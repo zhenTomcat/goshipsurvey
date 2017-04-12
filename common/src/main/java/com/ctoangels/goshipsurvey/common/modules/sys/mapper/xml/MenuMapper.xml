@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ctoangels.goshipsurvey.common.modules.sys.mapper.MenuMapper">
+    <select id="findParentMenusByUserId" parameterType="Integer" resultType="Menu">
+        select distinct m.*
+        from sys_user_role ur, sys_role_resource rs, sys_menu m
+        where ur.role_id= rs.role_id
+        and rs.resource_id = m.id
+        and rs.resource_type = 1
+        and m.del_flag != -1
+        <if test="_parameter != 1"><!--only for non-admin user -->
+            and ur.user_id = #{userId}
+        </if>
+        order by m.menu_order
+    </select>
+    <select id="findMenusByUserIdAndParent" resultType="Menu">
+        select distinct m.*
+        from sys_user_role ur, sys_role_resource rs, sys_menu m
+        where ur.role_id = rs.role_id
+        and rs.resource_id = m.id
+        and rs.resource_type = 2<!-- 菜单资源 -->
+        and m.parent_id = #{menuId}
+        and m.del_flag != -1
+        <if test="userId != 1"><!-- only for non-admin user -->
+            and ur.user_id = #{userId}
+        </if>
+        order by m.menu_order
+    </select><!-- TODO:排除掉admin用户 -->
+    <select id="getByPath" parameterType="String" resultType="Menu">
+        select * from sys_menu
+        where del_flag != -1
+        and menu_url = #{url}
+    </select>
+</mapper>

@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context" xmlns:tx="http://www.springframework.org/schema/tx"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans.xsd
+						http://www.springframework.org/schema/context
+						http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
+
+    <import resource="spring-mybatis.xml"/>
+
+    <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
+        <property name="cacheSeconds" value="5"/>
+        <property name="defaultEncoding" value="utf-8"/>
+        <property name="basenames">
+            <list>
+                <value>classpath:messages/message</value>
+            </list>
+        </property>
+    </bean>
+
+    <!-- ================ Shiro start ================ -->
+    <bean id="securityManager" class="org.apache.shiro.web.mgt.DefaultWebSecurityManager">
+        <property name="realm" ref="shiroRealm"/>
+    </bean>
+
+    <!--Realm -->
+    <bean id="shiroRealm" class="com.ctoangels.goshipsurvey.admin.base.interceptor.shiro.ShiroRealm"/>
+
+    <!-- rights -->
+    <bean id="gvrts" class="com.ctoangels.goshipsurvey.admin.base.filter.shiro.RightsFilter"/>
+
+    <!-- Shiro Filter -->
+    <bean id="shiroFilter" class="org.apache.shiro.spring.web.ShiroFilterFactoryBean">
+        <property name="securityManager" ref="securityManager"/>
+        <property name="loginUrl" value="/"/>
+        <property name="successUrl" value="/main"/>
+        <property name="unauthorizedUrl" value="/login_toLogin"/>
+        <property name="filters">
+            <map>
+                <entry key="gvrts" value-ref="gvrts"/>
+            </map>
+        </property>
+        <property name="filterChainDefinitions">
+            <value>
+                /static/** = anon
+                /assets/** = anon
+                /code = anon
+                /login_login = anon
+                /logout = anon
+                /account/** = user
+                /ship/**=user
+                /privateShipyard/**=user
+                /company/**=user
+                /repairSpec/**=user
+                /repairProg/**=user
+                /modelDetail/**=user
+                /repairSpecDetail/**=user
+                /repairProgDetail/**=user
+                /publicShip/**=user
+                /oss/**=user
+                /report/**=user
+                /reportDetail/**=user
+                /task/**=user
+                /register_register = anon
+                /register/activateConfirm = anon
+                /sys/index = anon
+                /user/unauthorized = anon
+                /user/editPwd = anon
+                /test=anon
+                /** = gvrts
+            </value>
+        </property>
+    </bean>
+    <!-- ================ Shiro end ================ -->
+
+</beans>

@@ -1,0 +1,169 @@
+body {
+    font-family: 'Microsoft Yahei', "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+
+a {
+    color: #1BA39C;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #5f6580;
+    border-color: #1BA39C;
+}
+
+.btn-primary:focus, .btn-primary.focus {
+
+}
+
+.btn-primary {
+    background-color: #32c5d2;
+    border-color: #1BA39C;
+}
+
+.btn-primary:focus, .btn-primary.focus {
+    background-color: #32C5D2;
+    border-color: #32c5d2;
+}
+
+.btn-primary:hover {
+    background-color: #32C5D2;
+    border-color: #1BA39C;
+}
+
+.btn-primary:active, .btn-primary.active,
+.open > .btn-primary.dropdown-toggle {
+    background-color: #32C5D2;
+    border-color: #1BA39C;
+}
+
+.btn-primary:active:hover, .btn-primary:active:focus, .btn-primary:active.focus, .btn-primary.active:hover, .btn-primary.active:focus, .btn-primary.active.focus,
+.open > .btn-primary.dropdown-toggle:hover,
+.open > .btn-primary.dropdown-toggle:focus,
+.open > .btn-primary.dropdown-toggle.focus {
+    background-color: #32C5D2;
+    border-color: #1BA39C;
+}
+
+.btn-primary:active, .btn-primary.active,
+.open > .btn-primary.dropdown-toggle {
+    background-image: none;
+}
+
+.btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled.focus, .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled].focus,
+fieldset[disabled] .btn-primary:hover,
+fieldset[disabled] .btn-primary:focus,
+fieldset[disabled] .btn-primary.focus {
+    background-color: #32c5d2;
+    border-color: #32C5D2;
+}
+
+.btn-primary .badge {
+    color: #32C5D2;
+}
+
+.pagination > li > a,
+.pagination > li > span {
+    color: #32c5d2;
+}
+
+.pagination > li > a:hover, .pagination > li > a:focus,
+.pagination > li > span:hover,
+.pagination > li > span:focus {
+    color: #32C5D2;
+}
+
+.pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus,
+.pagination > .active > span,
+.pagination > .active > span:hover,
+.pagination > .active > span:focus {
+    background-color: #32c5d2;
+    border-color: #32c5d2;
+}
+
+.bootstrap-dialog.type-primary .modal-header {
+    background-color: #32c5d2;
+}
+
+.control-label .required, .form-group .required {
+    color: #555;
+}
+
+.bootstrap-dialog.type-success .modal-header {
+    background-color: #32c5d2
+}
+
+/* datatables  and editor*/
+
+table.dataTable input {
+    height: 24px;
+}
+
+div.DTE_Inline {
+    max-width:150px !important;
+    min-width:60px !important;
+}
+
+div.DTE_Inline div.DTE_Inline_Buttons {
+    vertical-align: middle !important;
+}
+
+table.dataTable thead > tr > th {
+    padding-right: 0px;
+}
+
+div.DTE_Inline div.DTE_Inline_Field div.DTE_Form_Buttons button, div.DTE_Inline div.DTE_Inline_Buttons div.DTE_Form_Buttons button {
+    padding: 0px !important;
+}
+
+div.DTE_Inline div.DTE_Inline_Buttons div.DTE_Form_Buttons button {
+    margin-left: 0px;
+    margin-bottom: -4px;
+}
+
+.page-header.navbar .page-logo .logo-default {
+    margin: 0px;
+    height: 50px;
+}
+
+.table>tbody>tr>td, .table>tbody>tr>th, .table>tfoot>tr>td, .table>tfoot>tr>th, .table>thead>tr>td, .table>thead>tr>th{
+    vertical-align: middle;
+}
+
+
+.dropdown-menu{
+    font-family: 'Microsoft Yahei', "Helvetica Neue", Helvetica, Arial, sans-serif !important;
+}
+.table-record>thead>tr>th,.table-record-x>thead>tr>th{
+    width: 12.5%;
+}
+
+.control-label .required, .form-group .required{
+    padding-left:12px !important;
+}
+
+/*form 表单*/
+.p-error{
+    line-height: 34px;
+    margin-bottom: 0px;
+}
+.modal.bootstrap-dialog{
+    z-index: 100500 !important;
+}
+
+.mt-checkbox, .mt-radio{
+    margin-bottom: 0px !important;
+}
+
+/*********dataTables********/
+.dataTables_empty{
+    text-align:center;
+}
+
+.form-horizontal .form-group .mt-radio-inline{
+    padding-top:7px !important;
+}
+
+.page-bar{
+    margin-bottom:15px !important;
+}

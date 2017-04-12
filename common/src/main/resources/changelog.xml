@@ -1,0 +1,758 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
+                   http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="WangShun" id="15950097942-001">
+        <addColumn tableName="sys_user">
+            <column name="email_status" remarks="邮箱验证状态" type="int(3)">
+            </column>
+            <column name="email_time" remarks="邮箱验证开始时间" type="datetime">
+            </column>
+            <column name="email_code" remarks="邮箱验证码" type="varchar(200)">
+            </column>
+        </addColumn>
+    </changeSet>
+    <changeSet author="WangShun" id="15950097942-002">
+        <sql>
+            insert INTO sys_button(menu_id,button_name,button_url,del_flag) VALUES(106,'更改样式','account/editStyle',0);
+            insert INTO sys_button(menu_id,button_name,button_url,del_flag) VALUES(106,'更改个人姓名','account/editName',0);
+            insert INTO sys_button(menu_id,button_name,button_url,del_flag) VALUES(106,'更改密码','account/editPassword',0);
+            insert INTO sys_button(menu_id,button_name,button_url,del_flag) VALUES(106,'更改手机号码','account/editPhone',0);
+            insert INTO sys_button(menu_id,button_name,button_url,del_flag) VALUES(106,'更改电子邮箱','account/editEmail',0);
+        </sql>
+    </changeSet>
+    <changeSet author="WangShun" id="15950097942-003">
+        <sql>
+            ALTER TABLE `t_ship` CHANGE COLUMN `class` `ship_class` varchar(45) DEFAULT NULL COMMENT '船级社';
+        </sql>
+    </changeSet>
+    <changeSet author="WangShun" id="15950097942-004">
+        <sql>
+            ALTER TABLE `t_style` CHANGE COLUMN `desc` `des` varchar(30) DEFAULT NULL COMMENT '描述';
+        </sql>
+    </changeSet>
+    <changeSet author="WangShun" id="15950097942-005">
+        <sql>
+            insert INTO t_style(des,color) VALUES('default','dark');
+            insert INTO t_style(des,color) VALUES('blue','blue');
+            insert INTO t_style(des,color) VALUES('darkblue','blue-dark');
+            insert INTO t_style(des,color) VALUES('grey','grey');
+            insert INTO t_style(des,color) VALUES('light','white');
+            insert INTO t_style(des,color) VALUES('light2','grey-cararra');
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-001">
+        <sql>
+            alter table t_ship CHANGE builde_year build_year date;
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-002">
+        <sql>
+            CREATE TABLE `t_private_shipyard` (
+            `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '船东关联的船厂的id',
+            `name` varchar(45) DEFAULT NULL,
+            `group_company` varchar(45) DEFAULT NULL COMMENT '集团公司',
+            `country` varchar(45) DEFAULT NULL COMMENT '国家',
+            `city` varchar(45) DEFAULT NULL COMMENT '城市',
+            `location` varchar(45) DEFAULT NULL COMMENT '位置',
+            `tel` varchar(45) DEFAULT NULL COMMENT '电话',
+            `email` varchar(45) DEFAULT NULL COMMENT '邮箱',
+            `create_date` date DEFAULT NULL COMMENT '创建时间',
+            `create_by` varchar(45) DEFAULT NULL COMMENT '创建用户',
+            `update_date` date DEFAULT NULL COMMENT '修改时间',
+            `update_by` varchar(45) NOT NULL COMMENT '修改用户',
+            `del_flag` int(11) DEFAULT '0' COMMENT '状态',
+            `company_id` int(11) DEFAULT NULL COMMENT '公司id',
+            `shipyard_id` int(11) DEFAULT NULL COMMENT '船厂的id',
+            PRIMARY KEY (`id`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-003">
+        <sql>
+            alter table t_wharf_detail CHANGE lengh length int (11);
+            alter table t_wharf_detail CHANGE protocol draft int(11);
+            alter table t_berth_detail CHANGE protocol draft int(11);
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-005">
+        <sql>
+            alter table t_private_shipyard add contact_name varchar(10)
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-006">
+        <sql>
+            alter table t_ship add dd varchar(45);
+            alter table t_ship add ss varchar(45);
+            alter table t_private_shipyard modify column contact_name varchar(45);
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-007">
+        <sql>
+            alter table t_private_shipyard add logo varchar(100);
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-008">
+        <sql>
+            CREATE TABLE IF NOT EXISTS `go`.`t_param_value_variable` (
+            `id` INT NOT NULL AUTO_INCREMENT COMMENT '参数可变值id',
+            `param_code` INT NULL COMMENT '参数id',
+            `param_val_variable` VARCHAR(45) NULL COMMENT '参数可选值',
+            `create_by` VARCHAR(45) NULL COMMENT '建立者',
+            `create_date` DATE NULL COMMENT '建立时间',
+            `update_by` VARCHAR(45) NULL COMMENT '修改者',
+            `update_date` DATE NULL COMMENT '修改时间',
+            `del_flag` INT NULL DEFAULT 0 COMMENT '状态',
+            PRIMARY KEY (`id`))
+            ENGINE = InnoDB;
+            CREATE TABLE IF NOT EXISTS `go`.`t_param` (
+            `id` INT NOT NULL AUTO_INCREMENT COMMENT '参数id',
+            `item_code` VARCHAR(45) NULL COMMENT '项目编号',
+            `param_code` VARCHAR(45) NULL COMMENT '参数编号',
+            `name` VARCHAR(45) NULL COMMENT '参数名称',
+            `unit` VARCHAR(45) NULL COMMENT '参数单位',
+            `type` VARCHAR(45) NULL COMMENT '参数的类型',
+            `create_by` VARCHAR(45) NULL COMMENT '创建者',
+            `create_date` DATE NULL COMMENT '创建时间',
+            `update_by` VARCHAR(45) NULL COMMENT '修改者',
+            `update_date` DATE NULL COMMENT '修改者',
+            `del_flag` INT NULL DEFAULT 0 COMMENT '状态',
+            PRIMARY KEY (`id`))
+            ENGINE = InnoDB;
+            CREATE TABLE IF NOT EXISTS `go`.`t_price` (
+            `id` INT NOT NULL AUTO_INCREMENT COMMENT '价格表id',
+            `param1` VARCHAR(45) NULL COMMENT '参数1',
+            `param2` VARCHAR(45) NULL COMMENT '参数2',
+            `param3` VARCHAR(45) NULL COMMENT '参数3',
+            `param4` VARCHAR(45) NULL COMMENT '参数4',
+            `param5` VARCHAR(45) NULL COMMENT '参数5',
+            `param6` VARCHAR(45) NULL COMMENT '参数6',
+            `param7` VARCHAR(45) NULL COMMENT '参数7',
+            `param8` VARCHAR(45) NULL COMMENT '参数8',
+            `create_by` VARCHAR(45) NULL COMMENT '创建者',
+            `create_date` DATE NULL COMMENT '创建时间',
+            `update_by` VARCHAR(45) NULL COMMENT '修改者',
+            `update_date` DATE NULL COMMENT '修改时间',
+            `del_flag` INT NULL DEFAULT 0 COMMENT '状态',
+            PRIMARY KEY (`id`))
+            ENGINE = InnoDB;
+            CREATE TABLE IF NOT EXISTS `go`.`t_repair_spec_item` (
+            `id` INT NOT NULL AUTO_INCREMENT COMMENT '维修工程详情的id',
+            `repair_spec_detail_id` INT NULL COMMENT '维修工程的id',
+            `catagory` VARCHAR(45) NULL COMMENT '维修项目类型',
+            `code` VARCHAR(45) NULL COMMENT '项目号',
+            `content` VARCHAR(100) NULL COMMENT '维修类容',
+            `unit` VARCHAR(45) NULL COMMENT '单位',
+            `count` INT NULL COMMENT '数量',
+            `remark` VARCHAR(500) NULL COMMENT '备注',
+            `info` TEXT(1000) NULL COMMENT '维修信息',
+            `parentid` INT NULL COMMENT '父id',
+            `param1_val` VARCHAR(45) NULL COMMENT '参数1的值',
+            `param1_des` VARCHAR(45) NULL COMMENT '参数1的描述',
+            `param2_val` VARCHAR(45) NULL COMMENT '参数2的值',
+            `param2_des` VARCHAR(45) NULL COMMENT '参数2的描述',
+            `param3_val` VARCHAR(45) NULL COMMENT '参数3的值',
+            `param3_des` VARCHAR(45) NULL COMMENT '参数3的描述',
+            `param4_val` VARCHAR(45) NULL COMMENT '参数4的值',
+            `param4_des` VARCHAR(45) NULL COMMENT '参数4的描述',
+            `param5_val` VARCHAR(45) NULL COMMENT '参数5的值',
+            `param5_des` VARCHAR(45) NULL COMMENT '参数5的描述',
+            `param6_val` VARCHAR(45) NULL COMMENT '参数6的值',
+            `param6_des` VARCHAR(45) NULL COMMENT '参数6的描述',
+            `param7_val` VARCHAR(45) NULL,
+            `param7_des` VARCHAR(45) NULL,
+            `param8_val` VARCHAR(45) NULL,
+            `param8_des` VARCHAR(45) NULL,
+            `repair_spec_id` INT NULL COMMENT '维修工程的id',
+            `create_by` VARCHAR(45) NULL COMMENT '穿件者',
+            `create_date` DATE NULL COMMENT '创建时间',
+            `update_by` VARCHAR(45) NULL COMMENT '修改者',
+            `update_date` DATE NULL COMMENT '修改时间',
+            `del_flag` INT NULL DEFAULT 0 COMMENT '状态',
+            PRIMARY KEY (`id`))
+            ENGINE = InnoDB;
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-009">
+        <sql>
+            alter table t_repair_spec_item add param1_val VARCHAR(45) NULL COMMENT '参数1的值';
+            alter table t_repair_spec_item add param1_des VARCHAR(45) NULL COMMENT '参数1的描述';
+            alter table t_repair_spec_item add param2_val VARCHAR(45) NULL COMMENT '参数2的值';
+            alter table t_repair_spec_item add param2_des VARCHAR(45) NULL COMMENT '参数2的描述';
+            alter table t_repair_spec_item add param3_val VARCHAR(45) NULL COMMENT '参数3的值';
+            alter table t_repair_spec_item add param3_des VARCHAR(45) NULL COMMENT '参数3的描述';
+            alter table t_repair_spec_item add param4_val VARCHAR(45) NULL COMMENT '参数4的值';
+            alter table t_repair_spec_item add param4_des VARCHAR(45) NULL COMMENT '参数4的描述';
+            alter table t_repair_spec_item add param5_val VARCHAR(45) NULL COMMENT '参数5的值';
+            alter table t_repair_spec_item add param5_des VARCHAR(45) NULL COMMENT '参数5的描述';
+            alter table t_repair_spec_item add param6_val VARCHAR(45) NULL COMMENT '参数6的值';
+            alter table t_repair_spec_item add param6_des VARCHAR(45) NULL COMMENT '参数6的描述';
+            alter table t_repair_spec_item add param7_val VARCHAR(45) NULL COMMENT '参数7的值';
+            alter table t_repair_spec_item add param7_des VARCHAR(45) NULL COMMENT '参数7的描述';
+            alter table t_repair_spec_item add param8_val VARCHAR(45) NULL COMMENT '参数8的值';
+            alter table t_repair_spec_item add param8_des VARCHAR(45) NULL COMMENT '参数8的描述';
+
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-010">
+        <sql>
+            alter table t_repair_model_item add children INT NULL COMMENT '判断改项是否有孩子';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-011">
+        <sql>
+            alter table t_company add email varchar(45) NULL COMMENT '公司邮箱';
+        </sql>
+    </changeSet>
+
+    <changeSet author="LuZhen" id="17317309132-014">
+        <sql>
+            alter table t_param add model_id INT NULL COMMENT '红本id';
+            alter table t_param_value_variable add model_id INT NULL COMMENT '红本id';
+            alter table t_repair_spec_item add children INT NULL COMMENT '判断改项是否有孩子';
+        </sql>
+    </changeSet>
+    <changeSet author="WangShun" id="15950097942-007">
+        <sql>
+            ALTER TABLE `t_repair_prog` CHANGE COLUMN `s_cost` `plan_cost` int(11) DEFAULT NULL COMMENT '计划金额';
+            ALTER TABLE `t_repair_prog` CHANGE COLUMN `s_start_date` `plan_start_date` date DEFAULT NULL COMMENT
+            '计划进厂日期';
+            ALTER TABLE `t_repair_prog` CHANGE COLUMN `s_days` `plan_days` int(11) DEFAULT NULL COMMENT '计划天数';
+            ALTER TABLE `t_repair_spec` CHANGE COLUMN `s_cost` `plan_cost` int(11) DEFAULT NULL COMMENT '计划金额';
+            ALTER TABLE `t_repair_spec` CHANGE COLUMN `s_start_date` `plan_start_date` date DEFAULT NULL COMMENT
+            '计划进厂日期';
+            ALTER TABLE `t_repair_spec` CHANGE COLUMN `s_days` `plan_days` int(11) DEFAULT NULL COMMENT '计划天数';
+            ALTER TABLE `t_repair_spec` ADD COLUMN `ship_name` varchar(45) DEFAULT NULL COMMENT '船舶名称';
+        </sql>
+    </changeSet>
+    <changeSet author="WangShun" id="15950097942-009">
+        <sql>
+            ALTER TABLE `t_repair_spec` ADD COLUMN `model_id` int(11) DEFAULT NULL COMMENT '此维修工程单依据的红本';
+        </sql>
+    </changeSet>
+    <changeSet author="WangShun" id="15950097942-010">
+        <sql>
+            ALTER TABLE `t_repair_model_item` CHANGE COLUMN `parentid` `parent_code` varchar(45) DEFAULT NULL COMMENT
+            '父项目号';
+            ALTER TABLE `t_repair_spec_item` CHANGE COLUMN `parentid` `parent_code` varchar(45) DEFAULT NULL COMMENT
+            '父项目号';
+            ALTER TABLE `t_repair_prog_item` CHANGE COLUMN `parentid` `parent_code` varchar(45) DEFAULT NULL COMMENT
+            '父项目号';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-015">
+        <sql>
+            alter table t_repair_model_item add copy INT NULL COMMENT '判断是否需要复制';
+            alter table t_repair_spec_item add copy INT NULL COMMENT '判断是否需要复制';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-016">
+        <sql>
+            alter table t_repair_model_item add sort INT NULL COMMENT '工程单排序';
+            alter table t_repair_spec_item add sort INT NULL COMMENT '工程单排序';
+            alter table t_repair_prog_item add sort INT NULL COMMENT '工程单排序';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-017">
+        <sql>
+            alter table t_repair_spec_detail add ship_name varchar(45) NULL COMMENT '船名';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-018">
+        <sql>
+            alter table t_repair_spec_detail add pro_order_no varchar(45) NULL COMMENT '项目单号';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-019">
+        <sql>
+            alter table t_repair_spec_detail add img varchar(80) NULL COMMENT '图片或是图纸';
+        </sql>
+    </changeSet>
+    <changeSet author="WangShun" id="15950097942-011">
+        <sql>
+            alter table t_repair_prog_detail add ship_name varchar(45) NULL COMMENT '船名';
+            alter table t_repair_prog_detail add pro_order_no varchar(45) NULL COMMENT '项目单号';
+            alter table t_repair_prog_detail add img varchar(80) NULL COMMENT '图片或是图纸';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-020">
+        <sql>
+            CREATE TABLE `t_repair_model_detail` (
+            `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '维修工程范本的id',
+            `ship_name` varchar(45) DEFAULT NULL COMMENT '船名',
+            `code` varchar(45) DEFAULT NULL COMMENT '项目号',
+            `catagory` varchar(45) DEFAULT NULL COMMENT '项目分类',
+            `pro_order_no` varchar(45) DEFAULT NULL COMMENT '项目单号',
+            `pro_name` varchar(45) DEFAULT NULL COMMENT '项目名称',
+            `pro_desc` text COMMENT '项目描述',
+            `faci_name` varchar(45) DEFAULT NULL COMMENT '设备名称',
+            `faci_type` varchar(45) DEFAULT NULL COMMENT '设备类型',
+            `faci_src` varchar(45) DEFAULT NULL COMMENT '厂家/国家',
+            `faci_no` varchar(45) DEFAULT NULL COMMENT '设备信息：序列号',
+            `faci_param` varchar(200) DEFAULT NULL COMMENT '设备信息：相关参数',
+            `repair_position` varchar(45) DEFAULT NULL COMMENT '维修部位',
+            `repair_position_desc` text COMMENT '维修详细位置',
+            `damage` varchar(500) DEFAULT NULL COMMENT '损坏程度',
+            `repair_tech` varchar(300) DEFAULT NULL COMMENT '修理工艺',
+            `repair_tech_desc` varchar(500) DEFAULT NULL COMMENT '详细修理工艺',
+            `create_date` date DEFAULT NULL COMMENT '创建时间',
+            `create_by` varchar(45) DEFAULT NULL COMMENT '创建用户',
+            `update_date` date DEFAULT NULL COMMENT '修改时间',
+            `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
+            `del_flag` int(11) DEFAULT '0' COMMENT '状态',
+            `img` varchar(80) DEFAULT NULL COMMENT '图片或是图纸',
+            `company_id` varchar(80) DEFAULT NULL COMMENT '公司id',
+            PRIMARY KEY (`id`)
+            ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+        </sql>
+    </changeSet>
+
+    <changeSet author="LuZhen" id="17317309132-021">
+        <sql>
+            CREATE TABLE `t_repair_model_detail_req` (
+            `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '修理要求/和材料规格的id',
+            `des` varchar(500) DEFAULT NULL COMMENT '要求描述/和材料规格',
+            `unit` varchar(45) DEFAULT NULL COMMENT '单位',
+            `count` varchar(45) DEFAULT NULL COMMENT '数量',
+            `repair_spec_detail_id` int(11) DEFAULT NULL COMMENT '维修工程单范本的id',
+            `create_date` date DEFAULT NULL COMMENT '创建时间',
+            `create_by` varchar(45) DEFAULT NULL COMMENT '创建用户',
+            `update_date` date DEFAULT NULL COMMENT '修改时间',
+            `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
+            `del_flag` int(11) DEFAULT '0' COMMENT '状态',
+            PRIMARY KEY (`id`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-022">
+        <sql>
+            alter table t_repair_prog_item modify column task_status INT;
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-023">
+        <sql>
+            alter table t_repair_model_detail modify column company_id INT;
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-024">
+        <sql>
+            INSERT INTO `t_dict` VALUES ('1', '维修部位', '甲板', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('2', '维修部位', '机舱', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('3', '维修部位', '泵舱', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('4', '维修部位', '机舱棚', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('5', '维修部位', '压载舱', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('6', '维修部位', '驾驶室', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('7', '维修部位', '舵机舱', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('8', '维修部位', '集控室', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('9', '维修部位', '货控室', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('10', '维修部位', '艏楼区域', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('11', '维修部位', '罗经甲板', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('12', '维修部位', '上建', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('13', '维修部位', '船艉', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('14', '维修部位', '其他请填', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('15', '修理工艺', '动火', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('16', '修理工艺', '脚手架', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('17', '修理工艺', '吊车运输', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('18', '修理工艺', '功能测试', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('19', '修理工艺', '化学清洗', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('20', '修理工艺', '船厂提供螺栓螺母及垫片等材料', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('21', '修理工艺', '补漆', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('22', '修理工艺', '提供照明', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('23', '修理工艺', '清舱除气', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('24', '修理工艺', '拆装花钢板地格栅', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('25', '修理工艺', '布置安全通道', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('26', '修理工艺', '需船厂提供维修场地', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('27', '修理工艺', '清洁', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('28', '修理工艺', '提供通风', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('29', '修理工艺', '压力测试', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('30', '修理工艺', '拆装栏杆等铁舾件', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('31', '修理工艺', '船东提供材料', null, null, null, null, null, '0');
+            INSERT INTO `t_dict` VALUES ('32', '修理工艺', '其它请填', null, null, null, null, null, '0');
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-025">
+        <sql>
+            alter table t_repair_model_detail_req change column repair_spec_detail_id repair_model_detail_id INT COMMENT
+            '维修范本id';
+        </sql>
+    </changeSet>
+    <changeSet author="WangShun" id="15950097942-012">
+        <sql>
+            INSERT INTO t_dict (type,value,des,del_flag) VALUES ("维修类型","1","临时维修",0);
+            INSERT INTO t_dict (type,value,des,del_flag) VALUES ("维修类型","2","坞检",0);
+            INSERT INTO t_dict (type,value,des,del_flag) VALUES ("维修类型","3","特检",0);
+            INSERT INTO t_dict (type,value,des,del_flag) VALUES ("维修类型","4","改造",0);
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-026">
+        <sql>
+            alter table t_repair_model_detail_req modify column count float COMMENT '数量';
+            alter table t_repair_spec_detail_req modify column count float COMMENT '数量';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-027">
+        <sql>
+            alter table t_repair_model_item add src INT NULL COMMENT '判断是自定义还是红本中的数据';
+            alter table t_repair_spec_item add src INT NULL COMMENT '判断是自定义还是红本中的数据';
+            alter table t_repair_prog_item add src INT NULL COMMENT '判断是自定义还是红本中的数据';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-028">
+        <sql>
+            alter table t_repair_prog_detail add task_status INT NULL COMMENT '任务状态';
+        </sql>
+    </changeSet>
+    <changeSet author="WangShun" id="15950097942-013">
+        <sql>
+            INSERT INTO t_dict (type,value,des,del_flag) VALUES ("维修工程大类","1","通用服务",0);
+            INSERT INTO t_dict (type,value,des,del_flag) VALUES ("维修工程大类","2","坞修工程",0);
+            INSERT INTO t_dict (type,value,des,del_flag) VALUES ("维修工程大类","3","船体工程",0);
+            INSERT INTO t_dict (type,value,des,del_flag) VALUES ("维修工程大类","4","机械工程",0);
+            INSERT INTO t_dict (type,value,des,del_flag) VALUES ("维修工程大类","5","电气工程",0);
+            INSERT INTO t_dict (type,value,des,del_flag) VALUES ("维修工程大类","6","冷藏设备",0);
+            INSERT INTO t_dict (type,value,des,del_flag) VALUES ("维修工程大类","7","特种设备",0);
+            INSERT INTO t_dict (type,value,des,del_flag) VALUES ("维修工程大类","8","其他",0);
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-029">
+        <sql>
+            alter table t_repair_model_detail_req modify column count varchar(45) COMMENT '数量';
+            alter table t_repair_spec_detail_req modify column count varchar(45) COMMENT '数量';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-030">
+        <sql>
+            alter table t_repair_prog_detail_req modify column count varchar(45) COMMENT '数量';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-031">
+        <sql>
+            alter table t_task modify column status INT COMMENT '任务状态:1进行中，0已结束,2未开始';
+        </sql>
+    </changeSet>
+    <changeSet author="WangShun" id="15950097942-014">
+        <sql>
+            alter table t_report CHANGE publishTime publish_time date;
+            alter table t_report CHANGE generateTime generate_time date;
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-032">
+        <sql>
+            alter table t_repair_prog_detail_req add tariff float COMMENT '单价';
+            alter table t_repair_prog_detail_req add discount float COMMENT '系数';
+            alter table t_repair_prog_detail_req add total float COMMENT '总价';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-033">
+        <sql>
+            alter table t_repair_model_detail_req add tariff float COMMENT '单价';
+            alter table t_repair_model_detail_req add discount float COMMENT '系数';
+            alter table t_repair_model_detail_req add total float COMMENT '总价';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-034">
+        <sql>
+            alter table t_repair_spec_detail_req add tariff float COMMENT '单价';
+            alter table t_repair_spec_detail_req add discount float COMMENT '系数';
+            alter table t_repair_spec_detail_req add total float COMMENT '总价';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-035">
+        <sql>
+            alter table t_memo_media add filename varchar(100) COMMENT '文件名称';
+        </sql>
+    </changeSet>
+
+    <changeSet author="LuZhen" id="17317309132-036">
+        <sql>
+            alter table t_memo_media change column Oss oss varchar(200);
+            alter table t_memo_media change column S3 s3 varchar(200);
+        </sql>
+    </changeSet>
+
+    <changeSet author="WangShun" id="15950097942-015">
+        <sql>
+            alter table t_report_detail_status CHANGE column task_status status int(2) COMMENT '报告详单提交状态 0未提交 1提交';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-037">
+        <sql>
+            alter table t_report_detail add status INT COMMENT '工程进度状态';
+            alter table t_report_detail add submit INT COMMENT '是否已经提交状态';
+            alter table t_report_detail add memo TEXT COMMENT '是否已经提交状态';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-038">
+        <sql>
+            alter table t_report change hnmiaity humidity varchar(45) COMMENT '湿度';
+            DROP TABLE t_report_detail_memo;
+            DROP TABLE t_report_detail_status;
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-039">
+        <sql>
+            alter table t_report_detail change status task_status INT COMMENT '工程进度状态';
+            alter table t_report_detail change submit submit_status INT COMMENT '是否已经提交状态';
+        </sql>
+    </changeSet>
+
+    <changeSet author="WangShun" id="15950097942-016">
+        <sql>
+            alter table t_report ADD column remark varchar(200) COMMENT '备忘';
+            alter table t_report ADD column ship_inspection varchar(200) COMMENT '船检情况';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-040">
+        <sql>
+            CREATE TABLE `t_report_detail_req` (
+            `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '修理要求/和材料规格的id',
+            `des` varchar(500) DEFAULT NULL COMMENT '要求描述/和材料规格',
+            `unit` varchar(45) DEFAULT NULL COMMENT '单位',
+            `count` varchar(45) DEFAULT NULL COMMENT '数量',
+            `repair_spec_detail_id` int(11) DEFAULT NULL COMMENT '维修详单的id',
+            `create_date` date DEFAULT NULL COMMENT '创建时间',
+            `create_by` varchar(45) DEFAULT NULL COMMENT '创建用户',
+            `update_date` date DEFAULT NULL COMMENT '修改时间',
+            `update_by` varchar(45) DEFAULT NULL COMMENT '修改用户',
+            `del_flag` int(11) DEFAULT '0' COMMENT '状态',
+            `tariff` float DEFAULT NULL COMMENT '单价',
+            `discount` float DEFAULT NULL COMMENT '系数',
+            `total` float DEFAULT NULL COMMENT '总价',
+            `report_detail_id` int(11) DEFAULT NULL COMMENT '报告detail的id',
+            PRIMARY KEY (`id`)
+            ) ENGINE=InnoDB AUTO_INCREMENT=787 DEFAULT CHARSET=utf8;
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-041">
+        <sql>
+            alter table t_memo_media change report_detail_memo_id report_detail_id INT COMMENT '报告detail的id';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-042">
+        <sql>
+            alter table t_report modify generate_time datetime COMMENT '上传时间';
+            alter table t_report modify create_date datetime COMMENT '创建时间';
+            alter table t_report modify update_date datetime COMMENT '更新时间';
+        </sql>
+    </changeSet>
+    <changeSet author="WangShun" id="15950097942-017">
+        <sql>
+            INSERT INTO t_dict (type,value,des,del_flag) VALUES ("工程状态","0","已完成",0);
+            INSERT INTO t_dict (type,value,des,del_flag) VALUES ("工程状态","1","进行中",0);
+            INSERT INTO t_dict (type,value,des,del_flag) VALUES ("工程状态","2","未开始",0);
+            INSERT INTO t_dict (type,value,des,del_flag) VALUES ("工程状态","3","已取消",0);
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-043">
+        <sql>
+            alter table t_report_detail change udpate_date update_date date ;
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-044">
+        <sql>
+            alter table t_report_detail modify create_date datetime COMMENT '创建时间';
+            alter table t_report_detail modify update_date datetime COMMENT '更新时间';
+            alter table t_report_email modify create_date datetime COMMENT '创建时间';
+            alter table t_report_email modify update_date datetime COMMENT '更新时间';
+            alter table t_report_detail_req modify create_date datetime COMMENT '创建时间';
+            alter table t_report_detail_req modify update_date datetime COMMENT '更新时间';
+        </sql>
+    </changeSet>
+
+    <changeSet author="LuZhen" id="17317309132-045">
+        <sql>
+            alter table t_report_detail change repair_prog_id task_id INT ;
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-046">
+        <sql>
+            alter table t_ship modify column draft varchar(45) COMMENT '吃水';
+            alter table t_ship modify column dwt varchar(45) COMMENT '载重吨';
+            alter table t_ship modify column gt varchar(45) COMMENT '注册总吨';
+            alter table t_ship modify column depth varchar(45) COMMENT '型深';
+            alter table t_ship modify column beam varchar(45) COMMENT '船宽';
+            alter table t_ship modify column loa varchar(45) COMMENT '船长';
+            alter table t_ship modify column me_cyl_bore varchar(45) COMMENT '主机：缸径';
+            alter table t_ship modify column aux_cyl_bore varchar(45) COMMENT '辅机：缸径';
+            alter table t_ship modify column boiler_heating_area varchar(45) COMMENT '锅炉：热交换面积';
+            alter table t_ship modify column boiler_evaporation varchar(45) COMMENT '锅炉：蒸发量';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-047">
+        <sql>
+            alter table t_ship change gt grt varchar(45) COMMENT '注册总吨';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-048">
+        <sql>
+            alter table t_repair_spec_item modify count varchar(45) COMMENT '数量';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-049">
+        <sql>
+            alter table t_repair_model_detail drop column img;
+            alter table t_repair_prog_detail drop column img;
+            alter table t_repair_spec_detail drop column img;
+
+            CREATE TABLE IF NOT EXISTS `go`.`t_repair_spec_detail_memdia` (
+            `id` INT NOT NULL AUTO_INCREMENT,
+            `repair_spec_detail_id` INT NULL,
+            `type` INT NULL,
+            `oss` VARCHAR(225) NULL,
+            `s3` VARCHAR(225) NULL,
+            `filename` VARCHAR(225) NULL,
+            PRIMARY KEY (`id`))
+            ENGINE = InnoDB;
+
+            CREATE TABLE IF NOT EXISTS `go`.`t_repair_prog_detail_memdia` (
+            `id` INT NOT NULL AUTO_INCREMENT,
+            `repair_prog_detail_id` INT NULL,
+            `type` INT NULL,
+            `oss` VARCHAR(225) NULL,
+            `s3` VARCHAR(225) NULL,
+            `filename` VARCHAR(225) NULL,
+            PRIMARY KEY (`id`))
+            ENGINE = InnoDB
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-050">
+        <sql>
+            rename table t_repair_spec_detail_memdia to t_repair_spec_detail_media;
+            rename table t_repair_prog_detail_memdia to t_repair_prog_detail_media;
+        </sql>
+    </changeSet>
+    <changeSet author="WangShun" id="15950097942-018">
+        <sql>
+            DELETE FROM t_dict WHERE type='维修类型' AND des='特检';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-051">
+        <sql>
+            alter table t_repair_spec_detail_media modify type varchar(45);
+            alter table t_repair_prog_detail_media modify type varchar(45);
+        </sql>
+    </changeSet>
+    <changeSet author="WangShun" id="15950097942-019">
+        <sql>
+            UPDATE sys_menu SET menu_icon = 'fa fa-cog' WHERE menu_name = '系统配置';
+            UPDATE sys_menu SET menu_icon = 'fa fa-clock-o' WHERE menu_name = '维修进度';
+            UPDATE sys_menu SET menu_icon = 'fa fa-info' WHERE menu_name = '基础信息';
+            UPDATE sys_menu SET menu_icon = 'fa fa-ship' WHERE menu_name = '维修工程单';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-052">
+        <sql>
+            CREATE TABLE `t_public_ship` (
+            `id` int(8) NOT NULL AUTO_INCREMENT COMMENT 'id',
+            `imo` varchar(30) DEFAULT NULL COMMENT 'IMO 船号',
+            `status` varchar(30) DEFAULT NULL COMMENT 'Status 状态',
+            `name` varchar(80) DEFAULT NULL COMMENT 'Name 船名',
+            `buildYear` varchar(30) DEFAULT NULL COMMENT 'BuildYear 建造时间',
+            `builder` varchar(50) DEFAULT NULL COMMENT 'Builder 建造者',
+            `model` varchar(50) DEFAULT NULL COMMENT 'ShipType 船型',
+            `ice` varchar(50) DEFAULT NULL COMMENT '',
+            `owned` text COMMENT '',
+            `bunkers` varchar(50) DEFAULT NULL COMMENT '',
+            `twopenult` varchar(50) DEFAULT NULL COMMENT 'Bulker :Hatch Type, Gas:Tank No., Chemical:Total Cu.m, Tanker:Total Cu.m, Container:Gear,Multi-Purpose:De./Ho./Ha, Ro-Ro/PCC:Lane L/W/H',
+            `threepenult` varchar(50) DEFAULT NULL COMMENT 'Bulker:Grain/Bale, Gas:Pumps, Chemical:Tnk/Pmp/Sep, Tanker:Tnk/Pmp/Sep, Container:DWT/TEU,Multi-Purpose:Teu, Ro-Ro/PCC:Veh.',
+            `tpc` varchar(50) DEFAULT NULL COMMENT '',
+            `callsign` varchar(50) DEFAULT NULL COMMENT '船舶呼号',
+            `hp` varchar(50) DEFAULT NULL COMMENT '马力',
+            `fourpenult` text COMMENT 'Bulker:Gear, Gas:Max P/Min T, Chemical:Max t/hr, Tanker:Max t/hr, Container:Thrust,Multi-Purpose:Gear, Ro-Ro/PCC:M.Ramp',
+            `nt` varchar(50) DEFAULT NULL COMMENT '',
+            `onelast` varchar(50) DEFAULT NULL COMMENT 'Bulker:Lakes Fitted, Gas:Cargo, Chemical:Coating, Tanker:Coating, Container:TEU',
+            `twolast` varchar(50) DEFAULT NULL COMMENT 'Bulker:Log Fitted, Gas:Ammonia, Chemical:IMO grade, Tanker:IMO grade, Container:Rfr Teu/Plugs',
+            `threelast` varchar(50) DEFAULT NULL COMMENT 'Bulker:Str.Ore, Gas:Gas Con, Chemical:Heating, Tanker:Heating, Container:Ho/De',
+            `fourlast` varchar(50) DEFAULT NULL COMMENT 'Bulker:Str.Heavy, Gas:Liq.Con, Chemical:SBT, Tanker:SBT, Container:Tiers',
+            `onepenult` varchar(50) DEFAULT NULL COMMENT 'Bulker:Ho/Ha, Gas:Tank Type, Chemical:Hull Type, Tanker:Hull Type, Container:Ho/Ha, Multi-Purpose:',
+            `loa` varchar(50) DEFAULT NULL COMMENT '船长',
+            `beam` varchar(50) DEFAULT NULL COMMENT '船宽',
+            `ggt` varchar(50) DEFAULT NULL COMMENT '总吨',
+            `dwt` varchar(50) DEFAULT NULL COMMENT '载重吨',
+            `flag` varchar(100) DEFAULT NULL COMMENT '',
+            `classs` varchar(50) DEFAULT NULL COMMENT '船级社',
+            `exname` varchar(50) DEFAULT NULL COMMENT '过去名称',
+            `engine` varchar(100) DEFAULT NULL COMMENT 'M/E Maker/Type',
+            `next_ss` varchar(30) DEFAULT NULL COMMENT '特检时间',
+            `next_dd` varchar(30) DEFAULT NULL COMMENT '坞检时间',
+            `speed` text COMMENT '转速',
+            `draft` varchar(50) DEFAULT NULL COMMENT '吃水',
+            `ldt` varchar(50) DEFAULT NULL COMMENT '',
+            `mmaker` varchar(50) DEFAULT NULL COMMENT '主机：厂家',
+            `mmype` varchar(80) DEFAULT NULL COMMENT '主机：型号',
+            `mbr` varchar(50) DEFAULT NULL COMMENT '主机：马力/转速',
+            `mcyl` varchar(50) DEFAULT NULL COMMENT '主机：缸径',
+            `amake` varchar(50) DEFAULT NULL COMMENT '辅机：厂家',
+            `atype` varchar(50) DEFAULT NULL COMMENT '辅机：型号',
+            `aqty` varchar(50) DEFAULT NULL COMMENT '辅机：数量',
+            `arated` varchar(50) DEFAULT NULL COMMENT '辅机：额定功率',
+            `acyl` varchar(50) DEFAULT NULL COMMENT '辅机：缸径',
+            `ctype` varchar(50) DEFAULT NULL COMMENT '锅炉：型号',
+            `cqty` varchar(50) DEFAULT NULL COMMENT '锅炉：数量',
+            `baux` varchar(50) DEFAULT NULL COMMENT 'Boiler AUX.boiler heating area(m2)锅炉：热交换面积',
+            `blarge` varchar(50) DEFAULT NULL COMMENT 'Boiler Large water tube boiler evaporation(ton/hour)',
+            `bgas` varchar(50) DEFAULT NULL COMMENT 'Boiler Gas boiler heating area(m2)',
+            `bexhaust` varchar(50) DEFAULT NULL COMMENT 'Boiler Exhaust boiler heating area(m2)',
+            `emaker` varchar(50) DEFAULT NULL COMMENT 'EM CY GEN Maker',
+            `etype` varchar(50) DEFAULT NULL COMMENT 'EM CY GEN Type',
+            `wanchor` varchar(90) DEFAULT NULL COMMENT 'Windlass Anchor',
+            `wcapstan` varchar(90) DEFAULT NULL COMMENT 'Windlass Capstan mooring(mm)',
+            `tasishaft` varchar(50) DEFAULT NULL COMMENT 'Tailshaft Dia.(mm)',
+            `anchor` varchar(50) DEFAULT NULL COMMENT 'Anchor(kg)',
+            `anchorchain` varchar(50) DEFAULT NULL COMMENT 'Anchor chain dia.(mm)',
+            `air` varchar(50) DEFAULT NULL COMMENT 'Air compressor low pressure cly.bore(mm)',
+            `freon` varchar(50) DEFAULT NULL COMMENT 'Freon refrigetating compressor rated ourput(m3)',
+            `refrige` varchar(50) DEFAULT NULL COMMENT 'Refrigetating system heat exchange area(m2)',
+            `tubluar` varchar(50) DEFAULT NULL COMMENT 'Tubular  Heat Exhaust surface area(m2)',
+            `propeller` varchar(50) DEFAULT NULL COMMENT '',
+            `filename` varchar(80) DEFAULT NULL COMMENT '',
+            `inputdate` datetime DEFAULT NULL COMMENT '',
+            `remark` text COMMENT '',
+            `type_id` int(4) DEFAULT NULL,
+            PRIMARY KEY (`id`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+        </sql>
+    </changeSet>
+    <changeSet author="WangShun" id="15950097942-020">
+        <sql>
+            UPDATE t_param SET unit = '' WHERE name = '注册总吨';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-053">
+        <sql>
+            alter table t_repair_prog_detail modify pro_desc text;
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-054">
+        <sql>
+            CREATE TABLE `type` (
+            `id` int(4) NOT NULL AUTO_INCREMENT,
+            `category` varchar(30) DEFAULT NULL,
+            PRIMARY KEY (`id`)
+            ) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=utf8;
+
+            INSERT INTO `type` VALUES ('1', 'Bulker');
+            INSERT INTO `type` VALUES ('2', 'Tanker');
+            INSERT INTO `type` VALUES ('3', 'Gas');
+            INSERT INTO `type` VALUES ('4', 'Chemical');
+            INSERT INTO `type` VALUES ('5', 'Container');
+            INSERT INTO `type` VALUES ('6', 'Multi_Purpose');
+            INSERT INTO `type` VALUES ('7', 'Ro-Ro/PCC');
+            INSERT INTO `type` VALUES ('8', 'Reefer');
+
+            rename table type to t_ship_type;
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-055">
+        <sql>
+            alter table t_public_ship add category varchar(45) Null;
+            alter table t_repair_prog add shipyard_name varchar(225) Null;
+        </sql>
+    </changeSet>
+
+
+</databaseChangeLog>
+
+

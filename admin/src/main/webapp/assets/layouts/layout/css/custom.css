@@ -1,0 +1,114 @@
+
+a {
+    color: #3B3F50;
+}
+
+.btn-primary {
+    color: #fff;
+    background-color: #5f6580;
+    border-color: #3B3F50;
+}
+
+.btn-primary:focus, .btn-primary.focus {
+
+}
+
+.btn-primary {
+    background-color: #3E3E50;
+    border-color: #252732;
+}
+
+.btn-primary:focus, .btn-primary.focus {
+    background-color: #23232D;
+    border-color: #3E3E50;
+}
+
+.btn-primary:hover {
+    background-color: #23232D;
+    border-color: #252732;
+}
+
+.btn-primary:active, .btn-primary.active,
+.open > .btn-primary.dropdown-toggle {
+    background-color: #23232D;
+    border-color: #252732;
+}
+
+.btn-primary:active:hover, .btn-primary:active:focus, .btn-primary:active.focus, .btn-primary.active:hover, .btn-primary.active:focus, .btn-primary.active.focus,
+.open > .btn-primary.dropdown-toggle:hover,
+.open > .btn-primary.dropdown-toggle:focus,
+.open > .btn-primary.dropdown-toggle.focus {
+    background-color: #23232D;
+    border-color: #3B3F50;
+}
+
+.btn-primary:active, .btn-primary.active,
+.open > .btn-primary.dropdown-toggle {
+    background-image: none;
+}
+
+.btn-primary.disabled:hover, .btn-primary.disabled:focus, .btn-primary.disabled.focus, .btn-primary[disabled]:hover, .btn-primary[disabled]:focus, .btn-primary[disabled].focus,
+fieldset[disabled] .btn-primary:hover,
+fieldset[disabled] .btn-primary:focus,
+fieldset[disabled] .btn-primary.focus {
+    background-color: #3E3E50;
+    border-color: #23232D;
+}
+
+.btn-primary .badge {
+    color: #23232D;
+}
+
+.pagination > li > a,
+.pagination > li > span {
+    color: #3E3E50;
+}
+
+.pagination > li > a:hover, .pagination > li > a:focus,
+.pagination > li > span:hover,
+.pagination > li > span:focus {
+    color: #23232D;
+}
+
+.pagination > .active > a, .pagination > .active > a:hover, .pagination > .active > a:focus,
+.pagination > .active > span,
+.pagination > .active > span:hover,
+.pagination > .active > span:focus {
+    background-color: #3E3E50;
+    border-color: #3E3E50;
+}
+
+.bootstrap-dialog.type-primary .modal-header {
+    background-color: #4F4F66;
+}
+
+.control-label .required, .form-group .required {
+    color: #555;
+}
+
+.bootstrap-dialog.type-success .modal-header {
+    background-color: #5E5E7A
+}
+
+/* datatables  and editor*/
+
+table.dataTable input {
+    height: 24px;
+}
+div.DTE_Inline{
+}
+div.DTE_Inline div.DTE_Inline_Buttons{
+    vertical-align: middle !important;
+}
+
+table.dataTable thead > tr > th {
+    padding-right: 0px;
+}
+
+div.DTE_Inline div.DTE_Inline_Field div.DTE_Form_Buttons button, div.DTE_Inline div.DTE_Inline_Buttons div.DTE_Form_Buttons button {
+    padding: 0px !important;
+}
+div.DTE_Inline div.DTE_Inline_Buttons div.DTE_Form_Buttons button {
+    margin-left:0px;
+    margin-bottom: -4px;
+}
