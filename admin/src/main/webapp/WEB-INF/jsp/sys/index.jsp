@@ -200,7 +200,7 @@
         if (window.location.hash)
             url = window.location.hash.substring(1);
         else
-            url = "ship";
+            url = "test?url=myRecord";
 
         if ($("a[href='" + url + "']").length > 0) {
             $("a[href='" + url + "']").click();
@@ -212,5 +212,4 @@
         intPage();
     }
 </script>
-
 </html>

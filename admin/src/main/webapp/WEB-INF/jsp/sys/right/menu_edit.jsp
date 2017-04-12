@@ -30,7 +30,7 @@
                     <c:choose>
                         <c:when test="${menu.menuType == 1}">
                             <input id="menuUrl" name="menuUrl" value="#" type="text"
-                                   maxlength="32" class="form-control" readonly="readonly">
+                                   maxlength="32" class="form-control" >
                         </c:when>
                         <c:otherwise>
                             <input id="menuUrl" name="menuUrl" value="${menu.menuUrl}"
