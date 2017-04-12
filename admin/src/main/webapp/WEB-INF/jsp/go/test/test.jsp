@@ -5,14 +5,12 @@
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-    String ctx = request.getContextPath();
 %>
 <style>
     table th,td {
         text-align: center;
     }
 </style>
-<go:navigater path="privateShipyard"></go:navigater>
 <div class="row">
     <div class="col-md-12">
         <div class="portlet light bordered">
@@ -20,15 +18,13 @@
                 <div class="table-toolbar">
                     <div class="row">
                         <div class="col-md-6">
-                            船厂信息
+                            船舶信息
                         </div>
                         <div class="col-md-2">
                             <div class="btn-group">
-                                <shiro:hasPermission name="privateShipyard/add">
-                                    <a href="privateShipyard/add" data-target="navTab"
-                                       class="btn btn-sm blue"><i class="fa fa-plus"></i> 新增船厂信息
-                                    </a>
-                                </shiro:hasPermission>
+                                <a href="ship/add" data-target="navTab"
+                                   class="btn btn-sm blue"><i class="fa fa-plus"></i> <fmt:message key="ship_addInfo"/><%--新增船舶信息--%>
+                                </a>
                             </div>
                         </div>
                     </div>
@@ -37,16 +33,14 @@
                        id="default_table">
                     <thead>
                     <tr>
-                        <th>Logo</th>
-                        <th>船厂名称</th>
-                        <th>集团公司</th>
-                        <th>国家</th>
-                        <th>城市</th>
-                        <th>位置</th>
-                        <th>联系电话</th>
-                        <th>联系人</th>
-                        <th>邮箱</th>
-                        <th>操作</th>
+                        <th><fmt:message key="ship_name"/></th><%--船舶名称--%>
+                        <th><fmt:message key="ship_imo"/></th><%--IMO--%>
+                        <th><fmt:message key="ship_type"/></th><%--船舶类型--%>
+                        <th><fmt:message key="ship_gt"/></th><%--注册总吨--%>
+                        <th><fmt:message key="ship_association"/></th><%--船级社--%>
+                        <th><fmt:message key="ship_dd"/></th><%--坞检--%>
+                        <th><fmt:message key="ship_ss"/></th><%--特检--%>
+                        <th><fmt:message key="go_operation"/></th><%--操作--%>
                     </tr>
                     </thead>
                 </table>
@@ -64,7 +58,7 @@
             "autoWidth": false,
             "serverSide": true,
             "ajax": {
-                "url": "privateShipyard/list",
+                "url": "ship/list",
                 "type": "post",
                 "data": function (data) {
                     data.keyword = $("#keyword").val();
@@ -77,50 +71,44 @@
             "lengthMenu": [[5, 40, 60], [5, 40, 60]],
             "columns": [
                 {
-                    "data": "logo",
-                    "render": function (logo) {
-                        return "<img src='<%=basePath%>assets/layouts/layout/img/loading.gif'>"
+                    "data": "name",
+                    "render": function (data, type, row) {
+                        return row.name;
                     }
                 },
                 {
-                    "data": "name",
+                    "data": "imo",
                 },
                 {
-                    "data": "groupCompany",
+                    "data": "type",
                 },
                 {
-                    "data": "country",
+                    "data": "grt",
                 },
                 {
-                    "data": "city",
+                    "data": "shipClass",
                 },
                 {
-                    "data": "location",
+                    "data": "dd",
                 },
                 {
-                    "data": "tel",
-                },
-                {
-                    "data": "contactName",
-                },
-                {
-                    "data": "email",
+                    "data": "ss",
                 },
             ],
 
             "columnDefs": [{
-                "targets": 9,
+                "targets": 7,
                 "render": function (data, type, row) {
                     return ""
-                            <shiro:hasPermission name="privateShipyard/look">
-                            + '<a href="privateShipyard/look?id=' + row.id + '" class="btn btn-sm grey-mint" data-target="navTab"></i>查看</a>'
+                            <shiro:hasPermission name="ship/info">
+                            + '<a href="ship/info?id=' + row.id + '" class="btn btn-sm grey-mint" data-target="navTab"></i><fmt:message key='go_check'/></a>'
                             </shiro:hasPermission>
-                            <shiro:hasPermission name="privateShipyard/edit">
-                            + '<a href="privateShipyard/edit?id=' + row.id + '" class="btn  btn-sm blue" data-target="navTab"></i>编辑</a>'
+                            <shiro:hasPermission name="ship/edit">
+                            + '<a href="ship/edit?id=' + row.id + '" class="btn  btn-sm blue" data-target="navTab"></i><fmt:message key='go_editor'/></a>'
                             </shiro:hasPermission>
-                            <shiro:hasPermission name="privateShipyard/delete">
-                            + '<a href="privateShipyard/delete?id=' + row.id +
-                            '" data-msg="确定删除吗？"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm red">删除</a>'
+                            <shiro:hasPermission name="ship/delete">
+                            + '<a href="ship/delete?id=' + row.id +
+                            '" data-msg="<fmt:message key='ship_delete_confirm'/>"  data-model="ajaxToDo" data-callback="refreshTable" class="btn btn-sm red"><fmt:message key='go_delete'/></a>'
                             </shiro:hasPermission>
                             ;
                 }
@@ -130,17 +118,38 @@
                 drawICheck('defaultCheck', 'chx_default');
             },
             "initComplete": function () {
-                initSearchForm(null, "搜索船厂名称");
+                initSearchForm(null, "<fmt:message key='ship_nameOrIMO_input'/> ");
             }
         });
 
         $('#myInput').on('keyup', function () {
             defTable.search(this.value).draw();
         });
+
+
     });
+
+    function check(id, status) {
+        if (confirm("确定审核？")) {
+            $.post("/shipinfo/check", {id: id, status: status}, function () {
+                refreshTable();
+            });
+
+        }
+
+    }
+    //
+    //    function      slide(id, slide) {
+    //        if (confirm("确定提交？")) {
+    //            $.post("/shipinfo/slide", {id: id, slide: slide}, function () {
+    //                refreshTable();
+    //            });
+    //        }
+    //    }
 
 
     function refreshTable(toFirst) {
+        //defaultTable.ajax.reload();
         if (toFirst) {//表格重绘，并跳转到第一页
             defTable.draw();
         } else {//表格重绘，保持在当前页
@@ -148,10 +157,4 @@
         }
     }
 
-
-</script>
-<script>
-    if (${mes}) {
-        alert("没有该船厂的详细信息");
-    }
 </script>
