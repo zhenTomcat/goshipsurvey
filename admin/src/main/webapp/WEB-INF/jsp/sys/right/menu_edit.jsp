@@ -27,17 +27,20 @@
             <div class="form-group">
                 <label for="menuUrl" class="col-sm-2 control-label">路径</label>
                 <div class="col-sm-7">
-                    <c:choose>
-                        <c:when test="${menu.menuType == 1}">
-                            <input id="menuUrl" name="menuUrl" value="#" type="text"
-                                   maxlength="32" class="form-control" >
-                        </c:when>
-                        <c:otherwise>
-                            <input id="menuUrl" name="menuUrl" value="${menu.menuUrl}"
-                                   type="text" maxlength="32" class="form-control required"
-                                   placeholder="请输入路径">
-                        </c:otherwise>
-                    </c:choose>
+                    <%--<c:choose>--%>
+                    <%--<c:when test="${menu.menuType == 1}">--%>
+                    <%--<input id="menuUrl" name="menuUrl" value="#" type="text"--%>
+                    <%--maxlength="32" class="form-control" >--%>
+                    <%--</c:when>--%>
+                    <%--<c:otherwise>--%>
+                    <%--<input id="menuUrl" name="menuUrl" value="${menu.menuUrl}"--%>
+                    <%--type="text" maxlength="32" class="form-control required"--%>
+                    <%--placeholder="请输入路径">--%>
+                    <%--</c:otherwise>--%>
+                    <%--</c:choose>--%>
+                    <input id="menuUrl" name="menuUrl" value="${menu.menuUrl}"
+                           type="text" maxlength="32" class="form-control required"
+                           placeholder="请输入路径">
                 </div>
             </div>
             <div class="form-group">

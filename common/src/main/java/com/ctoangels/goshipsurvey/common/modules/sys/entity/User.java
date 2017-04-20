@@ -1,93 +1,190 @@
 package com.ctoangels.goshipsurvey.common.modules.sys.entity;
 
-import com.baomidou.mybatisplus.annotations.IdType;
-import com.baomidou.mybatisplus.annotations.TableField;
-import com.baomidou.mybatisplus.annotations.TableId;
-import com.baomidou.mybatisplus.annotations.TableName;
-import com.ctoangels.goshipsurvey.common.util.Const;
-
 import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
+import com.baomidou.mybatisplus.annotations.IdType;
+
+import com.baomidou.mybatisplus.annotations.TableField;
+import com.baomidou.mybatisplus.annotations.TableId;
+import com.baomidou.mybatisplus.annotations.TableName;
 
 /**
- * @author Sun.Han
- * @version 1.0
- * @FileName User.java
- * @Description:
- * @Date 2015年4月30日
+ *
+ *
+ *
  */
 @TableName("sys_user")
 public class User implements Serializable {
 
-    @TableId(value = "id", type = IdType.AUTO)
-    private Integer id; // 用户id
-    @TableField(value = "login_name")
-    private String loginName; // 用户名
-    private String password; // 密码
-    private String name; // 姓名
-    @TableField(value = "last_login")
-    private Date lastLogin; // 最后登录时间
-    private String ip; // 用户登录ip地址
-    private Integer delFlag; // 状态
-    private String description; // 描述
-    private String email; // 邮箱
-    private String phone; // 电话号码
-    private Integer score;//积分
-    private String identification;//身份证
-    private String prefer;//偏好
-    private String address;//地址
-    private String headImgUrl;//头像
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
 
-    @TableField(value = "email_code")//邮箱激活码
+    /**  */
+    @TableId(type = IdType.AUTO)
+    private Integer id;
+
+    /**
+     * 姓名
+     */
+    private String name;
+
+    /**
+     * 登录名
+     */
+    @TableField(value = "login_name")
+    private String loginName;
+
+    /**
+     * 密码
+     */
+    private String password;
+
+    /**  */
+    private Integer type;
+
+    /**  */
+    @TableField(value = "style_id")
+    private Integer styleId;
+
+    /**
+     * 部门Id
+     */
+    @TableField(value = "office_id")
+    private String officeId;
+
+    /**  */
+    @TableField(value = "company_id")
+    private Integer companyId;
+
+    /**
+     * IP
+     */
+    private String ip;
+
+    /**
+     * 邮箱
+     */
+    private String email;
+
+    /**  */
+    private String phone;
+
+    /**
+     * 地址
+     */
+    private String address;
+
+    /**
+     * 身份证
+     */
+    private String identification;
+
+    /**
+     * 头像图片地址
+     */
+    @TableField(value = "head_img_url")
+    private String headImgUrl;
+
+    /**
+     * 上次登录时间
+     */
+    @TableField(value = "last_login")
+    private Date lastLogin;
+
+    /**  */
+    private String description;
+
+    /**  */
+    private String achievement;
+
+    /**
+     * 可验船型
+     */
+    @TableField(value = "ship_type")
+    private String shipType;
+
+    /**  */
+    @TableField(value = "inspection_date_from")
+    private Date inspectionDateFrom;
+
+    /**  */
+    @TableField(value = "inspection_date_to")
+    private Date inspectionDateTo;
+
+    /**
+     * 评分
+     */
+    private Double point;
+
+    /**  */
+    @TableField(value = "email_status")
+    private Integer emailStatus;
+
+    /**  */
+    @TableField(value = "email_code")
     private String emailCode;
-    @TableField(value = "email_status")//邮箱激活状态
-    private Integer emailStatus = Const.EMAIL_ACTIVATE_STATUS_HAVE;
-    @TableField(value = "email_time")//邮箱激活时间
+
+    /**  */
+    @TableField(value = "email_time")
     private Date emailTime;
 
-    @TableField(value = "open_id")
-    private String openId; // 微信openId
+    /**
+     * 创建时间
+     */
+    @TableField(value = "create_date")
+    private Date createDate;
+
+    /**
+     * 创建者
+     */
+    @TableField(value = "create_by")
+    private String createBy;
+
+    /**
+     * 更新时间
+     */
+    @TableField(value = "update_date")
+    private Date updateDate;
+
+    /**
+     * 更新者
+     */
+    @TableField(value = "update_by")
+    private String updateBy;
+
+    /**
+     * 状态
+     */
+    @TableField(value = "del_flag")
+    private Integer delFlag;
+
     @TableField(exist = false)
     private List<Role> roles;
 
     @TableField(exist = false)
     private String roleIds;
 
-    @TableField(value = "style_id")
-    private Integer styleId;
-
-    @TableField(value = "company_id")
-    private Integer companyId;
-
-
-    public String getRoleIds() {
-        return roleIds;
-    }
-
-    public void setRoleIds(String roleIds) {
-        this.roleIds = roleIds;
-    }
-
-    public Integer getDelFlag() {
-        return delFlag;
-    }
-
-    public void setDelFlag(Integer delFlag) {
-        this.delFlag = delFlag;
-    }
 
     public Integer getId() {
-        return id;
+        return this.id;
     }
 
     public void setId(Integer id) {
         this.id = id;
     }
 
+    public String getName() {
+        return this.name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
     public String getLoginName() {
-        return loginName;
+        return this.loginName;
     }
 
     public void setLoginName(String loginName) {
@@ -95,47 +192,55 @@ public class User implements Serializable {
     }
 
     public String getPassword() {
-        return password;
+        return this.password;
     }
 
     public void setPassword(String password) {
         this.password = password;
     }
 
-    public String getName() {
-        return name;
+    public Integer getType() {
+        return this.type;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setType(Integer type) {
+        this.type = type;
     }
 
-    public Date getLastLogin() {
-        return lastLogin;
+    public Integer getStyleId() {
+        return this.styleId;
     }
 
-    public void setLastLogin(Date lastLogin) {
-        this.lastLogin = lastLogin;
+    public void setStyleId(Integer styleId) {
+        this.styleId = styleId;
+    }
+
+    public String getOfficeId() {
+        return this.officeId;
+    }
+
+    public void setOfficeId(String officeId) {
+        this.officeId = officeId;
+    }
+
+    public Integer getCompanyId() {
+        return this.companyId;
+    }
+
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
     }
 
     public String getIp() {
-        return ip;
+        return this.ip;
     }
 
     public void setIp(String ip) {
         this.ip = ip;
     }
 
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
     public String getEmail() {
-        return email;
+        return this.email;
     }
 
     public void setEmail(String email) {
@@ -143,11 +248,156 @@ public class User implements Serializable {
     }
 
     public String getPhone() {
-        return phone;
+        return this.phone;
     }
 
     public void setPhone(String phone) {
         this.phone = phone;
+    }
+
+    public String getAddress() {
+        return this.address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getIdentification() {
+        return this.identification;
+    }
+
+    public void setIdentification(String identification) {
+        this.identification = identification;
+    }
+
+    public String getHeadImgUrl() {
+        return this.headImgUrl;
+    }
+
+    public void setHeadImgUrl(String headImgUrl) {
+        this.headImgUrl = headImgUrl;
+    }
+
+    public Date getLastLogin() {
+        return this.lastLogin;
+    }
+
+    public void setLastLogin(Date lastLogin) {
+        this.lastLogin = lastLogin;
+    }
+
+    public String getDescription() {
+        return this.description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getAchievement() {
+        return this.achievement;
+    }
+
+    public void setAchievement(String achievement) {
+        this.achievement = achievement;
+    }
+
+    public String getShipType() {
+        return this.shipType;
+    }
+
+    public void setShipType(String shipType) {
+        this.shipType = shipType;
+    }
+
+    public Date getInspectionDateFrom() {
+        return this.inspectionDateFrom;
+    }
+
+    public void setInspectionDateFrom(Date inspectionDateFrom) {
+        this.inspectionDateFrom = inspectionDateFrom;
+    }
+
+    public Date getInspectionDateTo() {
+        return this.inspectionDateTo;
+    }
+
+    public void setInspectionDateTo(Date inspectionDateTo) {
+        this.inspectionDateTo = inspectionDateTo;
+    }
+
+    public Double getPoint() {
+        return this.point;
+    }
+
+    public void setPoint(Double point) {
+        this.point = point;
+    }
+
+    public Integer getEmailStatus() {
+        return this.emailStatus;
+    }
+
+    public void setEmailStatus(Integer emailStatus) {
+        this.emailStatus = emailStatus;
+    }
+
+    public String getEmailCode() {
+        return this.emailCode;
+    }
+
+    public void setEmailCode(String emailCode) {
+        this.emailCode = emailCode;
+    }
+
+    public Date getEmailTime() {
+        return this.emailTime;
+    }
+
+    public void setEmailTime(Date emailTime) {
+        this.emailTime = emailTime;
+    }
+
+    public Date getCreateDate() {
+        return this.createDate;
+    }
+
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
+
+    public String getCreateBy() {
+        return createBy;
+    }
+
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
+
+    public String getUpdateBy() {
+        return updateBy;
+    }
+
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
+
+    public Date getUpdateDate() {
+        return this.updateDate;
+    }
+
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
+
+
+    public Integer getDelFlag() {
+        return this.delFlag;
+    }
+
+    public void setDelFlag(Integer delFlag) {
+        this.delFlag = delFlag;
     }
 
     public List<Role> getRoles() {
@@ -158,91 +408,12 @@ public class User implements Serializable {
         this.roles = roles;
     }
 
-    public String getOpenId() {
-        return openId;
+    public String getRoleIds() {
+        return roleIds;
     }
 
-    public void setOpenId(String openId) {
-        this.openId = openId;
+    public void setRoleIds(String roleIds) {
+        this.roleIds = roleIds;
     }
 
-    public Integer getScore() {
-        return score;
-    }
-
-    public void setScore(Integer score) {
-        this.score = score;
-    }
-
-    public String getIdentification() {
-        return identification;
-    }
-
-    public void setIdentification(String identification) {
-        this.identification = identification;
-    }
-
-    public String getPrefer() {
-        return prefer;
-    }
-
-    public void setPrefer(String prefer) {
-        this.prefer = prefer;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getHeadImgUrl() {
-        return headImgUrl;
-    }
-
-    public void setHeadImgUrl(String headImgUrl) {
-        this.headImgUrl = headImgUrl;
-    }
-
-    public String getEmailCode() {
-        return emailCode;
-    }
-
-    public void setEmailCode(String emailCode) {
-        this.emailCode = emailCode;
-    }
-
-    public Date getEmailTime() {
-        return emailTime;
-    }
-
-    public void setEmailTime(Date emailTime) {
-        this.emailTime = emailTime;
-    }
-
-    public Integer getEmailStatus() {
-        return emailStatus;
-    }
-
-    public void setEmailStatus(Integer emailStatus) {
-        this.emailStatus = emailStatus;
-    }
-
-    public Integer getStyleId() {
-        return styleId;
-    }
-
-    public void setStyleId(Integer styleId) {
-        this.styleId = styleId;
-    }
-
-    public Integer getCompanyId() {
-        return companyId;
-    }
-
-    public void setCompanyId(Integer companyId) {
-        this.companyId = companyId;
-    }
 }

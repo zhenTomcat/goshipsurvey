@@ -47,7 +47,7 @@ public class LoginServiceImpl implements LoginService {
         return menuMapper.findMenusByUserIdAndParent(parames);
     }
 
-    public List<Button> getRightsButtons(Integer userId) {
+    public List<Button> getRightsButtons(int userId) {
         return buttonMapper.findButtonsByUserId(userId);
     }
 }

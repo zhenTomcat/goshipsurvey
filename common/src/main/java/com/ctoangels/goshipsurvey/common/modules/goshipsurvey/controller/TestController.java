@@ -26,19 +26,6 @@ import java.util.List;
 @RequestMapping("test")
 public class TestController extends BaseController {
 
-    @RequestMapping(method = RequestMethod.GET)
-    public String info(@RequestParam(required = false) String url) {
-        url = (url == null ? "myRecord" : url);
-        return "go/test/" + url;
-    }
-
-
-
-
-
-
-
-
     @RequestMapping(value = "/getChartJson", method = RequestMethod.GET)
     @ResponseBody
     public JSONObject test2(HttpServletResponse response, String callback) {

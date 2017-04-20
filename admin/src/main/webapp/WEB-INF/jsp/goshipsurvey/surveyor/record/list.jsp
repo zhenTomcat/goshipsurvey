@@ -21,8 +21,8 @@
                             <div class="portlet light">
                                 <div class="portlet-title">
                                     <div class="caption">
-                                        <i class="icon-social-dribbble font-purple-soft"></i>
-                                        <span class="caption-subject font-purple-soft bold uppercase">Scheduled inspections</span>
+                                        <i class="icon-social-dribbble font-blue-soft"></i>
+                                        <span class="caption-subject font-blue-soft bold uppercase">My inspection record</span>
                                     </div>
                                 </div>
                                 <div class="portlet-body">
@@ -81,3 +81,12 @@
         </div>
     </div>
 </div>
+<script>
+    var shipType = ["", "Bulker", "Tanker", "Gas", "Chemical", "Container", "Multi_purpose", "Ro-Ro/PCC", "Reefer"];
+    var inspectionType = ["", "on hire", "off hire", "condition"];
+    var inspectionTable;
+    $(document).ready(function () {
+    });
+
+
+</script>

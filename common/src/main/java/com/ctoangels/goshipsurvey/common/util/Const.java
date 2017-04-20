@@ -73,20 +73,31 @@ public class Const {
     public static final Integer EMAIL_ACTIVATE_STATUS_NOT = 0;//未进行邮箱验证
     public static final Integer EMAIL_ACTIVATE_STATUS_HAVE = 1;//已经行邮箱验证
 
-    //维修进度子项完成进度
-    public static final Integer TASK_COMPLETE = 0;//该项已完成
-    public static final Integer TASK_NOW = 1;//该项进行中
-    public static final Integer TASK_NOT_START = 2;//该项未开始
-    public static final Integer TASK_CANCEL = 3;//该项已取消
 
-    //报告详单提交状态
-    public static final Integer REPORT_DETAIL_SUBMIT_HAVE = 0;//报告详单已提交
-    public static final Integer REPORT_DETAIL_SUBMIT_NOT = 1;//报告详单未提交
+    //inspection_type
+    public static final Integer INSPECTION_TYPE_ON_HIRE = 0;
+    public static final Integer INSPECTION_TYPE_OFF_HIRE = 1;
+    public static final Integer INSPECTION_TYPE_CONDITION = 2;
 
-    //报告文件类型
-    public static final Integer REPORT_DETAIL_FILE_TYPE_IMAGE = 0;
-    public static final Integer REPORT_DETAIL_FILE_TYPE_MP3 = 1;
-    public static final Integer REPORT_DETAIL_FILE_TYPE_OTHER = 2;
+    //quotation
+    //流程  0:记录生成   1:op询价中  1.5:surveyor申请  2:op选择一个surveyor>>生成inspection  3:已取消
+    public static final Integer QUOTATION_INIT = 0;
+    public static final Integer QUOTATION_ING = 1;
+    public static final Integer QUOTATION_END = 2;
+    public static final Integer QUOTATION_CANCEL = 3;
 
+    //quotation_application
+    //  0:申请中  1:成功  2:失败
+    public static final Integer QUO_APPLY_ING = 0;
+    public static final Integer QUO_APPLY_SUCCESS = 1;
+    public static final Integer QUO_APPLY_FAILURE = 2;
+
+    //inspection
+    //0:记录生成  1:surveyor上传本人护照等信息  2:op上传船舶信息 3:等待surveyor上传验船报告  4:op确认完成
+    public static final Integer INSPECTION_INIT = 0;
+    public static final Integer INSPECTION_SURVEYOR_OK = 1;
+    public static final Integer INSPECTION_SHIP_OK = 2;
+    public static final Integer INSPECTION_REPORT_OK = 3;
+    public static final Integer INSPECTION_COMPLETE = 4;
 
 }

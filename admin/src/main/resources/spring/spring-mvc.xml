@@ -15,10 +15,12 @@
     <task:annotation-driven/>
 
 
-
     <context:property-placeholder location="classpath:override.properties"/>
     <context:component-scan base-package="com.ctoangels.goshipsurvey.admin"/>
-    <context:component-scan base-package="com.ctoangels.goshipsurvey.common"/>
+    <context:component-scan base-package="com.ctoangels.goshipsurvey.common">
+        <context:exclude-filter type="annotation"
+                                expression="org.springframework.stereotype.Service"/>
+    </context:component-scan>
     <mvc:default-servlet-handler/>
 
     <!-- 对静态资源文件的访问  restful-->
@@ -42,6 +44,7 @@
         </property>
     </bean>
 
+
     <!-- 配置fastjson -->
     <mvc:annotation-driven>
         <mvc:message-converters register-defaults="true">
@@ -53,6 +56,7 @@
                         <value>WriteMapNullValue</value>
                         <value>QuoteFieldNames</value>
                         <value>WriteNullStringAsEmpty</value>
+                        <value>WriteDateUseDateFormat</value>
                     </list>
                 </property>
             </bean>
@@ -61,7 +65,7 @@
 
 
     <mvc:interceptors>
-        <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"  />
+        <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
     </mvc:interceptors>
 
     <bean id="localeResolver" class="org.springframework.web.servlet.i18n.SessionLocaleResolver">
@@ -87,7 +91,6 @@
         <!-- cookie生效路径 -->
         <property name="sessionIdCookie.path" value="/"/>
     </bean>
-
 
 
 </beans>

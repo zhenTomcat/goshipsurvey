@@ -1,5 +1,6 @@
 package com.ctoangels.goshipsurvey.admin.base.interceptor.shiro;
 
+import com.ctoangels.goshipsurvey.admin.base.interceptor.dataSourceSelect.DataSourceInterceptor;
 import com.ctoangels.goshipsurvey.common.util.Const;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
 
@@ -15,6 +16,8 @@ import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.Subject;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.util.List;
 
@@ -28,13 +31,20 @@ import java.util.List;
  */
 public class ShiroRealm extends AuthorizingRealm {
 
+    private static Logger logger = LoggerFactory.getLogger(ShiroRealm.class);
+
+    public ShiroRealm() {
+        logger.info("ShiroRealm被启动了");
+    }
+
     /*
-     * (non-Javadoc)
-     *
-     * @see
-     * org.apache.shiro.realm.AuthenticatingRealm#doGetAuthenticationInfo(org
-     * .apache.shiro.authc.AuthenticationToken) 认证
-     */
+         * (non-Javadoc)
+
+         *
+         * @see
+         * org.apache.shiro.realm.AuthenticatingRealm#doGetAuthenticationInfo(org
+         * .apache.shiro.authc.AuthenticationToken) 认证
+         */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken token) throws AuthenticationException {
 

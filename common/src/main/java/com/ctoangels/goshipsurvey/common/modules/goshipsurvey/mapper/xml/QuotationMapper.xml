@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="null.QuotationMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id, op_id AS opId, op_name AS opName, ship_id AS shipId, ship_name AS shipName, imo, ship_type AS shipType, inspection_type AS inspectionType, port_id AS portId, port_name AS portName, date_from AS dateFrom, date_to AS dateTo, total_price AS totalPrice, quotation_status AS quotationStatus, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
+	</sql>
+
+</mapper>

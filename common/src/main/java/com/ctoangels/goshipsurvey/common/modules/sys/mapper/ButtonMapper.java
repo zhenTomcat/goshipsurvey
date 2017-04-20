@@ -6,6 +6,6 @@ import com.ctoangels.goshipsurvey.common.modules.sys.entity.Button;
 import java.util.List;
 
 public interface ButtonMapper  extends AutoMapper<Button> {
-    List<Button> findButtonsByUserId(Integer userId);
+    List<Button> findButtonsByUserId(int userId);
 
 }

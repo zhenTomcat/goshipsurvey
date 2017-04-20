@@ -200,7 +200,7 @@
         if (window.location.hash)
             url = window.location.hash.substring(1);
         else
-            url = "test?url=myRecord";
+            url = "op/record";
 
         if ($("a[href='" + url + "']").length > 0) {
             $("a[href='" + url + "']").click();

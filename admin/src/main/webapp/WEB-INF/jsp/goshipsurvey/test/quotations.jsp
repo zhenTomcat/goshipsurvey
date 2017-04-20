@@ -26,14 +26,11 @@
                             <div class="portlet light">
                                 <div class="portlet-title">
                                     <div class="caption col-md-8">
-                                        <i class="icon-social-dribbble font-purple-soft"></i>
-                                        <span class="caption-subject font-purple-soft bold uppercase">Quotations</span>
+                                        <i class="icon-social-dribbble font-blue-soft"></i>
+                                        <span class="caption-subject font-blue-soft bold uppercase">Quotations</span>
                                     </div>
                                     <div class="col-md-4">
                                         <div class="btn-group">
-                                            <%--<a href="test?url=addQuotation" data-model="dialog"--%>
-                                            <%--class="btn blue"><i class="fa fa-plus"></i> New quotation--%>
-                                            <%--</a>--%>
                                             <a href="#form_modal2" data-toggle="modal"
                                                class="btn blue"><i class="fa fa-plus"></i> New quotation
                                             </a>
@@ -84,6 +81,7 @@
         </div>
     </div>
 </div>
+
 
 <div id="form_modal2" class="modal fade" role="dialog" aria-hidden="true">
     <div class="modal-dialog">

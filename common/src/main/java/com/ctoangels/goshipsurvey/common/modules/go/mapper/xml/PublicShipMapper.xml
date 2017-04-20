@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ctoangels.goshipsurvey.common.modules.go.mapper.PublicShipMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id, imo, `status`, `name`, buildyear, builder, model, ice, owned, bunkers, twopenult, threepenult, tpc, callsign, hp, fourpenult, nt, onelast, twolast, threelast, fourlast, onepenult, loa, beam, ggt, dwt, flag, classs, exname, engine, next_ss AS nextSs, next_dd AS nextDd, speed, draft, ldt, mmaker, mmype, mbr, mcyl, amake, atype, aqty, arated, acyl, ctype, cqty, baux, blarge, bgas, bexhaust, emaker, etype, wanchor, wcapstan, tasishaft, anchor, anchorchain, air, freon, refrige, tubluar, propeller, filename, inputdate, remark, type_id AS typeId, category
+	</sql>
+
+</mapper>

@@ -136,7 +136,7 @@
 
                     if ("success" == data.result) {
                         saveCookie();
-                        window.location.href = "<%=basePath%>";
+                        window.location.href = "/index";
                     } else if ("user error" == data.result) {
                         $("#loginName").tips({
                             side: 1,
@@ -171,8 +171,6 @@
     $(document).ready(function () {
         changeCode();
         $("#codeImg").bind("click", changeCode);
-
-        // init background slide images
         $.backstretch([
                     "${ctx}/assets/layouts/layout/img/bg/1.jpg",
                     "${ctx}/assets/layouts/layout/img/bg/2.jpg",

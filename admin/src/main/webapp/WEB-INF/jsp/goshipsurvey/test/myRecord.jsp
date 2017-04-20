@@ -21,8 +21,8 @@
                             <div class="portlet light">
                                 <div class="portlet-title">
                                     <div class="caption">
-                                        <i class="icon-social-dribbble font-purple-soft"></i>
-                                        <span class="caption-subject font-purple-soft bold uppercase">My record</span>
+                                        <i class="icon-social-dribbble font-blue-soft"></i>
+                                        <span class="caption-subject font-blue-soft bold uppercase">My record</span>
                                     </div>
                                 </div>
                                 <div class="portlet-body">
@@ -57,8 +57,8 @@
                                                     <td>Boom</td>
                                                     <td>On hire</td>
                                                     <td>Shang Hai</td>
-                                                    <td>2017-11-16~~2017-11-15</td>
-                                                    <td>500$</td>
+                                                    <td> 4/14/2017to4/15/2017</td>
+                                                    <td>$500</td>
                                                     <td>已验船</td>
                                                 </tr>
                                                 <tr>
@@ -67,8 +67,8 @@
                                                     <td>Boom</td>
                                                     <td>On hire</td>
                                                     <td>Shang Hai</td>
-                                                    <td>2017-11-16~~2017-11-15</td>
-                                                    <td>500$</td>
+                                                    <td> 4/14/2017to4/15/2017</td>
+                                                    <td>$500</td>
                                                     <td>已验船</td>
                                                 </tr>
                                                 </tbody>

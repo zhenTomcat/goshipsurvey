@@ -10,6 +10,10 @@
 
     <import resource="spring-mybatis.xml"/>
 
+    <context:component-scan base-package="com.ctoangels.goshipsurvey.common">
+        <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
+    </context:component-scan>
+
     <bean id="messageSource" class="org.springframework.context.support.ReloadableResourceBundleMessageSource">
         <property name="cacheSeconds" value="5"/>
         <property name="defaultEncoding" value="utf-8"/>
@@ -46,26 +50,16 @@
             <value>
                 /static/** = anon
                 /assets/** = anon
+                /home=anon
                 /code = anon
                 /login_login = anon
                 /logout = anon
                 /account/** = user
-                /ship/**=user
-                /privateShipyard/**=user
                 /company/**=user
-                /repairSpec/**=user
-                /repairProg/**=user
-                /modelDetail/**=user
-                /repairSpecDetail/**=user
-                /repairProgDetail/**=user
-                /publicShip/**=user
                 /oss/**=user
-                /report/**=user
-                /reportDetail/**=user
-                /task/**=user
                 /register_register = anon
                 /register/activateConfirm = anon
-                /sys/index = anon
+                /index = anon
                 /user/unauthorized = anon
                 /user/editPwd = anon
                 /test=anon
@@ -74,5 +68,19 @@
         </property>
     </bean>
     <!-- ================ Shiro end ================ -->
+
+    <!--aop-->
+    <aop:aspectj-autoproxy expose-proxy="true"></aop:aspectj-autoproxy>
+    <bean id="dataSourceInterceptor"
+          class="com.ctoangels.goshipsurvey.admin.base.interceptor.dataSourceSelect.DataSourceInterceptor"/>
+    <aop:config>
+        <aop:aspect ref="dataSourceInterceptor">
+            <aop:pointcut id="changeDataSource"
+                          expression="execution(* com.ctoangels.goshipsurvey.common.modules.go.service.*.*(..))"/>
+            <aop:before pointcut-ref="changeDataSource" method="doBefore"/>
+            <aop:after pointcut-ref="changeDataSource" method="doAfter"/>
+        </aop:aspect>
+    </aop:config>
+
 
 </beans>

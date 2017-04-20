@@ -1,6 +1,8 @@
 package com.ctoangels.goshipsurvey.common.modules.sys.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.ctoangels.goshipsurvey.common.modules.go.entity.PublicShip;
+import com.ctoangels.goshipsurvey.common.modules.go.service.IPublicShipService;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Style;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IStyleService;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.Button;
@@ -30,7 +32,6 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
-import javax.servlet.http.HttpServletResponse;
 import java.util.*;
 
 /**
@@ -53,7 +54,10 @@ public class LoginController extends BaseController {
     private LoginService loginService;
 
     @Autowired
-    private IStyleService iStyleService;
+    private IStyleService styleService;
+
+    @Autowired
+    private IPublicShipService publicShipService;
 
     @Value("${site_path}")
     private String sitePath;
@@ -273,7 +277,7 @@ public class LoginController extends BaseController {
     /**
      * 访问系统首页
      */
-    @RequestMapping(value = "/sys/index")
+    @RequestMapping(value = "/index")
     public String login_index(ModelMap map) {
         // 加载所有菜单
         map.put("changeMenu", "yes");
@@ -291,11 +295,11 @@ public class LoginController extends BaseController {
                 Integer styleId = user.getStyleId();
                 Style style;
                 if (styleId == null) {
-                    style = iStyleService.selectById(1);
+                    style = styleService.selectById(1);
                 } else {
-                    style = iStyleService.selectById(styleId);
+                    style = styleService.selectById(styleId);
                     if (style == null) {
-                        style = iStyleService.selectById(1);
+                        style = styleService.selectById(1);
                     }
                 }
                 map.put("style", style);
@@ -398,22 +402,9 @@ public class LoginController extends BaseController {
         return "sys/admin/login";
     }
 
-    //试用入口
-    @RequestMapping(value = "/tryOut", method = RequestMethod.GET)
-    @ResponseBody
-    public JSONObject tryOut() {
-        JSONObject jsonObject = new JSONObject();
-        User user = userService.getTryUser();
-        if (user == null) {
-            jsonObject.put("success", false);
-        } else {
-            jsonObject.put("user", user);
-            jsonObject.put("success", true);
-            String sessionCode = (String) session.getAttribute(Const.SESSION_SECURITY_CODE);
-            jsonObject.put("sessionCode", sessionCode);
-        }
-
-        return jsonObject;
+    @RequestMapping(value = "/home")
+    public String home(ModelMap map) {
+        return "goshipsurvey/home";
     }
 
 }

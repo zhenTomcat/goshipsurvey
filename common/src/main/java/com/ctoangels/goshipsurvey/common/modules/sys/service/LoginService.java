@@ -12,9 +12,10 @@ import java.util.Map;
 public interface LoginService {
 
     List<String> getRightsRolesId(Integer userId);
+
     List<Menu> getRightsParentMenus(Integer userId);
 
     List<Menu> getRightsSubMenus(Map<?, ?> parames);
 
-    List<Button> getRightsButtons(Integer userId);
+    List<Button> getRightsButtons(int userId);
 }
