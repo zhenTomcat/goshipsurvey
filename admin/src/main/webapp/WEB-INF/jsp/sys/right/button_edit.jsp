@@ -20,7 +20,7 @@
                     for="buttonName" class="col-sm-2 control-label">名称</label>
                 <div class="col-sm-7">
                     <input id="buttonName" name="buttonName" value="${button.buttonName}"
-                           type="text" maxlength="32" minlength="2"
+                           type="text"
                            class="form-control required" placeholder="请输入名称">
                 </div>
             </div>
@@ -28,7 +28,7 @@
                 <label for="buttonUrl" class="col-sm-2 control-label">路径</label>
                 <div class="col-sm-7">
                     <input id="buttonUrl" name="buttonUrl" value="${button.buttonUrl}"
-                           type="text" maxlength="32" class="form-control required"
+                           type="text" class="form-control required"
                            placeholder="请输入路径">
                 </div>
             </div>

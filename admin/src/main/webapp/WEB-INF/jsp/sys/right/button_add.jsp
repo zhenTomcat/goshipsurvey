@@ -19,14 +19,14 @@
                 <input type="hidden" name="menuId" value="${menuId}"/> <label
                     for="buttonName" class="col-sm-2 control-label">名称</label>
                 <div class="col-sm-7">
-                    <input id="buttonName" name="buttonName" type="text" maxlength="32"
+                    <input id="buttonName" name="buttonName" type="text"
                            minlength="2" class="form-control required" placeholder="请输入名称">
                 </div>
             </div>
             <div class="form-group">
                 <label for="buttonUrl" class="col-sm-2 control-label">路径</label>
                 <div class="col-sm-7">
-                    <input id="buttonUrl" name="buttonUrl" type="text" maxlength="32"
+                    <input id="buttonUrl" name="buttonUrl" type="text"
                            class="form-control required" placeholder="请输入路径">
                 </div>
             </div>

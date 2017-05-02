@@ -63,6 +63,8 @@
                 /user/unauthorized = anon
                 /user/editPwd = anon
                 /test=anon
+                /surveyor/account/personalInfo=user
+                /surveyor/account/companyInfo=user
                 /** = gvrts
             </value>
         </property>

@@ -4,11 +4,11 @@ import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.SurveyorInf
 import com.baomidou.framework.service.ISuperService;
 
 /**
- *
  * SurveyorInfo 表数据服务层接口
- *
  */
 public interface ISurveyorInfoService extends ISuperService<SurveyorInfo> {
+
+    boolean editInfo(int id, String type, String url);
 
 
 }

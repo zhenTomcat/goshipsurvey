@@ -11,6 +11,18 @@ import java.util.List;
  */
 public interface IInspectionService extends ISuperService<Inspection> {
 
+    //op确认邀请surveyor验船后,生成inspection
     boolean initInspection(int quotationId, int applicationId);
+
+    List<Inspection> getInspectionsOP(int userId);
+
+    List<Inspection> getInspectionsSurveyor(int userId);
+
+    //op填写船的信息,后台更改inspection状态
+    boolean opShipInfoComplete(Inspection inspection);
+
+    boolean opConfirmComplete(int id);
+
+    boolean surveyorConfirmComplete(int id);
 
 }

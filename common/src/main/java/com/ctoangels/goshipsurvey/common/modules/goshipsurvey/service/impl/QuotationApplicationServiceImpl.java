@@ -27,10 +27,10 @@ public class QuotationApplicationServiceImpl extends SuperServiceImpl<QuotationA
 
     @Override
     public List<QuotationApplication> getAppliedQuotations(int userId) {
-        QuotationApplication qa = new QuotationApplication();
-        qa.setUserId(userId);
-        qa.setDelFlag(Const.DEL_FLAG_NORMAL);
-        List<QuotationApplication> applicationList = quotationApplicationMapper.selectList(new EntityWrapper<>(qa));
+        EntityWrapper<QuotationApplication> ew = new EntityWrapper<>();
+        ew.addFilter("user_id={0} and del_flag={1}", userId, Const.DEL_FLAG_NORMAL);
+        ew.orderBy("update_date", false);
+        List<QuotationApplication> applicationList = quotationApplicationMapper.selectList(ew);
         for (QuotationApplication application : applicationList) {
             application.setQuotation(quotationMapper.selectById(application.getQuotationId()));
         }

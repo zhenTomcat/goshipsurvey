@@ -13,7 +13,7 @@
         margin: 30px auto;
     }
 
-    #ship-list {
+    #ship-list, #port-list {
         display: none;
         position: absolute;
         z-index: 1000;
@@ -21,7 +21,7 @@
         background-color: white;
     }
 
-    #ship-list ul {
+    #ship-list ul, #port-list ul {
         margin: 0px;
         padding: 0px;
         list-style-type: none;
@@ -32,7 +32,12 @@
         padding: 2px 5px;
     }
 
-    #ship-list li:hover {
+    #port-list ul {
+        width: 160px;
+        padding: 2px 5px;
+    }
+
+    #ship-list li:hover, #port-list li:hover {
         background-color: #32c5d2;
         cursor: pointer;
     }
@@ -66,48 +71,54 @@
                             <label class="col-sm-6 control-label">Ship name</label>
                             <div class="col-sm-6">
                                 <input id="shipName" name="shipName" type="text" required
-                                       class="form-control ">
+                                       class="form-control required">
                             </div>
                         </div>
                         <div class="form-group col-md-6">
                             <label class="col-sm-6 control-label">IMO</label>
                             <div class="col-sm-6">
                                 <input id="imo" name="imo" type="text"
-                                       class="form-control ">
+                                       class="form-control required">
                             </div>
                         </div>
                         <div class="form-group col-md-6">
                             <label class="col-sm-6 control-label">Ship type</label>
                             <div class="col-sm-6">
-                                <input id="shipTypeInput" name="shipTypeInput" type="text"
-                                       class="form-control ">
-                                <input id="shipType" name="shipType" type="hidden" value="0">
+                                <select class="form-control" name="shipType" id="shipTypeSelect">
+                                    <c:forEach items="${shipType}" var="s">
+                                        <option value="${s.value}">${s.des}</option>
+                                    </c:forEach>
+                                </select>
                             </div>
                         </div>
                         <div class="form-group col-md-6">
                             <label class="col-sm-6 control-label">Inspection type</label>
                             <div class="col-sm-6">
-                                <select class="form-control" name="inspectionType">
-                                    <option value="1">On hire</option>
-                                    <option value="2">Off hire</option>
-                                    <option value="3">Condition</option>
+                                <select class="form-control" name="inspectionType" id="inspectionTypeSelect">
+                                    <c:forEach items="${inspectionType}" var="ins">
+                                        <option value="${ins.value}">${ins.des}</option>
+                                    </c:forEach>
                                 </select>
                             </div>
                         </div>
                         <div class="form-group col-md-6">
                             <label class="col-sm-6 control-label">Inspection port</label>
                             <div class="col-sm-6">
-                                <input id="inspectionPort" name="inspectionPort" type="text"
-                                       class="form-control ">
+                                <input id="portName" name="portName" type="text"
+                                       class="form-control required">
+                                <div id="port-list">
+                                    <ul id="portList">
+                                    </ul>
+                                </div>
                             </div>
                         </div>
                         <div class="form-group col-md-12">
                             <label class="control-label col-sm-3">Inspection date(LMT)</label>
                             <div class="col-sm-9" style="padding-left: 7.5px">
                                 <div class="input-group input-large date-picker input-daterange">
-                                    <input type="text" class="form-control" name="dateFrom">
+                                    <input type="text" class="form-control required" name="startDate">
                                     <span class="input-group-addon"> to </span>
-                                    <input type="text" class="form-control" name="dateTo">
+                                    <input type="text" class="form-control required" name="endDate">
                                 </div>
                             </div>
                         </div>
@@ -115,7 +126,7 @@
                 </div>
                 <div class="modal-footer">
                     <button id="closeModal" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                    <shiro:hasPermission name="quotation/add">
+                    <shiro:hasPermission name="op/quotation/add">
                         <button type="button" onclick="severCheck()" class="btn btn-primary">Save</button>
                     </shiro:hasPermission>
                 </div>
@@ -133,10 +144,10 @@
             $("#quotation-add-form").ajaxSubmit({
                 success: function (data) {
                     if (data.success) {
-                        refreshTable();
+                        drawTable();
                         $("#closeModal").click();
                     } else {
-                        console.log("nonono");
+                        alert("add quotation error")
                     }
                 }
             });
@@ -145,7 +156,7 @@
 
     function check() {
         var flag = true;
-        $("#quotation-add-form input.form-control").each(function () {
+        $("#quotation-add-form input.form-control.required").each(function () {
             var value = $(this).val();
             if (value == null || value.trim() == "") {
                 $(this).tips({
@@ -180,6 +191,7 @@
     //点击document隐藏下拉层
     $(document).click(function (event) {
         $("#ship-list").css("display", "none");
+        $("#port-list").css("display", "none");
     })
 
     $("#keyword").on("keyup", function () {
@@ -226,12 +238,46 @@
                     var ship = data.ship;
                     $("#shipId").val(ship.id);
                     $("#imo").val(ship.imo);
+                    $("#shipTypeSelect").val(ship.typeId);
                     $("#shipName").val(ship.name);
-                    $("#shipTypeInput").val(data.shipTypeDes);
-                    $("#shipType").val(ship.typeId);
-                    // $("#callSign").val(ship.callsign);
                 }
             }
         });
+    }
+
+    $("#portName").on("keyup", function () {
+        var keyword = $(this).val();
+        if (keyword == null || (keyword = keyword.trim()) == "") {
+            return;
+        }
+        $.ajax({
+            url: 'port/searchList',
+            type: 'GET',
+            async: true,
+            data: {
+                keyword: keyword
+            },
+            success: function (data) {
+                var html = "";
+                if (data.list.length == 0) {
+                    html += "<li>nothing</li>";
+                } else {
+                    $(data.list).each(function () {
+                        html += "<li onclick='getPortInfo(this)'>" + this.portEn + "," + this.countryCode + "</li>";
+                    })
+                }
+                $("#portList").html(html);
+                $("#port-list").css("display", "inline-block");
+            },
+            error: function () {
+                console.log("searchList error");
+            }
+        })
+    })
+
+    //点击获取信息
+    function getPortInfo(obj) {
+        var portInfo = $(obj).html();
+        $("#portName").val(portInfo);
     }
 </script>

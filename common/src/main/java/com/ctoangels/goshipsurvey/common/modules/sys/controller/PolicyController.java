@@ -41,7 +41,7 @@ public class PolicyController {
     @ResponseBody
     public Map<String, Object> get() {
         Map<String, Object> map = new HashMap<String, Object>();
-        String dir = "goshipyard/";
+        String dir = "goshipsurvey/";
         String host = "http://" + bucket + "." + endpoint;
         OSSClient client = new OSSClient(endpoint, accessId, accessKey);
         try {

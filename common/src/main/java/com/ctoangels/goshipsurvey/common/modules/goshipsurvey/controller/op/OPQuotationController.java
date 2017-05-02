@@ -45,7 +45,7 @@ public class OPQuotationController extends BaseController {
     public JSONObject getList() {
         JSONObject jsonObject = new JSONObject();
         EntityWrapper<Quotation> ew = getEntityWrapper();
-        ew.addFilter("op_id={0} and date_to>={1}", getCurrentUser().getId(), DateUtil.formatDate(new Date(), "yyyy-MM-dd"));
+        ew.addFilter("op_id={0} and end_date>={1}", getCurrentUser().getId(), DateUtil.formatDate(new Date(), "yyyy-MM-dd"));
         ew.orderBy("update_date", false);
         List<Quotation> list = quotationService.selectList(ew);
         for (Quotation q : list) {
@@ -88,8 +88,5 @@ public class OPQuotationController extends BaseController {
         }
         return jsonObject;
     }
-
-
-    //以下为surveyor
 
 }

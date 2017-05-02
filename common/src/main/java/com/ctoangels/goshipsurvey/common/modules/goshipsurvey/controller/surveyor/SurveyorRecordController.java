@@ -3,10 +3,14 @@ package com.ctoangels.goshipsurvey.common.modules.goshipsurvey.controller.survey
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Inspection;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Quotation;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.SurveyorInfo;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IInspectionService;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IQuotationService;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.ISurveyorInfoService;
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
+import com.ctoangels.goshipsurvey.common.util.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +26,15 @@ import java.util.List;
 @RequestMapping(value = "surveyor/record")
 public class SurveyorRecordController extends BaseController {
 
+    @Autowired
+    IInspectionService inspectionService;
+
+    @Autowired
+    ISurveyorInfoService surveyorInfoService;
+
+    @Autowired
+    IQuotationService quotationService;
+
     @RequestMapping
     public String list() {
         return "goshipsurvey/surveyor/record/list";
@@ -29,12 +42,18 @@ public class SurveyorRecordController extends BaseController {
 
     @RequestMapping(value = "/list")
     @ResponseBody
-    public JSONObject getQuotation() {
-        JSONObject jsonObject = new JSONObject();
-        //TODO:获取inspection记录
-        List<Quotation> list = null;
-        jsonObject.put("list", list);
-        return jsonObject;
+    public JSONObject getList() {
+        EntityWrapper<Inspection> ew = getEntityWrapper();
+        ew.addFilter("surveyor_id={0} and inspection_status>={1}", getCurrentUser().getId(), Const.INSPECTION_SURVEYOR_COMPLETE);
+        ew.orderBy("update_date", false);
+        Page<Inspection> page = inspectionService.selectPage(getPage(), ew);
+        for (Inspection inspection : page.getRecords()) {
+            inspection.setQuotation(quotationService.selectById(inspection.getQuotationId()));
+            SurveyorInfo surveyorInfo = new SurveyorInfo();
+            surveyorInfo.setInspectionId(inspection.getId());
+            inspection.setSurveyorInfo(surveyorInfoService.selectOne(surveyorInfo));
+        }
+        return jsonPage(page);
     }
 
 }

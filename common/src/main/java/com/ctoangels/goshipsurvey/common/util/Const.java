@@ -75,9 +75,9 @@ public class Const {
 
 
     //inspection_type
-    public static final Integer INSPECTION_TYPE_ON_HIRE = 0;
-    public static final Integer INSPECTION_TYPE_OFF_HIRE = 1;
-    public static final Integer INSPECTION_TYPE_CONDITION = 2;
+    public static final Integer INSPECTION_TYPE_ON_HIRE = 1;
+    public static final Integer INSPECTION_TYPE_OFF_HIRE = 2;
+    public static final Integer INSPECTION_TYPE_CONDITION = 3;
 
     //quotation
     //流程  0:记录生成   1:op询价中  1.5:surveyor申请  2:op选择一个surveyor>>生成inspection  3:已取消
@@ -93,11 +93,19 @@ public class Const {
     public static final Integer QUO_APPLY_FAILURE = 2;
 
     //inspection
-    //0:记录生成  1:surveyor上传本人护照等信息  2:op上传船舶信息 3:等待surveyor上传验船报告  4:op确认完成
+    //0:记录生成  1:op上传船舶信息 2:surveyor上传本人护照等信息 3:等待surveyor上传验船报告  4:op确认完成 5:surveyor 确认完成
     public static final Integer INSPECTION_INIT = 0;
-    public static final Integer INSPECTION_SURVEYOR_OK = 1;
-    public static final Integer INSPECTION_SHIP_OK = 2;
+    public static final Integer INSPECTION_OP_OK = 1;
+    public static final Integer INSPECTION_SURVEYOR_OK = 2;
     public static final Integer INSPECTION_REPORT_OK = 3;
-    public static final Integer INSPECTION_COMPLETE = 4;
+    public static final Integer INSPECTION_OP_COMPLETE = 4;
+    public static final Integer INSPECTION_SURVEYOR_COMPLETE = 5;
+
+
+    //user type
+    public static final Integer USER_TYPE_ADMIN = 0;
+    public static final Integer USER_TYPE_OP = 1;
+    public static final Integer USER_TYPE_SURVEYOR_PERSONAL = 2;
+    public static final Integer USER_TYPE_SURVEYOR_COMPANY = 3;
 
 }

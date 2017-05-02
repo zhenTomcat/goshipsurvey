@@ -9,6 +9,7 @@ import com.baomidou.mybatisplus.annotations.IdType;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.ctoangels.goshipsurvey.common.util.Const;
 
 /**
  *
@@ -71,6 +72,8 @@ public class User implements Serializable {
     /**  */
     private String phone;
 
+    private String country;
+
     /**
      * 地址
      */
@@ -106,12 +109,12 @@ public class User implements Serializable {
     private String shipType;
 
     /**  */
-    @TableField(value = "inspection_date_from")
-    private Date inspectionDateFrom;
+    @TableField(value = "start_date")
+    private Date startDate;
 
     /**  */
-    @TableField(value = "inspection_date_to")
-    private Date inspectionDateTo;
+    @TableField(value = "end_date")
+    private Date endDate;
 
     /**
      * 评分
@@ -255,6 +258,14 @@ public class User implements Serializable {
         this.phone = phone;
     }
 
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
+    }
+
     public String getAddress() {
         return this.address;
     }
@@ -311,20 +322,20 @@ public class User implements Serializable {
         this.shipType = shipType;
     }
 
-    public Date getInspectionDateFrom() {
-        return this.inspectionDateFrom;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setInspectionDateFrom(Date inspectionDateFrom) {
-        this.inspectionDateFrom = inspectionDateFrom;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public Date getInspectionDateTo() {
-        return this.inspectionDateTo;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setInspectionDateTo(Date inspectionDateTo) {
-        this.inspectionDateTo = inspectionDateTo;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public Double getPoint() {
@@ -414,6 +425,19 @@ public class User implements Serializable {
 
     public void setRoleIds(String roleIds) {
         this.roleIds = roleIds;
+    }
+
+    public void setCreateInfo(String userName) {
+        this.createDate = new Date();
+        this.createBy = userName;
+        this.updateDate = new Date();
+        this.updateBy = userName;
+        this.delFlag = Const.DEL_FLAG_NORMAL;
+    }
+
+    public void setUpdateInfo(String userName) {
+        this.updateDate = new Date();
+        this.updateBy = userName;
     }
 
 }

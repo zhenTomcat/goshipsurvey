@@ -70,11 +70,10 @@ public class QuotationServiceImpl extends SuperServiceImpl<QuotationMapper, Quot
 
     @Override
     public List<Quotation> getSatisfiedQuotations(int userId) {
-        //TODO:未对quotation进行筛选
-        Quotation quotation = new Quotation();
-        quotation.setDelFlag(Const.DEL_FLAG_NORMAL);
-        quotation.setQuotationStatus(Const.QUOTATION_ING);
-        List<Quotation> list = quotationMapper.selectList(new EntityWrapper<>(quotation));
+        EntityWrapper<Quotation> ew = new EntityWrapper<>();
+        ew.addFilter("quotation_status={0} and del_flag={1}", Const.QUOTATION_ING, Const.DEL_FLAG_NORMAL);
+        ew.orderBy("update_date", false);
+        List<Quotation> list = quotationMapper.selectList(ew);
         List<Quotation> applied = new ArrayList<>();
         for (Quotation q : list) {
             QuotationApplication qa = new QuotationApplication();

@@ -72,14 +72,14 @@ public class Quotation implements Serializable {
     /**
      * 检查起始日期
      */
-    @TableField(value = "date_from")
-    private Date dateFrom;
+    @TableField(value = "start_date")
+    private Date startDate;
 
     /**
      * 检查终止日期
      */
-    @TableField(value = "date_to")
-    private Date dateTo;
+    @TableField(value = "end_date")
+    private Date endDate;
 
     /**
      * 价格
@@ -200,20 +200,20 @@ public class Quotation implements Serializable {
         this.portName = portName;
     }
 
-    public Date getDateFrom() {
-        return this.dateFrom;
+    public Date getStartDate() {
+        return startDate;
     }
 
-    public void setDateFrom(Date dateFrom) {
-        this.dateFrom = dateFrom;
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
     }
 
-    public Date getDateTo() {
-        return this.dateTo;
+    public Date getEndDate() {
+        return endDate;
     }
 
-    public void setDateTo(Date dateTo) {
-        this.dateTo = dateTo;
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
     }
 
     public Double getTotalPrice() {

@@ -12,6 +12,15 @@
     table th, td {
         text-align: center;
     }
+
+    .table-bordered, .table-bordered > tbody > tr > td, .table-bordered > tbody > tr > th, .table-bordered > tfoot > tr > td, .table-bordered > tfoot > tr > th, .table-bordered > thead > tr > td, .table-bordered > thead > tr > th {
+        border: 1px solid #e7ecf1;
+    }
+
+    .application-outer-td {
+        padding: 0;
+    }
+
 </style>
 <div class="row">
     <div class="col-md-12">
@@ -26,18 +35,20 @@
                                         <i class="icon-social-dribbble font-blue-soft"></i>
                                         <span class="caption-subject font-blue-soft bold uppercase">Quotations</span>
                                     </div>
-                                    <div class="col-md-4">
-                                        <div class="btn-group">
-                                            <a href="#form_modal2" data-toggle="modal"
-                                               class="btn blue"><i class="fa fa-plus"></i> New quotation
-                                            </a>
+                                    <shiro:hasPermission name="op/quotation/add">
+                                        <div class="col-md-4">
+                                            <div class="btn-group">
+                                                <a href="#form_modal2" data-toggle="modal"
+                                                   class="btn blue"><i class="fa fa-plus"></i> New quotation
+                                                </a>
+                                            </div>
                                         </div>
-                                    </div>
+                                    </shiro:hasPermission>
                                 </div>
                                 <div class="portlet-body">
                                     <div class="tab-content">
                                         <div class="tab-pane fade active in" id="tab_1_1">
-                                            <table class="table table-striped table-bordered table-hover table-checkable order-column"
+                                            <table class="table  table-checkable table-bordered"
                                                    id="quotation_table">
                                                 <thead>
                                                 <tr>
@@ -82,19 +93,22 @@
                 var html = "";
                 for (var i = 0; i < list.length; i++) {
                     var quotation = list[i];
-                    html += "<tr>";
+                    html += "<tr class='quotation-tr'>";
                     html += "<td>" + quotation.shipName + "</td>";
                     html += "<td>" + quotation.imo + "</td>";
                     html += "<td>" + shipType[quotation.shipType] + "</td>";
                     html += "<td>" + inspectionType[quotation.inspectionType] + "</td>";
                     html += "<td>" + quotation.portName + "</td>";
-                    var dateFrom = new Date(quotation.dateFrom).Format("yyyy-MM-dd");
-                    var dateTo = new Date(quotation.dateTo).Format("yyyy-MM-dd");
-                    html += "<td>" + dateFrom + " to " + dateTo + "</td>";
+                    var startDate = new Date(quotation.startDate).Format("yyyy-MM-dd");
+                    var endDate = new Date(quotation.endDate).Format("yyyy-MM-dd");
+                    html += "<td>" + startDate + " to " + endDate + "</td>";
                     html += "<td>";
                     var quotationStatus = quotation.quotationStatus;
                     if (quotationStatus == 0) {
+                        <shiro:hasPermission name="op/quotation/startQuotation">
                         html += "<a class='btn btn-sm blue' onclick='startQuotation(" + quotation.id + ")'>询价</a>";
+                        </shiro:hasPermission>
+
                     } else if (quotationStatus == 1) {
                         html += "<a class='btn btn-sm green' readonly>询价中...</a>";
                     } else if (quotationStatus == 2) {
@@ -104,29 +118,38 @@
                     html += "</tr>"
                     var applyList = quotation.applicationList;
                     if (applyList != null && applyList.length > 0) {
-                        html += "<tr><td colspan='7'><table class='table table-striped table-bordered table-hover table-checkable order-column'>"
+                        html += "<tr class='application-outer-tr'><td colspan='7' style='padding: 0' class='application-outer-td'><table class='table' style='margin-bottom: 0'>"
                         for (var j = 0; j < applyList.length; j++) {
                             var application = applyList[j];
                             var user = application.user;
-                            html += "<tr>";
-                            html += "<td>Apply surveyor:" + user.name + "</td>";
-                            html += "<td>Surveyor CV:" + "" + "</td>";
-                            html += "<td>Location:" + "" + "</td>";
-                            html += "<td>Company:" + "" + "</td>";
-                            html += "<td>Quotation:" + application.totalPrice + "</td>";
+                            html += "<tr class='application-tr'>";
+                            html += "<td style='width:25%'>Apply surveyor/company:" + user.name + "</td>";
+                            if (user.type == 2) {
+                                html += "<td style='width:25%'>Surveyor CV: " + "<a href='surveyor/account/personalInfo?id=" + application.userId + "' data-target='navTab'>VIEW</a>" + "</td>";
+                            } else if (user.type == 3) {
+                                html += "<td style='width:25%'>Surveyor CV: " + "<a href='surveyor/account/companyInfo?id=" + application.userId + "' data-target='navTab'>VIEW</a>" + "</td>";
+                            }
+
+                            html += "<td style='width:20%'>Location:" + user.address + "</td>";
+                            html += "<td style='width:20%'>Quotation:$ " + application.totalPrice + "</td>";
                             var applicationStatus = application.applicationStatus;
                             if (applicationStatus == 0) {
-                                html += "<td><a class='btn btn-sm default' onclick='initInspection(" + quotation.id + "," + application.id + ")'>确认邀请验船</a></td>";
+                                <shiro:hasPermission name="op/inspection/add">
+                                html += "<td style='width:10%'><a class='btn btn-sm default' onclick='initInspection(" + quotation.id + "," + application.id + ")'>确认邀请验船</a></td>";
+                                </shiro:hasPermission>
                             } else if (applicationStatus == 1) {
-                                html += "<td><a class='btn btn-sm default'>已邀请验船</a></td>";
+                                html += "<td style='width:10%' ><a class='btn btn-sm default'>已邀请验船</a></td>";
                             } else if (applicationStatus == 2) {
-                                html += "<td><a class='btn btn-sm default'>下次合作</a></td>";
+                                html += "<td style='width:10%'><a class='btn btn-sm default'>下次合作</a></td>";
                             }
                             html += "</tr>";
                         }
                         html += "</table></td></tr>";
                     }
 
+                }
+                if (html == "") {
+                    html += "<tr><td colspan='7'>No data</td></tr>";
                 }
                 quotationTable.find("tbody").html(html);
             },
@@ -159,7 +182,6 @@
     }
 
     function startQuotation(quotationId) {
-        console.log(quotationId);
         $.ajax({
             type: "post",
             url: "op/quotation/startQuotation",

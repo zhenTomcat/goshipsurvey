@@ -33,10 +33,6 @@ public class ShiroRealm extends AuthorizingRealm {
 
     private static Logger logger = LoggerFactory.getLogger(ShiroRealm.class);
 
-    public ShiroRealm() {
-        logger.info("ShiroRealm被启动了");
-    }
-
     /*
          * (non-Javadoc)
 

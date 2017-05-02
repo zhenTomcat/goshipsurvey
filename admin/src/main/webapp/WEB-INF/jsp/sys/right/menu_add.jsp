@@ -20,8 +20,7 @@
                     type="hidden" name="menuType" value="${menuType}"/> <label
                     for="menuName" class="col-sm-2 control-label">名称</label>
                 <div class="col-sm-7">
-                    <input id="menuName" name="menuName" type="text" maxlength="32"
-                           minlength="2" class="form-control required" placeholder="请输入名称">
+                    <input id="menuName" name="menuName" type="text"  class="form-control required" placeholder="请输入名称">
                 </div>
             </div>
             <div class="form-group">
@@ -37,7 +36,7 @@
                     <%--class="form-control required" placeholder="请输入路径">--%>
                     <%--</c:otherwise>--%>
                     <%--</c:choose>--%>
-                    <input id="menuUrl" name="menuUrl" type="text" maxlength="32"
+                    <input id="menuUrl" name="menuUrl" type="text"
                            class="form-control required" placeholder="请输入路径">
                 </div>
             </div>

@@ -4,10 +4,6 @@
 <%@ taglib prefix="go" uri="http://www.ctoangels.com/jsp/jstl/common" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-    String path = request.getContextPath();
-    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-%>
 <style>
     table th, td {
         text-align: center;
@@ -81,15 +77,17 @@
     </div>
 </div>
 <script>
+    //船舶类型  船检类型
     var shipType = ["", "Bulker", "Tanker", "Gas", "Chemical", "Container", "Multi_purpose", "Ro-Ro/PCC", "Reefer"];
     var inspectionType = ["", "on hire", "off hire", "condition"];
 
-    var appliedTable = $("#applied_table");
-    var availableTable = $("#available_table");
+    var appliedTable = $("#applied_table");//已申请的quotation表格
+    var availableTable = $("#available_table");//可申请的quotation表格
     $(document).ready(function () {
         drawTable();
     })
 
+    //绘制页面表格
     function drawTable() {
         $.ajax({
             url: "surveyor/quotation/list",
@@ -104,6 +102,7 @@
         })
     }
 
+    //绘制已申请的quotation表格
     function drawAppliedTable(list) {
         var html = "";
         for (var i = 0; i < list.length; i++) {
@@ -115,9 +114,9 @@
             html += "<td>" + shipType[q.shipType] + "</td>";
             html += "<td>" + inspectionType[q.inspectionType] + "</td>";
             html += "<td>" + q.portName + "</td>";
-            var dateFrom = new Date(q.dateFrom).Format("yyyy-MM-dd");
-            var dateTo = new Date(q.dateTo).Format("yyyy-MM-dd");
-            html += "<td>" + dateFrom + " to " + dateTo + "</td>";
+            var startDate = new Date(q.startDate).Format("yyyy-MM-dd");
+            var endDate = new Date(q.endDate).Format("yyyy-MM-dd");
+            html += "<td>" + startDate + " to " + endDate + "</td>";
             html += "<td>$:" + a.totalPrice + "</td>";
             var applicationStaus = a.applicationStatus;
             if (applicationStaus == 0) {
@@ -129,9 +128,13 @@
             }
             html += "</tr>"
         }
+        if (html == "") {
+            html += "<tr><td colspan='8'>No data</td></tr>";
+        }
         appliedTable.find("tbody").html(html);
     }
 
+    //绘制可申请的quotation表格
     function drawAvailableTable(list) {
         var html = "";
         for (var i = 0; i < list.length; i++) {
@@ -142,16 +145,23 @@
             html += "<td>" + shipType[q.shipType] + "</td>";
             html += "<td>" + inspectionType[q.inspectionType] + "</td>";
             html += "<td>" + q.portName + "</td>";
-            var dateFrom = new Date(q.dateFrom).Format("yyyy-MM-dd");
-            var dateTo = new Date(q.dateTo).Format("yyyy-MM-dd");
-            html += "<td>" + dateFrom + " to " + dateTo + "</td>";
+            var startDate = new Date(q.startDate).Format("yyyy-MM-dd");
+            var endDate = new Date(q.endDate).Format("yyyy-MM-dd");
+            html += "<td>" + startDate + " to " + endDate + "</td>";
             html += "<td>$:<input class='price-input' style='width: 70%'></td>";
+            <shiro:hasPermission
+                    name="surveyor/quotationApplication/add">
             html += "<td><a class='btn btn-sm blue' onclick='addApplication(this," + q.id + ")'>Apply</a></td>";
+            </shiro:hasPermission>
             html += "</tr>"
+        }
+        if (html == "") {
+            html += "<tr><td colspan='8'>No data</td></tr>";
         }
         availableTable.find("tbody").html(html);
     }
 
+    //提交申请
     function addApplication(obj, quotationId) {
         var priceInput = $(obj).parents("tr").find(".price-input");
         var totalPrice = priceInput.val();
@@ -164,7 +174,6 @@
             });
             return;
         }
-
         $.ajax({
             url: "surveyor/quotationApplication/add",
             type: "post",
@@ -172,17 +181,15 @@
             success: function (data) {
                 if (data.success) {
                     drawTable();
+                } else {
+                    alert("addApplication error");
+
                 }
             },
             error: function () {
                 alert("addApplication error");
             },
-            complete: function () {
-                $(obj).attr("disabled", false);
-            }
         })
-
-
     }
 </script>
 

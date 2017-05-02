@@ -1,6 +1,7 @@
 package com.ctoangels.goshipsurvey.common.modules.sys.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.ctoangels.goshipsurvey.common.modules.go.entity.PublicShip;
 import com.ctoangels.goshipsurvey.common.modules.go.service.IPublicShipService;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Style;

@@ -23,7 +23,7 @@ import java.util.*;
  * @Description:
  * @Date 2015年5月9日
  */
-@Transactional(readOnly = true)
+//@Transactional(readOnly = true)
 @Service
 public class RoleServiceImpl extends SuperServiceImpl<RoleMapper, Role> implements RoleService {
 

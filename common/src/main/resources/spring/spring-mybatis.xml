@@ -133,14 +133,6 @@
 
     <tx:annotation-driven transaction-manager="transactionManager"/>
 
-    <!--<tx:advice id="txAdvice" transaction-manager="transactionManager">-->
-    <!--<tx:attributes>-->
-    <!--<tx:method name="find*" read-only="true"/>-->
-    <!--<tx:method name="load*" read-only="true"/>-->
-    <!--<tx:method name="*" rollback-for="CustomException"/>-->
-    <!--</tx:attributes>-->
-    <!--</tx:advice>-->
-
     <bean class="com.baomidou.mybatisplus.spring.MybatisMapperRefresh">
         <constructor-arg name="sqlSessionFactory" ref="sqlSessionFactory"/>
         <constructor-arg name="mapperLocations"

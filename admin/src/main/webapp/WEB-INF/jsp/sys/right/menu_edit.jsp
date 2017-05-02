@@ -20,7 +20,7 @@
                     for="menuName" class="col-sm-2 control-label">名称</label>
                 <div class="col-sm-7">
                     <input id="menuName" name="menuName" value="${menu.menuName}"
-                           type="text" maxlength="32" minlength="2"
+                           type="text"
                            class="form-control required" placeholder="请输入名称">
                 </div>
             </div>
@@ -39,7 +39,7 @@
                     <%--</c:otherwise>--%>
                     <%--</c:choose>--%>
                     <input id="menuUrl" name="menuUrl" value="${menu.menuUrl}"
-                           type="text" maxlength="32" class="form-control required"
+                           type="text" class="form-control required"
                            placeholder="请输入路径">
                 </div>
             </div>

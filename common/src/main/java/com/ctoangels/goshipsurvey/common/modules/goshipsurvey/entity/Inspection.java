@@ -25,6 +25,12 @@ public class Inspection implements Serializable {
     @TableId(type = IdType.AUTO)
     private Integer id;
 
+    @TableField(value = "op_id")
+    private Integer opId;
+
+    @TableField(value = "surveyor_id")
+    private Integer surveyorId;
+
     /**
      * 询价信息id
      */
@@ -52,17 +58,36 @@ public class Inspection implements Serializable {
     private String shipParticulars;
 
     /**  */
+    @TableField(value = "ship_particulars_url")
+    private String shipParticularsUrl;
+
+    /**  */
+    @TableField(value = "blank_loi_url")
+    private String blankLoiUrl;
+
+    /**  */
     @TableField(value = "port_agency")
     private String portAgency;
 
     /**  */
-    private String report;
+    @TableField(value = "report_url")
+    private String reportUrl;
 
     /**  */
-    private Double point;
+    @TableField(value = "op_point")
+    private Double opPoint;
 
     /**  */
-    private String comment;
+    @TableField(value = "op_comment")
+    private String opComment;
+
+    /**  */
+    @TableField(value = "surveyor_point")
+    private Double surveyorPoint;
+
+    /**  */
+    @TableField(value = "surveyor_comment")
+    private String surveyorComment;
 
     /**  */
     @TableField(value = "create_date")
@@ -87,6 +112,9 @@ public class Inspection implements Serializable {
     @TableField(exist = false)
     private SurveyorInfo surveyorInfo;
 
+    @TableField(exist = false)
+    private Quotation quotation;
+
 
     public Integer getId() {
         return this.id;
@@ -94,6 +122,22 @@ public class Inspection implements Serializable {
 
     public void setId(Integer id) {
         this.id = id;
+    }
+
+    public Integer getOpId() {
+        return opId;
+    }
+
+    public void setOpId(Integer opId) {
+        this.opId = opId;
+    }
+
+    public Integer getSurveyorId() {
+        return surveyorId;
+    }
+
+    public void setSurveyorId(Integer surveyorId) {
+        this.surveyorId = surveyorId;
     }
 
     public Integer getQuotationId() {
@@ -152,28 +196,60 @@ public class Inspection implements Serializable {
         this.portAgency = portAgency;
     }
 
-    public String getReport() {
-        return this.report;
+    public String getShipParticularsUrl() {
+        return shipParticularsUrl;
     }
 
-    public void setReport(String report) {
-        this.report = report;
+    public void setShipParticularsUrl(String shipParticularsUrl) {
+        this.shipParticularsUrl = shipParticularsUrl;
     }
 
-    public Double getPoint() {
-        return this.point;
+    public String getBlankLoiUrl() {
+        return blankLoiUrl;
     }
 
-    public void setPoint(Double point) {
-        this.point = point;
+    public void setBlankLoiUrl(String blankLoiUrl) {
+        this.blankLoiUrl = blankLoiUrl;
     }
 
-    public String getComment() {
-        return this.comment;
+    public String getReportUrl() {
+        return reportUrl;
     }
 
-    public void setComment(String comment) {
-        this.comment = comment;
+    public void setReportUrl(String reportUrl) {
+        this.reportUrl = reportUrl;
+    }
+
+    public Double getOpPoint() {
+        return opPoint;
+    }
+
+    public void setOpPoint(Double opPoint) {
+        this.opPoint = opPoint;
+    }
+
+    public String getOpComment() {
+        return opComment;
+    }
+
+    public void setOpComment(String opComment) {
+        this.opComment = opComment;
+    }
+
+    public Double getSurveyorPoint() {
+        return surveyorPoint;
+    }
+
+    public void setSurveyorPoint(Double surveyorPoint) {
+        this.surveyorPoint = surveyorPoint;
+    }
+
+    public String getSurveyorComment() {
+        return surveyorComment;
+    }
+
+    public void setSurveyorComment(String surveyorComment) {
+        this.surveyorComment = surveyorComment;
     }
 
     public Date getCreateDate() {
@@ -222,6 +298,14 @@ public class Inspection implements Serializable {
 
     public void setSurveyorInfo(SurveyorInfo surveyorInfo) {
         this.surveyorInfo = surveyorInfo;
+    }
+
+    public Quotation getQuotation() {
+        return quotation;
+    }
+
+    public void setQuotation(Quotation quotation) {
+        this.quotation = quotation;
     }
 
     public void setCreateInfo(String userName) {

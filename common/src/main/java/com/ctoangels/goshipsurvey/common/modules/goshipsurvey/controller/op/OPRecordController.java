@@ -3,10 +3,14 @@ package com.ctoangels.goshipsurvey.common.modules.goshipsurvey.controller.op;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Inspection;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Quotation;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.SurveyorInfo;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IInspectionService;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IQuotationService;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.ISurveyorInfoService;
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
+import com.ctoangels.goshipsurvey.common.util.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -25,6 +29,9 @@ public class OPRecordController extends BaseController {
     @Autowired
     IInspectionService inspectionService;
 
+    @Autowired
+    ISurveyorInfoService surveyorInfoService;
+
     @RequestMapping
     public String list() {
         return "goshipsurvey/op/record/list";
@@ -34,7 +41,7 @@ public class OPRecordController extends BaseController {
     @ResponseBody
     public JSONObject quotationList(@RequestParam(required = false) String keyword) {
         EntityWrapper<Quotation> ew = getEntityWrapper();
-        ew.addFilter("op_id={0}", getCurrentUser().getId());
+        ew.addFilter("op_id={0} and quotation_status>={1}", getCurrentUser().getId(), Const.QUOTATION_END);
         ew.orderBy("update_date", false);
         Page<Quotation> page = quotationService.selectPage(getPage(), ew);
         return jsonPage(page);
@@ -43,12 +50,15 @@ public class OPRecordController extends BaseController {
     @RequestMapping(value = "/list/inspection")
     @ResponseBody
     public JSONObject inspectionList(@RequestParam(required = false) String keyword) {
-        EntityWrapper<Quotation> ew = getEntityWrapper();
-        ew.addFilter("op_id={0}", getCurrentUser().getId());
+        EntityWrapper<Inspection> ew = getEntityWrapper();
+        ew.addFilter("op_id={0} and inspection_status>={1}", getCurrentUser().getId(), Const.INSPECTION_SURVEYOR_COMPLETE);
         ew.orderBy("update_date", false);
-        Page<Quotation> page = quotationService.selectPage(getPage(), ew);
-        for (Quotation quotation : page.getRecords()) {
-            quotation.setInspection(quotationService.getInspectionInfo(quotation.getId()));
+        Page<Inspection> page = inspectionService.selectPage(getPage(), ew);
+        for (Inspection inspection : page.getRecords()) {
+            inspection.setQuotation(quotationService.selectById(inspection.getQuotationId()));
+            SurveyorInfo surveyorInfo = new SurveyorInfo();
+            surveyorInfo.setInspectionId(inspection.getId());
+            inspection.setSurveyorInfo(surveyorInfoService.selectOne(surveyorInfo));
         }
         return jsonPage(page);
     }

@@ -2,9 +2,9 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.SurveyorInfoMapper">
 
-	<!-- 通用查询结果列-->
-	<sql id="Base_Column_List">
-		id, inspection_id AS inspectionId, user_id AS userId, `name`, passport, loi, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
+    <!-- 通用查询结果列-->
+    <sql id="Base_Column_List">
+		id, inspection_id AS inspectionId, user_id AS userId, `type`, `name`, passport_url AS passportUrl, loi_url AS loiUrl, report_url AS reportUrl, cv_url AS cvUrl, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
 	</sql>
 
 </mapper>
