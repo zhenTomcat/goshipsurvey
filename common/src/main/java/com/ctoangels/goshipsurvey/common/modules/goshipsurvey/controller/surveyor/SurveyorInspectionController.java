@@ -37,7 +37,17 @@ public class SurveyorInspectionController extends BaseController {
     public String list(ModelMap map) {
         int userId = getCurrentUser().getId();
         map.put("staticPath", staticPath);
-        map.put("list", inspectionService.getInspectionsSurveyor(userId));
+        List<Inspection> list = inspectionService.getInspectionsSurveyor(userId);
+        for (Inspection inspection : list) {
+            Quotation quotation = inspection.getQuotation();
+            quotation.setShipType(transferValuesToDes(quotation.getShipType(), getShipTypeDict()));
+            quotation.setInspectionType(transferValuesToDes(quotation.getInspectionType(), getInspectionTypeDict()));
+            inspection.setQuotation(quotation);
+            String inspectionType = inspection.getInspectionType();
+            String[] inspectionTypes = inspectionType.split(",");
+            inspection.setInspectionTypes(inspectionTypes);
+        }
+        map.put("list", list);
         map.put("shipType", dictService.getListByType("shipType"));
         map.put("inspectionType", dictService.getListByType("inspectionType"));
         return "goshipsurvey/surveyor/inspection/list";

@@ -43,7 +43,7 @@ public class Inspection implements Serializable {
 
     /**  */
     @TableField(value = "inspection_type")
-    private Integer inspectionType;
+    private String inspectionType;
 
     /**  */
     @TableField(value = "delivery_by")
@@ -52,6 +52,18 @@ public class Inspection implements Serializable {
     /**  */
     @TableField(value = "accepted_by")
     private String acceptedBy;
+
+    /**  */
+    @TableField(value = "re_delivery_by")
+    private String reDeliveryBy;
+
+    /**  */
+    @TableField(value = "re_accepted_by")
+    private String reAcceptedBy;
+
+    private String charter;
+
+    private String owner;
 
     /**  */
     @TableField(value = "ship_particulars")
@@ -72,6 +84,10 @@ public class Inspection implements Serializable {
     /**  */
     @TableField(value = "report_url")
     private String reportUrl;
+
+    /**  */
+    @TableField(value = "invoice_url")
+    private String invoiceUrl;
 
     /**  */
     @TableField(value = "op_point")
@@ -115,6 +131,9 @@ public class Inspection implements Serializable {
     @TableField(exist = false)
     private Quotation quotation;
 
+    @TableField(exist = false)
+    private String[] inspectionTypes;
+
 
     public Integer getId() {
         return this.id;
@@ -156,11 +175,11 @@ public class Inspection implements Serializable {
         this.inspectionStatus = inspectionStatus;
     }
 
-    public Integer getInspectionType() {
-        return this.inspectionType;
+    public String getInspectionType() {
+        return inspectionType;
     }
 
-    public void setInspectionType(Integer inspectionType) {
+    public void setInspectionType(String inspectionType) {
         this.inspectionType = inspectionType;
     }
 
@@ -178,6 +197,38 @@ public class Inspection implements Serializable {
 
     public void setAcceptedBy(String acceptedBy) {
         this.acceptedBy = acceptedBy;
+    }
+
+    public String getReDeliveryBy() {
+        return reDeliveryBy;
+    }
+
+    public void setReDeliveryBy(String reDeliveryBy) {
+        this.reDeliveryBy = reDeliveryBy;
+    }
+
+    public String getReAcceptedBy() {
+        return reAcceptedBy;
+    }
+
+    public void setReAcceptedBy(String reAcceptedBy) {
+        this.reAcceptedBy = reAcceptedBy;
+    }
+
+    public String getCharter() {
+        return charter;
+    }
+
+    public void setCharter(String charter) {
+        this.charter = charter;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
     }
 
     public String getShipParticulars() {
@@ -218,6 +269,14 @@ public class Inspection implements Serializable {
 
     public void setReportUrl(String reportUrl) {
         this.reportUrl = reportUrl;
+    }
+
+    public String getInvoiceUrl() {
+        return invoiceUrl;
+    }
+
+    public void setInvoiceUrl(String invoiceUrl) {
+        this.invoiceUrl = invoiceUrl;
     }
 
     public Double getOpPoint() {
@@ -306,6 +365,14 @@ public class Inspection implements Serializable {
 
     public void setQuotation(Quotation quotation) {
         this.quotation = quotation;
+    }
+
+    public String[] getInspectionTypes() {
+        return inspectionTypes;
+    }
+
+    public void setInspectionTypes(String[] inspectionTypes) {
+        this.inspectionTypes = inspectionTypes;
     }
 
     public void setCreateInfo(String userName) {

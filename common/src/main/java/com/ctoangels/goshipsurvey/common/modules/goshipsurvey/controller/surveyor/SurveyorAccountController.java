@@ -41,8 +41,8 @@ public class SurveyorAccountController extends BaseController {
 
     @RequestMapping(value = "/personalEdit", method = RequestMethod.GET)
     public String personalEdit(ModelMap map) {
-        map.put("shipType", dictService.getListByType("shipType"));
-        String userShipType = getCurrentUser().getShipType();
+        map.put("shipType", getShipTypeDict());
+        String userShipType = userService.selectById(getCurrentUser().getId()).getShipType();
         String[] userShipTypes = null;
         if (StringUtils.isNotEmpty(userShipType)) {
             userShipTypes = userShipType.split(",");
@@ -54,8 +54,8 @@ public class SurveyorAccountController extends BaseController {
 
     @RequestMapping(value = "/companyEdit", method = RequestMethod.GET)
     public String companyEdit(ModelMap map) {
-        map.put("shipType", dictService.getListByType("shipType"));
-        String userShipType = getCurrentUser().getShipType();
+        map.put("shipType", getShipTypeDict());
+        String userShipType = userService.selectById(getCurrentUser().getId()).getShipType();
         String[] userShipTypes = null;
         if (StringUtils.isNotEmpty(userShipType)) {
             userShipTypes = userShipType.split(",");
@@ -71,7 +71,6 @@ public class SurveyorAccountController extends BaseController {
         JSONObject jsonObject = new JSONObject();
         user.setUpdateInfo(user.getName());
         jsonObject.put("success", userService.updateSelectiveById(user));
-        session.setAttribute(Const.SESSION_USER, userService.selectById(user.getId()));
         return jsonObject;
     }
 
@@ -111,7 +110,7 @@ public class SurveyorAccountController extends BaseController {
                     }
                 }
             }
-            types = types.substring(0, types.length());
+            types = types.substring(0, types.length() - 1);
         }
         return types;
     }

@@ -5,6 +5,9 @@ import com.alibaba.fastjson.JSONObject;
 import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Dict;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Quotation;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IDictService;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
 import com.ctoangels.goshipsurvey.common.util.Const;
 import org.apache.shiro.SecurityUtils;
@@ -23,6 +26,7 @@ import javax.servlet.http.HttpSession;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author Sun.Han
@@ -57,6 +61,14 @@ public class BaseController {
 
     @Value("${effectiveTime}")
     private String effectiveTime;
+
+    @Autowired
+    private IDictService dictService;
+
+    List<Dict> inspectionTypeDict = null;
+
+    List<Dict> shipTypeDict = null;
+
 
     @Autowired
     protected ServletContext application;
@@ -151,5 +163,43 @@ public class BaseController {
         return JSON.toJSONStringWithDateFormat(object, format, SerializerFeature.WriteDateUseDateFormat);
     }
 
+
+    public List<Dict> getInspectionTypeDict() {
+        if (inspectionTypeDict == null) {
+            inspectionTypeDict = dictService.getListByType("inspectionType");
+        }
+        return this.inspectionTypeDict;
+    }
+
+    public List<Dict> getShipTypeDict() {
+        if (shipTypeDict == null) {
+            shipTypeDict = dictService.getListByType("shipType");
+        }
+        return this.shipTypeDict;
+    }
+
+    /**
+     * 将数字值转换为字符描述
+     *
+     * @param values   数字值
+     * @param dictList 字典表
+     * @return
+     */
+    public String transferValuesToDes(String values, List<Dict> dictList) {
+        String result = "";
+        if (values != null && values.trim() != "") {
+            String[] types = values.split(",");
+            for (String type : types) {
+                for (Dict dict : dictList) {
+                    if (dict.getValue().equals(type)) {
+                        result += dict.getDes() + ",";
+                        break;
+                    }
+                }
+            }
+            result = result.substring(0, result.length() - 1);
+        }
+        return result;
+    }
 
 }

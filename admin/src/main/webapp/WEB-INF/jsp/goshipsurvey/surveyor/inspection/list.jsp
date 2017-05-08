@@ -7,7 +7,15 @@
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+    String[] dLabel = {"", "Delivery by", "Re-delivery by", "Charter"};
+    String[] delivery = {"", "deliveryBy", "reDeliveryBy", "charter"};
+    String[] aLabel = {"", "Accepted by", "Re-accepted by", "Owner"};
+    String[] accepted = {"", "acceptedBy", "reAcceptedBy", "owner"};
 %>
+<c:set value="<%=delivery%>" var="delivery"></c:set>
+<c:set value="<%=dLabel%>" var="dLabel"></c:set>
+<c:set value="<%=accepted%>" var="accepted"></c:set>
+<c:set value="<%=aLabel%>" var="aLabel"></c:set>
 <style>
     table th, td {
         text-align: center;
@@ -50,7 +58,6 @@
                             <c:forEach items="${list}" var="inspection">
                                 <c:set value="${inspection.quotation}" var="quotation"></c:set>
                                 <c:set value="${inspection.surveyorInfo}" var="surveyor"></c:set>
-                                <c:set value="${quotation.inspectionType}" var="inspectionTypeValue"></c:set>
                                 <div class="row">
                                     <div class="col-md-12">
                                         <div class="portlet-body">
@@ -80,8 +87,8 @@
                                                                 <tr>
                                                                     <td>${quotation.shipName}</td>
                                                                     <td>${quotation.imo}</td>
-                                                                    <td>${shipType[quotation.shipType].des}</td>
-                                                                    <td>${inspectionType[inspectionTypeValue-1].des}</td>
+                                                                    <td>${quotation.shipType}</td>
+                                                                    <td>${quotation.inspectionType}</td>
                                                                     <td>${quotation.portName}</td>
                                                                     <td><fmt:formatDate value="${quotation.startDate}"
                                                                                         pattern="yyyy-MM-dd"></fmt:formatDate>
@@ -115,39 +122,34 @@
                                                                         <div class="form-group col-md-12">
                                                                             <label class="col-sm-2 control-label inspection-type-label">${inspectionType[inspectionTypeValue-1].des}</label>
                                                                         </div>
-                                                                        <div class="form-group col-md-6">
-                                                                            <label class="col-sm-5 control-label delivery-by-label">
-                                                                                <c:if test="${inspectionTypeValue==1}">
-                                                                                    Delivery by
-                                                                                </c:if>
-                                                                                <c:if test="${inspectionTypeValue==2}">
-                                                                                    Re-delivery by
-                                                                                </c:if>
-                                                                                <c:if test="${inspectionTypeValue==3}">
-                                                                                    Charter
-                                                                                </c:if>
-                                                                            </label>
-                                                                            <div class="col-sm-7">
-                                                                                <input name="deliveryBy" type="text"
-                                                                                       class="form-control delivery-by-input required"
-                                                                                       value="${inspection.deliveryBy}"/>
+                                                                        <c:forEach items="${inspection.inspectionTypes}"
+                                                                                   var="type">
+                                                                            <div class="form-group col-md-12">
+                                                                                <label class="col-sm-2 control-label inspection-type-label">${inspectionType[type-1].des}</label>
                                                                             </div>
-                                                                        </div>
-                                                                        <div class="form-group col-md-6">
-                                                                            <label class="col-sm-5 control-label accepted-by-label">
-                                                                                <c:if test="${inspectionTypeValue!=3}">
-                                                                                    Accepted by
-                                                                                </c:if>
-                                                                                <c:if test="${inspectionTypeValue==3}">
-                                                                                    Owner
-                                                                                </c:if>
-                                                                            </label>
-                                                                            <div class="col-sm-7">
-                                                                                <input name="acceptedBy" type="text"
-                                                                                       value="${inspection.acceptedBy}"
-                                                                                       class="form-control accepted-by-input required"/>
+                                                                            <div class="form-group col-md-6">
+                                                                                <label class="col-sm-5 control-label delivery-by-label">
+                                                                                        ${dLabel[type]}
+                                                                                </label>
+                                                                                <div class="col-sm-7">
+                                                                                    <input name="${delivery[type]}"
+                                                                                           type="text"
+                                                                                           class="form-control delivery-by-input required"
+                                                                                           value="${inspection[delivery[type]]}"/>
+                                                                                </div>
                                                                             </div>
-                                                                        </div>
+                                                                            <div class="form-group col-md-6">
+                                                                                <label class="col-sm-5 control-label delivery-by-label">
+                                                                                        ${aLabel[type]}
+                                                                                </label>
+                                                                                <div class="col-sm-7">
+                                                                                    <input name="${accepted[type]}"
+                                                                                           type="text"
+                                                                                           class="form-control delivery-by-input required"
+                                                                                           value="${inspection[accepted[type]]}"/>
+                                                                                </div>
+                                                                            </div>
+                                                                        </c:forEach>
                                                                         <div class="form-group col-md-3">
                                                                             <label class="col-sm-10 control-label">Ship
                                                                                 particulars</label>
@@ -221,22 +223,25 @@
                                                             </c:if>
                                                         </div>
                                                         <div class="portlet-body">
-                                                            <div class="form-group col-md-12">
-                                                                <label class="col-sm-2" style="margin-top: 7px">
-                                                                    Surveyor name:
-                                                                </label>
-                                                                <div class="col-sm-4">
-                                                                    <div class="input-group">
-                                                                        <input type="text" class="form-control"
-                                                                               value="${surveyor.name}">
-                                                                        <span class="input-group-btn">
+                                                            <shiro:hasPermission
+                                                                    name="surveyor/surveyorInfo/editInfoName">
+                                                                <div class="form-group col-md-12">
+                                                                    <label class="col-sm-2" style="margin-top: 7px">
+                                                                        Surveyor name:
+                                                                    </label>
+                                                                    <div class="col-sm-4">
+                                                                        <div class="input-group">
+                                                                            <input type="text" class="form-control"
+                                                                                   value="${surveyor.name}">
+                                                                            <span class="input-group-btn">
                                                                             <button class="btn blue"
                                                                                     onclick="companyConfirmSurveyorName(this,${surveyor.id})"
                                                                                     type="button">Confirm</button>
                                                                         </span>
+                                                                        </div>
                                                                     </div>
                                                                 </div>
-                                                            </div>
+                                                            </shiro:hasPermission>
                                                             <table class="table table-striped table-bordered table-hover  ">
                                                                 <thead>
                                                                 <tr>

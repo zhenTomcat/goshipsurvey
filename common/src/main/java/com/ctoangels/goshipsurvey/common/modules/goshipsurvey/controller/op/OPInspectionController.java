@@ -2,6 +2,7 @@ package com.ctoangels.goshipsurvey.common.modules.goshipsurvey.controller.op;
 
 import com.alibaba.fastjson.JSONObject;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Inspection;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Quotation;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IDictService;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IInspectionService;
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * Inspection 控制层
@@ -35,19 +38,19 @@ public class OPInspectionController extends BaseController {
     public String list(ModelMap map) {
         int userId = getCurrentUser().getId();
         map.put("staticPath", staticPath);
-        map.put("list", inspectionService.getInspectionsOP(userId));
-        map.put("shipType", dictService.getListByType("shipType"));
-        map.put("inspectionType", dictService.getListByType("inspectionType"));
+        List<Inspection> list = inspectionService.getInspectionsOP(userId);
+        for (Inspection inspection : list) {
+            Quotation quotation = inspection.getQuotation();
+            quotation.setShipType(transferValuesToDes(quotation.getShipType(), getShipTypeDict()));
+            quotation.setInspectionType(transferValuesToDes(quotation.getInspectionType(), getInspectionTypeDict()));
+            inspection.setQuotation(quotation);
+            String inspectionType = inspection.getInspectionType();
+            String[] inspectionTypes = inspectionType.split(",");
+            inspection.setInspectionTypes(inspectionTypes);
+        }
+        map.put("list", list);
+        map.put("inspectionType", getInspectionTypeDict());
         return "goshipsurvey/op/inspection/list";
-    }
-
-    @RequestMapping(value = "/list")
-    @ResponseBody
-    public JSONObject getList() {
-        JSONObject jsonObject = new JSONObject();
-        int userId = getCurrentUser().getId();
-        jsonObject.put("list", inspectionService.getInspectionsOP(userId));
-        return jsonObject;
     }
 
     @RequestMapping(value = "/add")

@@ -77,10 +77,6 @@
     </div>
 </div>
 <script>
-    //船舶类型  船检类型
-    var shipType = ["", "Bulker", "Tanker", "Gas", "Chemical", "Container", "Multi_purpose", "Ro-Ro/PCC", "Reefer"];
-    var inspectionType = ["", "on hire", "off hire", "condition"];
-
     var appliedTable = $("#applied_table");//已申请的quotation表格
     var availableTable = $("#available_table");//可申请的quotation表格
     $(document).ready(function () {
@@ -111,8 +107,8 @@
             html += "<tr>";
             html += "<td>" + q.shipName + "</td>";
             html += "<td>" + q.imo + "</td>";
-            html += "<td>" + shipType[q.shipType] + "</td>";
-            html += "<td>" + inspectionType[q.inspectionType] + "</td>";
+            html += "<td>" + q.shipType + "</td>";
+            html += "<td>" + q.inspectionType + "</td>";
             html += "<td>" + q.portName + "</td>";
             var startDate = new Date(q.startDate).Format("yyyy-MM-dd");
             var endDate = new Date(q.endDate).Format("yyyy-MM-dd");
@@ -142,8 +138,8 @@
             html += "<tr>";
             html += "<td>" + q.shipName + "</td>";
             html += "<td>" + q.imo + "</td>";
-            html += "<td>" + shipType[q.shipType] + "</td>";
-            html += "<td>" + inspectionType[q.inspectionType] + "</td>";
+            html += "<td>" + q.shipType + "</td>";
+            html += "<td>" + q.inspectionType + "</td>";
             html += "<td>" + q.portName + "</td>";
             var startDate = new Date(q.startDate).Format("yyyy-MM-dd");
             var endDate = new Date(q.endDate).Format("yyyy-MM-dd");

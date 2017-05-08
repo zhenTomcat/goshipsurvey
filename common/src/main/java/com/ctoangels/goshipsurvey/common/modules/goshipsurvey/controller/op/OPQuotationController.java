@@ -2,6 +2,7 @@ package com.ctoangels.goshipsurvey.common.modules.goshipsurvey.controller.op;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Dict;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Quotation;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IDictService;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IQuotationService;
@@ -30,13 +31,10 @@ public class OPQuotationController extends BaseController {
     @Autowired
     IQuotationService quotationService;
 
-    @Autowired
-    IDictService dictService;
-
     @RequestMapping
     public String list(ModelMap map) {
-        map.put("shipType", dictService.getListByType("shipType"));
-        map.put("inspectionType", dictService.getListByType("inspectionType"));
+        map.put("shipType", getShipTypeDict());
+        map.put("inspectionType", getInspectionTypeDict());
         return "goshipsurvey/op/quotation/list";
     }
 
@@ -49,6 +47,8 @@ public class OPQuotationController extends BaseController {
         ew.orderBy("update_date", false);
         List<Quotation> list = quotationService.selectList(ew);
         for (Quotation q : list) {
+            q.setInspectionType(transferValuesToDes(q.getInspectionType(), getInspectionTypeDict()));
+            q.setShipType(transferValuesToDes(q.getShipType(), getShipTypeDict()));
             if (q.getQuotationStatus() >= Const.QUOTATION_ING) {
                 q.setApplicationList(quotationService.getApplication(q.getId()));
             }

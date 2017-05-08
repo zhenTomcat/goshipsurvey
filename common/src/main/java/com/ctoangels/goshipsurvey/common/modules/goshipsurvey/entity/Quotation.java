@@ -49,13 +49,13 @@ public class Quotation implements Serializable {
      * 船类型
      */
     @TableField(value = "ship_type")
-    private Integer shipType;
+    private String shipType;
 
     /**
      * 船检类型
      */
     @TableField(value = "inspection_type")
-    private Integer inspectionType;
+    private String inspectionType;
 
     /**
      * 港口id
@@ -168,19 +168,19 @@ public class Quotation implements Serializable {
         this.imo = imo;
     }
 
-    public Integer getShipType() {
-        return this.shipType;
+    public String getShipType() {
+        return shipType;
     }
 
-    public void setShipType(Integer shipType) {
+    public void setShipType(String shipType) {
         this.shipType = shipType;
     }
 
-    public Integer getInspectionType() {
-        return this.inspectionType;
+    public String getInspectionType() {
+        return inspectionType;
     }
 
-    public void setInspectionType(Integer inspectionType) {
+    public void setInspectionType(String inspectionType) {
         this.inspectionType = inspectionType;
     }
 

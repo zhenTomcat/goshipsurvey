@@ -4,7 +4,7 @@
 
     <!-- 通用查询结果列-->
     <sql id="Base_Column_List">
-		id,op_id AS opId, surveyor_id AS surveyorId, quotation_id AS quotationId, inspection_status AS inspectionStatus, inspection_type AS inspectionType, delivery_by AS deliveryBy, accepted_by AS acceptedBy, ship_particulars AS shipParticulars,ship_particulars_url AS shipParticularsUrl, port_agency AS portAgency,blank_loi_url AS blankLoiUrl, report_url AS reportUrl, op_point AS opPoint, op_comment AS opComment,surveyor_point AS surveyorPoint, surveyor_comment AS surveyorCommnet, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
+		id,op_id AS opId, surveyor_id AS surveyorId, quotation_id AS quotationId, inspection_status AS inspectionStatus, inspection_type AS inspectionType, delivery_by AS deliveryBy, accepted_by AS acceptedBy , re_delivery_by AS reDeliveryBy, re_accepted_by AS reAcceptedBy, charter, owner, ship_particulars AS shipParticulars,ship_particulars_url AS shipParticularsUrl, port_agency AS portAgency,blank_loi_url AS blankLoiUrl, report_url AS reportUrl,invoice_url AS invoiceUrl, op_point AS opPoint, op_comment AS opComment,surveyor_point AS surveyorPoint, surveyor_comment AS surveyorCommnet, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
 	</sql>
 
 </mapper>

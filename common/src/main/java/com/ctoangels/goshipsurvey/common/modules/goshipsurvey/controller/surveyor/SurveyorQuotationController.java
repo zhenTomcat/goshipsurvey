@@ -2,6 +2,7 @@ package com.ctoangels.goshipsurvey.common.modules.goshipsurvey.controller.survey
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Dict;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Quotation;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.QuotationApplication;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IDictService;
@@ -33,6 +34,9 @@ public class SurveyorQuotationController extends BaseController {
     IQuotationService quotationService;
 
     @Autowired
+    IDictService dictService;
+
+    @Autowired
     IQuotationApplicationService quotationApplicationService;
 
     @RequestMapping
@@ -45,8 +49,20 @@ public class SurveyorQuotationController extends BaseController {
     public JSONObject getQuotation() {
         JSONObject jsonObject = new JSONObject();
         int id = getCurrentUser().getId();
+        List<Dict> inspectionTypeDict = dictService.getListByType("inspectionType");
+        List<Dict> shipTypeDict = dictService.getListByType("shipType");
         List<QuotationApplication> applicationList = quotationApplicationService.getAppliedQuotations(id);
+        for (QuotationApplication qa : applicationList) {
+            Quotation quotation = qa.getQuotation();
+            quotation.setInspectionType(transferValuesToDes(quotation.getInspectionType(), inspectionTypeDict));
+            quotation.setShipType(transferValuesToDes(quotation.getShipType(), shipTypeDict));
+            qa.setQuotation(quotation);
+        }
         List<Quotation> quotationList = quotationService.getSatisfiedQuotations(id);
+        for (Quotation q : quotationList) {
+            q.setInspectionType(transferValuesToDes(q.getInspectionType(), inspectionTypeDict));
+            q.setShipType(transferValuesToDes(q.getShipType(), shipTypeDict));
+        }
         jsonObject.put("applicationList", applicationList);
         jsonObject.put("quotationList", quotationList);
         return jsonObject;

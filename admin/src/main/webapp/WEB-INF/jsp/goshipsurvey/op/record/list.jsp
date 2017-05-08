@@ -174,8 +174,6 @@
 </div>
 
 <script>
-    var shipType = ["", "Bulker", "Tanker", "Gas", "Chemical", "Container", "Multi_purpose", "Ro-Ro/PCC", "Reefer"];
-    var inspectionType = ["", "on hire", "off hire", "condition"];
     var quotationTable;
     var inspectionTable;
     var starRatingNot = $("#star-rating-outer-not");
@@ -213,15 +211,9 @@
                 },
                 {
                     "data": "shipType",
-                    "render": function (data) {
-                        return shipType[data];
-                    }
                 },
                 {
                     "data": "inspectionType",
-                    "render": function (data) {
-                        return inspectionType[data];
-                    }
                 },
                 {
                     "data": "portName",
@@ -280,15 +272,9 @@
                 },
                 {
                     "data": "quotation.shipType",
-                    "render": function (data) {
-                        return shipType[data];
-                    }
                 },
                 {
-                    "data": "inspectionType",
-                    "render": function (data) {
-                        return inspectionType[data];
-                    }
+                    "data": "quotation.inspectionType",
                 },
                 {
                     "data": "quotation.portName",

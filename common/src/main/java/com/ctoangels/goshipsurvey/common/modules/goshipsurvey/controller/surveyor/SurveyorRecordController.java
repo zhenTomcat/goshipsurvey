@@ -48,7 +48,10 @@ public class SurveyorRecordController extends BaseController {
         ew.orderBy("update_date", false);
         Page<Inspection> page = inspectionService.selectPage(getPage(), ew);
         for (Inspection inspection : page.getRecords()) {
-            inspection.setQuotation(quotationService.selectById(inspection.getQuotationId()));
+            Quotation quotation = quotationService.selectById(inspection.getQuotationId());
+            quotation.setInspectionType(transferValuesToDes(quotation.getInspectionType(), getInspectionTypeDict()));
+            quotation.setShipType(transferValuesToDes(quotation.getShipType(), getShipTypeDict()));
+            inspection.setQuotation(quotation);
             SurveyorInfo surveyorInfo = new SurveyorInfo();
             surveyorInfo.setInspectionId(inspection.getId());
             inspection.setSurveyorInfo(surveyorInfoService.selectOne(surveyorInfo));

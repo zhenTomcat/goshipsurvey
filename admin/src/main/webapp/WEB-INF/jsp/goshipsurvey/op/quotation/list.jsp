@@ -76,9 +76,6 @@
     </div>
 </div>
 <script>
-    var shipType = ["", "Bulker", "Tanker", "Gas", "Chemical", "Container", "Multi_purpose", "Ro-Ro/PCC", "Reefer"];
-    var inspectionType = ["", "on hire", "off hire", "condition"];
-
     var quotationTable = $("#quotation_table");
     $(document).ready(function () {
         drawTable();
@@ -96,8 +93,8 @@
                     html += "<tr class='quotation-tr'>";
                     html += "<td>" + quotation.shipName + "</td>";
                     html += "<td>" + quotation.imo + "</td>";
-                    html += "<td>" + shipType[quotation.shipType] + "</td>";
-                    html += "<td>" + inspectionType[quotation.inspectionType] + "</td>";
+                    html += "<td>" + quotation.shipType + "</td>";
+                    html += "<td>" + quotation.inspectionType + "</td>";
                     html += "<td>" + quotation.portName + "</td>";
                     var startDate = new Date(quotation.startDate).Format("yyyy-MM-dd");
                     var endDate = new Date(quotation.endDate).Format("yyyy-MM-dd");
@@ -165,7 +162,7 @@
             url: "op/inspection/add",
             data: {quotationId: quotationId, applicationId: applicationId},
             success: function (data) {
-                drawTable();
+                $("a[href='op/inspection']").click();
             },
             error: function () {
                 alert("initInspection error");

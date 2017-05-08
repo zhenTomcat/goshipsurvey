@@ -92,26 +92,32 @@
                             </div>
                         </div>
                         <div class="form-group col-md-6">
-                            <label class="col-sm-6 control-label">Inspection type</label>
-                            <div class="col-sm-6">
-                                <select class="form-control" name="inspectionType" id="inspectionTypeSelect">
-                                    <c:forEach items="${inspectionType}" var="ins">
-                                        <option value="${ins.value}">${ins.des}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
                             <label class="col-sm-6 control-label">Inspection port</label>
                             <div class="col-sm-6">
                                 <input id="portName" name="portName" type="text"
-                                       class="form-control required">
+                                       class="form-control required" autocomplete="off">
                                 <div id="port-list">
                                     <ul id="portList">
                                     </ul>
                                 </div>
                             </div>
                         </div>
+                        <div class="form-group col-md-12">
+                            <label class="col-sm-3 control-label" id="inspectionTypeLabel">Inspection type</label>
+                            <div class="col-sm-9">
+                                <div class="mt-checkbox-inline">
+                                    <c:forEach items="${inspectionType}" var="ins">
+                                        <label class="mt-checkbox col-sm-3">
+                                            <input type="checkbox" value="${ins.value}" class="inspectionTypeCheckBox"
+                                                   name="inspectionType">
+                                                ${ins.des}
+                                            <span></span>
+                                        </label>
+                                    </c:forEach>
+                                </div>
+                            </div>
+                        </div>
+
                         <div class="form-group col-md-12">
                             <label class="control-label col-sm-3">Inspection date(LMT)</label>
                             <div class="col-sm-9" style="padding-left: 7.5px">
@@ -169,6 +175,29 @@
                 return flag;
             }
         })
+
+        if (flag) {
+            var flag2 = false;
+            var checkBoxs = $("#quotation-add-form .inspectionTypeCheckBox");
+            checkBoxs.each(function () {
+                if (this.checked) {
+                    flag2 = true;
+                    return false;
+                }
+            })
+
+            if (!flag2) {
+                $("#quotation-add-form .inspectionTypeCheckBox:first").tips({
+                    side: 1,
+                    msg: "至少选择一个",
+                    bg: '#FF5080',
+                    time: 3,
+                });
+            }
+
+            flag = flag2;
+
+        }
         return flag;
     }
 
