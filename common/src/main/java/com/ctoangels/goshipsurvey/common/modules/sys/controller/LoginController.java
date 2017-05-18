@@ -276,10 +276,10 @@ public class LoginController extends BaseController {
 
 
     /**
-     * 访问系统首页
+     * 访问on off首页
      */
-    @RequestMapping(value = "/index")
-    public String login_index(ModelMap map) {
+    @RequestMapping(value = "/onoffindex")
+    public String onOffIndex(ModelMap map) {
         // 加载所有菜单
         map.put("changeMenu", "yes");
         map.put("sysname", sysName); // 读取系统名称
@@ -289,7 +289,7 @@ public class LoginController extends BaseController {
             Session session = currentUser.getSession();
             User user = (User) session.getAttribute(Const.SESSION_USER);
             if (user != null) {
-                initRights(user, session);
+                initRights(user, session, Const.PROJECT_TYPE_HIRE);
                 session.setAttribute(Const.SESSION_USERNAME, user.getLoginName()); // 放入用户名
                 map.put("user", user);
                 map.put("menuList", session.getAttribute(Const.SESSION_ALLMENULIST));
@@ -304,7 +304,47 @@ public class LoginController extends BaseController {
                     }
                 }
                 map.put("style", style);
-                return "sys/index";
+                return "sys/onoffindex";
+            }
+
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
+            return "sys/admin/login";
+        }
+        return "sys/admin/login";
+    }
+
+
+    /**
+     * 访问on off首页
+     */
+    @RequestMapping(value = "/prepurchaseindex")
+    public String prePurchaseIndex(ModelMap map) {
+        // 加载所有菜单
+        map.put("changeMenu", "yes");
+        map.put("sysname", sysName); // 读取系统名称
+        try {
+            // shiro管理的session
+            Subject currentUser = SecurityUtils.getSubject();
+            Session session = currentUser.getSession();
+            User user = (User) session.getAttribute(Const.SESSION_USER);
+            if (user != null) {
+                initRights(user, session, Const.PROJECT_TYPE_HIRE);
+                session.setAttribute(Const.SESSION_USERNAME, user.getLoginName()); // 放入用户名
+                map.put("user", user);
+                map.put("menuList", session.getAttribute(Const.SESSION_ALLMENULIST));
+                Integer styleId = user.getStyleId();
+                Style style;
+                if (styleId == null) {
+                    style = styleService.selectById(1);
+                } else {
+                    style = styleService.selectById(styleId);
+                    if (style == null) {
+                        style = styleService.selectById(1);
+                    }
+                }
+                map.put("style", style);
+                return "sys/prepurchaseindex";
             }
 
         } catch (Exception e) {
@@ -324,7 +364,7 @@ public class LoginController extends BaseController {
         return "system/admin/tab";
     }
 
-    private void initRights(User sysUser, Session session) {
+    private void initRights(User sysUser, Session session, Integer proType) {
 
         try {
 
@@ -340,7 +380,7 @@ public class LoginController extends BaseController {
             // info.addRoles(roles);// TODO change to roleCode
 
             // 添加菜单权限信息（含分类菜单）
-            List<Menu> menus = loginService.getRightsParentMenus(sysUser.getId());
+            List<Menu> menus = loginService.getRightsParentMenus(sysUser.getId(), proType);
             // menuList.addAll(menus);
             for (Menu menu : menus) {
                 allRightsUrls.add(menu.getMenuUrl());
@@ -403,9 +443,19 @@ public class LoginController extends BaseController {
         return "sys/admin/login";
     }
 
-    @RequestMapping(value = "/home")
-    public String home(ModelMap map) {
+    @RequestMapping(value = "/onoff", method = RequestMethod.GET)
+    public String onOffHome(ModelMap map) {
         return "goshipsurvey/home";
+    }
+
+    @RequestMapping(value = "/prepurchase", method = RequestMethod.GET)
+    public String prePurchaseHome(ModelMap map) {
+        return "prepurchase/home";
+    }
+
+    @RequestMapping(value = "/welcome", method = RequestMethod.GET)
+    public String welcome(ModelMap map) {
+        return "sys/welcome";
     }
 
 }

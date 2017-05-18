@@ -13,7 +13,7 @@ public interface LoginService {
 
     List<String> getRightsRolesId(Integer userId);
 
-    List<Menu> getRightsParentMenus(Integer userId);
+    List<Menu> getRightsParentMenus(Integer userId, Integer proType);
 
     List<Menu> getRightsSubMenus(Map<?, ?> parames);
 

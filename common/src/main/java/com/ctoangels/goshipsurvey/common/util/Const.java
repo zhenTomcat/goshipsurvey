@@ -108,4 +108,9 @@ public class Const {
     public static final Integer USER_TYPE_SURVEYOR_PERSONAL = 2;
     public static final Integer USER_TYPE_SURVEYOR_COMPANY = 3;
 
+
+    //project type
+    public static final Integer PROJECT_TYPE_HIRE = 1;
+    public static final Integer PROJECT_TYPE_PURCHASE = 2;
+
 }

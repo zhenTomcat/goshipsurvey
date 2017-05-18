@@ -136,7 +136,7 @@
 
                     if ("success" == data.result) {
                         saveCookie();
-                        window.location.href = "/index";
+                        window.location.href = document.referrer;
                     } else if ("user error" == data.result) {
                         $("#loginName").tips({
                             side: 1,

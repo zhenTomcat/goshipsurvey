@@ -7,5 +7,6 @@
 **/rebel.xml
 **/gen.xml
 **/.DS_Store
+**/override.properties
 commons/
 **/CustomGenerator.java

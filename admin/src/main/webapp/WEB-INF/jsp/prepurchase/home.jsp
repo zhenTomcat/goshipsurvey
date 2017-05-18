@@ -164,12 +164,12 @@
                 <ul class="loginbar pull-right">
                     <c:if test="${not empty sessionScope.sessionUser}">
                         <li>
-                            <a href="onoffindex">${sessionScope.sessionUser.name}</a>
+                            <a href="prepurchaseindex">${sessionScope.sessionUser.name}</a>
                         </li>
                     </c:if>
                     <c:if test="${empty sessionScope.sessionUser}">
                         <li>
-                            <a href="login_toLogin?pro=1">login</a>
+                            <a href="login_toLogin">login</a>
                         </li>
                         <li class="topbar-devider"></li>
                         <li>
@@ -206,8 +206,8 @@
                     <div class="tp-caption re-title-v1 sft start" data-x="center" data-hoffset="0" data-y="70"
                          data-speed="1500" data-start="500" data-easing="Back.easeInOut" data-endeasing="Power1.easeIn"
                          data-endspeed="300">
-                        On/off hire + <br><br>
-                        &nbsp;&nbsp;&nbsp;condition inspection
+                        Pre-purchase <br><br>
+                        &nbsp;&nbsp;&nbsp; inspection
                     </div>
                 </li>
             </ul>

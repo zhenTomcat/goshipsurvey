@@ -68,6 +68,13 @@ public class Menu implements Serializable {
     /**  */
     private String description;
 
+
+    /**
+     * 项目类型  1:量油 2:买卖船
+     */
+    @TableField(value = "pro_type")
+    private Integer proType;
+
     /**  */
     @TableField(value = "del_flag")
     private Integer delFlag;
@@ -165,6 +172,14 @@ public class Menu implements Serializable {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public Integer getProType() {
+        return proType;
+    }
+
+    public void setProType(Integer proType) {
+        this.proType = proType;
     }
 
     public Integer getDelFlag() {

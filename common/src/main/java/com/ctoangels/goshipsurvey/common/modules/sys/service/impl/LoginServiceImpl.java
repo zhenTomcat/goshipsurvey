@@ -38,9 +38,9 @@ public class LoginServiceImpl implements LoginService {
         return roleMapper.findRolesIdByUserId(userId.toString());
     }
 
-    public List<Menu> getRightsParentMenus(Integer userId) {
+    public List<Menu> getRightsParentMenus(Integer userId, Integer proType) {
 
-        return menuMapper.findParentMenusByUserId(userId);
+        return menuMapper.findParentMenusByUserId(userId, proType);
     }
 
     public List<Menu> getRightsSubMenus(Map<?, ?> parames) {

@@ -9,9 +9,9 @@
         <param-value>classpath:spring/ApplicationContext.xml</param-value>
     </context-param>
 
-    <welcome-file-list>
-        <welcome-file>/static/html/index.html</welcome-file>
-    </welcome-file-list>
+    <!--<welcome-file-list>-->
+        <!--<welcome-file>/static/html/index.html</welcome-file>-->
+    <!--</welcome-file-list>-->
 
     <!-- 编码filter start -->
     <filter>

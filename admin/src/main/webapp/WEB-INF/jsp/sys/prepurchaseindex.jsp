@@ -77,15 +77,22 @@
         }
     </style>
 </head>
-<body onhashchange="hashChange()" class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
+<%--<body onhashchange="hashChange()" class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">--%>
+<body onhashchange="hashChange()"
+      class="page-header-fixed page-sidebar-closed-hide-logo page-content-white page-full-width">
+
 
 <jsp:include page="include/header.jsp"></jsp:include>
 <div class="clearfix"></div>
 <div class="page-container">
-    <jsp:include page="include/menu.jsp"></jsp:include>
+    <jsp:include page="include/hor-menu.jsp"></jsp:include>
+    <%--<jsp:include page="include/menu.jsp"></jsp:include>--%>
     <!-- END SIDEBAR -->
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
+        <div>
+            <a data-target="navTab" href="test/testUrl?url=prepurchase/op/quotation/list">step1</a>
+        </div>
         <div class="page-content">
             <div class="page-content-body" id="navTab">
             </div>
@@ -207,5 +214,28 @@
     function hashChange() {
         intPage();
     }
+
+    var selectedSpan = "<span class='selected'></span>";
+    $(".classic-menu-dropdown > a").on("click", function () {
+        var thisOne = $(this);
+        var href = thisOne.attr("href");
+        if (href != "javascript:;") {
+            $(".classic-menu-dropdown .selected").remove();
+            $(".classic-menu-dropdown.active").removeClass("active");
+            thisOne.parent().addClass("active");
+            thisOne.html(thisOne.html() + selectedSpan);
+        }
+    })
+    $(".dropdown-menu li > a").on("click", function () {
+        var thisOne = $(this);
+        var href = thisOne.attr("href");
+        if (href != "javascript:;") {
+            $(".classic-menu-dropdown .selected").remove();
+            $(".classic-menu-dropdown.active").removeClass("active");
+            var a = thisOne.parent().parent().siblings("a");
+            a.parent().addClass("active");
+            a.html(a.html() + selectedSpan);
+        }
+    })
 </script>
 </html>

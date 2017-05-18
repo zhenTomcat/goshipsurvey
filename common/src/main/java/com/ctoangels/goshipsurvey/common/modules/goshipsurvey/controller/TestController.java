@@ -40,5 +40,10 @@ public class TestController extends BaseController {
         return jsonObject;
     }
 
+    @RequestMapping(value = "/testUrl", method = RequestMethod.GET)
+    public String test(String url) {
+        return url;
+    }
+
 
 }

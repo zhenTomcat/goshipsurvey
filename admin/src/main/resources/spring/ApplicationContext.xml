@@ -50,6 +50,11 @@
             <value>
                 /static/** = anon
                 /assets/** = anon
+                /welcome = anon
+                /onoff = anon
+                /prepurchase =anon
+                /onoffindex = user
+                /prepurchaseindex = user
                 /home=anon
                 /code = anon
                 /login_login = anon
@@ -63,6 +68,7 @@
                 /user/unauthorized = anon
                 /user/editPwd = anon
                 /test=anon
+                /test/** = user
                 /surveyor/account/personalInfo=user
                 /surveyor/account/companyInfo=user
                 /** = gvrts
