@@ -20,7 +20,7 @@
                     type="hidden" name="menuType" value="${menuType}"/> <label
                     for="menuName" class="col-sm-2 control-label">名称</label>
                 <div class="col-sm-7">
-                    <input id="menuName" name="menuName" type="text"  class="form-control required" placeholder="请输入名称">
+                    <input id="menuName" name="menuName" type="text" class="form-control required" placeholder="请输入名称">
                 </div>
             </div>
             <div class="form-group">
@@ -45,6 +45,15 @@
                 <div class="col-sm-7">
                     <input id="menuOrder" name="menuOrder" type="text" maxlength="32"
                            class="form-control required" placeholder="请输入数值">
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="removable" class="col-sm-2 control-label">系统类型</label>
+                <div class="col-sm-7">
+                    <select class="form-control" id="proType" name="proType">
+                        <option value="1">on off</option>
+                        <option value="2">pre-purchase</option>
+                    </select>
                 </div>
             </div>
             <div class="form-group">

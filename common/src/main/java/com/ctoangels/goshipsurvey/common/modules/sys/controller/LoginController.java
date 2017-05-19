@@ -329,7 +329,7 @@ public class LoginController extends BaseController {
             Session session = currentUser.getSession();
             User user = (User) session.getAttribute(Const.SESSION_USER);
             if (user != null) {
-                initRights(user, session, Const.PROJECT_TYPE_HIRE);
+                initRights(user, session, Const.PROJECT_TYPE_PURCHASE);
                 session.setAttribute(Const.SESSION_USERNAME, user.getLoginName()); // 放入用户名
                 map.put("user", user);
                 map.put("menuList", session.getAttribute(Const.SESSION_ALLMENULIST));

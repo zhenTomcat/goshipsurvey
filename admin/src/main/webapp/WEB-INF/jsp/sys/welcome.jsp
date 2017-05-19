@@ -150,6 +150,27 @@
             </a>
             <!-- End Logo -->
 
+            <!-- Topbar -->
+            <div class="topbar" style="">
+                <ul class="loginbar pull-right">
+                    <c:if test="${not empty sessionScope.sessionUser}">
+                        <li>
+                            <a href="prepurchaseindex">${sessionScope.sessionUser.name}</a>
+                        </li>
+                    </c:if>
+                    <c:if test="${empty sessionScope.sessionUser}">
+                        <li>
+                            <a href="login_toLogin">login</a>
+                        </li>
+                        <li class="topbar-devider"></li>
+                        <li>
+                            <a href="javascript:void(0);">register</a>
+                        </li>
+                    </c:if>
+                </ul>
+            </div>
+            <!-- End Topbar -->
+
             <h1 style="color:white;margin:35px 0;font-size:60px">GOSHIPSURVEY</h1>
 
 

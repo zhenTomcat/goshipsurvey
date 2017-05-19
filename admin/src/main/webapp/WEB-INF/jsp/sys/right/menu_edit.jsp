@@ -52,6 +52,16 @@
                 </div>
             </div>
             <div class="form-group">
+                <label for="removable" class="col-sm-2 control-label">系统类型</label>
+                <div class="col-sm-7">
+                    <select class="form-control" id="proType" name="proType">
+                        <option value="1" <c:if test="${menu.proType==1}">selected</c:if>>on off</option>
+                        <option value="2" <c:if test="${menu.proType==2}">selected</c:if>>pre-purchase
+                        </option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-group">
                 <label for="removable" class="col-sm-2 control-label">可删除</label>
                 <div class="col-sm-7">
                     <select class="form-control" id="removable" name="removable">
