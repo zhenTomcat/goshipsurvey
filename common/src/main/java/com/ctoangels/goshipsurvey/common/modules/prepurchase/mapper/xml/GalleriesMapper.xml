@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.GalleriesMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id, `name`, `number`, inspection_report_id AS inspectionReportId, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
+	</sql>
+
+</mapper>

@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.ConditionInspectionMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id, hull, deck, deck_marchinery AS deckMarchinery, ballast_tank AS ballastTank, accommodation, navigation_bridge AS navigationBridge, machinery_space AS machinerySpace, life_saving AS lifeSaving, galley, ballast_water AS ballastWater, hatch_cover AS hatchCover, cargo_hold AS cargoHold, cargo_tank AS cargoTank, cargo_control_room AS cargoControlRoom, pump_room AS pumpRoom, pipelines, inter_gas_system AS interGasSystem, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
+	</sql>
+
+</mapper>
