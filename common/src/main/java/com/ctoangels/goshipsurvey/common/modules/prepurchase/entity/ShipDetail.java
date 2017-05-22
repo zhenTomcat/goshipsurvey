@@ -59,7 +59,8 @@ public class ShipDetail implements Serializable {
 	private String bunkers;
 
 	/**  */
-	private String class;
+	@TableField(value = "ship_class")
+	private String shipClass;
 
 	/**  */
 	private String flag;
@@ -143,24 +144,24 @@ public class ShipDetail implements Serializable {
 	private String apOthers;
 
 	/**  */
-	@TableField(value = "b_maker")
-	private String bMaker;
+	@TableField(value = "bo_maker")
+	private String boMaker;
 
 	/**  */
-	@TableField(value = "b_type")
-	private String bType;
+	@TableField(value = "bo_type")
+	private String boType;
 
 	/**  */
-	@TableField(value = "b_evaporation")
-	private String bEvaporation;
+	@TableField(value = "bo_evaporation")
+	private String boEvaporation;
 
 	/**  */
-	@TableField(value = "b_heating_area")
-	private String bHeatingArea;
+	@TableField(value = "bo_heating_area")
+	private String boHeatingArea;
 
 	/**  */
-	@TableField(value = "b_others")
-	private String bOthers;
+	@TableField(value = "bo_others")
+	private String boOthers;
 
 	/**  */
 	@TableField(value = "create_date")
@@ -279,12 +280,12 @@ public class ShipDetail implements Serializable {
 		this.bunkers = bunkers;
 	}
 
-	public String getClass() {
-		return this.class;
+	public String getShipClass() {
+		return this.shipClass;
 	}
 
-	public void setClass(String class) {
-		this.class = class;
+	public void setShipClass(String shipClass) {
+		this.shipClass = shipClass;
 	}
 
 	public String getFlag() {
@@ -455,44 +456,44 @@ public class ShipDetail implements Serializable {
 		this.apOthers = apOthers;
 	}
 
-	public String getBMaker() {
-		return this.bMaker;
+	public String getBoMaker() {
+		return this.boMaker;
 	}
 
-	public void setBMaker(String bMaker) {
-		this.bMaker = bMaker;
+	public void setBoMaker(String boMaker) {
+		this.boMaker = boMaker;
 	}
 
-	public String getBType() {
-		return this.bType;
+	public String getBoType() {
+		return this.boType;
 	}
 
-	public void setBType(String bType) {
-		this.bType = bType;
+	public void setBoType(String boType) {
+		this.boType = boType;
 	}
 
-	public String getBEvaporation() {
-		return this.bEvaporation;
+	public String getBoEvaporation() {
+		return this.boEvaporation;
 	}
 
-	public void setBEvaporation(String bEvaporation) {
-		this.bEvaporation = bEvaporation;
+	public void setBoEvaporation(String boEvaporation) {
+		this.boEvaporation = boEvaporation;
 	}
 
-	public String getBHeatingArea() {
-		return this.bHeatingArea;
+	public String getBoHeatingArea() {
+		return this.boHeatingArea;
 	}
 
-	public void setBHeatingArea(String bHeatingArea) {
-		this.bHeatingArea = bHeatingArea;
+	public void setBoHeatingArea(String boHeatingArea) {
+		this.boHeatingArea = boHeatingArea;
 	}
 
-	public String getBOthers() {
-		return this.bOthers;
+	public String getBoOthers() {
+		return this.boOthers;
 	}
 
-	public void setBOthers(String bOthers) {
-		this.bOthers = bOthers;
+	public void setBoOthers(String boOthers) {
+		this.boOthers = boOthers;
 	}
 
 	public Date getCreateDate() {
