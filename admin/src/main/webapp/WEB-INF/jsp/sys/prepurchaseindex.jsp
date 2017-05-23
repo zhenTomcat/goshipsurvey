@@ -90,9 +90,6 @@
     <!-- END SIDEBAR -->
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
-        <div>
-            <a data-target="navTab" href="test/testUrl?url=prepurchase/op/quotation/add">add</a>
-        </div>
         <div class="page-content">
             <div class="page-content-body" id="navTab">
             </div>

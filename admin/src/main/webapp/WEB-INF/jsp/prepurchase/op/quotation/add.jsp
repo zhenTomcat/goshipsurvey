@@ -97,7 +97,8 @@
 
 </style>
 <h1 style="text-align: center;background-color: #3598dc;color: white;margin-top: 0">New Quotation</h1>
-<form role="form" class="form-horizontal">
+<form id="add_purchase_quotation_form" role="form" class="form-horizontal" action="prepurchase/op/quotation/addComplete"
+      method="POST">
     <div class="tab-content">
         <jsp:include page="step1.jsp"></jsp:include>
         <jsp:include page="step2.jsp"></jsp:include>
@@ -106,3 +107,7 @@
         <jsp:include page="step5.jsp"></jsp:include>
     </div>
 </form>
+
+<script>
+    $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
+</script>

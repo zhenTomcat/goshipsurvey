@@ -29,39 +29,20 @@
                                     </div>
                                     <div class="tab-pane fade active in" id="tab_1_1">
                                         <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                                               id="applied_table">
+                                               id="quotation_table">
                                             <thead>
                                             <tr>
-                                                <th width="15%">Ship name</th>
-                                                <th width="10%">imo</th>
-                                                <th width="10%">Ship type</th>
-                                                <th width="15%">Inspection type</th>
-                                                <th width="15%">Inspection port</th>
-                                                <th width="20%">Inspection date(LMT)</th>
-                                                <th width="10%">Price</th>
-                                                <th width="10%">Status</th>
-                                            </tr>
-                                            <tbody></tbody>
-                                            </thead>
-                                        </table>
-                                    </div>
-                                    <div class="clearfix margin-bottom-20"></div>
-                                    <div class="caption col-md-8 margin-bottom-15">
-                                        <span class="caption-subject font-blue-soft bold uppercase">Available</span>
-                                    </div>
-                                    <div class="tab-content">
-                                        <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                                               id="available_table">
-                                            <thead>
-                                            <tr>
-                                                <th width="15%">Ship name</th>
-                                                <th width="10%">imo</th>
-                                                <th width="10%">Ship type</th>
-                                                <th width="15%">Inspection type</th>
-                                                <th width="15%">Inspection port</th>
-                                                <th width="20%">Inspection date(LMT)</th>
-                                                <th width="10%">Price</th>
-                                                <th width="10%">Apply Survey</th>
+                                                <th width="9%">Public date</th>
+                                                <th width="9%">Ship name</th>
+                                                <th width="9%">IMO</th>
+                                                <th width="9%">Ship Type</th>
+                                                <th width="9%">Inspection port</th>
+                                                <th width="9%">Inspection date(LMT)</th>
+                                                <th width="9%">Consignor</th>
+                                                <th width="9%">Price</th>
+                                                <th width="9%">Surveyor</th>
+                                                <th width="9%">Apply</th>
+                                                <th width="9%">More detail</th>
                                             </tr>
                                             <tbody></tbody>
                                             </thead>
@@ -77,84 +58,143 @@
     </div>
 </div>
 <script>
-    var appliedTable = $("#applied_table");//已申请的quotation表格
-    var availableTable = $("#available_table");//可申请的quotation表格
+    var quotationTable = $("#quotation_table");//已申请的quotation表格
     $(document).ready(function () {
         drawTable();
     })
 
     //绘制页面表格
     function drawTable() {
-        $.ajax({
-            url: "surveyor/quotation/list",
-            type: "get",
-            success: function (data) {
-                drawAppliedTable(data.applicationList);
-                drawAvailableTable(data.quotationList);
+        quotationTable = $('#quotation_table').DataTable({
+            "ordering": false,
+            "pagingType": "simple_numbers",
+            "processing": true,
+            "autoWidth": false,
+            "serverSide": true,
+            "ajax": {
+                "url": "prepurchase/surveyor/quotation/list",
+                "type": "post",
+                "data": function (data) {
+                    data.keyword = $("#keyword").val();
+                }
             },
-            error: function () {
-                alert("drawTable error");
+//            "language": {
+//                "url": "http://windyeel.oss-cn-shanghai.aliyuncs.com/global/plugins/datatables/cn.txt"
+//            },
+            "lengthMenu": [[5, 40, 60], [5, 40, 60]],
+            "columns": [
+                {
+                    "data": "createDate",
+                    "render": function (data) {
+                        return new Date(data).Format("yyyy-MM-dd");
+                    }
+                },
+                {
+                    "data": "shipDetail.shipName",
+                },
+                {
+                    "data": "shipDetail.imo",
+                },
+                {
+                    "data": "shipDetail.shipType",
+                },
+                {
+                    "data": "location",
+                },
+                {
+                    "data": "startDate",
+                },
+                {
+                    "data": "createBy",
+                },
+                {
+                    "data": "application.price",
+                },
+                {
+                    "data": "application.surveyor.lastName"
+                },
+            ],
+            "columnDefs": [{
+                "targets": 5,
+                "render": function (data, type, row) {
+                    var startDate = new Date(row.startDate).Format("yyyy-MM-dd");
+                    var endDate = new Date(row.endDate).Format("yyyy-MM-dd");
+                    return startDate + " to " + endDate;
+                }
+            }, {
+                "targets": 9,
+                "render": function (data, type, row) {
+                    var application = row.application;
+                    console.log("ooo" + application);
+                    if (application == null) {
+                        console.log("aaa")
+                        return "<button class='btn green'>apply</button>";
+                    }
+                    return "";
+                }
+            }, {
+                "targets": 10,
+                "class": "details-control",
+                "render": function (data, type, row) {
+                    return "<a href='javascript:void(0)'>VIEW</a>"
+                }
             }
-        })
+            ],
+        });
+
+        quotationTable.on('click', 'td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = quotationTable.row(tr);
+            if (row.child.isShown()) {
+                row.child.hide();
+//                tr.removeClass('shown');
+            }
+            else {
+                row.child(moreInfo(row.data())).show();
+//                tr.addClass('shown');
+            }
+        });
     }
 
-    //绘制已申请的quotation表格
-    function drawAppliedTable(list) {
-        var html = "";
-        for (var i = 0; i < list.length; i++) {
-            var a = list[i];
-            var q = a.quotation;
-            html += "<tr>";
-            html += "<td>" + q.shipName + "</td>";
-            html += "<td>" + q.imo + "</td>";
-            html += "<td>" + q.shipType + "</td>";
-            html += "<td>" + q.inspectionType + "</td>";
-            html += "<td>" + q.portName + "</td>";
-            var startDate = new Date(q.startDate).Format("yyyy-MM-dd");
-            var endDate = new Date(q.endDate).Format("yyyy-MM-dd");
-            html += "<td>" + startDate + " to " + endDate + "</td>";
-            html += "<td>$:" + a.totalPrice + "</td>";
-            var applicationStaus = a.applicationStatus;
-            if (applicationStaus == 0) {
-                html += "<td><a class='btn btn-sm yellow'>Applying</a></td>";
-            } else if (applicationStaus == 1) {
-                html += "<td><a class='btn btn-sm green'>Success</a></td>";
-            } else if (applicationStaus == 2) {
-                html += "<td><a class='btn btn-sm red'>Failure</a></td>";
-            }
-            html += "</tr>"
+    function moreInfo(data) {
+        var html = '';
+        var shipDetail = data.shipDetail;
+        html += '<div class="col-md-3">';
+        html += '<label class="col-md-6 text-right">Ship name:</label><label class="col-md-6 text-left">' + shipDetail.shipName + '&nbsp</label>';
+        html += '<label class="col-md-6 text-right">IMO:</label><label class="col-md-6 text-left">' + shipDetail.imo + '&nbsp</label>';
+        html += '<label class="col-md-6 text-right">Type:</label><label class="col-md-6 text-left">' + shipDetail.shipType + '&nbsp</label>';
+        html += '<label class="col-md-6 text-right">ex.Name:</label><label class="col-md-6 text-left">' + shipDetail.exName + '&nbsp;</label>';
+        html += '<label class="col-md-6 text-right">Class:</label><label class="col-md-6 text-left">' + shipDetail.shipClass + '&nbsp</label>';
+        html += '<label class="col-md-6 text-right">Flag:</label><label class="col-md-6 text-left">' + shipDetail.flag + '&nbsp</label>';
+        html += '<label class="col-md-6 text-right">Build Year:</label><label class="col-md-6 text-left">' + shipDetail.buildYear + '&nbsp</label>';
+        html += '<label class="col-md-6 text-right">Builder:</label><label class="col-md-6 text-left">' + shipDetail.builder + '&nbsp</label>';
+        html += "</div>";
+        html += '<div class="col-md-3">';
+        html += '<label class="col-md-6 text-right">LOA(m):</label><label class="col-md-6 text-left">' + shipDetail.loa + '&nbsp</label>';
+        html += '<label class="col-md-6 text-right">Beam(m):</label><label class="col-md-6 text-left">' + shipDetail.beam + '&nbsp</label>';
+        html += '<label class="col-md-6 text-right">Dwt(ton):</label><label class="col-md-6 text-left">' + shipDetail.dwt + '&nbsp</label>';
+        html += '<label class="col-md-6 text-right">Draft(m):</label><label class="col-md-6 text-left">' + shipDetail.draft + '&nbsp;</label>';
+        html += '<label class="col-md-6 text-right">GT:</label><label class="col-md-6 text-left">' + shipDetail.ggt + '&nbsp</label>';
+        html += '<label class="col-md-6 text-right">LDT(ton):</label><label class="col-md-6 text-left">' + shipDetail.ldt + '&nbsp</label>';
+        html += '<label class="col-md-6 text-right">Call Sign:</label><label class="col-md-6 text-left">' + shipDetail.callSign + '&nbsp</label>';
+        html += "</div>";
+        html += '<div class="col-md-3">';
+        html += '<label class="col-md-12 text-left">Agency details:</label>';
+        html += '<div class="col-md-12 text-left" style="padding-left:30px; ">' + data.agencyDetail + '</div>';
+        var agencyUrl = data.agencyUrl;
+        if (agencyUrl != null && agencyUrl != "") {
+            html += '<a target="_blank" style="float: right" href="' + agencyUrl + '" class="btn green">View</a>';
         }
-        if (html == "") {
-            html += "<tr><td colspan='8'>No data</td></tr>";
-        }
-        appliedTable.find("tbody").html(html);
-    }
+        html += "</div>";
+        html += '<div class="col-md-3">';
+        html += '<label class="col-md-12 text-left">Our price & surveyor:</label>';
+        html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5">Price:</label> <div class="input-group col-md-7"> <input type="text" class="form-control" id="shipName" name="shipName"> </div></div>';
+        html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">Surveyor:</label> <div class="input-group col-md-7"> <select  class="form-control surveyor-select"><option>1</option></select> </div></div>';
+        html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">SurveyorCV:</label>  <a class="col-md-3" href="" style="padding-top: 8px; vertical-align: middle">VIEW</a></div>';
 
-    //绘制可申请的quotation表格
-    function drawAvailableTable(list) {
-        var html = "";
-        for (var i = 0; i < list.length; i++) {
-            var q = list[i];
-            html += "<tr>";
-            html += "<td>" + q.shipName + "</td>";
-            html += "<td>" + q.imo + "</td>";
-            html += "<td>" + q.shipType + "</td>";
-            html += "<td>" + q.inspectionType + "</td>";
-            html += "<td>" + q.portName + "</td>";
-            var startDate = new Date(q.startDate).Format("yyyy-MM-dd");
-            var endDate = new Date(q.endDate).Format("yyyy-MM-dd");
-            html += "<td>" + startDate + " to " + endDate + "</td>";
-            html += "<td>$:<input class='price-input' style='width: 70%'></td>";
-            <shiro:hasPermission
-                    name="surveyor/quotationApplication/add">
-            html += "<td><a class='btn btn-sm blue' onclick='addApplication(this," + q.id + ")'>Apply</a></td>";
-            </shiro:hasPermission>
-            html += "</tr>"
-        }
-        if (html == "") {
-            html += "<tr><td colspan='8'>No data</td></tr>";
-        }
-        availableTable.find("tbody").html(html);
+        html += "</div>";
+
+        return html;
     }
 
     //提交申请

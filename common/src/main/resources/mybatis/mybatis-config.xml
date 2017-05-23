@@ -14,6 +14,14 @@
         <typeAlias type="com.ctoangels.goshipsurvey.common.modules.sys.entity.Menu" alias="Menu"/>
         <typeAlias type="com.ctoangels.goshipsurvey.common.modules.sys.entity.Button" alias="Button"/>
         <typeAlias type="com.ctoangels.goshipsurvey.common.modules.sys.entity.User" alias="User"/>
+        <typeAlias type="com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.QuotationApplication"
+                   alias="QuotationApplication"></typeAlias>
+        <typeAlias type="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.PurchaseQuotation"
+                   alias="PurchaseQuotation"></typeAlias>
+        <typeAlias type="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.ShipDetail"
+                   alias="ShipDetail"></typeAlias>
+        <typeAlias type="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Surveyor"
+                   alias="Surveyor"></typeAlias>
     </typeAliases>
     <!-- 映射map -->
     <mappers>

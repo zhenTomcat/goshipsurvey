@@ -85,11 +85,15 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    如果已核对完毕,请提交
-                                    <div>
-                                        <a class="btn blue" data-target="navTab"
-                                           href="test/testUrl?url=prepurchase/op/quotation/step5">submit</a>
+                                <div class="col-md-6" style="padding:50px 0 0 100px;">
+                                    <div style="margin: auto">
+                                        如果已核对完毕,请点这里发布到网上
+                                        <button type="button" onclick="public_to_net()" class="btn blue"
+                                                data-target="navTab"
+                                                id="publicBtn"
+                                                style="display: block;margin-top: 20px;width: 200px"
+                                                href="test/testUrl?url=prepurchase/op/quotation/step5">PUBLIC TO NET
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -106,3 +110,22 @@
         </div>
     </div>
 </div>
+<script>
+    function public_to_net() {
+        if (check()) {
+            $("#add_purchase_quotation_form").ajaxSubmit({
+                success: function (data) {
+                    alert("success");
+                    $("a[href='prepurchase/op/quotation']").click();
+                },
+                error: function () {
+                    console.log("error");
+                }
+            })
+        }
+    }
+
+    function check() {
+        return true;
+    }
+</script>

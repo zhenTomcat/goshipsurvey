@@ -320,11 +320,11 @@
             var row = inspectionTable.row(tr);
             if (row.child.isShown()) {
                 row.child.hide();
-                tr.removeClass('shown');
+//                tr.removeClass('shown');
             }
             else {
                 row.child(moreInfo(row.data())).show();
-                tr.addClass('shown');
+//                tr.addClass('shown');
             }
         });
     }

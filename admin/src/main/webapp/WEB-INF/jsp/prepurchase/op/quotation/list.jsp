@@ -21,6 +21,14 @@
         padding: 0;
     }
 
+    .text-left {
+        text-align: left;
+    }
+
+    .text-right {
+        text-align: right;
+    }
+
 </style>
 <div class="row">
     <div class="col-md-12">
@@ -38,7 +46,7 @@
                                     <shiro:hasPermission name="op/quotation/add">
                                         <div class="col-md-4">
                                             <div class="btn-group">
-                                                <a href="#form_modal2" data-toggle="modal"
+                                                <a href="prepurchase/op/quotation/add" data-target="navTab"
                                                    class="btn blue"><i class="fa fa-plus"></i> New quotation
                                                 </a>
                                             </div>
@@ -55,10 +63,11 @@
                                                     <th width="15%">Ship name</th>
                                                     <th width="10%">imo</th>
                                                     <th width="10%">Ship type</th>
-                                                    <th width="15%">Inspection type</th>
                                                     <th width="15%">Inspection port</th>
                                                     <th width="25%">Inspection date(LMT)</th>
+                                                    <th width="10%">Available surveyors</th>
                                                     <th width="10%">Status</th>
+                                                    <th width="10%">More Detail</th>
                                                 </tr>
                                                 <tbody></tbody>
                                                 </thead>
@@ -82,79 +91,120 @@
     })
 
     function drawTable() {
-        $.ajax({
-            url: "op/quotation/list",
-            type: "post",
-            success: function (data) {
-                var list = data.list;
-                var html = "";
-                for (var i = 0; i < list.length; i++) {
-                    var quotation = list[i];
-                    html += "<tr class='quotation-tr'>";
-                    html += "<td>" + quotation.shipName + "</td>";
-                    html += "<td>" + quotation.imo + "</td>";
-                    html += "<td>" + quotation.shipType + "</td>";
-                    html += "<td>" + quotation.inspectionType + "</td>";
-                    html += "<td>" + quotation.portName + "</td>";
-                    var startDate = new Date(quotation.startDate).Format("yyyy-MM-dd");
-                    var endDate = new Date(quotation.endDate).Format("yyyy-MM-dd");
-                    html += "<td>" + startDate + " to " + endDate + "</td>";
-                    html += "<td>";
-                    var quotationStatus = quotation.quotationStatus;
-                    if (quotationStatus == 0) {
-                        <shiro:hasPermission name="op/quotation/startQuotation">
-                        html += "<a class='btn btn-sm blue' onclick='startQuotation(" + quotation.id + ")'>询价</a>";
-                        </shiro:hasPermission>
-
-                    } else if (quotationStatus == 1) {
-                        html += "<a class='btn btn-sm green' readonly>询价中...</a>";
-                    } else if (quotationStatus == 2) {
-                        html += "<a class='btn btn-sm green' readonly>已邀请验船</a>";
-                    }
-                    html += "</td>"
-                    html += "</tr>"
-                    var applyList = quotation.applicationList;
-                    if (applyList != null && applyList.length > 0) {
-                        html += "<tr class='application-outer-tr'><td colspan='7' style='padding: 0' class='application-outer-td'><table class='table' style='margin-bottom: 0'>"
-                        for (var j = 0; j < applyList.length; j++) {
-                            var application = applyList[j];
-                            var user = application.user;
-                            html += "<tr class='application-tr'>";
-                            html += "<td style='width:25%'>Apply surveyor/company:" + user.name + "</td>";
-                            if (user.type == 2) {
-                                html += "<td style='width:25%'>Surveyor CV: " + "<a href='surveyor/account/personalInfo?id=" + application.userId + "' data-target='navTab'>VIEW</a>" + "</td>";
-                            } else if (user.type == 3) {
-                                html += "<td style='width:25%'>Surveyor CV: " + "<a href='surveyor/account/companyInfo?id=" + application.userId + "' data-target='navTab'>VIEW</a>" + "</td>";
-                            }
-
-                            html += "<td style='width:20%'>Location:" + user.address + "</td>";
-                            html += "<td style='width:20%'>Quotation:$ " + application.totalPrice + "</td>";
-                            var applicationStatus = application.applicationStatus;
-                            if (applicationStatus == 0) {
-                                <shiro:hasPermission name="op/inspection/add">
-                                html += "<td style='width:10%'><a class='btn btn-sm default' onclick='initInspection(" + quotation.id + "," + application.id + ")'>确认邀请验船</a></td>";
-                                </shiro:hasPermission>
-                            } else if (applicationStatus == 1) {
-                                html += "<td style='width:10%' ><a class='btn btn-sm default'>已邀请验船</a></td>";
-                            } else if (applicationStatus == 2) {
-                                html += "<td style='width:10%'><a class='btn btn-sm default'>下次合作</a></td>";
-                            }
-                            html += "</tr>";
-                        }
-                        html += "</table></td></tr>";
-                    }
-
+        quotationTable = $('#quotation_table').DataTable({
+            "ordering": false,
+            "pagingType": "simple_numbers",
+            "processing": true,
+            "autoWidth": false,
+            "serverSide": true,
+            "ajax": {
+                "url": "prepurchase/op/quotation/list",
+                "type": "post",
+                "data": function (data) {
+                    data.keyword = $("#keyword").val();
                 }
-                if (html == "") {
-                    html += "<tr><td colspan='7'>No data</td></tr>";
-                }
-                quotationTable.find("tbody").html(html);
             },
-            error: function () {
-
+//            "language": {
+//                "url": "http://windyeel.oss-cn-shanghai.aliyuncs.com/global/plugins/datatables/cn.txt"
+//            },
+            "lengthMenu": [[5, 40, 60], [5, 40, 60]],
+            "columns": [
+                {
+                    "data": "shipDetail.shipName",
+                },
+                {
+                    "data": "shipDetail.imo",
+                },
+                {
+                    "data": "shipDetail.shipType",
+                },
+                {
+                    "data": "location",
+                },
+                {
+                    "data": "startDate",
+                },
+                {
+                    "data": "imo",
+                },
+                {
+                    "data": "publicStatus",
+                    "render": function (data) {
+                        if (data == 1) {
+                            return "ing..";
+                        }
+                        return data;
+                    }
+                },
+                {
+                    "data": "quotationStatus"
+                },
+            ],
+            "columnDefs": [{
+                "targets": 4,
+                "render": function (data, type, row) {
+                    var startDate = new Date(row.startDate).Format("yyyy-MM-dd");
+                    var endDate = new Date(row.endDate).Format("yyyy-MM-dd");
+                    return startDate + " to " + endDate;
+                }
+            }, {
+                "targets": 7,
+                "class": "details-control",
+                "render": function (data, type, row) {
+                    return "<a href='javascript:void(0)'>VIEW</a>"
+                }
             }
-        })
+            ],
+        });
+
+        quotationTable.on('click', 'td.details-control', function () {
+            var tr = $(this).closest('tr');
+            var row = quotationTable.row(tr);
+            if (row.child.isShown()) {
+                row.child.hide();
+//                tr.removeClass('shown');
+            }
+            else {
+                row.child(moreInfo(row.data())).show();
+//                tr.addClass('shown');
+            }
+        });
     }
+
+    function moreInfo(data) {
+        var html = '';
+        var shipDetail = data.shipDetail;
+        html += '<div class="col-md-4">';
+        html += '<label class="col-md-6 text-right">Ship name:</label><label class="col-md-6 text-left">' + shipDetail.shipName + '&nbsp</label>';
+        html += '<label class="col-md-6 text-right">IMO:</label><label class="col-md-6 text-left">' + shipDetail.imo + '&nbsp</label>';
+        html += '<label class="col-md-6 text-right">Type:</label><label class="col-md-6 text-left">' + shipDetail.shipType + '&nbsp</label>';
+        html += '<label class="col-md-6 text-right">ex.Name:</label><label class="col-md-6 text-left">' + shipDetail.exName + '&nbsp;</label>';
+        html += '<label class="col-md-6 text-right">Class:</label><label class="col-md-6 text-left">' + shipDetail.shipClass + '&nbsp</label>';
+        html += '<label class="col-md-6 text-right">Flag:</label><label class="col-md-6 text-left">' + shipDetail.flag + '&nbsp</label>';
+        html += '<label class="col-md-6 text-right">Build Year:</label><label class="col-md-6 text-left">' + shipDetail.buildYear + '&nbsp</label>';
+        html += '<label class="col-md-6 text-right">Builder:</label><label class="col-md-6 text-left">' + shipDetail.builder + '&nbsp</label>';
+        html += "</div>";
+        html += '<div class="col-md-4">';
+        html += '<label class="col-md-6 text-right">LOA(m):</label><label class="col-md-6 text-left">' + shipDetail.loa + '&nbsp</label>';
+        html += '<label class="col-md-6 text-right">Beam(m):</label><label class="col-md-6 text-left">' + shipDetail.beam + '&nbsp</label>';
+        html += '<label class="col-md-6 text-right">Dwt(ton):</label><label class="col-md-6 text-left">' + shipDetail.dwt + '&nbsp</label>';
+        html += '<label class="col-md-6 text-right">Draft(m):</label><label class="col-md-6 text-left">' + shipDetail.draft + '&nbsp;</label>';
+        html += '<label class="col-md-6 text-right">GT:</label><label class="col-md-6 text-left">' + shipDetail.ggt + '&nbsp</label>';
+        html += '<label class="col-md-6 text-right">LDT(ton):</label><label class="col-md-6 text-left">' + shipDetail.ldt + '&nbsp</label>';
+        html += '<label class="col-md-6 text-right">Call Sign:</label><label class="col-md-6 text-left">' + shipDetail.callSign + '&nbsp</label>';
+        html += "</div>";
+        html += '<div class="col-md-4">';
+        html += '<label class="col-md-12 text-left">Agency details:</label>';
+        html += '<div class="col-md-12 text-left" style="padding-left:30px; ">' + data.agencyDetail + '</div>';
+        var agencyUrl = data.agencyUrl;
+        if (agencyUrl != null && agencyUrl != "") {
+            html += '<a target="_blank" style="float: right" href="' + agencyUrl + '" class="btn green">View</a>';
+        }
+        html += "</div>";
+
+        return html;
+    }
+
 
     function initInspection(quotationId, applicationId) {
         $.ajax({
@@ -172,9 +222,9 @@
 
     function refreshTable(toFirst) {
         if (toFirst) {//表格重绘，并跳转到第一页
-            defTable.draw();
+            quotationTable.draw();
         } else {//表格重绘，保持在当前页
-            defTable.draw(false);
+            quotationTable.draw(false);
         }
     }
 
@@ -199,6 +249,5 @@
 </script>
 
 
-<jsp:include page="add.jsp"/>
 
 

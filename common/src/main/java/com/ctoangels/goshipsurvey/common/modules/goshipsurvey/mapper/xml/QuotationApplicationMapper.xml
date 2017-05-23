@@ -4,7 +4,17 @@
 
     <!-- 通用查询结果列-->
     <sql id="Base_Column_List">
-		id, quotation_id AS quotationId, user_id AS userId, application_status AS applicationStatus, total_price AS totalPrice, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
+		id, quotation_id AS quotationId, user_id AS userId, application_status AS applicationStatus, total_price AS totalPrice,`type`, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
 	</sql>
+
+    <select id="getBySurveyorId" resultMap="QuotaionApplicationMap" parameterType="java.util.Map">
+        SELECT qa.* FROM t_quotation_application qa WHERE qa.user_id =#{surveyor_id} and qa.quotation_id=#{quotation_id} and qa.type=#{type}
+    </select>
+
+    <resultMap id="QuotaionApplicationMap" type="QuotationApplication">
+        <result property="id" column="id"></result>
+        <association property="surveyor" column="survey_id"
+                     select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.SurveyorMapper.getById"></association>
+    </resultMap>
 
 </mapper>

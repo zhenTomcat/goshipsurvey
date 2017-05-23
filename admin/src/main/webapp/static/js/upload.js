@@ -394,6 +394,42 @@ function initUploaders_head_img(buttonId, bucket, domain) {
 }
 
 
+function initUploaders_purchase_op_agency_loi(buttonId, bucket, domain) {
+    var uploader = new plupload.Uploader({
+        runtimes: 'html5,flash,silverlight,html4',
+        browse_button: buttonId,
+        flash_swf_url: domain + 'assets/plugins/plupload-2.1.2/js/Moxie.swf',
+        silverlight_xap_url: domain + 'assets/plugins/plupload-2.1.2/js/Moxie.xap',
+        url: 'http://oss.aliyuncs.com',
+        multi_selection: false,
+
+        filters: {
+            mime_types: [
+                {title: "Text files", extensions: "pdf,doc,docx"}
+            ],
+            max_file_size: '10mb', //最大只能上传10mb的文件
+            prevent_duplicates: true //不允许选取重复文件
+        },
+        init: {
+            FilesAdded: function (up) {
+                set_upload_param(up, '', false, domain);
+            },
+            BeforeUpload: function (up, file) {
+                set_upload_param(up, file.name, true, domain);
+            },
+            FileUploaded: function () {
+                var btn = $("#" + buttonId);
+                var href = "http://" + bucket + ".oss-cn-shanghai.aliyuncs.com/" + g_object_name;
+                btn.parent().find("input").attr("value", href);
+                var a = btn.parent().find("a");
+                a.attr("href", href);
+                a.css("display", "inline-block");
+            }
+        }
+    });
+    uploader.init();
+}
+
 
 
 
