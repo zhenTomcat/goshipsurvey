@@ -88,11 +88,10 @@
                                 <div class="col-md-6" style="padding:50px 0 0 100px;">
                                     <div style="margin: auto">
                                         如果已核对完毕,请点这里发布到网上
-                                        <button type="button" onclick="public_to_net()" class="btn blue"
+                                        <button type="button" onclick="public_to_net(this)" class="btn blue"
                                                 data-target="navTab"
                                                 id="publicBtn"
-                                                style="display: block;margin-top: 20px;width: 200px"
-                                                href="test/testUrl?url=prepurchase/op/quotation/step5">PUBLIC TO NET
+                                                style="display: block;margin-top: 20px;width: 200px">PUBLIC TO NET
                                         </button>
                                     </div>
                                 </div>
@@ -111,15 +110,23 @@
     </div>
 </div>
 <script>
-    function public_to_net() {
+    function public_to_net(obj) {
+        var btn = $(obj);
+        btn.attr("disabled", true);
         if (check()) {
             $("#add_purchase_quotation_form").ajaxSubmit({
                 success: function (data) {
-                    alert("success");
-                    $("a[href='prepurchase/op/quotation']").click();
+                    if (data.success) {
+                        alert("success");
+                        $("a[href='prepurchase/op/quotation']").click();
+                    } else {
+                        alert("failure");
+                        btn.attr("disabled", false);
+                    }
                 },
                 error: function () {
-                    console.log("error");
+                    alert("error");
+                    btn.prop("disabled", false);
                 }
             })
         }

@@ -65,9 +65,9 @@ public class BaseController {
     @Autowired
     private IDictService dictService;
 
-    List<Dict> inspectionTypeDict = null;
+    private List<Dict> inspectionTypeDict = null;
 
-    List<Dict> shipTypeDict = null;
+    private List<Dict> shipTypeDict = null;
 
 
     @Autowired

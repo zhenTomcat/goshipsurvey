@@ -47,6 +47,7 @@ public class InspectionServiceImpl extends SuperServiceImpl<InspectionMapper, In
         //更新所以询价申请状态
         QuotationApplication quotationApplication = new QuotationApplication();
         quotationApplication.setQuotationId(quotationId);
+        quotationApplication.setType(Const.PROJECT_TYPE_HIRE);
         List<QuotationApplication> applicationList = quotationApplicationMapper.selectList(new EntityWrapper<>(quotationApplication));
         int surveyorId = 0;
         double totalPrice = 0;

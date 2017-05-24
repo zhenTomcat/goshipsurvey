@@ -7,4 +7,5 @@
 		id, op_id AS opId, op_name AS opName, ship_id AS shipId, ship_name AS shipName, imo, ship_type AS shipType, inspection_type AS inspectionType, port_id AS portId, port_name AS portName, start_date AS startDate, end_date AS endDate, total_price AS totalPrice, quotation_status AS quotationStatus, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
 	</sql>
 
+
 </mapper>

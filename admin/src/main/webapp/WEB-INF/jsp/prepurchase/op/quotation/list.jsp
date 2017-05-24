@@ -129,12 +129,6 @@
                 },
                 {
                     "data": "publicStatus",
-                    "render": function (data) {
-                        if (data == 1) {
-                            return "ing..";
-                        }
-                        return data;
-                    }
                 },
                 {
                     "data": "quotationStatus"
@@ -146,6 +140,21 @@
                     var startDate = new Date(row.startDate).Format("yyyy-MM-dd");
                     var endDate = new Date(row.endDate).Format("yyyy-MM-dd");
                     return startDate + " to " + endDate;
+                }
+            }, {
+                "targets": 6,
+                "render": function (data, type, row) {
+                    var status = row.publicStatus;
+                    if (status == 1) {
+                        return '<a data-target="navTab" href="prepurchase/op/quotation/choose?quotationId=' + row.id + '">Go to choose surveyor</a>';
+                    }
+                    if (status == 2) {
+                        return '<a data-target="navTab" href="prepurchase/op/quotation/choose?quotationId=' + row.id + '">Chosen</a>';
+                    }
+                    if (status == 3) {
+                        return '<a data-target="navTab" href="prepurchase/op/quotation/choose?quotationId=' + row.id + '">Cancelled</a>';
+                    }
+                    return ""
                 }
             }, {
                 "targets": 7,

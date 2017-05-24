@@ -30,7 +30,6 @@ public class SurveyorQuotationApplicationController extends BaseController {
         qa.setUserId(getCurrentUser().getId());
         qa.setCreateInfo(getCurrentUser().getName());
         qa.setApplicationStatus(Const.QUO_APPLY_ING);
-        qa.setType(Const.PROJECT_TYPE_HIRE);
         jsonObject.put("success", quotationApplicationService.insert(qa));
         return jsonObject;
     }

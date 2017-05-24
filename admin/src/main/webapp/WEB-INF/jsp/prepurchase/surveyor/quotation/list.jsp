@@ -59,6 +59,8 @@
 </div>
 <script>
     var quotationTable = $("#quotation_table");//已申请的quotation表格
+    var surveyList;
+    var surveyorSelectHtml;
     $(document).ready(function () {
         drawTable();
     })
@@ -125,10 +127,18 @@
                 "targets": 9,
                 "render": function (data, type, row) {
                     var application = row.application;
-                    console.log("ooo" + application);
                     if (application == null) {
-                        console.log("aaa")
-                        return "<button class='btn green'>apply</button>";
+                        return "<button type='button' class='btn default' onclick='addApplication(this," + row.id + ")'>Apply</button>";
+                    }
+                    var status = application.applicationStatus;
+                    if (status == 0) {
+                        return "<button type='button' class='btn yellow' >Applying</button>";
+                    }
+                    if (status == 1) {
+                        return "<button type='button' class='btn green' >Success</button>";
+                    }
+                    if (status == 2) {
+                        return "<button type='button' class='btn red' >Failure</button>";
                     }
                     return "";
                 }
@@ -140,20 +150,41 @@
                 }
             }
             ],
+            "initComplete": function () {
+                getSurveyor();
+            }
         });
 
         quotationTable.on('click', 'td.details-control', function () {
             var tr = $(this).closest('tr');
             var row = quotationTable.row(tr);
-            if (row.child.isShown()) {
-                row.child.hide();
-//                tr.removeClass('shown');
-            }
-            else {
+            var flag = tr.attr("data-not-first");
+            if (flag) {
+                tr.next().toggle();
+            } else {
                 row.child(moreInfo(row.data())).show();
-//                tr.addClass('shown');
+                tr.next().addClass("detail-row");
+                tr.attr("data-not-first", true);
             }
         });
+    }
+
+
+    function getSurveyor() {
+        $.ajax({
+            type: "GET",
+            url: "surveyor/getSurveyors",
+            success: function (data) {
+                surveyList = data.list;
+                surveyorSelectHtml = "";
+                surveyorSelectHtml += '<select  class="form-control surveyor-select">';
+                surveyorSelectHtml += '<option value="0">请选择验船师</option>';
+                $(surveyList).each(function () {
+                    surveyorSelectHtml += '<option value="' + this.id + '">' + this.lastName + '</option>';
+                })
+                surveyorSelectHtml += '</select>';
+            }
+        })
     }
 
     function moreInfo(data) {
@@ -188,18 +219,39 @@
         html += "</div>";
         html += '<div class="col-md-3">';
         html += '<label class="col-md-12 text-left">Our price & surveyor:</label>';
-        html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5">Price:</label> <div class="input-group col-md-7"> <input type="text" class="form-control" id="shipName" name="shipName"> </div></div>';
-        html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">Surveyor:</label> <div class="input-group col-md-7"> <select  class="form-control surveyor-select"><option>1</option></select> </div></div>';
-        html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">SurveyorCV:</label>  <a class="col-md-3" href="" style="padding-top: 8px; vertical-align: middle">VIEW</a></div>';
-
+        var application = data.application;
+        if (application == null) {
+            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5">Price:</label> <div class="input-group col-md-7"> <input type="text" class="form-control price-input"> </div></div>';
+            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">Surveyor:</label> <div class="input-group col-md-7"> ';
+            html += surveyorSelectHtml;
+            html += ' </div></div>';
+            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">SurveyorCV:</label>  <a class="col-md-3" href="" style="padding-top: 8px; vertical-align: middle">VIEW</a></div>';
+        } else {
+            var surveyor = application.surveyor;
+            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5">Price:</label> <div class="input-group col-md-7"> ' + application.totalPrice + '</div></div>';
+            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">Surveyor:</label> <div class="input-group col-md-7">' + surveyor.lastName + '</div></div>';
+            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">SurveyorCV:</label>  <a class="col-md-7" href="" style="padding-top: 8px; vertical-align: middle">VIEW</a></div>';
+        }
         html += "</div>";
-
         return html;
     }
 
     //提交申请
     function addApplication(obj, quotationId) {
-        var priceInput = $(obj).parents("tr").find(".price-input");
+        var price = "";
+        var tr = $(obj).closest('tr');
+        var detail = tr.next(".detail-row");
+        if (detail.length == 0) {
+            $(obj).tips({
+                side: 1,
+                msg: "请输入正确的金额和验船师",
+                bg: '#FF5080',
+                time: 5,
+            });
+            return;
+        }
+
+        var priceInput = detail.find(".price-input");
         var totalPrice = priceInput.val();
         if (totalPrice == null || (totalPrice.trim() == "") || (isNaN(totalPrice)) || totalPrice < 0) {
             priceInput.tips({
@@ -210,16 +262,27 @@
             });
             return;
         }
+        var surveyorSelect = detail.find(".surveyor-select");
+        var surveyId = surveyorSelect.val();
+        if (surveyId == 0) {
+            surveyorSelect.tips({
+                side: 1,
+                msg: "请选择验船师",
+                bg: '#FF5080',
+                time: 5,
+            });
+        }
+
+
         $.ajax({
             url: "surveyor/quotationApplication/add",
             type: "post",
-            data: {quotationId: quotationId, totalPrice: totalPrice},
+            data: {quotationId: quotationId, totalPrice: totalPrice, type: 2, surveyId: surveyId},
             success: function (data) {
                 if (data.success) {
-                    drawTable();
+                    quotationTable.draw();
                 } else {
                     alert("addApplication error");
-
                 }
             },
             error: function () {

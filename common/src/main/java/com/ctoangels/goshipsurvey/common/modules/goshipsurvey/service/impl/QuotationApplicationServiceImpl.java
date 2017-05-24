@@ -37,4 +37,10 @@ public class QuotationApplicationServiceImpl extends SuperServiceImpl<QuotationA
         return applicationList;
     }
 
+    @Override
+    public List<QuotationApplication> getApplications(Integer quotationId, Integer proType) {
+        return quotationApplicationMapper.getApplications(quotationId, proType);
+    }
+
+
 }

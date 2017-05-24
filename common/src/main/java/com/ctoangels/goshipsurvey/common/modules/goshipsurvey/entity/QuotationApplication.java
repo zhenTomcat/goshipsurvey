@@ -48,6 +48,12 @@ public class QuotationApplication implements Serializable {
     @TableField(value = "total_price")
     private Double totalPrice;
 
+    @TableField(value = "company_id")
+    private Integer companyId;
+
+    @TableField(value = "survey_id")
+    private Integer surveyId;
+
     private Integer type;
 
     /**  */
@@ -119,6 +125,22 @@ public class QuotationApplication implements Serializable {
 
     public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public Integer getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
+    }
+
+    public Integer getSurveyId() {
+        return surveyId;
+    }
+
+    public void setSurveyId(Integer surveyId) {
+        this.surveyId = surveyId;
     }
 
     public Integer getType() {

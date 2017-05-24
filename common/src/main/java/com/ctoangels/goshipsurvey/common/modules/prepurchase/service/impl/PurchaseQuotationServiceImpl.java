@@ -36,6 +36,7 @@ public class PurchaseQuotationServiceImpl extends SuperServiceImpl<PurchaseQuota
         if (shipDetailMapper.insert(detail) < 0) {
             return false;
         }
+        quotation.setOpId(user.getId());
         quotation.setShipId(detail.getId());
         quotation.setCreateInfo(user.getName());
         quotation.setPublicStatus(Const.QUOTATION_ING);
