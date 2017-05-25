@@ -129,6 +129,8 @@
                     btn.prop("disabled", false);
                 }
             })
+        }else{
+            btn.attr("disabled", false);
         }
     }
 

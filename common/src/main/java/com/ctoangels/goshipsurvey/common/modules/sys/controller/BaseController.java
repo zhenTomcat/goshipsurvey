@@ -10,6 +10,7 @@ import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Quotation;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IDictService;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
 import com.ctoangels.goshipsurvey.common.util.Const;
+import com.ctoangels.goshipsurvey.common.util.StringUtils;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -200,6 +201,27 @@ public class BaseController {
             result = result.substring(0, result.length() - 1);
         }
         return result;
+    }
+
+    public String transferShipType(String userShipType) {
+        String[] userShipTypes = null;
+        if (StringUtils.isNotEmpty(userShipType)) {
+            userShipTypes = userShipType.split(",");
+        }
+        List<Dict> shipTypes = dictService.getListByType("shipType");
+        String types = "";
+        if (userShipTypes != null && userShipTypes.length > 0) {
+            for (String s : userShipTypes) {
+                for (Dict d : shipTypes) {
+                    if (d.getValue().equals(s)) {
+                        types += d.getDes() + ",";
+                        break;
+                    }
+                }
+            }
+            types = types.substring(0, types.length() - 1);
+        }
+        return types;
     }
 
 }

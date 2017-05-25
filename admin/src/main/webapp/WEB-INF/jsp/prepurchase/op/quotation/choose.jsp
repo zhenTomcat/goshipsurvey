@@ -168,10 +168,13 @@
                                         <c:forEach items="${list}" var="application">
                                             <tr>
                                                 <th>${application.user.name}</th>
-                                                <th><a>View</a></th>
+                                                <th><a data-target="navTab"
+                                                       href="user/companyInfo?id=${application.user.id}">View</a></th>
                                                 <th>${application.user.address}</th>
                                                 <th>${application.surveyor.lastName}</th>
-                                                <th><a>View${application.surveyId}</a></th>
+                                                <th><a data-target="navTab"
+                                                       href="surveyor/info?id=${application.surveyor.id}">View</a>
+                                                </th>
                                                 <th>
                                                     <div class="rating">
                                                         <div class="op-point-div" style="width: 100px;margin: auto">

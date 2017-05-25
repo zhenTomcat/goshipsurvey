@@ -14,6 +14,11 @@
             alter table t_purchase_quotation CHANGE select_status select_status int (4);
         </sql>
     </changeSet>
+    <changeSet author="WangShun" id="15950097942-002">
+        <sql>
+            alter table t_surveyor ADD COLUMN `ship_type` varchar(64) DEFAULT NULL COMMENT '可验船型';
+        </sql>
+    </changeSet>
 </databaseChangeLog>
 
 

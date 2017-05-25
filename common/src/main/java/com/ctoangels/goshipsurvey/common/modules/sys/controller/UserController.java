@@ -2,6 +2,7 @@ package com.ctoangels.goshipsurvey.common.modules.sys.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Surveyor;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.Role;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.RoleService;
@@ -14,6 +15,7 @@ import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -42,6 +44,9 @@ public class UserController extends BaseController {
 
     @Autowired
     private RoleService roleService;
+
+    @Value("${static_path}")
+    private String staticPath;
 
     @RequestMapping(value = "/editPwd", method = RequestMethod.GET)
     public String editPwd() {
@@ -178,5 +183,62 @@ public class UserController extends BaseController {
         result.put("status", 1);
         return result;
     }
+
+
+    @RequestMapping(value = "/companyEdit", method = RequestMethod.GET)
+    public String companyEdit(ModelMap map) {
+        map.put("shipType", getShipTypeDict());
+        User company = userService.selectById(getCurrentUser().getId());
+        map.put("company", company);
+        String userShipType = company.getShipType();
+        String[] userShipTypes = null;
+        if (com.ctoangels.goshipsurvey.common.util.StringUtils.isNotEmpty(userShipType)) {
+            userShipTypes = userShipType.split(",");
+        }
+        map.put("userShipTypes", userShipTypes);
+        map.put("staticPath", staticPath);
+        return "sys/user/companyEdit";
+    }
+
+    @RequestMapping(value = "/companyEditComplete", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject companyEditComplete(User user) {
+        JSONObject jsonObject = new JSONObject();
+        user.setUpdateInfo(user.getName());
+        jsonObject.put("success", userService.updateSelectiveById(user));
+        return jsonObject;
+    }
+
+    @RequestMapping(value = "/companyInfo", method = RequestMethod.GET)
+    public String companyInfo(@RequestParam(required = false) Integer id, ModelMap map) {
+        User company = userService.selectById(id);
+        map.put("company", company);
+        String types = transferShipType(company.getShipType());
+        map.put("shipType", types);
+        return "sys/user/companyInfo";
+    }
+
+    @RequestMapping(value = "/opEdit", method = RequestMethod.GET)
+    public String opEdit(ModelMap map) {
+        User op = userService.selectById(getCurrentUser().getId());
+        map.put("op", op);
+        map.put("staticPath", staticPath);
+        return "sys/user/opEdit";
+    }
+
+    @RequestMapping(value = "/opEditComplete", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject opEditComplete(User user) {
+        JSONObject result = new JSONObject();
+        return result;
+    }
+
+    @RequestMapping(value = "/opInfo", method = RequestMethod.GET)
+    public String opInfo(@RequestParam(required = false) Integer id, ModelMap map) {
+        User op = userService.selectById(id);
+        map.put("op", op);
+        return "sys/user/opInfo";
+    }
+
 
 }
