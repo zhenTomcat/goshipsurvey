@@ -3,6 +3,9 @@ package com.ctoangels.goshipsurvey.common.modules.prepurchase.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.baomidou.mybatisplus.toolkit.CollectionUtil;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Port;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IPortService;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Surveyor;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.ISurveyorService;
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
@@ -19,6 +22,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -35,6 +39,9 @@ public class SurveyorController extends BaseController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    IPortService portService;
 
 
     @RequestMapping
@@ -55,7 +62,7 @@ public class SurveyorController extends BaseController {
             ew.or("last_name like {0}", "%" + name + "%");
         }
         if (StringUtils.isNotEmpty(port)) {
-
+            ew.addFilter("( survey_port ={0} or survey_port REGEXP \"(^" + port + ",)|(," + port + "$)|(," + port + ",)\")", port);
         }
         if (startDate != null) {
             ew.addFilter("survey_time_start <={0}", DateUtil.formatDate(startDate, "yyyy-MM-dd"));
@@ -63,7 +70,22 @@ public class SurveyorController extends BaseController {
         if (endDate != null) {
             ew.addFilter("survey_time_end >={0}", DateUtil.formatDate(endDate, "yyyy-MM-dd"));
         }
+
+        List<Port> allPort = portService.selectList(new EntityWrapper<>());
         Page<Surveyor> page = surveyorService.selectPage(getPage(), ew);
+        for (Surveyor s : page.getRecords()) {
+            String portValue = "";
+            String portString = s.getSurveyPort();
+            String[] userPorts;
+            if (StringUtils.isNotEmpty(portString)) {
+                userPorts = portString.split(",");
+                for (String p : userPorts) {
+                    portValue += allPort.get(Integer.parseInt(p) - 1).getPortEn() + ",";
+                }
+                portValue.substring(0, portValue.length() - 2);
+            }
+            s.setSurveyPort(portValue);
+        }
         return jsonPage(page);
     }
 
@@ -102,15 +124,24 @@ public class SurveyorController extends BaseController {
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public String edit(ModelMap map, @RequestParam(required = false) int id) {
-        map.put("shipType", getShipTypeDict());
         Surveyor surveyor = surveyorService.selectById(id);
         String userShipType = surveyor.getShipType();
         String[] userShipTypes = null;
         if (StringUtils.isNotEmpty(userShipType)) {
             userShipTypes = userShipType.split(",");
         }
+        String portString = surveyor.getSurveyPort();
+        String[] userPorts;
+        List<Port> portList = new ArrayList<>();
+        if (StringUtils.isNotEmpty(portString)) {
+            userPorts = portString.split(",");
+            portList = portService.selectBatchIds(Arrays.asList(userPorts));
+        }
+
         map.put("userShipTypes", userShipTypes);
         map.put("surveyor", surveyor);
+        map.put("shipType", getShipTypeDict());
+        map.put("portList", portList);
         return "sys/surveyor/edit";
     }
 

@@ -192,7 +192,7 @@ public class UserController extends BaseController {
         map.put("company", company);
         String userShipType = company.getShipType();
         String[] userShipTypes = null;
-        if (com.ctoangels.goshipsurvey.common.util.StringUtils.isNotEmpty(userShipType)) {
+        if (StringUtils.isNotEmpty(userShipType)) {
             userShipTypes = userShipType.split(",");
         }
         map.put("userShipTypes", userShipTypes);

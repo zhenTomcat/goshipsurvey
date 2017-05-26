@@ -96,14 +96,26 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-md-12">
+                                            <label class=" control-label">Available survey port</label>
+                                            <div>
+                                                <select id="select2-button-addons-single-input-group-sm"
+                                                        name="surveyPort"
+                                                        class="form-control js-data-example-ajax" multiple>
+                                                    <c:forEach items="${portList}" var="port">
+                                                        <option value="${port.id}"
+                                                                selected="selected">${port.portEn}</option>
+                                                    </c:forEach>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-12">
                                             <label class="control-label">Surveyor's profile</label>
                                             <textarea class="form-control" rows="5"
                                                       name="surveyorProfile">${surveyor.surveyorProfile}</textarea>
                                         </div>
                                         <div class="form-group col-md-12">
                                             <label class="control-label">Surveyor's experience</label>
-                                            <textarea class="form-control" rows="5"
-                                            >${surveyor.surveyorProfile}</textarea>
+                                            <textarea class="form-control" rows="5"></textarea>
                                         </div>
                                         <div class="margiv-top-10 col-md-12">
                                             <button type="button" onclick="editSurveyor(this)" class="btn green"> Save
@@ -162,5 +174,91 @@
         return true;
     }
 
+
+    var PortMultiSelect = function () {
+        var handleDemo = function () {
+            $.fn.select2.defaults.set("theme", "bootstrap");
+            var placeholder = "Select a State";
+            $(".select2, .select2-multiple").select2({
+                placeholder: placeholder,
+                width: null
+            });
+            $(".select2-allow-clear").select2({
+                allowClear: true,
+                placeholder: placeholder,
+                width: null
+            });
+            function formatRepo(repo) {
+                if (repo.loading) return repo.text;
+                var markup = repo.portEn;
+
+                return markup;
+            }
+
+            function formatRepoSelection(repo) {
+                return repo.portEn || repo.text;
+            }
+
+            $(".js-data-example-ajax").select2({
+                width: "off",
+                ajax: {
+                    url: "port/searchList",
+                    dataType: 'json',
+                    delay: 10,
+                    data: function (params) {
+                        return {
+                            keyword: params.term,
+                            page: params.page
+                        };
+                    },
+                    processResults: function (data, page) {
+                        return {
+                            results: data.list
+                        };
+                    },
+                    cache: true
+                },
+                escapeMarkup: function (markup) {
+                    return markup;
+                },
+                minimumInputLength: 1,
+                templateResult: formatRepo,
+                templateSelection: formatRepoSelection
+            });
+            $("button[data-select2-open]").click(function () {
+                $("#" + $(this).data("select2-open")).select2("open");
+            });
+            $(":checkbox").on("click", function () {
+                $(this).parent().nextAll("select").prop("disabled", !this.checked);
+            });
+            $(".select2, .select2-multiple, .select2-allow-clear, .js-data-example-ajax").on("select2:open", function () {
+                if ($(this).parents("[class*='has-']").length) {
+                    var classNames = $(this).parents("[class*='has-']")[0].className.split(/\s+/);
+
+                    for (var i = 0; i < classNames.length; ++i) {
+                        if (classNames[i].match("has-")) {
+                            $("body > .select2-container").addClass(classNames[i]);
+                        }
+                    }
+                }
+            });
+            $(".js-btn-set-scaling-classes").on("click", function () {
+                $("#select2-multiple-input-sm, #select2-single-input-sm").next(".select2-container--bootstrap").addClass("input-sm");
+                $("#select2-multiple-input-lg, #select2-single-input-lg").next(".select2-container--bootstrap").addClass("input-lg");
+                $(this).removeClass("btn-primary btn-outline").prop("disabled", true);
+            });
+        }
+        return {
+            init: function () {
+                handleDemo();
+            }
+        };
+    }();
+
+    if (App.isAngularJsApp() === false) {
+        jQuery(document).ready(function () {
+            PortMultiSelect.init();
+        });
+    }
 
 </script>

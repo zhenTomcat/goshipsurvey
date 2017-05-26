@@ -2,12 +2,14 @@ package com.ctoangels.goshipsurvey.common.modules.prepurchase.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import com.baomidou.mybatisplus.annotations.IdType;
 
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Port;
 import com.ctoangels.goshipsurvey.common.util.Const;
 
 /**
@@ -88,6 +90,9 @@ public class Surveyor implements Serializable {
      */
     @TableField(value = "portrait_url")
     private String portraitUrl;
+
+    @TableField(exist = false)
+    private List<Port> portList;
 
     /**
      * 创建日期
@@ -220,6 +225,14 @@ public class Surveyor implements Serializable {
 
     public void setPortraitUrl(String portraitUrl) {
         this.portraitUrl = portraitUrl;
+    }
+
+    public List<Port> getPortList() {
+        return portList;
+    }
+
+    public void setPortList(List<Port> portList) {
+        this.portList = portList;
     }
 
     public Date getCreateDate() {

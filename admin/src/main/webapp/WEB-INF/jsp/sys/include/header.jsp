@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="page-top">
-            <div class="top-menu">
+            <div class="top-menu right-top-menu">
                 <ul class="nav navbar-nav pull-right">
                     <li class="dropdown dropdown-user dropdown-dark">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
