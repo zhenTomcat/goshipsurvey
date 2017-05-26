@@ -17,7 +17,6 @@ import com.ctoangels.goshipsurvey.common.util.Const;
  */
 @TableName("t_ship_detail")
 public class ShipDetail implements Serializable {
-
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
@@ -32,9 +31,6 @@ public class ShipDetail implements Serializable {
     /**  */
     private String imo;
 
-    /**  */
-    @TableField(value = "call_sign")
-    private String callSign;
 
     /**  */
     private String type;
@@ -104,6 +100,7 @@ public class ShipDetail implements Serializable {
     @TableField(value = "me_mcr_kw")
     private String meMcrKw;
 
+
     /**  */
     @TableField(value = "me_mcr_rpm")
     private String meMcrRpm;
@@ -111,6 +108,11 @@ public class ShipDetail implements Serializable {
     /**  */
     @TableField(value = "me_running_hours")
     private String meRunningHours;
+
+	/**  */
+	@TableField(value = "call_sign")
+	private String callSign;
+
 
     /**  */
     @TableField(value = "me_critical_rpm")
@@ -190,7 +192,7 @@ public class ShipDetail implements Serializable {
 
 
     public Integer getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Integer id) {
@@ -198,7 +200,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getShipName() {
-        return this.shipName;
+        return shipName;
     }
 
     public void setShipName(String shipName) {
@@ -206,23 +208,15 @@ public class ShipDetail implements Serializable {
     }
 
     public String getImo() {
-        return this.imo;
+        return imo;
     }
 
     public void setImo(String imo) {
         this.imo = imo;
     }
 
-    public String getCallSign() {
-        return callSign;
-    }
-
-    public void setCallSign(String callSign) {
-        this.callSign = callSign;
-    }
-
     public String getType() {
-        return this.type;
+        return type;
     }
 
     public void setType(String type) {
@@ -230,7 +224,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getLoa() {
-        return this.loa;
+        return loa;
     }
 
     public void setLoa(String loa) {
@@ -238,7 +232,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getBeam() {
-        return this.beam;
+        return beam;
     }
 
     public void setBeam(String beam) {
@@ -246,7 +240,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getDwt() {
-        return this.dwt;
+        return dwt;
     }
 
     public void setDwt(String dwt) {
@@ -254,7 +248,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getDraft() {
-        return this.draft;
+        return draft;
     }
 
     public void setDraft(String draft) {
@@ -270,7 +264,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getLdt() {
-        return this.ldt;
+        return ldt;
     }
 
     public void setLdt(String ldt) {
@@ -278,7 +272,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getSs() {
-        return this.ss;
+        return ss;
     }
 
     public void setSs(String ss) {
@@ -286,7 +280,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getBunkers() {
-        return this.bunkers;
+        return bunkers;
     }
 
     public void setBunkers(String bunkers) {
@@ -294,7 +288,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getShipClass() {
-        return this.shipClass;
+        return shipClass;
     }
 
     public void setShipClass(String shipClass) {
@@ -302,7 +296,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getFlag() {
-        return this.flag;
+        return flag;
     }
 
     public void setFlag(String flag) {
@@ -310,7 +304,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getBuildYear() {
-        return this.buildYear;
+        return buildYear;
     }
 
     public void setBuildYear(String buildYear) {
@@ -318,7 +312,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getBuilder() {
-        return this.builder;
+        return builder;
     }
 
     public void setBuilder(String builder) {
@@ -326,7 +320,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getExName() {
-        return this.exName;
+        return exName;
     }
 
     public void setExName(String exName) {
@@ -334,7 +328,7 @@ public class ShipDetail implements Serializable {
     }
 
     public Date getInspectionDate() {
-        return this.inspectionDate;
+        return inspectionDate;
     }
 
     public void setInspectionDate(Date inspectionDate) {
@@ -342,7 +336,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getLocation() {
-        return this.location;
+        return location;
     }
 
     public void setLocation(String location) {
@@ -350,7 +344,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getShipType() {
-        return this.shipType;
+        return shipType;
     }
 
     public void setShipType(String shipType) {
@@ -358,7 +352,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getMeMaker() {
-        return this.meMaker;
+        return meMaker;
     }
 
     public void setMeMaker(String meMaker) {
@@ -366,7 +360,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getMeType() {
-        return this.meType;
+        return meType;
     }
 
     public void setMeType(String meType) {
@@ -374,7 +368,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getMeMcrKw() {
-        return this.meMcrKw;
+        return meMcrKw;
     }
 
     public void setMeMcrKw(String meMcrKw) {
@@ -382,7 +376,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getMeMcrRpm() {
-        return this.meMcrRpm;
+        return meMcrRpm;
     }
 
     public void setMeMcrRpm(String meMcrRpm) {
@@ -390,15 +384,23 @@ public class ShipDetail implements Serializable {
     }
 
     public String getMeRunningHours() {
-        return this.meRunningHours;
+        return meRunningHours;
     }
 
     public void setMeRunningHours(String meRunningHours) {
         this.meRunningHours = meRunningHours;
     }
 
+    public String getCallSign() {
+        return callSign;
+    }
+
+    public void setCallSign(String callSign) {
+        this.callSign = callSign;
+    }
+
     public String getMeCriticalRpm() {
-        return this.meCriticalRpm;
+        return meCriticalRpm;
     }
 
     public void setMeCriticalRpm(String meCriticalRpm) {
@@ -406,7 +408,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getMeOthers() {
-        return this.meOthers;
+        return meOthers;
     }
 
     public void setMeOthers(String meOthers) {
@@ -414,7 +416,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getApMaker() {
-        return this.apMaker;
+        return apMaker;
     }
 
     public void setApMaker(String apMaker) {
@@ -422,7 +424,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getApType() {
-        return this.apType;
+        return apType;
     }
 
     public void setApType(String apType) {
@@ -430,7 +432,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getApLoad() {
-        return this.apLoad;
+        return apLoad;
     }
 
     public void setApLoad(String apLoad) {
@@ -438,7 +440,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getApA1() {
-        return this.apA1;
+        return apA1;
     }
 
     public void setApA1(String apA1) {
@@ -446,7 +448,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getApA2() {
-        return this.apA2;
+        return apA2;
     }
 
     public void setApA2(String apA2) {
@@ -454,7 +456,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getApA3() {
-        return this.apA3;
+        return apA3;
     }
 
     public void setApA3(String apA3) {
@@ -462,7 +464,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getApOthers() {
-        return this.apOthers;
+        return apOthers;
     }
 
     public void setApOthers(String apOthers) {
@@ -470,7 +472,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getBoMaker() {
-        return this.boMaker;
+        return boMaker;
     }
 
     public void setBoMaker(String boMaker) {
@@ -478,7 +480,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getBoType() {
-        return this.boType;
+        return boType;
     }
 
     public void setBoType(String boType) {
@@ -486,7 +488,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getBoEvaporation() {
-        return this.boEvaporation;
+        return boEvaporation;
     }
 
     public void setBoEvaporation(String boEvaporation) {
@@ -494,7 +496,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getBoHeatingArea() {
-        return this.boHeatingArea;
+        return boHeatingArea;
     }
 
     public void setBoHeatingArea(String boHeatingArea) {
@@ -502,7 +504,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getBoOthers() {
-        return this.boOthers;
+        return boOthers;
     }
 
     public void setBoOthers(String boOthers) {
@@ -510,7 +512,7 @@ public class ShipDetail implements Serializable {
     }
 
     public Date getCreateDate() {
-        return this.createDate;
+        return createDate;
     }
 
     public void setCreateDate(Date createDate) {
@@ -518,7 +520,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getCreateBy() {
-        return this.createBy;
+        return createBy;
     }
 
     public void setCreateBy(String createBy) {
@@ -526,7 +528,7 @@ public class ShipDetail implements Serializable {
     }
 
     public Date getUpdateDate() {
-        return this.updateDate;
+        return updateDate;
     }
 
     public void setUpdateDate(Date updateDate) {
@@ -534,7 +536,7 @@ public class ShipDetail implements Serializable {
     }
 
     public String getUpdateBy() {
-        return this.updateBy;
+        return updateBy;
     }
 
     public void setUpdateBy(String updateBy) {
@@ -542,7 +544,7 @@ public class ShipDetail implements Serializable {
     }
 
     public Integer getDelFlag() {
-        return this.delFlag;
+        return delFlag;
     }
 
     public void setDelFlag(Integer delFlag) {
@@ -561,5 +563,4 @@ public class ShipDetail implements Serializable {
         this.updateDate = new Date();
         this.updateBy = userName;
     }
-
 }

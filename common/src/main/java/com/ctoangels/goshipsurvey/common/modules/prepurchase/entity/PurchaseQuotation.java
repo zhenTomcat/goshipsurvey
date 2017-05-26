@@ -19,97 +19,87 @@ import com.ctoangels.goshipsurvey.common.util.Const;
 @TableName("t_purchase_quotation")
 public class PurchaseQuotation implements Serializable {
 
-    @TableField(exist = false)
-    private static final long serialVersionUID = 1L;
+	@TableField(exist = false)
+	private static final long serialVersionUID = 1L;
 
-    /**  */
-    @TableId(type = IdType.AUTO)
-    private Integer id;
+	/**  */
+	@TableId(type = IdType.AUTO)
+	private Integer id;
 
-    /**
-     * ship detail id
-     */
-    @TableField(value = "ship_id")
-    private Integer shipId;
+	/**  */
+	@TableField(value = "ship_id")
+	private Integer shipId;
 
-    /**
-     * 验船开始日期
-     */
-    @TableField(value = "start_date")
-    private Date startDate;
+	/** 验船开始日期 */
+	@TableField(value = "start_date")
+	private Date startDate;
 
-    /**
-     * 验船结束日期
-     */
-    @TableField(value = "end_date")
-    private Date endDate;
+	/** 验船结束日期 */
+	@TableField(value = "end_date")
+	private Date endDate;
 
-    /**
-     * 港口位置
-     */
-    private String location;
+	/** 港口位置 */
+	private String location;
 
-    /**
-     * 证书详情
-     */
-    @TableField(value = "agency_detail")
-    private String agencyDetail;
+	/** 证书详情 */
+	@TableField(value = "agency_detail")
+	private String agencyDetail;
 
-    /**
-     * 证书存放的路径
-     */
-    @TableField(value = "agency_url")
-    private String agencyUrl;
+	/** 证书存放的路径 */
+	@TableField(value = "agency_url")
+	private String agencyUrl;
 
-    /**
-     * loi的路径
-     */
-    @TableField(value = "loi_url")
-    private String loiUrl;
+	/** loi的路径 */
+	@TableField(value = "loi_url")
+	private String loiUrl;
 
-    /**
-     * 是否默认系统自动选择serveyor
-     */
-    @TableField(value = "select_status")
-    private Integer selectStatus;
+	/** 是否默认系统自动选择serveyor */
+	@TableField(value = "select_status")
+	private String selectStatus;
 
-    /**  */
-    @TableField(value = "op_id")
-    private Integer opId;
+	/**  */
+	@TableField(value = "op_id")
+	private Integer opId;
 
-    /**
-     * 发布状态
-     */
-    @TableField(value = "public_status")
-    private Integer publicStatus;
+	/** 发布状态 */
+	@TableField(value = "public_status")
+	private Integer publicStatus;
 
-    /**
-     * 创建日期
-     */
-    @TableField(value = "create_date")
-    private Date createDate;
+	/** 创建日期 */
+	@TableField(value = "create_date")
+	private Date createDate;
 
-    /**
-     * 创建者
-     */
-    @TableField(value = "create_by")
-    private String createBy;
+	/** 创建者 */
+	@TableField(value = "create_by")
+	private String createBy;
 
-    /**
-     * 修改时间
-     */
-    @TableField(value = "update_date")
-    private Date updateDate;
+	/** 修改时间 */
+	@TableField(value = "update_date")
+	private Date updateDate;
 
-    /**
-     * 修改者
-     */
-    @TableField(value = "update_by")
-    private String updateBy;
+	/** 修改者 */
+	@TableField(value = "update_by")
+	private String updateBy;
 
-    /**  */
-    @TableField(value = "del_flag")
-    private Integer delFlag;
+	/**  */
+	@TableField(value = "quotation_application_id")
+	private Integer quotationApplicationId;
+
+	/**  */
+	@TableField(value = "total_price")
+	private Double totalPrice;
+
+	/**  */
+	@TableField(value = "op_name")
+	private String opName;
+
+	/**  */
+	@TableField(value = "surveyor_name")
+	private String surveyorName;
+
+	/**  */
+	@TableField(value = "del_flag")
+	private Integer delFlag;
 
     @TableField(exist = false)
     private ShipDetail shipDetail;
@@ -118,7 +108,7 @@ public class PurchaseQuotation implements Serializable {
     private QuotationApplication application;
 
     public Integer getId() {
-        return this.id;
+        return id;
     }
 
     public void setId(Integer id) {
@@ -126,7 +116,7 @@ public class PurchaseQuotation implements Serializable {
     }
 
     public Integer getShipId() {
-        return this.shipId;
+        return shipId;
     }
 
     public void setShipId(Integer shipId) {
@@ -150,7 +140,7 @@ public class PurchaseQuotation implements Serializable {
     }
 
     public String getLocation() {
-        return this.location;
+        return location;
     }
 
     public void setLocation(String location) {
@@ -158,7 +148,7 @@ public class PurchaseQuotation implements Serializable {
     }
 
     public String getAgencyDetail() {
-        return this.agencyDetail;
+        return agencyDetail;
     }
 
     public void setAgencyDetail(String agencyDetail) {
@@ -166,7 +156,7 @@ public class PurchaseQuotation implements Serializable {
     }
 
     public String getAgencyUrl() {
-        return this.agencyUrl;
+        return agencyUrl;
     }
 
     public void setAgencyUrl(String agencyUrl) {
@@ -174,23 +164,23 @@ public class PurchaseQuotation implements Serializable {
     }
 
     public String getLoiUrl() {
-        return this.loiUrl;
+        return loiUrl;
     }
 
     public void setLoiUrl(String loiUrl) {
         this.loiUrl = loiUrl;
     }
 
-    public Integer getSelectStatus() {
-        return this.selectStatus;
+    public String getSelectStatus() {
+        return selectStatus;
     }
 
-    public void setSelectStatus(Integer selectStatus) {
+    public void setSelectStatus(String selectStatus) {
         this.selectStatus = selectStatus;
     }
 
     public Integer getOpId() {
-        return this.opId;
+        return opId;
     }
 
     public void setOpId(Integer opId) {
@@ -198,7 +188,7 @@ public class PurchaseQuotation implements Serializable {
     }
 
     public Integer getPublicStatus() {
-        return this.publicStatus;
+        return publicStatus;
     }
 
     public void setPublicStatus(Integer publicStatus) {
@@ -206,7 +196,7 @@ public class PurchaseQuotation implements Serializable {
     }
 
     public Date getCreateDate() {
-        return this.createDate;
+        return createDate;
     }
 
     public void setCreateDate(Date createDate) {
@@ -214,7 +204,7 @@ public class PurchaseQuotation implements Serializable {
     }
 
     public String getCreateBy() {
-        return this.createBy;
+        return createBy;
     }
 
     public void setCreateBy(String createBy) {
@@ -222,7 +212,7 @@ public class PurchaseQuotation implements Serializable {
     }
 
     public Date getUpdateDate() {
-        return this.updateDate;
+        return updateDate;
     }
 
     public void setUpdateDate(Date updateDate) {
@@ -230,15 +220,47 @@ public class PurchaseQuotation implements Serializable {
     }
 
     public String getUpdateBy() {
-        return this.updateBy;
+        return updateBy;
     }
 
     public void setUpdateBy(String updateBy) {
         this.updateBy = updateBy;
     }
 
+    public Integer getQuotationApplicationId() {
+        return quotationApplicationId;
+    }
+
+    public void setQuotationApplicationId(Integer quotationApplicationId) {
+        this.quotationApplicationId = quotationApplicationId;
+    }
+
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
+
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
+
+    public String getOpName() {
+        return opName;
+    }
+
+    public void setOpName(String opName) {
+        this.opName = opName;
+    }
+
+    public String getSurveyorName() {
+        return surveyorName;
+    }
+
+    public void setSurveyorName(String surveyorName) {
+        this.surveyorName = surveyorName;
+    }
+
     public Integer getDelFlag() {
-        return this.delFlag;
+        return delFlag;
     }
 
     public void setDelFlag(Integer delFlag) {
@@ -249,6 +271,9 @@ public class PurchaseQuotation implements Serializable {
         return shipDetail;
     }
 
+    public void setShipDetail(ShipDetail shipDetail) {
+        this.shipDetail = shipDetail;
+    }
 
     public QuotationApplication getApplication() {
         return application;
@@ -256,10 +281,6 @@ public class PurchaseQuotation implements Serializable {
 
     public void setApplication(QuotationApplication application) {
         this.application = application;
-    }
-
-    public void setShipDetail(ShipDetail shipDetail) {
-        this.shipDetail = shipDetail;
     }
 
     public void setCreateInfo(String userName) {
@@ -274,5 +295,6 @@ public class PurchaseQuotation implements Serializable {
         this.updateDate = new Date();
         this.updateBy = userName;
     }
+
 
 }

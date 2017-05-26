@@ -48,14 +48,6 @@ public class QuotationApplication implements Serializable {
     @TableField(value = "total_price")
     private Double totalPrice;
 
-    @TableField(value = "company_id")
-    private Integer companyId;
-
-    @TableField(value = "survey_id")
-    private Integer surveyId;
-
-    private Integer type;
-
     /**  */
     @TableField(value = "create_date")
     private Date createDate;
@@ -75,6 +67,14 @@ public class QuotationApplication implements Serializable {
     /**  */
     @TableField(value = "del_flag")
     private Integer delFlag;
+
+    @TableField(value = "company_id")
+    private Integer companyId;
+
+    @TableField(value = "survey_id")
+    private Integer surveyId;
+
+    private Integer type;//1表示Oil 2表示Purchase
 
     /**  */
     @TableField(exist = false)
@@ -206,6 +206,7 @@ public class QuotationApplication implements Serializable {
     public void setQuotation(Quotation quotation) {
         this.quotation = quotation;
     }
+
 
     public Surveyor getSurveyor() {
         return surveyor;

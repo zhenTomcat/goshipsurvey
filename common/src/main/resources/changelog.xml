@@ -3,7 +3,19 @@
                    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
                    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog 
                    http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.5.xsd">
+    <changeSet author="LuZhen" id="17317309132-001">
+        <sql>
+            alter table t_purchase_quotation add quotation_application_id int(11) Null;
+            alter table t_purchase_quotation add total_price double Null;
+        </sql>
+    </changeSet>
 
+    <changeSet author="LuZhen" id="17317309132-002">
+        <sql>
+            alter table t_purchase_quotation add op_name varchar(255) Null;
+            alter table t_purchase_quotation add surveyor_name varchar(155) Null;
+        </sql>
+    </changeSet>
 
     <!--insert INTO sys_button(menu_id,button_name,button_url,del_flag) VALUES(106,'更改电子邮箱','account/editEmail',0);-->
     <!--ALTER TABLE `t_ship` CHANGE COLUMN `class` `ship_class` varchar(45) DEFAULT NULL COMMENT '船级社';-->

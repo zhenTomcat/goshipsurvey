@@ -64,6 +64,7 @@
     <link href="${ctx}/assets/pages/css/profile.min.css" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/static/css/custom.css" rel="stylesheet" type="text/css"/>
 
+
     <!-- END THEME LAYOUT STYLES -->
     <link type="image/png" href="${ctx}/static/img/great_vision.png" rel="shortcut icon">
     <link rel="shortcut icon" href="${ctx}/favicon.ico"/>
@@ -134,6 +135,11 @@
 <script src="${global}/plugins/bootstrap-confirmation/bootstrap-confirmation.min.js" type="text/javascript"></script>
 <script src="${global}/plugins/select2/js/select2.full.min.js" type="text/javascript"></script>
 
+<script src="${global}/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+<script src="${global}/plugins/jquery-validation/js/additional-methods.min.js" type="text/javascript"></script>
+<script src="${global}/plugins/bootstrap-wizard/jquery.bootstrap.wizard.min.js" type="text/javascript"></script>
+
+
 <script src="${global}/plugins/plupload-2.1.2/js/moxie.min.js"></script>
 <script src="${global}/plugins/plupload-2.1.2/js/plupload.dev.js"></script>
 
@@ -147,9 +153,11 @@
 <script src="${global}/plugins/ladda/ladda.min.js" type="text/javascript"></script>
 <script src="${global}/plugins/jquery-notific8/jquery.notific8.min.js" type="text/javascript"></script>
 
+
 <!-- END CORE PLUGINS -->
 <!-- BEGIN THEME GLOBAL SCRIPTS -->
 <script src="${global}/scripts/app.min.js" type="text/javascript"></script>
+<script src="${ctx}/assets/pages/scripts/form-wizard.min.js" type="text/javascript"></script>
 <!-- END THEME GLOBAL SCRIPTS -->
 <!-- BEGIN THEME LAYOUT SCRIPTS -->
 <script src="${ctx}/assets/layouts/layout/scripts/layout.js" type="text/javascript"></script>
@@ -157,12 +165,12 @@
 <script src="${ctx}/assets/layouts/global/scripts/quick-sidebar.min.js" type="text/javascript"></script>
 <script src="${ctx}/assets/layouts/global/scripts/quick-nav.min.js" type="text/javascript"></script>
 
+
 <!-- END THEME LAYOUT SCRIPTS -->
 
 <%-- 自定义js文件--%>
 <script src="${ctx}/static/js/upload.js"></script>
 <script src="${ctx}/static/js/jquery.form.min.js" type="text/javascript"></script>
-<script src="${ctx}/static/js/jquery.validate.min.js" type="text/javascript"></script>
 <script src="${ctx}/static/js/jquery-gv-validate.js" type="text/javascript"></script>
 <script src="${ctx}/static/js/admin.js" type="text/javascript"></script>
 <script src="${ctx}/static/js/go.common.js"></script>
@@ -176,6 +184,8 @@
 <script src="${ctx}/static/js/handsontable/numbro.js"></script>
 <script src="${ctx}/static/js/handsontable/languages.js"></script>
 <script src="${ctx}/static/js/handsontable/handsontable.js"></script>
+
+
 <input id="index-user-type" type="hidden" value="${sessionScope.sessionUser.type}">
 </body>
 <script>

@@ -1,6 +1,8 @@
 package com.ctoangels.goshipsurvey.common.modules.prepurchase.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.ShipDetail;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.ShipDetailMapper;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Inspection;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Quotation;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.QuotationApplication;
@@ -28,11 +30,24 @@ import java.util.List;
 public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInspectionMapper, PurchaseInspection> implements IPurchaseInspectionService {
 
     @Autowired
-    QuotationApplicationMapper quotationApplicationMapper;
+    private PurchaseInspectionMapper purchaseInspectionMapper;
+
     @Autowired
-    PurchaseInspectionMapper purchaseInspectionMapper;
+    private ShipDetailMapper shipDetailMapper;
+
+    @Autowired
+    QuotationApplicationMapper quotationApplicationMapper;
+
     @Autowired
     PurchaseQuotationMapper purchaseQuotationMapper;
+
+    @Override
+    public List<PurchaseInspection> selectByInspection(Integer id) {
+
+        List<PurchaseInspection> inspections = purchaseInspectionMapper.selectByInspection(id);
+        return inspections;
+    }
+
 
 
     @Override

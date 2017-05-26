@@ -2,10 +2,14 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.ShipDetailMapper">
 
-    <!-- 通用查询结果列-->
-    <sql id="Base_Column_List">
-		id, ship_name AS shipName, imo,call_sign As callSign, `type`, loa, beam, dwt, draft, ggt, ldt, ss, bunkers, ship_class AS shipClass, flag, build_year AS buildYear, builder, ex_name AS exName, inspection_date AS inspectionDate, `location`, ship_type AS shipType, me_maker AS meMaker, me_type AS meType, me_mcr_kw AS meMcrKw, me_mcr_rpm AS meMcrRpm, me_running_hours AS meRunningHours, me_critical_rpm AS meCriticalRpm, me_others AS meOthers, ap_maker AS apMaker, ap_type AS apType, ap_load AS apLoad, ap_a1 AS apA1, ap_a2 AS apA2, ap_a3 AS apA3, ap_others AS apOthers, bo_maker AS boMaker, bo_type AS boType, bo_evaporation AS boEvaporation, bo_heating_area AS boHeatingArea, bo_others AS boOthers, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id, ship_name AS shipName, imo, `type`, loa, beam, dwt, draft, ggt, ldt, ss, bunkers, ship_class AS shipClass, flag, build_year AS buildYear, builder, ex_name AS exName, inspection_date AS inspectionDate, `location`, ship_type AS shipType, me_maker AS meMaker, me_type AS meType, me_mcr_kw AS meMcrKw, me_mcr_rpm AS meMcrRpm, me_running_hours AS meRunningHours, me_critical_rpm AS meCriticalRpm, me_others AS meOthers, ap_maker AS apMaker, ap_type AS apType, ap_load AS apLoad, ap_a1 AS apA1, ap_a2 AS apA2, ap_a3 AS apA3, ap_others AS apOthers, bo_maker AS boMaker, bo_type AS boType, bo_evaporation AS boEvaporation, bo_heating_area AS boHeatingArea, bo_others AS boOthers, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag, call_sign AS callSign
 	</sql>
+    <select id="selectByShipId"
+            resultType="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.ShipDetail">
+		select * from t_ship_detail where id=#{ship_id}
+	</select>
 
     <select id="getById" resultType="ShipDetail">
         SELECT sd.* FROM t_ship_detail sd WHERE sd.id=#{0}
