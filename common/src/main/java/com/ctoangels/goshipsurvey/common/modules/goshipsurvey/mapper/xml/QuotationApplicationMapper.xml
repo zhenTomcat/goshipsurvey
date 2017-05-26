@@ -4,11 +4,7 @@
 
     <!-- 通用查询结果列-->
     <sql id="Base_Column_List">
-<<<<<<< HEAD
 		id, quotation_id AS quotationId, user_id AS userId, application_status AS applicationStatus, total_price AS totalPrice, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag, company_id AS companyId, survey_id AS surveyId, `type`
-=======
-		id, quotation_id AS quotationId, user_id AS userId, application_status AS applicationStatus, total_price AS totalPrice,company_id AS companyId,survey_id AS surveyId,`type`, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
->>>>>>> 6e36f1572ce73f784d5d8fb8dcb4c377aa4763a5
 	</sql>
 
     <select id="getBySurveyorId" resultMap="QuotationApplicationMap" parameterType="java.util.Map">
