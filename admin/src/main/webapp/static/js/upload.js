@@ -375,15 +375,19 @@ function initUploaders_attachment(buttonId, bucket, domain, obj,remove) {
                 set_upload_param(up, file.name, true, domain);
             },
             FileUploaded: function () {
-                var html='<a target="_blank" href="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '">'+nativeName+'</a>'+
-                    '<input name="attachmentUrl" type="hidden" value="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '" >'+
+                var html = '<a target="_blank" href="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '">' + nativeName + '</a>' +
+                    '<input name="attachmentUrl" type="hidden" value="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '" >' +
                     '<input name="attachmentName" type="hidden" value="' + nativeName + '"/>';
                 $(obj).parent().prev().html(html);
 
-<<<<<<< HEAD
-                var html1='<button onclick="clearTd(this)" type="button" style="color: red">Delete</button>';
+                var html1 = '<button onclick="clearTd(this)" type="button" style="color: red">Delete</button>';
                 $(obj).parent().html(html1);
-=======
+            }
+        }
+    });
+    uploader.init();
+}
+
 function initUploaders_purchase_op_agency_loi(buttonId, bucket, domain) {
     var uploader = new plupload.Uploader({
         runtimes: 'html5,flash,silverlight,html4',
@@ -414,16 +418,11 @@ function initUploaders_purchase_op_agency_loi(buttonId, bucket, domain) {
                 var a = btn.parent().find("a");
                 a.attr("href", href);
                 a.css("display", "inline-block");
->>>>>>> 6e36f1572ce73f784d5d8fb8dcb4c377aa4763a5
             }
         }
     });
     uploader.init();
 }
-<<<<<<< HEAD
-=======
-
->>>>>>> 6e36f1572ce73f784d5d8fb8dcb4c377aa4763a5
 
 function initUploaders_img(buttonId, bucket, domain, divId) {
     var uploader = new plupload.Uploader({

@@ -48,9 +48,9 @@ public class InspectionReportController extends BaseController {
 
     @RequestMapping(value = "/surveyor/reportEdit",method = RequestMethod.GET)
     public String edit(@RequestParam(required = false) Integer id, ModelMap modelMap){
-        List<PurchaseInspection> inspections=purchaseInspectionService.selectByInspection(id);
-        modelMap.put("inspections",inspections);
-        return "prepurchase/surveyor/inspection/reportList";
+       /* List<PurchaseInspection> inspections=purchaseInspectionService.selectByInspection(id);
+        modelMap.put("inspections",inspections);*/
+        return "prepurchase/surveyor/inspection/reportEdit";
     }
 
     @RequestMapping(value = "/surveyor/viewImg",method = RequestMethod.GET)
