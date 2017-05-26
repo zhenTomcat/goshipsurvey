@@ -8,10 +8,11 @@ import com.baomidou.mybatisplus.annotations.IdType;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.ctoangels.goshipsurvey.common.util.Const;
 
 /**
  *
- * 
+ *
  *
  */
 @TableName("t_purchase_inspection")
@@ -93,141 +94,155 @@ public class PurchaseInspection implements Serializable {
 	private PurchaseQuotation purchaseQuotation;
 
 
-	public Integer getId() {
-		return this.id;
-	}
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public Integer getId() {
+        return this.id;
+    }
 
-	public Integer getPurchaseQuoId() {
-		return this.purchaseQuoId;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setPurchaseQuoId(Integer purchaseQuoId) {
-		this.purchaseQuoId = purchaseQuoId;
-	}
+    public Integer getPurchaseQuoId() {
+        return this.purchaseQuoId;
+    }
 
-	public Integer getShipId() {
-		return this.shipId;
-	}
+    public void setPurchaseQuoId(Integer purchaseQuoId) {
+        this.purchaseQuoId = purchaseQuoId;
+    }
 
-	public void setShipId(Integer shipId) {
-		this.shipId = shipId;
-	}
+    public Integer getShipId() {
+        return this.shipId;
+    }
 
-	public Integer getCompanyId() {
-		return this.companyId;
-	}
+    public void setShipId(Integer shipId) {
+        this.shipId = shipId;
+    }
 
-	public void setCompanyId(Integer companyId) {
-		this.companyId = companyId;
-	}
+    public Integer getCompanyId() {
+        return this.companyId;
+    }
 
-	public Integer getSurveyId() {
-		return this.surveyId;
-	}
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
+    }
 
-	public void setSurveyId(Integer surveyId) {
-		this.surveyId = surveyId;
-	}
+    public Integer getSurveyId() {
+        return this.surveyId;
+    }
 
-	public Integer getOpId() {
-		return this.opId;
-	}
+    public void setSurveyId(Integer surveyId) {
+        this.surveyId = surveyId;
+    }
 
-	public void setOpId(Integer opId) {
-		this.opId = opId;
-	}
+    public Integer getOpId() {
+        return this.opId;
+    }
 
-	public String getLoi() {
-		return this.loi;
-	}
+    public void setOpId(Integer opId) {
+        this.opId = opId;
+    }
 
-	public void setLoi(String loi) {
-		this.loi = loi;
-	}
+    public String getLoi() {
+        return this.loi;
+    }
 
-	public String getPassport() {
-		return this.passport;
-	}
+    public void setLoi(String loi) {
+        this.loi = loi;
+    }
 
-	public void setPassport(String passport) {
-		this.passport = passport;
-	}
+    public String getPassport() {
+        return this.passport;
+    }
 
-	public Date getCreateDate() {
-		return this.createDate;
-	}
+    public void setPassport(String passport) {
+        this.passport = passport;
+    }
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
+    public Date getCreateDate() {
+        return this.createDate;
+    }
 
-	public String getCreateBy() {
-		return this.createBy;
-	}
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
 
-	public void setCreateBy(String createBy) {
-		this.createBy = createBy;
-	}
+    public String getCreateBy() {
+        return this.createBy;
+    }
 
-	public Date getUpdateDate() {
-		return this.updateDate;
-	}
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
 
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
-	}
+    public Date getUpdateDate() {
+        return this.updateDate;
+    }
 
-	public String getUpdateBy() {
-		return this.updateBy;
-	}
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
 
-	public void setUpdateBy(String updateBy) {
-		this.updateBy = updateBy;
-	}
+    public String getUpdateBy() {
+        return this.updateBy;
+    }
 
-	public Integer getDelFlag() {
-		return this.delFlag;
-	}
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
 
-	public void setDelFlag(Integer delFlag) {
-		this.delFlag = delFlag;
-	}
+    public Integer getDelFlag() {
+        return this.delFlag;
+    }
 
-	public String getCompanyGrade() {
-		return this.companyGrade;
-	}
+    public void setDelFlag(Integer delFlag) {
+        this.delFlag = delFlag;
+    }
 
-	public void setCompanyGrade(String companyGrade) {
-		this.companyGrade = companyGrade;
-	}
+    public String getCompanyGrade() {
+        return this.companyGrade;
+    }
 
-	public String getRemark() {
-		return this.remark;
-	}
+    public void setCompanyGrade(String companyGrade) {
+        this.companyGrade = companyGrade;
+    }
 
-	public void setRemark(String remark) {
-		this.remark = remark;
-	}
+    public String getRemark() {
+        return this.remark;
+    }
 
-	public Integer getInspectionReportId() {
-		return this.inspectionReportId;
-	}
+    public void setRemark(String remark) {
+        this.remark = remark;
+    }
 
-	public void setInspectionReportId(Integer inspectionReportId) {
-		this.inspectionReportId = inspectionReportId;
-	}
+    public Integer getInspectionReportId() {
+        return this.inspectionReportId;
+    }
 
-	public String getOpGrade() {
-		return this.opGrade;
-	}
+    public void setInspectionReportId(Integer inspectionReportId) {
+        this.inspectionReportId = inspectionReportId;
+    }
 
-	public void setOpGrade(String opGrade) {
-		this.opGrade = opGrade;
-	}
+    public String getOpGrade() {
+        return this.opGrade;
+    }
+
+    public void setOpGrade(String opGrade) {
+        this.opGrade = opGrade;
+    }
+
+    public void setCreateInfo(String userName) {
+        this.createDate = new Date();
+        this.createBy = userName;
+        this.updateDate = new Date();
+        this.updateBy = userName;
+        this.delFlag = Const.DEL_FLAG_NORMAL;
+    }
+
+    public void setUpdateInfo(String userName) {
+        this.updateDate = new Date();
+        this.updateBy = userName;
+    }
 
 	public Integer getUserId() {
 		return userId;

@@ -57,7 +57,7 @@
                                 <div class="form-group form-md-line-input col-md-12">
                                     <label class="col-md-3 control-label">Date From</label>
                                     <div class="input-group col-md-6">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control date-picker" name="startDate">
                                     </div>
                                 </div>
                             </div>
@@ -65,7 +65,7 @@
                                 <div class="form-group form-md-line-input col-md-12">
                                     <label class="col-md-3 control-label">Date To</label>
                                     <div class="input-group col-md-6">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control date-picker" name="endDate">
                                     </div>
                                 </div>
                             </div>
@@ -73,7 +73,7 @@
                                 <div class="form-group form-md-line-input col-md-12">
                                     <label class="col-md-3 control-label">Location</label>
                                     <div class="input-group col-md-6">
-                                        <input type="text" class="form-control">
+                                        <input type="text" class="form-control" name="location">
                                     </div>
                                 </div>
                             </div>

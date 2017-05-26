@@ -51,50 +51,55 @@
                     </div>
                 </div>
                 <div class="portlet-body form">
-                    <form role="form" class="form-horizontal">
-                        <div class="form-body">
-                            <div class="row">
-                                <div class=" col-md-6">
-                                    <label class="col-md-12" style="color: #888">Agency details</label>
-                                    <textarea class="form-control"
-                                              style="height:200px;resize: none;"></textarea>
-                                    <div style="margin-top: 5px">
-                                        <a type="button"
-                                           class="btn btn-sm blue">
-                                            <i class="fa fa-upload"></i>
-                                            Upload
-                                        </a>
-                                        <a class="btn btn-sm green"
-                                           target="_blank"
-                                           href="#">DOWNLOAD</a>
-                                    </div>
+                    <div class="form-body">
+                        <div class="row">
+                            <div class=" col-md-6">
+                                <label class="col-md-12" style="color: #888">Agency details</label>
+                                <textarea class="form-control" name="agencyDetail"
+                                          style="height:200px;resize: none;"></textarea>
+                                <div style="margin-top: 5px">
+                                    <button type="button" id="agencyBtn"
+                                            class="btn btn-sm blue">
+                                        <i class="fa fa-upload"></i>
+                                        Upload
+                                    </button>
+                                    <input type="hidden" name="agencyUrl" id="agencyUrl">
+                                    <a class="btn btn-sm green"
+                                       target="_blank" style="display: none"
+                                       href="#">DOWNLOAD</a>
                                 </div>
-                                <div class=" col-md-6">
-                                    <label class="col-md-12" style="color: #888">LOI</label>
-                                    <div>
-                                        <a type="button" class="btn btn-sm blue"><i class="fa fa-upload"></i> Upload</a>
-                                        <a class="btn btn-sm green" target="_blank" href="#">DOWNLOAD</a>
-                                    </div>
-
-                                    <div class="notice" style="margin: 80px 0px 0 50px;">
-                                        Notice:
-                                        <hr style="margin: 10px 0;">
-                                        This information can't be read by surveyor,until chosen surveyor/company.
-
-                                    </div>
-
+                            </div>
+                            <div class=" col-md-6">
+                                <label class="col-md-12" style="color: #888">LOI</label>
+                                <div>
+                                    <button id="loiBtn" type="button" class="btn btn-sm blue"><i
+                                            class="fa fa-upload"></i>
+                                        Upload
+                                    </button>
+                                    <input type="hidden" name="loiUrl" id="loiUrl">
+                                    <a class="btn btn-sm green" style="display: none" target="_blank"
+                                       href="#">DOWNLOAD</a>
+                                </div>
+                                <div class="notice" style="margin: 80px 0px 0 50px;">
+                                    Notice:
+                                    <hr style="margin: 10px 0;">
+                                    This information can't be read by surveyor,until chosen surveyor/company.
                                 </div>
                             </div>
                         </div>
-                        <div class="form-actions right">
-                            <a data-toggle="tab" href="#step2"
-                               class="btn default btn-back">Back</a>
-                            <a data-toggle="tab" href="#step4"
-                               class="btn default">Next</a>
-                        </div>
-                    </form>
+                    </div>
+                    <div class="form-actions right">
+                        <a data-toggle="tab" href="#step2"
+                           class="btn default btn-back">Back</a>
+                        <a data-toggle="tab" href="#step4"
+                           class="btn default">Next</a>
+                    </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
+<script>
+    initUploaders_purchase_op_agency_loi("agencyBtn", "shipinfo", "${staticPath}/");
+    initUploaders_purchase_op_agency_loi("loiBtn", "shipinfo", "${staticPath}/");
+</script>

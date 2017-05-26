@@ -2,9 +2,13 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.SurveyorMapper">
 
-	<!-- 通用查询结果列-->
-	<sql id="Base_Column_List">
-		id, first_name AS firstName, last_name AS lastName, nationality, survey_time_start AS surveyTimeStart, survey_time_end AS surveyTimeEnd, email, tel, survey_port AS surveyPort, surveyor_profile AS surveyorProfile, company_id AS companyId, portrait_url AS portraitUrl, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
+    <!-- 通用查询结果列-->
+    <sql id="Base_Column_List">
+		id, first_name AS firstName, last_name AS lastName, nationality, survey_time_start AS surveyTimeStart, survey_time_end AS surveyTimeEnd, email, tel, ship_type AS shipType, survey_port AS surveyPort, surveyor_profile AS surveyorProfile, company_id AS companyId, portrait_url AS portraitUrl, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
 	</sql>
+
+    <select id="getById" resultType="Surveyor">
+		SELECT s.*  FROM  t_surveyor s WHERE s.id=#{survey_id}
+	</select>
 
 </mapper>

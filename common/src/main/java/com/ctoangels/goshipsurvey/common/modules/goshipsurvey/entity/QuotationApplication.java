@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.annotations.IdType;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Surveyor;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
 import com.ctoangels.goshipsurvey.common.util.Const;
 
@@ -82,6 +83,9 @@ public class QuotationApplication implements Serializable {
     @TableField(exist = false)
     private Quotation quotation;
 
+    @TableField(exist = false)
+    private Surveyor surveyor;
+
 
     public Integer getId() {
         return this.id;
@@ -121,6 +125,30 @@ public class QuotationApplication implements Serializable {
 
     public void setTotalPrice(Double totalPrice) {
         this.totalPrice = totalPrice;
+    }
+
+    public Integer getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
+    }
+
+    public Integer getSurveyId() {
+        return surveyId;
+    }
+
+    public void setSurveyId(Integer surveyId) {
+        this.surveyId = surveyId;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     public Date getCreateDate() {
@@ -179,28 +207,13 @@ public class QuotationApplication implements Serializable {
         this.quotation = quotation;
     }
 
-    public Integer getCompanyId() {
-        return companyId;
+
+    public Surveyor getSurveyor() {
+        return surveyor;
     }
 
-    public void setCompanyId(Integer companyId) {
-        this.companyId = companyId;
-    }
-
-    public Integer getSurveyId() {
-        return surveyId;
-    }
-
-    public void setSurveyId(Integer surveyId) {
-        this.surveyId = surveyId;
-    }
-
-    public Integer getType() {
-        return type;
-    }
-
-    public void setType(Integer type) {
-        this.type = type;
+    public void setSurveyor(Surveyor surveyor) {
+        this.surveyor = surveyor;
     }
 
     public void setCreateInfo(String userName) {

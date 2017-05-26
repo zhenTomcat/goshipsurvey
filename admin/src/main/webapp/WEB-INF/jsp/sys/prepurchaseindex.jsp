@@ -78,7 +78,6 @@
         }
     </style>
 </head>
-<%--<body onhashchange="hashChange()" class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">--%>
 <body onhashchange="hashChange()"
       class="page-header-fixed page-sidebar-closed-hide-logo page-content-white page-full-width">
 
@@ -87,13 +86,9 @@
 <div class="clearfix"></div>
 <div class="page-container">
     <jsp:include page="include/hor-menu.jsp"></jsp:include>
-    <%--<jsp:include page="include/menu.jsp"></jsp:include>--%>
     <!-- END SIDEBAR -->
     <!-- BEGIN CONTENT -->
     <div class="page-content-wrapper">
-        <div>
-            <a data-target="navTab" href="test/testUrl?url=prepurchase/op/quotation/add">add</a>
-        </div>
         <div class="page-content">
             <div class="page-content-body" id="navTab">
             </div>

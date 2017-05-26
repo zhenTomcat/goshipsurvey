@@ -2,6 +2,9 @@ package com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper;
 
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.QuotationApplication;
 import com.baomidou.mybatisplus.mapper.AutoMapper;
+import org.apache.ibatis.annotations.Param;
+
+import java.util.List;
 
 /**
  *
@@ -10,5 +13,6 @@ import com.baomidou.mybatisplus.mapper.AutoMapper;
  */
 public interface QuotationApplicationMapper extends AutoMapper<QuotationApplication> {
 
+    List<QuotationApplication> getApplications(@Param(value = "quotationId") Integer quotationId, @Param(value = "proType") Integer proType);
 
 }

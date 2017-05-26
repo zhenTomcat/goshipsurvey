@@ -7,4 +7,8 @@
 		id, `name`, login_name AS loginName, `password`, `type`, style_id AS styleId, office_id AS officeId, company_id AS companyId, ip, email, phone,country, address, identification, head_img_url AS headImgUrl, last_login AS lastLogin, description, achievement, ship_type AS shipType, start_date AS startDate, end_date AS endDate, point, email_status AS emailStatus, email_code AS emailCode, email_time AS emailTime, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
 	</sql>
 
+    <select id="getById" resultType="User">
+        SELECT u.* FROM sys_user u WHERE u.id=#{0}
+    </select>
+
 </mapper>

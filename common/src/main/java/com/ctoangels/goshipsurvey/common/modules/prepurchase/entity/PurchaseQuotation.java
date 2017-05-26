@@ -8,10 +8,12 @@ import com.baomidou.mybatisplus.annotations.IdType;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.QuotationApplication;
+import com.ctoangels.goshipsurvey.common.util.Const;
 
 /**
  *
- * 
+ *
  *
  */
 @TableName("t_purchase_quotation")
@@ -61,7 +63,7 @@ public class PurchaseQuotation implements Serializable {
 
 	/** 发布状态 */
 	@TableField(value = "public_status")
-	private String publicStatus;
+	private Integer publicStatus;
 
 	/** 创建日期 */
 	@TableField(value = "create_date")
@@ -99,165 +101,200 @@ public class PurchaseQuotation implements Serializable {
 	@TableField(value = "del_flag")
 	private Integer delFlag;
 
+    @TableField(exist = false)
+    private ShipDetail shipDetail;
 
-	public Integer getId() {
-		return this.id;
-	}
+    @TableField(exist = false)
+    private QuotationApplication application;
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public Integer getId() {
+        return id;
+    }
 
-	public Integer getShipId() {
-		return this.shipId;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public void setShipId(Integer shipId) {
-		this.shipId = shipId;
-	}
+    public Integer getShipId() {
+        return shipId;
+    }
 
-	public Date getStartDate() {
-		return startDate;
-	}
+    public void setShipId(Integer shipId) {
+        this.shipId = shipId;
+    }
 
-	public void setStartDate(Date startDate) {
-		this.startDate = startDate;
-	}
+    public Date getStartDate() {
+        return startDate;
+    }
 
-	public Date getEndDate() {
-		return endDate;
-	}
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
 
-	public void setEndDate(Date endDate) {
-		this.endDate = endDate;
-	}
+    public Date getEndDate() {
+        return endDate;
+    }
 
-	public String getLocation() {
-		return this.location;
-	}
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
 
-	public void setLocation(String location) {
-		this.location = location;
-	}
+    public String getLocation() {
+        return location;
+    }
 
-	public String getAgencyDetail() {
-		return this.agencyDetail;
-	}
+    public void setLocation(String location) {
+        this.location = location;
+    }
 
-	public void setAgencyDetail(String agencyDetail) {
-		this.agencyDetail = agencyDetail;
-	}
+    public String getAgencyDetail() {
+        return agencyDetail;
+    }
 
-	public String getAgencyUrl() {
-		return this.agencyUrl;
-	}
+    public void setAgencyDetail(String agencyDetail) {
+        this.agencyDetail = agencyDetail;
+    }
 
-	public void setAgencyUrl(String agencyUrl) {
-		this.agencyUrl = agencyUrl;
-	}
+    public String getAgencyUrl() {
+        return agencyUrl;
+    }
 
-	public String getLoiUrl() {
-		return this.loiUrl;
-	}
+    public void setAgencyUrl(String agencyUrl) {
+        this.agencyUrl = agencyUrl;
+    }
 
-	public void setLoiUrl(String loiUrl) {
-		this.loiUrl = loiUrl;
-	}
+    public String getLoiUrl() {
+        return loiUrl;
+    }
 
-	public String getSelectStatus() {
-		return this.selectStatus;
-	}
+    public void setLoiUrl(String loiUrl) {
+        this.loiUrl = loiUrl;
+    }
 
-	public void setSelectStatus(String selectStatus) {
-		this.selectStatus = selectStatus;
-	}
+    public String getSelectStatus() {
+        return selectStatus;
+    }
 
-	public Integer getOpId() {
-		return this.opId;
-	}
+    public void setSelectStatus(String selectStatus) {
+        this.selectStatus = selectStatus;
+    }
 
-	public void setOpId(Integer opId) {
-		this.opId = opId;
-	}
+    public Integer getOpId() {
+        return opId;
+    }
 
-	public String getPublicStatus() {
-		return this.publicStatus;
-	}
+    public void setOpId(Integer opId) {
+        this.opId = opId;
+    }
 
-	public void setPublicStatus(String publicStatus) {
-		this.publicStatus = publicStatus;
-	}
+    public Integer getPublicStatus() {
+        return publicStatus;
+    }
 
-	public Date getCreateDate() {
-		return this.createDate;
-	}
+    public void setPublicStatus(Integer publicStatus) {
+        this.publicStatus = publicStatus;
+    }
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
+    public Date getCreateDate() {
+        return createDate;
+    }
 
-	public String getCreateBy() {
-		return this.createBy;
-	}
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
 
-	public void setCreateBy(String createBy) {
-		this.createBy = createBy;
-	}
+    public String getCreateBy() {
+        return createBy;
+    }
 
-	public Date getUpdateDate() {
-		return this.updateDate;
-	}
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
 
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
-	}
+    public Date getUpdateDate() {
+        return updateDate;
+    }
 
-	public String getUpdateBy() {
-		return this.updateBy;
-	}
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
 
-	public void setUpdateBy(String updateBy) {
-		this.updateBy = updateBy;
-	}
+    public String getUpdateBy() {
+        return updateBy;
+    }
 
-	public Integer getDelFlag() {
-		return this.delFlag;
-	}
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
 
-	public void setDelFlag(Integer delFlag) {
-		this.delFlag = delFlag;
-	}
+    public Integer getQuotationApplicationId() {
+        return quotationApplicationId;
+    }
 
-	public Integer getQuotationApplicationId() {
-		return quotationApplicationId;
-	}
+    public void setQuotationApplicationId(Integer quotationApplicationId) {
+        this.quotationApplicationId = quotationApplicationId;
+    }
 
-	public void setQuotationApplicationId(Integer quotationApplicationId) {
-		this.quotationApplicationId = quotationApplicationId;
-	}
+    public Double getTotalPrice() {
+        return totalPrice;
+    }
 
-	public Double getTotalPrice() {
-		return totalPrice;
-	}
+    public void setTotalPrice(Double totalPrice) {
+        this.totalPrice = totalPrice;
+    }
 
-	public void setTotalPrice(Double totalPrice) {
-		this.totalPrice = totalPrice;
-	}
+    public String getOpName() {
+        return opName;
+    }
+
+    public void setOpName(String opName) {
+        this.opName = opName;
+    }
+
+    public String getSurveyorName() {
+        return surveyorName;
+    }
+
+    public void setSurveyorName(String surveyorName) {
+        this.surveyorName = surveyorName;
+    }
+
+    public Integer getDelFlag() {
+        return delFlag;
+    }
+
+    public void setDelFlag(Integer delFlag) {
+        this.delFlag = delFlag;
+    }
+
+    public ShipDetail getShipDetail() {
+        return shipDetail;
+    }
+
+    public void setShipDetail(ShipDetail shipDetail) {
+        this.shipDetail = shipDetail;
+    }
+
+    public QuotationApplication getApplication() {
+        return application;
+    }
+
+    public void setApplication(QuotationApplication application) {
+        this.application = application;
+    }
+
+    public void setCreateInfo(String userName) {
+        this.createDate = new Date();
+        this.createBy = userName;
+        this.updateDate = new Date();
+        this.updateBy = userName;
+        this.delFlag = Const.DEL_FLAG_NORMAL;
+    }
+
+    public void setUpdateInfo(String userName) {
+        this.updateDate = new Date();
+        this.updateBy = userName;
+    }
 
 
-	public String getOpName() {
-		return opName;
-	}
-
-	public void setOpName(String opName) {
-		this.opName = opName;
-	}
-
-	public String getSurveyorName() {
-		return surveyorName;
-	}
-
-	public void setSurveyorName(String surveyorName) {
-		this.surveyorName = surveyorName;
-	}
 }

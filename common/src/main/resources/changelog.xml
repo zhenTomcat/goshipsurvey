@@ -17,7 +17,20 @@
         </sql>
     </changeSet>
 
+    <!--insert INTO sys_button(menu_id,button_name,button_url,del_flag) VALUES(106,'更改电子邮箱','account/editEmail',0);-->
+    <!--ALTER TABLE `t_ship` CHANGE COLUMN `class` `ship_class` varchar(45) DEFAULT NULL COMMENT '船级社';-->
 
+    <changeSet author="WangShun" id="15950097942-001">
+        <sql>
+            alter table t_purchase_quotation CHANGE public_status public_status int (4);
+            alter table t_purchase_quotation CHANGE select_status select_status int (4);
+        </sql>
+    </changeSet>
+    <changeSet author="WangShun" id="15950097942-002">
+        <sql>
+            alter table t_surveyor ADD COLUMN `ship_type` varchar(64) DEFAULT NULL COMMENT '可验船型';
+        </sql>
+    </changeSet>
 </databaseChangeLog>
 
 

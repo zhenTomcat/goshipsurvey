@@ -173,7 +173,7 @@
         $.ajax({
             url: "surveyor/quotationApplication/add",
             type: "post",
-            data: {quotationId: quotationId, totalPrice: totalPrice},
+            data: {quotationId: quotationId, totalPrice: totalPrice, type: 1},
             success: function (data) {
                 if (data.success) {
                     drawTable();

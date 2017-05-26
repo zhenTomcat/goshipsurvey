@@ -94,25 +94,5 @@ public class SurveyorAccountController extends BaseController {
         return "goshipsurvey/surveyor/account/companyInfo";
     }
 
-    public String transferShipType(String userShipType) {
-        String[] userShipTypes = null;
-        if (StringUtils.isNotEmpty(userShipType)) {
-            userShipTypes = userShipType.split(",");
-        }
-        List<Dict> shipTypes = dictService.getListByType("shipType");
-        String types = "";
-        if (userShipTypes != null && userShipTypes.length > 0) {
-            for (String s : userShipTypes) {
-                for (Dict d : shipTypes) {
-                    if (d.getValue().equals(s)) {
-                        types += d.getDes() + ",";
-                        break;
-                    }
-                }
-            }
-            types = types.substring(0, types.length() - 1);
-        }
-        return types;
-    }
 
 }

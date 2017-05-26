@@ -3,6 +3,7 @@ package com.ctoangels.goshipsurvey.common.modules.goshipsurvey.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Port;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IPortService;
+import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,7 +17,7 @@ import java.util.List;
  */
 @Controller
 @RequestMapping(value = "port")
-public class PortController {
+public class PortController extends BaseController {
 
     @Autowired
     IPortService portService;

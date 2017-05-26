@@ -52,7 +52,7 @@ function initSearchForm(others, placeholderText) {
             + '<span class="input-group-btn">'
             + '<button type="button" class="btn btn-primary btn-flat" id="mybtn" onclick="javacript:refreshTable(1);"><i class="fa fa-search"></i> 搜索</button>'
             + '</span>' + '</div>')
-            + '</div>';
+    + '</div>';
     $("#defTool").keydown(function (e) {
         var curKey = e.which;
         if (curKey == 13) {
@@ -94,3 +94,7 @@ Date.prototype.Format = function (fmt) { //author: meizz
     return fmt;
 }
 
+
+$(".top-menu.right-top-menu .navbar-nav ul li").on("click", function () {
+    $(".dropdown.dropdown-user.active.open").click()
+})

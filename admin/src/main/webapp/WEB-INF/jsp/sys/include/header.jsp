@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="page-top">
-            <div class="top-menu">
+            <div class="top-menu right-top-menu">
                 <ul class="nav navbar-nav pull-right">
                     <li class="dropdown dropdown-user dropdown-dark">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
@@ -29,12 +29,24 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-default">
                             <li>
+                                <a href="javascript:;" data-url="user/editPwd" data-target='navTab'>
+                                    <i class="fa fa-comment"></i>Message </a>
+                            </li>
+                            <li>
+                                <a href="surveyor" data-target='navTab'>
+                                    <i class="fa fa-users"></i>Surveyor management </a>
+                            </li>
+                            <li>
+                                <a href="user/companyEdit" data-target='navTab'>
+                                    <i class="fa fa-user"></i>My profile </a>
+                            </li>
+                            <li>
                                 <a href="javascript:;" data-url="user/editPwd" data-model='dialog'>
-                                    <i class="icon-user"></i>修改密码 </a>
+                                    <i class="fa fa-cog"></i>Change password </a>
                             </li>
                             <li>
                                 <a href="logout">
-                                    <i class="icon-key"></i> 退出 </a>
+                                    <i class="icon-key"></i> Exit </a>
                             </li>
                         </ul>
                     </li>
@@ -43,4 +55,4 @@
         </div>
     </div>
 </div>
-<div class="clearfix"> </div>
+<div class="clearfix"></div>

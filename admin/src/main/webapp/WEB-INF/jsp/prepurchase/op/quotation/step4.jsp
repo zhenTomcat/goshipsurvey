@@ -85,11 +85,14 @@
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6">
-                                    如果已核对完毕,请提交
-                                    <div>
-                                        <a class="btn blue" data-target="navTab"
-                                           href="test/testUrl?url=prepurchase/op/quotation/step5">submit</a>
+                                <div class="col-md-6" style="padding:50px 0 0 100px;">
+                                    <div style="margin: auto">
+                                        如果已核对完毕,请点这里发布到网上
+                                        <button type="button" onclick="public_to_net(this)" class="btn blue"
+                                                data-target="navTab"
+                                                id="publicBtn"
+                                                style="display: block;margin-top: 20px;width: 200px">PUBLIC TO NET
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -106,3 +109,32 @@
         </div>
     </div>
 </div>
+<script>
+    function public_to_net(obj) {
+        var btn = $(obj);
+        btn.attr("disabled", true);
+        if (check()) {
+            $("#add_purchase_quotation_form").ajaxSubmit({
+                success: function (data) {
+                    if (data.success) {
+                        alert("success");
+                        $("a[href='prepurchase/op/quotation']").click();
+                    } else {
+                        alert("failure");
+                        btn.attr("disabled", false);
+                    }
+                },
+                error: function () {
+                    alert("error");
+                    btn.prop("disabled", false);
+                }
+            })
+        }else{
+            btn.attr("disabled", false);
+        }
+    }
+
+    function check() {
+        return true;
+    }
+</script>

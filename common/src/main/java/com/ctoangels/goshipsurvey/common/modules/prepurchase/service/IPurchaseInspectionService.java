@@ -6,11 +6,12 @@ import com.baomidou.framework.service.ISuperService;
 import java.util.List;
 
 /**
- *
  * PurchaseInspection 表数据服务层接口
- *
  */
 public interface IPurchaseInspectionService extends ISuperService<PurchaseInspection> {
 
     List<PurchaseInspection> selectByInspection(Integer id);
+
+    boolean initInspection(int quotationId, int applicationId);
+
 }

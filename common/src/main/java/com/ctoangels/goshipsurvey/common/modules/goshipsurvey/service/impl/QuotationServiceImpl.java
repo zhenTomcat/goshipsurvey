@@ -61,6 +61,7 @@ public class QuotationServiceImpl extends SuperServiceImpl<QuotationMapper, Quot
     public List<QuotationApplication> getApplication(int id) {
         QuotationApplication quotationApplication = new QuotationApplication();
         quotationApplication.setQuotationId(id);
+        quotationApplication.setType(Const.PROJECT_TYPE_HIRE);
         List<QuotationApplication> list = quotationApplicationMapper.selectList(new EntityWrapper<>(quotationApplication));
         for (QuotationApplication q : list) {
             q.setUser(userMapper.selectById(q.getUserId()));
