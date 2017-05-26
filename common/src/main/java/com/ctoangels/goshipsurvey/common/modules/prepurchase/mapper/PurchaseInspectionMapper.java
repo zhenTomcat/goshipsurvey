@@ -3,6 +3,8 @@ package com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.PurchaseInspection;
 import com.baomidou.mybatisplus.mapper.AutoMapper;
 
+import java.util.List;
+
 /**
  *
  * PurchaseInspection 表数据库控制层接口
@@ -10,5 +12,6 @@ import com.baomidou.mybatisplus.mapper.AutoMapper;
  */
 public interface PurchaseInspectionMapper extends AutoMapper<PurchaseInspection> {
 
+    List<PurchaseInspection> selectByInspection(Integer id);
 
 }

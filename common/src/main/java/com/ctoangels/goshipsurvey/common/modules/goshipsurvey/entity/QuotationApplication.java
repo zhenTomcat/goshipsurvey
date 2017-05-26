@@ -67,6 +67,14 @@ public class QuotationApplication implements Serializable {
     @TableField(value = "del_flag")
     private Integer delFlag;
 
+    @TableField(value = "company_id")
+    private Integer companyId;
+
+    @TableField(value = "survey_id")
+    private Integer surveyId;
+
+    private Integer type;//1表示Oil 2表示Purchase
+
     /**  */
     @TableField(exist = false)
     private User user;
@@ -169,6 +177,30 @@ public class QuotationApplication implements Serializable {
 
     public void setQuotation(Quotation quotation) {
         this.quotation = quotation;
+    }
+
+    public Integer getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
+    }
+
+    public Integer getSurveyId() {
+        return surveyId;
+    }
+
+    public void setSurveyId(Integer surveyId) {
+        this.surveyId = surveyId;
+    }
+
+    public Integer getType() {
+        return type;
+    }
+
+    public void setType(Integer type) {
+        this.type = type;
     }
 
     public void setCreateInfo(String userName) {

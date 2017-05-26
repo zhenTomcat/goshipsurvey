@@ -12,7 +12,7 @@
     <artifactId>common</artifactId>
     <properties>
         <jdbc.type>mysql</jdbc.type>
-        <jdbc.url>jdbc:mysql://localhost:3306/go?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false
+        <jdbc.url>jdbc:mysql://localhost:3306/goshipsurvey?useUnicode=true&amp;characterEncoding=utf-8&amp;useSSL=false
         </jdbc.url>
         <jdbc.username>root</jdbc.username>
         <jdbc.password>root</jdbc.password>

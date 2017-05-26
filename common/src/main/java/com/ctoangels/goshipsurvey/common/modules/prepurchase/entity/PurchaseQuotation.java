@@ -29,12 +29,12 @@ public class PurchaseQuotation implements Serializable {
 	private Integer shipId;
 
 	/** 验船开始日期 */
-	@TableField(value = "data_start")
-	private Date dataStart;
+	@TableField(value = "start_date")
+	private Date startDate;
 
 	/** 验船结束日期 */
-	@TableField(value = "data_end")
-	private Date dataEnd;
+	@TableField(value = "end_date")
+	private Date endDate;
 
 	/** 港口位置 */
 	private String location;
@@ -80,6 +80,22 @@ public class PurchaseQuotation implements Serializable {
 	private String updateBy;
 
 	/**  */
+	@TableField(value = "quotation_application_id")
+	private Integer quotationApplicationId;
+
+	/**  */
+	@TableField(value = "total_price")
+	private Double totalPrice;
+
+	/**  */
+	@TableField(value = "op_name")
+	private String opName;
+
+	/**  */
+	@TableField(value = "surveyor_name")
+	private String surveyorName;
+
+	/**  */
 	@TableField(value = "del_flag")
 	private Integer delFlag;
 
@@ -100,20 +116,20 @@ public class PurchaseQuotation implements Serializable {
 		this.shipId = shipId;
 	}
 
-	public Date getDataStart() {
-		return this.dataStart;
+	public Date getStartDate() {
+		return startDate;
 	}
 
-	public void setDataStart(Date dataStart) {
-		this.dataStart = dataStart;
+	public void setStartDate(Date startDate) {
+		this.startDate = startDate;
 	}
 
-	public Date getDataEnd() {
-		return this.dataEnd;
+	public Date getEndDate() {
+		return endDate;
 	}
 
-	public void setDataEnd(Date dataEnd) {
-		this.dataEnd = dataEnd;
+	public void setEndDate(Date endDate) {
+		this.endDate = endDate;
 	}
 
 	public String getLocation() {
@@ -212,4 +228,36 @@ public class PurchaseQuotation implements Serializable {
 		this.delFlag = delFlag;
 	}
 
+	public Integer getQuotationApplicationId() {
+		return quotationApplicationId;
+	}
+
+	public void setQuotationApplicationId(Integer quotationApplicationId) {
+		this.quotationApplicationId = quotationApplicationId;
+	}
+
+	public Double getTotalPrice() {
+		return totalPrice;
+	}
+
+	public void setTotalPrice(Double totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+
+
+	public String getOpName() {
+		return opName;
+	}
+
+	public void setOpName(String opName) {
+		this.opName = opName;
+	}
+
+	public String getSurveyorName() {
+		return surveyorName;
+	}
+
+	public void setSurveyorName(String surveyorName) {
+		this.surveyorName = surveyorName;
+	}
 }

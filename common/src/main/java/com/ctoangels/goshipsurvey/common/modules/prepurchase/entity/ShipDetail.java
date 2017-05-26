@@ -47,7 +47,7 @@ public class ShipDetail implements Serializable {
 	private String draft;
 
 	/**  */
-	private String gt;
+	private String ggt;
 
 	/**  */
 	private String ldt;
@@ -181,8 +181,12 @@ public class ShipDetail implements Serializable {
 
 	/**  */
 	@TableField(value = "del_flag")
-	private String delFlag;
+	private Integer delFlag;
 
+
+	/**  */
+	@TableField(value = "call_sign")
+	private String callSign;
 
 	public Integer getId() {
 		return this.id;
@@ -248,12 +252,12 @@ public class ShipDetail implements Serializable {
 		this.draft = draft;
 	}
 
-	public String getGt() {
-		return this.gt;
+	public String getGgt() {
+		return ggt;
 	}
 
-	public void setGt(String gt) {
-		this.gt = gt;
+	public void setGgt(String ggt) {
+		this.ggt = ggt;
 	}
 
 	public String getLdt() {
@@ -528,12 +532,19 @@ public class ShipDetail implements Serializable {
 		this.updateBy = updateBy;
 	}
 
-	public String getDelFlag() {
-		return this.delFlag;
+	public Integer getDelFlag() {
+		return delFlag;
 	}
 
-	public void setDelFlag(String delFlag) {
+	public void setDelFlag(Integer delFlag) {
 		this.delFlag = delFlag;
 	}
 
+	public String getCallSign() {
+		return callSign;
+	}
+
+	public void setCallSign(String callSign) {
+		this.callSign = callSign;
+	}
 }

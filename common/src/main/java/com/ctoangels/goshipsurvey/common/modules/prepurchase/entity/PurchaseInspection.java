@@ -85,6 +85,13 @@ public class PurchaseInspection implements Serializable {
 	@TableField(value = "op_grade")
 	private String opGrade;
 
+	@TableField(value = "user_id")
+	private Integer userId;
+
+	private ShipDetail shipDetail;
+
+	private PurchaseQuotation purchaseQuotation;
+
 
 	public Integer getId() {
 		return this.id;
@@ -222,4 +229,27 @@ public class PurchaseInspection implements Serializable {
 		this.opGrade = opGrade;
 	}
 
+	public Integer getUserId() {
+		return userId;
+	}
+
+	public void setUserId(Integer userId) {
+		this.userId = userId;
+	}
+
+	public ShipDetail getShipDetail() {
+		return shipDetail;
+	}
+
+	public void setShipDetail(ShipDetail shipDetail) {
+		this.shipDetail = shipDetail;
+	}
+
+	public PurchaseQuotation getPurchaseQuotation() {
+		return purchaseQuotation;
+	}
+
+	public void setPurchaseQuotation(PurchaseQuotation purchaseQuotation) {
+		this.purchaseQuotation = purchaseQuotation;
+	}
 }
