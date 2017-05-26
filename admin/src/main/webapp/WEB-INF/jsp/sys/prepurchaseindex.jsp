@@ -59,7 +59,8 @@
     <!-- BEGIN THEME LAYOUT STYLES -->
     <link href="${ctx}/assets/layouts/layout/css/layout.min.css" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/assets/layouts/layout/css/themes/${style.des}.min.css" rel="stylesheet" type="text/css"
-          id="style_color"/>
+    id="style_color"/>
+
     <link href="${ctx}/assets/pages/css/profile.min.css" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/static/css/custom.css" rel="stylesheet" type="text/css"/>
 

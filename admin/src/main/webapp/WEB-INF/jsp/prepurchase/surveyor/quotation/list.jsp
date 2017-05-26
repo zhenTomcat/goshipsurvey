@@ -57,6 +57,7 @@
         </div>
     </div>
 </div>
+<a id="goToSurveyorInfo" style="display: none" data-target="navTab"></a>
 <script>
     var quotationTable = $("#quotation_table");//已申请的quotation表格
     var surveyList;
@@ -110,7 +111,7 @@
                     "data": "createBy",
                 },
                 {
-                    "data": "application.price",
+                    "data": "application.totalPrice",
                 },
                 {
                     "data": "application.surveyor.lastName"
@@ -190,6 +191,7 @@
     function moreInfo(data) {
         var html = '';
         var shipDetail = data.shipDetail;
+        //Agency details and loiship detail
         html += '<div class="col-md-3">';
         html += '<label class="col-md-6 text-right">Ship name:</label><label class="col-md-6 text-left">' + shipDetail.shipName + '&nbsp</label>';
         html += '<label class="col-md-6 text-right">IMO:</label><label class="col-md-6 text-left">' + shipDetail.imo + '&nbsp</label>';
@@ -209,28 +211,36 @@
         html += '<label class="col-md-6 text-right">LDT(ton):</label><label class="col-md-6 text-left">' + shipDetail.ldt + '&nbsp</label>';
         html += '<label class="col-md-6 text-right">Call Sign:</label><label class="col-md-6 text-left">' + shipDetail.callSign + '&nbsp</label>';
         html += "</div>";
+        //Agency details and loi
+        var application = data.application;
         html += '<div class="col-md-3">';
         html += '<label class="col-md-12 text-left">Agency details:</label>';
-        html += '<div class="col-md-12 text-left" style="padding-left:30px; ">' + data.agencyDetail + '</div>';
-        var agencyUrl = data.agencyUrl;
-        if (agencyUrl != null && agencyUrl != "") {
-            html += '<a target="_blank" style="float: right" href="' + agencyUrl + '" class="btn green">View</a>';
-        }
+        html += '<div class="col-md-12 text-left" style="padding-left:30px; ">Cannot be show,until apply success</div>';
+//        html += '<div class="col-md-12 text-left" style="padding-left:30px; ">' + data.agencyDetail + '</div>';
+//        var agencyUrl = data.agencyUrl;
+//        if (agencyUrl != null && agencyUrl != "") {
+//            html += '<a target="_blank" style="float: left;margin-left:10px" href="' + agencyUrl + '" class="btn green">View</a>';
+//        }
+        html += '<label class="col-md-12 text-left margin-top-10">Loi:</label>';
+        html += '<div class="col-md-12 text-left" style="padding-left:30px; ">Cannot be show,until apply success</div>';
+//        var loiUrl = data.loiUrl;
+//        if (loiUrl != null && loiUrl != "") {
+//            html += '<a target="_blank"  style="float: left;margin-left:10px" href="' + loiUrl + '" class="btn green">View</a>';
+//        }
         html += "</div>";
         html += '<div class="col-md-3">';
         html += '<label class="col-md-12 text-left">Our price & surveyor:</label>';
-        var application = data.application;
         if (application == null) {
             html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5">Price:</label> <div class="input-group col-md-7"> <input type="text" class="form-control price-input"> </div></div>';
             html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">Surveyor:</label> <div class="input-group col-md-7"> ';
             html += surveyorSelectHtml;
             html += ' </div></div>';
-            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">SurveyorCV:</label>  <a class="col-md-3" href="" style="padding-top: 8px; vertical-align: middle">VIEW</a></div>';
+            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">SurveyorCV:</label>  <a class="col-md-3" href="javascript:void(0)" onclick="goToViewSurveyor(this)"  style="padding-top: 8px; vertical-align: middle">VIEW</a></div>';
         } else {
             var surveyor = application.surveyor;
             html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5">Price:</label> <div class="input-group col-md-7"> ' + application.totalPrice + '</div></div>';
             html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">Surveyor:</label> <div class="input-group col-md-7">' + surveyor.lastName + '</div></div>';
-            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">SurveyorCV:</label>  <a class="col-md-7" href="" style="padding-top: 8px; vertical-align: middle">VIEW</a></div>';
+            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">SurveyorCV:</label>  <a class="col-md-7" data-target="navTab" href="surveyor/info?id=' + surveyor.id + '" style="padding-top: 8px; vertical-align: middle">VIEW</a></div>';
         }
         html += "</div>";
         return html;
@@ -289,6 +299,21 @@
                 alert("addApplication error");
             },
         })
+    }
+
+    function goToViewSurveyor(obj) {
+        var select = $(obj).parent().parent().find(".surveyor-select");
+        var id = select.val();
+        if (id == 0) {
+            select.tips({
+                side: 1,
+                msg: "请选择验船师",
+                bg: '#FF5080',
+                time: 5,
+            });
+        } else {
+            $("#goToSurveyorInfo").attr("href", "surveyor/info?id=" + id).click();
+        }
     }
 </script>
 
