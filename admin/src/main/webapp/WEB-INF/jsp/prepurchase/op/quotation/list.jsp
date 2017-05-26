@@ -207,7 +207,12 @@
         html += '<div class="col-md-12 text-left" style="padding-left:30px; ">' + data.agencyDetail + '</div>';
         var agencyUrl = data.agencyUrl;
         if (agencyUrl != null && agencyUrl != "") {
-            html += '<a target="_blank" style="float: right" href="' + agencyUrl + '" class="btn green">View</a>';
+            html += '<a target="_blank" style="float: left;margin-left:10px" href="' + agencyUrl + '" class="btn green">View</a>';
+        }
+        html += '<label class="col-md-12 text-left margin-top-10">Loi:</label>';
+        var loiUrl = data.loiUrl;
+        if (loiUrl != null && loiUrl != "") {
+            html += '<a target="_blank"  style="float: left;margin-left:10px" href="' + loiUrl + '" class="btn green">View</a>';
         }
         html += "</div>";
 
