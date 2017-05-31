@@ -96,8 +96,37 @@
                                                       name="surveyorProfile"></textarea>
                                         </div>
                                         <div class="form-group col-md-12">
-                                            <label class="control-label">Surveyor's experience</label>
-                                            <textarea class="form-control" rows="5"></textarea>
+                                            <label class="control-label">Surveyor's experience</label>&nbsp;
+                                            <button id="add-row-btn" type="button" class="btn btn-sm green"
+                                                    style="padding: 2px 5px" onclick="TableDeal.addRow()">+ Add new
+                                            </button>
+                                            <table class="table  table-checkable table-bordered"
+                                                   id="experience_table">
+                                                <thead>
+                                                <tr>
+                                                    <th width="25%">Time</th>
+                                                    <th width="15%">Ship type</th>
+                                                    <th width="15%">Company</th>
+                                                    <th width="40%">Work content</th>
+                                                    <th width="5%">Delete</th>
+                                                </tr>
+                                                <tbody>
+                                                <tr>
+                                                    <td><input type="text" class="date-picker form-control"
+                                                               style="width:45%;display: inline-block">to<input
+                                                            type="text"
+                                                            class="form-control date-picker"
+                                                            style="width:45%;display: inline-block"></td>
+                                                    <td><input type="text" class=" form-control"></td>
+                                                    <td><input type="text" class=" form-control"></td>
+                                                    <td><input type="text" class=" form-control"></td>
+                                                    <td>
+                                                        <button onclick="" type="button" class="btn red">Delete</button>
+                                                    </td>
+                                                </tr>
+                                                </tbody>
+                                                </thead>
+                                            </table>
                                         </div>
                                         <div class="margiv-top-10 col-md-12">
                                             <button type="button" onclick="addSurveyor(this)" class="btn green"> Save
@@ -131,8 +160,10 @@
     function addSurveyor(obj) {
         var btn = $(obj);
         btn.attr("disabled", true);
+        console.log(TableDeal.getData());
         if (check()) {
             $("#add-surveyor-form").ajaxSubmit({
+                data: {myList: JSON.stringify(TableDeal.getData())},
                 success: function (data) {
                     if (data.success) {
                         alert("success");
@@ -176,6 +207,7 @@
 
                 return markup;
             }
+
             function formatRepoSelection(repo) {
                 return repo.portEn || repo.text;
             }
@@ -242,9 +274,35 @@
         });
     }
 
-    $("select").on("change", function () {
-        console.log("value:" + $(this).val());
-    })
+
+    var experienceTable = $("#experience_table");
+    var TableDeal = function () {
+        var row = '<tr><td><input type="text" class="date-picker form-control"  style="width:45%;display: inline-block">to<input type="text" class="form-control date-picker" style="width:45%;display: inline-block"></td> <td><input type="text" class=" form-control"></td> <td><input type="text" class=" form-control"></td> <td><input type="text" class="form-control"></td> <td> <button onclick="TableDeal.deleteRow(this)" type="button" class="btn red">Delete</button> </td> </tr>'
+        return {
+            addRow: function () {
+                experienceTable.append(row);
+                $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
+            },
+            deleteRow: function (obj) {
+                $(obj).closest("tr").remove();
+            },
+            getData: function () {
+                var experienceList = [];
+                experienceTable.find("tbody tr").each(function (i, e) {
+                    var surveyorExperience = {};
+                    var inputs = $(e).find("input");
+                    surveyorExperience.startDate = $(inputs[0]).val();
+                    surveyorExperience.endDate = $(inputs[1]).val();
+                    surveyorExperience.shipType = $(inputs[2]).val();
+                    surveyorExperience.company = $(inputs[3]).val();
+                    surveyorExperience.workContent = $(inputs[4]).val();
+                    surveyorExperience.delFlag = 0;
+                    experienceList.push(surveyorExperience);
+                })
+                return experienceList;
+            }
+        }
+    }();
 
 
 </script>

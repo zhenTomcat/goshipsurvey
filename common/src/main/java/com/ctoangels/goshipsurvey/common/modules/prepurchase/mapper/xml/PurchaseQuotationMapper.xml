@@ -2,20 +2,23 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.PurchaseQuotationMapper">
 
-	<!-- 通用查询结果列-->
-	<sql id="Base_Column_List">
+    <!-- 通用查询结果列-->
+    <sql id="Base_Column_List">
 		id, ship_id AS shipId, start_date AS startDate, end_date AS endDate, `location`, agency_detail AS agencyDetail, agency_url AS agencyUrl, loi_url AS loiUrl, select_status AS selectStatus, op_id AS opId, public_status AS publicStatus, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag, quotation_application_id AS quotationApplicationId
 		,total_price AS totalPrice ,op_name AS opName ,surveyor_name AS surveyorName
 	</sql>
 
 
-	<select id="selectByPurchaseQuotationId"
-			resultType="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.PurchaseQuotation">
+    <select id="selectByPurchaseQuotationId"
+            resultType="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.PurchaseQuotation">
 		select * from t_purchase_quotation where id=#{purchase_quotation_id}
 	</select>
 
     <select id="getOPList" resultMap="shipDetailMap">
-        SELECT pq.* FROM t_purchase_quotation pq
+        SELECT pq.*,
+        (SELECT count(qa.id) FROM t_quotation_application qa WHERE qa.quotation_id=pq.id and qa.type=2) AS
+        applicationCount
+        FROM t_purchase_quotation pq
         <where>
             AND pq.end_date &gt;= (select date_format(now(),'%Y-%m-%d'))
             AND pq.op_id=#{opId}

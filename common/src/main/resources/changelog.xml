@@ -31,6 +31,22 @@
             alter table t_surveyor ADD COLUMN `ship_type` varchar(64) DEFAULT NULL COMMENT '可验船型';
         </sql>
     </changeSet>
+    <changeSet author="WangShun" id="15950097942-003">
+        <sql>
+            alter table t_surveyor_experience CHANGE time start_date Date COMMENT '工作起始日期';
+            alter table t_surveyor_experience ADD COLUMN end_date Date COMMENT '工作结束日期';
+        </sql>
+    </changeSet>
+    <changeSet author="WangShun" id="15950097942-004">
+        <sql>
+            alter table t_surveyor_experience CHANGE work_contant work_content varchar(255);
+        </sql>
+    </changeSet>
+    <changeSet author="WangShun" id="15950097942-005">
+        <sql>
+            alter table t_surveyor_experience CHANGE surveyor_id surveyor_id int(11);
+        </sql>
+    </changeSet>
 </databaseChangeLog>
 
 

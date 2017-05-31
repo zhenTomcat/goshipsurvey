@@ -1,5 +1,7 @@
 package com.ctoangels.goshipsurvey.common.modules.prepurchase.controller;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONArray;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
@@ -7,6 +9,8 @@ import com.baomidou.mybatisplus.toolkit.CollectionUtil;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Port;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IPortService;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Surveyor;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.SurveyorExperience;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.ISurveyorExperienceService;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.ISurveyorService;
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
@@ -36,6 +40,9 @@ public class SurveyorController extends BaseController {
 
     @Autowired
     ISurveyorService surveyorService;
+
+    @Autowired
+    ISurveyorExperienceService surveyorExperienceService;
 
     @Autowired
     UserService userService;
@@ -82,7 +89,7 @@ public class SurveyorController extends BaseController {
                 for (String p : userPorts) {
                     portValue += allPort.get(Integer.parseInt(p) - 1).getPortEn() + ",";
                 }
-                portValue.substring(0, portValue.length() - 2);
+                portValue = portValue.substring(0, portValue.length() - 1);
             }
             s.setSurveyPort(portValue);
         }
@@ -115,33 +122,44 @@ public class SurveyorController extends BaseController {
     @RequestMapping(value = "/addComplete", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject addComplete(Surveyor surveyor) {
+
         JSONObject jsonObject = new JSONObject();
         surveyor.setCompanyId(getCurrentUser().getId());
         surveyor.setCreateInfo(getCurrentUser().getName());
-        jsonObject.put("success", surveyorService.insert(surveyor));
+
+        String a = request.getParameter("myList");
+        List<SurveyorExperience> list = JSON.parseArray(a, SurveyorExperience.class);
+
+        jsonObject.put("success", surveyorService.insertSurveyorWithExperience(surveyor, list));
         return jsonObject;
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
     public String edit(ModelMap map, @RequestParam(required = false) int id) {
         Surveyor surveyor = surveyorService.selectById(id);
+
         String userShipType = surveyor.getShipType();
-        String[] userShipTypes = null;
         if (StringUtils.isNotEmpty(userShipType)) {
-            userShipTypes = userShipType.split(",");
-        }
-        String portString = surveyor.getSurveyPort();
-        String[] userPorts;
-        List<Port> portList = new ArrayList<>();
-        if (StringUtils.isNotEmpty(portString)) {
-            userPorts = portString.split(",");
-            portList = portService.selectBatchIds(Arrays.asList(userPorts));
+            String[] userShipTypes = userShipType.split(",");
+            map.put("userShipTypes", userShipTypes);
         }
 
-        map.put("userShipTypes", userShipTypes);
+        String portString = surveyor.getSurveyPort();
+        if (StringUtils.isNotEmpty(portString)) {
+            String[] userPorts;
+            userPorts = portString.split(",");
+            List<Port> portList = portService.selectBatchIds(Arrays.asList(userPorts));
+            map.put("portList", portList);
+        }
+
+        SurveyorExperience surveyorExperience = new SurveyorExperience();
+        surveyorExperience.setSurveyorId(id);
+        surveyorExperience.setDelFlag(Const.DEL_FLAG_NORMAL);
+        List<SurveyorExperience> experienceList = surveyorExperienceService.selectList(new EntityWrapper<>(surveyorExperience));
+        map.put("experienceList", experienceList);
+
         map.put("surveyor", surveyor);
         map.put("shipType", getShipTypeDict());
-        map.put("portList", portList);
         return "sys/surveyor/edit";
     }
 
@@ -149,14 +167,22 @@ public class SurveyorController extends BaseController {
     @ResponseBody
     public JSONObject editComplete(Surveyor surveyor) {
         JSONObject jsonObject = new JSONObject();
-        surveyor.setUpdateInfo(getCurrentUser().getName());
-        jsonObject.put("success", surveyorService.updateById(surveyor));
+        String a = request.getParameter("myList");
+        List<SurveyorExperience> list = JSON.parseArray(a, SurveyorExperience.class);
+        jsonObject.put("success", surveyorService.updateSurveyorWithExperience(surveyor, list));
         return jsonObject;
     }
 
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     public String info(ModelMap map, @RequestParam(required = false) int id) {
         Surveyor surveyor = surveyorService.selectById(id);
+
+        SurveyorExperience surveyorExperience = new SurveyorExperience();
+        surveyorExperience.setSurveyorId(id);
+        surveyorExperience.setDelFlag(Const.DEL_FLAG_NORMAL);
+        List<SurveyorExperience> experienceList = surveyorExperienceService.selectList(new EntityWrapper<>(surveyorExperience));
+        surveyor.setExperienceList(experienceList);
+
         String userShipType = surveyor.getShipType();
         String[] userShipTypes = null;
         if (StringUtils.isNotEmpty(userShipType)) {

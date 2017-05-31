@@ -125,7 +125,7 @@
                     "data": "startDate",
                 },
                 {
-                    "data": "imo",
+                    "data": "applicationCount",
                 },
                 {
                     "data": "publicStatus",
@@ -146,13 +146,16 @@
                 "render": function (data, type, row) {
                     var status = row.publicStatus;
                     if (status == 1) {
+                        if (row.applicationCount == 0) {
+                            return 'Quotation..';
+                        }
                         return '<a data-target="navTab" href="prepurchase/op/quotation/choose?quotationId=' + row.id + '">Go to choose surveyor</a>';
                     }
                     if (status == 2) {
                         return '<a data-target="navTab" href="prepurchase/op/quotation/choose?quotationId=' + row.id + '">Chosen</a>';
                     }
                     if (status == 3) {
-                        return '<a data-target="navTab" href="prepurchase/op/quotation/choose?quotationId=' + row.id + '">Cancelled</a>';
+                        return 'Cancelled';
                     }
                     return ""
                 }

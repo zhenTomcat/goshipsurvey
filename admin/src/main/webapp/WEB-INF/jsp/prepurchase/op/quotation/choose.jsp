@@ -213,8 +213,11 @@
                                 </div>
                             </div>
                             <div class="form-actions right">
-                                <a data-toggle="tab" href="#step4"
-                                   class="btn default btn-back">Back</a>
+                                <a href="prepurchase/op/quotation/cancel?quotationId=${param.quotationId}"
+                                   data-msg="确定取消吗？"
+                                   data-model="ajaxToDo" data-callback="goToQuotationList"
+                                   class="btn green">Cancel
+                                    this quotation</a>
                             </div>
                         </div>
                     </div>
@@ -243,5 +246,9 @@
                 alert("error");
             }
         })
+    }
+
+    function goToQuotationList() {
+        $("a[href='prepurchase/op/quotation']").click();
     }
 </script>

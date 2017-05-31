@@ -19,87 +19,117 @@ import com.ctoangels.goshipsurvey.common.util.Const;
 @TableName("t_purchase_quotation")
 public class PurchaseQuotation implements Serializable {
 
-	@TableField(exist = false)
-	private static final long serialVersionUID = 1L;
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
 
-	/**  */
-	@TableId(type = IdType.AUTO)
-	private Integer id;
+    /**  */
+    @TableId(type = IdType.AUTO)
+    private Integer id;
 
-	/**  */
-	@TableField(value = "ship_id")
-	private Integer shipId;
+    /**  */
+    @TableField(value = "ship_id")
+    private Integer shipId;
 
-	/** 验船开始日期 */
-	@TableField(value = "start_date")
-	private Date startDate;
+    /**
+     * 验船开始日期
+     */
+    @TableField(value = "start_date")
+    private Date startDate;
 
-	/** 验船结束日期 */
-	@TableField(value = "end_date")
-	private Date endDate;
+    /**
+     * 验船结束日期
+     */
+    @TableField(value = "end_date")
+    private Date endDate;
 
-	/** 港口位置 */
-	private String location;
+    /**
+     * 港口位置
+     */
+    private String location;
 
-	/** 证书详情 */
-	@TableField(value = "agency_detail")
-	private String agencyDetail;
+    /**
+     * 证书详情
+     */
+    @TableField(value = "agency_detail")
+    private String agencyDetail;
 
-	/** 证书存放的路径 */
-	@TableField(value = "agency_url")
-	private String agencyUrl;
+    /**
+     * 证书存放的路径
+     */
+    @TableField(value = "agency_url")
+    private String agencyUrl;
 
-	/** loi的路径 */
-	@TableField(value = "loi_url")
-	private String loiUrl;
+    /**
+     * loi的路径
+     */
+    @TableField(value = "loi_url")
+    private String loiUrl;
 
-	/** 是否默认系统自动选择serveyor */
-	@TableField(value = "select_status")
-	private String selectStatus;
+    /**
+     * 是否默认系统自动选择serveyor
+     */
+    @TableField(value = "select_status")
+    private String selectStatus;
 
-	/**  */
-	@TableField(value = "op_id")
-	private Integer opId;
+    /**  */
+    @TableField(value = "op_id")
+    private Integer opId;
 
-	/** 发布状态 */
-	@TableField(value = "public_status")
-	private Integer publicStatus;
+    /**
+     * 发布状态
+     */
+    @TableField(value = "public_status")
+    private Integer publicStatus;
 
-	/** 创建日期 */
-	@TableField(value = "create_date")
-	private Date createDate;
+    /**
+     * 发布状态
+     */
+    @TableField(exist = false)
+    private Integer applicationCount;
 
-	/** 创建者 */
-	@TableField(value = "create_by")
-	private String createBy;
+    /**
+     * 创建日期
+     */
+    @TableField(value = "create_date")
+    private Date createDate;
 
-	/** 修改时间 */
-	@TableField(value = "update_date")
-	private Date updateDate;
+    /**
+     * 创建者
+     */
+    @TableField(value = "create_by")
+    private String createBy;
 
-	/** 修改者 */
-	@TableField(value = "update_by")
-	private String updateBy;
+    /**
+     * 修改时间
+     */
+    @TableField(value = "update_date")
+    private Date updateDate;
 
-	/**  */
-	@TableField(value = "quotation_application_id")
-	private Integer quotationApplicationId;
+    /**
+     * 修改者
+     */
+    @TableField(value = "update_by")
+    private String updateBy;
 
-	/**  */
-	@TableField(value = "total_price")
-	private Double totalPrice;
+    /**  */
+    @TableField(value = "quotation_application_id")
+    private Integer quotationApplicationId;
 
-	/**  */
-	@TableField(value = "op_name")
-	private String opName;
+    /**  */
+    @TableField(value = "total_price")
+    private Double totalPrice;
 
-	/**  */
-	@TableField(value = "surveyor_name")
-	private String surveyorName;
+    /**  */
+    @TableField(value = "op_name")
+    private String opName;
 
-	/**  */
-	@TableField(value = "del_flag")
-	private Integer delFlag;
+    /**  */
+    @TableField(value = "surveyor_name")
+    private String surveyorName;
+
+    /**  */
+    @TableField(value = "del_flag")
+    private Integer delFlag;
 
     @TableField(exist = false)
     private ShipDetail shipDetail;
@@ -257,6 +287,14 @@ public class PurchaseQuotation implements Serializable {
 
     public void setSurveyorName(String surveyorName) {
         this.surveyorName = surveyorName;
+    }
+
+    public Integer getApplicationCount() {
+        return applicationCount;
+    }
+
+    public void setApplicationCount(Integer applicationCount) {
+        this.applicationCount = applicationCount;
     }
 
     public Integer getDelFlag() {

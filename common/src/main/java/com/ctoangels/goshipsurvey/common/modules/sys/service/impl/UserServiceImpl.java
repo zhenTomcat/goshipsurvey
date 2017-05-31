@@ -32,7 +32,7 @@ import java.util.Map;
  * @Description:
  * @Date 2015年5月9日
  */
-@Transactional(readOnly = true)
+//@Transactional(readOnly = true)
 @Service
 public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implements UserService {
     @Autowired
