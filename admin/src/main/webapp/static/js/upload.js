@@ -383,7 +383,8 @@ function initUploaders_attachment(buttonId, bucket, domain, obj, remove) {
                 $(obj).parent().html(html1);
             }
         }
-    })
+    });
+    uploader.init();
 }
 
 function initUploaders_purchase_op_agency_loi(buttonId, bucket, domain) {

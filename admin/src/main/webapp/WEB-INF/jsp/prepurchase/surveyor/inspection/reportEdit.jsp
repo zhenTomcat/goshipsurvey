@@ -337,7 +337,8 @@
                                                                         <li class="li-right fa fa-remove"></li>
                                                                     </span>
                                                                     <a data-model="dialog" href="prepurchase/surveyor/viewImg"  >
-                                                                        <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/GWTcR228ek.jpg" style="width: 200px;height: 200px;"/>
+                                                                        <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/GWTcR228ek.jpg"
+                                                                             style="width: 200px;height: 200px;"/>
                                                                     </a>
                                                                 </div>
                                                                 <div style="width: 200px">

@@ -58,7 +58,7 @@
                                     <td>
                                         <a href="javascript:;" onclick="unfold(this)">View</a>&nbsp;<li class="fa fa-sort-desc"></li>
                                      </td>
-                                    <td> <a href="/prepurchase/surveyor/reportEdit?${i.id}" >Edit</a> <li class="fa fa-edit"></li></td>
+                                    <td> <a data-target="navTab" href="/prepurchase/surveyor/reportEdit?id=${i.id}" >Edit</a> <li class="fa fa-edit"></li></td>
 
                                 </tr>
                                 <tr style="display: none">
@@ -130,9 +130,22 @@
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
+                                                    <div  class="col-md-6">
+                                                        <label class="control-label">Agency details:</label>
+                                                    </div>
+                                                    <div  class="col-md-12" style="margin-left: 10px">
+                                                        <label class="control-label">${i.purchaseQuotation.agencyDetail}</label>
+                                                    </div>
+                                                    <div class="col-md-12">
+                                                        <label class="control-label">LOI：</label>
+                                                        <label class="control-label"><a href="${i.purchaseQuotation.loiUrl}"></a></label>
+                                                    </div>
                                                 </div>
                                                 <div class="col-md-3">
-                                                    Our price & surveyour:
+
+                                                    <div  class="col-md-9">
+                                                        <label class="control-label">Our price & surveyour:</label>
+                                                    </div>
                                                     <div class="col-md-12">
                                                         <label class="control-label">Price：</label>
                                                         <label class="control-label">${i.purchaseQuotation.totalPrice}</label>
@@ -147,12 +160,12 @@
                                                     </div>
                                                     <div class="col-md-12">
                                                         <label class="control-label">Passport：</label>
-                                                        <label class="control-label"><input type="text" class="form-xsmail"/></label>
+                                                        <label class="control-label"><input type="text" class="form-control input-xsmall"/></label>
                                                         <label class="control-label"><button type="button" >Browse</button></label>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <label class="control-label">LOI：</label>
-                                                        <label class="control-label"><input type="text" class="form-xsmail"/></label>
+                                                        <label class="control-label"><input type="text" class="form-control input-xsmall"/></label>
                                                         <label class="control-label"><button type="button" >Browse</button></label>
                                                     </div>
                                                     <div class="col-md-12">
