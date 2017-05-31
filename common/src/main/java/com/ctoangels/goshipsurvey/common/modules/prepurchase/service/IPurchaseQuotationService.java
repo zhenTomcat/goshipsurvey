@@ -17,9 +17,13 @@ public interface IPurchaseQuotationService extends ISuperService<PurchaseQuotati
 
     List<PurchaseQuotation> getOPList(Integer opId, Integer start, Integer length);
 
-    List<PurchaseQuotation> getSurveyorList(Integer surveyorId,Integer start, Integer length);
+    List<PurchaseQuotation> getSurveyorList(Integer surveyorId, Integer start, Integer length);
 
     int getOPTotal(Integer opId);
 
     int getSurveyorTotal();
+
+    List<PurchaseQuotation> getOPRecordList(Integer opId, Integer start, Integer length);
+
+    int getRecordTotal(Integer opId);
 }

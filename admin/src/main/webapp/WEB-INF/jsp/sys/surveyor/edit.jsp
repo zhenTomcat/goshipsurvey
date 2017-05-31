@@ -145,7 +145,8 @@
                                                         <td><input value="${e.workContent}" type="text"
                                                                    class=" form-control"></td>
                                                         <td>
-                                                            <button onclick="TableDeal.deleteRow(this)" type="button" class="btn red">Delete
+                                                            <button onclick="TableDeal.deleteRow(this)" type="button"
+                                                                    class="btn red">Delete
                                                             </button>
                                                         </td>
                                                         <input type="hidden" value="${e.id}">
@@ -191,7 +192,7 @@
         btn.attr("disabled", true);
         if (check()) {
             $("#add-surveyor-form").ajaxSubmit({
-                data: {myList: JSON.stringify(TableDeal.getData())},
+                data: {experienceList: JSON.stringify(TableDeal.getData())},
                 success: function (data) {
                     if (data.success) {
                         alert("success");

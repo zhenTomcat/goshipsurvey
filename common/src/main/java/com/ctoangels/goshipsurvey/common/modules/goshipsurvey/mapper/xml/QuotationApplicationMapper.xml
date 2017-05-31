@@ -24,4 +24,8 @@
     <select id="getApplications" resultMap="QuotationApplicationMap">
         SELECT qa.* FROM t_quotation_application qa WHERE qa.type=#{proType} and qa.quotation_id=#{quotationId}
     </select>
+
+    <select id="getSuccessApplication" resultMap="QuotationApplicationMap">
+        SELECT qa.* FROM t_quotation_application qa WHERE qa.quotation_id=#{quotationId} and  qa.type=#{proType} and qa.application_status=1
+    </select>
 </mapper>

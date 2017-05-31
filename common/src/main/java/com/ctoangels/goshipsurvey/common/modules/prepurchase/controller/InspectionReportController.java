@@ -16,9 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import java.util.List;
 
 /**
- *
  * InspectionReport 控制层
- *
  */
 @Controller
 @RequestMapping("prepurchase")
@@ -31,30 +29,30 @@ public class InspectionReportController extends BaseController {
     private IPurchaseInspectionService purchaseInspectionService;
 
     @RequestMapping(value = "/surveyor/inspection", method = RequestMethod.GET)
-    public String inspectionList(ModelMap modelMap){
-        int id=getCurrentUser().getId();
-        List<PurchaseInspection> inspections=purchaseInspectionService.selectByInspection(id);
-        modelMap.put("inspections",inspections);
+    public String inspectionList(ModelMap modelMap) {
+        int id = getCurrentUser().getId();
+        List<PurchaseInspection> inspections = purchaseInspectionService.selectByInspection(id);
+        modelMap.put("inspections", inspections);
         return "prepurchase/surveyor/inspection/inspectionList";
     }
 
-    @RequestMapping(value = "/surveyor/report",method = RequestMethod.GET)
-    public String reportList(ModelMap modelMap){
-        int id=getCurrentUser().getId();
-        List<PurchaseInspection> inspections=purchaseInspectionService.selectByInspection(id);
-        modelMap.put("inspections",inspections);
+    @RequestMapping(value = "/surveyor/report", method = RequestMethod.GET)
+    public String reportList(ModelMap modelMap) {
+        int id = getCurrentUser().getId();
+        List<PurchaseInspection> inspections = purchaseInspectionService.selectByInspection(id);
+        modelMap.put("inspections", inspections);
         return "prepurchase/surveyor/inspection/reportList";
     }
 
-    @RequestMapping(value = "/surveyor/reportEdit",method = RequestMethod.GET)
-    public String edit(@RequestParam(required = false) Integer id, ModelMap modelMap){
+    @RequestMapping(value = "/surveyor/reportEdit", method = RequestMethod.GET)
+    public String edit(@RequestParam(required = false) Integer id, ModelMap modelMap) {
        /* List<PurchaseInspection> inspections=purchaseInspectionService.selectByInspection(id);
         modelMap.put("inspections",inspections);*/
         return "prepurchase/surveyor/inspection/reportEdit";
     }
 
-    @RequestMapping(value = "/surveyor/viewImg",method = RequestMethod.GET)
-    public String viewImg(){
+    @RequestMapping(value = "/surveyor/viewImg", method = RequestMethod.GET)
+    public String viewImg() {
         return "prepurchase/surveyor/inspection/viewImg";
     }
 

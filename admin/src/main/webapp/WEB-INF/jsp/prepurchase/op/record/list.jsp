@@ -75,9 +75,9 @@
                                                     <th>Ship name</th>
                                                     <th>imo</th>
                                                     <th>Ship type</th>
-                                                    <th>Inspection type</th>
                                                     <th>Inspection port</th>
                                                     <th>Inspection date(LMT)</th>
+                                                    <th>Surveyor/Company</th>
                                                     <th>Total price</th>
                                                     <th>Status</th>
                                                 </tr>
@@ -180,7 +180,7 @@
     var starRatingHave = $("#star-rating-outer-have");
     $(document).ready(function () {
         drawQuotationTable();
-        drawInspectionTable();
+//        drawInspectionTable();
     });
 
 
@@ -192,8 +192,8 @@
             "autoWidth": false,
             "serverSide": true,
             "ajax": {
-                "url": "op/record/list/quotation",
-                "type": "post",
+                "url": "prepurchase/op/record/quotation/list",
+                "type": "get",
                 "data": function (data) {
                     data.keyword = $("#keyword").val();
                 }
@@ -204,42 +204,51 @@
             "lengthMenu": [[5, 40, 60], [5, 40, 60]],
             "columns": [
                 {
-                    "data": "shipName",
+                    "data": "shipDetail.shipName",
                 },
                 {
-                    "data": "imo",
+                    "data": "shipDetail.imo",
                 },
                 {
-                    "data": "shipType",
+                    "data": "shipDetail.shipType",
                 },
                 {
-                    "data": "inspectionType",
+                    "data": "location",
                 },
                 {
-                    "data": "portName",
+                    "data": "location",
                 },
                 {
-                    "data": "imo",
-                },
-                {
-                    "data": "totalPrice",
+                    "data": "application",
                     "render": function (data) {
-                        return "$:" + data;
+                        if (data != null) {
+                            return data.surveyor.firstName + "/" + data.user.name;
+                        }
+                        return "";
                     }
                 },
                 {
-                    "data": "quotationStatus",
+                    "data": "application",
+                    "render": function (data) {
+                        if (data != null) {
+                            return "$:" + data.totalPrice;
+                        }
+                        return "";
+                    }
+                },
+                {
+                    "data": "publicStatus",
                     "render": function (data) {
                         if (data == 2) {
                             return "<a class='btn btn-sm blue'>已完成</a>";
                         } else if (data == 3) {
-                            return "<a class='btn btn-sm blue'>已取消</a>";
+                            return "<a class='btn btn-sm yellow'>已取消</a>";
                         }
                     }
                 },
             ],
             "columnDefs": [{
-                "targets": 5,
+                "targets": 4,
                 "render": function (data, type, row) {
                     var startDate = new Date(row.startDate).Format("yyyy-MM-dd");
                     var endDate = new Date(row.endDate).Format("yyyy-MM-dd");
@@ -256,7 +265,7 @@
             "autoWidth": false,
             "serverSide": true,
             "ajax": {
-                "url": "op/record/list/inspection",
+                "url": "prepurchase/op/record/inspection/list",
                 "type": "post",
                 "data": function (data) {
                     data.keyword = $("#keyword").val();
