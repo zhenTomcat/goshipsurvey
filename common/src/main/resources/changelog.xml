@@ -47,6 +47,30 @@
             alter table t_surveyor_experience CHANGE surveyor_id surveyor_id int(11);
         </sql>
     </changeSet>
+    <changeSet author="WangShun" id="15950097942-006">
+        <sql>
+            CREATE TABLE `sys_message` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `sender` int(11) DEFAULT NULL COMMENT '消息发出方',
+            `receiver` int(11) DEFAULT NULL COMMENT '消息接收方',
+            `title` varchar(64) DEFAULT NULL COMMENT '标题',
+            `content` text COMMENT '内容',
+            `read_status` int(4) DEFAULT NULL COMMENT '阅读状态',
+            `read_date` date DEFAULT NULL COMMENT '阅读日期',
+            `top_time` int(11) DEFAULT NULL COMMENT '置顶时间秒数',
+            `create_date` date DEFAULT NULL,
+            `create_by` varchar(64) DEFAULT NULL,
+            `update_date` date DEFAULT NULL,
+            `update_by` varchar(64) DEFAULT NULL,
+            `del_flag` int(2) DEFAULT NULL,
+            PRIMARY KEY (`id`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+        </sql>
+    </changeSet>
+
+
+
+
 </databaseChangeLog>
 
 

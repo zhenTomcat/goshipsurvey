@@ -33,11 +33,13 @@
                         <div class="portlet-body">
                             <div class="well">
                                 <h4>Nationality</h4>
-                                ${surveyor.firstName}
+                                ${surveyor.nationality}
                             </div>
                             <div class="well">
                                 <h4>Available port</h4>
-                                ${surveyor.firstName}
+                                <c:forEach items="${portList}" var="p">
+                                    ${p.portEn},${p.countryCode};
+                                </c:forEach>
                             </div>
                             <div class="well">
                                 <h4>Surveyor's profile</h4>
@@ -58,9 +60,11 @@
                                         <tbody>
                                         <c:forEach items="${surveyor.experienceList}" var="e">
                                             <tr>
-                                                <td><fmt:formatDate value="${e.startDate}" pattern="yyyy-MM-dd"></fmt:formatDate>
+                                                <td><fmt:formatDate value="${e.startDate}"
+                                                                    pattern="yyyy-MM-dd"></fmt:formatDate>
                                                     to
-                                                    <fmt:formatDate value="${e.endDate}" pattern="yyyy-MM-dd"></fmt:formatDate></td>
+                                                    <fmt:formatDate value="${e.endDate}"
+                                                                    pattern="yyyy-MM-dd"></fmt:formatDate></td>
                                                 <td>${e.shipType}</td>
                                                 <td>${e.company}</td>
                                                 <td>${e.workContent}</td>

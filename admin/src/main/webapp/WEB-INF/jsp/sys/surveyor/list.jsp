@@ -4,36 +4,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="go" uri="http://www.ctoangels.com/jsp/jstl/common" %>
 <style>
-    .timeline .timeline-badge {
-        float: none;
-    }
-
-    .timeline .timeline-icon {
-        background-color: #e1e5ec;
-        display: table;
-        padding-top: 0px;
-        padding-left: 0px;
-        vertical-align: middle;
-        align-content: center;
-        text-align: center;
-    }
-
-    .timeline:before {
-        background: #e1e5ec;
-    }
-
-    .timeline-content {
-        display: table-cell;
-        vertical-align: middle;
-        width: 100%;
-        text-align: center;
-    }
-
-    .timeline-icon.selected {
-        background-color: #32c5d2;
-        color: white
-    }
-
     .search-input :-moz-placeholder { /* Mozilla Firefox 4 to 18 */
         color: white !important;
     }

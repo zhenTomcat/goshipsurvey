@@ -19,6 +19,7 @@ import com.ctoangels.goshipsurvey.common.util.Const;
 import com.ctoangels.goshipsurvey.common.util.DateUtil;
 import com.ctoangels.goshipsurvey.common.util.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -49,6 +50,9 @@ public class SurveyorController extends BaseController {
 
     @Autowired
     IPortService portService;
+
+    @Value("${static_path}")
+    private String staticPath;
 
 
     @RequestMapping
@@ -87,12 +91,14 @@ public class SurveyorController extends BaseController {
             if (StringUtils.isNotEmpty(portString)) {
                 userPorts = portString.split(",");
                 for (String p : userPorts) {
-                    portValue += allPort.get(Integer.parseInt(p) - 1).getPortEn() + ",";
+                    Port p1 = allPort.get(Integer.parseInt(p) - 1);
+                    portValue += p1.getPortEn() + "," + p1.getCountryCode() + ";";
                 }
                 portValue = portValue.substring(0, portValue.length() - 1);
             }
             s.setSurveyPort(portValue);
         }
+
         return jsonPage(page);
     }
 
@@ -116,6 +122,7 @@ public class SurveyorController extends BaseController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String add(ModelMap map) {
         map.put("shipType", getShipTypeDict());
+        map.put("staticPath", staticPath);
         return "sys/surveyor/add";
     }
 
@@ -158,6 +165,7 @@ public class SurveyorController extends BaseController {
         List<SurveyorExperience> experienceList = surveyorExperienceService.selectList(new EntityWrapper<>(surveyorExperience));
         map.put("experienceList", experienceList);
 
+        map.put("staticPath", staticPath);
         map.put("surveyor", surveyor);
         map.put("shipType", getShipTypeDict());
         return "sys/surveyor/edit";
@@ -188,6 +196,15 @@ public class SurveyorController extends BaseController {
         if (StringUtils.isNotEmpty(userShipType)) {
             userShipTypes = userShipType.split(",");
         }
+
+        String portString = surveyor.getSurveyPort();
+        if (StringUtils.isNotEmpty(portString)) {
+            String[] userPorts;
+            userPorts = portString.split(",");
+            List<Port> portList = portService.selectBatchIds(Arrays.asList(userPorts));
+            map.put("portList", portList);
+        }
+
         map.put("userShipTypes", userShipTypes);
         map.put("surveyor", surveyor);
         map.put("company", userService.selectById(surveyor.getCompanyId()));

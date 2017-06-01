@@ -113,4 +113,9 @@ public class Const {
     public static final Integer PROJECT_TYPE_HIRE = 1;
     public static final Integer PROJECT_TYPE_PURCHASE = 2;
 
+    //消息是否已阅读
+    public static final Integer MESSAGE_UNREAD = 0;
+    public static final Integer MESSAGE_READ = 1;
+    //消息不置顶
+    public static final Integer MESSAGE_NOT_TOP = 0;
 }

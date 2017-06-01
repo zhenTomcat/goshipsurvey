@@ -114,7 +114,13 @@
                     "data": "application.totalPrice",
                 },
                 {
-                    "data": "application.surveyor.lastName"
+                    "data": "application.surveyor",
+                    "render": function (data) {
+                        if (data != null) {
+                            return data.firstName + " " + data.lastName;
+                        }
+                        return "";
+                    }
                 },
             ],
             "columnDefs": [{
@@ -181,7 +187,7 @@
                 surveyorSelectHtml += '<select  class="form-control surveyor-select">';
                 surveyorSelectHtml += '<option value="0">请选择验船师</option>';
                 $(surveyList).each(function () {
-                    surveyorSelectHtml += '<option value="' + this.id + '">' + this.lastName + '</option>';
+                    surveyorSelectHtml += '<option value="' + this.id + '">' + this.firstName + " " + this.lastName + '</option>';
                 })
                 surveyorSelectHtml += '</select>';
             }

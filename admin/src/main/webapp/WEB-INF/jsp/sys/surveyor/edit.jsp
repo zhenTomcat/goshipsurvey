@@ -38,6 +38,7 @@
                                 <div class="tab-pane active">
                                     <form id="add-surveyor-form" action="surveyor/editComplete" method="post">
                                         <input name="id" value="${surveyor.id}" type="hidden">
+                                        <input type="hidden" name="portraitUrl" id="portraitUrl">
                                         <input name="companyId" value="${surveyor.companyId}" type="hidden">
                                         <input name="createBy" value="${surveyor.createBy}" type="hidden">
                                         <input name="createDate"
@@ -103,7 +104,7 @@
                                                         class="form-control js-data-example-ajax" multiple>
                                                     <c:forEach items="${portList}" var="port">
                                                         <option value="${port.id}"
-                                                                selected="selected">${port.portEn}</option>
+                                                                selected="selected">${port.portEn},${port.countryCode}</option>
                                                     </c:forEach>
                                                 </select>
                                             </div>
@@ -176,6 +177,7 @@
 
 <script>
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
+    initUploaders_surveyor_head_img("change-head-img-btn", "shipinfo", "${staticPath}/");
 
     if (jQuery().datepicker) {
         $('.date-picker').datepicker({
@@ -192,7 +194,7 @@
         btn.attr("disabled", true);
         if (check()) {
             $("#add-surveyor-form").ajaxSubmit({
-                data: {experienceList: JSON.stringify(TableDeal.getData())},
+                data: {myList: JSON.stringify(TableDeal.getData())},
                 success: function (data) {
                     if (data.success) {
                         alert("success");

@@ -41,6 +41,7 @@
                             <div class="tab-content">
                                 <div class="tab-pane active">
                                     <form id="add-surveyor-form" action="surveyor/addComplete" method="post">
+                                        <input type="hidden" name="portraitUrl" id="portraitUrl">
                                         <div class="form-group col-md-6">
                                             <label class="control-label">First name</label>
                                             <input type="text" class="form-control" name="firstName"/>
@@ -130,7 +131,6 @@
                                         </div>
                                         <div class="margiv-top-10 col-md-12">
                                             <button type="button" onclick="addSurveyor(this)" class="btn green"> Save
-                                                Changes
                                             </button>
                                         </div>
                                     </form>
@@ -146,6 +146,7 @@
 
 <script>
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
+    initUploaders_surveyor_head_img("change-head-img-btn", "shipinfo", "${staticPath}/");
 
     if (jQuery().datepicker) {
         $('.date-picker').datepicker({
@@ -160,7 +161,6 @@
     function addSurveyor(obj) {
         var btn = $(obj);
         btn.attr("disabled", true);
-        console.log(TableDeal.getData());
         if (check()) {
             $("#add-surveyor-form").ajaxSubmit({
                 data: {myList: JSON.stringify(TableDeal.getData())},
@@ -203,13 +203,13 @@
             });
             function formatRepo(repo) {
                 if (repo.loading) return repo.text;
-                var markup = repo.portEn;
+                var markup = repo.portEn + "," + repo.countryCode
 
                 return markup;
             }
 
             function formatRepoSelection(repo) {
-                return repo.portEn || repo.text;
+                return repo.portEn + "," + repo.countryCode || repo.text;
             }
 
             $(".js-data-example-ajax").select2({
