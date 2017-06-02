@@ -67,8 +67,11 @@
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
         </sql>
     </changeSet>
-
-
+    <changeSet author="WangShun" id="15950097942-007">
+        <sql>
+            alter table sys_message CHANGE top_time top_time varchar(20) DEFAULT NULL COMMENT '置顶时间';
+        </sql>
+    </changeSet>
 
 
 </databaseChangeLog>

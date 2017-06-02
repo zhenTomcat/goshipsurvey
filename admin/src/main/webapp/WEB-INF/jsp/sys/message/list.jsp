@@ -86,9 +86,9 @@
                 <label class="control-label col-sm-3 head-set">Message from </label>
                 <div class="col-sm-9" style="padding-left: 7.5px">
                     <div class="input-group input-large date-picker input-daterange">
-                        <input id="startDate" type="text" class="form-control required head-set">
+                        <input id="dateStart" type="text" class="form-control required head-set">
                         <span class="input-group-addon"> to </span>
-                        <input id="endDate" type="text" class="form-control required head-set">
+                        <input id="dateEnd" type="text" class="form-control required head-set">
                     </div>
                 </div>
             </div>
@@ -182,8 +182,8 @@
                 "type": "get",
                 "data": function (data) {
                     data.title = $("#title").val();
-                    data.startDate = $("#startDate").val();
-                    data.endDate = $("#endDate").val();
+                    data.dateStart = $("#dateStart").val();
+                    data.dateEnd = $("#dateEnd").val();
                     data.readStatus = $("#readStatus").val();
                 }
             },
@@ -205,6 +205,7 @@
                 },
                 {
                     "data": "readDate",
+                    "class": "readDateTd",
                     "render": function (data) {
                         if (data != null) {
                             return new Date(data).Format("yyyy-MM-dd");
@@ -224,10 +225,12 @@
                         isTop = false;
                     }
                     html += ' > <label  style="float: left" data-top="' + isTop + '" onclick="toTop(' + row.id + ',this)"><i class="fa fa-star"></i></label></div></div>';
-                    html += '<a href="#message_modal" data-toggle="modal" data-title="' + row.title + '" data-content="' + row.content + '" onclick="changeMessage(this)">' + row.title + '</a>';
                     var readStatus = row.readStatus;
                     if (readStatus == 0) {
-                        html += "(not read)";
+                        html += '<a  href="#message_modal" data-id="' + row.id + '" data-unread="true" data-toggle="modal" data-title="' + row.title + '" data-content="' + row.content + '" onclick="changeMessage(this)">' + row.title + '</a>';
+                        html += '<span class="unread-span">(not read)</span>';
+                    } else {
+                        html += '<a href="#message_modal"  data-id="' + row.id + '"  data-unread="false" data-toggle="modal" data-title="' + row.title + '" data-content="' + row.content + '" onclick="changeMessage(this)">' + row.title + '</a>';
                     }
                     return html;
                 }
@@ -262,10 +265,28 @@
     }
 
     function changeMessage(obj) {
-        var title = $(obj).attr("data-title");
-        var content = $(obj).attr("data-content");
+        var thisOne = $(obj);
+        var title = thisOne.attr("data-title");
+        var content = thisOne.attr("data-content");
         $("#modal-title").html(title);
         $("#modal-content").html(content);
+
+        var unread = thisOne.attr("data-unread");
+        if (unread) {
+            var id = thisOne.attr("data-id");
+            console.log(id);
+            $.ajax({
+                type: "get",
+                url: "message/batchRead",
+                data: {ids: id},
+                success: function (data) {
+
+                }
+            })
+            thisOne.attr("data-unread", false);
+            thisOne.siblings(".unread-span").remove();
+            thisOne.closest("tr").find(".readDateTd").html(new Date().Format("yyyy-MM-dd"));
+        }
     }
 
 

@@ -57,7 +57,6 @@ public class MessageController extends BaseController {
 //            list.add(message);
 //        }
 //        messageService.insertBatch(list);
-
         return "sys/message/list";
     }
 
@@ -73,10 +72,10 @@ public class MessageController extends BaseController {
             ew.like("title", title);
         }
         if (dateStart != null) {
-            ew.addFilter("read_date >={0}", DateUtil.formatDate(dateStart, "yyyy-MM-dd"));
+            ew.addFilter("create_date >={0}", DateUtil.formatDate(dateStart, "yyyy-MM-dd"));
         }
         if (dateEnd != null) {
-            ew.addFilter("read_date <={0}", DateUtil.formatDate(dateEnd, "yyyy-MM-dd"));
+            ew.addFilter("create_date <={0}", DateUtil.formatDate(dateEnd, "yyyy-MM-dd"));
         }
         if (readStatus != null) {
             ew.addFilter("read_status ={0}", readStatus);
@@ -96,9 +95,9 @@ public class MessageController extends BaseController {
             Message message = new Message();
             message.setId(id);
             if (toTop) {
-                message.setTopTime((int) (new Date().getTime() / 1000));
+                message.setTopTime(DateUtil.formatDate(new Date(), "yyyyMMddHHmmss"));
             } else {
-                message.setTopTime(0);
+                message.setTopTime("0");
             }
             jsonObject.put("success", messageService.updateSelectiveById(message));
         }
@@ -131,6 +130,7 @@ public class MessageController extends BaseController {
             List<Message> list = messageService.selectBatchIds(Arrays.asList(ids.split(",")));
             for (Message m : list) {
                 m.setReadStatus(Const.MESSAGE_READ);
+                m.setReadDate(new Date());
             }
             if (messageService.updateBatchById(list)) {
                 result.put("status", 1);

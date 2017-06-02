@@ -61,7 +61,7 @@ public class Message implements Serializable {
      * 置顶时间秒数
      */
     @TableField(value = "top_time")
-    private Integer topTime;
+    private String topTime;
 
     /**  */
     @TableField(value = "create_date")
@@ -140,11 +140,11 @@ public class Message implements Serializable {
         this.readDate = readDate;
     }
 
-    public Integer getTopTime() {
-        return this.topTime;
+    public String getTopTime() {
+        return topTime;
     }
 
-    public void setTopTime(Integer topTime) {
+    public void setTopTime(String topTime) {
         this.topTime = topTime;
     }
 
