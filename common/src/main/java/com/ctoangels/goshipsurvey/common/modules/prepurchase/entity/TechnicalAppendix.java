@@ -2,6 +2,7 @@ package com.ctoangels.goshipsurvey.common.modules.prepurchase.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import com.baomidou.mybatisplus.annotations.IdType;
 
@@ -32,7 +33,13 @@ public class TechnicalAppendix implements Serializable {
 	private String catagory;
 
 	/** 表头第一个 */
-	private String type;
+	private String title1;
+
+	/** 表头第一个 */
+	private String title2;
+
+	/** 表头第一个 */
+	private String title3;
 
 	/**  */
 	@TableField(value = "create_date")
@@ -53,6 +60,9 @@ public class TechnicalAppendix implements Serializable {
 	/**  */
 	@TableField(value = "del_flag")
 	private Integer delFlag;
+
+	@TableField(exist = false)
+	private List<TechnicalAppendixInfo> technicalAppendixInfo;
 
 
 	public Integer getId() {
@@ -77,14 +87,6 @@ public class TechnicalAppendix implements Serializable {
 
 	public void setCatagory(String catagory) {
 		this.catagory = catagory;
-	}
-
-	public String getType() {
-		return this.type;
-	}
-
-	public void setType(String type) {
-		this.type = type;
 	}
 
 	public Date getCreateDate() {
@@ -127,4 +129,35 @@ public class TechnicalAppendix implements Serializable {
 		this.delFlag = delFlag;
 	}
 
+	public List<TechnicalAppendixInfo> getTechnicalAppendixInfo() {
+		return technicalAppendixInfo;
+	}
+
+	public void setTechnicalAppendixInfo(List<TechnicalAppendixInfo> technicalAppendixInfo) {
+		this.technicalAppendixInfo = technicalAppendixInfo;
+	}
+
+	public String getTitle1() {
+		return title1;
+	}
+
+	public void setTitle1(String title1) {
+		this.title1 = title1;
+	}
+
+	public String getTitle2() {
+		return title2;
+	}
+
+	public void setTitle2(String title2) {
+		this.title2 = title2;
+	}
+
+	public String getTitle3() {
+		return title3;
+	}
+
+	public void setTitle3(String title3) {
+		this.title3 = title3;
+	}
 }

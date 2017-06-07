@@ -7,4 +7,8 @@
 		id, title, attachment_name AS attachmentName, attachment_url AS attachmentUrl, `status`, inspection_report_id AS inspectionReportId, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
 	</sql>
 
+	<select id="selectDocumentByid" resultType="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Document">
+		SELECT * from t_document d where d.inspection_report_id=#{id}
+	</select>
+
 </mapper>

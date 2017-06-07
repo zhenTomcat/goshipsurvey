@@ -1,5 +1,6 @@
 package com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper;
 
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Inspection;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.InspectionReport;
 import com.baomidou.mybatisplus.mapper.AutoMapper;
 
@@ -10,5 +11,5 @@ import com.baomidou.mybatisplus.mapper.AutoMapper;
  */
 public interface InspectionReportMapper extends AutoMapper<InspectionReport> {
 
-
+    InspectionReport selectByPurchaseInspectionId(Integer id);
 }

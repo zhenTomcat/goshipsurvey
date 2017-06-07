@@ -2,6 +2,7 @@ package com.ctoangels.goshipsurvey.common.modules.prepurchase.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import com.baomidou.mybatisplus.annotations.IdType;
 
@@ -53,6 +54,9 @@ public class Galleries implements Serializable {
 	/**  */
 	@TableField(value = "del_flag")
 	private Integer delFlag;
+
+	@TableField(exist = false)
+	private List<Media> medias;
 
 
 	public Integer getId() {
@@ -127,4 +131,11 @@ public class Galleries implements Serializable {
 		this.delFlag = delFlag;
 	}
 
+	public List<Media> getMedias() {
+		return medias;
+	}
+
+	public void setMedias(List<Media> medias) {
+		this.medias = medias;
+	}
 }

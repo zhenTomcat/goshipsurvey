@@ -7,7 +7,7 @@
 		id, purchase_quo_id AS purchaseQuoId, ship_id AS shipId, company_id AS companyId, survey_id AS surveyId, op_id AS opId, loi, passport, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag, company_grade AS companyGrade, remark, inspection_report_id AS inspectionReportId, op_grade AS opGrade, user_id AS userId
 	</sql>
 	<select id="selectByInspection" resultMap="shipDetal">
-			select * from t_purchase_inspection p join t_ship_detail s on p.ship_id=s.id where p.user_id=#{0};
+			select * from t_purchase_inspection p join t_ship_detail s on p.ship_id=s.id where p.user_id=#{0}
 
 	</select>
 

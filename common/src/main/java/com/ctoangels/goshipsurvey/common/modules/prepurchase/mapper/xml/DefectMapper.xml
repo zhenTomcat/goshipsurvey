@@ -7,4 +7,9 @@
 		id, inspection_report_id AS inspectionReportId, description, estimat_cost AS estimatCost, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy
 	</sql>
 
+	<select id="selectDefectById"
+			resultType="Defect">
+		select * from t_defect t where t.inspection_report_id=#{id}
+	</select>
+
 </mapper>

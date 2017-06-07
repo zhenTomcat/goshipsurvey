@@ -58,7 +58,7 @@
                                     <td>
                                         <a href="javascript:;" onclick="unfold(this)">View</a>&nbsp;<li class="fa fa-sort-desc"></li>
                                      </td>
-                                    <td> <a data-target="navTab" href="/prepurchase/surveyor/reportEdit?id=${i.id}" >Edit</a> <li class="fa fa-edit"></li></td>
+                                    <td> <a data-target="navTab" href="/prepurchase/surveyor/reportEdit?inspectionId=${i.id}" >Edit</a> <li class="fa fa-edit"></li></td>
 
                                 </tr>
                                 <tr style="display: none">

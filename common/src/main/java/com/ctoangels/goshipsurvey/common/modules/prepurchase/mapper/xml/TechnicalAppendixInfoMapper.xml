@@ -7,4 +7,8 @@
 		id, one, two, three, technical_appendix_id AS technicalAppendixId, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
 	</sql>
 
+	<select id="selectTechnicalAppendixInfoById" resultType="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.TechnicalAppendixInfo">
+		select * from t_technical_appendix_info t where t.technical_appendix_id=#{id}
+	</select>
+
 </mapper>

@@ -4,7 +4,22 @@
 
 	<!-- 通用查询结果列-->
 	<sql id="Base_Column_List">
-		id, inspection_report_id AS inspectionReportId, catagory, `type`, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
+		id, inspection_report_id AS inspectionReportId, catagory, title1, ,title2, title3, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
 	</sql>
+	<select id="selectTechnicalAppendixByid" resultMap="TechnicalAppendix">
+		select * from t_technical_appendix t where t.inspection_report_id=#{id}
+	</select>
+
+
+	<select id="selectListByReportId" resultMap="TechnicalAppendix">
+		select * from t_technical_appendix t where t.inspection_report_id=#{0} and t.catagory=#{1}
+	</select>
+
+	<resultMap id="TechnicalAppendix" type="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.TechnicalAppendix">
+		<result property="id" column="id" />
+		<result property="inspectionReportId" column="inspection_report_id"/>
+		<collection property="technicalAppendixInfo" column="{id=id}" ofType="TechnicalAppendixInfo"
+					select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.TechnicalAppendixInfoMapper.selectTechnicalAppendixInfoById"/>
+	</resultMap>
 
 </mapper>

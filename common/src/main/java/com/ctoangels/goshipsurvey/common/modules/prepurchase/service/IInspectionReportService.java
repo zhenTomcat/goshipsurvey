@@ -9,6 +9,8 @@ import com.baomidou.framework.service.ISuperService;
  *
  */
 public interface IInspectionReportService extends ISuperService<InspectionReport> {
+    InspectionReport selectByPurchaseInspectionId(Integer purchaseInspectionId);
 
+    Boolean updateDefect(InspectionReport inspectionReport);
 
 }

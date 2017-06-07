@@ -7,4 +7,8 @@
 		id, galleries_id AS galleriesId, file_type AS fileType, file_url AS fileUrl, file_name AS fileName, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
 	</sql>
 
+	<select id="selectMediaById" resultType="Media">
+		SELECT * from t_media m where m.galleries_id=#{id}
+	</select>
+
 </mapper>

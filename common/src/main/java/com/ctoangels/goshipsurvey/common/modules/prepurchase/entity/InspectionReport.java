@@ -2,6 +2,7 @@ package com.ctoangels.goshipsurvey.common.modules.prepurchase.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import com.baomidou.mybatisplus.annotations.IdType;
 
@@ -32,13 +33,10 @@ public class InspectionReport implements Serializable {
 	@TableField(value = "condition_inspection_id")
 	private Integer conditionInspectionId;
 
-	/**  */
-	@TableField(value = "purchase_inspection_id")
-	private Integer purchaseInspectionId;
 
 	/**  */
-	@TableField(value = "t_inspection_reportcol")
-	private String tInspectionReportcol;
+	@TableField(value = "inspection_reportcol")
+	private String inspectionReportcol;
 
 	/**  */
 	@TableField(value = "create_date")
@@ -60,6 +58,23 @@ public class InspectionReport implements Serializable {
 	@TableField(value = "del_flag")
 	private String delFlag;
 
+	@TableField(exist = false)
+	private ShipDetail shipDetail;
+
+	@TableField(exist = false)
+	private List<Defect> defects;
+
+	@TableField(exist = false)
+	private List<Galleries> galleries;
+
+	@TableField(exist = false)
+	private ConditionInspection conditionInspection;
+
+	@TableField(exist = false)
+	private List<TechnicalAppendix> technicalAppendices;
+
+	@TableField(exist = false)
+	private List<Document> documents;
 
 	public Integer getId() {
 		return this.id;
@@ -83,22 +98,6 @@ public class InspectionReport implements Serializable {
 
 	public void setConditionInspectionId(Integer conditionInspectionId) {
 		this.conditionInspectionId = conditionInspectionId;
-	}
-
-	public Integer getPurchaseInspectionId() {
-		return this.purchaseInspectionId;
-	}
-
-	public void setPurchaseInspectionId(Integer purchaseInspectionId) {
-		this.purchaseInspectionId = purchaseInspectionId;
-	}
-
-	public String getTInspectionReportcol() {
-		return this.tInspectionReportcol;
-	}
-
-	public void setTInspectionReportcol(String tInspectionReportcol) {
-		this.tInspectionReportcol = tInspectionReportcol;
 	}
 
 	public Date getCreateDate() {
@@ -141,4 +140,60 @@ public class InspectionReport implements Serializable {
 		this.delFlag = delFlag;
 	}
 
+	public ShipDetail getShipDetail() {
+		return shipDetail;
+	}
+
+	public void setShipDetail(ShipDetail shipDetail) {
+		this.shipDetail = shipDetail;
+	}
+
+	public String getInspectionReportcol() {
+		return inspectionReportcol;
+	}
+
+	public void setInspectionReportcol(String inspectionReportcol) {
+		this.inspectionReportcol = inspectionReportcol;
+	}
+
+
+	public List<Defect> getDefects() {
+		return defects;
+	}
+
+	public void setDefects(List<Defect> defects) {
+		this.defects = defects;
+	}
+
+	public List<Galleries> getGalleries() {
+		return galleries;
+	}
+
+	public void setGalleries(List<Galleries> galleries) {
+		this.galleries = galleries;
+	}
+
+	public ConditionInspection getConditionInspection() {
+		return conditionInspection;
+	}
+
+	public void setConditionInspection(ConditionInspection conditionInspection) {
+		this.conditionInspection = conditionInspection;
+	}
+
+	public List<TechnicalAppendix> getTechnicalAppendices() {
+		return technicalAppendices;
+	}
+
+	public void setTechnicalAppendices(List<TechnicalAppendix> technicalAppendices) {
+		this.technicalAppendices = technicalAppendices;
+	}
+
+	public List<Document> getDocuments() {
+		return documents;
+	}
+
+	public void setDocuments(List<Document> documents) {
+		this.documents = documents;
+	}
 }

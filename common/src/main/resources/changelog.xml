@@ -31,6 +31,28 @@
             alter table t_surveyor ADD COLUMN `ship_type` varchar(64) DEFAULT NULL COMMENT '可验船型';
         </sql>
     </changeSet>
+    <changeSet author="LuZhen" id="17317309132-003">
+        <sql>
+            alter table t_inspection_report drop column purchase_inspection_id
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-004">
+        <sql>
+            alter table t_inspection_report change column t_inspection_reportcol inspection_reportcol varchar(155) NULL;
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-005">
+        <sql>
+            alter table t_media modify column file_url varchar(255) NULL;
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-006">
+        <sql>
+            alter table t_technical_appendix change column type title1 varchar(155) NULL;
+            alter table t_technical_appendix add title2 varchar(155) Null;
+            alter table t_technical_appendix add title3 varchar(155) Null;
+        </sql>
+    </changeSet>
 </databaseChangeLog>
 
 

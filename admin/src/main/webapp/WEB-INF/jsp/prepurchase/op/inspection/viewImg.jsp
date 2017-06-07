@@ -33,23 +33,6 @@
         background-color: #cccccc;
         margin-bottom: 20px;
     }
-
-    .span-li{
-        margin-right: 3px;
-        margin-bottom: 4px;
-    }
-
-    .span-left{
-        display: none;
-        width: 30px;
-        background: rgb(0, 0, 0);
-        color:white;
-        position:absolute;
-        top:0px;
-        right:10px;
-        z-index: 999;
-    }
-
     .span-right{display:none;background: rgb(0, 0, 0);color:white;position:absolute;top:0px;right:0px;z-index: 999;}
 </style>
 <div class="modal-header">
@@ -58,11 +41,10 @@
 </div>
 <div class="col-md-12 line1"></div>
 <form action="" method="post" class="form-horizontal" id="defForm">
-    <input id="galleriesId" value="${galleriesId}"type="hidden"/>
     <div class="col-md-12">
         <div class="col-md-3" style="margin-top: 20px;margin-bottom: 20px;">
-            <button id="upload_img" type="button" >Upload photo</button>&nbsp;&nbsp;
-            <button  type="button" onclick="deleteImgs()">Delect</button>
+            <button id="upload_img" type="button" >Download</button>&nbsp;&nbsp;
+            <button  type="button" onclick="deleteImgs()">Download all</button>
         </div>
     </div>
     <div id="div-img" class="page col-md-12">
@@ -70,12 +52,9 @@
             <div class="div-photo">
                 <div class="div-img" onmouseover="mouseOverImg(this)">
                     <div >
-                    <span  onclick="javascript:;" class="span-left">
-                        <input class="icheck" data-imgId="${m.id}" style=" margin-left: 3px; margin-top: 5px;" type="checkbox"/>
-                    </span>
                         <span onclick="javascript:removeImg(this,'${m.id}');" class="span-right">
-                        <li class="fa fa-remove span-li"></li>
-                    </span>
+                            <input class="icheck" data-imgId="${m.id}" style=" margin-left: 3px; margin-top: 5px;" type="checkbox"/>
+                        </span>
                         <img src="${m.fileUrl}" style="width: 150px;height: 150px;"/>
                     </div>
                     <div style="width: 150px">
@@ -90,8 +69,6 @@
             <div class="col-md-12" style="text-align: center">
                 <br>
                 <div id="detail_alert"></div>
-                <button type="button" class="btn green" onclick="saveInfo(2)">确定</button>
-                &nbsp;&nbsp;&nbsp;&nbsp;
                 <button id="close" type="button" class="btn default" data-dismiss="modal">关闭</button>
                 <br><br>
             </div>
@@ -106,68 +83,5 @@
             $(obj).find("span").hide();
         });
     }
-
-    //移除单张照片
-    function removeImg(obj,imgId){
-        if(confirm("确定要删除？")){
-            $.ajax({
-                url:"prepurchase/surveyor/deleteImg",
-                type:"GET",
-                dataType:"json",
-                data:{
-                    imgId:imgId,
-                },
-                success:function (data) {
-                    if(data){
-                        $(obj).closest(".div-photo").remove();
-                        $("#"+"album"+${galleriesId}).html("("+data.number+")");
-                    }
-                },
-                error:function () {
-
-                }
-            });
-        }
-    }
-
-    //批量删除照片
-    function deleteImgs() {
-        var t=confirm("确定要删除吗？");
-        if(t) {
-            var count = 0;
-            $(".icheck").each(function () {
-                if ($(this).prop("checked")) {
-                    count++
-                    removeImgs($(this),$(this).attr("data-imgId"));
-                }
-            });
-            if (count == 0) {
-                alert("至少选择一个!");
-                return;
-            }
-        }
-    }
-    //移除多张照片
-    function removeImgs(obj,imgId){
-        $.ajax({
-            url:"prepurchase/surveyor/deleteImg",
-            type:"GET",
-            dataType:"json",
-            data:{
-                imgId:imgId,
-            },
-            success:function (data) {
-                if(data){
-                    $(obj).closest(".div-photo").remove();
-                    $("#"+"album"+${galleriesId}).html("("+data.number+")");
-                }
-            },
-            error:function () {
-
-            }
-        });
-    }
-
-    initUploaders_img("upload_img", "shipinfo", "${staticPath}/","div-img",$("#galleriesId").val());
 
 </script>

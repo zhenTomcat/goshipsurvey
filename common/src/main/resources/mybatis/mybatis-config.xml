@@ -22,6 +22,14 @@
                    alias="ShipDetail"></typeAlias>
         <typeAlias type="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Surveyor"
                    alias="Surveyor"></typeAlias>
+        <typeAlias type="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.InspectionReport"
+                   alias="InspectionReport"></typeAlias>
+        <typeAlias type="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Defect"
+                   alias="Defect"></typeAlias>
+        <typeAlias type="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Galleries"
+                   alias="Galleries"></typeAlias>
+        <typeAlias type="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Media"
+                   alias="Media"></typeAlias>
     </typeAliases>
     <!-- 映射map -->
     <mappers>

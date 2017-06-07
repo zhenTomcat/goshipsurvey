@@ -6,5 +6,25 @@
 	<sql id="Base_Column_List">
 		id, ship_id AS shipId, condition_inspection_id AS conditionInspectionId, purchase_inspection_id AS purchaseInspectionId, t_inspection_reportcol AS tInspectionReportcol, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
 	</sql>
+	<select id="selectByPurchaseInspectionId" resultMap="InspectionReport">
+		select * from t_inspection_report i where i.id=#{0}
+	</select>
+
+	<resultMap id="InspectionReport" type="InspectionReport">
+		<result property="id" column="id"></result>
+		<result property="shipId" column="ship_id"></result>
+		<collection property="shipDetail" column="{ship_id=ship_id}" ofType="ShipDetail"
+					select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.ShipDetailMapper.selectByShipId"/>
+		<collection property="defects" column="{id=id}" ofType="ShipDetail"
+					select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.DefectMapper.selectDefectById"/>
+		<collection property="galleries" column="{id=id}" ofType="Galleries"
+					select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.GalleriesMapper.selectGalleriesById"/>
+		<collection property="conditionInspection" column="{id=condition_inspection_id}" ofType="ConditionInspection"
+					select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.ConditionInspectionMapper.selectConditionInspectionById"/>
+		<collection property="technicalAppendices" column="{id=id}" ofType="TechnicalAppendices"
+					select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.TechnicalAppendixMapper.selectTechnicalAppendixByid"/>
+		<collection property="documents" column="{id=id}" ofType="Document"
+					select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.DocumentMapper.selectDocumentByid"/>
+	</resultMap>
 
 </mapper>

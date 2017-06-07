@@ -12,7 +12,6 @@
     table th, td {
         text-align: center;
     }
-
 </style>
 <div class="row">
     <div class="col-md-12">
@@ -26,18 +25,17 @@
                     <table class="table table-striped table-bordered table-hover table-checkable order-column">
                         <thead>
                         <tr>
-                            <th> Public date </th>
                             <th> Ship name </th>
                             <th> IMO </th>
                             <th> ship type </th>
                             <th> Inspection port </th>
                             <th> Inspection dates(LMT)</th>
 
-                            <th> Consignor </th>
-                            <th> Price </th>
-                            <th> Surveyor </th>
+                            <th> Surveyor/Consignor </th>
+                            <th> Total Price </th>
                             <th> Grading </th>
-                            <th> Link to report </th>
+                            <th> View report </th>
+                            <th> Download </th>
                         </tr>
                         </thead>
                         <tbody>
@@ -47,18 +45,16 @@
                                         <fmt:formatDate value="${i.purchaseQuotation.createDate}" pattern="dd/MM/yyyy" var="publicDate"/>
                                         <fmt:formatDate value="${i.purchaseQuotation.startDate}" pattern="dd/MM/yyyy" var="startDate"/>
                                         <fmt:formatDate value="${i.purchaseQuotation.endDate}" pattern="dd/MM/yyyy" var="endDate"/>
-                                        <td> ${publicDate} </td>
                                         <td> ${i.shipDetail.shipName} </td>
                                         <td> ${i.shipDetail.imo} </td>
                                         <td> ${i.shipDetail.shipType} </td>
                                         <td> ${i.purchaseQuotation.location} </td>
                                         <td> ${startDate}-${endDate} </td>
-                                        <td> ${i.purchaseQuotation.opName} </td>
-                                        <td> ${i.purchaseQuotation.totalPrice} </td>
                                         <td> ${i.purchaseQuotation.surveyorName}</td>
+                                        <td> ${i.purchaseQuotation.totalPrice} </td>
                                         <td> ${i.opGrade} </td>
-
-                                        <td> <a href="/prepurchase/surveyor/inspectionId?reportId=${i.id}" >Edit</a> <li class="fa fa-edit"></li></td>
+                                        <td> <a data-target="navTab" href="/prepurchase/op/reportInfo?reportId=${i.inspectionReportId}" >View</a> </td>
+                                        <td> <li class="fa fa-download"></li></td>
                                     </tr>
                                 </c:forEach>
                             </c:if>

@@ -10,5 +10,8 @@ import com.baomidou.framework.service.ISuperService;
  */
 public interface IMediaService extends ISuperService<Media> {
 
+    Integer insertMedia(Media media);
+
+    Integer deleteByMediaId(int mediaId);
 
 }

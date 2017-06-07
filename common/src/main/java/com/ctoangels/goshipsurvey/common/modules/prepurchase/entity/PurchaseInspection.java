@@ -89,8 +89,10 @@ public class PurchaseInspection implements Serializable {
 	@TableField(value = "user_id")
 	private Integer userId;
 
+    @TableField(exist = false)
 	private ShipDetail shipDetail;
 
+    @TableField(exist = false)
 	private PurchaseQuotation purchaseQuotation;
 
 

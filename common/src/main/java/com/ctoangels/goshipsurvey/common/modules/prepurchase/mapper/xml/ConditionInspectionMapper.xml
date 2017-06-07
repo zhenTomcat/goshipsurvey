@@ -7,4 +7,8 @@
 		id, hull, deck, deck_marchinery AS deckMarchinery, ballast_tank AS ballastTank, accommodation, navigation_bridge AS navigationBridge, machinery_space AS machinerySpace, life_saving AS lifeSaving, galley, ballast_water AS ballastWater, hatch_cover AS hatchCover, cargo_hold AS cargoHold, cargo_tank AS cargoTank, cargo_control_room AS cargoControlRoom, pump_room AS pumpRoom, pipelines, inter_gas_system AS interGasSystem, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
 	</sql>
 
+	<select id="selectConditionInspectionById" resultType="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.ConditionInspection">
+		select * from t_condition_inspection where id=#{id}
+	</select>
+
 </mapper>

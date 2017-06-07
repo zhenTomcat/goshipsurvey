@@ -352,7 +352,7 @@ function initUploaders_head_img(buttonId, bucket, domain) {
     uploader.init();
 }
 
-function initUploaders_attachment(buttonId, bucket, domain, obj,remove) {
+function initUploaders_attachment(buttonId, bucket, domain, obj,count,reportId,documentId) {
     var uploader = new plupload.Uploader({
         runtimes: 'html5,flash,silverlight,html4',
         browse_button: buttonId,
@@ -376,8 +376,10 @@ function initUploaders_attachment(buttonId, bucket, domain, obj,remove) {
             },
             FileUploaded: function () {
                 var html = '<a target="_blank" href="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '">' + nativeName + '</a>' +
-                    '<input name="attachmentUrl" type="hidden" value="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '" >' +
-                    '<input name="attachmentName" type="hidden" value="' + nativeName + '"/>';
+                    '<input type="hidden" name="documents['+count+'].id" value="'+documentId+'">'+
+                    '<input type="hidden" name="documents['+count+'].inspectionReportId" value="'+reportId+'">'+
+                    '<input name="documents['+count+'].attachmentUrl" type="hidden" value="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '" >' +
+                    '<input name="documents['+count+'].attachmentName" type="hidden" value="' + nativeName + '"/>';
                 $(obj).parent().prev().html(html);
 
                 var html1 = '<button onclick="clearTd(this)" type="button" style="color: red">Delete</button>';
@@ -424,7 +426,7 @@ function initUploaders_purchase_op_agency_loi(buttonId, bucket, domain) {
     uploader.init();
 }
 
-function initUploaders_img(buttonId, bucket, domain, divId) {
+function initUploaders_img(buttonId, bucket, domain, divId,galleriesId) {
     var uploader = new plupload.Uploader({
         runtimes: 'html5,flash,silverlight,html4',
         browse_button: buttonId,
@@ -447,15 +449,36 @@ function initUploaders_img(buttonId, bucket, domain, divId) {
                 set_upload_param(up, file.name, true, domain);
             },
             FileUploaded: function () {
-                $("#" + divId).append('<div class="div-photo">' +
-                    '<div class="div-img" onmouseover="mouseOverImg(this)">' +//文件原名称
-                    '<div><span  onclick="javascript:;" class="span-left">' +
-                    '<input class="icheck" style=" margin-left: 3px; margin-top: 5px;" type="checkbox"/></span> ' +
-                    ' <span onclick="javascript:removeImg(this);" class="span-right"> <li class="fa fa-remove span-li"></li> </span>' +
-                    ' <img src="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '" style="width: 150px;height: 150px;"/></div>' +
-                    '<div style="width: 150px"><input name="fileUrl" type="hidden" value="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '" >'+
-                    '<input name="fileName" type="hidden" value="' + nativeName + '"/>'+
-                    ' <p >' + nativeName + '</p></div></div></div>');
+
+                $.ajax({
+                    url:"prepurchase/surveyor/addImg",
+                    type:"GET",
+                    dataType:"json",
+                    data:{
+                        fileName:nativeName,
+                        fileUrl:"http://" + bucket + ".oss-cn-shanghai.aliyuncs.com/" + g_object_name ,
+                        galleriesId:galleriesId
+
+                    },
+                    success:function (data) {
+                        if(data.mes){
+                            $("#" + divId).append('<div class="div-photo">' +
+                                '<div class="div-img" onmouseover="mouseOverImg(this)">' +//文件原名称
+                                '<div><span  onclick="javascript:;" class="span-left">' +
+                                '<input class="icheck" data-imgId="" style=" margin-left: 3px; margin-top: 5px;" type="checkbox"/></span> ' +
+                                ' <span onclick="javascript:removeImg(this);" class="span-right"> <li class="fa fa-remove span-li"></li> </span>' +
+                                ' <img src="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '" style="width: 150px;height: 150px;"/></div>' +
+                                '<div style="width: 150px"><input name="fileUrl" type="hidden" value="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '" >'+
+                                ' <p >' + nativeName + '</p></div></div></div>');
+
+                            $("#"+"album"+galleriesId).html("("+data.number+")");
+                        }
+                    },
+                    error:function () {
+
+                    }
+                });
+
             }
         }
     });
