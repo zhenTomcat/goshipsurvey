@@ -53,6 +53,7 @@
     .li-left{margin-left: 2px}
     .li-right{margin-right: 2px}
     textarea{ resize:none;}
+    #info-a{color:white }
 </style>
     <div class="row">
         <div class="col-md-12">
@@ -64,7 +65,7 @@
                             <li class="fa fa-bars"></li>Report List</button>
                         </div>--%>
                         <div style="float: right" >
-                            <ul class="nav nav-tabs" style="margin-top: 10px;margin-bottom: 0px">
+                            <ul id="info-a" class="nav nav-tabs" style="margin-top: 10px;margin-bottom: 0px">
                                 <li class="active">
                                     <a href="#tab1" data-toggle="tab"> Ship details </a>
                                 </li>

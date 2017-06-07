@@ -52,9 +52,9 @@
                                     <td> ${i.shipDetail.shipType} </td>
                                     <td> ${i.purchaseQuotation.location} </td>
                                     <td> ${startDate}-${endDate} </td>
-                                    <td> ${i.purchaseQuotation.opName} </td>
+                                    <td> ${i.op.name} </td>
                                     <td> ${i.purchaseQuotation.totalPrice} </td>
-                                    <td> ${i.purchaseQuotation.surveyorName}</td>
+                                    <td> ${i.surveyor.firstName} ${i.surveyor.lastName}</td>
                                     <td>
                                         <a href="javascript:;" onclick="unfold(this)">View</a>&nbsp;<li class="fa fa-sort-desc"></li>
                                      </td>
@@ -152,7 +152,7 @@
                                                     </div>
                                                     <div class="col-md-12">
                                                         <label class="control-label">Surveyor：</label>
-                                                        <label class="control-label">${i.purchaseQuotation.surveyorName}</label>
+                                                        <label class="control-label">${i.surveyor.firstName} ${i.surveyor.lastName}</label>
                                                     </div>
                                                     <div class="col-md-12">
                                                         <label class="control-label">Surveyor CV：</label>

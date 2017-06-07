@@ -1,26 +1,26 @@
 package com.ctoangels.goshipsurvey.common.modules.prepurchase.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.ShipDetail;
-import com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.ShipDetailMapper;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.*;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.*;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Inspection;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Quotation;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.QuotationApplication;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.SurveyorInfo;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.QuotationApplicationMapper;
-import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.PurchaseQuotation;
-import com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.PurchaseQuotationMapper;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IDocumentService;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IShipDetailService;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.ITechnicalAppendixService;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
 import com.ctoangels.goshipsurvey.common.util.Const;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.PurchaseInspectionMapper;
-import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.PurchaseInspection;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IPurchaseInspectionService;
 import com.baomidou.framework.service.impl.SuperServiceImpl;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,6 +40,22 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
 
     @Autowired
     PurchaseQuotationMapper purchaseQuotationMapper;
+
+    @Autowired
+    InspectionReportMapper inspectionReportMapper;
+
+    @Autowired
+    ITechnicalAppendixService technicalAppendixService;
+
+    @Autowired
+    IDocumentService documentService;
+
+    @Autowired
+    GalleriesMapper galleriesMapper;
+
+    @Autowired
+    IShipDetailService shipDetailService;
+
 
     @Override
     public List<PurchaseInspection> selectByInspection(Integer id) {
@@ -92,7 +108,47 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
             return false;
         }
 
+        //report
+        InspectionReport report=new InspectionReport();
+
+        //创建两个默认相册
+        Galleries galleries=new Galleries();
+        galleries.setName("未命名");
+        galleries.setNumber(0);
+        galleries.setInspectionReportId(report.getId());
+        galleries.setCreateDate(new Date());
+        galleries.setDelFlag(Const.DEL_FLAG_NORMAL);
+        galleriesMapper.insert(galleries);
+
+        Galleries galleries1=new Galleries();
+        galleries1.setName("Certificate");
+        galleries1.setNumber(0);
+        galleries1.setInspectionReportId(report.getId());
+        galleries1.setCreateDate(new Date());
+        galleries1.setDelFlag(Const.DEL_FLAG_NORMAL);
+        galleriesMapper.insert(galleries1);
+
+        //创建16个Technical appendix
+        technicalAppendixService.createTechnicalAppendix(report.getId());
+
+        //创建12Document
+        documentService.createDocuments(report.getId());
+
+        report.setShipId(inspection.getShipId());
+
+        //插入一条报告
+        inspectionReportMapper.insert(report);
+
+        //g更新PurchaseInspiron
+        inspection.setInspectionReportId(report.getId());
+        purchaseInspectionMapper.updateById(inspection);
 
         return true;
+    }
+
+    @Override
+    public List<PurchaseInspection> selectByOpInspection(Integer id) {
+        List<PurchaseInspection> inspections = purchaseInspectionMapper.selectByOpInspection(id);
+        return inspections;
     }
 }

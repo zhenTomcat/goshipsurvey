@@ -58,7 +58,7 @@ public class InspectionReportController extends BaseController {
 
 
 
-    //获取PrepurchaseInspection的列表信息
+    //获取InspectionReport的列表信息
     @RequestMapping(value = "/surveyor/report",method = RequestMethod.GET)
     public String reportList(ModelMap modelMap){
         int id=getCurrentUser().getId();
@@ -73,28 +73,8 @@ public class InspectionReportController extends BaseController {
                        ModelMap modelMap){
         //获取PurchaseInspection信息
         PurchaseInspection purchaseInspection=purchaseInspectionService.selectById(inspectionId);
-        //获取船舶的信息
-        EntityWrapper<ShipDetail> ew =getEntityWrapper();
-        ew.addFilter("id={0}",purchaseInspection.getShipId());
-        ShipDetail shipDetail=shipDetailService.selectOne(ew);
 
-        //创建16个Technical appendix
-        technicalAppendixService.createTechnicalAppendix(purchaseInspection.getInspectionReportId());
-
-        //创建12Document
-        documentService.createDocuments(purchaseInspection.getInspectionReportId());
-
-        InspectionReport inspectionReport=null;
-        if(purchaseInspection.getInspectionReportId()==null){
-            inspectionReport =new InspectionReport();
-            iInspectionReportService.insert(inspectionReport);
-            purchaseInspection.setInspectionReportId(inspectionReport.getId());
-            purchaseInspectionService.updateById(purchaseInspection);
-
-            inspectionReport.setShipDetail(shipDetail);
-        }else {
-            inspectionReport=iInspectionReportService.selectByPurchaseInspectionId(purchaseInspection.getInspectionReportId());
-        }
+        InspectionReport inspectionReport=iInspectionReportService.selectByPurchaseInspectionId(purchaseInspection.getInspectionReportId());
 
         //获取 Vessel tank capacity 这个表下的所有信息
         List<TechnicalAppendix> technicalAppendices=technicalAppendixService.selectListByReportId(purchaseInspection.getInspectionReportId(),"Vessel tank capacity");
@@ -313,7 +293,7 @@ public class InspectionReportController extends BaseController {
     @RequestMapping(value = "/op/report",method = RequestMethod.GET)
     public String opReportList(ModelMap modelMap){
         int id=getCurrentUser().getId();
-        List<PurchaseInspection> inspections=purchaseInspectionService.selectByInspection(id);
+        List<PurchaseInspection> inspections=purchaseInspectionService.selectByOpInspection(id);
         modelMap.put("inspections",inspections);
         return "prepurchase/op/inspection/reportList";
     }
