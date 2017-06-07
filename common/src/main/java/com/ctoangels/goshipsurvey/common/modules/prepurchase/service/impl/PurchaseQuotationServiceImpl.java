@@ -66,6 +66,18 @@ public class PurchaseQuotationServiceImpl extends SuperServiceImpl<PurchaseQuota
     }
 
     @Override
+    public List<PurchaseQuotation> getOPRecordList(Integer opId, Integer start, Integer length) {
+        return purchaseQuotationMapper.getOPRecordList(opId, start, length);
+    }
+
+    @Override
+    public int getRecordTotal(Integer opId) {
+        EntityWrapper<PurchaseQuotation> ew = new EntityWrapper();
+        ew.addFilter("op_id={0} and public_status > {1}", opId, Const.QUOTATION_ING);
+        return purchaseQuotationMapper.selectCountByEw(ew);
+    }
+
+    @Override
     public List<PurchaseQuotation> getSurveyorList(Integer surveyorId, Integer start, Integer length) {
         return purchaseQuotationMapper.getSurveyorList(surveyorId, start, length);
     }

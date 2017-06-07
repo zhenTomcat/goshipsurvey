@@ -49,7 +49,6 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
     }
 
 
-
     @Override
     public boolean initInspection(int quotationId, int applicationId) {
         //更新所有询价申请状态
@@ -83,7 +82,7 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
         //生成船检
         PurchaseInspection inspection = new PurchaseInspection();
         inspection.setOpId(quotation.getOpId());
-        inspection.setCompanyId(companyId);
+        inspection.setUserId(companyId);
         inspection.setSurveyId(surveyorId);
         inspection.setPurchaseQuoId(quotationId);
         inspection.setShipId(quotation.getShipId());

@@ -18,83 +18,110 @@ import com.ctoangels.goshipsurvey.common.util.Const;
 @TableName("t_purchase_inspection")
 public class PurchaseInspection implements Serializable {
 
-	@TableField(exist = false)
-	private static final long serialVersionUID = 1L;
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
 
-	/** 检查的id */
-	@TableId(type = IdType.AUTO)
-	private Integer id;
+    /**
+     * 检查的id
+     */
+    @TableId(type = IdType.AUTO)
+    private Integer id;
 
-	/** 询价id */
-	@TableField(value = "purchase_quo_id")
-	private Integer purchaseQuoId;
+    /**
+     * 询价id
+     */
+    @TableField(value = "purchase_quo_id")
+    private Integer purchaseQuoId;
 
-	/**  */
-	@TableField(value = "ship_id")
-	private Integer shipId;
+    /**  */
+    @TableField(value = "ship_id")
+    private Integer shipId;
 
-	/** suvery的公司id */
-	@TableField(value = "company_id")
-	private Integer companyId;
+    /**
+     * suvery的公司id
+     */
+    @TableField(value = "company_id")
+    private Integer companyId;
 
-	/** surveyor的id */
-	@TableField(value = "survey_id")
-	private Integer surveyId;
+    /**
+     * surveyor的id
+     */
+    @TableField(value = "survey_id")
+    private Integer surveyId;
 
-	/**  */
-	@TableField(value = "op_id")
-	private Integer opId;
+    /**  */
+    @TableField(value = "op_id")
+    private Integer opId;
 
-	/** 免责声明 */
-	private String loi;
+    /**
+     * 免责声明
+     */
+    private String loi;
 
-	/** 护照 */
-	private String passport;
+    /**
+     * 护照
+     */
+    private String passport;
 
-	/** 创建日期 */
-	@TableField(value = "create_date")
-	private Date createDate;
+    /**
+     * 创建日期
+     */
+    @TableField(value = "create_date")
+    private Date createDate;
 
-	/** 创建者 */
-	@TableField(value = "create_by")
-	private String createBy;
+    /**
+     * 创建者
+     */
+    @TableField(value = "create_by")
+    private String createBy;
 
-	/** 修改日期 */
-	@TableField(value = "update_date")
-	private Date updateDate;
+    /**
+     * 修改日期
+     */
+    @TableField(value = "update_date")
+    private Date updateDate;
 
-	/** 修改者 */
-	@TableField(value = "update_by")
-	private String updateBy;
+    /**
+     * 修改者
+     */
+    @TableField(value = "update_by")
+    private String updateBy;
 
-	/**  */
-	@TableField(value = "del_flag")
-	private Integer delFlag;
+    /**  */
+    @TableField(value = "del_flag")
+    private Integer delFlag;
 
-	/** op给surveyor的评分 */
-	@TableField(value = "company_grade")
-	private String companyGrade;
+    /**
+     * op给surveyor的评分
+     */
+    @TableField(value = "company_grade")
+    private String companyGrade;
 
-	/** 备注 */
-	private String remark;
+    /**
+     * 备注
+     */
+    private String remark;
 
-	/** 检查报告id */
-	@TableField(value = "inspection_report_id")
-	private Integer inspectionReportId;
+    /**
+     * 检查报告id
+     */
+    @TableField(value = "inspection_report_id")
+    private Integer inspectionReportId;
 
-	/** surveyor给op的评分 */
-	@TableField(value = "op_grade")
-	private String opGrade;
+    /**
+     * surveyor给op的评分
+     */
+    @TableField(value = "op_grade")
+    private String opGrade;
 
-	@TableField(value = "user_id")
-	private Integer userId;
+    @TableField(value = "user_id")
+    private Integer userId;
 
     @TableField(exist = false)
-	private ShipDetail shipDetail;
+    private ShipDetail shipDetail;
 
     @TableField(exist = false)
-	private PurchaseQuotation purchaseQuotation;
-
+    private PurchaseQuotation purchaseQuotation;
 
 
     public Integer getId() {
@@ -246,27 +273,27 @@ public class PurchaseInspection implements Serializable {
         this.updateBy = userName;
     }
 
-	public Integer getUserId() {
-		return userId;
-	}
+    public Integer getUserId() {
+        return userId;
+    }
 
-	public void setUserId(Integer userId) {
-		this.userId = userId;
-	}
+    public void setUserId(Integer userId) {
+        this.userId = userId;
+    }
 
-	public ShipDetail getShipDetail() {
-		return shipDetail;
-	}
+    public ShipDetail getShipDetail() {
+        return shipDetail;
+    }
 
-	public void setShipDetail(ShipDetail shipDetail) {
-		this.shipDetail = shipDetail;
-	}
+    public void setShipDetail(ShipDetail shipDetail) {
+        this.shipDetail = shipDetail;
+    }
 
-	public PurchaseQuotation getPurchaseQuotation() {
-		return purchaseQuotation;
-	}
+    public PurchaseQuotation getPurchaseQuotation() {
+        return purchaseQuotation;
+    }
 
-	public void setPurchaseQuotation(PurchaseQuotation purchaseQuotation) {
-		this.purchaseQuotation = purchaseQuotation;
-	}
+    public void setPurchaseQuotation(PurchaseQuotation purchaseQuotation) {
+        this.purchaseQuotation = purchaseQuotation;
+    }
 }

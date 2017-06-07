@@ -33,11 +33,13 @@
                         <div class="portlet-body">
                             <div class="well">
                                 <h4>Nationality</h4>
-                                ${surveyor.firstName}
+                                ${surveyor.nationality}
                             </div>
                             <div class="well">
                                 <h4>Available port</h4>
-                                ${surveyor.firstName}
+                                <c:forEach items="${portList}" var="p">
+                                    ${p.portEn},${p.countryCode};
+                                </c:forEach>
                             </div>
                             <div class="well">
                                 <h4>Surveyor's profile</h4>
@@ -45,7 +47,33 @@
                             </div>
                             <div class="well">
                                 <h4>Surveyor's experience</h4>
-                                ${surveyor.surveyorProfile}
+                                <div class="form-group col-md-12">
+                                    <table class="table  table-checkable table-bordered"
+                                           id="experience_table">
+                                        <thead>
+                                        <tr>
+                                            <th width="25%">Time</th>
+                                            <th width="15%">Ship type</th>
+                                            <th width="15%">Company</th>
+                                            <th width="45%">Work content</th>
+                                        </tr>
+                                        <tbody>
+                                        <c:forEach items="${surveyor.experienceList}" var="e">
+                                            <tr>
+                                                <td><fmt:formatDate value="${e.startDate}"
+                                                                    pattern="yyyy-MM-dd"></fmt:formatDate>
+                                                    to
+                                                    <fmt:formatDate value="${e.endDate}"
+                                                                    pattern="yyyy-MM-dd"></fmt:formatDate></td>
+                                                <td>${e.shipType}</td>
+                                                <td>${e.company}</td>
+                                                <td>${e.workContent}</td>
+                                            </tr>
+                                        </c:forEach>
+                                        </tbody>
+                                        </thead>
+                                    </table>
+                                </div>
                             </div>
                         </div>
                     </div>

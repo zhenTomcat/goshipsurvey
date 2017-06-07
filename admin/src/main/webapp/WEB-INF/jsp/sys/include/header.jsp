@@ -29,7 +29,7 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-default">
                             <li>
-                                <a href="javascript:;" data-url="user/editPwd" data-target='navTab'>
+                                <a href="message" data-target='navTab'>
                                     <i class="fa fa-comment"></i>Message </a>
                             </li>
                             <li>

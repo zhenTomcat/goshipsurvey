@@ -107,6 +107,23 @@ public class PurchaseQuotationController extends BaseController {
         return jsonObject;
     }
 
+    @RequestMapping(value = "/op/quotation/cancel", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject chooseComplete(@RequestParam(required = false) int quotationId) {
+        JSONObject jsonObject = new JSONObject();
+        PurchaseQuotation quotation = new PurchaseQuotation();
+        quotation.setId(quotationId);
+        quotation.setPublicStatus(Const.QUOTATION_CANCEL);
+        quotation.setUpdateInfo(getCurrentUser().getName());
+        if (purchaseQuotationService.updateSelectiveById(quotation)) {
+            jsonObject.put("status", 1);
+        } else {
+            jsonObject.put("status", 0);
+        }
+
+        return jsonObject;
+    }
+
 
     //surveyor
     @RequestMapping(value = "/surveyor/quotation")

@@ -11,144 +11,156 @@ import com.baomidou.mybatisplus.annotations.TableName;
 
 /**
  *
- * 
+ *
  *
  */
 @TableName("t_surveyor_experience")
 public class SurveyorExperience implements Serializable {
 
-	@TableField(exist = false)
-	private static final long serialVersionUID = 1L;
+    @TableField(exist = false)
+    private static final long serialVersionUID = 1L;
 
-	/**  */
-	@TableId(type = IdType.AUTO)
-	private Integer id;
+    /**  */
+    @TableId(type = IdType.AUTO)
+    private Integer id;
 
-	/**  */
-	private Date time;
+    /**  */
+    @TableField(value = "start_date")
+    private Date startDate;
 
-	/**  */
-	@TableField(value = "ship_type")
-	private String shipType;
+    /**  */
+    @TableField(value = "end_date")
+    private Date endDate;
 
-	/**  */
-	private String company;
+    /**  */
+    @TableField(value = "ship_type")
+    private String shipType;
 
-	/**  */
-	@TableField(value = "work_contant")
-	private String workContant;
+    /**  */
+    private String company;
 
-	/**  */
-	@TableField(value = "create_date")
-	private Date createDate;
+    /**  */
+    @TableField(value = "work_content")
+    private String workContent;
 
-	/**  */
-	@TableField(value = "create_by")
-	private String createBy;
+    /**  */
+    @TableField(value = "create_date")
+    private Date createDate;
 
-	/**  */
-	@TableField(value = "update_date")
-	private Date updateDate;
+    /**  */
+    @TableField(value = "create_by")
+    private String createBy;
 
-	/**  */
-	@TableField(value = "update_by")
-	private String updateBy;
+    /**  */
+    @TableField(value = "update_date")
+    private Date updateDate;
 
-	/**  */
-	@TableField(value = "del_flag")
-	private Integer delFlag;
+    /**  */
+    @TableField(value = "update_by")
+    private String updateBy;
 
-	/**  */
-	@TableField(value = "surveyor_id")
-	private String surveyorId;
+    /**  */
+    @TableField(value = "del_flag")
+    private Integer delFlag;
+
+    /**  */
+    @TableField(value = "surveyor_id")
+    private Integer surveyorId;
 
 
-	public Integer getId() {
-		return this.id;
-	}
+    public Integer getId() {
+        return this.id;
+    }
 
-	public void setId(Integer id) {
-		this.id = id;
-	}
+    public void setId(Integer id) {
+        this.id = id;
+    }
 
-	public Date getTime() {
-		return this.time;
-	}
+    public Date getStartDate() {
+        return startDate;
+    }
 
-	public void setTime(Date time) {
-		this.time = time;
-	}
+    public void setStartDate(Date startDate) {
+        this.startDate = startDate;
+    }
 
-	public String getShipType() {
-		return this.shipType;
-	}
+    public Date getEndDate() {
+        return endDate;
+    }
 
-	public void setShipType(String shipType) {
-		this.shipType = shipType;
-	}
+    public void setEndDate(Date endDate) {
+        this.endDate = endDate;
+    }
 
-	public String getCompany() {
-		return this.company;
-	}
+    public String getShipType() {
+        return this.shipType;
+    }
 
-	public void setCompany(String company) {
-		this.company = company;
-	}
+    public void setShipType(String shipType) {
+        this.shipType = shipType;
+    }
 
-	public String getWorkContant() {
-		return this.workContant;
-	}
+    public String getCompany() {
+        return this.company;
+    }
 
-	public void setWorkContant(String workContant) {
-		this.workContant = workContant;
-	}
+    public void setCompany(String company) {
+        this.company = company;
+    }
 
-	public Date getCreateDate() {
-		return this.createDate;
-	}
+    public String getWorkContent() {
+        return workContent;
+    }
 
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
+    public void setWorkContent(String workContent) {
+        this.workContent = workContent;
+    }
 
-	public String getCreateBy() {
-		return this.createBy;
-	}
+    public Date getCreateDate() {
+        return this.createDate;
+    }
 
-	public void setCreateBy(String createBy) {
-		this.createBy = createBy;
-	}
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
+    }
 
-	public Date getUpdateDate() {
-		return this.updateDate;
-	}
+    public String getCreateBy() {
+        return this.createBy;
+    }
 
-	public void setUpdateDate(Date updateDate) {
-		this.updateDate = updateDate;
-	}
+    public void setCreateBy(String createBy) {
+        this.createBy = createBy;
+    }
 
-	public String getUpdateBy() {
-		return this.updateBy;
-	}
+    public Date getUpdateDate() {
+        return this.updateDate;
+    }
 
-	public void setUpdateBy(String updateBy) {
-		this.updateBy = updateBy;
-	}
+    public void setUpdateDate(Date updateDate) {
+        this.updateDate = updateDate;
+    }
 
-	public Integer getDelFlag() {
-		return this.delFlag;
-	}
+    public String getUpdateBy() {
+        return this.updateBy;
+    }
 
-	public void setDelFlag(Integer delFlag) {
-		this.delFlag = delFlag;
-	}
+    public void setUpdateBy(String updateBy) {
+        this.updateBy = updateBy;
+    }
 
-	public String getSurveyorId() {
-		return this.surveyorId;
-	}
+    public Integer getDelFlag() {
+        return this.delFlag;
+    }
 
-	public void setSurveyorId(String surveyorId) {
-		this.surveyorId = surveyorId;
-	}
+    public void setDelFlag(Integer delFlag) {
+        this.delFlag = delFlag;
+    }
 
+    public Integer getSurveyorId() {
+        return surveyorId;
+    }
+
+    public void setSurveyorId(Integer surveyorId) {
+        this.surveyorId = surveyorId;
+    }
 }

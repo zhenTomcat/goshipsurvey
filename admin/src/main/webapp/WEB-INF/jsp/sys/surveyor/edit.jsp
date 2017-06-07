@@ -38,6 +38,7 @@
                                 <div class="tab-pane active">
                                     <form id="add-surveyor-form" action="surveyor/editComplete" method="post">
                                         <input name="id" value="${surveyor.id}" type="hidden">
+                                        <input type="hidden" name="portraitUrl" id="portraitUrl">
                                         <input name="companyId" value="${surveyor.companyId}" type="hidden">
                                         <input name="createBy" value="${surveyor.createBy}" type="hidden">
                                         <input name="createDate"
@@ -73,10 +74,10 @@
                                             <label class="control-labe">Available survey time from</label>
                                             <div class="input-group input-large date-picker input-daterange">
                                                 <input type="text" class="form-control required" name="surveyTimeStart"
-                                                       value=" <fmt:formatDate value="${surveyor.surveyTimeStart}" pattern="yyyy-MM-dd"></fmt:formatDate>  ">
+                                                       value=" <fmt:formatDate value="${surveyor.surveyTimeStart}" pattern="yyyy-MM-dd"></fmt:formatDate>">
                                                 <span class="input-group-addon"> to </span>
                                                 <input type="text" class="form-control required" name="surveyTimeEnd"
-                                                       value=" <fmt:formatDate value="${surveyor.surveyTimeEnd}" pattern="yyyy-MM-dd"></fmt:formatDate>  ">
+                                                       value="<fmt:formatDate value="${surveyor.surveyTimeEnd}" pattern="yyyy-MM-dd"></fmt:formatDate>">
                                             </div>
                                         </div>
                                         <div class="form-group col-md-12">
@@ -103,7 +104,7 @@
                                                         class="form-control js-data-example-ajax" multiple>
                                                     <c:forEach items="${portList}" var="port">
                                                         <option value="${port.id}"
-                                                                selected="selected">${port.portEn}</option>
+                                                                selected="selected">${port.portEn},${port.countryCode}</option>
                                                     </c:forEach>
                                                 </select>
                                             </div>
@@ -114,8 +115,49 @@
                                                       name="surveyorProfile">${surveyor.surveyorProfile}</textarea>
                                         </div>
                                         <div class="form-group col-md-12">
-                                            <label class="control-label">Surveyor's experience</label>
-                                            <textarea class="form-control" rows="5"></textarea>
+                                            <label class="control-label">Surveyor's experience</label>&nbsp;
+                                            <button id="add-row-btn" type="button" class="btn btn-sm green"
+                                                    style="padding: 2px 5px" onclick="TableDeal.addRow()">+ Add new
+                                            </button>
+                                            <table class="table  table-checkable table-bordered"
+                                                   id="experience_table">
+                                                <thead>
+                                                <tr>
+                                                    <th width="25%">Time</th>
+                                                    <th width="15%">Ship type</th>
+                                                    <th width="15%">Company</th>
+                                                    <th width="40%">Work content</th>
+                                                    <th width="5%">Delete</th>
+                                                </tr>
+                                                <tbody>
+                                                <c:forEach items="${experienceList}" var="e">
+                                                    <tr>
+                                                        <td><input type="text" class="date-picker form-control"
+                                                                   value="<fmt:formatDate value="${e.startDate}" pattern="yyyy-MM-dd"></fmt:formatDate>"
+                                                                   style="width:45%;display: inline-block">
+                                                            to
+                                                            <input value="<fmt:formatDate value="${e.endDate}" pattern="yyyy-MM-dd"></fmt:formatDate>"
+                                                                   type="text" class="form-control date-picker"
+                                                                   style="width:45%;display: inline-block"></td>
+                                                        <td><input value="${e.shipType}" type="text"
+                                                                   class=" form-control"></td>
+                                                        <td><input value="${e.company}" type="text"
+                                                                   class=" form-control"></td>
+                                                        <td><input value="${e.workContent}" type="text"
+                                                                   class=" form-control"></td>
+                                                        <td>
+                                                            <button onclick="TableDeal.deleteRow(this)" type="button"
+                                                                    class="btn red">Delete
+                                                            </button>
+                                                        </td>
+                                                        <input type="hidden" value="${e.id}">
+                                                        <input type="hidden" value="${e.delFlag}"
+                                                               class="del-flag-class">
+                                                    </tr>
+                                                </c:forEach>
+                                                </tbody>
+                                                </thead>
+                                            </table>
                                         </div>
                                         <div class="margiv-top-10 col-md-12">
                                             <button type="button" onclick="editSurveyor(this)" class="btn green"> Save
@@ -135,6 +177,7 @@
 
 <script>
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
+    initUploaders_surveyor_head_img("change-head-img-btn", "shipinfo", "${staticPath}/");
 
     if (jQuery().datepicker) {
         $('.date-picker').datepicker({
@@ -151,6 +194,7 @@
         btn.attr("disabled", true);
         if (check()) {
             $("#add-surveyor-form").ajaxSubmit({
+                data: {myList: JSON.stringify(TableDeal.getData())},
                 success: function (data) {
                     if (data.success) {
                         alert("success");
@@ -190,13 +234,13 @@
             });
             function formatRepo(repo) {
                 if (repo.loading) return repo.text;
-                var markup = repo.portEn;
+                var markup = repo.portEn + "," + repo.countryCode;
 
                 return markup;
             }
 
             function formatRepoSelection(repo) {
-                return repo.portEn || repo.text;
+                return repo.text;
             }
 
             $(".js-data-example-ajax").select2({
@@ -204,11 +248,9 @@
                 ajax: {
                     url: "port/searchList",
                     dataType: 'json',
-                    delay: 10,
                     data: function (params) {
                         return {
                             keyword: params.term,
-                            page: params.page
                         };
                     },
                     processResults: function (data, page) {
@@ -225,27 +267,15 @@
                 templateResult: formatRepo,
                 templateSelection: formatRepoSelection
             });
-            $("button[data-select2-open]").click(function () {
-                $("#" + $(this).data("select2-open")).select2("open");
-            });
-            $(":checkbox").on("click", function () {
-                $(this).parent().nextAll("select").prop("disabled", !this.checked);
-            });
             $(".select2, .select2-multiple, .select2-allow-clear, .js-data-example-ajax").on("select2:open", function () {
                 if ($(this).parents("[class*='has-']").length) {
                     var classNames = $(this).parents("[class*='has-']")[0].className.split(/\s+/);
-
                     for (var i = 0; i < classNames.length; ++i) {
                         if (classNames[i].match("has-")) {
                             $("body > .select2-container").addClass(classNames[i]);
                         }
                     }
                 }
-            });
-            $(".js-btn-set-scaling-classes").on("click", function () {
-                $("#select2-multiple-input-sm, #select2-single-input-sm").next(".select2-container--bootstrap").addClass("input-sm");
-                $("#select2-multiple-input-lg, #select2-single-input-lg").next(".select2-container--bootstrap").addClass("input-lg");
-                $(this).removeClass("btn-primary btn-outline").prop("disabled", true);
             });
         }
         return {
@@ -260,5 +290,39 @@
             PortMultiSelect.init();
         });
     }
+
+
+    var experienceTable = $("#experience_table");
+    var TableDeal = function () {
+        var row = '<tr><td><input type="text" class="date-picker form-control"  style="width:45%;display: inline-block">to<input type="text" class="form-control date-picker" style="width:45%;display: inline-block"></td> <td><input type="text" class=" form-control"></td> <td><input type="text" class=" form-control"></td> <td><input type="text" class="form-control"></td> <td> <button onclick="TableDeal.deleteRow(this)" type="button" class="btn red">Delete</button> </td><input type="hidden" > <input type="hidden" value="0" class="del-flag-class"></tr>'
+        return {
+            addRow: function () {
+                experienceTable.append(row);
+                $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
+            },
+            deleteRow: function (obj) {
+                var tr = $(obj).closest("tr");
+                tr.css("display", "none");
+                tr.find(".del-flag-class").val(1);
+            },
+            getData: function () {
+                var experienceList = [];
+                experienceTable.find("tbody tr").each(function (i, e) {
+                    var surveyorExperience = {};
+                    var inputs = $(e).find("input");
+                    surveyorExperience.startDate = $(inputs[0]).val();
+                    surveyorExperience.endDate = $(inputs[1]).val();
+                    surveyorExperience.shipType = $(inputs[2]).val();
+                    surveyorExperience.company = $(inputs[3]).val();
+                    surveyorExperience.workContent = $(inputs[4]).val();
+                    surveyorExperience.id = $(inputs[5]).val();
+                    surveyorExperience.delFlag = $(inputs[6]).val();
+                    experienceList.push(surveyorExperience);
+                })
+                return experienceList;
+            }
+        }
+    }();
+
 
 </script>

@@ -94,6 +94,9 @@ public class Surveyor implements Serializable {
     @TableField(exist = false)
     private List<Port> portList;
 
+    @TableField(exist = false)
+    private List<SurveyorExperience> experienceList;
+
     /**
      * 创建日期
      */
@@ -233,6 +236,14 @@ public class Surveyor implements Serializable {
 
     public void setPortList(List<Port> portList) {
         this.portList = portList;
+    }
+
+    public List<SurveyorExperience> getExperienceList() {
+        return experienceList;
+    }
+
+    public void setExperienceList(List<SurveyorExperience> experienceList) {
+        this.experienceList = experienceList;
     }
 
     public Date getCreateDate() {

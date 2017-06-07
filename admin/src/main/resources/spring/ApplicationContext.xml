@@ -65,6 +65,7 @@
                 /register_register = anon
                 /register/activateConfirm = anon
                 /index = anon
+                /message/** = user
                 /user/unauthorized = anon
                 /user/editPwd = anon
                 /test=anon

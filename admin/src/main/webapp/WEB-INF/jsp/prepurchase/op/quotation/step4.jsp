@@ -100,8 +100,6 @@
                         <div class="form-actions right">
                             <a data-toggle="tab" href="#step3"
                                class="btn default btn-back">Back</a>
-                            <a data-toggle="tab" href="#step5"
-                               class="btn default">Next</a>
                         </div>
                     </form>
                 </div>
