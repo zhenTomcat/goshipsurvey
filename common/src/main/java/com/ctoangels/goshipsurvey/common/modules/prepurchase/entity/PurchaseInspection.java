@@ -118,6 +118,18 @@ public class PurchaseInspection implements Serializable {
     @TableField(value = "user_id")
     private Integer userId;
 
+    @TableField(value = "loi_url")
+    private String loiUrl;
+
+    @TableField(value = "passport_url")
+    private String passportUrl;
+
+    /**
+     * 报告提交状态
+     */
+    @TableField(value = "submit_status")
+    private Integer submitStatus;
+
     @TableField(exist = false)
     private ShipDetail shipDetail;
 
@@ -317,5 +329,29 @@ public class PurchaseInspection implements Serializable {
 
     public void setOp(User op) {
         this.op = op;
+    }
+
+    public Integer getSubmitStatus() {
+        return submitStatus;
+    }
+
+    public void setSubmitStatus(Integer submitStatus) {
+        this.submitStatus = submitStatus;
+    }
+
+    public String getLoiUrl() {
+        return loiUrl;
+    }
+
+    public void setLoiUrl(String loiUrl) {
+        this.loiUrl = loiUrl;
+    }
+
+    public String getPassportUrl() {
+        return passportUrl;
+    }
+
+    public void setPassportUrl(String passportUrl) {
+        this.passportUrl = passportUrl;
     }
 }

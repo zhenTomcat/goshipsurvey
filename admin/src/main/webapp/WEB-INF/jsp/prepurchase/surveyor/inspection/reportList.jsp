@@ -53,9 +53,9 @@
                                         <td> ${i.shipDetail.shipType} </td>
                                         <td> ${i.purchaseQuotation.location} </td>
                                         <td> ${startDate}-${endDate} </td>
-                                        <td> ${i.purchaseQuotation.opName} </td>
+                                        <td> ${i.op.name} </td>
                                         <td> ${i.purchaseQuotation.totalPrice} </td>
-                                        <td> ${i.purchaseQuotation.surveyorName}</td>
+                                        <td> ${i.surveyor.firstName} ${i.surveyor.lastName}</td>
                                         <td> ${i.opGrade} </td>
 
                                         <td> <a href="/prepurchase/surveyor/inspectionId?reportId=${i.id}" >Edit</a> <li class="fa fa-edit"></li></td>

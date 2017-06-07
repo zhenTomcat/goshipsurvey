@@ -120,14 +120,6 @@ public class PurchaseQuotation implements Serializable {
     private Double totalPrice;
 
     /**  */
-    @TableField(value = "op_name")
-    private String opName;
-
-    /**  */
-    @TableField(value = "surveyor_name")
-    private String surveyorName;
-
-    /**  */
     @TableField(value = "del_flag")
     private Integer delFlag;
 
@@ -273,21 +265,6 @@ public class PurchaseQuotation implements Serializable {
         this.totalPrice = totalPrice;
     }
 
-    public String getOpName() {
-        return opName;
-    }
-
-    public void setOpName(String opName) {
-        this.opName = opName;
-    }
-
-    public String getSurveyorName() {
-        return surveyorName;
-    }
-
-    public void setSurveyorName(String surveyorName) {
-        this.surveyorName = surveyorName;
-    }
 
     public Integer getApplicationCount() {
         return applicationCount;

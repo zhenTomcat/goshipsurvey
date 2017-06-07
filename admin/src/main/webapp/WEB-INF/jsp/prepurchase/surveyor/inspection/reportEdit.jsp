@@ -674,7 +674,7 @@
                                             <a href="javascript:;" onclick="nextLi()" class="btn btn-outline green button-next"> Save
                                                 <i class="fa fa-angle-right"></i>
                                             </a>
-                                            <a href="javascript:;" class="btn green button-submit"> Submit
+                                            <a href="javascript:;" onclick="submitReport()" class="btn green button-submit"> Submit
                                                 <i class="fa fa-check"></i>
                                             </a>
                                         </div>
@@ -1024,4 +1024,25 @@
         obj.find("a").click();
         obj.addClass("info");
     }*/
+
+   /*提交报告*/
+   function submitReport() {
+       var reportId=$("#reportId").val();
+       $.ajax({
+           url:"prepurchase/surveyor/submitReport",
+           type:"GET",
+           dataType:"json",
+           data:{
+               reportId:reportId
+           },
+           success:function (data) {
+               if(data){
+                   alert("SUCCESS")
+               }
+           },
+           error:function () {
+
+           }
+       });
+   }
 </script>

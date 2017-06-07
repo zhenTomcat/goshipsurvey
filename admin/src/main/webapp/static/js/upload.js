@@ -515,5 +515,73 @@ function initUploaders_surveyor_head_img(buttonId, bucket, domain) {
     uploader.init();
 }
 
+function initUploaders_surveyor_loi(buttonId,bucket,domain,obj){
+    var uploader = new plupload.Uploader({
+        runtimes: 'html5,flash,silverlight,html4',
+        browse_button: buttonId,
+        flash_swf_url: domain + 'assets/plugins/plupload-2.1.2/js/Moxie.swf',
+        silverlight_xap_url: domain + 'assets/plugins/plupload-2.1.2/js/Moxie.xap',
+        url: 'http://oss.aliyuncs.com',
+        filters: {
+            mime_types: [ //上传pdf,txt和zip,rar文件
+                {title: "Zip files", extensions: "zip,rar"},
+                {title: "Text files", extensions: "txt,pdf"}
+            ],
+            max_file_size: '100mb', //最大只能上传100mb的文件
+            prevent_duplicates: true //不允许选取重复文件
+        },
+        init: {
+            FilesAdded: function (up) {
+                set_upload_param(up, '', false, domain);
+            },
+            BeforeUpload: function (up, file) {
+                set_upload_param(up, file.name, true, domain);
+            },
+            FileUploaded: function () {
+                 var html = '<a target="_blank" href="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '">' + nativeName + '</a>' +
+                       '<input type="hidden" name="loi" value="'+nativeName+'">'+
+                       '<input type="hidden" name="loitUrl" value="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '">';
+                $(obj).parent().prev().html(html);
+                $(obj).parent().html('<button onclick="deleteLabelLoi(this)" type="button" class="btn btn-sm red"><li class="fa fa-remove"></li>Delete</button>');
+            }
+        }
+    });
+    uploader.init();
+}
+
+function initUploaders_surveyor_passport(buttonId,bucket,domain,obj){
+    var uploader = new plupload.Uploader({
+        runtimes: 'html5,flash,silverlight,html4',
+        browse_button: buttonId,
+        flash_swf_url: domain + 'assets/plugins/plupload-2.1.2/js/Moxie.swf',
+        silverlight_xap_url: domain + 'assets/plugins/plupload-2.1.2/js/Moxie.xap',
+        url: 'http://oss.aliyuncs.com',
+        filters: {
+            mime_types: [ //上传pdf,txt和zip,rar文件
+                {title: "Zip files", extensions: "zip,rar"},
+                {title: "Text files", extensions: "txt,pdf"}
+            ],
+            max_file_size: '100mb', //最大只能上传100mb的文件
+            prevent_duplicates: true //不允许选取重复文件
+        },
+        init: {
+            FilesAdded: function (up) {
+                set_upload_param(up, '', false, domain);
+            },
+            BeforeUpload: function (up, file) {
+                set_upload_param(up, file.name, true, domain);
+            },
+            FileUploaded: function () {
+                var html = '<a target="_blank" href="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '">' + nativeName + '</a>' +
+                    '<input type="hidden" name="passport" value="'+nativeName+'">'+
+                    '<input type="hidden" name="passporttUrl" value="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '">';
+                $(obj).parent().prev().html(html);
+                $(obj).parent().html('<button onclick="deleteLabelPassport(this)" type="button" class="btn btn-sm red"><li class="fa fa-remove"></li>Delete</button>');
+            }
+        }
+    });
+    uploader.init();
+}
+
 
 

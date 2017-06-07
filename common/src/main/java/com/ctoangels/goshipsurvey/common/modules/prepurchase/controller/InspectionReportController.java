@@ -282,6 +282,24 @@ public class InspectionReportController extends BaseController {
         return jsonObject;
     }
 
+    //surveyour提交报告
+    @RequestMapping(value = "/surveyor/submitReport")
+    @ResponseBody
+    public JSONObject submitReport(@RequestParam(required = false) Integer reportId){
+        JSONObject jsonObject=new JSONObject();
+        try{
+            PurchaseInspection inspection=purchaseInspectionService.selectById(reportId);
+            inspection.setSubmitStatus(Const.REPORT_SUBMIT);
+            purchaseInspectionService.updateById(inspection);
+
+            jsonObject.put("mes",true);
+        }catch (Exception e){
+            jsonObject.put("mes",false);
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+
 
 
 
@@ -308,7 +326,7 @@ public class InspectionReportController extends BaseController {
 
         boolean flag=false;
         for(TechnicalAppendix t:technicalAppendices){
-            if(t.getTechnicalAppendixInfo()!=null){
+            if(t.getTechnicalAppendixInfo()!=null && t.getTechnicalAppendixInfo().size()>0){
                 flag=true;
                 break;
             }

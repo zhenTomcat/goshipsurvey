@@ -50,11 +50,24 @@
                                         <td> ${i.shipDetail.shipType} </td>
                                         <td> ${i.purchaseQuotation.location} </td>
                                         <td> ${startDate}-${endDate} </td>
-                                        <td> ${i.purchaseQuotation.surveyorName}</td>
+                                        <td> ${i.surveyor.firstName} ${i.surveyor.lastName}</td>
                                         <td> ${i.purchaseQuotation.totalPrice} </td>
-                                        <td> ${i.opGrade} </td>
-                                        <td> <a data-target="navTab" href="/prepurchase/op/reportInfo?reportId=${i.inspectionReportId}" >View</a> </td>
-                                        <td> <li class="fa fa-download"></li></td>
+
+                                        <td>
+                                            <c:if test="${i.submitStatus==1}">
+                                                    ${i.opGrade}
+                                            </c:if>
+                                        </td>
+                                        <td>
+                                            <c:if test="${i.submitStatus==1}">
+                                                <a data-target="navTab" href="/prepurchase/op/reportInfo?reportId=${i.inspectionReportId}" >View</a>
+                                            </c:if>
+                                        </td>
+                                        <td>
+                                            <c:if test="${i.submitStatus==1}">
+                                                <li class="fa fa-download"></li>
+                                            </c:if>
+                                        </td>
                                     </tr>
                                 </c:forEach>
                             </c:if>
