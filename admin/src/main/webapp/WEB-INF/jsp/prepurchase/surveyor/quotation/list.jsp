@@ -57,7 +57,7 @@
         </div>
     </div>
 </div>
-<a id="goToSurveyorInfo" style="display: none" data-target="navTab"></a>
+<a id="goToSurveyorInfo" style="display: none" data-model="dialog" ></a>
 <script>
     var quotationTable = $("#quotation_table");//已申请的quotation表格
     var surveyList;
@@ -245,8 +245,8 @@
         } else {
             var surveyor = application.surveyor;
             html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5">Price:</label> <div class="input-group col-md-7"> ' + application.totalPrice + '</div></div>';
-            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">Surveyor:</label> <div class="input-group col-md-7">' + surveyor.lastName + '</div></div>';
-            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">SurveyorCV:</label>  <a class="col-md-7" data-target="navTab" href="surveyor/info?id=' + surveyor.id + '" style="padding-top: 8px; vertical-align: middle">VIEW</a></div>';
+            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">Surveyor:</label> <div class="input-group col-md-7">'+ surveyor.firstName+" "  + surveyor.lastName + '</div></div>';
+            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">SurveyorCV:</label>  <a class="col-md-7" data-model="dialog"  href="surveyor/info?id=' + surveyor.id + '" style="padding-top: 8px; vertical-align: middle">VIEW</a></div>';
         }
         html += "</div>";
         return html;

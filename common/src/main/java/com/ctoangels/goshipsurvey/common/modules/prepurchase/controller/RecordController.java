@@ -1,6 +1,7 @@
 package com.ctoangels.goshipsurvey.common.modules.prepurchase.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.PurchaseInspection;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.PurchaseQuotation;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IPurchaseInspectionService;
@@ -14,6 +15,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 /**

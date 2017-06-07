@@ -24,10 +24,15 @@
         overflow-y: auto;
     }
 
-    textarea.form-control {
-
+    .modal-dialog {
+        width: 80%;
+        margin: 30px auto;
     }
 </style>
+<div class="modal-header" style="background-color: #3598dc;">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+    <h4 class="modal-title" style="color: white">Company info</h4>
+</div>
 <div class="row">
     <div class="col-md-12">
         <div class="profile-sidebar">
@@ -41,12 +46,12 @@
             <div class="row">
                 <div class="col-md-12">
                     <div class="portlet light ">
-                        <div class="portlet-title tabbable-line">
-                            <div class="caption caption-md">
-                                <i class="icon-globe theme-font hide"></i>
-                                <span class="caption-subject font-blue-madison bold uppercase" style="font-size: 30px">Profile Account</span>
-                            </div>
-                        </div>
+                        <%--<div class="portlet-title tabbable-line">--%>
+                            <%--<div class="caption caption-md">--%>
+                                <%--<i class="icon-globe theme-font hide"></i>--%>
+                                <%--<span class="caption-subject font-blue-madison bold uppercase" style="font-size: 30px">Profile Account</span>--%>
+                            <%--</div>--%>
+                        <%--</div>--%>
                         <div class="portlet-body">
                             <div class="tab-content">
                                 <div class="tab-pane active" id="tab_1_1">

@@ -168,11 +168,11 @@
                                         <c:forEach items="${list}" var="application">
                                             <tr>
                                                 <th>${application.user.name}</th>
-                                                <th><a data-target="navTab"
+                                                <th><a data-model="dialog"
                                                        href="user/companyInfo?id=${application.user.id}">View</a></th>
                                                 <th>${application.user.address}</th>
                                                 <th>${application.surveyor.lastName}</th>
-                                                <th><a data-target="navTab"
+                                                <th><a data-model="dialog"
                                                        href="surveyor/info?id=${application.surveyor.id}">View</a>
                                                 </th>
                                                 <th>
