@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.annotations.IdType;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
 import com.ctoangels.goshipsurvey.common.util.Const;
 
 /**
@@ -123,6 +124,11 @@ public class PurchaseInspection implements Serializable {
     @TableField(exist = false)
     private PurchaseQuotation purchaseQuotation;
 
+    @TableField(exist = false)
+    private Surveyor surveyor;
+
+    @TableField(exist = false)
+    private User op;
 
     public Integer getId() {
         return this.id;
@@ -295,5 +301,21 @@ public class PurchaseInspection implements Serializable {
 
     public void setPurchaseQuotation(PurchaseQuotation purchaseQuotation) {
         this.purchaseQuotation = purchaseQuotation;
+    }
+
+    public Surveyor getSurveyor() {
+        return surveyor;
+    }
+
+    public void setSurveyor(Surveyor surveyor) {
+        this.surveyor = surveyor;
+    }
+
+    public User getOp() {
+        return op;
+    }
+
+    public void setOp(User op) {
+        this.op = op;
     }
 }

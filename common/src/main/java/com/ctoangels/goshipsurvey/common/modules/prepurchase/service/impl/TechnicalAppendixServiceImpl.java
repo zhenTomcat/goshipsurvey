@@ -38,10 +38,6 @@ public class TechnicalAppendixServiceImpl extends SuperServiceImpl<TechnicalAppe
 
     @Override
     public Boolean createTechnicalAppendix(Integer reportId) {
-        EntityWrapper<TechnicalAppendix> ew = new EntityWrapper<>();
-        ew.addFilter("inspection_report_id={0}", reportId);
-        List<TechnicalAppendix> technicalAppendices = technicalAppendixService.selectList(ew);
-        if (technicalAppendices.size() <= 0) {
             for (int i = 0; i < 15; i++) {
                 TechnicalAppendix technicalAppendix = new TechnicalAppendix();
                 technicalAppendix.setInspectionReportId(reportId);
@@ -154,7 +150,6 @@ public class TechnicalAppendixServiceImpl extends SuperServiceImpl<TechnicalAppe
                 }
 
                 }
-            }
             return null;
         }
 

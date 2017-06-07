@@ -14,4 +14,7 @@ public interface IPurchaseInspectionService extends ISuperService<PurchaseInspec
 
     boolean initInspection(int quotationId, int applicationId);
 
+    List<PurchaseInspection> selectByOpInspection(Integer id);
+
+
 }
