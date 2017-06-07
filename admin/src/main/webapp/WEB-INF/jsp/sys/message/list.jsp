@@ -274,7 +274,6 @@
         var unread = thisOne.attr("data-unread");
         if (unread) {
             var id = thisOne.attr("data-id");
-            console.log(id);
             $.ajax({
                 type: "get",
                 url: "message/batchRead",

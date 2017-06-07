@@ -181,6 +181,48 @@ public class SurveyorController extends BaseController {
         return jsonObject;
     }
 
+    @RequestMapping(value = "/editPort", method = RequestMethod.GET)
+    public String editPort(ModelMap map, @RequestParam(required = false) Integer id) {
+        Surveyor surveyor = surveyorService.selectById(id);
+        String portString = surveyor.getSurveyPort();
+        if (StringUtils.isNotEmpty(portString)) {
+            String[] userPorts;
+            userPorts = portString.split(",");
+            List<Port> portList = portService.selectBatchIds(Arrays.asList(userPorts));
+            map.put("portList", portList);
+        }
+        return "sys/surveyor/editPort";
+    }
+
+    @RequestMapping(value = "/editPortComplete", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject editPortComplete(Surveyor surveyor) {
+        JSONObject jsonObject = new JSONObject();
+        surveyor.setUpdateInfo(getCurrentUser().getName());
+        jsonObject.put("success", surveyorService.updateSelectiveById(surveyor));
+        return jsonObject;
+    }
+
+    @RequestMapping(value = "/editTime", method = RequestMethod.GET)
+    public String editTime(ModelMap map, @RequestParam(required = false) Integer id) {
+        Surveyor surveyor = surveyorService.selectById(id);
+        map.put("surveyor", surveyor);
+        return "sys/surveyor/editTime";
+    }
+
+    @RequestMapping(value = "/editTimeComplete", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject editTimeComplete(Surveyor surveyor) {
+        JSONObject jsonObject = new JSONObject();
+        surveyor.setUpdateInfo(getCurrentUser().getName());
+        if (surveyorService.updateSelectiveById(surveyor)) {
+            jsonObject.put("status", 1);
+        } else {
+            jsonObject.put("status", 0);
+        }
+        return jsonObject;
+    }
+
     @RequestMapping(value = "/info", method = RequestMethod.GET)
     public String info(ModelMap map, @RequestParam(required = false) int id) {
         Surveyor surveyor = surveyorService.selectById(id);

@@ -136,7 +136,6 @@
                         <button type="button" onclick="severCheck()" class="btn btn-primary">Save</button>
                     </shiro:hasPermission>
                 </div>
-
             </div>
         </div>
     </div>

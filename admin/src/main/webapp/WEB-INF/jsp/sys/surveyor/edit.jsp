@@ -234,13 +234,13 @@
             });
             function formatRepo(repo) {
                 if (repo.loading) return repo.text;
-                var markup = repo.portEn;
+                var markup = repo.portEn + "," + repo.countryCode;
 
                 return markup;
             }
 
             function formatRepoSelection(repo) {
-                return repo.portEn || repo.text;
+                return repo.text;
             }
 
             $(".js-data-example-ajax").select2({

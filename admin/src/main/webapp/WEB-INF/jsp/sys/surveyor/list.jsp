@@ -135,6 +135,7 @@
     </div>
 </div>
 
+
 <script>
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
 
@@ -178,7 +179,9 @@
             "columns": [
                 {"data": "id", "orderable": false},
                 {"data": "lastName"},
-                {"data": "surveyPort"},
+                {
+                    "data": "surveyPort",
+                },
             ],
             "columnDefs": [{
                 "targets": 1,
@@ -186,11 +189,17 @@
                     return '<a data-target="navTab" href="surveyor/edit?id=' + row.id + '">' + row.firstName + " " + row.lastName + '</a>';
                 }
             }, {
+                "targets": 2,
+                "render": function (data, type, row) {
+                    return '<a href="surveyor/editPort?id=' + row.id + '" data-model="dialog">' + row.surveyPort + '</a>';
+                }
+            }, {
                 "targets": 3,
                 "render": function (data, type, row) {
                     var surveyTimeStart = new Date(row.surveyTimeStart).Format("yyyy-MM-dd");
                     var surveyTimeEnd = new Date(row.surveyTimeEnd).Format("yyyy-MM-dd");
-                    return surveyTimeStart + " to " + surveyTimeEnd;
+//                    return '<a href="surveyor/editTime?id=' + row.id + '" data-model="dialog">' + surveyTimeStart + ' to ' + surveyTimeEnd + '</a>';
+                    return '<a href="#time_modal" data-toggle="modal" onclick="changeEditTimeId(' + row.id + ')">' + surveyTimeStart + ' to ' + surveyTimeEnd + '</a>';
                 }
             }],
             "drawCallback": function (settings) {
@@ -295,7 +304,14 @@
     }
 
 
+    function changeEditTimeId(id) {
+        $("#edit-time-id").val(id);
+    }
+
+
     $("#reset-btn").on("click", function () {
         $("#port").html("");
     })
+
 </script>
+<jsp:include page="editTime.jsp"/>

@@ -98,3 +98,4 @@ Date.prototype.Format = function (fmt) { //author: meizz
 $(".top-menu.right-top-menu .navbar-nav ul li").on("click", function () {
     $(".dropdown.dropdown-user.active.open").click()
 })
+
