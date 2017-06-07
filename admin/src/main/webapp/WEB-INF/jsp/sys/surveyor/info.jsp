@@ -7,8 +7,17 @@
     .well h4 {
         color: #3598dc;
     }
+
+    .modal-dialog {
+        width: 80%;
+        margin: 30px auto;
+    }
 </style>
-<h1 style="text-align: center;background-color: #3598dc;color: white;margin-top: 0">Surveyor Curriculum Vitae</h1>
+<div class="modal-header" style="background-color: #3598dc;">
+    <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+    <h4 class="modal-title" style="color: white">Surveyor Curriculum Vitae</h4>
+</div>
+
 <div class="row">
     <div class="col-md-12">
         <div class="profile-sidebar">

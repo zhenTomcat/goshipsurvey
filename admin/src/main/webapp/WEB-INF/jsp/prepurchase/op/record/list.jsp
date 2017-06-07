@@ -222,6 +222,7 @@
                     "data": "application",
                     "render": function (data) {
                         if (data != null) {
+                            console.log(data.user)
                             return data.surveyor.firstName + "/" + data.user.name;
                         }
                         return "";
