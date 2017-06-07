@@ -210,19 +210,7 @@ public class InspectionReportController extends BaseController {
         modelMap.put("galleriesId", galleriesId);
         return  "prepurchase/surveyor/inspection/viewImg";
     }
-    @RequestMapping(value = "/surveyor/inspection", method = RequestMethod.GET)
-    public String inspectionList(ModelMap modelMap) {
-        int id = getCurrentUser().getId();
-        List<PurchaseInspection> inspections = purchaseInspectionService.selectByInspection(id);
-        modelMap.put("inspections", inspections);
-        return "prepurchase/surveyor/inspection/inspectionList";
-    }
 
-
-    @RequestMapping(value = "/surveyor/viewImg", method = RequestMethod.GET)
-    public String viewImg() {
-        return "prepurchase/surveyor/inspection/viewImg";
-    }
 
     //删除照片
     @RequestMapping(value = "/surveyor/deleteImg",method = RequestMethod.GET)
