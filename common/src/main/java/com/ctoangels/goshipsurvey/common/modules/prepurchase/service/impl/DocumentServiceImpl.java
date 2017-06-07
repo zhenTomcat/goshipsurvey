@@ -27,10 +27,6 @@ public class DocumentServiceImpl extends SuperServiceImpl<DocumentMapper, Docume
     @Override
     public Boolean createDocuments(Integer reportId) {
 
-        EntityWrapper<Document> ew = new EntityWrapper<>();
-        ew.addFilter("inspection_report_id={0}", reportId);
-        List<Document> documents = documentService.selectList(ew);
-        if (documents.size() <= 0) {
             for (int i = 0; i < 12; i++) {
                 Document document=new Document();
                 document.setInspectionReportId(reportId);
@@ -85,7 +81,6 @@ public class DocumentServiceImpl extends SuperServiceImpl<DocumentMapper, Docume
                 }
 
             }
-        }
 
         return null;
     }
