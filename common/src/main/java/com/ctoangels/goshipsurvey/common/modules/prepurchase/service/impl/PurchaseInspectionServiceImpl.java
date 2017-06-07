@@ -74,11 +74,13 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
         List<QuotationApplication> applicationList = quotationApplicationMapper.selectList(new EntityWrapper<>(quotationApplication));
         int companyId = 0;
         int surveyorId = 0;
+        double price = 0;
         for (QuotationApplication qa : applicationList) {
             if (qa.getId() == applicationId) {
                 qa.setApplicationStatus(Const.QUO_APPLY_SUCCESS);
                 companyId = qa.getUserId();
                 surveyorId = qa.getSurveyId();
+                price = qa.getTotalPrice();
             } else {
                 qa.setApplicationStatus(Const.QUO_APPLY_FAILURE);
             }
@@ -90,6 +92,7 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
         //更新询价状态
         PurchaseQuotation quotation = purchaseQuotationMapper.selectById(quotationId);
         quotation.setPublicStatus(Const.QUOTATION_END);
+        quotation.setTotalPrice(price);
         if (purchaseQuotationMapper.updateById(quotation) < 0) {
             return false;
         }
