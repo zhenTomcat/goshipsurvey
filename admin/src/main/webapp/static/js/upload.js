@@ -540,9 +540,8 @@ function initUploaders_surveyor_loi(buttonId,bucket,domain,obj){
             FileUploaded: function () {
                  var html = '<a target="_blank" href="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '">' + nativeName + '</a>' +
                        '<input type="hidden" name="loi" value="'+nativeName+'">'+
-                       '<input type="hidden" name="loitUrl" value="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '">';
+                       '<input type="hidden" name="loiUrl" value="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '">';
                 $(obj).parent().prev().html(html);
-                $(obj).parent().html('<button onclick="deleteLabelLoi(this)" type="button" class="btn btn-sm red"><li class="fa fa-remove"></li>Delete</button>');
             }
         }
     });
@@ -574,9 +573,8 @@ function initUploaders_surveyor_passport(buttonId,bucket,domain,obj){
             FileUploaded: function () {
                 var html = '<a target="_blank" href="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '">' + nativeName + '</a>' +
                     '<input type="hidden" name="passport" value="'+nativeName+'">'+
-                    '<input type="hidden" name="passporttUrl" value="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '">';
+                    '<input type="hidden" name="passportUrl" value="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '">';
                 $(obj).parent().prev().html(html);
-                $(obj).parent().html('<button onclick="deleteLabelPassport(this)" type="button" class="btn btn-sm red"><li class="fa fa-remove"></li>Delete</button>');
             }
         }
     });

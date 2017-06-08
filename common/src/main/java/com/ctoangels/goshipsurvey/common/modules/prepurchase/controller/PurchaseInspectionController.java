@@ -48,7 +48,7 @@ public class PurchaseInspectionController  extends BaseController {
             inspection1.setLoi(inspection.getLoi());
             inspection1.setLoiUrl(inspection.getLoiUrl());
             inspection1.setPassport(inspection.getPassport());
-            inspection.setPassportUrl(inspection.getPassportUrl());
+            inspection1.setPassportUrl(inspection.getPassportUrl());
             purchaseInspectionService.updateById(inspection1);
 
             jsonObject.put("mes",true);

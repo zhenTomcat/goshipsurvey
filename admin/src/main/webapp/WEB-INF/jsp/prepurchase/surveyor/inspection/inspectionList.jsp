@@ -45,7 +45,7 @@
                         </thead>
                         <tbody>
                         <c:if test="${! empty inspections}" var="a">
-                            <c:forEach items="${inspections}" var="i">
+                            <c:forEach items="${inspections}" var="i" varStatus="s">
                                 <tr >
                                     <fmt:formatDate value="${i.purchaseQuotation.createDate}" pattern="dd/MM/yyyy" var="publicDate"/>
                                     <fmt:formatDate value="${i.purchaseQuotation.startDate}" pattern="dd/MM/yyyy" var="startDate"/>
@@ -62,7 +62,14 @@
                                     <td>
                                         <a href="javascript:;" onclick="unfold(this)">View</a>&nbsp;<li class="fa fa-sort-desc"/>
                                      </td>
-                                    <td> <a data-target="navTab" href="/prepurchase/surveyor/reportEdit?inspectionId=${i.id}" >Edit</a> <li class="fa fa-edit"></li></td>
+                                    <td>
+                                        <c:if test="${i.submitStatus==1}">
+                                            <a data-target="navTab" href="/prepurchase/surveyor/reportEdit?inspectionId=${i.id}" >View</a> <li class="fa fa-link"></li>
+                                        </c:if>
+                                        <c:if test="${i.submitStatus==0}">
+                                            <a data-target="navTab" href="/prepurchase/surveyor/reportEdit?inspectionId=${i.id}" >Edit</a> <li class="fa fa-edit"></li>
+                                        </c:if>
+                                    </td>
                                     <td>
                                         <c:if test="${i.loi=='' || i.loi==null}">
                                             <li class="fa fa-upload">&nbsp;
@@ -177,16 +184,11 @@
                                                         <input type="hidden" value="${i.id}" name="id"/>
                                                         <div class="col-md-12">
                                                             <label class="control-label">Passport：</label>
-                                                            <label class="control-label passport"><a target="_blank" href="${i.passportUrl}">${i.passport}</a></label>
+                                                            <label class="control-label passport"><a  href="${i.passportUrl}" download="lskfkls">${i.passport}</a></label>
                                                             <label class="control-label">
-                                                                <c:if test="${i.passport!=null && i.passport!=''}">
-                                                                    <button onclick="deleteLabelPassport(this)" type="button" class="btn btn-sm red"><li class="fa fa-remove"></li>Delete</button>
-                                                                </c:if>
-                                                                <c:if test="${i.passport==null || i.passport==''}">
-                                                                    <button onmouseover="upload_attachment_passport(this)" type="button" class="btn btn-sm blue">
+                                                                    <button id="passport_button${s.count}" type="button" class="btn btn-sm blue passport_button">
                                                                         <li class="fa fa-upload"></li>Browse
                                                                     </button>
-                                                                </c:if>
 
                                                             </label>
                                                         </div>
@@ -194,14 +196,9 @@
                                                             <label class="control-label">LOI：</label>
                                                             <label class="control-label loi"><a target="_blank" href="${i.loiUrl}">${i.loi}</a></label>
                                                             <label class="control-label">
-                                                                <c:if test="${i.loi!=null && i.loi!=''}">
-                                                                    <button onclick="deleteLabelLoi(this)" type="button" class="btn btn-sm red"><li class="fa fa-remove"></li>Delete</button>
-                                                                </c:if>
-                                                                <c:if test="${i.loi==null || i.loi==''}">
-                                                                    <button onmouseover="upload_attachment_loi(this)" type="button" class="btn btn-sm blue">
+                                                                    <button id="loi${s.count}"  type="button" class="btn btn-sm blue loi_button">
                                                                         <li class="fa fa-upload"></li>Browse
                                                                     </button>
-                                                                </c:if>
                                                             </label>
                                                         </div>
                                                         <div class="col-md-12">
@@ -231,6 +228,13 @@
     </div>
 </div>
 <script>
+    $(".loi_button").each(function () {
+        initUploaders_surveyor_loi($(this).attr("id"), "shipinfo", "${staticPath}/",$(this));
+    });
+    $(".passport_button").each(function () {
+        initUploaders_surveyor_passport($(this).attr("id"), "shipinfo", "${staticPath}/",$(this));
+    });
+
     //展开
     function unfold(obj,loi) {
 
@@ -246,25 +250,6 @@
         $(obj).parent().html('<a href="javascript:;" onclick="unfold(this)">View</a>&nbsp;<li class="fa fa-sort-desc"></li>');
     }
 
-
-
-    function upload_attachment_loi(obj){
-        initUploaders_surveyor_loi(obj, "shipinfo", "${staticPath}/",obj);
-    }
-
-    function upload_attachment_passport(obj){
-        initUploaders_surveyor_passport(obj, "shipinfo", "${staticPath}/",obj);
-    }
-
-    function deleteLabelLoi(obj) {
-        $(obj).parent().prev().html("");
-        $(obj).parent().html('<button onmouseover="upload_attachment_loi(this)" type="button" class="btn btn-sm blue"><li class="fa fa-upload"></li>Browse </button>');
-    }
-
-    function deleteLabelPassport(obj) {
-        $(obj).parent().prev().html("");
-        $(obj).parent().html('<button onmouseover="upload_attachment_passport(this)" type="button" class="btn btn-sm blue"><li class="fa fa-upload"></li>Browse </button>');
-    }
 
 
 

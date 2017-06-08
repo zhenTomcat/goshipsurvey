@@ -73,7 +73,7 @@
                     <span  onclick="javascript:;" class="span-left">
                         <input class="icheck" data-imgId="${m.id}" style=" margin-left: 3px; margin-top: 5px;" type="checkbox"/>
                     </span>
-                        <span onclick="javascript:removeImg(this,'${m.id}');" class="span-right">
+                        <span  onclick="javascript:removeImg(this,'${m.id}');" class="span-right">
                         <li class="fa fa-remove span-li"></li>
                     </span>
                         <img src="${m.fileUrl}" style="width: 150px;height: 150px;"/>

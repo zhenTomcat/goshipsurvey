@@ -85,23 +85,7 @@
     </div>
 </div>
 <script>
-    $(document).ready(function () {
-        $("form input").prop("readonly", true);
-        $("textarea").prop("readonly", true);
 
-        $(".passport-btn").each(function () {
-            initUploaders_passprot_loi_report($(this).attr("id"), "shipinfo", "${staticPath}/", "passport");
-        })
-
-        $(".loi-btn").each(function () {
-            initUploaders_passprot_loi_report($(this).attr("id"), "shipinfo", "${staticPath}/", "loi");
-        })
-
-        $(".report-btn").each(function () {
-            initUploaders_passprot_loi_report($(this).attr("id"), "shipinfo", "${staticPath}/", "report");
-        })
-
-    })
 
 
 
