@@ -38,7 +38,8 @@
                                 <div class="tab-pane active">
                                     <form id="add-surveyor-form" action="surveyor/editComplete" method="post">
                                         <input name="id" value="${surveyor.id}" type="hidden">
-                                        <input type="hidden" name="portraitUrl" id="portraitUrl">
+                                        <input name="pastEvaluation" value="${surveyor.pastEvaluation}" type="hidden">
+                                        <input name="portraitUrl" id="portraitUrl" type="hidden">
                                         <input name="companyId" value="${surveyor.companyId}" type="hidden">
                                         <input name="createBy" value="${surveyor.createBy}" type="hidden">
                                         <input name="createDate"

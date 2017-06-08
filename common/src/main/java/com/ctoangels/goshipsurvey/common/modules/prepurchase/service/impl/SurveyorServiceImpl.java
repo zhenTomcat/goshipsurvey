@@ -86,4 +86,9 @@ public class SurveyorServiceImpl extends SuperServiceImpl<SurveyorMapper, Survey
         }
         return true;
     }
+
+    @Override
+    public boolean updatePastEvaluation(Integer surveyorId) {
+        return surveyorMapper.updatePastEvaluation(surveyorId) >= 0;
+    }
 }

@@ -17,4 +17,6 @@ public interface ISurveyorService extends ISuperService<Surveyor> {
 
     boolean updateSurveyorWithExperience(Surveyor surveyor, List<SurveyorExperience> experienceList);
 
+    boolean updatePastEvaluation(Integer surveyorId);
+
 }

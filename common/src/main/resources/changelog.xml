@@ -129,6 +129,11 @@
             alter table t_purchase_inspection add passport_url varchar(155) Null;
         </sql>
     </changeSet>
+    <changeSet author="WangShun" id="15950097942-009">
+        <sql>
+            alter table t_surveyor ADD past_evaluation DOUBLE DEFAULT NULL COMMENT '平均分';
+        </sql>
+    </changeSet>
 </databaseChangeLog>
 
 

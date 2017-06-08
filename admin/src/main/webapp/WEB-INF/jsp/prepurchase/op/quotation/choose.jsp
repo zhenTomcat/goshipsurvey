@@ -178,15 +178,20 @@
                                                 <th>
                                                     <div class="rating">
                                                         <div class="op-point-div" style="width: 100px;margin: auto">
-                                                            <input type="radio" value="5" checked>
+                                                            <input type="radio" value="5" <c:if
+                                                                    test="${5==application.surveyor.pastEvaluation}">checked</c:if>>
                                                             <label><i class="fa fa-star"></i></label>
-                                                            <input type="radio" value="4">
+                                                            <input type="radio" value="4" <c:if
+                                                                    test="${4==application.surveyor.pastEvaluation}">checked</c:if>>
                                                             <label><i class="fa fa-star"></i></label>
-                                                            <input type="radio" value="3">
+                                                            <input type="radio" value="3" <c:if
+                                                                    test="${3==application.surveyor.pastEvaluation}">checked</c:if>>
                                                             <label><i class="fa fa-star"></i></label>
-                                                            <input type="radio" value="2">
+                                                            <input type="radio" value="2" <c:if
+                                                                    test="${2==application.surveyor.pastEvaluation}">checked</c:if>>
                                                             <label><i class="fa fa-star"></i></label>
-                                                            <input type="radio" value="1">
+                                                            <input type="radio" value="1" <c:if
+                                                                    test="${1==application.surveyor.pastEvaluation}">checked</c:if>>
                                                             <label><i class="fa fa-star"></i></label>
                                                         </div>
                                                     </div>

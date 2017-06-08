@@ -327,7 +327,8 @@
         if (opGrade == null || opGrade == "") {
             var commentDom = starRatingNot.clone();
             commentDom.find(".op-point-div input[type='radio']").attr("name", "opGrade")
-            commentDom.find(".comment-btn").attr("data-id", comment.id)
+            commentDom.find(".comment-btn").attr("data-id", comment.id);
+            commentDom.find(".comment-btn").attr("data-surveyor-id", comment.surveyorId)
             html += commentDom.html();
         } else {
             var commentDom = starRatingHave.clone();
@@ -355,6 +356,7 @@
         var btn = $(obj);
         var div = btn.parents(".comment-submit-div");
         var id = btn.attr("data-id");
+        var surveyorId = btn.attr("data-surveyor-id");
         var point = 0;
 
         var radio = div.find("input[type='radio']");
@@ -390,7 +392,7 @@
         $.ajax({
             url: "comment/editComment",
             type: "post",
-            data: {id: id, opGrade: point, opComment: comment},
+            data: {id: id, opGrade: point, opComment: comment, surveyorId: surveyorId},
             success: function (data) {
                 if (data.success) {
                     var newComment = starRatingHave.find(".row").clone();

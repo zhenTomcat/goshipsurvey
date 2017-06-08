@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Inspection;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Comment;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.ICommentService;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.ISurveyorService;
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,12 +22,18 @@ public class CommentController extends BaseController {
     @Autowired
     ICommentService commentService;
 
+    @Autowired
+    ISurveyorService surveyorService;
+
     @RequestMapping(value = "/editComment", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject addPoint(Comment comment) {
         JSONObject jsonObject = new JSONObject();
         comment.setUpdateInfo(getCurrentUser().getName());
         jsonObject.put("success", commentService.updateSelectiveById(comment));
+        if (comment.getOpGrade() != null) {
+            surveyorService.updatePastEvaluation(comment.getSurveyorId());
+        }
         return jsonObject;
     }
 
