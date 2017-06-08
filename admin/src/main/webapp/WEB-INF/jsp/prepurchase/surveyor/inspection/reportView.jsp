@@ -61,8 +61,10 @@
                         <div class="portlet box green">
                             <div class="portlet-title" >
                                 <div class="caption"><h3>Report of Star Deltas</h3></div>
-                                <div class="tools">
-                                    <button style="color: black" type="button"><li class="fa fa-bars"></li>Report List</button>
+                                <div class="tools" style="padding-top: 20px">
+                                    <div>
+                                        <a data-target="navTab" href="prepurchase/surveyor/report" class="btn blue"><li class="fa fa-bars"></li>Report List</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -642,7 +644,7 @@
                                                                     <c:forEach items="${report.documents}" var="d" varStatus="i">
                                                                         <tr>
                                                                             <td>—${d.title}<input type="hidden" name="documents[${i.index}].title" value="${d.title}"></td>
-                                                                            <td><a href="${d.attachmentUrl}">${d.attachmentName}</a>
+                                                                            <td><a target="_blank" href="${d.attachmentUrl}">${d.attachmentName}</a>
                                                                                 <input type="hidden" name="documents[${i.index}].id" value="${d.id}">
                                                                                 <input type="hidden" name="documents[${i.index}].inspectionReportId" value="${report.id}">
                                                                                 <input type="hidden" name="documents[${i.index}].attachmentUrl" value="${d.attachmentUrl}">
