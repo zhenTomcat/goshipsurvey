@@ -179,7 +179,7 @@
     var starRatingHave = $("#star-rating-outer-have");
     $(document).ready(function () {
         drawQuotationTable();
-//        drawInspectionTable();
+        drawInspectionTable();
     });
 
 
@@ -266,7 +266,7 @@
             "serverSide": true,
             "ajax": {
                 "url": "prepurchase/op/record/inspection/list",
-                "type": "post",
+                "type": "get",
                 "data": function (data) {
                     data.keyword = $("#keyword").val();
                 }
@@ -274,19 +274,16 @@
             "lengthMenu": [[5, 40, 60], [5, 40, 60]],
             "columns": [
                 {
-                    "data": "quotation.shipName",
+                    "data": "shipDetail.shipName",
                 },
                 {
-                    "data": "quotation.imo",
+                    "data": "shipDetail.imo",
                 },
                 {
-                    "data": "quotation.shipType",
+                    "data": "shipDetail.shipType",
                 },
                 {
-                    "data": "quotation.inspectionType",
-                },
-                {
-                    "data": "quotation.portName",
+                    "data": "purchaseQuotation.location",
                 },
                 {
                     "data": "",
@@ -297,28 +294,12 @@
                         return "$:" + data;
                     }
                 },
-                {
-                    "data": "surveyorInfo.name",
-                },
-                {
-                    "data": "surveyorInfo.reportUrl",
-                    "render": function (data) {
-                        return "<a class='btn btn-sm green' target='_blank' href='" + data + "'>VIEW</a>";
-                    }
-                },
-                {
-                    "data": "",
-                    "class": "details-control",
-                    "render": function () {
-                        return "<i class='fa fa-info' title='View Comment'></i>";
-                    }
-                },
             ],
             "columnDefs": [{
-                "targets": 5,
+                "targets": 4,
                 "render": function (data, type, row) {
-                    var startDate = new Date(row.quotation.startDate).Format("yyyy-MM-dd");
-                    var endDate = new Date(row.quotation.endDate).Format("yyyy-MM-dd");
+                    var startDate = new Date(row.purchaseQuotation.startDate).Format("yyyy-MM-dd");
+                    var endDate = new Date(row.purchaseQuotation.endDate).Format("yyyy-MM-dd");
                     return startDate + " to " + endDate;
                 }
             }],

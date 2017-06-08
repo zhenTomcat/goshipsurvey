@@ -76,12 +76,12 @@ public class RecordController extends BaseController {
             length = Integer.parseInt(request.getParameter(Const.LENGTH));
         }
         List<PurchaseInspection> list = purchaseInspectionService.getOPRecordList(getCurrentUser().getId(), start, length);
-//        for (PurchaseQuotation q : list) {
-//            int shipType = Integer.parseInt(q.getShipDetail().getShipType());
-//            q.getShipDetail().setShipType(getShipTypeDict().get(shipType - 1).getDes());
-//        }
+        for (PurchaseInspection i : list) {
+            int shipType = Integer.parseInt(i.getShipDetail().getShipType());
+            i.getShipDetail().setShipType(getShipTypeDict().get(shipType - 1).getDes());
+        }
         jsonObject.put(Const.DRAW, request.getParameter(Const.DRAW));
-        int total = purchaseQuotationService.getRecordTotal(getCurrentUser().getId());
+        int total = purchaseInspectionService.getRecordTotal(getCurrentUser().getId(), null);
         jsonObject.put(Const.RECORDSTOTAL, total);
         jsonObject.put(Const.RECORDSFILTERED, total);
         jsonObject.put(Const.NDATA, list);
