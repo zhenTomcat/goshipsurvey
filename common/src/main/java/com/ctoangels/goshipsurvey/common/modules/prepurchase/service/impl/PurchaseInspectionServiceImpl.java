@@ -121,6 +121,7 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
         comment.setOpId(quotation.getOpId());
         comment.setCreateInfo(user.getName());
         comment.setProType(Const.PROJECT_TYPE_PURCHASE);
+        comment.setInspectionId(inspection.getId());
         if (commentMapper.insert(comment) < 0) {
             return false;
         }

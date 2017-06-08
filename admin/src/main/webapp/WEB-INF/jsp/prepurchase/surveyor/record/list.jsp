@@ -68,15 +68,15 @@
                                                    id="inspection_table">
                                                 <thead>
                                                 <tr>
-                                                    <th>Ship name</th>
-                                                    <th>imo</th>
-                                                    <th>Ship type</th>
-                                                    <th>Inspection type</th>
-                                                    <th>Inspection port</th>
-                                                    <th>Inspection date(LMT)</th>
-                                                    <th>Total price</th>
-                                                    <th>Inspection report</th>
-                                                    <th></th>
+                                                    <th style="width: 15%">Ship name</th>
+                                                    <th style="width: 10%">imo</th>
+                                                    <th style="width: 7%">Ship type</th>
+                                                    <th style="width: 12%">Inspection port</th>
+                                                    <th style="width: 18%">Inspection date(LMT)</th>
+                                                    <th style="width: 7%">Total price</th>
+                                                    <th style="width: 8%">Grading</th>
+                                                    <th style="width: 8%">Surveyor</th>
+                                                    <th style="width: 15%">Link of inspection report</th>
                                                 </tr>
                                                 </thead>
                                             </table>
@@ -165,8 +165,8 @@
             "autoWidth": false,
             "serverSide": true,
             "ajax": {
-                "url": "surveyor/record/list",
-                "type": "post",
+                "url": "prepurchase/surveyor/record/inspection/list",
+                "type": "get",
                 "data": function (data) {
                     data.keyword = $("#keyword").val();
                 }
@@ -174,89 +174,81 @@
             "lengthMenu": [[5, 40, 60], [5, 40, 60]],
             "columns": [
                 {
-                    "data": "quotation.shipName",
+                    "data": "shipDetail.shipName",
                 },
                 {
-                    "data": "quotation.imo",
+                    "data": "shipDetail.imo",
                 },
                 {
-                    "data": "quotation.shipType",
+                    "data": "shipDetail.shipType",
                 },
                 {
-                    "data": "quotation.inspectionType",
+                    "data": "purchaseQuotation.location",
                 },
                 {
-                    "data": "quotation.portName",
+                    "data": "",
                 },
                 {
-                    "data": "quotation.portName",
-                },
-                {
-                    "data": "quotation.totalPrice",
+                    "data": "purchaseQuotation.totalPrice",
                     "render": function (data) {
                         return "$:" + data;
                     }
                 },
                 {
-                    "data": "surveyorInfo.reportUrl",
+                    "data": "",
+                },
+                {
+                    "data": "surveyor",
                     "render": function (data) {
-                        return "<a class='btn btn-sm green' target='_blank' href='" + data + "'>VIEW</a>";
+                        return data.firstName + " " + data.lastName;
                     }
                 },
                 {
                     "data": "",
-                    "class": "details-control",
-                    "render": function () {
-                        return "<i class='fa fa-info' title='View Comment'></i>";
-                    }
                 },
             ],
             "columnDefs": [{
-                "targets": 5,
+                "targets": 4,
                 "render": function (data, type, row) {
-                    var startDate = new Date(row.quotation.startDate).Format("yyyy-MM-dd");
-                    var endDate = new Date(row.quotation.endDate).Format("yyyy-MM-dd");
+                    var startDate = new Date(row.purchaseQuotation.startDate).Format("yyyy-MM-dd");
+                    var endDate = new Date(row.purchaseQuotation.endDate).Format("yyyy-MM-dd");
                     return startDate + " to " + endDate;
                 }
             }],
+            "initComplete": function (settings, json) {
+                var rows = $('#inspection_table').find("tbody tr");
+                rows.each(function (i, e) {
+                    var row = inspectionTable.row($(this));
+                    row.child(moreInfo(row.data())).show();
+                })
+            }
         });
 
-        inspectionTable.on('click', 'td.details-control', function () {
-            var tr = $(this).closest('tr');
-            var row = inspectionTable.row(tr);
-            if (row.child.isShown()) {
-                row.child.hide();
-                tr.removeClass('shown');
-            }
-            else {
-                row.child(moreInfo(row.data())).show();
-                tr.addClass('shown');
-            }
-        });
     });
 
     function moreInfo(data) {
         var html = "";
-        var surveyorInfo = data.surveyorInfo;
-        var surveyorPoint = data.surveyorPoint;
-        if (surveyorPoint == null || surveyorPoint == "") {
-            var comment = starRatingNot.clone();
-            comment.find(".op-point-div input[type='radio']").attr("name", "surveyorPoint")
-            comment.find(".comment-btn").attr("data-id", data.id)
-            html += comment.html();
+        var surveyor = data.surveyor.firstName;
+        var comment = data.comment;
+        var surveyorGrade = comment.surveyorGrade;
+        if (surveyorGrade == null || surveyorGrade == "") {
+            var commentDom = starRatingNot.clone();
+            commentDom.find(".op-point-div input[type='radio']").attr("name", "surveyorGrade")
+            commentDom.find(".comment-btn").attr("data-id", comment.id)
+            html += commentDom.html();
         } else {
-            var comment = starRatingHave.clone();
-            comment.find(".op-point-div input[value='" + surveyorPoint + "']").attr("checked", true);
-            comment.find(".op-comment-div").html(data.surveyorComment);
-            html += comment.html();
+            var commentDom = starRatingHave.clone();
+            commentDom.find(".op-point-div input[value='" + surveyorGrade + "']").attr("checked", true);
+            commentDom.find(".op-comment-div").html(comment.surveyorComment);
+            html += commentDom.html();
         }
-        var opPoint = data.opPoint;
-        if (opPoint != null && opPoint != "") {
-            var comment = starRatingHave.clone();
-            comment.find(".comment-label-div").html("OP's comment");
-            comment.find(".op-point-div input[value='" + opPoint + "']").attr("checked", true);
-            comment.find(".op-comment-div").html(data.opComment);
-            html += comment.html();
+        var opGrade = comment.opGrade;
+        if (opGrade != null && opGrade != "") {
+            var commentDom = starRatingHave.clone();
+            commentDom.find(".comment-label-div").html("Consignor : " + data.op.name);
+            commentDom.find(".op-point-div input[value='" + opGrade + "']").attr("checked", true);
+            commentDom.find(".op-comment-div").html(comment.opComment);
+            html += commentDom.html();
         }
         return html;
     }
@@ -301,10 +293,11 @@
             return;
         }
 
+
         $.ajax({
-            url: "surveyor/inspection/addPoint",
+            url: "comment/editComment",
             type: "post",
-            data: {id: id, surveyorPoint: point, surveyorComment: comment},
+            data: {id: id, surveyorGrade: point, surveyorComment: comment},
             success: function (data) {
                 if (data.success) {
                     var newComment = starRatingHave.find(".row").clone();

@@ -72,14 +72,14 @@
                                                    id="quotation_table">
                                                 <thead>
                                                 <tr>
-                                                    <th>Ship name</th>
-                                                    <th>imo</th>
-                                                    <th>Ship type</th>
-                                                    <th>Inspection port</th>
-                                                    <th>Inspection date(LMT)</th>
-                                                    <th>Surveyor/Company</th>
-                                                    <th>Total price</th>
-                                                    <th>Status</th>
+                                                    <th style="width: 15%">Ship name</th>
+                                                    <th style="width: 10%">imo</th>
+                                                    <th style="width: 10%">Ship type</th>
+                                                    <th style="width: 12%">Inspection port</th>
+                                                    <th style="width: 18%">Inspection date(LMT)</th>
+                                                    <th style="width: 10%">Surveyor/Company</th>
+                                                    <th style="width: 10%">Total price</th>
+                                                    <th style="width: 15%">Status</th>
                                                 </tr>
                                                 </thead>
                                             </table>
@@ -89,15 +89,14 @@
                                                    id="inspection_table">
                                                 <thead>
                                                 <tr>
-                                                    <th>Ship name</th>
-                                                    <th>imo</th>
-                                                    <th>Ship type</th>
-                                                    <th>Inspection port</th>
-                                                    <th>Inspection date(LMT)</th>
-                                                    <th>Total price</th>
-                                                    <th>Grading</th>
-                                                    <th>Link of inspection report</th>
-                                                    <th></th>
+                                                    <th style="width: 15%">Ship name</th>
+                                                    <th style="width: 10%">imo</th>
+                                                    <th style="width: 10%">Ship type</th>
+                                                    <th style="width: 12%">Inspection port</th>
+                                                    <th style="width: 18%">Inspection date(LMT)</th>
+                                                    <th style="width: 10%">Total price</th>
+                                                    <th style="width: 10%">Grading</th>
+                                                    <th style="width: 15%">Link of inspection report</th>
                                                 </tr>
                                                 </thead>
                                             </table>
@@ -221,7 +220,6 @@
                     "data": "application",
                     "render": function (data) {
                         if (data != null) {
-                            console.log(data.user)
                             return data.surveyor.firstName + "/" + data.user.name;
                         }
                         return "";
@@ -289,10 +287,16 @@
                     "data": "",
                 },
                 {
-                    "data": "quotation.totalPrice",
+                    "data": "purchaseQuotation.totalPrice",
                     "render": function (data) {
                         return "$:" + data;
                     }
+                },
+                {
+                    "data": "",
+                },
+                {
+                    "data": "",
                 },
             ],
             "columnDefs": [{
@@ -303,18 +307,12 @@
                     return startDate + " to " + endDate;
                 }
             }],
-        });
-
-        inspectionTable.on('click', 'td.details-control', function () {
-            var tr = $(this).closest('tr');
-            var row = inspectionTable.row(tr);
-            if (row.child.isShown()) {
-                row.child.hide();
-                tr.removeClass('shown');
-            }
-            else {
-                row.child(moreInfo(row.data())).show();
-                tr.addClass('shown');
+            "initComplete": function (settings, json) {
+                var rows = $('#inspection_table').find("tbody tr");
+                rows.each(function (i, e) {
+                    var row = inspectionTable.row($(this));
+                    row.child(moreInfo(row.data())).show();
+                })
             }
         });
     }
@@ -323,25 +321,27 @@
     function moreInfo(data) {
         var html = "";
         var surveyorInfo = data.surveyorInfo;
-        var opPoint = data.opPoint;
-        if (opPoint == null || opPoint == "") {
-            var comment = starRatingNot.clone();
-            comment.find(".op-point-div input[type='radio']").attr("name", "opPoint")
-            comment.find(".comment-btn").attr("data-id", data.id)
-            html += comment.html();
+        var comment = data.comment;
+        var opGrade = comment.opGrade;
+
+        if (opGrade == null || opGrade == "") {
+            var commentDom = starRatingNot.clone();
+            commentDom.find(".op-point-div input[type='radio']").attr("name", "opGrade")
+            commentDom.find(".comment-btn").attr("data-id", comment.id)
+            html += commentDom.html();
         } else {
-            var comment = starRatingHave.clone();
-            comment.find(".op-point-div input[value='" + opPoint + "']").attr("checked", true);
-            comment.find(".op-comment-div").html(data.opComment);
-            html += comment.html();
+            var commentDom = starRatingHave.clone();
+            commentDom.find(".op-point-div input[value='" + opGrade + "']").attr("checked", true);
+            commentDom.find(".op-comment-div").html(comment.opComment);
+            html += commentDom.html();
         }
-        var surveyorPoint = data.surveyorPoint;
-        if (surveyorPoint != null && surveyorPoint != "") {
-            var comment = starRatingHave.clone();
-            comment.find(".comment-label-div").html("Surveyor's comment");
-            comment.find(".op-point-div input[value='" + surveyorPoint + "']").attr("checked", true);
-            comment.find(".op-comment-div").html(data.surveyorComment);
-            html += comment.html();
+        var surveyorGrade = comment.surveyorGrade;
+        if (surveyorGrade != null && surveyorGrade != "") {
+            var commentDom = starRatingHave.clone();
+            commentDom.find(".comment-label-div").html("Surveyor's/Company : " + data.surveyor.firstName + "/" + data.company.name);
+            commentDom.find(".op-point-div input[value='" + surveyorGrade + "']").attr("checked", true);
+            commentDom.find(".op-comment-div").html(comment.surveyorComment);
+            html += commentDom.html();
         }
         return html;
     }
@@ -386,10 +386,11 @@
             return;
         }
 
+
         $.ajax({
-            url: "op/inspection/addPoint",
+            url: "comment/editComment",
             type: "post",
-            data: {id: id, opPoint: point, opComment: comment},
+            data: {id: id, opGrade: point, opComment: comment},
             success: function (data) {
                 if (data.success) {
                     var newComment = starRatingHave.find(".row").clone();
