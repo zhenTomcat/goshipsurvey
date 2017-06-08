@@ -30,6 +30,10 @@
                    alias="Galleries"></typeAlias>
         <typeAlias type="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Media"
                    alias="Media"></typeAlias>
+        <typeAlias type="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.PurchaseInspection"
+                   alias="PurchaseInspection"></typeAlias>
+        <typeAlias type="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Comment"
+                   alias="Comment"></typeAlias>
     </typeAliases>
     <!-- 映射map -->
     <mappers>

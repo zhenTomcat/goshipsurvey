@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.CommentMapper">
+
+    <!-- 通用查询结果列-->
+    <sql id="Base_Column_List">
+		id, op_id AS opId, op_grade AS opGrade, op_comment AS opComment, surveyor_id AS surveyorId, surveyor_grade AS surveyorGrade, surveyor_comment AS surveyorComment, company_id AS companyId, pro_type AS proType, inspection_id AS inspectionId, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
+	</sql>
+
+    <select id="getByInspectionIdAndProType" parameterType="Map" resultType="Comment">
+		SELECT co.*
+		FROM t_comment co
+		WHERE co.inspection_id=#{inspectionId} and co.pro_type=#{proType}
+	</select>
+
+</mapper>

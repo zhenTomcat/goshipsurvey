@@ -94,6 +94,28 @@
             alter table sys_message CHANGE top_time top_time varchar(20) DEFAULT NULL COMMENT '置顶时间';
         </sql>
     </changeSet>
+    <changeSet author="WangShun" id="15950097942-008">
+        <sql>
+            CREATE TABLE `t_comment` (
+            `id` int(11) NOT NULL AUTO_INCREMENT,
+            `op_id` int(11) DEFAULT NULL,
+            `op_grade` double DEFAULT NULL,
+            `op_comment` varchar(255) DEFAULT NULL,
+            `surveyor_id` int(11) DEFAULT NULL,
+            `surveyor_grade` double DEFAULT NULL,
+            `surveyor_comment` varchar(255) DEFAULT NULL,
+            `company_id` int(11) DEFAULT NULL,
+            `pro_type` int(2) DEFAULT NULL COMMENT '系统类型(1:量油 2:买卖船)',
+            `inspection_id` int(11) DEFAULT NULL,
+            `create_date` date DEFAULT NULL,
+            `create_by` varchar(45) DEFAULT NULL,
+            `update_date` date DEFAULT NULL,
+            `update_by` varchar(45) DEFAULT NULL,
+            `del_flag` int(2) DEFAULT NULL,
+            PRIMARY KEY (`id`)
+            ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+        </sql>
+    </changeSet>
     <changeSet author="LuZhen" id="17317309132-007">
         <sql>
             alter table t_purchase_inspection add submit_status int(11) Null;
@@ -107,7 +129,6 @@
             alter table t_purchase_inspection add passport_url varchar(155) Null;
         </sql>
     </changeSet>
-
 </databaseChangeLog>
 
 
