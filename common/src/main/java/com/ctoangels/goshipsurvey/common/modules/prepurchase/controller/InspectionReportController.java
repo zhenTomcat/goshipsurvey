@@ -79,11 +79,15 @@ public class InspectionReportController extends BaseController {
         //获取 Vessel tank capacity 这个表下的所有信息
         List<TechnicalAppendix> technicalAppendices=technicalAppendixService.selectListByReportId(purchaseInspection.getInspectionReportId(),"Vessel tank capacity");
 
-
         modelMap.put("report",inspectionReport);
         modelMap.put("technicalAppendices",technicalAppendices);
 
+        if(purchaseInspection.getSubmitStatus()==1){
+            return "prepurchase/surveyor/inspection/reportView";
+        }
+
         return "prepurchase/surveyor/inspection/reportEdit";
+
     }
 
     //对报告中的船舶信息的更新
@@ -181,14 +185,25 @@ public class InspectionReportController extends BaseController {
     }
 
     //跳转到图片弹窗
-    @RequestMapping(value = "/surveyor/viewImg",method = RequestMethod.GET)
-    public String viewImg(@RequestParam (required=false) Integer galleriesId,ModelMap modelMap) {
+    @RequestMapping(value = "/surveyor/img",method = RequestMethod.GET)
+    public String viewImg(@RequestParam (required=false) Integer galleriesId,@RequestParam (required=false) Integer reportId,ModelMap modelMap) {
         EntityWrapper<Media> ew = getEntityWrapper();
         ew.addFilter("galleries_id={0}", galleriesId);
         List<Media> medias = mediaService.selectList(ew);
+
+        EntityWrapper<PurchaseInspection> ew1=getEntityWrapper();
+        ew1.addFilter("inspection_report_id",reportId);
+        PurchaseInspection inspection=purchaseInspectionService.selectOne(ew1);
+
+        if(inspection.getSubmitStatus()==1){
+            return "prepurchase/surveyor/inspection/imgView";
+        }
+
+
+
         modelMap.put("medias", medias);
         modelMap.put("galleriesId", galleriesId);
-        return  "prepurchase/surveyor/inspection/viewImg";
+        return  "prepurchase/surveyor/inspection/imgEdit";
     }
 
 
@@ -282,6 +297,24 @@ public class InspectionReportController extends BaseController {
         return jsonObject;
     }
 
+    //surveyour提交报告
+    @RequestMapping(value = "/surveyor/submitReport")
+    @ResponseBody
+    public JSONObject submitReport(@RequestParam(required = false) Integer reportId){
+        JSONObject jsonObject=new JSONObject();
+        try{
+            PurchaseInspection inspection=purchaseInspectionService.selectById(reportId);
+            inspection.setSubmitStatus(Const.REPORT_SUBMIT);
+            purchaseInspectionService.updateById(inspection);
+
+            jsonObject.put("mes",true);
+        }catch (Exception e){
+            jsonObject.put("mes",false);
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+
 
 
 
@@ -308,7 +341,7 @@ public class InspectionReportController extends BaseController {
 
         boolean flag=false;
         for(TechnicalAppendix t:technicalAppendices){
-            if(t.getTechnicalAppendixInfo()!=null){
+            if(t.getTechnicalAppendixInfo()!=null && t.getTechnicalAppendixInfo().size()>0){
                 flag=true;
                 break;
             }

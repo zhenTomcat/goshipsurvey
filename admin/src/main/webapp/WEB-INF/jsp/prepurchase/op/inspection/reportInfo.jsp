@@ -53,7 +53,6 @@
     .li-left{margin-left: 2px}
     .li-right{margin-right: 2px}
     textarea{ resize:none;}
-    #info-a{color:white }
 </style>
     <div class="row">
         <div class="col-md-12">
@@ -65,7 +64,7 @@
                             <li class="fa fa-bars"></li>Report List</button>
                         </div>--%>
                         <div style="float: right" >
-                            <ul id="info-a" class="nav nav-tabs" style="margin-top: 10px;margin-bottom: 0px">
+                            <ul  class="nav nav-tabs" style="margin-top: 10px;margin-bottom: 0px">
                                 <li class="active">
                                     <a href="#tab1" data-toggle="tab"> Ship details </a>
                                 </li>
@@ -109,82 +108,82 @@
                                                     <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/GWTcR228ek.jpg" style="width: 100%;height: 300px"/>
                                                 </div>
                                                 <div class="col-md-4" style="margin-top: 20px;margin-bottom: 20px">
-                                                    <p style="color: #00a8c6">Ship Name</p><input type="hidden" value="${report.shipDetail.id}" name="id"/>
-                                                    <p>${report.shipDetail.shipName}</p><input type="hidden" value="${report.shipDetail.shipName}" name="shipName"/>
+                                                    <p style="color: #00a8c6">Ship Name</p>
+                                                    <p>${report.shipDetail.shipName}</p>
                                                     <p style="color: #00a8c6">IMO</p>
-                                                    <p>${report.shipDetail.imo}</p><input type="hidden" value="${report.shipDetail.imo}" name="imo"/>
+                                                    <p>${report.shipDetail.imo}</p>
                                                     <p style="color: #00a8c6">Type</p>
-                                                    <p>${report.shipDetail.type}</p><input type="hidden" value="${report.shipDetail.type}" name="type"/>
+                                                    <p>${report.shipDetail.type}</p>
                                                 </div>
                                             </div>
                                             <div class="col-md-12" style="margin-top:30px ">
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-4 control-label">LOA(m):</label>
-                                                    <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.loa}" name="loa"/></div>
+                                                    <div class="col-md-8"><input disabled class="form-control" type="text" value="${report.shipDetail.loa}" name="loa"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-4 control-label">Beam(m): </label>
-                                                    <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.beam}" name="beam"/></div>
+                                                    <div class="col-md-8"><input disabled class="form-control" type="text" value="${report.shipDetail.beam}" name="beam"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-4 control-label">Dwt(ton): </label>
-                                                    <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.dwt}" name="dwt"/></div>
+                                                    <div class="col-md-8"><input disabled class="form-control" type="text" value="${report.shipDetail.dwt}" name="dwt"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-4 control-label">Draft(m): </label>
-                                                    <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.draft}" name="draft"/></div>
+                                                    <div class="col-md-8"><input disabled class="form-control" type="text" value="${report.shipDetail.draft}" name="draft"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-4 control-label">GT: </label>
-                                                    <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.ggt}" name="ggt"/></div>
+                                                    <div class="col-md-8"><input disabled class="form-control" type="text" value="${report.shipDetail.ggt}" name="ggt"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-4 control-label">LDT: </label>
-                                                    <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.ldt}" name="ldt"/></div>
+                                                    <div class="col-md-8"><input disabled class="form-control" type="text" value="${report.shipDetail.ldt}" name="ldt"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-4 control-label">SS(m/y): </label>
-                                                    <div class="col-md-8 "><input readonly class="form-control" type="text" value="${report.shipDetail.ss}" name="ss"/></div>
+                                                    <div class="col-md-8 "><input disabled class="form-control" type="text" value="${report.shipDetail.ss}" name="ss"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-4 control-label">Bunkers: </label>
-                                                    <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.bunkers}" name="bunkers"/></div>
+                                                    <div class="col-md-8"><input disabled class="form-control" type="text" value="${report.shipDetail.bunkers}" name="bunkers"/></div>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label class="col-sm-4 control-label">Class:</label>
-                                                    <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.shipClass}" name="shipClass"/></div>
+                                                    <div class="col-md-8"><input disabled class="form-control" type="text" value="${report.shipDetail.shipClass}" name="shipClass"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-sm-4 control-label">Flag:</label>
-                                                    <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.flag}" name="flag"/></div>
+                                                    <div class="col-md-8"><input disabled class="form-control" type="text" value="${report.shipDetail.flag}" name="flag"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-4 control-label">Builder:</label>
-                                                    <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.builder}" name="builder"/></div>
+                                                    <div class="col-md-8"><input disabled class="form-control" type="text" value="${report.shipDetail.builder}" name="builder"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-4 control-label">ex.Name:</label>
-                                                    <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.exName}" name="exName"/></div>
+                                                    <div class="col-md-8"><input disabled class="form-control" type="text" value="${report.shipDetail.exName}" name="exName"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-4 control-label">Location:</label>
-                                                    <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.location}" name="location"/></div>
+                                                    <div class="col-md-8"><input disabled class="form-control" type="text" value="${report.shipDetail.location}" name="location"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-4 control-label">ShipType:</label>
-                                                    <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.shipType}" name="shipType"/></div>
+                                                    <div class="col-md-8"><input disabled class="form-control" type="text" value="${report.shipDetail.shipType}" name="shipType"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-4 control-label">Build Year:</label>
-                                                    <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.buildYear}" name="buildYear"/></div>
+                                                    <div class="col-md-8"><input disabled class="form-control" type="text" value="${report.shipDetail.buildYear}" name="buildYear"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-4 control-label">Call Sign:</label>
-                                                    <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.callSign}" name="callSign"/></div>
+                                                    <div class="col-md-8"><input disabled class="form-control" type="text" value="${report.shipDetail.callSign}" name="callSign"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-4 control-label">Inspection date:</label>
-                                                    <div class="col-md-8"><input readonly class="form-control" type="text" value="" name=""/></div>
+                                                    <div class="col-md-8"><input disabled class="form-control" type="text" value="" name=""/></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -197,27 +196,27 @@
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">Maker:</label>
-                                                    <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.meMaker}" name="meMaker"/></div>
+                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.meMaker}" name="meMaker"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">Type:</label>
-                                                    <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.meType}" name="meType"/></div>
+                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.meType}" name="meType"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">MCR KW:</label>
-                                                    <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.meMcrKw}" name="meMcrKw"/></div>
+                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.meMcrKw}" name="meMcrKw"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">MCR RPM:</label>
-                                                    <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.meMcrRpm}" name="meMcrRpm"/></div>
+                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.meMcrRpm}" name="meMcrRpm"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-4">Running hours: </label>
-                                                    <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.meRunningHours}" name="meRunningHours"/></div>
+                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.meRunningHours}" name="meRunningHours"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">Critical RPM:</label>
-                                                    <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.meCriticalRpm}" name="meCriticalRpm"/></div>
+                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.meCriticalRpm}" name="meCriticalRpm"/></div>
                                                 </div>
                                                 <div class="col-md-12 form-group">
                                                     <div class="col-md-12"><input class="form-control" placeholder="Others"  type="text" value="${report.shipDetail.meOthers}" name="meOthers"/></div>
@@ -231,30 +230,30 @@
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">Maker:</label>
-                                                    <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.apMaker}" name="apMaker"/></div>
+                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.apMaker}" name="apMaker"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">Type:</label>
-                                                    <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.apType}" name="apType"/></div>
+                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.apType}" name="apType"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">Load:</label>
-                                                    <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.apLoad}" name="apLoad"/></div>
+                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.apLoad}" name="apLoad"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">A1 r/h:</label>
-                                                    <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.apA1}" name="apA1"/></div>
+                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.apA1}" name="apA1"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">A2 r/h: </label>
-                                                    <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.apA2}" name="apA2"/></div>
+                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.apA2}" name="apA2"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">A3 r/h:</label>
-                                                    <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.apA3}" name="apA3"/></div>
+                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.apA3}" name="apA3"/></div>
                                                 </div>
                                                 <div class="col-md-12 form-group">
-                                                    <div class="col-md-12"><input class="form-control" placeholder="Others"  type="text" value="${report.shipDetail.apOthers}" name="apOthers"/></div>
+                                                    <div class="col-md-12"><input disabled class="form-control" placeholder="Others"  type="text" value="${report.shipDetail.apOthers}" name="apOthers"/></div>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
@@ -265,22 +264,22 @@
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">Maker:</label>
-                                                    <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.boMaker}" name="boMaker"/></div>
+                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.boMaker}" name="boMaker"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">Type:</label>
-                                                    <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.boType}" name="boType"/></div>
+                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.boType}" name="boType"/></div>
                                                 </div>
                                                 <div class="col-md-5 form-group">
                                                     <label class="col-md-7">Evaporation:</label>
-                                                    <div class="col-md-5"><input class="input-xsmall" type="text" value="${report.shipDetail.boEvaporation}" name="boEvaporation"/></div>
+                                                    <div class="col-md-5"><input disabled class="input-xsmall" type="text" value="${report.shipDetail.boEvaporation}" name="boEvaporation"/></div>
                                                 </div>
                                                 <div class="col-md-7 form-group">
                                                     <label class="col-md-4">Heating area:</label>
-                                                    <div class="col-md-4"><input class="input-small" type="text" value="${report.shipDetail.boHeatingArea}" name="boHeatingArea"/></div>
+                                                    <div class="col-md-4"><input disabled class="input-small" type="text" value="${report.shipDetail.boHeatingArea}" name="boHeatingArea"/></div>
                                                 </div>
                                                 <div class="col-md-12 form-group">
-                                                    <div class="col-md-12"><input class="form-control" placeholder="Others"  type="text" value="${report.shipDetail.boOthers}" name="boOthers"/></div>
+                                                    <div class="col-md-12"><input disabled class="form-control" placeholder="Others"  type="text" value="${report.shipDetail.boOthers}" name="boOthers"/></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -310,13 +309,18 @@
                                                         </tr>
                                                         </thead>
                                                         <tbody>
-                                                        <c:forEach items="${report.defects}" var="d" varStatus="i">
-                                                            <tr >
-                                                                <td>${i.count}</td>
-                                                                <td>${d.description}</td>
-                                                                <td>${d.estimatCost}</td>
-                                                            </tr>
-                                                        </c:forEach>
+                                                        <c:if test="${! empty report.defects}" var="rd">
+                                                            <c:forEach items="${report.defects}" var="d" varStatus="i">
+                                                                <tr >
+                                                                    <td>${i.count}</td>
+                                                                    <td>${d.description}</td>
+                                                                    <td>${d.estimatCost}</td>
+                                                                </tr>
+                                                            </c:forEach>
+                                                        </c:if>
+                                                        <c:if test="${!rd}">
+                                                            <tr><td colspan="3">无任何信息</td></tr>
+                                                        </c:if>
                                                         </tbody>
                                                     </table>
                                                 </div>
@@ -356,10 +360,8 @@
                             </div>
                             <div class="tab-pane" id="tab5">
                                 <div class="tab-pane-div" >
-                                        <input type="hidden" value="${report.id}" name="reportId"/>
-                                        <input name="id" value="${report.conditionInspection.id}" type="hidden"/>
                                         <center><h2>Surveyor’s summary</h2></center>
-                                        <c:if test="${report.conditionInspection.hull!=''}">
+                                        <c:if test="${report.conditionInspection.hull!='' && report.conditionInspection.hull!=null}">
                                             <div class="col-md-12">
                                                 <div class="portlet box blue">
                                                     <div class="portlet-title">
@@ -375,7 +377,7 @@
                                                 </div>
                                             </div>
                                         </c:if>
-                                        <c:if test="${report.conditionInspection.deck!=''}">
+                                        <c:if test="${report.conditionInspection.deck!=''&& report.conditionInspection.deck!=null}">
                                             <div class="col-md-12">
                                                 <div class="portlet box blue">
                                                     <div class="portlet-title">
@@ -391,7 +393,7 @@
                                                 </div>
                                             </div>
                                         </c:if>
-                                        <c:if test="${report.conditionInspection.deckMarchinery!=''}">
+                                        <c:if test="${report.conditionInspection.deckMarchinery!=''&&report.conditionInspection.deckMarchinery!=null}">
                                             <div class="col-md-12">
                                                 <div class="portlet box blue">
                                                     <div class="portlet-title">
@@ -407,7 +409,7 @@
                                                 </div>
                                             </div>
                                         </c:if>
-                                        <c:if test="${report.conditionInspection.ballastTank!=''}">
+                                        <c:if test="${report.conditionInspection.ballastTank!=''&&report.conditionInspection.ballastTank!=null}">
                                             <div class="col-md-12">
                                                 <div class="portlet box blue">
                                                     <div class="portlet-title">
@@ -423,7 +425,7 @@
                                                 </div>
                                             </div>
                                         </c:if>
-                                        <c:if test="${report.conditionInspection.accommodation!=''}">
+                                        <c:if test="${report.conditionInspection.accommodation!=''&& report.conditionInspection.accommodation!=null}">
                                             <div class="col-md-12">
                                                 <div class="portlet box blue">
                                                     <div class="portlet-title">
@@ -439,7 +441,7 @@
                                                 </div>
                                             </div>
                                         </c:if>
-                                        <c:if test="${report.conditionInspection.navigationBridge!=''}">
+                                        <c:if test="${report.conditionInspection.navigationBridge!=''&& report.conditionInspection.navigationBridge!=null}">
                                             <div class="col-md-12">
                                                 <div class="portlet box blue">
                                                     <div class="portlet-title">
@@ -455,7 +457,7 @@
                                                 </div>
                                             </div>
                                          </c:if>
-                                        <c:if test="${report.conditionInspection.machinerySpace!=''}">
+                                        <c:if test="${report.conditionInspection.machinerySpace!=''&&report.conditionInspection.machinerySpace!=null}">
                                             <div class="col-md-12">
                                                 <div class="portlet box blue">
                                                     <div class="portlet-title">
@@ -472,7 +474,7 @@
                                                 </div>
                                             </div>
                                         </c:if>
-                                        <c:if test="${report.conditionInspection.lifeSaving!=''}">
+                                        <c:if test="${report.conditionInspection.lifeSaving!=''&&report.conditionInspection.lifeSaving!=null}">
                                             <div class="col-md-12">
                                                 <div class="portlet box blue">
                                                     <div class="portlet-title">
@@ -488,7 +490,7 @@
                                                 </div>
                                             </div>
                                         </c:if>
-                                        <c:if test="${report.conditionInspection.galley!=''}">
+                                        <c:if test="${report.conditionInspection.galley!=''&&report.conditionInspection.galley!=null}">
                                             <div class="col-md-12">
                                                 <div class="portlet box blue">
                                                     <div class="portlet-title">
@@ -504,7 +506,7 @@
                                                 </div>
                                             </div>
                                         </c:if>
-                                        <c:if test="${report.conditionInspection.ballastWater!=''}">
+                                        <c:if test="${report.conditionInspection.ballastWater!=''&&report.conditionInspection.ballastWater!=null}">
                                             <div class="col-md-12">
                                                 <div class="portlet box blue">
                                                     <div class="portlet-title">
@@ -521,7 +523,7 @@
                                             </div>
                                         </c:if>
                                         <c:if test="${report.shipDetail.type=='Bulker'}">
-                                            <c:if test="${report.conditionInspection.hatchCover!=''}">
+                                            <c:if test="${report.conditionInspection.hatchCover!=''&&report.conditionInspection.hatchCover!=null}">
                                                 <div class="col-md-12">
                                                 <div class="portlet box blue">
                                                     <div class="portlet-title">
@@ -537,7 +539,7 @@
                                                 </div>
                                             </div>
                                             </c:if>
-                                            <c:if test="${report.conditionInspection.cargoHold!=''}">
+                                            <c:if test="${report.conditionInspection.cargoHold!=''&&report.conditionInspection.cargoHold!=null}">
                                                 <div class="col-md-12">
                                                 <div class="portlet box blue">
                                                     <div class="portlet-title">
@@ -557,7 +559,7 @@
                                         </c:if>
 
                                             <c:if test="${report.shipDetail.type=='Tanker'}">
-                                                <c:if test="${report.conditionInspection.cargoTank!=''}">
+                                                <c:if test="${report.conditionInspection.cargoTank!=''&& report.conditionInspection.cargoTank!=null}">
                                                     <div class="col-md-12">
                                                     <div class="portlet box blue">
                                                         <div class="portlet-title">
@@ -573,7 +575,7 @@
                                                     </div>
                                                 </div>
                                                 </c:if>
-                                                <c:if test="${report.conditionInspection.cargoControlRoom!=''}">
+                                                <c:if test="${report.conditionInspection.cargoControlRoom!=''&& report.conditionInspection.cargoControlRoom!=null}">
                                                     <div class="col-md-12">
                                                     <div class="portlet box blue">
                                                         <div class="portlet-title">
@@ -589,7 +591,7 @@
                                                     </div>
                                                 </div>
                                                 </c:if>
-                                                <c:if test="${report.conditionInspection.pumpRoom!=''}">
+                                                <c:if test="${report.conditionInspection.pumpRoom!=''&& report.conditionInspection.pumpRoom!=null}">
                                                     <div class="col-md-12">
                                                     <div class="portlet box blue">
                                                         <div class="portlet-title">
@@ -605,7 +607,7 @@
                                                     </div>
                                                 </div>
                                                 </c:if>
-                                                <c:if test="${report.conditionInspection.pipelines!=''}">
+                                                <c:if test="${report.conditionInspection.pipelines!=''&&  report.conditionInspection.pipelines!=null}">
                                                     <div class="col-md-12">
                                                     <div class="portlet box blue">
                                                         <div class="portlet-title">
@@ -621,7 +623,7 @@
                                                     </div>
                                                 </div>
                                                 </c:if>
-                                                <c:if test="${report.conditionInspection.interGasSystem!=''}">
+                                                <c:if test="${report.conditionInspection.interGasSystem!=''&& report.conditionInspection.interGasSystem!=null}">
                                                     <div class="col-md-12">
                                                     <div class="portlet box blue">
                                                         <div class="portlet-title">
@@ -735,7 +737,7 @@
                                             </thead>
                                             <tbody>
                                             <c:forEach items="${report.documents}" var="d" varStatus="i">
-                                                <c:if test="${d.attachmentName!=''}">
+                                                <c:if test="${d.attachmentName!=''&& d.attachmentName!=null}">
                                                     <tr>
                                                         <td>${i.count}</td>
                                                         <td><a href="${d.attachmentUrl}">${d.title}</a></td>

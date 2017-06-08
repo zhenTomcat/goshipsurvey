@@ -12,6 +12,9 @@
     table th, td {
         text-align: center;
     }
+    .text-right {
+        text-align: right;
+    }
 
 </style>
 <div class="row">
@@ -19,7 +22,7 @@
         <!-- BEGIN SAMPLE TABLE PORTLET-->
         <div class="portlet box green">
             <div class="portlet-title" >
-                <center><div class="caption"><h3>Reports</h3></div></center>
+                <center><div class="caption"><h3>Inspections</h3></div></center>
             </div>
             <div class="portlet-body">
                 <div class="table-scrollable">
@@ -37,11 +40,12 @@
                             <th> Surveyor </th>
                             <th> More details </th>
                             <th> Link to report </th>
+                            <th>Status</th>
                         </tr>
                         </thead>
                         <tbody>
                         <c:if test="${! empty inspections}" var="a">
-                            <c:forEach items="${inspections}" var="i">
+                            <c:forEach items="${inspections}" var="i" varStatus="s">
                                 <tr >
                                     <fmt:formatDate value="${i.purchaseQuotation.createDate}" pattern="dd/MM/yyyy" var="publicDate"/>
                                     <fmt:formatDate value="${i.purchaseQuotation.startDate}" pattern="dd/MM/yyyy" var="startDate"/>
@@ -56,15 +60,25 @@
                                     <td> ${i.purchaseQuotation.totalPrice} </td>
                                     <td> ${i.surveyor.firstName} ${i.surveyor.lastName}</td>
                                     <td>
-                                        <a href="javascript:;" onclick="unfold(this)">View</a>&nbsp;<li class="fa fa-sort-desc"></li>
+                                        <a href="javascript:;" onclick="unfold(this)">View</a>&nbsp;<li class="fa fa-sort-desc"/>
                                      </td>
-                                    <td> <a data-target="navTab" href="/prepurchase/surveyor/reportEdit?inspectionId=${i.id}" >Edit</a> <li class="fa fa-edit"></li></td>
-
+                                    <td>
+                                        <c:if test="${i.submitStatus==1}">
+                                            <a data-target="navTab" href="/prepurchase/surveyor/reportEdit?inspectionId=${i.id}" >View</a> <li class="fa fa-link"></li>
+                                        </c:if>
+                                        <c:if test="${i.submitStatus==0}">
+                                            <a data-target="navTab" href="/prepurchase/surveyor/reportEdit?inspectionId=${i.id}" >Edit</a> <li class="fa fa-edit"></li>
+                                        </c:if>
+                                    </td>
+                                    <td>
+                                        <c:if test="${i.loi=='' || i.loi==null}">
+                                            <li class="fa fa-upload">&nbsp;
+                                        </c:if>
+                                    </td>
                                 </tr>
                                 <tr style="display: none">
-                                    <td colspan="11">
-                                        <form class="form-horizontal" action="#" id="submit_form" method="POST">
-                                            <div class="col-md-12" style="background-color: rgba(223, 222, 144, 0.58)">
+                                    <td colspan="12">
+                                        <div class="col-md-12" style="background-color: rgba(223, 222, 144, 0.58)">
                                                 <div class="col-md-3" >
                                                     <div class="col-md-12">
                                                         <label class="control-label label-top">Ship Name：</label>
@@ -138,7 +152,15 @@
                                                     </div>
                                                     <div class="col-md-12">
                                                         <label class="control-label">LOI：</label>
-                                                        <label class="control-label"><a href="${i.purchaseQuotation.loiUrl}"></a></label>
+                                                        <label class="control-label">
+                                                            <%--<c:if test="${i.purchaseQuotation.loiUrl!=null && i.purchaseQuotation.loiUrl!=''}">--%>
+                                                                <button class="btn btn-circle purple-sharp" type="button">
+                                                                    <li class="fa fa-download"></li>
+                                                                    Download
+                                                                </button>
+                                                            <%--</c:if>--%>
+
+                                                        </label>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-3">
@@ -156,27 +178,38 @@
                                                     </div>
                                                     <div class="col-md-12">
                                                         <label class="control-label">Surveyor CV：</label>
-                                                        <label class="control-label"><a href="javascript:;">View</a></label>
+                                                        <label class="control-label"><a data-model="dialog" href="surveyor/info?id=${i.surveyor.id}">View</a></label>
                                                     </div>
-                                                    <div class="col-md-12">
-                                                        <label class="control-label">Passport：</label>
-                                                        <label class="control-label"><input type="text" class="form-control input-xsmall"/></label>
-                                                        <label class="control-label"><button type="button" >Browse</button></label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label class="control-label">LOI：</label>
-                                                        <label class="control-label"><input type="text" class="form-control input-xsmall"/></label>
-                                                        <label class="control-label"><button type="button" >Browse</button></label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <div style="float: right">
-                                                            <label class="control-label"><button type="button" >Submit</button></label>
+                                                    <form method="post" action="prepurchase/surveyor/saveLoiPassport" >
+                                                        <input type="hidden" value="${i.id}" name="id"/>
+                                                        <div class="col-md-12">
+                                                            <label class="control-label">Passport：</label>
+                                                            <label class="control-label passport"><a  href="${i.passportUrl}" download="lskfkls">${i.passport}</a></label>
+                                                            <label class="control-label">
+                                                                    <button id="passport_button${s.count}" type="button" class="btn btn-sm blue passport_button">
+                                                                        <li class="fa fa-upload"></li>Browse
+                                                                    </button>
 
+                                                            </label>
                                                         </div>
-                                                    </div>
+                                                        <div class="col-md-12">
+                                                            <label class="control-label">LOI：</label>
+                                                            <label class="control-label loi"><a target="_blank" href="${i.loiUrl}">${i.loi}</a></label>
+                                                            <label class="control-label">
+                                                                    <button id="loi${s.count}"  type="button" class="btn btn-sm blue loi_button">
+                                                                        <li class="fa fa-upload"></li>Browse
+                                                                    </button>
+                                                            </label>
+                                                        </div>
+                                                        <div class="col-md-12">
+                                                            <div style="float: right">
+                                                                <label class="control-label"><button type="button" class="btn green" onclick="submitLoiAndPassport(this)">Submit</button></label>
+
+                                                            </div>
+                                                        </div>
+                                                    </form>
                                                 </div>
                                         </div>
-                                        </form>
                                     </td>
                                 </tr>
                             </c:forEach>
@@ -195,8 +228,15 @@
     </div>
 </div>
 <script>
+    $(".loi_button").each(function () {
+        initUploaders_surveyor_loi($(this).attr("id"), "shipinfo", "${staticPath}/",$(this));
+    });
+    $(".passport_button").each(function () {
+        initUploaders_surveyor_passport($(this).attr("id"), "shipinfo", "${staticPath}/",$(this));
+    });
+
     //展开
-    function unfold(obj) {
+    function unfold(obj,loi) {
 
         $(obj).closest("tr").next().show();
         $(obj).closest("tr").css("background-color","yellow");
@@ -210,6 +250,31 @@
         $(obj).parent().html('<a href="javascript:;" onclick="unfold(this)">View</a>&nbsp;<li class="fa fa-sort-desc"></li>');
     }
 
+
+
+
+    function submitLoiAndPassport(obj) {
+        if(check(obj)){
+            $(obj).closest('form').ajaxSubmit({
+                success:function (data) {
+                    alert("提交成功")
+                },
+                error:function () {
+
+                }
+            });
+        }
+
+    }
+    function check(obj) {
+        var loi=$(obj).parent().parent().parent().prev().find(".loi").find("a").html();
+        var passport=$(obj).parent().parent().parent().prev().prev().find(".passport").find("a").html();
+        if(loi=='' || passport==''){
+            alert("请将信息上传完整");
+            return false;
+        }
+        return true;
+    }
 
 </script>
 

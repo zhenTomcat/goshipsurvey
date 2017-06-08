@@ -53,12 +53,20 @@
                                         <td> ${i.shipDetail.shipType} </td>
                                         <td> ${i.purchaseQuotation.location} </td>
                                         <td> ${startDate}-${endDate} </td>
-                                        <td> ${i.purchaseQuotation.opName} </td>
+                                        <td> ${i.op.name} </td>
                                         <td> ${i.purchaseQuotation.totalPrice} </td>
-                                        <td> ${i.purchaseQuotation.surveyorName}</td>
+                                        <td> ${i.surveyor.firstName} ${i.surveyor.lastName}</td>
                                         <td> ${i.opGrade} </td>
 
-                                        <td> <a href="/prepurchase/surveyor/inspectionId?reportId=${i.id}" >Edit</a> <li class="fa fa-edit"></li></td>
+                                        <td>
+                                            <c:if test="${i.submitStatus==0}">
+                                                <a data-target="navTab" href="/prepurchase/surveyor/reportEdit?inspectionId=${i.id}" >Edit</a> <li class="fa fa-edit"></li>
+                                            </c:if>
+                                            <c:if test="${i.submitStatus==1}">
+                                                <a data-target="navTab" href="/prepurchase/surveyor/reportEdit?inspectionId=${i.id}" >view</a> <li class="fa fa-link"></li>
+                                            </c:if>
+
+                                        </td>
                                     </tr>
                                 </c:forEach>
                             </c:if>
@@ -76,23 +84,6 @@
     </div>
 </div>
 <script>
-    $(document).ready(function () {
-        $("form input").prop("readonly", true);
-        $("textarea").prop("readonly", true);
-
-        $(".passport-btn").each(function () {
-            initUploaders_passprot_loi_report($(this).attr("id"), "shipinfo", "${staticPath}/", "passport");
-        })
-
-        $(".loi-btn").each(function () {
-            initUploaders_passprot_loi_report($(this).attr("id"), "shipinfo", "${staticPath}/", "loi");
-        })
-
-        $(".report-btn").each(function () {
-            initUploaders_passprot_loi_report($(this).attr("id"), "shipinfo", "${staticPath}/", "report");
-        })
-
-    })
 
 
 

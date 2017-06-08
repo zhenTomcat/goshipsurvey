@@ -144,6 +144,7 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
 
         //g更新PurchaseInspiron
         inspection.setInspectionReportId(report.getId());
+        inspection.setSubmitStatus(Const.REPORT_UNSUBMIT);
         purchaseInspectionMapper.updateById(inspection);
 
         return true;

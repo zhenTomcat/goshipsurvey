@@ -118,4 +118,7 @@ public class Const {
     public static final Integer MESSAGE_READ = 1;
     //消息不置顶
     public static final Integer MESSAGE_NOT_TOP = 0;
+
+    public static final Integer REPORT_UNSUBMIT=0;
+    public static final Integer REPORT_SUBMIT=1;
 }

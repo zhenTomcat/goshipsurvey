@@ -116,12 +116,19 @@
             ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
         </sql>
     </changeSet>
-
-
-
-
-
-
+    <changeSet author="LuZhen" id="17317309132-007">
+        <sql>
+            alter table t_purchase_inspection add submit_status int(11) Null;
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-008">
+        <sql>
+            alter table t_purchase_quotation drop column op_name;
+            alter table t_purchase_quotation drop column surveyor_name;
+            alter table t_purchase_inspection add loi_url varchar(155) Null;
+            alter table t_purchase_inspection add passport_url varchar(155) Null;
+        </sql>
+    </changeSet>
 </databaseChangeLog>
 
 
