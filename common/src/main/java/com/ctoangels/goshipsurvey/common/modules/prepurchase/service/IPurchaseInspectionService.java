@@ -18,5 +18,9 @@ public interface IPurchaseInspectionService extends ISuperService<PurchaseInspec
 
     List<PurchaseInspection> getOPRecordList(Integer opId, Integer start, Integer length);
 
+    List<PurchaseInspection> getCompanyRecordList(Integer companyId, Integer start, Integer length);
+
+    int getRecordTotal(Integer opId, Integer companyId);
+
 
 }

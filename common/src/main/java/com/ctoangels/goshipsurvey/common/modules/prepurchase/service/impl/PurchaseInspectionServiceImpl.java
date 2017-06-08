@@ -101,7 +101,7 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
         //生成船检
         PurchaseInspection inspection = new PurchaseInspection();
         inspection.setOpId(quotation.getOpId());
-        inspection.setUserId(companyId);
+        inspection.setCompanyId(companyId);
         inspection.setSurveyId(surveyorId);
         inspection.setPurchaseQuoId(quotationId);
         inspection.setShipId(quotation.getShipId());
@@ -112,10 +112,10 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
         }
 
         //report
-        InspectionReport report=new InspectionReport();
+        InspectionReport report = new InspectionReport();
 
         //创建两个默认相册
-        Galleries galleries=new Galleries();
+        Galleries galleries = new Galleries();
         galleries.setName("未命名");
         galleries.setNumber(0);
         galleries.setInspectionReportId(report.getId());
@@ -123,7 +123,7 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
         galleries.setDelFlag(Const.DEL_FLAG_NORMAL);
         galleriesMapper.insert(galleries);
 
-        Galleries galleries1=new Galleries();
+        Galleries galleries1 = new Galleries();
         galleries1.setName("Certificate");
         galleries1.setNumber(0);
         galleries1.setInspectionReportId(report.getId());
@@ -158,6 +158,25 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
 
     @Override
     public List<PurchaseInspection> getOPRecordList(Integer opId, Integer start, Integer length) {
-        return null;
+        return purchaseInspectionMapper.getRecord(opId, null, Const.PROJECT_TYPE_PURCHASE, start, length);
+    }
+
+    @Override
+    public List<PurchaseInspection> getCompanyRecordList(Integer companyId, Integer start, Integer length) {
+        return purchaseInspectionMapper.getRecord(null, companyId, Const.PROJECT_TYPE_PURCHASE, start, length);
+    }
+
+    @Override
+    public int getRecordTotal(Integer opId, Integer companyId) {
+        PurchaseInspection pi = new PurchaseInspection();
+        pi.setDelFlag(Const.DEL_FLAG_NORMAL);
+        pi.setSubmitStatus(Const.REPORT_SUBMIT);
+        if (opId != null) {
+            pi.setOpId(opId);
+        }
+        if (companyId != null) {
+            pi.setCompanyId(companyId);
+        }
+        return purchaseInspectionMapper.selectCount(pi);
     }
 }
