@@ -155,4 +155,9 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
         List<PurchaseInspection> inspections = purchaseInspectionMapper.selectByOpInspection(id);
         return inspections;
     }
+
+    @Override
+    public PurchaseInspection selectByReportId(Integer reportId) {
+        return purchaseInspectionMapper.selectByReportId(reportId);
+    }
 }

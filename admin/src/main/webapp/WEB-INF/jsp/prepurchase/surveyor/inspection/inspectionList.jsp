@@ -186,24 +186,31 @@
                                                             <label class="control-label">Passport：</label>
                                                             <label class="control-label passport"><a  href="${i.passportUrl}" download="lskfkls">${i.passport}</a></label>
                                                             <label class="control-label">
+                                                                <c:if test="${i.loi==null || i.loi==''}">
                                                                     <button id="passport_button${s.count}" type="button" class="btn btn-sm blue passport_button">
                                                                         <li class="fa fa-upload"></li>Browse
                                                                     </button>
-
+                                                                </c:if>
                                                             </label>
                                                         </div>
                                                         <div class="col-md-12">
                                                             <label class="control-label">LOI：</label>
                                                             <label class="control-label loi"><a target="_blank" href="${i.loiUrl}">${i.loi}</a></label>
                                                             <label class="control-label">
+                                                                <c:if test="${i.loi==null || i.loi==''}">
                                                                     <button id="loi${s.count}"  type="button" class="btn btn-sm blue loi_button">
                                                                         <li class="fa fa-upload"></li>Browse
                                                                     </button>
+                                                                </c:if>
                                                             </label>
                                                         </div>
                                                         <div class="col-md-12">
                                                             <div style="float: right">
-                                                                <label class="control-label"><button type="button" class="btn green" onclick="submitLoiAndPassport(this)">Submit</button></label>
+                                                                <label class="control-label">
+                                                                    <c:if test="${i.loi==null || i.loi==''}">
+                                                                        <button type="button" class="btn green" onclick="submitLoiAndPassport(this)">Submit</button>
+                                                                    </c:if>
+                                                                </label>
 
                                                             </div>
                                                         </div>
@@ -257,7 +264,11 @@
         if(check(obj)){
             $(obj).closest('form').ajaxSubmit({
                 success:function (data) {
-                    alert("提交成功")
+                    alert("提交成功");
+                    $(obj).parent().parent().parent().prev().find("button").parent().html("");
+                    $(obj).parent().parent().parent().prev().prev().find("button").parent().html("");
+                    $(obj).parent().html("");
+
                 },
                 error:function () {
 

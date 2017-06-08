@@ -191,18 +191,13 @@ public class InspectionReportController extends BaseController {
         ew.addFilter("galleries_id={0}", galleriesId);
         List<Media> medias = mediaService.selectList(ew);
 
-        EntityWrapper<PurchaseInspection> ew1=getEntityWrapper();
-        ew1.addFilter("inspection_report_id",reportId);
-        PurchaseInspection inspection=purchaseInspectionService.selectOne(ew1);
-
-        if(inspection.getSubmitStatus()==1){
-            return "prepurchase/surveyor/inspection/imgView";
-        }
-
-
+        PurchaseInspection inspection=purchaseInspectionService.selectByReportId(reportId);
 
         modelMap.put("medias", medias);
         modelMap.put("galleriesId", galleriesId);
+        if(inspection.getSubmitStatus()==1){
+            return "prepurchase/surveyor/inspection/imgView";
+        }
         return  "prepurchase/surveyor/inspection/imgEdit";
     }
 

@@ -16,4 +16,6 @@ public interface PurchaseInspectionMapper extends AutoMapper<PurchaseInspection>
 
     List<PurchaseInspection> selectByOpInspection(Integer id);
 
+    PurchaseInspection selectByReportId(Integer reportId);
+
 }
