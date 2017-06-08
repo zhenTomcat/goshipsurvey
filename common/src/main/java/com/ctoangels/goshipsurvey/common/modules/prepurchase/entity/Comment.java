@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.annotations.IdType;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.ctoangels.goshipsurvey.common.util.Const;
 
 /**
  *
@@ -199,6 +200,19 @@ public class Comment implements Serializable {
 
 	public void setDelFlag(Integer delFlag) {
 		this.delFlag = delFlag;
+	}
+
+	public void setCreateInfo(String userName) {
+		this.createDate = new Date();
+		this.createBy = userName;
+		this.updateDate = new Date();
+		this.updateBy = userName;
+		this.delFlag = Const.DEL_FLAG_NORMAL;
+	}
+
+	public void setUpdateInfo(String userName) {
+		this.updateDate = new Date();
+		this.updateBy = userName;
 	}
 
 }
