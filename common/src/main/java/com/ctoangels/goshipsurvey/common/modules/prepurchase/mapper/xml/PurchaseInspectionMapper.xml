@@ -2,34 +2,71 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.PurchaseInspectionMapper">
 
-	<!-- 通用查询结果列-->
-	<sql id="Base_Column_List">
+    <!-- 通用查询结果列-->
+    <sql id="Base_Column_List">
 		id, purchase_quo_id AS purchaseQuoId, ship_id AS shipId, company_id AS companyId, survey_id AS surveyId, op_id AS opId, loi, passport, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag, company_grade AS companyGrade, remark, inspection_report_id AS inspectionReportId, op_grade AS opGrade, user_id AS userId
 	</sql>
-	<select id="selectByInspection" resultMap="Inspection">
+    <select id="selectByInspection" resultMap="Inspection">
 			select * from t_purchase_inspection p join t_ship_detail s on p.ship_id=s.id where p.company_id=#{0}
 
 	</select>
 
-	<select id="selectByOpInspection" resultMap="Inspection">
+    <select id="selectByOpInspection" resultMap="Inspection">
 		select * from t_purchase_inspection p join t_ship_detail s on p.ship_id=s.id where p.op_id=#{0}
 	</select>
 
 
-	<resultMap id="Inspection" type="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.PurchaseInspection">
-		<result property="id" column="id"></result>
-		<result property="shipId" column="ship_id"></result>
-		<result property="companyId" column="company_id"></result>
-		<result property="surveyId" column="survey_id"></result>
-		<result property="opId" column="op_id"></result>
-		<result property="purchaseQuoId" column="purchase_quo_id"></result>
-		<collection property="shipDetail" column="{ship_id=ship_id}" ofType="Param"
-					select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.ShipDetailMapper.selectByShipId"/>
-		<collection property="purchaseQuotation" column="{purchase_quotation_id=purchase_quo_id}" ofType="Param"
-					select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.PurchaseQuotationMapper.selectByPurchaseQuotationId"/>
-		<collection property="surveyor" column="{survey_id=survey_id}" ofType="Surveyor"
-					select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.SurveyorMapper.getById"/>
-		<collection property="op" column="{op_id=op_id}" ofType="User"
-					select="com.ctoangels.goshipsurvey.common.modules.sys.mapper.UserMapper.getById"/>
-	</resultMap>
+    <resultMap id="Inspection" type="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.PurchaseInspection">
+        <result property="id" column="id"></result>
+        <result property="shipId" column="ship_id"></result>
+        <result property="companyId" column="company_id"></result>
+        <result property="surveyId" column="survey_id"></result>
+        <result property="opId" column="op_id"></result>
+        <result property="purchaseQuoId" column="purchase_quo_id"></result>
+        <collection property="shipDetail" column="{ship_id=ship_id}" ofType="Param"
+                    select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.ShipDetailMapper.selectByShipId"/>
+        <collection property="purchaseQuotation" column="{purchase_quotation_id=purchase_quo_id}" ofType="Param"
+                    select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.PurchaseQuotationMapper.selectByPurchaseQuotationId"/>
+        <collection property="surveyor" column="{survey_id=survey_id}" ofType="Surveyor"
+                    select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.SurveyorMapper.getById"/>
+        <collection property="op" column="{op_id=op_id}" ofType="User"
+                    select="com.ctoangels.goshipsurvey.common.modules.sys.mapper.UserMapper.getById"/>
+    </resultMap>
+
+    <select id="getRecord" resultMap="RecordMap">
+        SELECT pi.*, #{proType} AS proType FROM t_purchase_inspection pi
+        <where>
+            AND pi.
+            <if test="opId != null">
+                AND pi.op_id=#{opId}
+            </if>
+            <if test="companyId != null">
+                AND pi.company_id=#{companyId}
+            </if>
+            order by pq.update_date desc
+            limit #{start},#{length}
+        </where>
+    </select>
+
+    <resultMap id="RecordMap" type="PurchaseInspection">
+        <result property="id" column="id"></result>
+        <result property="shipId" column="ship_id"></result>
+        <result property="companyId" column="company_id"></result>
+        <result property="surveyId" column="survey_id"></result>
+        <result property="opId" column="op_id"></result>
+        <result property="purchaseQuoId" column="purchase_quo_id"></result>
+        <association property="shipDetail" column="{ship_id=ship_id}" javaType="ShipDetail"
+                     select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.ShipDetailMapper.selectByShipId"/>
+        <association property="purchaseQuotation" column="{purchase_quotation_id=purchase_quo_id}"
+                     javaType="PurchaseQuotation"
+                     select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.PurchaseQuotationMapper.selectByPurchaseQuotationId"/>
+        <association property="surveyor" column="{survey_id=survey_id}" javaType="Surveyor"
+                     select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.SurveyorMapper.getById"/>
+        <association property="op" column="{op_id=op_id}" javaType="User"
+                     select="com.ctoangels.goshipsurvey.common.modules.sys.mapper.UserMapper.getById"/>
+        <association property="company" column="{id=company_id}" javaType="User"
+                     select="com.ctoangels.goshipsurvey.common.modules.sys.mapper.UserMapper.getById"/>
+        <association property="comment" column="{inspectionId=id,proType=proType}" javaType="Comment"
+                     select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.CommentMapper.getByInspectionIdAndProType"/>
+    </resultMap>
 </mapper>

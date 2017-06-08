@@ -130,6 +130,13 @@ public class PurchaseInspection implements Serializable {
     @TableField(exist = false)
     private User op;
 
+    @TableField(exist = false)
+    private User company;
+
+    @TableField(exist = false)
+    private Comment comment;
+
+
     public Integer getId() {
         return this.id;
     }
@@ -317,5 +324,21 @@ public class PurchaseInspection implements Serializable {
 
     public void setOp(User op) {
         this.op = op;
+    }
+
+    public Comment getComment() {
+        return comment;
+    }
+
+    public void setComment(Comment comment) {
+        this.comment = comment;
+    }
+
+    public User getCompany() {
+        return company;
+    }
+
+    public void setCompany(User company) {
+        this.company = company;
     }
 }

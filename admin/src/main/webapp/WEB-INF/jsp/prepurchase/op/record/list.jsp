@@ -92,12 +92,11 @@
                                                     <th>Ship name</th>
                                                     <th>imo</th>
                                                     <th>Ship type</th>
-                                                    <th>Inspection type</th>
                                                     <th>Inspection port</th>
                                                     <th>Inspection date(LMT)</th>
                                                     <th>Total price</th>
-                                                    <th>Surveyors/Company</th>
-                                                    <th>Inspection report</th>
+                                                    <th>Grading</th>
+                                                    <th>Link of inspection report</th>
                                                     <th></th>
                                                 </tr>
                                                 </thead>
