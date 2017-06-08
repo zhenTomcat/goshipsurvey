@@ -8,7 +8,7 @@
 	</sql>
 
     <select id="getById" resultType="User">
-        SELECT u.* FROM sys_user u WHERE u.id=#{0}
+        SELECT u.* FROM sys_user u WHERE u.id=#{id}
     </select>
 
 </mapper>

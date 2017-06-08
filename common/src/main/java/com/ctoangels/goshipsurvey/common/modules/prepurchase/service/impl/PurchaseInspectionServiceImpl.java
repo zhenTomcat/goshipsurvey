@@ -157,6 +157,9 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
     }
 
     @Override
+    public PurchaseInspection selectByReportId(Integer reportId) {
+        return purchaseInspectionMapper.selectByReportId(reportId);
+    }
     public List<PurchaseInspection> getOPRecordList(Integer opId, Integer start, Integer length) {
         return purchaseInspectionMapper.getRecord(opId, null, Const.PROJECT_TYPE_PURCHASE, start, length);
     }

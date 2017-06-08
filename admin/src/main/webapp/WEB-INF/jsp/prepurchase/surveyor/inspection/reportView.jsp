@@ -380,13 +380,13 @@
                                                                 <div class="divPhoto">
                                                                     <div class="divImg" onmouseover="mouseOver(this)">
                                                                         <div >
-                                                                            <span  onclick="javascript:editPhoto(this,'${g.id}','${g.name}');" class="span-left">
+                                                                            <span   class="span-left">
                                                                                 <li class="li-left fa fa-edit"></li>
                                                                             </span>
-                                                                            <span onclick="javascript:removePhoto(this,'${g.id}');" class="span-right">
+                                                                            <span  class="span-right">
                                                                                 <li class="li-right fa fa-remove"></li>
                                                                             </span>
-                                                                            <a data-model="dialog" href="prepurchase/surveyor/img?galleriesId=${g.id}"  >
+                                                                            <a data-model="dialog" href="prepurchase/surveyor/img?galleriesId=${g.id}&reportId=${report.id}"  >
                                                                                 <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/GWTcR228ek.jpg"
                                                                                      style="width: 200px;height: 200px;"/>
                                                                             </a>

@@ -52,12 +52,19 @@
                                     <td> ${i.shipDetail.shipType} </td>
                                     <td> ${i.purchaseQuotation.location} </td>
                                     <td> ${startDate}-${endDate} </td>
-                                    <td> ${i.surveyor.lastName} </td>
+                                    <td>
+                                        <a data-model="dialog" href="surveyor/info?id=${i.surveyor.id}">${i.surveyor.firstName} ${i.surveyor.lastName}</a>/
+                                        <a data-model="dialog" href="user/companyInfo?id=${i.companyId}">${i.op.name}</a>
+                                    </td>
                                     <td> <a href="${i.passportUrl}">${i.passport}</a> </td>
                                     <td> <a href="${i.loiUrl}">${i.loi}</a> </td>
                                     <td> ${i.purchaseQuotation.totalPrice} </td>
                                     <td> ${i.companyGrade} </td>
-                                    <td> <li class="fa fa-link"></li></td>
+                                    <td>
+                                        <c:if test="${i.submitStatus==1}">
+                                            <a data-target="navTab" href="/prepurchase/op/reportInfo?reportId=${i.inspectionReportId}" >View</a> <li class="fa fa-link"></li>
+                                        </c:if>
+                                    </td>
 
                                 </tr>
                             </c:forEach>
