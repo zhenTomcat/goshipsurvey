@@ -53,6 +53,8 @@
     .li-left{margin-left: 2px}
     .li-right{margin-right: 2px}
     textarea{ resize:none;}
+
+    .li-span{color: black}
 </style>
     <div class="row">
         <input value="${report.id}" id="reportId" type="hidden"/>
@@ -62,12 +64,12 @@
                                 <div class="caption"><h3>Report of Star Deltas</h3></div>
                                 <div class="tools" style="padding-top: 20px">
                                 <div>
-                                    <a data-target="navTab" href="prepurchase/surveyor/report" class="btn blue"><li class="fa fa-bars"></li>Report List</a>
+                                    <a id="reportList" data-target="navTab" href="prepurchase/surveyor/report" class="btn blue"><li class="fa fa-bars"></li>Report List</a>
                                 </div>
                             </div>
                             </div>
                         </div>
-                            <div class="portlet-body form">
+                            <div  class="portlet-body form">
 <%--
                                 <form class="form-horizontal" action="#" id="submit_form" method="POST" novalidate="novalidate">
 --%>
@@ -75,56 +77,56 @@
                                         <div class=" form-body">
                                             <ul  id="ul_li" class="title nav nav-pills nav-justified steps">
                                                 <li class="active info">
-                                                    <a href="#tab1" data-toggle="tab" class="step" aria-expanded="true">
+                                                    <a id="#tab1" href="javascript:;" onclick="liNow(this)"  class="step" aria-expanded="true">
                                                         <span class="number"> 1 </span></br>
                                                         <span class="desc">
                                                                     <i class="fa fa-check"></i> Ship details </span>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#tab2" data-toggle="tab" class="step">
+                                                    <a id="#tab2" href="javascript:;" onclick="liNow(this)" class="step">
                                                         <span class="number"> 2 </span></br>
                                                         <span class="desc">
                                                                     <i class="fa fa-check"></i> Grading </span>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#tab3" data-toggle="tab" class="step">
+                                                    <a id="#tab3" href="javascript:;" onclick="liNow(this)" class="step">
                                                         <span class="number"> 3 </span></br>
                                                         <span class="desc">
                                                                     <i class="fa fa-check"></i> Defects </span>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#tab4" data-toggle="tab" class="step">
+                                                    <a id="#tab4" href="javascript:;" onclick="liNow(this)" class="step">
                                                         <span class="number"> 4 </span></br>
                                                         <span class="desc">
                                                                     <i class="fa fa-check"></i> Galleries </span>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#tab5" data-toggle="tab" class="step">
+                                                    <a id="#tab5" href="javascript:;" onclick="liNow(this)" class="step">
                                                         <span class="number"> 5 </span></br>
                                                         <span class="desc">
                                                                     <i class="fa fa-check"></i> Condition inspection </span>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#tab6" data-toggle="tab" class="step">
+                                                    <a id="#tab6" href="javascript:;" onclick="liNow(this)" class="step">
                                                         <span class="number"> 6 </span></br>
                                                         <span class="desc">
                                                                     <i class="fa fa-check"></i> Technical appendix &</br> equipment information </span>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#tab7" data-toggle="tab" class="step">
+                                                    <a id="#tab7" href="javascript:;" onclick="liNow(this)" class="step">
                                                         <span class="number"> 7 </span></br>
                                                         <span class="desc">
                                                                     <i class="fa fa-check"></i> Documents </span>
                                                     </a>
                                                 </li>
                                                 <li>
-                                                    <a href="#tab8" data-toggle="tab" class="step">
+                                                    <a id="#tab8" href="javascript:;" onclick="liNow(this)" class="step">
                                                         <span class="number"> <i class="fa fa-check"></i> </span></br>
                                                         <span class="desc">
                                                                      Complete </span>
@@ -642,7 +644,9 @@
                                                                 <tbody>
                                                                     <c:forEach items="${report.documents}" var="d" varStatus="i">
                                                                         <tr>
-                                                                            <td>—${d.title}<input type="hidden" name="documents[${i.index}].title" value="${d.title}"></td>
+                                                                            <td>—${d.title}<input type="hidden" name="documents[${i.index}].title" value="${d.title}">
+
+                                                                            </td>
                                                                             <td><a target="_blank" href="${d.attachmentUrl}">${d.attachmentName}</a>
                                                                                 <input type="hidden" name="documents[${i.index}].id" value="${d.id}">
                                                                                 <input type="hidden" name="documents[${i.index}].inspectionReportId" value="${report.id}">
@@ -651,7 +655,7 @@
                                                                             </td>
                                                                             <td>
                                                                                 <c:if test="${d.attachmentUrl!='' && d.attachmentUrl!=null}">
-                                                                                    <button onclick="clearTd(this)" type="button" style="color: red">Delete</button>
+                                                                                    <button onclick="clearTd(this,'${i.index}','${report.id}','${d.id}')" type="button" style="color: red">Delete</button>
                                                                                 </c:if>
                                                                                 <c:if test="${d.attachmentUrl=='' || d.attachmentUrl==null}">
                                                                                     <button type="button" onmouseover="upload_attachment(this,'${i.index}','${report.id}','${d.id}')">Browse</button>
@@ -666,19 +670,28 @@
                                                     </div>
                                                 </div>
                                                 <div class="tab-pane" id="tab8">
+                                                    <div class="tab-pane-div"  >
+                                                        <div>
+                                                            <img width="800px" height="500px" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/system/success.jpg"/>
+                                                        </div>
+                                                    </div>
 
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="col-md-offset-3 col-md-9"  style="margin-left: 70%;margin-top: 20px;margin-bottom: 20px">
+                                        <div class="col-md-offset-3 col-md-4"  style="margin-left: 80%;margin-top: 20px;margin-bottom: 20px">
                                            <%-- <a id="back" href="javascript:;" onclick="prevLi()" class="btn default button-previous">
                                                 <i class="fa fa-angle-left"></i> Back </a>--%>
-                                            <a href="javascript:;" onclick="nextLi()" class="btn btn-outline green button-next"> Save
-                                                <i class="fa fa-angle-right"></i>
-                                            </a>
-                                            <a href="javascript:;" onclick="submitReport()" class="btn green button-submit"> Submit
-                                                <i class="fa fa-check"></i>
-                                            </a>
+                                            <div class="col-md-3">
+                                                <a id="next" href="javascript:;" onclick="nextLi(this)" class="btn btn-outline green button-next"> Save
+                                                    <i class="fa fa-angle-right"></i>
+                                                </a>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <a href="javascript:;" onclick="submitReport()" class="btn green button-submit"> Submit
+                                                    <i class="fa fa-check"></i>
+                                                </a>
+                                            </div>
                                         </div>
                                     </div>
                                 <%--</form>--%>
@@ -838,20 +851,26 @@
    }
    function sure(obj) {
        var trNum=$("#default_table").find("tbody tr").length;
+       var reportId=$("#reportId").val();
 
        var html='<tr><td>—'+$("#title").val()+'<input type="hidden" name="documents['+trNum+'].title" value="'+$("#title").val()+'"/></td>' +
                '<td></td>' +
-               '<td><button onmouseover="upload_attachment(this)" type="button">Browse</button></td></tr>';
+               '<td><button onmouseover="upload_attachment(this,'+trNum+','+reportId+','+0+')" type="button">Browse</button></td></tr>';
        $("#default_table").find("tbody tr:last").after(html);
        $(obj).prev().click();
    }
    function upload_attachment(obj,count,reportId,documentId) {
        initUploaders_attachment(obj, "shipinfo", "${staticPath}/",obj,count,reportId,documentId);
+       $(obj).mouseout(function () {
+           return false;
+       });
+       return false;
    }
 
-   function clearTd(obj) {
+   function clearTd(obj,count,reportId,documentId) {
+       alert(count);
        $(obj).parent().prev().html("");
-       $(obj).parent().html('<button  type="button" onmouseover="upload_attachment(this)">Browse</button>');
+       $(obj).parent().html('<button  type="button" onmouseover="upload_attachment(this,'+count+','+reportId+','+documentId+')">Browse</button>');
    }
 
    //鼠标移入事件
@@ -991,7 +1010,50 @@
  /*   if($(".info").find("a").attr("href")=="#tab1"){
         $("#back").hide();
     }*/
-    function nextLi() {
+    function liNow(obj) {
+        $("#ul_li .active").removeClass("active");
+        $("#div_from .active").removeClass("active");
+        if($(obj).attr("id")=='#tab1'){
+            $(obj).parent().addClass("active")
+            $("#tab1").addClass("active");
+        }
+        if($(obj).attr("id")=='#tab2'){
+            $(obj).parent().addClass("active")
+            $("#tab2").addClass("active");
+        }
+        if($(obj).attr("id")=='#tab3'){
+            $(obj).parent().addClass("active")
+            $("#tab3").addClass("active");
+        }
+        if($(obj).attr("id")=='#tab4'){
+            $(obj).parent().addClass("active")
+            $("#tab4").addClass("active");
+        }
+        if($(obj).attr("id")=='#tab5'){
+            $(obj).parent().addClass("active")
+            $("#tab5").addClass("active");
+        }
+        if($(obj).attr("id")=='#tab6'){
+            $(obj).parent().addClass("active")
+            $("#tab6").addClass("active");
+        }
+        if($(obj).attr("id")=='#tab7'){
+            $(obj).parent().addClass("active")
+            $("#tab7").addClass("active");
+        }
+        if($(obj).attr("id")=='#tab8'){
+            $(obj).parent().addClass("active")
+            $("#tab8").addClass("active");
+            $("#next").hide();
+        }
+        if($(obj).attr("id")!='#tab8'){
+            $("#next").show();
+        }
+
+    }
+
+
+    function nextLi(objButton) {
         if($("#div_from .active").attr("data-flag")=='flag'){
             $("#div_from .active").find("form").each(function () {
                 $(this).ajaxSubmit({
@@ -1014,8 +1076,15 @@
             });
         }
 
+        $("#ul_li .active").find("span:first").html('<i class="fa fa-check"></i>');
+        $("#ul_li .active").find("span:first").css("background-color","#36c6d3");
+        $("#ul_li .active").find("span:first").css("color","white");
         var obj=$("#ul_li .active").next();
+
         $(".active").removeClass("active");
+        if(obj.find("a").attr("id")=='#tab8'){
+            $(objButton).hide();
+        }
         obj.find("a").click();
 
     }
@@ -1029,22 +1098,25 @@
 
    /*提交报告*/
    function submitReport() {
-       var reportId=$("#reportId").val();
-       $.ajax({
-           url:"prepurchase/surveyor/submitReport",
-           type:"GET",
-           dataType:"json",
-           data:{
-               reportId:reportId
-           },
-           success:function (data) {
-               if(data){
-                   alert("SUCCESS")
-               }
-           },
-           error:function () {
+      if(confirm("确定要提交报告吗?")){
+          var reportId=$("#reportId").val();
+          $.ajax({
+              url:"prepurchase/surveyor/submitReport",
+              type:"GET",
+              dataType:"json",
+              data:{
+                  reportId:reportId
+              },
+              success:function (data) {
+                  if(data){
+                      alert("SUCCESS");
+                      $("#reportList").click();
+                  }
+              },
+              error:function () {
 
-           }
-       });
+              }
+          });
+      }
    }
 </script>
