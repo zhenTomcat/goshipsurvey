@@ -163,7 +163,7 @@
                 "targets": 7,
                 "class": "details-control",
                 "render": function (data, type, row) {
-                    return "<a href='javascript:void(0)'>VIEW</a>"
+                    return '<a  href="javascript:void(0)">VIEW</a>';
                 }
             }
             ],
@@ -172,14 +172,15 @@
         quotationTable.on('click', 'td.details-control', function () {
             var tr = $(this).closest('tr');
             var row = quotationTable.row(tr);
-            if (row.child.isShown()) {
-                row.child.hide();
-//                tr.removeClass('shown');
-            }
-            else {
+            var flag = tr.attr("data-not-first");
+            if (flag) {
+                    tr.next().toggle();
+            } else {
                 row.child(moreInfo(row.data())).show();
-//                tr.addClass('shown');
+                tr.next().addClass("detail-row");
+                tr.attr("data-not-first", true);
             }
+
         });
     }
 
@@ -223,20 +224,6 @@
     }
 
 
-    function initInspection(quotationId, applicationId) {
-        $.ajax({
-            type: "post",
-            url: "op/inspection/add",
-            data: {quotationId: quotationId, applicationId: applicationId},
-            success: function (data) {
-                $("a[href='op/inspection']").click();
-            },
-            error: function () {
-                alert("initInspection error");
-            }
-        })
-    }
-
     function refreshTable(toFirst) {
         if (toFirst) {//表格重绘，并跳转到第一页
             quotationTable.draw();
@@ -245,23 +232,6 @@
         }
     }
 
-    function startQuotation(quotationId) {
-        $.ajax({
-            type: "post",
-            url: "op/quotation/startQuotation",
-            data: {id: quotationId},
-            success: function (data) {
-                if (data.success) {
-                    drawTable();
-                } else {
-                    alert("error1");
-                }
-            },
-            error: function () {
-                alert("error2");
-            }
-        })
-    }
 
 </script>
 

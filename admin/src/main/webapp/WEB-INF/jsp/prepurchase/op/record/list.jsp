@@ -296,7 +296,11 @@
                     "data": "",
                 },
                 {
-                    "data": "",
+                    "data": "inspectionReportId",
+                    "render": function (data) {
+                        return '<a data-target="navTab" href="prepurchase/op/reportInfo?reportId=' + data + '" >View</a> <li class="fa fa-link"></li>'
+
+                    }
                 },
             ],
             "columnDefs": [{

@@ -24,9 +24,9 @@
                                     </div>
                                 </div>
                                 <div class="portlet-body">
-                                    <div class="caption col-md-8 margin-bottom-15">
-                                        <span class="caption-subject font-blue-soft bold uppercase">Applied</span>
-                                    </div>
+                                    <%--<div class="caption col-md-8 margin-bottom-15">--%>
+                                        <%--<span class="caption-subject font-blue-soft bold uppercase">Applied</span>--%>
+                                    <%--</div>--%>
                                     <div class="tab-pane fade active in" id="tab_1_1">
                                         <table class="table table-striped table-bordered table-hover table-checkable order-column"
                                                id="quotation_table">
