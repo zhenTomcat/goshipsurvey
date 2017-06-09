@@ -79,6 +79,9 @@ public class Surveyor implements Serializable {
     @TableField(value = "surveyor_profile")
     private String surveyorProfile;
 
+    @TableField(value = "past_evaluation")
+    private Double pastEvaluation;
+
     /**
      * 公司id
      */
@@ -299,4 +302,11 @@ public class Surveyor implements Serializable {
         this.updateBy = userName;
     }
 
+    public Double getPastEvaluation() {
+        return pastEvaluation;
+    }
+
+    public void setPastEvaluation(Double pastEvaluation) {
+        this.pastEvaluation = pastEvaluation;
+    }
 }

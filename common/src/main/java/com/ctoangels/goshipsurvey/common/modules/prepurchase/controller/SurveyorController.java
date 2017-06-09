@@ -131,6 +131,7 @@ public class SurveyorController extends BaseController {
     public JSONObject addComplete(Surveyor surveyor) {
 
         JSONObject jsonObject = new JSONObject();
+        surveyor.setPastEvaluation(0D);
         surveyor.setCompanyId(getCurrentUser().getId());
         surveyor.setCreateInfo(getCurrentUser().getName());
 

@@ -4,11 +4,17 @@
 
     <!-- 通用查询结果列-->
     <sql id="Base_Column_List">
-		id, first_name AS firstName, last_name AS lastName, nationality, survey_time_start AS surveyTimeStart, survey_time_end AS surveyTimeEnd, email, tel, ship_type AS shipType, survey_port AS surveyPort, surveyor_profile AS surveyorProfile, company_id AS companyId, portrait_url AS portraitUrl, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
+		id, first_name AS firstName, last_name AS lastName, nationality, survey_time_start AS surveyTimeStart, survey_time_end AS surveyTimeEnd, email, tel, ship_type AS shipType, survey_port AS surveyPort, surveyor_profile AS surveyorProfile,past_evaluation AS pastEvaluation, company_id AS companyId, portrait_url AS portraitUrl, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
 	</sql>
 
     <select id="getById" resultType="Surveyor">
 		SELECT s.*  FROM  t_surveyor s WHERE s.id=#{survey_id}
 	</select>
+
+    <update id="updatePastEvaluation">
+		UPDATE t_surveyor sur
+		SET sur.past_evaluation= ceil((select IFNULL(AVG(co.op_grade),0)  as avg_grade  from t_comment co WHERE co.surveyor_id=#{0}))
+		Where sur.id=#{0}
+	</update>
 
 </mapper>

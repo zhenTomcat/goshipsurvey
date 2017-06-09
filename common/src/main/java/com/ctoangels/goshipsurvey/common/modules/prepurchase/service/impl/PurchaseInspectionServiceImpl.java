@@ -56,6 +56,9 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
     @Autowired
     IShipDetailService shipDetailService;
 
+    @Autowired
+    CommentMapper commentMapper;
+
 
     @Override
     public List<PurchaseInspection> selectByInspection(Integer id) {
@@ -111,6 +114,18 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
             return false;
         }
 
+        //生成评论
+        Comment comment = new Comment();
+        comment.setCompanyId(companyId);
+        comment.setSurveyorId(surveyorId);
+        comment.setOpId(quotation.getOpId());
+        comment.setCreateInfo(user.getName());
+        comment.setProType(Const.PROJECT_TYPE_PURCHASE);
+        comment.setInspectionId(inspection.getId());
+        if (commentMapper.insert(comment) < 0) {
+            return false;
+        }
+
         //report
         InspectionReport report = new InspectionReport();
 
@@ -142,7 +157,7 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
         //插入一条报告
         inspectionReportMapper.insert(report);
 
-        //g更新PurchaseInspiron
+        //更新PurchaseInspection
         inspection.setInspectionReportId(report.getId());
         inspection.setSubmitStatus(Const.REPORT_UNSUBMIT);
         purchaseInspectionMapper.updateById(inspection);
@@ -160,6 +175,7 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
     public PurchaseInspection selectByReportId(Integer reportId) {
         return purchaseInspectionMapper.selectByReportId(reportId);
     }
+
     public List<PurchaseInspection> getOPRecordList(Integer opId, Integer start, Integer length) {
         return purchaseInspectionMapper.getRecord(opId, null, Const.PROJECT_TYPE_PURCHASE, start, length);
     }
