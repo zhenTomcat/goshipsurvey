@@ -88,6 +88,9 @@ public class DocumentServiceImpl extends SuperServiceImpl<DocumentMapper, Docume
     @Override
     public Boolean insertOrUpdateDocument(List<Document> documents) {
         for (Document d:documents){
+            if(d.getId()==0){
+                d.setId(null);
+            }
             documentService.insertOrUpdate(d);
         }
         return true;

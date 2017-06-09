@@ -153,12 +153,12 @@
                                                     <div class="col-md-12">
                                                         <label class="control-label">LOI：</label>
                                                         <label class="control-label">
-                                                            <%--<c:if test="${i.purchaseQuotation.loiUrl!=null && i.purchaseQuotation.loiUrl!=''}">--%>
-                                                                <button class="btn btn-circle purple-sharp" type="button">
+                                                            <c:if test="${i.purchaseQuotation.loiUrl!=null && i.purchaseQuotation.loiUrl!=''}">
+                                                                <a download="download" class="btn btn-circle purple-sharp" href="${i.purchaseQuotation.loiUrl}">
                                                                     <li class="fa fa-download"></li>
                                                                     Download
-                                                                </button>
-                                                            <%--</c:if>--%>
+                                                                </a>
+                                                            </c:if>
 
                                                         </label>
                                                     </div>
@@ -184,7 +184,7 @@
                                                         <input type="hidden" value="${i.id}" name="id"/>
                                                         <div class="col-md-12">
                                                             <label class="control-label">Passport：</label>
-                                                            <label class="control-label passport"><a  href="${i.passportUrl}" download="lskfkls">${i.passport}</a></label>
+                                                            <label class="control-label passport"><a  href="${i.passportUrl}" target="_blank">${i.passport}</a></label>
                                                             <label class="control-label">
                                                                 <c:if test="${i.loi==null || i.loi==''}">
                                                                     <button id="passport_button${s.count}" type="button" class="btn btn-sm blue passport_button">

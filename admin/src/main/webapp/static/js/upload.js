@@ -381,7 +381,7 @@ function initUploaders_attachment(buttonId, bucket, domain, obj,count,reportId,d
                     '<input name="documents['+count+'].attachmentUrl" type="hidden" value="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '" >' +
                     '<input name="documents['+count+'].attachmentName" type="hidden" value="' + nativeName + '"/>';
                 $(obj).parent().prev().html(html);
-                var html1 = '<button onclick="clearTd(this)" type="button" style="color: red">Delete</button>';
+                var html1 = '<button onclick="clearTd(this,'+count+','+reportId+','+documentId+')" type="button" style="color: red">Delete</button>';
                 $(obj).parent().html(html1);
             }
         }
