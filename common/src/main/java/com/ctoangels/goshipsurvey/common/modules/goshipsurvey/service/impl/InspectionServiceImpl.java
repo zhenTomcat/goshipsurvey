@@ -7,6 +7,9 @@ import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.SurveyorInf
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.QuotationApplicationMapper;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.QuotationMapper;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.SurveyorInfoMapper;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Comment;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.PurchaseInspection;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.CommentMapper;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
 import com.ctoangels.goshipsurvey.common.modules.sys.mapper.UserMapper;
 import com.ctoangels.goshipsurvey.common.util.Const;
@@ -42,6 +45,9 @@ public class InspectionServiceImpl extends SuperServiceImpl<InspectionMapper, In
     @Autowired
     UserMapper userMapper;
 
+    @Autowired
+    CommentMapper commentMapper;
+
     @Override
     public boolean initInspection(int quotationId, int applicationId) {
         //更新所以询价申请状态
@@ -50,12 +56,14 @@ public class InspectionServiceImpl extends SuperServiceImpl<InspectionMapper, In
         quotationApplication.setType(Const.PROJECT_TYPE_HIRE);
         List<QuotationApplication> applicationList = quotationApplicationMapper.selectList(new EntityWrapper<>(quotationApplication));
         int surveyorId = 0;
+        int companyId = 0;
         double totalPrice = 0;
         for (QuotationApplication qa : applicationList) {
             if (qa.getId() == applicationId) {
                 qa.setApplicationStatus(Const.QUO_APPLY_SUCCESS);
-                surveyorId = qa.getUserId();
+                surveyorId = qa.getSurveyId();
                 totalPrice = qa.getTotalPrice();
+                companyId = qa.getUserId();
             } else {
                 qa.setApplicationStatus(Const.QUO_APPLY_FAILURE);
             }
@@ -76,6 +84,7 @@ public class InspectionServiceImpl extends SuperServiceImpl<InspectionMapper, In
         //生成船检
         Inspection inspection = new Inspection();
         inspection.setOpId(quotation.getOpId());
+        inspection.setCompanyId(companyId);
         inspection.setSurveyorId(surveyorId);
         inspection.setInspectionType(quotation.getInspectionType());
         inspection.setQuotationId(quotationId);
@@ -86,51 +95,91 @@ public class InspectionServiceImpl extends SuperServiceImpl<InspectionMapper, In
             return false;
         }
 
-        //生成surveyorInfo
-        User surveyor = userMapper.selectById(surveyorId);
-        SurveyorInfo surveyorInfo = new SurveyorInfo();
-        surveyorInfo.setInspectionId(inspection.getId());
-        surveyorInfo.setUserId(inspection.getSurveyorId());
-        surveyorInfo.setType(surveyor.getType());
-        surveyorInfo.setName(surveyor.getName());
-        surveyorInfo.setCreateInfo(user.getName());
-        if (surveyorInfoMapper.insert(surveyorInfo) < 0) {
+        //生成评论
+        Comment comment = new Comment();
+        comment.setCompanyId(companyId);
+        comment.setSurveyorId(surveyorId);
+        comment.setOpId(quotation.getOpId());
+        comment.setCreateInfo(user.getName());
+        comment.setProType(Const.PROJECT_TYPE_HIRE);
+        comment.setInspectionId(inspection.getId());
+        if (commentMapper.insert(comment) < 0) {
             return false;
         }
+
         return true;
     }
 
     @Override
-    public List<Inspection> getInspectionsOP(int userId) {
-        EntityWrapper<Inspection> ew = new EntityWrapper<>();
-        ew.addFilter("op_id={0} and inspection_status<{1}", userId, Const.INSPECTION_SURVEYOR_COMPLETE);
-        ew.orderBy("update_date", false);
-        List<Inspection> list = inspectionMapper.selectList(ew);
-        for (Inspection i : list) {
-            i.setQuotation(quotationMapper.selectById(i.getQuotationId()));
-            SurveyorInfo surveyorInfo = new SurveyorInfo();
-            surveyorInfo.setInspectionId(i.getId());
-            surveyorInfo = surveyorInfoMapper.selectOne(surveyorInfo);
-            i.setSurveyorInfo(surveyorInfo);
-        }
-        return list;
+    public List<Inspection> getList(Integer opId, Integer companyId, int start, int length) {
+        return inspectionMapper.getList(opId, companyId, start, length);
     }
 
     @Override
-    public List<Inspection> getInspectionsSurveyor(int userId) {
-        EntityWrapper<Inspection> ew = new EntityWrapper<>();
-        ew.addFilter("surveyor_id={0} and inspection_status >={1} and inspection_status <{2}", userId, Const.INSPECTION_OP_OK, Const.INSPECTION_SURVEYOR_COMPLETE);
-        ew.orderBy("update_date", false);
-        List<Inspection> list = inspectionMapper.selectList(ew);
-        for (Inspection i : list) {
-            i.setQuotation(quotationMapper.selectById(i.getQuotationId()));
-            SurveyorInfo surveyorInfo = new SurveyorInfo();
-            surveyorInfo.setInspectionId(i.getId());
-            surveyorInfo = surveyorInfoMapper.selectOne(surveyorInfo);
-            i.setSurveyorInfo(surveyorInfo);
-        }
-        return list;
+    public Inspection getById(int id) {
+        return inspectionMapper.getById(id);
     }
+
+    @Override
+    public int getTotal(Integer opId, Integer companyId) {
+        EntityWrapper<Inspection> ew = new EntityWrapper<>();
+        ew.addFilter("del_flag = 0");
+        if (opId != null) {
+            ew.addFilter("op_id ={0}", opId);
+        }
+        if (companyId != null) {
+            ew.addFilter("company_id ={0}", companyId);
+        }
+        return inspectionMapper.selectCountByEw(ew);
+    }
+
+    @Override
+    public boolean editUrl(int id, String type, String url) {
+        User user = (User) SecurityUtils.getSubject().getPrincipal();
+        String userName = user.getName();
+
+        Inspection i = new Inspection();
+        i.setId(id);
+        i.setUpdateInfo(userName);
+        if ("passport".equals(type)) {
+            i.setPassportUrl(url);
+        } else if ("loi".equals(type)) {
+            i.setLoiUrl(url);
+        } else if ("report".equals(type)) {
+            i.setReportUrl(url);
+            i.setInspectionStatus(Const.INSPECTION_REPORT_OK);
+        }
+
+        if (inspectionMapper.updateSelectiveById(i) < 0) {
+            return false;
+        }
+
+        return true;
+    }
+
+    public List<Inspection> getOPRecordList(Integer opId, Integer start, Integer length) {
+        return inspectionMapper.getRecord(opId, null, Const.PROJECT_TYPE_HIRE, start, length);
+    }
+
+    @Override
+    public List<Inspection> getCompanyRecordList(Integer companyId, Integer start, Integer length) {
+        return inspectionMapper.getRecord(null, companyId, Const.PROJECT_TYPE_HIRE, start, length);
+    }
+
+
+    @Override
+    public int getRecordTotal(Integer opId, Integer companyId) {
+        EntityWrapper<Inspection> ew = new EntityWrapper<>();
+        if (opId != null) {
+            ew.addFilter("op_id={0} and inspection_status >={1} and del_flag=0", opId, Const.INSPECTION_SURVEYOR_COMPLETE);
+        }
+        if (companyId != null) {
+            ew.addFilter("company_id={0} and inspection_status >={1} and del_flag=0", companyId, Const.INSPECTION_SURVEYOR_COMPLETE);
+        }
+        return inspectionMapper.selectCountByEw(ew);
+    }
+
+
 
     @Override
     public boolean opShipInfoComplete(Inspection inspection) {

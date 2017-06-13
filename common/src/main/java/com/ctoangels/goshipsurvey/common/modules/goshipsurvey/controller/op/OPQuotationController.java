@@ -38,22 +38,28 @@ public class OPQuotationController extends BaseController {
         return "goshipsurvey/op/quotation/list";
     }
 
-    @RequestMapping(value = "/list")
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
     public JSONObject getList() {
+        int start = 0;
+        int length = 10;
+        if (request.getParameter(Const.START) != null) {
+            start = Integer.parseInt(request.getParameter(Const.START));
+        }
+        if (request.getParameter(Const.LENGTH) != null) {
+            length = Integer.parseInt(request.getParameter(Const.LENGTH));
+        }
         JSONObject jsonObject = new JSONObject();
-        EntityWrapper<Quotation> ew = getEntityWrapper();
-        ew.addFilter("op_id={0} and end_date>={1}", getCurrentUser().getId(), DateUtil.formatDate(new Date(), "yyyy-MM-dd"));
-        ew.orderBy("update_date", false);
-        List<Quotation> list = quotationService.selectList(ew);
+        List<Quotation> list = quotationService.getOPList(getCurrentUser().getId(), start, length);
         for (Quotation q : list) {
             q.setInspectionType(transferValuesToDes(q.getInspectionType(), getInspectionTypeDict()));
             q.setShipType(transferValuesToDes(q.getShipType(), getShipTypeDict()));
-            if (q.getQuotationStatus() >= Const.QUOTATION_ING) {
-                q.setApplicationList(quotationService.getApplication(q.getId()));
-            }
         }
-        jsonObject.put("list", list);
+        jsonObject.put(Const.DRAW, request.getParameter(Const.DRAW));
+        int total = quotationService.getOPTotal(getCurrentUser().getId());
+        jsonObject.put(Const.RECORDSTOTAL, total);
+        jsonObject.put(Const.RECORDSFILTERED, total);
+        jsonObject.put(Const.NDATA, list);
         return jsonObject;
     }
 

@@ -4,6 +4,7 @@ import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Inspection;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Quotation;
 import com.baomidou.framework.service.ISuperService;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.QuotationApplication;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.PurchaseQuotation;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
@@ -12,6 +13,10 @@ import java.util.List;
  * Quotation 表数据服务层接口
  */
 public interface IQuotationService extends ISuperService<Quotation> {
+
+    List<Quotation> getOPList(Integer opId, Integer start, Integer length);
+
+    int getOPTotal(Integer opId);
 
     //根据quo查询inspection  包含surveyorInfo
     Inspection getInspectionInfo(int id);
@@ -22,7 +27,9 @@ public interface IQuotationService extends ISuperService<Quotation> {
     //获取满足surveyor条件的quotation集合
     List<Quotation> getSatisfiedQuotations(int userId);
 
+    List<Quotation> getSurveyorList(Integer surveyorId, Integer start, Integer length);
 
+    int getSurveyorTotal();
 
 
 }

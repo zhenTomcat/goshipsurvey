@@ -82,101 +82,124 @@
     })
 
     function drawTable() {
-        $.ajax({
-            url: "op/quotation/list",
-            type: "post",
-            success: function (data) {
-                var list = data.list;
-                var html = "";
-                for (var i = 0; i < list.length; i++) {
-                    var quotation = list[i];
-                    html += "<tr class='quotation-tr'>";
-                    html += "<td>" + quotation.shipName + "</td>";
-                    html += "<td>" + quotation.imo + "</td>";
-                    html += "<td>" + quotation.shipType + "</td>";
-                    html += "<td>" + quotation.inspectionType + "</td>";
-                    html += "<td>" + quotation.portName + "</td>";
-                    var startDate = new Date(quotation.startDate).Format("yyyy-MM-dd");
-                    var endDate = new Date(quotation.endDate).Format("yyyy-MM-dd");
-                    html += "<td>" + startDate + " to " + endDate + "</td>";
-                    html += "<td>";
-                    var quotationStatus = quotation.quotationStatus;
-                    if (quotationStatus == 0) {
-                        <shiro:hasPermission name="op/quotation/startQuotation">
-                        html += "<a class='btn btn-sm blue' onclick='startQuotation(" + quotation.id + ")'>询价</a>";
-                        </shiro:hasPermission>
-
-                    } else if (quotationStatus == 1) {
-                        html += "<a class='btn btn-sm green' readonly>询价中...</a>";
-                    } else if (quotationStatus == 2) {
-                        html += "<a class='btn btn-sm green' readonly>已邀请验船</a>";
+        quotationTable = $('#quotation_table').DataTable({
+            "ordering": false,
+            "pagingType": "simple_numbers",
+            "destroy": true,
+            "processing": true,
+            "autoWidth": false,
+            "serverSide": true,
+            "ajax": {
+                "url": "op/quotation/list",
+                "type": "get",
+                "data": function (data) {
+                    data.keyword = $("#keyword").val();
+                }
+            },
+//            "language": {
+//                "url": "http://windyeel.oss-cn-shanghai.aliyuncs.com/global/plugins/datatables/cn.txt"
+//            },
+            "lengthMenu": [[5, 40, 60], [5, 40, 60]],
+            "columns": [
+                {
+                    "data": "shipName",
+                },
+                {
+                    "data": "imo",
+                },
+                {
+                    "data": "shipType",
+                },
+                {
+                    "data": "inspectionType",
+                },
+                {
+                    "data": "portName",
+                },
+                {
+                    "data": "startDate",
+                },
+                {
+                    "data": "quotationStatus",
+                },
+            ],
+            "columnDefs": [
+                {
+                    "targets": 5,
+                    "render": function (data, type, row) {
+                        var startDate = new Date(row.startDate).Format("yyyy-MM-dd");
+                        var endDate = new Date(row.endDate).Format("yyyy-MM-dd");
+                        return startDate + " to " + endDate;
                     }
-                    html += "</td>"
-                    html += "</tr>"
-                    var applyList = quotation.applicationList;
-                    if (applyList != null && applyList.length > 0) {
-                        html += "<tr class='application-outer-tr'><td colspan='7' style='padding: 0' class='application-outer-td'><table class='table' style='margin-bottom: 0'>"
-                        for (var j = 0; j < applyList.length; j++) {
-                            var application = applyList[j];
-                            var user = application.user;
-                            html += "<tr class='application-tr'>";
-                            html += "<td style='width:25%'>Apply surveyor/company:" + user.name + "</td>";
-                            if (user.type == 2) {
-                                html += "<td style='width:25%'>Surveyor CV: " + "<a href='surveyor/account/personalInfo?id=" + application.userId + "' data-target='navTab'>VIEW</a>" + "</td>";
-                            } else if (user.type == 3) {
-                                html += "<td style='width:25%'>Surveyor CV: " + "<a href='surveyor/account/companyInfo?id=" + application.userId + "' data-target='navTab'>VIEW</a>" + "</td>";
-                            }
-
-                            html += "<td style='width:20%'>Location:" + user.address + "</td>";
-                            html += "<td style='width:20%'>Quotation:$ " + application.totalPrice + "</td>";
-                            var applicationStatus = application.applicationStatus;
-                            if (applicationStatus == 0) {
-                                <shiro:hasPermission name="op/inspection/add">
-                                html += "<td style='width:10%'><a class='btn btn-sm default' onclick='initInspection(" + quotation.id + "," + application.id + ")'>确认邀请验船</a></td>";
-                                </shiro:hasPermission>
-                            } else if (applicationStatus == 1) {
-                                html += "<td style='width:10%' ><a class='btn btn-sm default'>已邀请验船</a></td>";
-                            } else if (applicationStatus == 2) {
-                                html += "<td style='width:10%'><a class='btn btn-sm default'>下次合作</a></td>";
-                            }
-                            html += "</tr>";
+                }, {
+                    "targets": 6,
+                    "render": function (data, type, row) {
+                        var status = row.quotationStatus;
+                        if (status == 0) {
+                            return '<a class="btn btn-sm blue" onclick="startQuotation(' + row.id + ')">询价</a>';
+                        } else if (status == 1) {
+                            return '<a class="btn btn-sm green">询价中...</a>';
+                        } else if (status == 2) {
+                            return '<a class="btn btn-sm green">已邀请验船</a>';
                         }
-                        html += "</table></td></tr>";
                     }
-
                 }
-                if (html == "") {
-                    html += "<tr><td colspan='7'>No data</td></tr>";
-                }
-                quotationTable.find("tbody").html(html);
-            },
-            error: function () {
+            ],
+            "drawCallback": function () {
+                var rows = $('#quotation_table').find("tbody tr");
 
+                rows.each(function (i, e) {
+                    var row = quotationTable.row($(this));
+                    $(this).after(moreInfo(row.data()));
+                })
             }
-        })
+        });
+
+
     }
 
-    function initInspection(quotationId, applicationId) {
-        $.ajax({
-            type: "post",
-            url: "op/inspection/add",
-            data: {quotationId: quotationId, applicationId: applicationId},
-            success: function (data) {
-                $("a[href='op/inspection']").click();
-            },
-            error: function () {
-                alert("initInspection error");
+
+    function moreInfo(data) {
+        var html = '';
+        var quotation = data;
+        var applyList = data.applicationList;
+        if (applyList != null && applyList.length > 0) {
+            html += '<tr class="application-outer-tr"><td colspan="7" style="padding: 0" class="application-outer-td"><table class="table" style="margin-bottom: 0">';
+            for (var j = 0; j < applyList.length; j++) {
+                var application = applyList[j];
+                var user = application.user;
+                var surveyor = application.surveyor;
+                html += '<tr class="application-tr">';
+                html += '<td style="width:25%">Apply company : <a href="user/companyInfo?id=' + user.id + '"data-model="dialog">' + user.name + '</a></td>';
+                html += '<td style="width:25%">Apply surveyor : <a data-model="dialog" href="surveyor/info?id=' + surveyor.id + '">' + surveyor.firstName + ' ' + surveyor.lastName + '</a></td>';
+                html += '<td style="width:20%">Location:' + user.address + '</td>';
+                html += '<td style="width:20%">Quotation:$ ' + application.totalPrice + '</td>';
+                var applicationStatus = application.applicationStatus;
+                if (applicationStatus == 0) {
+                    <shiro:hasPermission name="op/inspection/add">
+                    html += '<td style="width:10%"><a class="btn btn-sm default" onclick="initInspection(' + quotation.id + ',' + application.id + ')">确认邀请验船</a></td>';
+                    </shiro:hasPermission>
+                } else if (applicationStatus == 1) {
+                    html += '<td style="width:10%" ><a class="btn btn-sm default">已邀请验船</a></td>';
+                } else if (applicationStatus == 2) {
+                    html += '<td style="width:10%"><a class="btn btn-sm default">下次合作</a></td>';
+                }
+                html += '</tr>';
             }
-        })
+            html += '</table></td></tr>';
+        }
+        return html;
     }
+
 
     function refreshTable(toFirst) {
         if (toFirst) {//表格重绘，并跳转到第一页
-            defTable.draw();
+            quotationTable.draw();
         } else {//表格重绘，保持在当前页
-            defTable.draw(false);
+            quotationTable.draw(false);
         }
     }
+
 
     function startQuotation(quotationId) {
         $.ajax({
@@ -196,9 +219,22 @@
         })
     }
 
+
+    function initInspection(quotationId, applicationId) {
+        $.ajax({
+            type: "post",
+            url: "op/inspection/add",
+            data: {quotationId: quotationId, applicationId: applicationId},
+            success: function (data) {
+                refreshTable();
+            },
+            error: function () {
+                alert("initInspection error");
+            }
+        })
+    }
+
 </script>
-
-
 <jsp:include page="add.jsp"/>
 
 

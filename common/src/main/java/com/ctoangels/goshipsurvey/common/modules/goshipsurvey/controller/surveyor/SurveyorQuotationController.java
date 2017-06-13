@@ -8,6 +8,8 @@ import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.QuotationAp
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IDictService;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IQuotationApplicationService;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IQuotationService;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.PurchaseQuotation;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IPurchaseQuotationService;
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
 import com.ctoangels.goshipsurvey.common.util.Const;
@@ -48,23 +50,24 @@ public class SurveyorQuotationController extends BaseController {
     @ResponseBody
     public JSONObject getQuotation() {
         JSONObject jsonObject = new JSONObject();
-        int id = getCurrentUser().getId();
-        List<Dict> inspectionTypeDict = dictService.getListByType("inspectionType");
-        List<Dict> shipTypeDict = dictService.getListByType("shipType");
-        List<QuotationApplication> applicationList = quotationApplicationService.getAppliedQuotations(id);
-        for (QuotationApplication qa : applicationList) {
-            Quotation quotation = qa.getQuotation();
-            quotation.setInspectionType(transferValuesToDes(quotation.getInspectionType(), inspectionTypeDict));
-            quotation.setShipType(transferValuesToDes(quotation.getShipType(), shipTypeDict));
-            qa.setQuotation(quotation);
+        int start = 0;
+        int length = 10;
+        if (request.getParameter(Const.LENGTH) != null) {
+            start = Integer.parseInt(request.getParameter(Const.START));
         }
-        List<Quotation> quotationList = quotationService.getSatisfiedQuotations(id);
-        for (Quotation q : quotationList) {
-            q.setInspectionType(transferValuesToDes(q.getInspectionType(), inspectionTypeDict));
-            q.setShipType(transferValuesToDes(q.getShipType(), shipTypeDict));
+        if (request.getParameter(Const.LENGTH) != null) {
+            length = Integer.parseInt(request.getParameter(Const.LENGTH));
         }
-        jsonObject.put("applicationList", applicationList);
-        jsonObject.put("quotationList", quotationList);
+        List<Quotation> list = quotationService.getSurveyorList(getCurrentUser().getId(), start, length);
+        for (Quotation q : list) {
+            int shipType = Integer.parseInt(q.getShipType());
+            q.setShipType(getShipTypeDict().get(shipType - 1).getDes());
+        }
+        jsonObject.put(Const.DRAW, request.getParameter(Const.DRAW));
+        int total = quotationService.getSurveyorTotal();
+        jsonObject.put(Const.RECORDSTOTAL, total);
+        jsonObject.put(Const.RECORDSFILTERED, total);
+        jsonObject.put(Const.NDATA, list);
         return jsonObject;
     }
 

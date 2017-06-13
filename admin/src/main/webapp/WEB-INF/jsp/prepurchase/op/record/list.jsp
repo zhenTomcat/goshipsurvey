@@ -311,7 +311,7 @@
                     return startDate + " to " + endDate;
                 }
             }],
-            "initComplete": function (settings, json) {
+            "drawCallback": function (settings, json) {
                 var rows = $('#inspection_table').find("tbody tr");
                 rows.each(function (i, e) {
                     var row = inspectionTable.row($(this));
@@ -324,7 +324,6 @@
 
     function moreInfo(data) {
         var html = "";
-        var surveyorInfo = data.surveyorInfo;
         var comment = data.comment;
         var opGrade = comment.opGrade;
 
