@@ -134,6 +134,11 @@
             alter table t_surveyor ADD past_evaluation DOUBLE DEFAULT NULL COMMENT '平均分';
         </sql>
     </changeSet>
+    <changeSet author="LuZhen" id="17317309132-009">
+        <sql>
+            alter table t_purchase_quotation modify column agency_detail text NULL;
+        </sql>
+    </changeSet>
     <changeSet author="WangShun" id="15950097942-010">
         <sql>
             alter table t_quotation ADD delivery_by varchar(64) DEFAULT NULL;

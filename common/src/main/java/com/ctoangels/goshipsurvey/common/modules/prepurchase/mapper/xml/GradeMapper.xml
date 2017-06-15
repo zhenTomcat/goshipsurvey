@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.GradeMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id, item, weight, grade, remark, site_photo AS sitePhoto, parent_item AS parentItem, inspection_report_id AS inspectionReportId, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag, `rank`, file_name AS fileName
+	</sql>
+	<select id="selectGradesByReportId" resultType="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Grade">
+		select * from t_grade g where g.inspection_report_id=#{id}
+	</select>
+
+	<select id="selectGradesByParentItem" resultType="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Grade">
+		select * from t_grade g where g.parent_item=#{0} and g.inspection_report_id=#{1}
+	</select>
+
+
+	<select id="selectGradeByItem"
+			resultType="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Grade">
+		select * from t_grade g where g.item=#{0} and g.inspection_report_id=#{1}
+	</select>
+
+	<select id="selectListGrade" resultMap="gradeModel">
+		select * from t_grade g where g.inspection_report_id=#{0}
+	</select>
+
+	<resultMap id="gradeModel" type="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Grade">
+		<result property="id" column="id"></result>
+		<result property="item" column="item"></result>
+		<collection property="grades" column="{parent_item=item}" ofType="grade"
+					select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.GradeMapper.selectListChildGrades"/>
+	</resultMap>
+
+	<select id="selectListChildGrades" resultMap="gradeModelChild">
+		SELECT * from t_grade g where g.parent_item=#{parent_item}
+	</select>
+
+	<resultMap id="gradeModelChild" type="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Grade">
+		<result property="id" column="id"></result>
+		<result property="item" column="item"></result>
+		<collection property="grades" column="{parent_item=item}" ofType="grade"
+					select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.GradeMapper.selectListChild"/>
+	</resultMap>
+
+	<select id="selectListChild" resultType="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Grade">
+		SELECT * from t_grade g where g.parent_item=#{parent_item}
+	</select>
+
+
+</mapper>

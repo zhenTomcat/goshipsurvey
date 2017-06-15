@@ -113,7 +113,7 @@
                                                     <p style="color: #00a8c6">IMO</p>
                                                     <p>${report.shipDetail.imo}</p>
                                                     <p style="color: #00a8c6">Type</p>
-                                                    <p>${report.shipDetail.type}</p>
+                                                    <p>${report.shipDetail.shipType}</p>
                                                 </div>
                                             </div>
                                             <div class="col-md-12" style="margin-top:30px ">
@@ -522,7 +522,7 @@
                                                 </div>
                                             </div>
                                         </c:if>
-                                        <c:if test="${report.shipDetail.type=='Bulker'}">
+                                        <c:if test="${report.shipDetail.shipType=='Bulker'}">
                                             <c:if test="${report.conditionInspection.hatchCover!=''&&report.conditionInspection.hatchCover!=null}">
                                                 <div class="col-md-12">
                                                 <div class="portlet box blue">
@@ -558,7 +558,7 @@
 
                                         </c:if>
 
-                                            <c:if test="${report.shipDetail.type=='Tanker'}">
+                                            <c:if test="${report.shipDetail.shipType=='Tanker'}">
                                                 <c:if test="${report.conditionInspection.cargoTank!=''&& report.conditionInspection.cargoTank!=null}">
                                                     <div class="col-md-12">
                                                     <div class="portlet box blue">

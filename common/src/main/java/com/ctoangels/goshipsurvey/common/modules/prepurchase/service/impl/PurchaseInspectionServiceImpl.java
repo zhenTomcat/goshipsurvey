@@ -1,27 +1,24 @@
 package com.ctoangels.goshipsurvey.common.modules.prepurchase.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.*;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IDictService;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.*;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.*;
-import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Inspection;
-import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Quotation;
-import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.QuotationApplication;
-import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.SurveyorInfo;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.QuotationApplicationMapper;
-import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IDocumentService;
-import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IShipDetailService;
-import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.ITechnicalAppendixService;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.*;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.IMessageService;
 import com.ctoangels.goshipsurvey.common.util.Const;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IPurchaseInspectionService;
 import com.baomidou.framework.service.impl.SuperServiceImpl;
 
 import java.util.ArrayList;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Date;
 import java.util.List;
 
@@ -64,11 +61,25 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
     @Autowired
     IMessageService messageService;
 
+    @Autowired
+    IDictService dictService;
+
+    @Autowired
+    IGradeModelService gradeModelService;
+
+    @Autowired
+    IGradeService gradeService;
+
 
     @Override
-    public List<PurchaseInspection> selectByInspection(Integer id) {
+    public List<PurchaseInspection> selectByInspection(Integer id, Integer start, Integer length) {
 
-        List<PurchaseInspection> inspections = purchaseInspectionMapper.selectByInspection(id);
+        List<PurchaseInspection> inspections = purchaseInspectionMapper.selectByInspection(id, start, length);
+        List<Dict> shipTypeDict = dictService.getListByType("shipType");
+
+        for (PurchaseInspection inspection : inspections) {
+            inspection.getShipDetail().setShipType(shipTypeDict.get(Integer.parseInt(inspection.getShipDetail().getShipType()) - 1).getDes());
+        }
         return inspections;
     }
 
@@ -142,6 +153,10 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
 
         //report
         InspectionReport report = new InspectionReport();
+        report.setShipId(inspection.getShipId());
+
+        //插入一条报告
+        inspectionReportMapper.insert(report);
 
         //创建两个默认相册
         Galleries galleries = new Galleries();
@@ -166,22 +181,25 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
         //创建12Document
         documentService.createDocuments(report.getId());
 
-        report.setShipId(inspection.getShipId());
-
-        //插入一条报告
-        inspectionReportMapper.insert(report);
 
         //更新PurchaseInspection
         inspection.setInspectionReportId(report.getId());
         inspection.setSubmitStatus(Const.REPORT_UNSUBMIT);
         purchaseInspectionMapper.updateById(inspection);
 
+
         return true;
     }
 
     @Override
-    public List<PurchaseInspection> selectByOpInspection(Integer id) {
-        List<PurchaseInspection> inspections = purchaseInspectionMapper.selectByOpInspection(id);
+    public List<PurchaseInspection> selectByOpInspection(Integer id, Integer start, Integer length) {
+        List<PurchaseInspection> inspections = purchaseInspectionMapper.selectByOpInspection(id, start, length);
+        List<Dict> shipTypeDict = dictService.getListByType("shipType");
+
+        for (PurchaseInspection inspection : inspections) {
+            inspection.getShipDetail().setShipType(shipTypeDict.get(Integer.parseInt(inspection.getShipDetail().getShipType()) - 1).getDes());
+        }
+
         return inspections;
     }
 
@@ -211,5 +229,21 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
             pi.setCompanyId(companyId);
         }
         return purchaseInspectionMapper.selectCount(pi);
+    }
+
+    @Override
+    public Integer getInspectionCount(Integer id) {
+        EntityWrapper<PurchaseInspection> ew = new EntityWrapper<>();
+        ew.addFilter("company_id={0}", id);
+        int total = purchaseInspectionMapper.selectCountByEw(ew);
+        return total;
+    }
+
+    @Override
+    public Integer getOpInspectionCount(Integer id) {
+        EntityWrapper<PurchaseInspection> ew = new EntityWrapper<>();
+        ew.addFilter("op_id={0}", id);
+        int total = purchaseInspectionMapper.selectCountByEw(ew);
+        return total;
     }
 }

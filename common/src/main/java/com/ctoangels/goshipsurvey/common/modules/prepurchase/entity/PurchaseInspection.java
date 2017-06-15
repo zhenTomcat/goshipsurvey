@@ -91,13 +91,6 @@ public class PurchaseInspection implements Serializable {
     /**  */
     @TableField(value = "del_flag")
     private Integer delFlag;
-
-    /**
-     * op给surveyor的评分
-     */
-    @TableField(value = "company_grade")
-    private String companyGrade;
-
     /**
      * 备注
      */
@@ -112,8 +105,8 @@ public class PurchaseInspection implements Serializable {
     /**
      * surveyor给op的评分
      */
-    @TableField(value = "op_grade")
-    private String opGrade;
+    @TableField(value = "total_grade")
+    private Double totalGrade;
 
     @TableField(value = "user_id")
     private Integer userId;
@@ -253,13 +246,6 @@ public class PurchaseInspection implements Serializable {
         this.delFlag = delFlag;
     }
 
-    public String getCompanyGrade() {
-        return this.companyGrade;
-    }
-
-    public void setCompanyGrade(String companyGrade) {
-        this.companyGrade = companyGrade;
-    }
 
     public String getRemark() {
         return this.remark;
@@ -277,13 +263,6 @@ public class PurchaseInspection implements Serializable {
         this.inspectionReportId = inspectionReportId;
     }
 
-    public String getOpGrade() {
-        return this.opGrade;
-    }
-
-    public void setOpGrade(String opGrade) {
-        this.opGrade = opGrade;
-    }
 
     public void setCreateInfo(String userName) {
         this.createDate = new Date();
@@ -376,5 +355,13 @@ public class PurchaseInspection implements Serializable {
 
     public void setPassportUrl(String passportUrl) {
         this.passportUrl = passportUrl;
+    }
+
+    public Double getTotalGrade() {
+        return totalGrade;
+    }
+
+    public void setTotalGrade(Double totalGrade) {
+        this.totalGrade = totalGrade;
     }
 }

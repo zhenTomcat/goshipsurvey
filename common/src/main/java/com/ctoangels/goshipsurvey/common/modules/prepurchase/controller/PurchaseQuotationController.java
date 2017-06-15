@@ -57,7 +57,7 @@ public class PurchaseQuotationController extends BaseController {
         JSONObject jsonObject = new JSONObject();
         int start = 0;
         int length = 10;
-        if (request.getParameter(Const.LENGTH) != null) {
+        if (request.getParameter(Const.START) != null) {
             start = Integer.parseInt(request.getParameter(Const.START));
         }
         if (request.getParameter(Const.LENGTH) != null) {

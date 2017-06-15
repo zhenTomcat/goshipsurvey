@@ -619,4 +619,56 @@ function initUploaders_surveyor_passport(buttonId, bucket, domain, obj) {
 }
 
 
+function initUploaders_report_grade(buttonId,bucket,domain,gradeId){
+    var uploader = new plupload.Uploader({
+        runtimes: 'html5,flash,silverlight,html4',
+        browse_button: buttonId,
+        flash_swf_url: domain + 'assets/plugins/plupload-2.1.2/js/Moxie.swf',
+        silverlight_xap_url: domain + 'assets/plugins/plupload-2.1.2/js/Moxie.xap',
+        url: 'http://oss.aliyuncs.com',
+        filters: {
+            mime_types: [ //上传pdf,txt和zip,rar文件
+                {title: "Zip files", extensions: "zip,rar"},
+                {title: "Text files", extensions: "txt,pdf"},
+                {title: "Image files", extensions: "jpg,gif,png,bmp,jpeg"},
+            ],
+            max_file_size: '100mb', //最大只能上传100mb的文件
+            prevent_duplicates: true //不允许选取重复文件
+        },
+        init: {
+            FilesAdded: function (up) {
+                set_upload_param(up, '', false, domain);
+            },
+            BeforeUpload: function (up, file) {
+                set_upload_param(up, file.name, true, domain);
+            },
+            FileUploaded: function () {
+                $.ajax({
+                    url:"prepurchase/surveyor/reportEditGrade",
+                    type:"GET",
+                    dataType:"json",
+                    data:{
+                        fileName:nativeName,
+                        sitePhoto:"http://" + bucket + ".oss-cn-shanghai.aliyuncs.com/" + g_object_name ,
+                        id:gradeId
+
+                    },
+                    success:function (data) {
+                        if(data.mes){
+                            var html = '<a target="_blank" href="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '">' + nativeName + '</a>';
+                            $(buttonId).parent().prev().html(html);
+                            $(buttonId).parent().html('<button onclick="removeGrade(this,'+gradeId+')" type="button" class="btn red">Delete</button>');
+                        }
+                    },
+                    error:function () {
+
+                    }
+                });
+            }
+        }
+    });
+    uploader.init();
+}
+
+
 

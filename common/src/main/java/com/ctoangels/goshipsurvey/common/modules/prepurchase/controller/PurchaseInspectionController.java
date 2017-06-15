@@ -30,12 +30,35 @@ public class PurchaseInspectionController  extends BaseController {
     @Autowired
     private IPurchaseInspectionService purchaseInspectionService;
 
-    @RequestMapping(value = "/surveyor/inspection", method = RequestMethod.GET)
-    public String inspectionList(ModelMap modelMap){
-        int id=getCurrentUser().getId();
-        List<PurchaseInspection> inspections=purchaseInspectionService.selectByInspection(id);
-        modelMap.put("inspections",inspections);
+    //获取surveyor所有的信息
+    @RequestMapping(value = "/surveyor/inspection")
+    public String surveyorList(){
         return "prepurchase/surveyor/inspection/inspectionList";
+    }
+
+    @RequestMapping(value = "/surveyor/inspection/list")
+    @ResponseBody
+    public JSONObject surveyorList(ModelMap modelMap){
+        JSONObject jsonObject=new JSONObject();
+        int id=getCurrentUser().getId();
+
+        int start = 0;
+        int length = 10;
+        if (request.getParameter(Const.START) != null) {
+            start = Integer.parseInt(request.getParameter(Const.START));
+        }
+        if (request.getParameter(Const.LENGTH) != null) {
+            length = Integer.parseInt(request.getParameter(Const.LENGTH));
+        }
+
+        List<PurchaseInspection> inspections=purchaseInspectionService.selectByInspection(id,start, length);
+        Integer total=purchaseInspectionService.getInspectionCount(id);
+
+        jsonObject.put(Const.DRAW, request.getParameter(Const.DRAW));
+        jsonObject.put(Const.RECORDSTOTAL, total);
+        jsonObject.put(Const.RECORDSFILTERED, total);
+        jsonObject.put(Const.NDATA, inspections);
+        return jsonObject;
     }
 
     //surveyour提交loi和passport
@@ -60,12 +83,36 @@ public class PurchaseInspectionController  extends BaseController {
     }
 
 
-    @RequestMapping(value = "/op/inspection", method = RequestMethod.GET)
-    public String inspection(ModelMap modelMap){
-        int id=getCurrentUser().getId();
-        List<PurchaseInspection> inspections=purchaseInspectionService.selectByInspection(id);
-        modelMap.put("inspections",inspections);
+    //获取op所有的信息
+    @RequestMapping(value = "/op/inspection")
+    public String opList(){
         return "prepurchase/op/inspection/inspectionList";
+    }
+
+    @RequestMapping(value = "/op/inspection/list")
+    @ResponseBody
+    public JSONObject opList(ModelMap modelMap){
+        JSONObject jsonObject=new JSONObject();
+        int id=getCurrentUser().getId();
+
+        int start = 0;
+        int length = 10;
+        if (request.getParameter(Const.START) != null) {
+            start = Integer.parseInt(request.getParameter(Const.START));
+        }
+        if (request.getParameter(Const.LENGTH) != null) {
+            length = Integer.parseInt(request.getParameter(Const.LENGTH));
+        }
+
+        List<PurchaseInspection> inspections=purchaseInspectionService.selectByOpInspection(id,start, length);
+        Integer total=purchaseInspectionService.getOpInspectionCount(id);
+
+        jsonObject.put(Const.DRAW, request.getParameter(Const.DRAW));
+        jsonObject.put(Const.RECORDSTOTAL, total);
+        jsonObject.put(Const.RECORDSFILTERED, total);
+        jsonObject.put(Const.NDATA, inspections);
+        return jsonObject;
+
     }
 
 }

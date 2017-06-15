@@ -25,6 +25,8 @@
 					select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.TechnicalAppendixMapper.selectTechnicalAppendixByid"/>
 		<collection property="documents" column="{id=id}" ofType="Document"
 					select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.DocumentMapper.selectDocumentByid"/>
+        <collection property="grades" column="{id=id}" ofType="Grade"
+                    select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.GradeMapper.selectGradesByReportId"/>
 	</resultMap>
 
 </mapper>
