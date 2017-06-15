@@ -62,16 +62,16 @@
                                                                 <div class="tools">
                                                                     <a href="javascript:;" class="collapse"> </a>
                                                                 </div>
-                                                                <shiro:hasPermission name="op/inspection/confirm">
-                                                                    <c:if test="${inspection.inspectionStatus==3}">
-                                                                        <div class="actions inspection-action">
-                                                                            <a class="btn btn-sm green-jungle inspection-action"
-                                                                               onclick="OPConfirmComplete(this,${inspection.id})"><i
-                                                                                    class="fa fa-pencil"></i>
-                                                                                Complete</a>
-                                                                        </div>
-                                                                    </c:if>
-                                                                </shiro:hasPermission>
+                                                                <%--<shiro:hasPermission name="op/inspection/confirm">--%>
+                                                                    <%--<c:if test="${inspection.inspectionStatus==3}">--%>
+                                                                        <%--<div class="actions inspection-action">--%>
+                                                                            <%--<a class="btn btn-sm green-jungle inspection-action"--%>
+                                                                               <%--onclick="OPConfirmComplete(this,${inspection.id})"><i--%>
+                                                                                    <%--class="fa fa-pencil"></i>--%>
+                                                                                <%--Complete</a>--%>
+                                                                        <%--</div>--%>
+                                                                    <%--</c:if>--%>
+                                                                <%--</shiro:hasPermission>--%>
                                                             </div>
                                                             <div class="portlet-body">
                                                                 <table class="table table-striped table-bordered table-hover  ">

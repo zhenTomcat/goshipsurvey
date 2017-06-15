@@ -62,14 +62,14 @@
                                                                 <div class="tools">
                                                                     <a href="javascript:;" class="collapse"> </a>
                                                                 </div>
-                                                                <c:if test="${inspection.inspectionStatus==4}">
-                                                                    <div class="actions inspection-action">
-                                                                        <a class="btn btn-sm green-jungle inspection-action"
-                                                                           onclick="SurveyorConfirmComplete(this,${inspection.id})"><i
-                                                                                class="fa fa-pencil"></i>
-                                                                            Complete</a>
-                                                                    </div>
-                                                                </c:if>
+                                                                <%--<c:if test="${inspection.inspectionStatus==4}">--%>
+                                                                <%--<div class="actions inspection-action">--%>
+                                                                <%--<a class="btn btn-sm green-jungle inspection-action"--%>
+                                                                <%--onclick="SurveyorConfirmComplete(this,${inspection.id})"><i--%>
+                                                                <%--class="fa fa-pencil"></i>--%>
+                                                                <%--Complete</a>--%>
+                                                                <%--</div>--%>
+                                                                <%--</c:if>--%>
                                                             </div>
                                                             <div class="portlet-body">
                                                                 <table class="table table-striped table-bordered table-hover  ">
@@ -139,13 +139,15 @@
                                                                             </div>
                                                                             <shiro:hasPermission
                                                                                     name="surveyor/inspection/editUrl">
-                                                                                <button type="button" title="upload"
-                                                                                        style="float: right"
-                                                                                        id="passport-btn"
-                                                                                        data-id="${inspection.id}"
-                                                                                        class=" btn btn-sm blue passport-btn">
-                                                                                    <i class="fa fa-upload"></i>
-                                                                                </button>
+                                                                                <c:if test="${inspection.inspectionStatus<6}">
+                                                                                    <button type="button" title="upload"
+                                                                                            style="float: right"
+                                                                                            id="passport-btn"
+                                                                                            data-id="${inspection.id}"
+                                                                                            class=" btn btn-sm blue passport-btn">
+                                                                                        <i class="fa fa-upload"></i>
+                                                                                    </button>
+                                                                                </c:if>
                                                                             </shiro:hasPermission>
                                                                         </td>
                                                                         <td>
@@ -162,13 +164,15 @@
                                                                             </div>
                                                                             <shiro:hasPermission
                                                                                     name="surveyor/inspection/editUrl">
-                                                                                <button type="button" title="upload"
-                                                                                        style="float: right"
-                                                                                        id="loi-btn"
-                                                                                        data-id="${inspection.id}"
-                                                                                        class="btn btn-sm blue loi-btn">
-                                                                                    <i class="fa fa-upload"></i>
-                                                                                </button>
+                                                                                <c:if test="${inspection.inspectionStatus<6}">
+                                                                                    <button type="button" title="upload"
+                                                                                            style="float: right"
+                                                                                            id="loi-btn"
+                                                                                            data-id="${inspection.id}"
+                                                                                            class="btn btn-sm blue loi-btn">
+                                                                                        <i class="fa fa-upload"></i>
+                                                                                    </button>
+                                                                                </c:if>
                                                                             </shiro:hasPermission>
                                                                         </td>
                                                                         <td>
@@ -181,13 +185,15 @@
                                                                             </div>
                                                                             <shiro:hasPermission
                                                                                     name="surveyor/inspection/editUrl">
-                                                                                <button type="button" title="upload"
-                                                                                        style="float: right"
-                                                                                        id="report-btn"
-                                                                                        data-id="${inspection.id}"
-                                                                                        class=" btn btn-sm blue report-btn">
-                                                                                    <i class="fa fa-upload"></i>
-                                                                                </button>
+                                                                                <c:if test="${inspection.inspectionStatus<6}">
+                                                                                    <button type="button" title="upload"
+                                                                                            style="float: right"
+                                                                                            id="report-btn"
+                                                                                            data-id="${inspection.id}"
+                                                                                            class=" btn btn-sm blue report-btn">
+                                                                                        <i class="fa fa-upload"></i>
+                                                                                    </button>
+                                                                                </c:if>
                                                                             </shiro:hasPermission>
                                                                         </td>
                                                                     </tr>

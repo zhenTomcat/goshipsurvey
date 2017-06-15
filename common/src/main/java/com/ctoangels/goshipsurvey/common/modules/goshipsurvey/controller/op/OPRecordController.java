@@ -12,6 +12,7 @@ import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IInspectio
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IQuotationService;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.ISurveyorInfoService;
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
+import com.ctoangels.goshipsurvey.common.modules.sys.service.IMessageService;
 import com.ctoangels.goshipsurvey.common.util.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -39,6 +40,8 @@ public class OPRecordController extends BaseController {
     @Autowired
     IDictService dictService;
 
+    @Autowired
+    IMessageService messageService;
 
     @RequestMapping
     public String list() {

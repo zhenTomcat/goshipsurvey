@@ -13,6 +13,7 @@ import com.ctoangels.goshipsurvey.common.modules.sys.entity.UserRole;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.UserService;
 import com.ctoangels.goshipsurvey.common.util.Const;
 import com.ctoangels.goshipsurvey.common.util.StringUtils;
+import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.subject.Subject;
@@ -143,4 +144,8 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
         return user;
     }
 
+    @Override
+    public List<Integer> getAllId(Integer role) {
+        return userMapper.getAllId(role);
+    }
 }

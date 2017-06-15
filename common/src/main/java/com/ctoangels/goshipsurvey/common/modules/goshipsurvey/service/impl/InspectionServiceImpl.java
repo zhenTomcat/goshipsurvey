@@ -147,7 +147,7 @@ public class InspectionServiceImpl extends SuperServiceImpl<InspectionMapper, In
             i.setLoiUrl(url);
         } else if ("report".equals(type)) {
             i.setReportUrl(url);
-            i.setInspectionStatus(Const.INSPECTION_REPORT_OK);
+            i.setInspectionStatus(Const.INSPECTION_END);
         }
 
         if (inspectionMapper.updateSelectiveById(i) < 0) {
@@ -178,7 +178,6 @@ public class InspectionServiceImpl extends SuperServiceImpl<InspectionMapper, In
         }
         return inspectionMapper.selectCountByEw(ew);
     }
-
 
 
     @Override

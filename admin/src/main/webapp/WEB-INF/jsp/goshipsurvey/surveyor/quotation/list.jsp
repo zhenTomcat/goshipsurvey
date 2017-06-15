@@ -134,20 +134,28 @@
                 "targets": 9,
                 "render": function (data, type, row) {
                     var application = row.application;
-                    if (application == null) {
+                    var quoStatus = row.quotationStatus;
+                    if (application != null && quoStatus != 2) {
+                        var status = application.applicationStatus;
+                        if (status == 0) {
+                            return "<button type='button' class='btn yellow' >Applying</button>";
+                        }
+                        if (status == 1) {
+                            return "<button type='button' class='btn green' >Success</button>";
+                        }
+                        if (status == 2) {
+                            return "<button type='button' class='btn red' >Failure</button>";
+                        }
+                    }
+                    if (quoStatus == 1) {
                         return "<button type='button' class='btn default' onclick='addApplication(this," + row.id + ")'>Apply</button>";
                     }
-                    var status = application.applicationStatus;
-                    if (status == 0) {
-                        return "<button type='button' class='btn yellow' >Applying</button>";
+                    if (quoStatus == 2) {
+                        return "<button type='button' class='btn default'>END</button>";
                     }
-                    if (status == 1) {
-                        return "<button type='button' class='btn green' >Success</button>";
+                    if (quoStatus == 3) {
+                        return "<button type='button' class='btn default'>CANCELED</button>";
                     }
-                    if (status == 2) {
-                        return "<button type='button' class='btn red' >Failure</button>";
-                    }
-                    return "";
                 }
             }, {
                 "targets": 10,

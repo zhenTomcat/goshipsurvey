@@ -43,7 +43,7 @@
     <select id="getRecord" resultMap="RecordMap">
         SELECT ins.*, #{proType} AS proType FROM t_inspection ins
         <where>
-            AND ins.inspection_status >=5 AND ins.del_flag=0
+            AND ins.inspection_status >=6 AND ins.del_flag=0
             <if test="opId != null">
                 AND ins.op_id=#{opId}
             </if>

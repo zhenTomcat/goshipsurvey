@@ -100,13 +100,14 @@ public class Const {
     public static final Integer INSPECTION_REPORT_OK = 3;
     public static final Integer INSPECTION_OP_COMPLETE = 4;
     public static final Integer INSPECTION_SURVEYOR_COMPLETE = 5;
+    public static final Integer INSPECTION_END = 6;
 
 
     //user type
-    public static final Integer USER_TYPE_ADMIN = 0;
-    public static final Integer USER_TYPE_OP = 1;
-    public static final Integer USER_TYPE_SURVEYOR_PERSONAL = 2;
-    public static final Integer USER_TYPE_SURVEYOR_COMPANY = 3;
+    public static final Integer USER_TYPE_ADMIN = 1;
+    public static final Integer USER_TYPE_OP = 2;
+    public static final Integer USER_TYPE_SURVEYOR_PERSONAL =3;
+    public static final Integer USER_TYPE_SURVEYOR_COMPANY = 4;
 
 
     //project type

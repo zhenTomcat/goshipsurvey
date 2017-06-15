@@ -8,8 +8,12 @@ import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IDictServi
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IQuotationService;
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
+import com.ctoangels.goshipsurvey.common.modules.sys.service.IMessageService;
+import com.ctoangels.goshipsurvey.common.modules.sys.service.impl.MessageServiceImpl;
 import com.ctoangels.goshipsurvey.common.util.Const;
 import com.ctoangels.goshipsurvey.common.util.DateUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,8 +32,13 @@ import java.util.List;
 @RequestMapping(value = "op/quotation")
 public class OPQuotationController extends BaseController {
 
+    private static Logger logger = LoggerFactory.getLogger(OPQuotationController.class);
+
     @Autowired
     IQuotationService quotationService;
+
+    @Autowired
+    IMessageService messageService;
 
     @RequestMapping
     public String list(ModelMap map) {
@@ -89,6 +98,9 @@ public class OPQuotationController extends BaseController {
         quotation.setUpdateInfo(getCurrentUser().getName());
         if (quotationService.updateById(quotation)) {
             jsonObject.put("success", true);
+            logger.info("startQuotation" + Thread.currentThread().getId());
+            String title = "本区域有可进行租还船检验船舶,请及时查看";
+            messageService.publicAll(title, title, Const.USER_TYPE_SURVEYOR_COMPANY);
         } else {
             jsonObject.put("success", false);
         }
