@@ -57,11 +57,6 @@
                                     </div>
                                 </div>
                                 <div class="portlet-body">
-                                    <ul class="nav nav-tabs">
-                                        <li>
-                                            <a href="#tab_1_2" data-toggle="tab"> Last inspections </a>
-                                        </li>
-                                    </ul>
                                     <div class="tab-content">
                                         <div class="tab-pane fade active in" id="tab_1_2">
                                             <table class="table table-striped table-bordered table-hover table-checkable order-column"
@@ -76,7 +71,6 @@
                                                     <th>Inspection date(LMT)</th>
                                                     <th>Total price</th>
                                                     <th>Inspection report</th>
-                                                    <th></th>
                                                 </tr>
                                                 </thead>
                                             </table>
@@ -203,13 +197,6 @@
                         return "<a class='btn btn-sm green' target='_blank' href='" + data + "'>VIEW</a>";
                     }
                 },
-                {
-                    "data": "",
-                    "class": "details-control",
-                    "render": function () {
-                        return "<i class='fa fa-info' title='View Comment'></i>";
-                    }
-                },
             ],
             "columnDefs": [{
                 "targets": 5,
@@ -219,44 +206,37 @@
                     return startDate + " to " + endDate;
                 }
             }],
+            "fnCreatedRow": function (nRow, aData, iDataIndex) {
+                var row = inspectionTable.row($(nRow));
+                row.child(moreInfo(aData)).show();
+            }
         });
 
-        inspectionTable.on('click', 'td.details-control', function () {
-            var tr = $(this).closest('tr');
-            var row = inspectionTable.row(tr);
-            if (row.child.isShown()) {
-                row.child.hide();
-                tr.removeClass('shown');
-            }
-            else {
-                row.child(moreInfo(row.data())).show();
-                tr.addClass('shown');
-            }
-        });
     });
 
     function moreInfo(data) {
         var html = "";
-        var surveyorInfo = data.surveyorInfo;
-        var surveyorPoint = data.surveyorPoint;
-        if (surveyorPoint == null || surveyorPoint == "") {
-            var comment = starRatingNot.clone();
-            comment.find(".op-point-div input[type='radio']").attr("name", "surveyorPoint")
-            comment.find(".comment-btn").attr("data-id", data.id)
-            html += comment.html();
+        var surveyor = data.surveyor.firstName;
+        var comment = data.comment;
+        var surveyorGrade = comment.surveyorGrade;
+        if (surveyorGrade == null || surveyorGrade == "") {
+            var commentDom = starRatingNot.clone();
+            commentDom.find(".op-point-div input[type='radio']").attr("name", "surveyorGrade")
+            commentDom.find(".comment-btn").attr("data-id", comment.id)
+            html += commentDom.html();
         } else {
-            var comment = starRatingHave.clone();
-            comment.find(".op-point-div input[value='" + surveyorPoint + "']").attr("checked", true);
-            comment.find(".op-comment-div").html(data.surveyorComment);
-            html += comment.html();
+            var commentDom = starRatingHave.clone();
+            commentDom.find(".op-point-div input[value='" + surveyorGrade + "']").attr("checked", true);
+            commentDom.find(".op-comment-div").html(comment.surveyorComment);
+            html += commentDom.html();
         }
-        var opPoint = data.opPoint;
-        if (opPoint != null && opPoint != "") {
-            var comment = starRatingHave.clone();
-            comment.find(".comment-label-div").html("OP's comment");
-            comment.find(".op-point-div input[value='" + opPoint + "']").attr("checked", true);
-            comment.find(".op-comment-div").html(data.opComment);
-            html += comment.html();
+        var opGrade = comment.opGrade;
+        if (opGrade != null && opGrade != "") {
+            var commentDom = starRatingHave.clone();
+            commentDom.find(".comment-label-div").html("Consignor : " + data.op.name);
+            commentDom.find(".op-point-div input[value='" + opGrade + "']").attr("checked", true);
+            commentDom.find(".op-comment-div").html(comment.opComment);
+            html += commentDom.html();
         }
         return html;
     }
@@ -301,10 +281,11 @@
             return;
         }
 
+
         $.ajax({
-            url: "surveyor/inspection/addPoint",
+            url: "comment/editComment",
             type: "post",
-            data: {id: id, surveyorPoint: point, surveyorComment: comment},
+            data: {id: id, surveyorGrade: point, surveyorComment: comment},
             success: function (data) {
                 if (data.success) {
                     var newComment = starRatingHave.find(".row").clone();

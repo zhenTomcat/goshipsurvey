@@ -36,22 +36,53 @@ public class OPInspectionController extends BaseController {
 
     @RequestMapping
     public String list(ModelMap map) {
-        int userId = getCurrentUser().getId();
-        map.put("staticPath", staticPath);
-        List<Inspection> list = inspectionService.getInspectionsOP(userId);
-        for (Inspection inspection : list) {
-            Quotation quotation = inspection.getQuotation();
-            quotation.setShipType(transferValuesToDes(quotation.getShipType(), getShipTypeDict()));
-            quotation.setInspectionType(transferValuesToDes(quotation.getInspectionType(), getInspectionTypeDict()));
-            inspection.setQuotation(quotation);
-            String inspectionType = inspection.getInspectionType();
-            String[] inspectionTypes = inspectionType.split(",");
-            inspection.setInspectionTypes(inspectionTypes);
-        }
-        map.put("list", list);
         map.put("inspectionType", getInspectionTypeDict());
         return "goshipsurvey/op/inspection/list";
     }
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject getList() {
+        int start = 0;
+        int length = 10;
+        if (request.getParameter(Const.START) != null) {
+            start = Integer.parseInt(request.getParameter(Const.START));
+        }
+        if (request.getParameter(Const.LENGTH) != null) {
+            length = Integer.parseInt(request.getParameter(Const.LENGTH));
+        }
+        JSONObject jsonObject = new JSONObject();
+        List<Inspection> list = inspectionService.getList(getCurrentUser().getId(), null, start, length);
+        for (Inspection i : list) {
+            Quotation q = i.getQuotation();
+            q.setInspectionType(transferValuesToDes(q.getInspectionType(), getInspectionTypeDict()));
+            q.setShipType(transferValuesToDes(q.getShipType(), getShipTypeDict()));
+            String inspectionType = i.getInspectionType();
+            String[] inspectionTypes = inspectionType.split(",");
+            i.setInspectionTypes(inspectionTypes);
+            i.setQuotation(q);
+        }
+        jsonObject.put(Const.DRAW, request.getParameter(Const.DRAW));
+        int total = inspectionService.getTotal(getCurrentUser().getId(), null);
+        jsonObject.put(Const.RECORDSTOTAL, total);
+        jsonObject.put(Const.RECORDSFILTERED, total);
+        jsonObject.put(Const.NDATA, list);
+        return jsonObject;
+    }
+
+
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public String list(ModelMap map, @RequestParam(required = false) int id) {
+        map.put("staticPath", staticPath);
+        map.put("inspectionType", getInspectionTypeDict());
+        Inspection i = inspectionService.getById(id);
+        String inspectionType = i.getInspectionType();
+        String[] inspectionTypes = inspectionType.split(",");
+        i.setInspectionTypes(inspectionTypes);
+        map.put("inspection", i);
+        return "goshipsurvey/op/inspection/edit";
+    }
+
 
     @RequestMapping(value = "/add")
     @ResponseBody
@@ -62,6 +93,8 @@ public class OPInspectionController extends BaseController {
         return jsonObject;
     }
 
+
+    //弃用
     @RequestMapping(value = "/editOtherDetails", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject editOtherDetails(Inspection inspection) {

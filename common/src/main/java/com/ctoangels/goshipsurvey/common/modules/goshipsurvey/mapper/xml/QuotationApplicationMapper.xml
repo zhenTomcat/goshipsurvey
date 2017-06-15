@@ -17,7 +17,6 @@
                      select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.SurveyorMapper.getById"></association>
         <association property="user" column="user_id"
                      select="com.ctoangels.goshipsurvey.common.modules.sys.mapper.UserMapper.getById"></association>
-
     </resultMap>
 
 

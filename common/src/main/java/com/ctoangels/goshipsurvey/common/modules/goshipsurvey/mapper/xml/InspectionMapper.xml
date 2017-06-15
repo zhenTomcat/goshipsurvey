@@ -4,7 +4,69 @@
 
     <!-- 通用查询结果列-->
     <sql id="Base_Column_List">
-		id,op_id AS opId, surveyor_id AS surveyorId, quotation_id AS quotationId, inspection_status AS inspectionStatus, inspection_type AS inspectionType, delivery_by AS deliveryBy, accepted_by AS acceptedBy , re_delivery_by AS reDeliveryBy, re_accepted_by AS reAcceptedBy, charter, owner, ship_particulars AS shipParticulars,ship_particulars_url AS shipParticularsUrl, port_agency AS portAgency,blank_loi_url AS blankLoiUrl, report_url AS reportUrl,invoice_url AS invoiceUrl, op_point AS opPoint, op_comment AS opComment,surveyor_point AS surveyorPoint, surveyor_comment AS surveyorCommnet, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
+		id,op_id AS opId, company_id AS companyId, surveyor_id AS surveyorId, quotation_id AS quotationId, inspection_status AS inspectionStatus, inspection_type AS inspectionType, report_url AS reportUrl, passport_url AS passportUrl, loi_url AS loiUrl, invoice_url AS invoiceUrl, op_point AS opPoint, op_comment AS opComment,surveyor_point AS surveyorPoint, surveyor_comment AS surveyorCommnet, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
 	</sql>
+
+
+    <select id="getList" resultMap="inspectionListMapper">
+        SELECT ins.* FROM t_inspection ins
+        <where>
+            AND ins.del_flag=0
+            <if test="opId != null">
+                AND ins.op_id=#{opId}
+            </if>
+            <if test="companyId != null">
+                AND ins.company_id=#{companyId}
+            </if>
+        </where>
+        order by ins.update_date desc
+        limit #{start},#{length}
+    </select>
+
+    <select id="getById" resultMap="inspectionListMapper">
+        SELECT ins.* FROM t_inspection ins WHERE ins.id=#{id}
+    </select>
+
+    <resultMap id="inspectionListMapper" type="Inspection">
+        <result column="id" property="id"/>
+        <association property="quotation" column="quotation_id"
+                     select="com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.QuotationMapper.getById"/>
+        <association property="op" column="op_id"
+                     select="com.ctoangels.goshipsurvey.common.modules.sys.mapper.UserMapper.getById"/>
+        <association property="company" column="company_id"
+                     select="com.ctoangels.goshipsurvey.common.modules.sys.mapper.UserMapper.getById"/>
+        <association property="surveyor" column="surveyor_id"
+                     select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.SurveyorMapper.getById"/>
+    </resultMap>
+
+
+    <select id="getRecord" resultMap="RecordMap">
+        SELECT ins.*, #{proType} AS proType FROM t_inspection ins
+        <where>
+            AND ins.inspection_status >=6 AND ins.del_flag=0
+            <if test="opId != null">
+                AND ins.op_id=#{opId}
+            </if>
+            <if test="companyId != null">
+                AND ins.company_id=#{companyId}
+            </if>
+            order by ins.update_date desc
+            limit #{start},#{length}
+        </where>
+    </select>
+
+    <resultMap id="RecordMap" type="Inspection">
+        <result property="id" column="id"/>
+        <association property="quotation" column="quotation_id"
+                     select="com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.QuotationMapper.getById"/>
+        <association property="op" column="op_id"
+                     select="com.ctoangels.goshipsurvey.common.modules.sys.mapper.UserMapper.getById"/>
+        <association property="company" column="company_id"
+                     select="com.ctoangels.goshipsurvey.common.modules.sys.mapper.UserMapper.getById"/>
+        <association property="surveyor" column="surveyor_id"
+                     select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.SurveyorMapper.getById"/>
+        <association property="comment" column="{inspectionId=id,proType=proType}" javaType="Comment"
+                     select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.CommentMapper.getByInspectionIdAndProType"/>
+    </resultMap>
 
 </mapper>

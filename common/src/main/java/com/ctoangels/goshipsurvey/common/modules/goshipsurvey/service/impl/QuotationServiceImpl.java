@@ -7,8 +7,10 @@ import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.SurveyorInf
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.InspectionMapper;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.QuotationApplicationMapper;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.SurveyorInfoMapper;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.PurchaseQuotation;
 import com.ctoangels.goshipsurvey.common.modules.sys.mapper.UserMapper;
 import com.ctoangels.goshipsurvey.common.util.Const;
+import com.ctoangels.goshipsurvey.common.util.DateUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +20,7 @@ import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IQuotation
 import com.baomidou.framework.service.impl.SuperServiceImpl;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -40,6 +43,18 @@ public class QuotationServiceImpl extends SuperServiceImpl<QuotationMapper, Quot
 
     @Autowired
     UserMapper userMapper;
+
+    @Override
+    public List<Quotation> getOPList(Integer opId, Integer start, Integer length) {
+        return quotationMapper.getOPList(opId, start, length);
+    }
+
+    @Override
+    public int getOPTotal(Integer opId) {
+        EntityWrapper<Quotation> ew = new EntityWrapper<>();
+        ew.addFilter("op_id={0} and end_date>={1}", opId, DateUtil.formatDate(new Date(), "yyyy-MM-dd"));
+        return quotationMapper.selectCountByEw(ew);
+    }
 
     @Override
     public Inspection getInspectionInfo(int id) {
@@ -88,6 +103,18 @@ public class QuotationServiceImpl extends SuperServiceImpl<QuotationMapper, Quot
         }
         list.removeAll(applied);
         return list;
+    }
+
+    @Override
+    public List<Quotation> getSurveyorList(Integer surveyorId, Integer start, Integer length) {
+        return quotationMapper.getSurveyorList(surveyorId, start, length);
+    }
+
+    @Override
+    public int getSurveyorTotal() {
+        EntityWrapper<Quotation> ew = new EntityWrapper();
+        ew.addFilter("end_date>={0}", DateUtil.formatDate(new Date(), "yyyy-MM-dd"));
+        return quotationMapper.selectCountByEw(ew);
     }
 
 }

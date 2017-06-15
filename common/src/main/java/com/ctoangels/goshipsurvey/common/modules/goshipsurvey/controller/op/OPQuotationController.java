@@ -8,8 +8,12 @@ import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IDictServi
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IQuotationService;
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
+import com.ctoangels.goshipsurvey.common.modules.sys.service.IMessageService;
+import com.ctoangels.goshipsurvey.common.modules.sys.service.impl.MessageServiceImpl;
 import com.ctoangels.goshipsurvey.common.util.Const;
 import com.ctoangels.goshipsurvey.common.util.DateUtil;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -28,8 +32,13 @@ import java.util.List;
 @RequestMapping(value = "op/quotation")
 public class OPQuotationController extends BaseController {
 
+    private static Logger logger = LoggerFactory.getLogger(OPQuotationController.class);
+
     @Autowired
     IQuotationService quotationService;
+
+    @Autowired
+    IMessageService messageService;
 
     @RequestMapping
     public String list(ModelMap map) {
@@ -38,22 +47,28 @@ public class OPQuotationController extends BaseController {
         return "goshipsurvey/op/quotation/list";
     }
 
-    @RequestMapping(value = "/list")
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
     public JSONObject getList() {
+        int start = 0;
+        int length = 10;
+        if (request.getParameter(Const.START) != null) {
+            start = Integer.parseInt(request.getParameter(Const.START));
+        }
+        if (request.getParameter(Const.LENGTH) != null) {
+            length = Integer.parseInt(request.getParameter(Const.LENGTH));
+        }
         JSONObject jsonObject = new JSONObject();
-        EntityWrapper<Quotation> ew = getEntityWrapper();
-        ew.addFilter("op_id={0} and end_date>={1}", getCurrentUser().getId(), DateUtil.formatDate(new Date(), "yyyy-MM-dd"));
-        ew.orderBy("update_date", false);
-        List<Quotation> list = quotationService.selectList(ew);
+        List<Quotation> list = quotationService.getOPList(getCurrentUser().getId(), start, length);
         for (Quotation q : list) {
             q.setInspectionType(transferValuesToDes(q.getInspectionType(), getInspectionTypeDict()));
             q.setShipType(transferValuesToDes(q.getShipType(), getShipTypeDict()));
-            if (q.getQuotationStatus() >= Const.QUOTATION_ING) {
-                q.setApplicationList(quotationService.getApplication(q.getId()));
-            }
         }
-        jsonObject.put("list", list);
+        jsonObject.put(Const.DRAW, request.getParameter(Const.DRAW));
+        int total = quotationService.getOPTotal(getCurrentUser().getId());
+        jsonObject.put(Const.RECORDSTOTAL, total);
+        jsonObject.put(Const.RECORDSFILTERED, total);
+        jsonObject.put(Const.NDATA, list);
         return jsonObject;
     }
 
@@ -83,6 +98,9 @@ public class OPQuotationController extends BaseController {
         quotation.setUpdateInfo(getCurrentUser().getName());
         if (quotationService.updateById(quotation)) {
             jsonObject.put("success", true);
+            logger.info("startQuotation" + Thread.currentThread().getId());
+            String title = "本区域有可进行租还船检验船舶,请及时查看";
+            messageService.publicAll(title, title, Const.USER_TYPE_SURVEYOR_COMPANY);
         } else {
             jsonObject.put("success", false);
         }

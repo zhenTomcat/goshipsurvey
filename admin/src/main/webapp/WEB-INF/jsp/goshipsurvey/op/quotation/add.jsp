@@ -9,7 +9,7 @@
     }
 
     .modal-dialog {
-        width: 60%;
+        width: 90%;
         margin: 30px auto;
     }
 
@@ -53,7 +53,6 @@
                 </div>
                 <div class="modal-body">
                     <div class="container-fluid">
-
                         <div class="form-group col-md-12" style="border-bottom: 1px solid #e5e5e5;padding-bottom: 5px">
                             <label class="col-sm-2 control-label">Search ship</label>
                             <div class="col-sm-9">
@@ -67,64 +66,191 @@
                             </div>
                         </div>
                         <input type="hidden" id="shipId" name="shipId" value="0">
-                        <div class="form-group col-md-6">
-                            <label class="col-sm-6 control-label">Ship name</label>
-                            <div class="col-sm-6">
-                                <input id="shipName" name="shipName" type="text" required
-                                       class="form-control required">
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label class="col-sm-6 control-label">Ship name</label>
+                                <div class="col-sm-6">
+                                    <input id="shipName" name="shipName" type="text"
+                                           class="form-control ">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="col-sm-6 control-label">IMO</label>
-                            <div class="col-sm-6">
-                                <input id="imo" name="imo" type="text"
-                                       class="form-control required">
+                            <div class="form-group col-md-4">
+                                <label class="col-sm-6 control-label">IMO</label>
+                                <div class="col-sm-6">
+                                    <input id="imo" name="imo" type="text"
+                                           class="form-control ">
+                                </div>
                             </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="col-sm-6 control-label">Ship type</label>
-                            <div class="col-sm-6">
-                                <select class="form-control" name="shipType" id="shipTypeSelect">
-                                    <c:forEach items="${shipType}" var="s">
-                                        <option value="${s.value}">${s.des}</option>
-                                    </c:forEach>
-                                </select>
-                            </div>
-                        </div>
-                        <div class="form-group col-md-6">
-                            <label class="col-sm-6 control-label">Inspection port</label>
-                            <div class="col-sm-6">
-                                <input id="portName" name="portName" type="text"
-                                       class="form-control required" autocomplete="off">
-                                <div id="port-list">
-                                    <ul id="portList">
-                                    </ul>
+                            <div class="form-group col-md-4">
+                                <label class="col-sm-6 control-label">Ship type</label>
+                                <div class="col-sm-6">
+                                    <select class="form-control" name="shipType" id="shipTypeSelect">
+                                        <c:forEach items="${shipType}" var="s">
+                                            <option value="${s.value}">${s.des}</option>
+                                        </c:forEach>
+                                    </select>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-group col-md-12">
-                            <label class="col-sm-3 control-label" id="inspectionTypeLabel">Inspection type</label>
-                            <div class="col-sm-9">
-                                <div class="mt-checkbox-inline">
-                                    <c:forEach items="${inspectionType}" var="ins">
-                                        <label class="mt-checkbox col-sm-3">
-                                            <input type="checkbox" value="${ins.value}" class="inspectionTypeCheckBox"
-                                                   name="inspectionType">
-                                                ${ins.des}
-                                            <span></span>
-                                        </label>
-                                    </c:forEach>
+                        <div class="row">
+                            <div class="form-group col-md-4">
+                                <label class="col-sm-6 control-label">Inspection port</label>
+                                <div class="col-sm-6">
+                                    <input id="portName" name="portName" type="text"
+                                           class="form-control " autocomplete="off">
+                                    <div id="port-list">
+                                        <ul id="portList">
+                                        </ul>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="form-group col-md-8">
+                                <label class="col-sm-3 control-label" id="inspectionTypeLabel">Inspection type</label>
+                                <div class="col-sm-9">
+                                    <div class="mt-checkbox-inline">
+                                        <c:forEach items="${inspectionType}" var="ins">
+                                            <label class="mt-checkbox col-sm-3">
+                                                <input type="checkbox" value="${ins.value}"
+                                                       class="inspectionTypeCheckBox"
+                                                       name="inspectionType">
+                                                    ${ins.des}
+                                                <span></span>
+                                            </label>
+                                        </c:forEach>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-
-                        <div class="form-group col-md-12">
-                            <label class="control-label col-sm-3">Inspection date(LMT)</label>
-                            <div class="col-sm-9" style="padding-left: 7.5px">
-                                <div class="input-group input-large date-picker input-daterange">
-                                    <input type="text" class="form-control required" name="startDate">
-                                    <span class="input-group-addon"> to </span>
-                                    <input type="text" class="form-control required" name="endDate">
+                        <div class="row">
+                            <div class="form-group col-md-8">
+                                <label class="control-label col-sm-3">Inspection date(LMT)</label>
+                                <div class="col-sm-9" style="padding-left: 7.5px">
+                                    <div class="input-group input-large date-picker input-daterange">
+                                        <input type="text" class="form-control " name="startDate">
+                                        <span class="input-group-addon"> to </span>
+                                        <input type="text" class="form-control " name="endDate">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-md-12" style="border-top: 1px solid #e5e5e5;padding-top: 10px">
+                            <div class="col-md-8">
+                                <div class="form-group col-md-12">
+                                    <label class="col-sm-3 control-label">On hire</label>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-sm-6 control-label">Delivery by</label>
+                                    <div class="col-sm-6">
+                                        <input id="" name="deliveryBy" type="text" disabled
+                                               data-value="1"
+                                               class="form-control other-detail-input">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-sm-6 control-label">Accepted by</label>
+                                    <div class="col-sm-6">
+                                        <input name="acceptedBy" type="text" disabled
+                                               data-value="1"
+                                               class="form-control other-detail-input">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="col-sm-3 control-label">Off hire</label>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-sm-6 control-label">Re-delivery by</label>
+                                    <div class="col-sm-6">
+                                        <input name="reDeliveryBy" type="text" disabled
+                                               data-value="2"
+                                               class="form-control other-detail-input">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-sm-6 control-label">Re-accepted by</label>
+                                    <div class="col-sm-6">
+                                        <input name="reAcceptedBy" type="text" disabled
+                                               data-value="2"
+                                               class="form-control other-detail-input">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-12">
+                                    <label class="col-sm-3 control-label">Condition</label>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-sm-6 control-label">Charter</label>
+                                    <div class="col-sm-6">
+                                        <input name="charter" type="text" disabled
+                                               data-value="3"
+                                               class="form-control other-detail-input">
+                                    </div>
+                                </div>
+                                <div class="form-group col-md-6">
+                                    <label class="col-sm-6 control-label">Owner</label>
+                                    <div class="col-sm-6">
+                                        <input name="owner" type="text" disabled
+                                               data-value="3"
+                                               class="form-control other-detail-input">
+                                    </div>
+                                </div>
+                                <div class="col-md-12">
+                                    <label class="col-sm-3 control-label">Ship particulars</label>
+                                    <div class="form-group col-md-9">
+                                        <textarea class="form-control ship-particulars-textarea"
+                                                  name="shipParticulars"
+                                                  style="height:100px;resize: none;width: 94%;margin-left: 2%"></textarea>
+                                        <br/>
+                                        <button type="button" style="margin-left: 10px" id="particulars-btn"
+                                                class="col-sm-4 btn btn-sm blue ship-particulars-btn">
+                                            <i class="fa fa-upload"></i>
+                                            Ship
+                                            particulars upload
+                                        </button>
+                                        <div class="col-sm-6 btn-group upload-file-div" style="display: none">
+                                            <input class="form-control ship-particulars-url-input"
+                                                   data-loi="true"
+                                                   name="shipParticularsUrl"
+                                                   type="hidden"/>
+                                            <a class="btn btn-sm green"
+                                               target="_blank"
+                                               href=";">DOWNLOAD</a>
+                                            <span class="input-group-btn">
+                                                <button class="btn red btn-sm" type="button" title="delete"
+                                                        onclick="delFileAndInput(this)">
+                                                    <i class="fa fa-ban"></i></button>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-md-4">
+                                <label class="col-md-12 control-label"
+                                       style="margin-bottom: 15px;text-align: left">Port
+                                    agency</label>
+                                <textarea
+                                        class="form-control port-agency-textarea "
+                                        name="portAgency"
+                                        style="height:230px;resize: none;width: 94%"></textarea>
+                                <br><br>
+                                <button type="button" id="loi-btn"
+                                        class="col-sm-6 btn btn-sm blue loi-btn">
+                                    <i class="fa fa-upload"></i>
+                                    L.O.I
+                                    without
+                                    sign upload
+                                </button>
+                                <div class="col-sm-6 btn-group upload-file-div" style="display: none">
+                                    <input class="form-control ship-particulars-url-input"
+                                           data-loi="true"
+                                           name="blankLoiUrl"
+                                           type="hidden"/>
+                                    <a class="btn btn-sm green"
+                                       target="_blank"
+                                       href=";">DOWNLOAD</a>
+                                    <span class="input-group-btn">
+                                                <button class="btn red btn-sm" type="button" title="delete"
+                                                        onclick="delFileAndInput(this)">
+                                                    <i class="fa fa-ban"></i></button>
+                                            </span>
                                 </div>
                             </div>
                         </div>
@@ -143,6 +269,9 @@
 
 <script>
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
+
+    initUploaders_loi_without_sign_and_ship_particulars("particulars-btn", "shipinfo", "${staticPath}/");
+    initUploaders_loi_without_sign_and_ship_particulars("loi-btn", "shipinfo", "${staticPath}/");
 
     function severCheck() {
         if (check()) {
@@ -307,5 +436,19 @@
     function getPortInfo(obj) {
         var portInfo = $(obj).html();
         $("#portName").val(portInfo);
+    }
+
+    $(".inspectionTypeCheckBox").on("click", function () {
+        var flag = this.checked;
+        var value = this.value;
+        $(".other-detail-input[data-value='" + value + "']").attr("disabled", !flag).val("");
+    })
+
+
+    function delFileAndInput(obj) {
+        var div = $(obj).parent().parent();
+        div.find("input").val("");
+        div.find("a").attr("href", "");
+        div.css("display", "none");
     }
 </script>

@@ -16,6 +16,7 @@ public interface PurchaseInspectionMapper extends AutoMapper<PurchaseInspection>
     List<PurchaseInspection> selectByOpInspection(Integer id,Integer start, Integer length);
 
     PurchaseInspection selectByReportId(Integer reportId);
+
     List<PurchaseInspection> getRecord(@Param(value = "opId") Integer opId,
                                        @Param(value = "companyId") Integer companyId,
                                        @Param(value = "proType") Integer proType,

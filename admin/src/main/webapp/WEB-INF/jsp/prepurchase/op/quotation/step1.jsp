@@ -135,7 +135,6 @@
                                             <option value="${s.value}">${s.des}</option>
                                         </c:forEach>
                                     </select>
-                                    <%--<input type="text" class="form-control" id="shipType" name="shipType">--%>
                                 </div>
                             </div>
                             <div class="form-group form-md-line-input col-md-6">

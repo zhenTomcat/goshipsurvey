@@ -57,11 +57,11 @@
                                     </div>
                                 </div>
                                 <div class="portlet-body">
-                                    <ul class="nav nav-tabs">
-                                        <li>
-                                            <a href="#tab_1_2" data-toggle="tab"> Last inspections </a>
-                                        </li>
-                                    </ul>
+                                    <%--<ul class="nav nav-tabs">--%>
+                                    <%--<li>--%>
+                                    <%--<a href="#tab_1_2" data-toggle="tab"> Last inspections </a>--%>
+                                    <%--</li>--%>
+                                    <%--</ul>--%>
                                     <div class="tab-content">
                                         <div class="tab-pane fade active in" id="tab_1_2">
                                             <table class="table table-striped table-bordered table-hover table-checkable order-column"
@@ -204,7 +204,11 @@
                     }
                 },
                 {
-                    "data": "",
+                    "data": "inspectionReportId",
+                    "render": function (data) {
+                        return '<a data-target="navTab" href="prepurchase/op/reportInfo?reportId=' + data + '" >View</a> <li class="fa fa-link"></li>'
+
+                    }
                 },
             ],
             "columnDefs": [{
@@ -215,7 +219,7 @@
                     return startDate + " to " + endDate;
                 }
             }],
-            "initComplete": function (settings, json) {
+            "drawCallback": function (settings, json) {
                 var rows = $('#inspection_table').find("tbody tr");
                 rows.each(function (i, e) {
                     var row = inspectionTable.row($(this));

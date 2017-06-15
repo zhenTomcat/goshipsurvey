@@ -11,4 +11,14 @@
         SELECT u.* FROM sys_user u WHERE u.id=#{id}
     </select>
 
+    <select id="getAllId" resultType="Integer">
+        SELECT DISTINCT u.id FROM sys_user u join sys_user_role ur on u.id=ur.user_id
+        <where>
+            del_flag = 0
+            <if test="role!=null">
+               AND (ur.role_id=#{role} or ur.role_id=1)
+            </if>
+        </where>
+    </select>
+
 </mapper>

@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.framework.service.ISuperService;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.Role;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
+import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
 
@@ -20,5 +21,7 @@ public interface UserService extends ISuperService<User> {
     JSONObject editPassword(String password, String oldPassword);
 
     User getTryUser();
+
+    List<Integer> getAllId(Integer role);
 
 }

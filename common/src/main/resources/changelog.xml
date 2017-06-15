@@ -139,7 +139,41 @@
             alter table t_purchase_quotation modify column agency_detail text NULL;
         </sql>
     </changeSet>
-
+    <changeSet author="WangShun" id="15950097942-010">
+        <sql>
+            alter table t_quotation ADD delivery_by varchar(64) DEFAULT NULL;
+            alter table t_quotation ADD accepted_by varchar(64) DEFAULT NULL;
+            alter table t_quotation ADD re_delivery_by varchar(64) DEFAULT NULL;
+            alter table t_quotation ADD re_accepted_by varchar(64) DEFAULT NULL;
+            alter table t_quotation ADD charter varchar(64) DEFAULT NULL;
+            alter table t_quotation ADD owner varchar(64) DEFAULT NULL;
+            alter table t_quotation ADD ship_particulars text;
+            alter table t_quotation ADD ship_particulars_url varchar(255) DEFAULT NULL;
+            alter table t_quotation ADD port_agency text;
+            alter table t_quotation ADD blank_loi_url varchar(255) DEFAULT NULL;
+        </sql>
+    </changeSet>
+    <changeSet author="WangShun" id="15950097942-011">
+        <sql>
+            alter table t_inspection ADD company_id int(11) DEFAULT NULL;
+        </sql>
+    </changeSet>
+    <changeSet author="WangShun" id="15950097942-012">
+        <sql>
+            alter table t_inspection DROP delivery_by ;
+            alter table t_inspection DROP accepted_by ;
+            alter table t_inspection DROP re_delivery_by ;
+            alter table t_inspection DROP re_accepted_by ;
+            alter table t_inspection DROP charter ;
+            alter table t_inspection DROP owner ;
+            alter table t_inspection DROP ship_particulars ;
+            alter table t_inspection DROP ship_particulars_url ;
+            alter table t_inspection DROP port_agency ;
+            alter table t_inspection DROP blank_loi_url ;
+            alter table t_inspection ADD passport_url varchar(255) DEFAULT NULL;
+            alter table t_inspection ADD loi_url varchar(255) DEFAULT NULL;
+        </sql>
+    </changeSet>
 </databaseChangeLog>
 
 

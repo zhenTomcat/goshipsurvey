@@ -94,6 +94,42 @@ public class Quotation implements Serializable {
     private Integer quotationStatus;
 
     /**  */
+    @TableField(value = "delivery_by")
+    private String deliveryBy;
+
+    /**  */
+    @TableField(value = "accepted_by")
+    private String acceptedBy;
+
+    /**  */
+    @TableField(value = "re_delivery_by")
+    private String reDeliveryBy;
+
+    /**  */
+    @TableField(value = "re_accepted_by")
+    private String reAcceptedBy;
+
+    private String charter;
+
+    private String owner;
+
+    /**  */
+    @TableField(value = "ship_particulars")
+    private String shipParticulars;
+
+    /**  */
+    @TableField(value = "ship_particulars_url")
+    private String shipParticularsUrl;
+
+    /**  */
+    @TableField(value = "blank_loi_url")
+    private String blankLoiUrl;
+
+    /**  */
+    @TableField(value = "port_agency")
+    private String portAgency;
+
+    /**  */
     @TableField(value = "create_date")
     private Date createDate;
 
@@ -116,6 +152,9 @@ public class Quotation implements Serializable {
 
     @TableField(exist = false)
     private Inspection inspection;
+
+    @TableField(exist = false)
+    private QuotationApplication application;
 
     @TableField(exist = false)
     private List<QuotationApplication> applicationList;
@@ -288,6 +327,14 @@ public class Quotation implements Serializable {
         this.applicationList = applicationList;
     }
 
+    public QuotationApplication getApplication() {
+        return application;
+    }
+
+    public void setApplication(QuotationApplication application) {
+        this.application = application;
+    }
+
     public void setCreateInfo(String userName) {
         this.createDate = new Date();
         this.createBy = userName;
@@ -301,4 +348,83 @@ public class Quotation implements Serializable {
         this.updateBy = userName;
     }
 
+    public String getDeliveryBy() {
+        return deliveryBy;
+    }
+
+    public void setDeliveryBy(String deliveryBy) {
+        this.deliveryBy = deliveryBy;
+    }
+
+    public String getAcceptedBy() {
+        return acceptedBy;
+    }
+
+    public void setAcceptedBy(String acceptedBy) {
+        this.acceptedBy = acceptedBy;
+    }
+
+    public String getReDeliveryBy() {
+        return reDeliveryBy;
+    }
+
+    public void setReDeliveryBy(String reDeliveryBy) {
+        this.reDeliveryBy = reDeliveryBy;
+    }
+
+    public String getReAcceptedBy() {
+        return reAcceptedBy;
+    }
+
+    public void setReAcceptedBy(String reAcceptedBy) {
+        this.reAcceptedBy = reAcceptedBy;
+    }
+
+    public String getCharter() {
+        return charter;
+    }
+
+    public void setCharter(String charter) {
+        this.charter = charter;
+    }
+
+    public String getOwner() {
+        return owner;
+    }
+
+    public void setOwner(String owner) {
+        this.owner = owner;
+    }
+
+    public String getShipParticulars() {
+        return shipParticulars;
+    }
+
+    public void setShipParticulars(String shipParticulars) {
+        this.shipParticulars = shipParticulars;
+    }
+
+    public String getShipParticularsUrl() {
+        return shipParticularsUrl;
+    }
+
+    public void setShipParticularsUrl(String shipParticularsUrl) {
+        this.shipParticularsUrl = shipParticularsUrl;
+    }
+
+    public String getBlankLoiUrl() {
+        return blankLoiUrl;
+    }
+
+    public void setBlankLoiUrl(String blankLoiUrl) {
+        this.blankLoiUrl = blankLoiUrl;
+    }
+
+    public String getPortAgency() {
+        return portAgency;
+    }
+
+    public void setPortAgency(String portAgency) {
+        this.portAgency = portAgency;
+    }
 }

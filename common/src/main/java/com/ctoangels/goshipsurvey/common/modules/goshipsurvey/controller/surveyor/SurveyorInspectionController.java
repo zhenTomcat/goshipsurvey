@@ -6,6 +6,7 @@ import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Quotation;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IDictService;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IInspectionService;
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
+import com.ctoangels.goshipsurvey.common.util.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -35,22 +36,61 @@ public class SurveyorInspectionController extends BaseController {
 
     @RequestMapping
     public String list(ModelMap map) {
-        int userId = getCurrentUser().getId();
-        map.put("staticPath", staticPath);
-        List<Inspection> list = inspectionService.getInspectionsSurveyor(userId);
-        for (Inspection inspection : list) {
-            Quotation quotation = inspection.getQuotation();
-            quotation.setShipType(transferValuesToDes(quotation.getShipType(), getShipTypeDict()));
-            quotation.setInspectionType(transferValuesToDes(quotation.getInspectionType(), getInspectionTypeDict()));
-            inspection.setQuotation(quotation);
-            String inspectionType = inspection.getInspectionType();
-            String[] inspectionTypes = inspectionType.split(",");
-            inspection.setInspectionTypes(inspectionTypes);
-        }
-        map.put("list", list);
-        map.put("shipType", dictService.getListByType("shipType"));
-        map.put("inspectionType", dictService.getListByType("inspectionType"));
+        map.put("inspectionType", getInspectionTypeDict());
         return "goshipsurvey/surveyor/inspection/list";
+    }
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject getList() {
+        int start = 0;
+        int length = 10;
+        if (request.getParameter(Const.START) != null) {
+            start = Integer.parseInt(request.getParameter(Const.START));
+        }
+        if (request.getParameter(Const.LENGTH) != null) {
+            length = Integer.parseInt(request.getParameter(Const.LENGTH));
+        }
+        JSONObject jsonObject = new JSONObject();
+        List<Inspection> list = inspectionService.getList(null, getCurrentUser().getId(), start, length);
+        for (Inspection i : list) {
+            Quotation q = i.getQuotation();
+            q.setInspectionType(transferValuesToDes(q.getInspectionType(), getInspectionTypeDict()));
+            q.setShipType(transferValuesToDes(q.getShipType(), getShipTypeDict()));
+            String inspectionType = i.getInspectionType();
+            String[] inspectionTypes = inspectionType.split(",");
+            i.setInspectionTypes(inspectionTypes);
+            i.setQuotation(q);
+        }
+        jsonObject.put(Const.DRAW, request.getParameter(Const.DRAW));
+        int total = inspectionService.getTotal(null, getCurrentUser().getId());
+        jsonObject.put(Const.RECORDSTOTAL, total);
+        jsonObject.put(Const.RECORDSFILTERED, total);
+        jsonObject.put(Const.NDATA, list);
+        return jsonObject;
+    }
+
+
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public String list(ModelMap map, @RequestParam(required = false) int id) {
+        map.put("staticPath", staticPath);
+        map.put("inspectionType", getInspectionTypeDict());
+        Inspection i = inspectionService.getById(id);
+        String inspectionType = i.getInspectionType();
+        String[] inspectionTypes = inspectionType.split(",");
+        i.setInspectionTypes(inspectionTypes);
+        map.put("inspection", i);
+        return "goshipsurvey/surveyor/inspection/edit";
+    }
+
+    @RequestMapping(value = "/editUrl", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject editInfo(@RequestParam(required = false) int id,
+                               @RequestParam(required = false) String type,
+                               @RequestParam(required = false) String url) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("success", inspectionService.editUrl(id, type, url));
+        return jsonObject;
     }
 
     @RequestMapping(value = "/confirm", method = RequestMethod.POST)
@@ -69,5 +109,6 @@ public class SurveyorInspectionController extends BaseController {
         jsonObject.put("success", inspectionService.updateSelectiveById(inspection));
         return jsonObject;
     }
+
 
 }

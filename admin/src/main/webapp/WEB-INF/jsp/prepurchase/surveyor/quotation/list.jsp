@@ -24,9 +24,9 @@
                                     </div>
                                 </div>
                                 <div class="portlet-body">
-                                    <div class="caption col-md-8 margin-bottom-15">
-                                        <span class="caption-subject font-blue-soft bold uppercase">Applied</span>
-                                    </div>
+                                    <%--<div class="caption col-md-8 margin-bottom-15">--%>
+                                    <%--<span class="caption-subject font-blue-soft bold uppercase">Applied</span>--%>
+                                    <%--</div>--%>
                                     <div class="tab-pane fade active in" id="tab_1_1">
                                         <table class="table table-striped table-bordered table-hover table-checkable order-column"
                                                id="quotation_table">
@@ -57,7 +57,7 @@
         </div>
     </div>
 </div>
-<a id="goToSurveyorInfo" style="display: none" data-model="dialog" ></a>
+<a id="goToSurveyorInfo" style="display: none" data-model="dialog"></a>
 <script>
     var quotationTable = $("#quotation_table");//已申请的quotation表格
     var surveyList;
@@ -134,20 +134,28 @@
                 "targets": 9,
                 "render": function (data, type, row) {
                     var application = row.application;
-                    if (application == null) {
+                    var quoStatus = row.publicStatus;
+                    if (application != null && quoStatus != 3) {
+                        var status = application.applicationStatus;
+                        if (status == 0) {
+                            return "<button type='button' class='btn yellow' >Applying</button>";
+                        }
+                        if (status == 1) {
+                            return "<button type='button' class='btn green' >Success</button>";
+                        }
+                        if (status == 2) {
+                            return "<button type='button' class='btn red' >Failure</button>";
+                        }
+                    }
+                    if (quoStatus == 1) {
                         return "<button type='button' class='btn default' onclick='addApplication(this," + row.id + ")'>Apply</button>";
                     }
-                    var status = application.applicationStatus;
-                    if (status == 0) {
-                        return "<button type='button' class='btn yellow' >Applying</button>";
+                    if (quoStatus == 2) {
+                        return "<button type='button' class='btn default'>END</button>";
                     }
-                    if (status == 1) {
-                        return "<button type='button' class='btn green' >Success</button>";
+                    if (quoStatus == 3) {
+                        return "<button type='button' class='btn default'>CANCELED</button>";
                     }
-                    if (status == 2) {
-                        return "<button type='button' class='btn red' >Failure</button>";
-                    }
-                    return "";
                 }
             }, {
                 "targets": 10,
@@ -245,7 +253,7 @@
         } else {
             var surveyor = application.surveyor;
             html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5">Price:</label> <div class="input-group col-md-7"> ' + application.totalPrice + '</div></div>';
-            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">Surveyor:</label> <div class="input-group col-md-7">'+ surveyor.firstName+" "  + surveyor.lastName + '</div></div>';
+            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">Surveyor:</label> <div class="input-group col-md-7">' + surveyor.firstName + " " + surveyor.lastName + '</div></div>';
             html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">SurveyorCV:</label>  <a class="col-md-7" data-model="dialog"  href="surveyor/info?id=' + surveyor.id + '" style="padding-top: 8px; vertical-align: middle">VIEW</a></div>';
         }
         html += "</div>";

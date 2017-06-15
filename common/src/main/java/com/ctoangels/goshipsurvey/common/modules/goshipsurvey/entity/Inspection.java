@@ -8,6 +8,9 @@ import com.baomidou.mybatisplus.annotations.IdType;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Comment;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Surveyor;
+import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
 import com.ctoangels.goshipsurvey.common.util.Const;
 
 /**
@@ -31,6 +34,9 @@ public class Inspection implements Serializable {
     @TableField(value = "surveyor_id")
     private Integer surveyorId;
 
+    @TableField(value = "company_id")
+    private Integer companyId;
+
     /**
      * 询价信息id
      */
@@ -45,45 +51,18 @@ public class Inspection implements Serializable {
     @TableField(value = "inspection_type")
     private String inspectionType;
 
-    /**  */
-    @TableField(value = "delivery_by")
-    private String deliveryBy;
-
-    /**  */
-    @TableField(value = "accepted_by")
-    private String acceptedBy;
-
-    /**  */
-    @TableField(value = "re_delivery_by")
-    private String reDeliveryBy;
-
-    /**  */
-    @TableField(value = "re_accepted_by")
-    private String reAcceptedBy;
-
-    private String charter;
-
-    private String owner;
-
-    /**  */
-    @TableField(value = "ship_particulars")
-    private String shipParticulars;
-
-    /**  */
-    @TableField(value = "ship_particulars_url")
-    private String shipParticularsUrl;
-
-    /**  */
-    @TableField(value = "blank_loi_url")
-    private String blankLoiUrl;
-
-    /**  */
-    @TableField(value = "port_agency")
-    private String portAgency;
 
     /**  */
     @TableField(value = "report_url")
     private String reportUrl;
+
+    /**  */
+    @TableField(value = "passport_url")
+    private String passportUrl;
+
+    /**  */
+    @TableField(value = "loi_url")
+    private String loiUrl;
 
     /**  */
     @TableField(value = "invoice_url")
@@ -134,6 +113,18 @@ public class Inspection implements Serializable {
     @TableField(exist = false)
     private String[] inspectionTypes;
 
+    @TableField(exist = false)
+    private User op;
+
+    @TableField(exist = false)
+    private User company;
+
+    @TableField(exist = false)
+    private Surveyor surveyor;
+
+    @TableField(exist = false)
+    private Comment comment;
+
 
     public Integer getId() {
         return this.id;
@@ -181,86 +172,6 @@ public class Inspection implements Serializable {
 
     public void setInspectionType(String inspectionType) {
         this.inspectionType = inspectionType;
-    }
-
-    public String getDeliveryBy() {
-        return this.deliveryBy;
-    }
-
-    public void setDeliveryBy(String deliveryBy) {
-        this.deliveryBy = deliveryBy;
-    }
-
-    public String getAcceptedBy() {
-        return this.acceptedBy;
-    }
-
-    public void setAcceptedBy(String acceptedBy) {
-        this.acceptedBy = acceptedBy;
-    }
-
-    public String getReDeliveryBy() {
-        return reDeliveryBy;
-    }
-
-    public void setReDeliveryBy(String reDeliveryBy) {
-        this.reDeliveryBy = reDeliveryBy;
-    }
-
-    public String getReAcceptedBy() {
-        return reAcceptedBy;
-    }
-
-    public void setReAcceptedBy(String reAcceptedBy) {
-        this.reAcceptedBy = reAcceptedBy;
-    }
-
-    public String getCharter() {
-        return charter;
-    }
-
-    public void setCharter(String charter) {
-        this.charter = charter;
-    }
-
-    public String getOwner() {
-        return owner;
-    }
-
-    public void setOwner(String owner) {
-        this.owner = owner;
-    }
-
-    public String getShipParticulars() {
-        return this.shipParticulars;
-    }
-
-    public void setShipParticulars(String shipParticulars) {
-        this.shipParticulars = shipParticulars;
-    }
-
-    public String getPortAgency() {
-        return this.portAgency;
-    }
-
-    public void setPortAgency(String portAgency) {
-        this.portAgency = portAgency;
-    }
-
-    public String getShipParticularsUrl() {
-        return shipParticularsUrl;
-    }
-
-    public void setShipParticularsUrl(String shipParticularsUrl) {
-        this.shipParticularsUrl = shipParticularsUrl;
-    }
-
-    public String getBlankLoiUrl() {
-        return blankLoiUrl;
-    }
-
-    public void setBlankLoiUrl(String blankLoiUrl) {
-        this.blankLoiUrl = blankLoiUrl;
     }
 
     public String getReportUrl() {
@@ -371,8 +282,64 @@ public class Inspection implements Serializable {
         return inspectionTypes;
     }
 
+    public Integer getCompanyId() {
+        return companyId;
+    }
+
+    public void setCompanyId(Integer companyId) {
+        this.companyId = companyId;
+    }
+
     public void setInspectionTypes(String[] inspectionTypes) {
         this.inspectionTypes = inspectionTypes;
+    }
+
+    public User getOp() {
+        return op;
+    }
+
+    public void setOp(User op) {
+        this.op = op;
+    }
+
+    public User getCompany() {
+        return company;
+    }
+
+    public void setCompany(User company) {
+        this.company = company;
+    }
+
+    public Surveyor getSurveyor() {
+        return surveyor;
+    }
+
+    public void setSurveyor(Surveyor surveyor) {
+        this.surveyor = surveyor;
+    }
+
+    public String getPassportUrl() {
+        return passportUrl;
+    }
+
+    public void setPassportUrl(String passportUrl) {
+        this.passportUrl = passportUrl;
+    }
+
+    public String getLoiUrl() {
+        return loiUrl;
+    }
+
+    public void setLoiUrl(String loiUrl) {
+        this.loiUrl = loiUrl;
+    }
+
+    public Comment getComment() {
+        return comment;
+    }
+
+    public void setComment(Comment comment) {
+        this.comment = comment;
     }
 
     public void setCreateInfo(String userName) {

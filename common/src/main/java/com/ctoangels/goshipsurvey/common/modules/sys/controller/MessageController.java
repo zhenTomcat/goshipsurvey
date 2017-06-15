@@ -36,27 +36,6 @@ public class MessageController extends BaseController {
 
     @RequestMapping(method = RequestMethod.GET)
     public String list(ModelMap map) {
-//        String name = getCurrentUser().getName();
-//        int id = getCurrentUser().getId();
-//        List<Message> list = new ArrayList<>();
-//        for (int i = 0; i < 25; i++) {
-//            Message message = new Message();
-//            message.setCreateInfo(name);
-//            message.setReceiver(id);
-//            message.setSender(id);
-//            message.setReadStatus(i % 2);
-//            message.setTitle("title" + i);
-//            message.setContent("content" + i);
-//            if (i % 4 == 0) {
-//                long a = new Date().getTime();
-//                int b = (int) a / 1000;
-//                message.setTopTime(b);
-//            } else {
-//                message.setTopTime(Const.MESSAGE_NOT_TOP);
-//            }
-//            list.add(message);
-//        }
-//        messageService.insertBatch(list);
         return "sys/message/list";
     }
 

@@ -12,9 +12,6 @@
                             http://www.springframework.org/schema/mvc
                             http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-    <task:annotation-driven/>
-
-
     <context:property-placeholder location="classpath:override.properties"/>
     <context:component-scan base-package="com.ctoangels.goshipsurvey.admin"/>
     <context:component-scan base-package="com.ctoangels.goshipsurvey.common">
@@ -36,13 +33,13 @@
 
     <!-- controller返回json -->
     <!--<bean class="org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerAdapter">-->
-        <!--<property name="messageConverters">-->
-            <!--<list>-->
-                <!--<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">-->
-                    <!--<property name="supportedMediaTypes" value="application/json"/>-->
-                <!--</bean>-->
-            <!--</list>-->
-        <!--</property>-->
+    <!--<property name="messageConverters">-->
+    <!--<list>-->
+    <!--<bean class="com.alibaba.fastjson.support.spring.FastJsonHttpMessageConverter">-->
+    <!--<property name="supportedMediaTypes" value="application/json"/>-->
+    <!--</bean>-->
+    <!--</list>-->
+    <!--</property>-->
     <!--</bean>-->
 
 

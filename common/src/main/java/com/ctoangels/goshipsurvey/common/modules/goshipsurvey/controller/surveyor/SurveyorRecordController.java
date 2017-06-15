@@ -43,20 +43,28 @@ public class SurveyorRecordController extends BaseController {
     @RequestMapping(value = "/list")
     @ResponseBody
     public JSONObject getList() {
-        EntityWrapper<Inspection> ew = getEntityWrapper();
-        ew.addFilter("surveyor_id={0} and inspection_status>={1}", getCurrentUser().getId(), Const.INSPECTION_SURVEYOR_COMPLETE);
-        ew.orderBy("update_date", false);
-        Page<Inspection> page = inspectionService.selectPage(getPage(), ew);
-        for (Inspection inspection : page.getRecords()) {
-            Quotation quotation = quotationService.selectById(inspection.getQuotationId());
-            quotation.setInspectionType(transferValuesToDes(quotation.getInspectionType(), getInspectionTypeDict()));
-            quotation.setShipType(transferValuesToDes(quotation.getShipType(), getShipTypeDict()));
-            inspection.setQuotation(quotation);
-            SurveyorInfo surveyorInfo = new SurveyorInfo();
-            surveyorInfo.setInspectionId(inspection.getId());
-            inspection.setSurveyorInfo(surveyorInfoService.selectOne(surveyorInfo));
+        int start = 0;
+        int length = 10;
+        if (request.getParameter(Const.START) != null) {
+            start = Integer.parseInt(request.getParameter(Const.START));
         }
-        return jsonPage(page);
+        if (request.getParameter(Const.LENGTH) != null) {
+            length = Integer.parseInt(request.getParameter(Const.LENGTH));
+        }
+        JSONObject jsonObject = new JSONObject();
+        List<Inspection> list = inspectionService.getCompanyRecordList(getCurrentUser().getId(), start, length);
+        for (Inspection i : list) {
+            Quotation q = i.getQuotation();
+            q.setInspectionType(transferValuesToDes(q.getInspectionType(), getInspectionTypeDict()));
+            q.setShipType(transferValuesToDes(q.getShipType(), getShipTypeDict()));
+            i.setQuotation(q);
+        }
+        jsonObject.put(Const.DRAW, request.getParameter(Const.DRAW));
+        int total = inspectionService.getRecordTotal(null, getCurrentUser().getId());
+        jsonObject.put(Const.RECORDSTOTAL, total);
+        jsonObject.put(Const.RECORDSFILTERED, total);
+        jsonObject.put(Const.NDATA, list);
+        return jsonObject;
     }
 
 }
