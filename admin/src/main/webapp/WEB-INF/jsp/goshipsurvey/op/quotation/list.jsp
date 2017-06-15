@@ -48,7 +48,7 @@
                                 <div class="portlet-body">
                                     <div class="tab-content">
                                         <div class="tab-pane fade active in" id="tab_1_1">
-                                            <table class="table  table-checkable table-bordered"
+                                            <table class="table  table-bordered"
                                                    id="quotation_table">
                                                 <thead>
                                                 <tr>
@@ -145,13 +145,17 @@
                     }
                 }
             ],
-            "drawCallback": function () {
-                var rows = $('#quotation_table').find("tbody tr");
-
-                rows.each(function (i, e) {
-                    var row = quotationTable.row($(this));
-                    $(this).after(moreInfo(row.data()));
-                })
+//            "drawCallback": function () {
+//                var rows = $('#quotation_table').find("tbody tr");
+//
+//                rows.each(function (i, e) {
+//                    var row = quotationTable.row($(this));
+//                    $(this).after(moreInfo(row.data()));
+//                })
+//            },
+            "fnCreatedRow": function (nRow, aData, iDataIndex) {
+                var row = quotationTable.row($(nRow));
+                row.child(moreInfo(aData)).show();
             }
         });
 
@@ -164,7 +168,7 @@
         var quotation = data;
         var applyList = data.applicationList;
         if (applyList != null && applyList.length > 0) {
-            html += '<tr class="application-outer-tr"><td colspan="7" style="padding: 0" class="application-outer-td"><table class="table" style="margin-bottom: 0">';
+            html += '<table class="table" style="margin-bottom: 0;width:100%">';
             for (var j = 0; j < applyList.length; j++) {
                 var application = applyList[j];
                 var user = application.user;
@@ -186,7 +190,7 @@
                 }
                 html += '</tr>';
             }
-            html += '</table></td></tr>';
+            html += '</table>';
         }
         return html;
     }

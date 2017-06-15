@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.*;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.*;
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
+import com.ctoangels.goshipsurvey.common.modules.sys.service.IMessageService;
 import com.ctoangels.goshipsurvey.common.util.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -56,6 +57,9 @@ public class InspectionReportController extends BaseController {
     @Autowired
     private IDocumentService documentService;
 
+    @Autowired
+    private IMessageService messageService;
+
 
     //获取InspectionReport的列表信息
     @RequestMapping(value = "/surveyor/report", method = RequestMethod.GET)
@@ -99,7 +103,6 @@ public class InspectionReportController extends BaseController {
             InspectionReport report = iInspectionReportService.selectById(reportId);
             report.setShipId(shipDetail.getId());
             iInspectionReportService.updateById(report);
-
             jsonObject.put("mes", true);
         } catch (Exception e) {
             jsonObject.put("mes", false);
@@ -300,8 +303,8 @@ public class InspectionReportController extends BaseController {
             PurchaseInspection inspection = purchaseInspectionService.selectByReportId(reportId);
             inspection.setSubmitStatus(Const.REPORT_SUBMIT);
             purchaseInspectionService.updateById(inspection);
-
             jsonObject.put("mes", true);
+            messageService.publicPreInspectionEnd(inspection.getId());
         } catch (Exception e) {
             jsonObject.put("mes", false);
             e.printStackTrace();

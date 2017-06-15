@@ -12,6 +12,7 @@ import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IDocumentSe
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IShipDetailService;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.ITechnicalAppendixService;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
+import com.ctoangels.goshipsurvey.common.modules.sys.service.IMessageService;
 import com.ctoangels.goshipsurvey.common.util.Const;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,6 +21,7 @@ import org.springframework.stereotype.Service;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IPurchaseInspectionService;
 import com.baomidou.framework.service.impl.SuperServiceImpl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -59,6 +61,9 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
     @Autowired
     CommentMapper commentMapper;
 
+    @Autowired
+    IMessageService messageService;
+
 
     @Override
     public List<PurchaseInspection> selectByInspection(Integer id) {
@@ -77,6 +82,7 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
         List<QuotationApplication> applicationList = quotationApplicationMapper.selectList(new EntityWrapper<>(quotationApplication));
         int companyId = 0;
         int surveyorId = 0;
+        List<Integer> failureIds = new ArrayList<>();
         double price = 0;
         for (QuotationApplication qa : applicationList) {
             if (qa.getId() == applicationId) {
@@ -86,6 +92,7 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
                 price = qa.getTotalPrice();
             } else {
                 qa.setApplicationStatus(Const.QUO_APPLY_FAILURE);
+                failureIds.add(qa.getUserId());
             }
         }
         if (quotationApplicationMapper.updateBatchById(applicationList) < 0) {
@@ -125,6 +132,13 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
         if (commentMapper.insert(comment) < 0) {
             return false;
         }
+
+        //发送信息
+        String shipName = shipDetailMapper.selectById(quotation.getShipId()).getShipName();
+        String content1 = shipName + "船买卖船勘验,船东已接受您的检验申请,请尽快上传护照及loi文件,并查看代理信息安排人员验船";
+        messageService.publicOne(companyId, content1, content1);
+        String content2 = shipName + "船买卖船勘验,验船申请失败";
+        messageService.publicSome(failureIds, content2, content2);
 
         //report
         InspectionReport report = new InspectionReport();

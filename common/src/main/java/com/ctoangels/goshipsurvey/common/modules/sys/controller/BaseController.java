@@ -9,6 +9,7 @@ import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Dict;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Quotation;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IDictService;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
+import com.ctoangels.goshipsurvey.common.modules.sys.service.IMessageService;
 import com.ctoangels.goshipsurvey.common.util.Const;
 import com.ctoangels.goshipsurvey.common.util.StringUtils;
 import org.apache.shiro.SecurityUtils;

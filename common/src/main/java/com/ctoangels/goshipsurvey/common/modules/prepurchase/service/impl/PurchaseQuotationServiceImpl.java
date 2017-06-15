@@ -5,6 +5,7 @@ import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.QuotationAp
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.ShipDetail;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.ShipDetailMapper;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
+import com.ctoangels.goshipsurvey.common.modules.sys.service.IMessageService;
 import com.ctoangels.goshipsurvey.common.util.Const;
 import com.ctoangels.goshipsurvey.common.util.DateUtil;
 import org.apache.shiro.SecurityUtils;
@@ -28,6 +29,8 @@ public class PurchaseQuotationServiceImpl extends SuperServiceImpl<PurchaseQuota
     private PurchaseQuotationMapper purchaseQuotationMapper;
     @Autowired
     private ShipDetailMapper shipDetailMapper;
+    @Autowired
+    private IMessageService messageService;
 
     @Override
     public boolean saveQuotationWithDetail(PurchaseQuotation quotation, ShipDetail detail) {
@@ -43,6 +46,8 @@ public class PurchaseQuotationServiceImpl extends SuperServiceImpl<PurchaseQuota
         if (purchaseQuotationMapper.insert(quotation) < 0) {
             return false;
         }
+        String title = "本区域内有可进行买卖船勘验船舶,请及时查看";
+        messageService.publicAll(title, title, Const.USER_TYPE_SURVEYOR_COMPANY);
         return true;
     }
 
