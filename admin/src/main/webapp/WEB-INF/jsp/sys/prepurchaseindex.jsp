@@ -71,6 +71,7 @@
 
     <%--handsontable的CSS--%>
     <link rel="stylesheet" media="screen" href="${ctx}/static/css/handsontable/handsontable.css">
+    <link rel="stylesheet" rel="stylesheet" href="${ctx}/static/css/float.css">
     <style>
         @media screen and (min-width: 992px) {
             .page-sidebar {

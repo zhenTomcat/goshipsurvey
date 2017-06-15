@@ -22,8 +22,7 @@
                 <center><div class="caption"><h3>Inspections</h3></div></center>
             </div>
             <div class="portlet-body">
-                <div class="table-scrollable">
-                    <table class="table table-striped table-bordered table-hover table-checkable order-column">
+                    <table class="table table-striped table-bordered table-hover table-checkable order-column" id="inspection_table">
                         <thead>
                         <tr>
                             <th> Ship name </th>
@@ -47,17 +46,12 @@
                                 <tr >
                                     <fmt:formatDate value="${i.purchaseQuotation.startDate}" pattern="dd/MM/yyyy" var="startDate"/>
                                     <fmt:formatDate value="${i.purchaseQuotation.endDate}" pattern="dd/MM/yyyy" var="endDate"/>
-                                    <td> ${i.shipDetail.shipName} </td>
-                                    <td> ${i.shipDetail.imo} </td>
-                                    <td> ${i.shipDetail.shipType} </td>
-                                    <td> ${i.purchaseQuotation.location} </td>
-                                    <td> ${startDate}-${endDate} </td>
                                     <td>
                                         <a data-model="dialog" href="surveyor/info?id=${i.surveyor.id}">${i.surveyor.firstName} ${i.surveyor.lastName}</a>/
                                         <a data-model="dialog" href="user/companyInfo?id=${i.companyId}">${i.op.name}</a>
                                     </td>
-                                    <td> <a download="${i.passport}" href="${i.passportUrl}">${i.passport}</a> </td>
-                                    <td> <a download="${i.loi}" href="${i.loiUrl}">${i.loi}</a> </td>
+                                    <td> < </td>
+                                    <td>  </td>
                                     <td> ${i.purchaseQuotation.totalPrice} </td>
                                     <td> ${i.companyGrade} </td>
                                     <td>
@@ -76,26 +70,107 @@
                         </c:if>
                         </tbody>
                     </table>
-                </div>
             </div>
         </div>
         <!-- END SAMPLE TABLE PORTLET-->
     </div>
 </div>
 <script>
-    //展开
-    function unfold(obj) {
+    var inspectionTable = null;
 
-        $(obj).closest("tr").next().show();
-        $(obj).closest("tr").css("background-color","yellow");
-        $(obj).parent().html('<a href="javascript:;" onclick="merge(this)">View</a>&nbsp;<li class="fa fa-sort-up"></li>');
-    }
+    $(document).ready(function () {
+        drawTable();
+    })
 
-    //合并
-    function merge(obj) {
-        $(obj).closest("tr").css("background-color","white");
-        $(obj).parent().parent().next().hide();
-        $(obj).parent().html('<a href="javascript:;" onclick="unfold(this)">View</a>&nbsp;<li class="fa fa-sort-desc"></li>');
+    function drawTable() {
+        inspectionTable = $('#inspection_table').DataTable({
+            "ordering": false,
+            "pagingType": "simple_numbers",
+            "processing": true,
+            "autoWidth": false,
+            "serverSide": true,
+            "ajax": {
+                "url": "prepurchase/op/inspection/list",
+                "type": "post",
+                "data": function (data) {
+                    data.keyword = $("#keyword").val();
+                }
+            },
+//            "language": {
+//                "url": "http://windyeel.oss-cn-shanghai.aliyuncs.com/global/plugins/datatables/cn.txt"
+//            },
+            "lengthMenu": [[5, 40, 60], [5, 40, 60]],
+            "columns": [
+                {
+                    "data": "shipDetail.shipName",
+                },
+                {
+                    "data": "shipDetail.imo",
+                },
+                {
+                    "data": "shipDetail.shipType",
+                },
+                {
+                    "data": "purchaseQuotation.location",
+                },
+                {
+                    "data": "startDate",
+                },
+                {
+                    "data": "",
+                },
+                {
+                    "data": "passport",
+                },
+                {
+                    "data": "loi",
+                },
+                {
+                    "data": "purchaseQuotation.totalPrice",
+                },
+                {
+                    "data": "companyGrade",
+                },
+                {
+                    "data": "",
+                }
+            ],
+            "columnDefs": [
+                {
+                    "targets": 4,
+                    "render": function (data, type, row) {
+                        var startDate = new Date(row.purchaseQuotation.startDate).Format("dd/MM/yyyy");
+                        var endDate = new Date(row.purchaseQuotation.endDate).Format("dd/MM/yyyy");
+                        return startDate + " - " + endDate;
+                    }
+                },{
+                    "targets": 5,
+                    "render": function (data, type, row) {
+                        var td='<a data-model="dialog" href="surveyor/info?id='+row.surveyor.id+'">'+row.surveyor.firstName+' '+row.surveyor.lastName+'</a>/';
+                           td+='<a data-model="dialog" href="user/companyInfo?id='+row.companyId+'">'+row.op.name+'</a>';
+                        return td;
+                    }
+                },{
+                    "targets": 6,
+                    "render": function (data, type, row) {
+                            return '<a download="'+row.passport+'" href="'+row.passportUrl+'">'+row.passport+'</a>';
+                    }
+                },{
+                    "targets": 7,
+                    "render": function (data, type, row) {
+                            return '<a download="'+row.loi+'" href="'+row.loiUrl+'">'+row.loi+'</a>';
+                    }
+                },{
+                    "targets": 10,
+                    "render": function (data, type, row) {
+                        if(row.submitStatus==1){
+                            return '<a data-target="navTab" href="/prepurchase/op/reportInfo?reportId='+row.inspectionReportId+'" >View</a> <li class="fa fa-link"></li>';
+                        }
+                        return "";
+                    }
+                }
+            ]
+        });
     }
 
 

@@ -10,11 +10,11 @@ import java.util.List;
  */
 public interface IPurchaseInspectionService extends ISuperService<PurchaseInspection> {
 
-    List<PurchaseInspection> selectByInspection(Integer id);
+    List<PurchaseInspection> selectByInspection(Integer id,Integer start, Integer length);
 
     boolean initInspection(int quotationId, int applicationId);
 
-    List<PurchaseInspection> selectByOpInspection(Integer id);
+    List<PurchaseInspection> selectByOpInspection(Integer id,Integer start,Integer length);
 
     PurchaseInspection selectByReportId(Integer reportId);
 
@@ -23,6 +23,10 @@ public interface IPurchaseInspectionService extends ISuperService<PurchaseInspec
     List<PurchaseInspection> getCompanyRecordList(Integer companyId, Integer start, Integer length);
 
     int getRecordTotal(Integer opId, Integer companyId);
+
+    Integer getInspectionCount(Integer id);
+
+    Integer getOpInspectionCount(Integer id);
 
 
 }

@@ -134,6 +134,12 @@
             alter table t_surveyor ADD past_evaluation DOUBLE DEFAULT NULL COMMENT '平均分';
         </sql>
     </changeSet>
+    <changeSet author="LuZhen" id="17317309132-009">
+        <sql>
+            alter table t_purchase_quotation modify column agency_detail text NULL;
+        </sql>
+    </changeSet>
+
 </databaseChangeLog>
 
 

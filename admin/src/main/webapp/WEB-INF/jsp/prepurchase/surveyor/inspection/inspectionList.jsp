@@ -25,8 +25,7 @@
                 <center><div class="caption"><h3>Inspections</h3></div></center>
             </div>
             <div class="portlet-body">
-                <div class="table-scrollable">
-                    <table class="table table-striped table-bordered table-hover table-checkable order-column">
+                <table class="table table-striped table-bordered table-hover table-checkable order-column" id="inspection_table">
                         <thead>
                         <tr>
                             <th> Public date </th>
@@ -40,207 +39,303 @@
                             <th> Surveyor </th>
                             <th> More details </th>
                             <th> Link to report </th>
-                            <th>Status</th>
                         </tr>
                         </thead>
                         <tbody>
-                        <c:if test="${! empty inspections}" var="a">
-                            <c:forEach items="${inspections}" var="i" varStatus="s">
-                                <tr >
-                                    <fmt:formatDate value="${i.purchaseQuotation.createDate}" pattern="dd/MM/yyyy" var="publicDate"/>
-                                    <fmt:formatDate value="${i.purchaseQuotation.startDate}" pattern="dd/MM/yyyy" var="startDate"/>
-                                    <fmt:formatDate value="${i.purchaseQuotation.endDate}" pattern="dd/MM/yyyy" var="endDate"/>
-                                    <td> ${publicDate} </td>
-                                    <td> ${i.shipDetail.shipName} </td>
-                                    <td> ${i.shipDetail.imo} </td>
-                                    <td> ${i.shipDetail.shipType} </td>
-                                    <td> ${i.purchaseQuotation.location} </td>
-                                    <td> ${startDate}-${endDate} </td>
-                                    <td> ${i.op.name} </td>
-                                    <td> ${i.purchaseQuotation.totalPrice} </td>
-                                    <td> ${i.surveyor.firstName} ${i.surveyor.lastName}</td>
-                                    <td>
-                                        <a href="javascript:;" onclick="unfold(this)">View</a>&nbsp;<li class="fa fa-sort-desc"/>
-                                     </td>
-                                    <td>
-                                        <c:if test="${i.submitStatus==1}">
-                                            <a data-target="navTab" href="/prepurchase/surveyor/reportEdit?inspectionId=${i.id}" >View</a> <li class="fa fa-link"></li>
-                                        </c:if>
-                                        <c:if test="${i.submitStatus==0}">
-                                            <a data-target="navTab" href="/prepurchase/surveyor/reportEdit?inspectionId=${i.id}" >Edit</a> <li class="fa fa-edit"></li>
-                                        </c:if>
-                                    </td>
-                                    <td>
-                                        <c:if test="${i.loi=='' || i.loi==null}">
-                                            <li class="fa fa-upload">&nbsp;
-                                        </c:if>
-                                    </td>
-                                </tr>
-                                <tr style="display: none">
-                                    <td colspan="12">
-                                        <div class="col-md-12" style="background-color: rgba(223, 222, 144, 0.58)">
-                                                <div class="col-md-3" >
-                                                    <div class="col-md-12">
-                                                        <label class="control-label label-top">Ship Name：</label>
-                                                        <label style="width: auto;padding-left: 0px;" class="control-label label-top">${i.shipDetail.shipName}</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label class="control-label">IMO：</label>
-                                                        <label class="control-label">${i.shipDetail.imo}</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label class="control-label">Type：</label>
-                                                        <label class="control-label">${i.shipDetail.type}</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label class="control-label">Class：</label>
-                                                        <label class="control-label">${i.shipDetail.shipClass}</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label class="control-label">Flag：</label>
-                                                        <label class="control-label">${i.shipDetail.flag}</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label class="control-label">Build Year：</label>
-                                                        <label class="control-label">${i.shipDetail.buildYear}</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label class="control-label">Builder：</label>
-                                                        <label class="control-label">${i.shipDetail.builder}</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <div class="col-md-12">
-                                                        <label class="control-label label-top">LOA(m)：</label>
-                                                        <label style="width: auto;padding-left: 0px;" class="control-label label-top">${i.shipDetail.loa}</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label class="control-label">Beam(m)：</label>
-                                                        <label class="control-label">${i.shipDetail.beam}</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label class="control-label">Dwt(ton)：</label>
-                                                        <label class="control-label">${i.shipDetail.dwt}</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label class="control-label">draft(m)：</label>
-                                                        <label class="control-label">${i.shipDetail.draft}</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label class="control-label">GT：</label>
-                                                        <label class="control-label">${i.shipDetail.ggt}</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label class="control-label">ex.Name：</label>
-                                                        <label class="control-label">${i.shipDetail.exName}</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label class="control-label">Call Sign：</label>
-                                                        <label class="control-label">${i.shipDetail.callSign}</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label class="control-label">LDT(ton)：</label>
-                                                        <label class="control-label">${i.shipDetail.ldt}</label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
-                                                    <div  class="col-md-6">
-                                                        <label class="control-label">Agency details:</label>
-                                                    </div>
-                                                    <div  class="col-md-12" style="margin-left: 10px">
-                                                        <label class="control-label">${i.purchaseQuotation.agencyDetail}</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label class="control-label">LOI：</label>
-                                                        <label class="control-label">
-                                                            <c:if test="${i.purchaseQuotation.loiUrl!=null && i.purchaseQuotation.loiUrl!=''}">
-                                                                <a download="download" class="btn btn-circle purple-sharp" href="${i.purchaseQuotation.loiUrl}">
-                                                                    <li class="fa fa-download"></li>
-                                                                    Download
-                                                                </a>
-                                                            </c:if>
+                        <tr style="display: none">
+                            <td colspan="12">
 
-                                                        </label>
-                                                    </div>
-                                                </div>
-                                                <div class="col-md-3">
-
-                                                    <div  class="col-md-9">
-                                                        <label class="control-label">Our price & surveyour:</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label class="control-label">Price：</label>
-                                                        <label class="control-label">${i.purchaseQuotation.totalPrice}</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label class="control-label">Surveyor：</label>
-                                                        <label class="control-label">${i.surveyor.firstName} ${i.surveyor.lastName}</label>
-                                                    </div>
-                                                    <div class="col-md-12">
-                                                        <label class="control-label">Surveyor CV：</label>
-                                                        <label class="control-label"><a data-model="dialog" href="surveyor/info?id=${i.surveyor.id}">View</a></label>
-                                                    </div>
-                                                    <form method="post" action="prepurchase/surveyor/saveLoiPassport" >
-                                                        <input type="hidden" value="${i.id}" name="id"/>
-                                                        <div class="col-md-12">
-                                                            <label class="control-label">Passport：</label>
-                                                            <label class="control-label passport"><a  href="${i.passportUrl}" target="_blank">${i.passport}</a></label>
-                                                            <label class="control-label">
-                                                                <c:if test="${i.loi==null || i.loi==''}">
-                                                                    <button id="passport_button${s.count}" type="button" class="btn btn-sm blue passport_button">
-                                                                        <li class="fa fa-upload"></li>Browse
-                                                                    </button>
-                                                                </c:if>
-                                                            </label>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <label class="control-label">LOI：</label>
-                                                            <label class="control-label loi"><a target="_blank" href="${i.loiUrl}">${i.loi}</a></label>
-                                                            <label class="control-label">
-                                                                <c:if test="${i.loi==null || i.loi==''}">
-                                                                    <button id="loi${s.count}"  type="button" class="btn btn-sm blue loi_button">
-                                                                        <li class="fa fa-upload"></li>Browse
-                                                                    </button>
-                                                                </c:if>
-                                                            </label>
-                                                        </div>
-                                                        <div class="col-md-12">
-                                                            <div style="float: right">
-                                                                <label class="control-label">
-                                                                    <c:if test="${i.loi==null || i.loi==''}">
-                                                                        <button type="button" class="btn green" onclick="submitLoiAndPassport(this)">Submit</button>
-                                                                    </c:if>
-                                                                </label>
-
-                                                            </div>
-                                                        </div>
-                                                    </form>
-                                                </div>
-                                        </div>
-                                    </td>
-                                </tr>
-                            </c:forEach>
-                        </c:if>
-                        <c:if test="${! a}" >
-                            <tr>
-                                <td colspan="11">没有任何报告</td>
-                            </tr>
-                        </c:if>
+                            </td>
+                        </tr>
                         </tbody>
                     </table>
-                </div>
             </div>
         </div>
         <!-- END SAMPLE TABLE PORTLET-->
     </div>
 </div>
 <script>
-    $(".loi_button").each(function () {
-        initUploaders_surveyor_loi($(this).attr("id"), "shipinfo", "${staticPath}/",$(this));
-    });
-    $(".passport_button").each(function () {
-        initUploaders_surveyor_passport($(this).attr("id"), "shipinfo", "${staticPath}/",$(this));
-    });
+    var inspectionTable = null;
+
+    $(document).ready(function () {
+        drawTable();
+    })
+
+    function drawTable() {
+        inspectionTable = $('#inspection_table').DataTable({
+            "ordering": false,
+            "pagingType": "simple_numbers",
+            "processing": true,
+            "autoWidth": false,
+            "serverSide": true,
+
+            "ajax": {
+                "url": "prepurchase/surveyor/inspection/list",
+                "type": "post",
+                "data": function (data) {
+                    data.keyword = $("#keyword").val();
+                }
+            },
+//            "language": {
+//                "url": "http://windyeel.oss-cn-shanghai.aliyuncs.com/global/plugins/datatables/cn.txt"
+//            },
+            "lengthMenu": [[5, 40, 60], [5, 40, 60]],
+            "columns": [
+                {
+                    "data": "createDate",
+                },
+                {
+                    "data": "shipDetail.shipName",
+                },
+                {
+                    "data": "shipDetail.imo",
+                },
+                {
+                    "data": "shipDetail.shipType",
+                },
+                {
+                    "data": "purchaseQuotation.location",
+                },
+                {
+                    "data": "startDate",
+                },
+                {
+                    "data": "op.name",
+                },
+                {
+                    "data": "purchaseQuotation.totalPrice",
+                },
+                {
+                    "data": "surveyor.firstName",
+                },
+                {
+                    "data": "",
+                },
+                {
+                    "data": "",
+                },
+            ],
+            "columnDefs": [
+                    {
+                    "targets": 0,
+                    "render": function (data, type, row) {
+                        var publicDate = new Date(row.createDate).Format("dd/MM/yyyy");
+                        return publicDate;
+                    }
+                },{
+                    "targets": 5,
+                    "render": function (data, type, row) {
+                        var startDate = new Date(row.purchaseQuotation.startDate).Format("dd/MM/yyyy");
+                        var endDate = new Date(row.purchaseQuotation.endDate).Format("dd/MM/yyyy");
+                        return startDate + " - " + endDate;
+                    }
+                },{
+                    "targets": 8,
+                    "render": function (data, type, row) {
+                        return row.surveyor.firstName + " " + row.surveyor.lastName;
+                    }
+                },{
+                    "targets": 9,
+                    "render": function (data, type, row) {
+                        return '<a href="javascript:;" onclick="unfold(this)">View</a>&nbsp;<li class="fa fa-sort-desc"/>';
+                    }
+                },{
+                "targets": 10,
+                "render": function (data, type, row) {
+                    var status = row.submitStatus;
+                    if (status == 1) {
+                        return '<a data-target="navTab" href="/prepurchase/surveyor/reportEdit?inspectionId='+row.id+'" >View</a> <li class="fa fa-link"></li>';
+                    }
+                    if (status == 0) {
+                        return '<a data-target="navTab" href="/prepurchase/surveyor/reportEdit?inspectionId='+row.id+'" >Edit</a> <li class="fa fa-edit"></li>';
+                    }
+                    return ""
+                }
+                }
+            ],
+            "fnDrawCallback": function (settings, json) {
+                var count =0;
+                var rows = $('#inspection_table').find("tbody tr");
+                rows.each(function (i, e) {
+                    count++;
+                    var row = inspectionTable.row($(this));
+                    $(this).after(moreInfo(row.data(),count))
+                })
+            },
+            "initComplete": function () {
+                $(".loi_button").each(function () {
+                    initUploaders_surveyor_loi($(this).attr("id"), "shipinfo", "${staticPath}/",$(this));
+                });
+                $(".passport_button").each(function () {
+                    initUploaders_surveyor_passport($(this).attr("id"), "shipinfo", "${staticPath}/",$(this));
+                });
+            },
+            "oLanguage": { //国际化配置  
+                "sProcessing" : "正在获取数据，请稍后...",
+                "sLengthMenu" : "显示 _MENU_ 条",
+                "sZeroRecords" : "没有您要搜索的内容",
+                "sInfo" : "从 _START_ 到  _END_ 条记录 总记录数为 _TOTAL_ 条",
+                "sInfoEmpty" : "记录数为0",
+                "sInfoFiltered" : "(全部记录数 _MAX_ item)",
+                "sInfoPostFix" : "",
+                "sSearch" : "搜索",
+                "sUrl" : "",
+                "oPaginate": {
+                    "sFirst" : "第一页",
+                    "sPrevious" : "上一页",
+                    "sNext" : "下一页",
+                    "sLast" : "最后一页"
+                }
+            },
+        });
+    }
+    function moreInfo(data,count) {
+        var html='<tr style="display:none "><td colspan="11">';
+        html += ' <div class="col-md-12" style="background-color: rgba(223, 222, 144, 0.58)">';
+        html += '<div class="col-md-3" >';
+        html += '<div class="col-md-12">';
+        html += '<label class="control-label label-top">Ship Name：</label>';
+        html += '<label style="width: auto;padding-left: 0px;" class="control-label label-top">'+data.shipDetail.shipName+'</label>';
+        html += '</div>';
+        html += '<div class="col-md-12">';
+        html += '<label class="control-label">IMO：</label>';
+        html += '<label class="control-label">'+data.shipDetail.imo+'</label>';
+        html += '</div>';
+        html += '<div class="col-md-12">';
+        html += '<label class="control-label">Type：</label>';
+        html += '<label class="control-label">'+data.shipDetail.type+'</label>';
+        html += '</div>';
+        html += '<div class="col-md-12">';
+        html += '<label class="control-label">Class：</label>';
+        html += '<label class="control-label">'+data.shipDetail.shipClass+'</label>';
+        html += '</div>';
+        html += '<div class="col-md-12">';
+        html += '<label class="control-label">Flag：</label>';
+        html += '<label class="control-label">'+data.shipDetail.flag+'</label>';
+        html += '</div>';
+        html += '<div class="col-md-12">';
+        html += '<label class="control-label">Build Year：</label>';
+        html += '<label class="control-label">'+data.shipDetail.buildYear+'</label>';
+        html += '</div>';
+        html += '<div class="col-md-12">';
+        html += '<label class="control-label">Builder：</label>';
+        html += '<label class="control-label">'+data.shipDetail.builder+'</label>';
+        html += '</div>';
+        html += '</div>';
+        html += '<div class="col-md-3">';
+        html += '<div class="col-md-12">';
+        html += '<label class="control-label label-top">LOA(m)：</label>';
+        html += '<label style="width: auto;padding-left: 0px;" class="control-label label-top">'+data.shipDetail.loa+'</label>';
+        html += '</div>';
+        html += '<div class="col-md-12">';
+        html += '<label class="control-label">Beam(m)：</label>';
+        html += '<label class="control-label">'+data.shipDetail.beam+'</label>';
+        html += '</div>';
+        html += '<div class="col-md-12">';
+        html += '<label class="control-label">Dwt(ton)：</label>';
+        html += '<label class="control-label">'+data.shipDetail.dwt+'</label>';
+        html += '</div>';
+        html += '<div class="col-md-12">';
+        html += '<label class="control-label">draft(m)：</label>';
+        html += '<label class="control-label">'+data.shipDetail.draft+'</label>';
+        html += '</div>';
+        html += '<div class="col-md-12">';
+        html += '<label class="control-label">GT：</label>';
+        html += '<label class="control-label">'+data.shipDetail.ggt+'</label>';
+        html += '</div>';
+        html += '<div class="col-md-12">';
+        html += '<label class="control-label">ex.Name：</label>';
+        html += '<label class="control-label">'+data.shipDetail.exName+'</label>';
+        html += '</div>';
+        html += '<div class="col-md-12">';
+        html += '<label class="control-label">Call Sign：</label>';
+        html += '<label class="control-label">'+data.shipDetail.callSign+'</label>';
+        html += '</div>';
+        html += '<div class="col-md-12">';
+        html += '<label class="control-label">LDT(ton)：</label>';
+        html += '<label class="control-label">'+data.shipDetail.ldt+'</label>';
+        html += '</div>';
+        html += '</div>';
+        html += '<div class="col-md-3">';
+        html += '<div  class="col-md-6">';
+        html += '<label class="control-label">Agency details:</label>';
+        html += '</div>';
+        html += '<div  class="col-md-12" style="margin-left: 10px">';
+        html += '<label class="control-label">'+data.purchaseQuotation.agencyDetail+'</label>';
+        html += '</div>';
+        html += '<div class="col-md-12">';
+        html += '<label class="control-label">LOI：</label>';
+        html += '<label class="control-label">';
+        if(data.purchaseQuotation.loiUrl!=null && data.purchaseQuotation.loiUrl!=""){
+            html +=  '<a download="download" class="btn btn-circle purple-sharp" href="'+data.purchaseQuotation.loiUrl+'">';
+            html += '<li class="fa fa-download"></li>Download</a>';
+        }
+
+        html += '</label>';
+        html += '</div>';
+        html += '</div>';
+        html += '<div class="col-md-3">';
+
+        html +='<div  class="col-md-9">';
+        html += '<label class="control-label">Our price & surveyour:</label>';
+        html += '</div>';
+        html += '<div class="col-md-12">';
+        html += '<label class="control-label">Price：</label>';
+        html += '<label class="control-label">'+data.purchaseQuotation.totalPrice+'</label>';
+        html += '</div>';
+        html += '<div class="col-md-12">';
+        html += '<label class="control-label">Surveyor：</label>';
+        html += '<label class="control-label">'+data.surveyor.firstName +''+data.surveyor.lastName+'</label>';
+        html += '</div>';
+        html += '<div class="col-md-12">';
+        html += '<label class="control-label">Surveyor CV：</label>';
+        html += '<label class="control-label"><a data-model="dialog" href="surveyor/info?id='+data.surveyor.id+'">View</a></label>';
+        html += '</div>';
+        html += '<form method="post" action="prepurchase/surveyor/saveLoiPassport" >';
+        html += '<input type="hidden" value="'+data.id+'" name="id"/>';
+        html += '<div class="col-md-12">';
+        html += '<label class="control-label">Passport：</label>';
+        html += '<label class="control-label passport"><a  href="'+data.passportUrl+'" target="_blank">'+data.passport+'</a></label>';
+        html += '<label class="control-label">';
+        if(data.loi==null || data.loi==''){
+            html += '<button id="passport_button'+count+'" type="button" class="btn btn-sm blue passport_button">';
+            html += '<li class="fa fa-upload"></li>Browse';
+            html += '</button>';
+        }
+
+        html += '</label>';
+        html += '</div>';
+        html += '<div class="col-md-12">';
+        html += '<label class="control-label">LOI：</label>';
+        html += '<label class="control-label loi"><a target="_blank" href="'+data.loiUrl+'">'+data.loi+'</a></label>';
+        html += '<label class="control-label">';
+        if(data.loi==null || data.loi==''){
+            html +=  '<button id="loi'+count+'"  type="button" class="btn btn-sm blue loi_button">';
+            html +=  '<li class="fa fa-upload"></li>Browse';
+            html +=  '</button>';
+        }
+        html +=     '</label>';
+        html +=     '</div>';
+        html +=     '<div class="col-md-12">';
+        html +=     '<div style="float: right">';
+        html +=     '<label class="control-label">';
+        if(data.loi==null || data.loi=='') {
+
+            html += '<button type="button" class="btn green" onclick="submitLoiAndPassport(this)">Submit</button>';
+        }
+        html += '</label>';
+        html += '</div>';
+        html += '</div>';
+        html += '</form>';
+        html += '</div>';
+        html += '</div></td></tr>';
+
+        return html;
+    }
+
+
+</script>
+<script>
 
     //展开
     function unfold(obj,loi) {
@@ -256,9 +351,6 @@
         $(obj).parent().parent().next().hide();
         $(obj).parent().html('<a href="javascript:;" onclick="unfold(this)">View</a>&nbsp;<li class="fa fa-sort-desc"></li>');
     }
-
-
-
 
     function submitLoiAndPassport(obj) {
         if(check(obj)){

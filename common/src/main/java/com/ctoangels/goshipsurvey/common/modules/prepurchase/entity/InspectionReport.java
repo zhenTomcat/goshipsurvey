@@ -76,6 +76,9 @@ public class InspectionReport implements Serializable {
 	@TableField(exist = false)
 	private List<Document> documents;
 
+	@TableField(exist = false)
+	private List<Grade> grades;
+
 	public Integer getId() {
 		return this.id;
 	}
@@ -195,5 +198,13 @@ public class InspectionReport implements Serializable {
 
 	public void setDocuments(List<Document> documents) {
 		this.documents = documents;
+	}
+
+	public List<Grade> getGrades() {
+		return grades;
+	}
+
+	public void setGrades(List<Grade> grades) {
+		this.grades = grades;
 	}
 }

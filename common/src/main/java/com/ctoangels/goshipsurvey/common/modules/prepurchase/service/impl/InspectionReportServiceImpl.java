@@ -1,7 +1,10 @@
 package com.ctoangels.goshipsurvey.common.modules.prepurchase.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Dict;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IDictService;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Defect;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.PurchaseInspection;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.DefectMapper;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IDefectService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,9 +32,16 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
     @Autowired
     private IDefectService defectService;
 
+    @Autowired
+    private IDictService dictService;
+
     @Override
     public InspectionReport selectByPurchaseInspectionId(Integer purchaseInspectionId) {
         InspectionReport report=inspectionReportMapper.selectByPurchaseInspectionId(purchaseInspectionId);
+
+        List<Dict> shipTypeDict = dictService.getListByType("shipType");
+
+        report.getShipDetail().setShipType(shipTypeDict.get(Integer.parseInt(report.getShipDetail().getShipType())-1).getDes());
         return report;
     }
 

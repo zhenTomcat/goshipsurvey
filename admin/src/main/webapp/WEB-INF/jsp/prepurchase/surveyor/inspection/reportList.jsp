@@ -22,8 +22,7 @@
                 <center><div class="caption"><h3>Reports</h3></div></center>
             </div>
             <div class="portlet-body">
-                <div class="table-scrollable">
-                    <table class="table table-striped table-bordered table-hover table-checkable order-column">
+                    <table class="table table-striped table-bordered table-hover table-checkable order-column" id="report_table">
                         <thead>
                         <tr>
                             <th> Public date </th>
@@ -41,50 +40,108 @@
                         </tr>
                         </thead>
                         <tbody>
-                            <c:if test="${! empty inspections}" var="a">
-                                <c:forEach items="${inspections}" var="i">
-                                    <tr >
-                                        <fmt:formatDate value="${i.purchaseQuotation.createDate}" pattern="dd/MM/yyyy" var="publicDate"/>
-                                        <fmt:formatDate value="${i.purchaseQuotation.startDate}" pattern="dd/MM/yyyy" var="startDate"/>
-                                        <fmt:formatDate value="${i.purchaseQuotation.endDate}" pattern="dd/MM/yyyy" var="endDate"/>
-                                        <td> ${publicDate} </td>
-                                        <td> ${i.shipDetail.shipName} </td>
-                                        <td> ${i.shipDetail.imo} </td>
-                                        <td> ${i.shipDetail.shipType} </td>
-                                        <td> ${i.purchaseQuotation.location} </td>
-                                        <td> ${startDate}-${endDate} </td>
-                                        <td> ${i.op.name} </td>
-                                        <td> ${i.purchaseQuotation.totalPrice} </td>
-                                        <td> ${i.surveyor.firstName} ${i.surveyor.lastName}</td>
-                                        <td> ${i.opGrade} </td>
-
-                                        <td>
-                                            <c:if test="${i.submitStatus==0}">
-                                                <a data-target="navTab" href="/prepurchase/surveyor/reportEdit?inspectionId=${i.id}" >Edit</a> <li class="fa fa-edit"></li>
-                                            </c:if>
-                                            <c:if test="${i.submitStatus==1}">
-                                                <a data-target="navTab" href="/prepurchase/surveyor/reportEdit?inspectionId=${i.id}" >view</a> <li class="fa fa-link"></li>
-                                            </c:if>
-
-                                        </td>
-                                    </tr>
-                                </c:forEach>
-                            </c:if>
-                        <c:if test="${! a}" >
-                            <tr>
-                                <td colspan="11">没有任何报告</td>
-                            </tr>
-                        </c:if>
                         </tbody>
                     </table>
-                </div>
             </div>
         </div>
         <!-- END SAMPLE TABLE PORTLET-->
     </div>
 </div>
 <script>
+    var reportTable = null;
 
+    $(document).ready(function () {
+        drawTable();
+    })
+
+    function drawTable() {
+        reportTable = $('#report_table').DataTable({
+            "ordering": false,
+            "pagingType": "simple_numbers",
+            "processing": true,
+            "autoWidth": false,
+            "serverSide": true,
+            "ajax": {
+                "url": "prepurchase/op/inspection/list",
+                "type": "post",
+                "data": function (data) {
+                    data.keyword = $("#keyword").val();
+                }
+            },
+//            "language": {
+//                "url": "http://windyeel.oss-cn-shanghai.aliyuncs.com/global/plugins/datatables/cn.txt"
+//            },
+            "lengthMenu": [[5, 40, 60], [5, 40, 60]],
+            "columns": [
+                {
+                    "data": "createDate",
+                },
+                {
+                    "data": "shipDetail.shipName",
+                },
+                {
+                    "data": "shipDetail.imo",
+                },
+                {
+                    "data": "shipDetail.shipType",
+                },
+                {
+                    "data": "purchaseQuotation.location",
+                },
+                {
+                    "data": "startDate",
+                },
+                {
+                    "data": "op.name",
+                },
+                {
+                    "data": "purchaseQuotation.totalPrice",
+                },
+                {
+                    "data": "surveyor.firstName",
+                },
+                {
+                    "data": "opGrade",
+                },
+                {
+                    "data": "",
+                },
+            ],
+            "columnDefs": [
+                {
+                    "targets": 0,
+                    "render": function (data, type, row) {
+                        var createDate = new Date(row.createDate).Format("dd/MM/yyyy");
+                        return createDate;
+                    }
+                },
+                {
+                    "targets": 5,
+                    "render": function (data, type, row) {
+                        var startDate = new Date(row.purchaseQuotation.startDate).Format("dd/MM/yyyy");
+                        var endDate = new Date(row.purchaseQuotation.endDate).Format("dd/MM/yyyy");
+                        return startDate + " - " + endDate;
+                    }
+                },{
+                    "targets": 8,
+                    "render": function (data, type, row) {
+                        return row.surveyor.firstName + " " + row.surveyor.lastName;
+                    }
+                },{
+                    "targets": 10,
+                    "render": function (data, type, row) {
+                        if(row.submitStatus==1){
+                            return '<a data-target="navTab" href="/prepurchase/surveyor/reportEdit?inspectionId='+row.id+'" >View</a> <li class="fa fa-link"></li>';
+                        }
+                        if(row.submitStatus==0){
+                            return '<a data-target="navTab" href="/prepurchase/surveyor/reportEdit?inspectionId='+row.id+'" >Edit</a> <li class="fa fa-edit"></li></li>';
+                        }
+                        return "";
+                    }
+                }
+            ]
+        });
+    }
 
 
 </script>

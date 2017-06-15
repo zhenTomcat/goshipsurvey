@@ -85,7 +85,7 @@
     </div>
 </div>
 <script>
-    var quotationTable = $("#quotation_table");
+    var quotationTable = null;
     $(document).ready(function () {
         drawTable();
     })

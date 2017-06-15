@@ -11,9 +11,9 @@ import java.util.List;
  */
 public interface PurchaseInspectionMapper extends AutoMapper<PurchaseInspection> {
 
-    List<PurchaseInspection> selectByInspection(Integer id);
+    List<PurchaseInspection> selectByInspection(Integer id,Integer start , Integer length);
 
-    List<PurchaseInspection> selectByOpInspection(Integer id);
+    List<PurchaseInspection> selectByOpInspection(Integer id,Integer start, Integer length);
 
     PurchaseInspection selectByReportId(Integer reportId);
     List<PurchaseInspection> getRecord(@Param(value = "opId") Integer opId,
