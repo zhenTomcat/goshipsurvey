@@ -122,9 +122,9 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-md-8">
-                                <label class="control-label col-sm-3">Inspection date(LMT)</label>
-                                <div class="col-sm-9" style="padding-left: 7.5px">
+                            <div class="form-group col-md-6">
+                                <label class="control-label col-sm-4">Inspection date(LMT)</label>
+                                <div class="col-sm-8" style="padding-left: 7.5px">
                                     <div class="input-group input-large date-picker input-daterange">
                                         <input type="text" class="form-control " name="startDate">
                                         <span class="input-group-addon"> to </span>
@@ -133,7 +133,44 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12" style="border-top: 1px solid #e5e5e5;padding-top: 10px">
+                        <div class="form-group col-md-12">
+                            <label class="control-label col-sm-3">Current quantity of bunkers from ship</label>
+                            <div class="col-sm-3">
+                                <input name="currentQuantity" type="text"
+                                       class="form-control ">
+                            </div>
+                            <div class="col-sm-4">
+                                <button type="button" style="margin-left: 10px" id="currentQuantity-btn"
+                                        title="A photo about current quantity"
+                                        class="col-sm-4 btn btn-sm blue ship-particulars-btn">
+                                    <i class="fa fa-upload"></i>
+                                    upload
+                                </button>
+                                <div class="col-sm-7 btn-group upload-file-div" style="display: none">
+                                    <input class="form-control ship-particulars-url-input"
+                                           data-loi="true"
+                                           name="currentQuantityUrl"
+                                           type="hidden"/>
+                                    <a class="btn btn-sm green"
+                                       target="_blank"
+                                       href=";">View</a>
+                                    <span class="input-group-btn">
+                                        <button class="btn red btn-sm" type="button" title="delete"
+                                                onclick="delFileAndInput(this)">
+                                            <i class="fa fa-ban"></i></button>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-sm-4 control-label">Bonus plan</label>
+                            <div class="form-group col-sm-8">
+                                        <textarea class="form-control"
+                                                  name="bonusPlan"
+                                                  style="height:100px;resize: none;width: 94%;margin-left: 2%"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12" style="border-top: 1px solid #e5e5e5;padding-top: 10px;">
                             <div class="col-md-8">
                                 <div class="form-group col-md-12">
                                     <label class="col-sm-3 control-label">On hire</label>
@@ -272,6 +309,7 @@
 
     initUploaders_loi_without_sign_and_ship_particulars("particulars-btn", "shipinfo", "${staticPath}/");
     initUploaders_loi_without_sign_and_ship_particulars("loi-btn", "shipinfo", "${staticPath}/");
+    initUploaders_quotation_oil_photo("currentQuantity-btn", "shipinfo", "${staticPath}/");
 
     function severCheck() {
         if (check()) {

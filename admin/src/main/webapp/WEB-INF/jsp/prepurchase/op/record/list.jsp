@@ -315,7 +315,10 @@
                 var rows = $('#inspection_table').find("tbody tr");
                 rows.each(function (i, e) {
                     var row = inspectionTable.row($(this));
-                    row.child(moreInfo(row.data())).show();
+                    var data=row.data();
+                    if(data!=null){
+                        row.child(moreInfo(data)).show();
+                    }
                 })
             }
         });

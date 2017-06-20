@@ -48,6 +48,10 @@
                                 <a href="logout">
                                     <i class="icon-key"></i> Exit </a>
                             </li>
+                            <li>
+                                <a href="prepurchaseindex">
+                                    <i class="fa fa-ship"></i> pre-purchase link </a>
+                            </li>
                         </ul>
                     </li>
                 </ul>

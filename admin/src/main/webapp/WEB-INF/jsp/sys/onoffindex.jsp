@@ -79,7 +79,7 @@
 </head>
 <body onhashchange="hashChange()" class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
 <%--<body onhashchange="hashChange()"--%>
-      <%--class="page-header-fixed page-sidebar-closed-hide-logo page-content-white page-full-width">--%>
+<%--class="page-header-fixed page-sidebar-closed-hide-logo page-content-white page-full-width">--%>
 
 
 <jsp:include page="include/header.jsp"></jsp:include>
@@ -182,7 +182,7 @@
 <script>
 
     $(document).ready(function () {
-        intPage();
+        initPage();
     });
 
     function nofind(type) {
@@ -198,18 +198,18 @@
         }
     }
 
-    function intPage() {
-        var userType = $("#index-user-type").val();
-        var url = "";
-        if (userType == 2 || userType == 3) {
-            url = "surveyor/record";
+    function initPage() {
+        var url1 = "op/record";
+        var url2 = "surveyor/record";
+        var a = $("a[href='" + url1 + "']");
+        if (a.length > 0) {
+            a.click();
         } else {
-            url = "op/record";
+            $("a[href='" + url2 + "']").click();
         }
-        $("a[href='" + url + "']").click();
     }
     function hashChange() {
-        intPage();
+        initPage();
     }
 
     var selectedSpan = "<span class='selected'></span>";

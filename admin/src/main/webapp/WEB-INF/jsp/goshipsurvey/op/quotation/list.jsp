@@ -145,18 +145,16 @@
                     }
                 }
             ],
-//            "drawCallback": function () {
-//                var rows = $('#quotation_table').find("tbody tr");
-//
-//                rows.each(function (i, e) {
-//                    var row = quotationTable.row($(this));
-//                    $(this).after(moreInfo(row.data()));
-//                })
-//            },
-            "fnCreatedRow": function (nRow, aData, iDataIndex) {
-                var row = quotationTable.row($(nRow));
-                row.child(moreInfo(aData)).show();
-            }
+            "drawCallback": function () {
+                var rows = $('#quotation_table').find("tbody tr");
+                rows.each(function (i, e) {
+                    var row = quotationTable.row($(this));
+                    var data = row.data();
+                    if (data != null) {
+                        $(this).after(moreInfo(data));
+                    }
+                })
+            },
         });
 
 
@@ -168,7 +166,7 @@
         var quotation = data;
         var applyList = data.applicationList;
         if (applyList != null && applyList.length > 0) {
-            html += '<table class="table" style="margin-bottom: 0;width:100%">';
+            html += '<tr class="application-outer-tr"><td colspan="7" style="padding: 0" class="application-outer-td"><table class="table" style="margin-bottom: 0;width:100%">';
             for (var j = 0; j < applyList.length; j++) {
                 var application = applyList[j];
                 var user = application.user;
@@ -190,7 +188,7 @@
                 }
                 html += '</tr>';
             }
-            html += '</table>';
+            html += '</table></td></tr>';
         }
         return html;
     }

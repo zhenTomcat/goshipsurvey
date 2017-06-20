@@ -83,7 +83,6 @@ public class MessageServiceImpl extends SuperServiceImpl<MessageMapper, Message>
     public void publicSome(List<Integer> ids, String title, String content) {
         Tools.loggerThreadId("publicSome");
         logger.info("publicMessage" + Thread.currentThread().getId());
-        System.out.println();
         if (ids != null && ids.size() > 0) {
             User u = (User) SecurityUtils.getSubject().getPrincipal();
             Integer sender = u.getId();

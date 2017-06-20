@@ -80,6 +80,10 @@
                                 <a href="logout">
                                     <i class="icon-key"></i> Exit </a>
                             </li>
+                            <li>
+                                <a href="onoffindex">
+                                    <i class="fa fa-ship"></i> on-off link </a>
+                            </li>
                         </ul>
                     </li>
                 </ul>

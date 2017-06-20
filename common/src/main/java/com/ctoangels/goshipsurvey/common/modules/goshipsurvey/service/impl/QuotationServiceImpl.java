@@ -113,7 +113,7 @@ public class QuotationServiceImpl extends SuperServiceImpl<QuotationMapper, Quot
     @Override
     public int getSurveyorTotal() {
         EntityWrapper<Quotation> ew = new EntityWrapper();
-        ew.addFilter("end_date>={0}", DateUtil.formatDate(new Date(), "yyyy-MM-dd"));
+        ew.addFilter("end_date>={0} and quotation_status != 0", DateUtil.formatDate(new Date(), "yyyy-MM-dd"));
         return quotationMapper.selectCountByEw(ew);
     }
 

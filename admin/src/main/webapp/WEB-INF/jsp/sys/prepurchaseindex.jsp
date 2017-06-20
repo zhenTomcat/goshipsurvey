@@ -59,7 +59,7 @@
     <!-- BEGIN THEME LAYOUT STYLES -->
     <link href="${ctx}/assets/layouts/layout/css/layout.min.css" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/assets/layouts/layout/css/themes/${style.des}.min.css" rel="stylesheet" type="text/css"
-    id="style_color"/>
+          id="style_color"/>
 
     <link href="${ctx}/assets/pages/css/profile.min.css" rel="stylesheet" type="text/css"/>
     <link href="${ctx}/static/css/custom.css" rel="stylesheet" type="text/css"/>
@@ -84,7 +84,7 @@
       class="page-header-fixed page-sidebar-closed-hide-logo page-content-white page-full-width">
 
 
-<jsp:include page="include/header.jsp"></jsp:include>
+<%--<jsp:include page="include/header.jsp"></jsp:include>--%>
 <div class="clearfix"></div>
 <div class="page-container">
     <jsp:include page="include/hor-menu.jsp"></jsp:include>
@@ -192,7 +192,7 @@
 <script>
 
     $(document).ready(function () {
-        intPage();
+        initPage();
     });
 
     function nofind(type) {
@@ -208,18 +208,18 @@
         }
     }
 
-    function intPage() {
-        var userType = $("#index-user-type").val();
-        var url = "";
-        if (userType == 2 || userType == 3) {
-            url = "surveyor/record";
+    function initPage() {
+        var url1 = "prepurchase/op/record";
+        var url2 = "prepurchase/surveyor/record";
+        var a = $("a[href='" + url1 + "']");
+        if (a.length > 0) {
+            a.click();
         } else {
-            url = "op/record";
+            $("a[href='" + url2 + "']").click();
         }
-        $("a[href='" + url + "']").click();
     }
     function hashChange() {
-        intPage();
+        initPage();
     }
 
     var selectedSpan = "<span class='selected'></span>";

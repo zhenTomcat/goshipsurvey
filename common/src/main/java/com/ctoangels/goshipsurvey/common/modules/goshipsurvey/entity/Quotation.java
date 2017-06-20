@@ -82,6 +82,24 @@ public class Quotation implements Serializable {
     private Date endDate;
 
     /**
+     * 当前油量
+     */
+    @TableField(value = "current_quantity")
+    private String currentQuantity;
+
+    /**
+     * 油量相关照片
+     */
+    @TableField(value = "current_quantity_url")
+    private String currentQuantityUrl;
+
+    /**
+     * 奖励方案
+     */
+    @TableField(value = "bonus_plan")
+    private String bonusPlan;
+
+    /**
      * 价格
      */
     @TableField(value = "total_price")
@@ -426,5 +444,29 @@ public class Quotation implements Serializable {
 
     public void setPortAgency(String portAgency) {
         this.portAgency = portAgency;
+    }
+
+    public String getCurrentQuantity() {
+        return currentQuantity;
+    }
+
+    public void setCurrentQuantity(String currentQuantity) {
+        this.currentQuantity = currentQuantity;
+    }
+
+    public String getCurrentQuantityUrl() {
+        return currentQuantityUrl;
+    }
+
+    public void setCurrentQuantityUrl(String currentQuantityUrl) {
+        this.currentQuantityUrl = currentQuantityUrl;
+    }
+
+    public String getBonusPlan() {
+        return bonusPlan;
+    }
+
+    public void setBonusPlan(String bonusPlan) {
+        this.bonusPlan = bonusPlan;
     }
 }
