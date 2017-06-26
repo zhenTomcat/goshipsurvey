@@ -235,13 +235,13 @@
             });
             function formatRepo(repo) {
                 if (repo.loading) return repo.text;
-                var markup = repo.portEn + "," + repo.countryCode;
+                var markup = repo.portEn + "," + repo.countryCode
 
                 return markup;
             }
 
             function formatRepoSelection(repo) {
-                return repo.text;
+                return repo.portEn + "," + repo.countryCode || repo.text;
             }
 
             $(".js-data-example-ajax").select2({

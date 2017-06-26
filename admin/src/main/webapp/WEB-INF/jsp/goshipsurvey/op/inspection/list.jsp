@@ -120,7 +120,12 @@
                 {
                     "data": "inspectionStatus",
                     "render": function (data) {
-                        return data;
+                        if (data < 6) {
+                            return "船检中";
+                        } else {
+                            return "船检结束";
+                        }
+
                     }
                 },
                 {

@@ -135,7 +135,7 @@
                 "render": function (data, type, row) {
                     var application = row.application;
                     var quoStatus = row.quotationStatus;
-                    if (application != null && quoStatus != 2) {
+                    if (application != null && quoStatus != 3) {
                         var status = application.applicationStatus;
                         if (status == 0) {
                             return "<button type='button' class='btn yellow' >Applying</button>";

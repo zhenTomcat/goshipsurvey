@@ -113,6 +113,7 @@ public class Const {
     //project type
     public static final Integer PROJECT_TYPE_HIRE = 1;
     public static final Integer PROJECT_TYPE_PURCHASE = 2;
+    public static final Integer PROJECT_MENU_NOT_SHOW = 3;
 
     //消息是否已阅读
     public static final Integer MESSAGE_UNREAD = 0;

@@ -22,12 +22,14 @@
                         <div class="col-md-6">
                             <div class="btn-group">
                                 <shiro:hasPermission name="right/addMenu">
-                                    <button data-url="right/addMenu?parentId=${menu.id}" data-model="dialog" class="btn btn-outline btn-circle btn-sm green"> 新增
+                                    <button data-url="right/addMenu?parentId=${menu.id}" data-model="dialog"
+                                            class="btn btn-outline btn-circle btn-sm green"> 新增
                                         <i class="fa fa-plus"></i>
                                     </button>
                                 </shiro:hasPermission>
                                 <shiro:hasPermission name="right/batchDeleteMenu">
-                                    <button data-url="right/batchDeleteMenu" data-msg="确定批量删除吗？" data-model="ajaxToDo" class="btn btn-outline btn-circle btn-sm green"
+                                    <button data-url="right/batchDeleteMenu" data-msg="确定批量删除吗？" data-model="ajaxToDo"
+                                            class="btn btn-outline btn-circle btn-sm green"
                                             data-checkbox-name="chx_default" data-callback="refreshTable">批量删除
                                         <i class="fa fa-times"></i>
                                     </button>
@@ -42,8 +44,8 @@
                        id="default_table">
                     <thead>
                     <tr>
-                        <th width="10px" >
-                           <input type='checkbox' id="defaultCheck"/>
+                        <th width="10px">
+                            <input type='checkbox' id="defaultCheck"/>
                         </th>
 
                         <th>名称</th>

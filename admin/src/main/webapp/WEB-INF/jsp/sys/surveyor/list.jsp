@@ -74,7 +74,7 @@
 <h1 style="text-align: center;background-color: #3598dc;color: white;margin-top: 0">Surveyor management</h1>
 <div class="row">
     <div class="col-md-12">
-        <form class="form-horizontal" action="op/quotation/add" method="post" id="quotation-add-form">
+        <form class="form-horizontal">
             <div class="form-group col-md-3">
                 <label class="col-md-6 control-label head-set">Surveyor name</label>
                 <div class="col-md-6">

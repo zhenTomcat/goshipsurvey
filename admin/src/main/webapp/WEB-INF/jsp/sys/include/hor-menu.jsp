@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -64,10 +65,12 @@
                                 <a href="message" data-target='navTab'>
                                     <i class="fa fa-comment"></i>Message </a>
                             </li>
-                            <li>
-                                <a href="surveyor" data-target='navTab'>
-                                    <i class="fa fa-users"></i>Surveyor management </a>
-                            </li>
+                            <shiro:hasPermission name="surveyor/list">
+                                <li>
+                                    <a href="surveyor" data-target='navTab'>
+                                        <i class="fa fa-users"></i>Surveyor management </a>
+                                </li>
+                            </shiro:hasPermission>
                             <li>
                                 <a href="user/companyEdit" data-target='navTab'>
                                     <i class="fa fa-user"></i>My profile </a>

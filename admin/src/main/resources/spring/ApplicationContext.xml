@@ -73,6 +73,7 @@
                 /message/** = user
                 /user/unauthorized = anon
                 /user/editPwd = anon
+                /comment/editComment =user
                 /test=anon
                 /test/** = user
                 /surveyor/account/personalInfo=user
