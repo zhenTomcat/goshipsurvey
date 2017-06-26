@@ -8,20 +8,20 @@
 	</sql>
 
     <select id="getBySurveyorId" resultMap="QuotationApplicationMap" parameterType="java.util.Map">
-        SELECT qa.* FROM t_quotation_application qa WHERE qa.user_id =#{surveyor_id} and qa.quotation_id=#{quotation_id} and qa.type=#{type}
+        SELECT qa.* FROM t_quotation_application qa WHERE qa.user_id =#{surveyor_id} and qa.quotation_id=#{quotation_id} and qa.type=#{type} and del_flag=0
     </select>
 
     <resultMap id="QuotationApplicationMap" type="QuotationApplication">
         <result property="id" column="id"></result>
         <association property="surveyor" column="survey_id"
-                     select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.SurveyorMapper.getById"></association>
+                     select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.SurveyorMapper.getById"/>
         <association property="user" column="user_id"
-                     select="com.ctoangels.goshipsurvey.common.modules.sys.mapper.UserMapper.getById"></association>
+                     select="com.ctoangels.goshipsurvey.common.modules.sys.mapper.UserMapper.getById"/>
     </resultMap>
 
 
     <select id="getApplications" resultMap="QuotationApplicationMap">
-        SELECT qa.* FROM t_quotation_application qa WHERE qa.type=#{proType} and qa.quotation_id=#{quotationId}
+        SELECT qa.* FROM t_quotation_application qa WHERE qa.type=#{proType} and qa.quotation_id=#{quotationId} and qa.del_flag=0
     </select>
 
     <select id="getSuccessApplication" resultMap="QuotationApplicationMap">

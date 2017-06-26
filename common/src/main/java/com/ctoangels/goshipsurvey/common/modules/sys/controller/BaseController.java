@@ -71,6 +71,8 @@ public class BaseController {
 
     private List<Dict> shipTypeDict = null;
 
+    private List<Dict> surveyTypeDict = null;
+
 
     @Autowired
     protected ServletContext application;
@@ -178,6 +180,13 @@ public class BaseController {
             shipTypeDict = dictService.getListByType("shipType");
         }
         return this.shipTypeDict;
+    }
+
+    public List<Dict> getSurveyTypeDict() {
+        if (surveyTypeDict == null) {
+            surveyTypeDict = dictService.getListByType("surveyType");
+        }
+        return this.surveyTypeDict;
     }
 
     /**

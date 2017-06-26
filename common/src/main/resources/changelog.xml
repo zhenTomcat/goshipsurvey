@@ -185,6 +185,13 @@
             alter table t_quotation ADD bonus_plan text DEFAULT NULL;
         </sql>
     </changeSet>
+    <changeSet author="WangShun" id="15950097942-015">
+        <sql>
+            alter table t_surveyor ADD survey_type varchar(20) DEFAULT NULL COMMENT '能够船检的类型';
+            insert INTO t_dict(type,value,des,del_flag) VALUES('surveyType',1,'On-off hire + Condition',0);
+            insert INTO t_dict(type,value,des,del_flag) VALUES('surveyType',2,'Pre-purchase',0);
+        </sql>
+    </changeSet>
 </databaseChangeLog>
 
 

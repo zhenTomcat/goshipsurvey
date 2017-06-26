@@ -83,6 +83,18 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-md-12">
+                                            <label>Type of survey</label>
+                                            <div class="mt-checkbox-inline">
+                                                <c:forEach items="${surveyType}" var="type">
+                                                    <label class="mt-checkbox col-sm-5">
+                                                        <input type="checkbox" value="${type.value}" name="surveyType">
+                                                            ${type.des}
+                                                        <span></span>
+                                                    </label>
+                                                </c:forEach>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-12">
                                             <label class=" control-label">Available survey port</label>
                                             <div>
                                                 <select id="select2-button-addons-single-input-group-sm"

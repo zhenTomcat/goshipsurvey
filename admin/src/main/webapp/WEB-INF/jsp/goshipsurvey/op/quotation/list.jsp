@@ -38,7 +38,7 @@
                                     <shiro:hasPermission name="op/quotation/add">
                                         <div class="col-md-4">
                                             <div class="btn-group">
-                                                <a href="#form_modal2" data-toggle="modal"
+                                                <a href="#add_quotation_form" data-toggle="modal"
                                                    class="btn blue"><i class="fa fa-plus"></i> New quotation
                                                 </a>
                                             </div>
@@ -57,8 +57,9 @@
                                                     <th width="10%">Ship type</th>
                                                     <th width="15%">Inspection type</th>
                                                     <th width="15%">Inspection port</th>
-                                                    <th width="25%">Inspection date(LMT)</th>
+                                                    <th width="15%">Inspection date(LMT)</th>
                                                     <th width="10%">Status</th>
+                                                    <th width="10%">Trash</th>
                                                 </tr>
                                                 <tbody></tbody>
                                                 </thead>
@@ -121,6 +122,12 @@
                 },
                 {
                     "data": "quotationStatus",
+                },
+                {
+                    "data": "id",
+                    "render": function (data) {
+                        return '<a href="op/quotation/deleteById?id=' + data + '" class="btn red btn-sm" type="button" data-msg="确定删除吗？" data-model="ajaxToDo" data-callback="drawTable()"><i class="fa fa-trash"></i></a>';
+                    }
                 },
             ],
             "columnDefs": [

@@ -247,7 +247,7 @@
                     </c:if>
                     <c:if test="${empty sessionScope.sessionUser}">
                         <li>
-                            <a href="login_toLogin?pro=1">login</a>
+                            <a href="login_toLogin?pro=2">login</a>
                         </li>
                         <li class="topbar-devider"></li>
                         <li>

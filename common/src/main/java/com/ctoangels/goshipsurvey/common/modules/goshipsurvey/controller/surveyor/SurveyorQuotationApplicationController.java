@@ -45,7 +45,6 @@ public class SurveyorQuotationApplicationController extends BaseController {
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject add(QuotationApplication qa) {
-        Tools.loggerThreadId("add application");
         JSONObject jsonObject = new JSONObject();
         qa.setUserId(getCurrentUser().getId());
         qa.setCreateInfo(getCurrentUser().getName());
@@ -55,6 +54,22 @@ public class SurveyorQuotationApplicationController extends BaseController {
             messageService.addApplicationMessage(qa.getId());
         } else {
             jsonObject.put("success", false);
+        }
+        return jsonObject;
+    }
+
+    @RequestMapping(value = "/cancel")
+    @ResponseBody
+    public JSONObject cancel(@RequestParam(required = false) Integer id) {
+        JSONObject jsonObject = new JSONObject();
+        QuotationApplication qa = new QuotationApplication();
+        qa.setId(id);
+        qa.setDelFlag(Const.DEL_FLAG_DELETE);
+        qa.setUpdateInfo(getCurrentUser().getName());
+        if (quotationApplicationService.updateSelectiveById(qa)) {
+            jsonObject.put("status", 1);
+        } else {
+            jsonObject.put("status", 0);
         }
         return jsonObject;
     }

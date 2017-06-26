@@ -52,10 +52,19 @@
                         <div class="col-md-12">
                             <div class="portlet light">
                                 <div class="portlet-title">
-                                    <div class="caption">
+                                    <div class="caption col-md-8">
                                         <i class="icon-social-dribbble font-blue-soft"></i>
                                         <span class="caption-subject font-blue-soft bold uppercase">My record</span>
                                     </div>
+                                    <shiro:hasPermission name="op/quotation/add">
+                                        <div class="col-md-4">
+                                            <div class="btn-group">
+                                                <a href="#add_quotation_form" data-toggle="modal"
+                                                   class="btn blue"><i class="fa fa-plus"></i> New quotation
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </shiro:hasPermission>
                                 </div>
                                 <div class="portlet-body">
                                     <ul class="nav nav-tabs">
@@ -89,15 +98,16 @@
                                                    id="inspection_table">
                                                 <thead>
                                                 <tr>
-                                                    <th style="width: 15%">Ship name</th>
+                                                    <th style="width: 10%">Ship name</th>
                                                     <th style="width: 10%">imo</th>
                                                     <th style="width: 10%">Ship type</th>
-                                                    <th style="width: 15%">Inspection type</th>
-                                                    <th style="width: 15%">Inspection port</th>
-                                                    <th style="width: 15%">Inspection date(LMT)</th>
+                                                    <th style="width: 10%">Inspection type</th>
+                                                    <th style="width: 10%">Inspection port</th>
+                                                    <th style="width: 10%">Inspection date(LMT)</th>
                                                     <th style="width: 10%">Total price</th>
                                                     <th style="width: 10%">Surveyors/Company</th>
                                                     <th style="width: 10%">Inspection report</th>
+                                                    <th style="width: 10%">Comment</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -298,6 +308,13 @@
                         return "<a class='btn btn-sm green' target='_blank' href='" + data + "'>VIEW</a>";
                     }
                 },
+                {
+                    "data": "",
+                    "class": "comment-detail",
+                    "render": function (data) {
+                        return '<a href="javascript:void(0)">COMMENT</a>';
+                    }
+                },
             ],
             "columnDefs": [
                 {
@@ -322,12 +339,23 @@
 //                    row.child(moreInfo(row.data())).show();
 //                })
 //            },
-            "fnCreatedRow": function (nRow, aData, iDataIndex) {
-                var row = inspectionTable.row($(nRow));
-                row.child(moreInfo(aData)).show();
+//            "fnCreatedRow": function (nRow, aData, iDataIndex) {
+//                var row = inspectionTable.row($(nRow));
+//                row.child(moreInfo(aData)).show();
+//            }
+        });
+        inspectionTable.on('click', 'td.comment-detail', function () {
+            var tr = $(this).closest('tr');
+            var row = inspectionTable.row(tr);
+            var flag = tr.attr("data-not-first");
+            if (flag) {
+                tr.next().toggle();
+            } else {
+                row.child(moreInfo(row.data())).show();
+                tr.next().addClass("detail-row");
+                tr.attr("data-not-first", true);
             }
         });
-
     }
 
 
@@ -421,3 +449,4 @@
         })
     }
 </script>
+<jsp:include page="../quotation/add.jsp"/>

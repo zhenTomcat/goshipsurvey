@@ -48,6 +48,13 @@
                                         <i class="icon-social-dribbble font-blue-soft"></i>
                                         <span class="caption-subject font-blue-soft bold uppercase">Scheduled inspections</span>
                                     </div>
+                                    <div class="col-md-4">
+                                        <div class="btn-group" style="float: right">
+                                            <a href="surveyor/inspection" data-target="navTab" style="float: right"
+                                               class="btn blue"><i class="fa fa-angle-left"></i> Back
+                                            </a>
+                                        </div>
+                                    </div>
                                     <c:set value="${inspection.quotation}" var="quotation"></c:set>
                                     <c:set value="${inspection.surveyor}" var="surveyor"></c:set>
                                     <c:set value="${inspection.company}" var="company"></c:set>

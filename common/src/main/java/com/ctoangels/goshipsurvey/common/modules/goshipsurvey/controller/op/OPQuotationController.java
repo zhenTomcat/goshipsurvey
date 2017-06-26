@@ -107,4 +107,19 @@ public class OPQuotationController extends BaseController {
         return jsonObject;
     }
 
+    @RequestMapping(value = "/deleteById")
+    @ResponseBody
+    public JSONObject deleteById(@RequestParam(required = false) Integer id) {
+        Quotation q = new Quotation();
+        q.setId(id);
+        q.setDelFlag(Const.DEL_FLAG_DELETE);
+        JSONObject jsonObject = new JSONObject();
+        if (quotationService.updateSelectiveById(q)) {
+            jsonObject.put("status", 1);
+        } else {
+            jsonObject.put("status", 0);
+        }
+        return jsonObject;
+    }
+
 }

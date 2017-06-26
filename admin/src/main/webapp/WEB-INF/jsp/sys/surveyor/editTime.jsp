@@ -1,7 +1,8 @@
+<%@ page import="java.util.Date" %>
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
+<% Date today = new Date(); %>
 <form id="editTimeForm" class="form-horizontal" method="post" action="surveyor/editTimeComplete" role="form">
     <div id="time_modal" class="modal fade" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
@@ -20,9 +21,11 @@
                         <div class="form-group col-md-12">
                             <input type="hidden" id="edit-time-id" name="id" value="${param.id}">
                             <div class="input-group input-large date-picker input-daterange">
-                                <input type="text" class="form-control required edit-time-input" name="surveyTimeStart">
+                                <input type="text" class="form-control required edit-time-input" name="surveyTimeStart"
+                                       value="<fmt:formatDate value="<%=today%>" pattern="yyyy-MM-dd"/>">
                                 <span class="input-group-addon"> to </span>
-                                <input type="text" class="form-control required edit-time-input" name="surveyTimeEnd">
+                                <input type="text" class="form-control required edit-time-input" name="surveyTimeEnd"
+                                       value="<fmt:formatDate value="<%=today%>" pattern="yyyy-MM-dd"/>">
                             </div>
                         </div>
                     </div>
@@ -55,7 +58,7 @@
         if (check()) {
             $("#editTimeForm").ajaxSubmit({
                 complete: function () {
-                    $("#close-btn").click();
+                    $("#editTimeForm #close-btn").click();
                     refreshTable();
                 }
             })

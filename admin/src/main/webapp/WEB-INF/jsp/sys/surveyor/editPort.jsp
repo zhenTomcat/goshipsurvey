@@ -45,7 +45,7 @@
         if (check()) {
             $("#editPortForm").ajaxSubmit({
                 complete: function () {
-                    $("#close-btn").click();
+                    $("#editPortForm #close-btn").click();
                     refreshTable();
                 }
             })

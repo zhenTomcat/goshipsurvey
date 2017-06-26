@@ -98,6 +98,22 @@
                                             </div>
                                         </div>
                                         <div class="form-group col-md-12">
+                                            <label>Type of survey</label>
+                                            <div class="mt-checkbox-inline">
+                                                <c:forEach items="${surveyType}" var="type">
+                                                    <label class="mt-checkbox col-sm-5">
+                                                        <input type="checkbox" value="${type.value}" name="surveyType"
+                                                        <c:forEach items="${userSurveyTypes}" var="userSurveyType">
+                                                               <c:if test="${userSurveyTypes==type.value}">checked</c:if>
+                                                        </c:forEach>
+                                                        >
+                                                            ${type.des}
+                                                        <span></span>
+                                                    </label>
+                                                </c:forEach>
+                                            </div>
+                                        </div>
+                                        <div class="form-group col-md-12">
                                             <label class=" control-label">Available survey port</label>
                                             <div>
                                                 <select id="select2-button-addons-single-input-group-sm"
@@ -134,10 +150,10 @@
                                                 <c:forEach items="${experienceList}" var="e">
                                                     <tr>
                                                         <td><input type="text" class="date-picker form-control"
-                                                                   value="<fmt:formatDate value="${e.startDate}" pattern="yyyy-MM-dd"></fmt:formatDate>"
+                                                                   value="<fmt:formatDate value="${e.startDate}" pattern="yyyy-MM-dd"/>"
                                                                    style="width:45%;display: inline-block">
                                                             to
-                                                            <input value="<fmt:formatDate value="${e.endDate}" pattern="yyyy-MM-dd"></fmt:formatDate>"
+                                                            <input value="<fmt:formatDate value="${e.endDate}" pattern="yyyy-MM-dd"/>"
                                                                    type="text" class="form-control date-picker"
                                                                    style="width:45%;display: inline-block"></td>
                                                         <td><input value="${e.shipType}" type="text"
@@ -241,7 +257,7 @@
             }
 
             function formatRepoSelection(repo) {
-                return repo.portEn + "," + repo.countryCode || repo.text;
+                return repo.text || repo.portEn + "," + repo.countryCode;
             }
 
             $(".js-data-example-ajax").select2({

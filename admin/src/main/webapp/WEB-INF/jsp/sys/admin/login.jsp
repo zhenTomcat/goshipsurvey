@@ -94,6 +94,8 @@
 <div class="copyright"><fmt:message key="login_since_year"/> &copy; <a href="http://a.goshipyard.com/"><fmt:message
         key="sys.site.title"/></a> <fmt:message key="login_copyrights_reserved"/></div>
 
+<input type="hidden" id="proType" value="${param.pro}">
+
 <script src="${global}/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <script src="${global}/plugins/backstretch/jquery.backstretch.min.js" type="text/javascript"></script>
 </body>
@@ -136,7 +138,16 @@
 
                     if ("success" == data.result) {
                         saveCookie();
-                        window.location.href = document.referrer;
+                        var proType = $("#proType").val();
+                        if (proType == 1) {
+                            window.location.href = "onoffindex";
+                        }
+                        else if (proType == 2) {
+                            window.location.href = "prepurchaseindex";
+                        } else {
+                            window.location.href = "";
+                        }
+
                     } else if ("user error" == data.result) {
                         $("#loginName").tips({
                             side: 1,

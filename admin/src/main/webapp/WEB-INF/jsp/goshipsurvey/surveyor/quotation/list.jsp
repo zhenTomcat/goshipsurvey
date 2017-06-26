@@ -39,10 +39,10 @@
                                                 <th width="9%">Inspection port</th>
                                                 <th width="9%">Inspection date(LMT)</th>
                                                 <th width="9%">Consignor</th>
-                                                <th width="9%">Price</th>
+                                                <th width="7%">Price</th>
                                                 <th width="9%">Surveyor</th>
-                                                <th width="9%">Apply</th>
-                                                <th width="9%">More detail</th>
+                                                <th width="14%">Apply</th>
+                                                <th width="7%">More detail</th>
                                             </tr>
                                             <tbody></tbody>
                                             </thead>
@@ -74,6 +74,7 @@
             "processing": true,
             "autoWidth": false,
             "serverSide": true,
+            "destroy": true,
             "ajax": {
                 "url": "surveyor/quotation/list",
                 "type": "post",
@@ -112,6 +113,9 @@
                 },
                 {
                     "data": "application.totalPrice",
+                    "render": function (data) {
+                        return "$" + (data || "");
+                    }
                 },
                 {
                     "data": "application.surveyor",
@@ -138,7 +142,17 @@
                     if (application != null && quoStatus != 3) {
                         var status = application.applicationStatus;
                         if (status == 0) {
-                            return "<button type='button' class='btn yellow' >Applying</button>";
+                            var html =
+                                    '<div class=" btn-group upload-file-div">' +
+                                    '<a class="btn btn-sm yellow">Applying</a>' +
+                                    '<span class="input-group-btn">' +
+                                    '<a class="btn red btn-sm" title="cancel" href="surveyor/quotationApplication/cancel?id=' + application.id + '" data-msg="确定取消吗？" data-model="ajaxToDo" data-callback="drawTable()"> ' +
+                                    '<i class="fa fa-ban"></i>' +
+                                    '</a>' +
+                                    '</span>' +
+                                    '</div>';
+                            return html;
+//                            return "<button type='button' class='btn yellow' >Applying</button>";
                         }
                         if (status == 1) {
                             return "<button type='button' class='btn green' >Success</button>";
@@ -232,14 +246,14 @@
         html += '<div class="col-md-3">';
         html += '<label class="col-md-12 text-left">Our price & surveyor:</label>';
         if (application == null) {
-            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5">Price:</label> <div class="input-group col-md-7"> <input type="text" class="form-control price-input"> </div></div>';
+            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5">Price:</label> <div class="input-group input-icon col-md-7"><i class="fa fa-dollar"></i> <input type="text" class="form-control price-input"> </div></div>';
             html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">Surveyor:</label> <div class="input-group col-md-7"> ';
             html += surveyorSelectHtml;
             html += ' </div></div>';
             html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">SurveyorCV:</label>  <a class="col-md-3" href="javascript:void(0)" onclick="goToViewSurveyor(this)"  style="padding-top: 8px; vertical-align: middle">VIEW</a></div>';
         } else {
             var surveyor = application.surveyor;
-            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5">Price:</label> <div class="input-group col-md-7"> ' + application.totalPrice + '</div></div>';
+            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5">Price:$</label> <div class="input-group col-md-7"> ' + application.totalPrice + '</div></div>';
             html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">Surveyor:</label> <div class="input-group col-md-7">' + surveyor.firstName + " " + surveyor.lastName + '</div></div>';
             html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">SurveyorCV:</label>  <a class="col-md-7" data-model="dialog"  href="surveyor/info?id=' + surveyor.id + '" style="padding-top: 8px; vertical-align: middle">VIEW</a></div>';
         }
