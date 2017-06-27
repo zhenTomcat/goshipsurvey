@@ -56,8 +56,8 @@
                 <div class="col-sm-7">
                     <select class="form-control" id="proType" name="proType">
                         <option value="1" <c:if test="${menu.proType==1}">selected</c:if>>on off</option>
-                        <option value="2" <c:if test="${menu.proType==2}">selected</c:if>>pre-purchase
-                        </option>
+                        <option value="2" <c:if test="${menu.proType==2}">selected</c:if>>pre-purchase</option>
+                        <option value="3" <c:if test="${menu.proType==3}">selected</c:if>>菜单栏不显示</option>
                     </select>
                 </div>
             </div>

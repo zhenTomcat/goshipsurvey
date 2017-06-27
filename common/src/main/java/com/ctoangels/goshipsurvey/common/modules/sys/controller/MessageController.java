@@ -3,9 +3,7 @@ package com.ctoangels.goshipsurvey.common.modules.sys.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Surveyor;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.Message;
-import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.IMessageService;
 import com.ctoangels.goshipsurvey.common.util.Const;
 import com.ctoangels.goshipsurvey.common.util.DateUtil;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -32,7 +29,6 @@ public class MessageController extends BaseController {
 
     @Autowired
     IMessageService messageService;
-
 
     @RequestMapping(method = RequestMethod.GET)
     public String list(ModelMap map) {
@@ -61,6 +57,7 @@ public class MessageController extends BaseController {
         }
         ew.orderBy("top_time", false);
         ew.orderBy("create_date", false);
+        ew.orderBy("id", false);
         Page<Message> page = messageService.selectPage(getPage(), ew);
         return jsonPage(page);
     }

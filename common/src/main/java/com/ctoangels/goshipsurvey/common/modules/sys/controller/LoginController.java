@@ -381,8 +381,12 @@ public class LoginController extends BaseController {
 
             // 添加菜单权限信息（含分类菜单）
             List<Menu> menus = loginService.getRightsParentMenus(sysUser.getId(), proType);
+
+            List<Menu> menus2 = loginService.getRightsParentMenus(sysUser.getId(), Const.PROJECT_MENU_NOT_SHOW);
+
+            menus2.addAll(menus);
             // menuList.addAll(menus);
-            for (Menu menu : menus) {
+            for (Menu menu : menus2) {
                 allRightsUrls.add(menu.getMenuUrl());
 
                 Map<String, Integer> params = new HashMap<>();

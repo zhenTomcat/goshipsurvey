@@ -40,7 +40,7 @@
                                     <div class="tab-content">
                                         <div class="tab-pane fade active in" id="tab_1_1">
                                             <table class="table  table-checkable table-bordered"
-                                                   id="inspection_table">
+                                                   id="onoff_surveyor_inspection_table">
                                                 <thead>
                                                 <tr>
                                                     <th width="10%">Ship name</th>
@@ -69,18 +69,19 @@
     </div>
 </div>
 <script>
-    var inspectionTable = $("#inspection_table");
+    var inspectionTable = $("#onoff_surveyor_inspection_table");
     $(document).ready(function () {
         drawTable();
     })
 
     function drawTable() {
-        inspectionTable = $('#inspection_table').DataTable({
+        inspectionTable = $('#onoff_surveyor_inspection_table').DataTable({
             "ordering": false,
             "pagingType": "simple_numbers",
             "processing": true,
             "autoWidth": false,
             "serverSide": true,
+            'bStateSave': true,
             "ajax": {
                 "url": "surveyor/inspection/list",
                 "type": "get",
@@ -120,7 +121,10 @@
                 {
                     "data": "inspectionStatus",
                     "render": function (data) {
-                        return data;
+                        if (data == 6) {
+                            return "船检完成";
+                        }
+                        return "船检中";
                     }
                 },
                 {

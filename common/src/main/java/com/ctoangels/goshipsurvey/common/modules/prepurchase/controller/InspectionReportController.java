@@ -7,6 +7,7 @@ import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IDictServi
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.*;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.*;
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
+import com.ctoangels.goshipsurvey.common.modules.sys.service.IMessageService;
 import com.ctoangels.goshipsurvey.common.util.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -70,6 +71,9 @@ public class InspectionReportController extends BaseController {
     private IDocumentService documentService;
 
     @Autowired
+    private IMessageService messageService;
+
+    @Autowired
     private IGradeModelService gradeModelService;
 
     @Autowired
@@ -94,8 +98,8 @@ public class InspectionReportController extends BaseController {
     @RequestMapping(value = "/surveyor/report/list")
     @ResponseBody
     public JSONObject reportList(ModelMap modelMap) {
-        JSONObject jsonObject=new JSONObject();
-        int id=getCurrentUser().getId();
+        JSONObject jsonObject = new JSONObject();
+        int id = getCurrentUser().getId();
 
         int start = 0;
         int length = 10;
@@ -105,9 +109,9 @@ public class InspectionReportController extends BaseController {
         if (request.getParameter(Const.LENGTH) != null) {
             length = Integer.parseInt(request.getParameter(Const.LENGTH));
         }
-        List<PurchaseInspection> inspections=purchaseInspectionService.selectByInspection(id,start, length);
+        List<PurchaseInspection> inspections = purchaseInspectionService.selectByInspection(id, start, length);
 
-        Integer total=purchaseInspectionService.getInspectionCount(id);
+        Integer total = purchaseInspectionService.getInspectionCount(id);
 
         jsonObject.put(Const.DRAW, request.getParameter(Const.DRAW));
         jsonObject.put(Const.RECORDSTOTAL, total);
@@ -135,6 +139,8 @@ public class InspectionReportController extends BaseController {
 
         modelMap.put("totalGrade",purchaseInspection.getTotalGrade());
         modelMap.put("dicts", dicts);
+
+        modelMap.put("totalGrade", purchaseInspection.getTotalGrade());
         modelMap.put("hullGrades", hullGrades);
         modelMap.put("machineGrades", machineGrades);
         modelMap.put("report", inspectionReport);
@@ -158,7 +164,6 @@ public class InspectionReportController extends BaseController {
             InspectionReport report = iInspectionReportService.selectById(reportId);
             report.setShipId(shipDetail.getId());
             iInspectionReportService.updateById(report);
-
             jsonObject.put("mes", true);
         } catch (Exception e) {
             jsonObject.put("mes", false);
@@ -170,10 +175,10 @@ public class InspectionReportController extends BaseController {
     //异步加载Grades
     @RequestMapping(value = "/surveyor/getGradeList")
     @ResponseBody
-    public JSONObject getGradeList( @RequestParam(required = false) Integer reportId) {
+    public JSONObject getGradeList(@RequestParam(required = false) Integer reportId) {
         JSONObject jsonObject = new JSONObject();
         try {
-            List<Grade> grades=gradeService.selectListGrade(reportId);
+            List<Grade> grades = gradeService.selectListGrade(reportId);
             jsonObject.put("grades", grades);
             jsonObject.put("mes", true);
         } catch (Exception e) {
@@ -186,13 +191,13 @@ public class InspectionReportController extends BaseController {
     //
     @RequestMapping(value = "/surveyor/reportEditGrade")
     @ResponseBody
-    public JSONObject reportEditGrade( Grade grade) {
+    public JSONObject reportEditGrade(Grade grade) {
         JSONObject jsonObject = new JSONObject();
         try {
-            List<Double> totalGrades=gradeService.updateGradeById(grade);
+            List<Double> totalGrades = gradeService.updateGradeById(grade);
 
             jsonObject.put("mes", true);
-            jsonObject.put("totalGrades",totalGrades);
+            jsonObject.put("totalGrades", totalGrades);
         } catch (Exception e) {
             jsonObject.put("mes", false);
             e.printStackTrace();
@@ -412,6 +417,7 @@ public class InspectionReportController extends BaseController {
             iInspectionReportService.downloadReportByReportId(reportId,endpoint,accessId,accessKey,bucket);
 
             jsonObject.put("mes", true);
+            messageService.publicPreInspectionEnd(inspection.getId());
         } catch (Exception e) {
             jsonObject.put("mes", false);
             e.printStackTrace();
@@ -431,8 +437,8 @@ public class InspectionReportController extends BaseController {
     @RequestMapping(value = "/op/report/list")
     @ResponseBody
     public JSONObject opReportList(ModelMap modelMap) {
-        JSONObject jsonObject=new JSONObject();
-        int id=getCurrentUser().getId();
+        JSONObject jsonObject = new JSONObject();
+        int id = getCurrentUser().getId();
 
         int start = 0;
         int length = 10;
@@ -443,8 +449,8 @@ public class InspectionReportController extends BaseController {
             length = Integer.parseInt(request.getParameter(Const.LENGTH));
         }
 
-        List<PurchaseInspection> inspections=purchaseInspectionService.selectByOpInspection(id,start, length);
-        Integer total=purchaseInspectionService.getOpInspectionCount(id);
+        List<PurchaseInspection> inspections = purchaseInspectionService.selectByOpInspection(id, start, length);
+        Integer total = purchaseInspectionService.getOpInspectionCount(id);
 
         jsonObject.put(Const.DRAW, request.getParameter(Const.DRAW));
         jsonObject.put(Const.RECORDSTOTAL, total);

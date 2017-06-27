@@ -180,6 +180,24 @@
             alter table t_ship_detail add wog int(11) Null;
         </sql>
     </changeSet>
+    <changeSet author="WangShun" id="15950097942-013">
+        <sql>
+            alter table t_quotation ADD current_quantity varchar(64) DEFAULT NULL;
+            alter table t_quotation ADD current_quantity_url varchar(255) DEFAULT NULL;
+        </sql>
+    </changeSet>
+    <changeSet author="WangShun" id="15950097942-014">
+        <sql>
+            alter table t_quotation ADD bonus_plan text DEFAULT NULL;
+        </sql>
+    </changeSet>
+    <changeSet author="WangShun" id="15950097942-015">
+        <sql>
+            alter table t_surveyor ADD survey_type varchar(20) DEFAULT NULL COMMENT '能够船检的类型';
+            insert INTO t_dict(type,value,des,del_flag) VALUES('surveyType',1,'On-off hire + Condition',0);
+            insert INTO t_dict(type,value,des,del_flag) VALUES('surveyType',2,'Pre-purchase',0);
+        </sql>
+    </changeSet>
 </databaseChangeLog>
 
 

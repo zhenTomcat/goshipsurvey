@@ -60,7 +60,7 @@
                                     <div class="tab-content">
                                         <div class="tab-pane fade active in" id="tab_1_2">
                                             <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                                                   id="inspection_table">
+                                                   id="onoff_surveyor_record_inspection_table">
                                                 <thead>
                                                 <tr>
                                                     <th>Ship name</th>
@@ -71,6 +71,7 @@
                                                     <th>Inspection date(LMT)</th>
                                                     <th>Total price</th>
                                                     <th>Inspection report</th>
+                                                    <th>Comment</th>
                                                 </tr>
                                                 </thead>
                                             </table>
@@ -152,12 +153,13 @@
     var starRatingNot = $("#star-rating-outer-not");
     var starRatingHave = $("#star-rating-outer-have");
     $(document).ready(function () {
-        inspectionTable = $('#inspection_table').DataTable({
+        inspectionTable = $('#onoff_surveyor_record_inspection_table').DataTable({
             "ordering": false,
             "pagingType": "simple_numbers",
             "processing": true,
             "autoWidth": false,
             "serverSide": true,
+            'bStateSave': true,
             "ajax": {
                 "url": "surveyor/record/list",
                 "type": "post",
@@ -192,9 +194,16 @@
                     }
                 },
                 {
-                    "data": "surveyorInfo.reportUrl",
+                    "data": "reportUrl",
                     "render": function (data) {
                         return "<a class='btn btn-sm green' target='_blank' href='" + data + "'>VIEW</a>";
+                    }
+                },
+                {
+                    "data": "",
+                    "class": "comment-detail",
+                    "render": function (data) {
+                        return '<a href="javascript:void(0)">COMMENT</a>';
                     }
                 },
             ],
@@ -206,9 +215,22 @@
                     return startDate + " to " + endDate;
                 }
             }],
-            "fnCreatedRow": function (nRow, aData, iDataIndex) {
-                var row = inspectionTable.row($(nRow));
-                row.child(moreInfo(aData)).show();
+//            "fnCreatedRow": function (nRow, aData, iDataIndex) {
+//                var row = inspectionTable.row($(nRow));
+//                row.child(moreInfo(aData)).show();
+//            }
+        });
+
+        inspectionTable.on('click', 'td.comment-detail', function () {
+            var tr = $(this).closest('tr');
+            var row = inspectionTable.row(tr);
+            var flag = tr.attr("data-not-first");
+            if (flag) {
+                tr.next().toggle();
+            } else {
+                row.child(moreInfo(row.data())).show();
+                tr.next().addClass("detail-row");
+                tr.attr("data-not-first", true);
             }
         });
 

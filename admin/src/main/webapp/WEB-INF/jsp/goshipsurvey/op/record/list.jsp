@@ -52,10 +52,19 @@
                         <div class="col-md-12">
                             <div class="portlet light">
                                 <div class="portlet-title">
-                                    <div class="caption">
+                                    <div class="caption col-md-8">
                                         <i class="icon-social-dribbble font-blue-soft"></i>
                                         <span class="caption-subject font-blue-soft bold uppercase">My record</span>
                                     </div>
+                                    <shiro:hasPermission name="op/quotation/add">
+                                        <div class="col-md-4">
+                                            <div class="btn-group">
+                                                <a href="#add_quotation_form" data-toggle="modal"
+                                                   class="btn blue"><i class="fa fa-plus"></i> New quotation
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </shiro:hasPermission>
                                 </div>
                                 <div class="portlet-body">
                                     <ul class="nav nav-tabs">
@@ -69,7 +78,7 @@
                                     <div class="tab-content">
                                         <div class="tab-pane fade active in" id="tab_1_1">
                                             <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                                                   id="quotation_table">
+                                                   id="onoff_op_record_quotation_table">
                                                 <thead>
                                                 <tr>
                                                     <th style="width: 15%">Ship name</th>
@@ -86,18 +95,19 @@
                                         </div>
                                         <div class="tab-pane fade" id="tab_1_2">
                                             <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                                                   id="inspection_table">
+                                                   id="onoff_op_record_inspection_table">
                                                 <thead>
                                                 <tr>
-                                                    <th style="width: 15%">Ship name</th>
+                                                    <th style="width: 10%">Ship name</th>
                                                     <th style="width: 10%">imo</th>
                                                     <th style="width: 10%">Ship type</th>
-                                                    <th style="width: 15%">Inspection type</th>
-                                                    <th style="width: 15%">Inspection port</th>
-                                                    <th style="width: 15%">Inspection date(LMT)</th>
+                                                    <th style="width: 10%">Inspection type</th>
+                                                    <th style="width: 10%">Inspection port</th>
+                                                    <th style="width: 10%">Inspection date(LMT)</th>
                                                     <th style="width: 10%">Total price</th>
                                                     <th style="width: 10%">Surveyors/Company</th>
                                                     <th style="width: 10%">Inspection report</th>
+                                                    <th style="width: 10%">Comment</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
@@ -173,7 +183,6 @@
         </div>
     </div>
 </div>
-
 <script>
     var quotationTable;
     var inspectionTable;
@@ -184,14 +193,14 @@
         drawInspectionTable();
     });
 
-
     function drawQuotationTable() {
-        quotationTable = $('#quotation_table').DataTable({
+        quotationTable = $('#onoff_op_record_quotation_table').DataTable({
             "ordering": false,
             "pagingType": "simple_numbers",
             "processing": true,
             "autoWidth": false,
             "serverSide": true,
+            'bStateSave': true,
             "ajax": {
                 "url": "op/record/list/quotation",
                 "type": "post",
@@ -250,12 +259,13 @@
         });
     }
     function drawInspectionTable() {
-        inspectionTable = $('#inspection_table').DataTable({
+        inspectionTable = $('#onoff_op_record_inspection_table').DataTable({
             "ordering": false,
             "pagingType": "simple_numbers",
             "processing": true,
             "autoWidth": false,
             "serverSide": true,
+            'bStateSave': true,
             "ajax": {
                 "url": "op/record/list/inspection",
                 "type": "post",
@@ -298,6 +308,13 @@
                         return "<a class='btn btn-sm green' target='_blank' href='" + data + "'>VIEW</a>";
                     }
                 },
+                {
+                    "data": "",
+                    "class": "comment-detail",
+                    "render": function (data) {
+                        return '<a href="javascript:void(0)">COMMENT</a>';
+                    }
+                },
             ],
             "columnDefs": [
                 {
@@ -315,19 +332,19 @@
                     }
                 },
             ],
-//            "drawCallback": function (settings, json) {
-//                var rows = $('#inspection_table').find("tbody tr");
-//                rows.each(function (i, e) {
-//                    var row = inspectionTable.row($(this));
-//                    row.child(moreInfo(row.data())).show();
-//                })
-//            },
-            "fnCreatedRow": function (nRow, aData, iDataIndex) {
-                var row = inspectionTable.row($(nRow));
-                row.child(moreInfo(aData)).show();
+        });
+        inspectionTable.on('click', 'td.comment-detail', function () {
+            var tr = $(this).closest('tr');
+            var row = inspectionTable.row(tr);
+            var flag = tr.attr("data-not-first");
+            if (flag) {
+                tr.next().toggle();
+            } else {
+                row.child(moreInfo(row.data())).show();
+                tr.next().addClass("detail-row");
+                tr.attr("data-not-first", true);
             }
         });
-
     }
 
 
@@ -421,3 +438,4 @@
         })
     }
 </script>
+<jsp:include page="../quotation/add.jsp"/>

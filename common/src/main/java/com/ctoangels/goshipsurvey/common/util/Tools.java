@@ -15,6 +15,10 @@
 
 package com.ctoangels.goshipsurvey.common.util;
 
+import com.ctoangels.goshipsurvey.common.modules.sys.controller.RightController;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 import java.io.*;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
@@ -31,6 +35,8 @@ import java.util.regex.Pattern;
  * @Date Apr 19, 2015
  */
 public class Tools {
+
+    private static Logger logger = LoggerFactory.getLogger(Tools.class);
 
     /**
      * 随机生成六位数验证码
@@ -172,8 +178,8 @@ public class Tools {
     /**
      * 写txt里的单行内容
      *
-     * @param fileP 文件路径
-     * @param content  写入的内容
+     * @param fileP   文件路径
+     * @param content 写入的内容
      */
     public static void writeFile(String fileP, String content) {
         String filePath = String.valueOf(Thread.currentThread().getContextClassLoader().getResource("")) + "../../";    //项目路径
@@ -306,6 +312,13 @@ public class Tools {
 
     public static void main(String[] args) {
         System.out.println(getRandomNum());
+    }
+
+    public static void loggerThreadId(String content) {
+        if (content == null) {
+            content = "当前线程id:";
+        }
+        logger.info(content + Thread.currentThread().getId());
     }
 
 }

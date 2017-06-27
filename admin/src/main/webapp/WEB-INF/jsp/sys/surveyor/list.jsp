@@ -74,7 +74,7 @@
 <h1 style="text-align: center;background-color: #3598dc;color: white;margin-top: 0">Surveyor management</h1>
 <div class="row">
     <div class="col-md-12">
-        <form class="form-horizontal" action="op/quotation/add" method="post" id="quotation-add-form">
+        <form class="form-horizontal">
             <div class="form-group col-md-3">
                 <label class="col-md-6 control-label head-set">Surveyor name</label>
                 <div class="col-md-6">
@@ -122,11 +122,12 @@
                id="surveyor_table">
             <thead>
             <tr>
-                <th width="10%">
+                <th width="5%">
                     <input type='checkbox' id="defaultCheck"/>
                 </th>
-                <th width="20%">Surveyor name</th>
+                <th width="15%">Surveyor name</th>
                 <th width="40%">Available port</th>
+                <th width="20%">Type of survey</th>
                 <th width="30%">Available time</th>
             </tr>
             <tbody></tbody>
@@ -183,25 +184,36 @@
                     "data": "surveyPort",
                 },
             ],
-            "columnDefs": [{
-                "targets": 1,
-                "render": function (data, type, row) {
-                    return '<a data-target="navTab" href="surveyor/edit?id=' + row.id + '">' + row.firstName + " " + row.lastName + '</a>';
-                }
-            }, {
-                "targets": 2,
-                "render": function (data, type, row) {
-                    return '<a href="surveyor/editPort?id=' + row.id + '" data-model="dialog">' + row.surveyPort + '</a>';
-                }
-            }, {
-                "targets": 3,
-                "render": function (data, type, row) {
-                    var surveyTimeStart = new Date(row.surveyTimeStart).Format("yyyy-MM-dd");
-                    var surveyTimeEnd = new Date(row.surveyTimeEnd).Format("yyyy-MM-dd");
+            "columnDefs": [
+                {
+                    "targets": 1,
+                    "render": function (data, type, row) {
+                        return '<a data-target="navTab" href="surveyor/edit?id=' + row.id + '">' + row.firstName + " " + row.lastName + '</a>';
+                    }
+                },
+                {
+                    "targets": 2,
+                    "render": function (data, type, row) {
+                        var text = row.surveyPort || "nothing";
+                        return '<a href="surveyor/editPort?id=' + row.id + '" data-model="dialog">' + text + '</a>';
+                    }
+                },
+                {
+                    "targets": 3,
+                    "render": function (data, type, row) {
+                        var text = row.surveyType || "nothing";
+                        return '<a href="surveyor/editSurveyType?id=' + row.id + '" data-model="dialog">' + text + '</a>';
+                    }
+                },
+                {
+                    "targets": 4,
+                    "render": function (data, type, row) {
+                        var surveyTimeStart = new Date(row.surveyTimeStart).Format("yyyy-MM-dd");
+                        var surveyTimeEnd = new Date(row.surveyTimeEnd).Format("yyyy-MM-dd");
 //                    return '<a href="surveyor/editTime?id=' + row.id + '" data-model="dialog">' + surveyTimeStart + ' to ' + surveyTimeEnd + '</a>';
-                    return '<a href="#time_modal" data-toggle="modal" onclick="changeEditTimeId(' + row.id + ')">' + surveyTimeStart + ' to ' + surveyTimeEnd + '</a>';
-                }
-            }],
+                        return '<a href="#time_modal" data-toggle="modal" onclick="changeEditTimeId(' + row.id + ')">' + surveyTimeStart + ' to ' + surveyTimeEnd + '</a>';
+                    }
+                }],
             "drawCallback": function (settings) {
                 drawICheck('defaultCheck', 'chx_default');
             },

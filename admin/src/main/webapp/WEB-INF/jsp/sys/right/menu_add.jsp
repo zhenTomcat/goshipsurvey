@@ -53,6 +53,7 @@
                     <select class="form-control" id="proType" name="proType">
                         <option value="1">on off</option>
                         <option value="2">pre-purchase</option>
+                        <option value="3">菜单栏不显示</option>
                     </select>
                 </div>
             </div>

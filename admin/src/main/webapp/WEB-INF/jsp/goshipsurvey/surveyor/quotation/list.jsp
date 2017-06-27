@@ -29,7 +29,7 @@
                                     <%--</div>--%>
                                     <div class="tab-pane fade active in" id="tab_1_1">
                                         <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                                               id="quotation_table">
+                                               id="onoff_surveyor_quotation_table">
                                             <thead>
                                             <tr>
                                                 <th width="9%">Public date</th>
@@ -39,10 +39,10 @@
                                                 <th width="9%">Inspection port</th>
                                                 <th width="9%">Inspection date(LMT)</th>
                                                 <th width="9%">Consignor</th>
-                                                <th width="9%">Price</th>
+                                                <th width="7%">Price</th>
                                                 <th width="9%">Surveyor</th>
-                                                <th width="9%">Apply</th>
-                                                <th width="9%">More detail</th>
+                                                <th width="14%">Apply</th>
+                                                <th width="7%">More detail</th>
                                             </tr>
                                             <tbody></tbody>
                                             </thead>
@@ -59,7 +59,7 @@
 </div>
 <a id="goToSurveyorInfo" style="display: none" data-model="dialog"></a>
 <script>
-    var quotationTable = $("#quotation_table");//已申请的quotation表格
+    var quotationTable = $("#onoff_surveyor_quotation_table");//已申请的quotation表格
     var surveyList;
     var surveyorSelectHtml;
     $(document).ready(function () {
@@ -68,12 +68,14 @@
 
     //绘制页面表格
     function drawTable() {
-        quotationTable = $('#quotation_table').DataTable({
+        quotationTable = $('#onoff_surveyor_quotation_table').DataTable({
             "ordering": false,
             "pagingType": "simple_numbers",
             "processing": true,
             "autoWidth": false,
             "serverSide": true,
+            "destroy": true,
+            'bStateSave': true,
             "ajax": {
                 "url": "surveyor/quotation/list",
                 "type": "post",
@@ -112,6 +114,9 @@
                 },
                 {
                     "data": "application.totalPrice",
+                    "render": function (data) {
+                        return "$" + (data || "");
+                    }
                 },
                 {
                     "data": "application.surveyor",
@@ -135,10 +140,20 @@
                 "render": function (data, type, row) {
                     var application = row.application;
                     var quoStatus = row.quotationStatus;
-                    if (application != null && quoStatus != 2) {
+                    if (application != null && quoStatus != 3) {
                         var status = application.applicationStatus;
                         if (status == 0) {
-                            return "<button type='button' class='btn yellow' >Applying</button>";
+                            var html =
+                                    '<div class=" btn-group upload-file-div">' +
+                                    '<a class="btn btn-sm yellow">Applying</a>' +
+                                    '<span class="input-group-btn">' +
+                                    '<a class="btn red btn-sm" title="cancel" href="surveyor/quotationApplication/cancel?id=' + application.id + '" data-msg="确定取消吗？" data-model="ajaxToDo" data-callback="drawTable()"> ' +
+                                    '<i class="fa fa-ban"></i>' +
+                                    '</a>' +
+                                    '</span>' +
+                                    '</div>';
+                            return html;
+//                            return "<button type='button' class='btn yellow' >Applying</button>";
                         }
                         if (status == 1) {
                             return "<button type='button' class='btn green' >Success</button>";
@@ -209,7 +224,8 @@
 
         html += "</div>";
         html += '<div class="col-md-3">';
-
+        html += '<label class="col-md-12 text-left">Bonus plan:</label>';
+        html += '<div class="col-md-12 text-left" style="padding-left:30px; ">' + data.bonusPlan + '</div>';
         html += "</div>";
         //Agency details and loi
         var application = data.application;
@@ -231,14 +247,14 @@
         html += '<div class="col-md-3">';
         html += '<label class="col-md-12 text-left">Our price & surveyor:</label>';
         if (application == null) {
-            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5">Price:</label> <div class="input-group col-md-7"> <input type="text" class="form-control price-input"> </div></div>';
+            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5">Price:</label> <div class="input-group input-icon col-md-7"><i class="fa fa-dollar"></i> <input type="text" class="form-control price-input"> </div></div>';
             html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">Surveyor:</label> <div class="input-group col-md-7"> ';
             html += surveyorSelectHtml;
             html += ' </div></div>';
             html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">SurveyorCV:</label>  <a class="col-md-3" href="javascript:void(0)" onclick="goToViewSurveyor(this)"  style="padding-top: 8px; vertical-align: middle">VIEW</a></div>';
         } else {
             var surveyor = application.surveyor;
-            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5">Price:</label> <div class="input-group col-md-7"> ' + application.totalPrice + '</div></div>';
+            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5">Price:$</label> <div class="input-group col-md-7"> ' + application.totalPrice + '</div></div>';
             html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">Surveyor:</label> <div class="input-group col-md-7">' + surveyor.firstName + " " + surveyor.lastName + '</div></div>';
             html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">SurveyorCV:</label>  <a class="col-md-7" data-model="dialog"  href="surveyor/info?id=' + surveyor.id + '" style="padding-top: 8px; vertical-align: middle">VIEW</a></div>';
         }

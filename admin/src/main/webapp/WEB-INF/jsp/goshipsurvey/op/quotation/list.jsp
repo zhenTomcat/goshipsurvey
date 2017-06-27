@@ -38,7 +38,7 @@
                                     <shiro:hasPermission name="op/quotation/add">
                                         <div class="col-md-4">
                                             <div class="btn-group">
-                                                <a href="#form_modal2" data-toggle="modal"
+                                                <a href="#add_quotation_form" data-toggle="modal"
                                                    class="btn blue"><i class="fa fa-plus"></i> New quotation
                                                 </a>
                                             </div>
@@ -48,8 +48,8 @@
                                 <div class="portlet-body">
                                     <div class="tab-content">
                                         <div class="tab-pane fade active in" id="tab_1_1">
-                                            <table class="table  table-checkable table-bordered"
-                                                   id="quotation_table">
+                                            <table class="table  table-bordered"
+                                                   id="onoff_op_quotation_table">
                                                 <thead>
                                                 <tr>
                                                     <th width="15%">Ship name</th>
@@ -57,8 +57,9 @@
                                                     <th width="10%">Ship type</th>
                                                     <th width="15%">Inspection type</th>
                                                     <th width="15%">Inspection port</th>
-                                                    <th width="25%">Inspection date(LMT)</th>
+                                                    <th width="15%">Inspection date(LMT)</th>
                                                     <th width="10%">Status</th>
+                                                    <th width="10%">Trash</th>
                                                 </tr>
                                                 <tbody></tbody>
                                                 </thead>
@@ -76,19 +77,20 @@
     </div>
 </div>
 <script>
-    var quotationTable = $("#quotation_table");
+    var quotationTable = $("#onoff_op_quotation_table");
     $(document).ready(function () {
         drawTable();
     })
 
     function drawTable() {
-        quotationTable = $('#quotation_table').DataTable({
+        quotationTable = $('#onoff_op_quotation_table').DataTable({
             "ordering": false,
             "pagingType": "simple_numbers",
             "destroy": true,
             "processing": true,
             "autoWidth": false,
             "serverSide": true,
+            'bStateSave': true,
             "ajax": {
                 "url": "op/quotation/list",
                 "type": "get",
@@ -122,6 +124,12 @@
                 {
                     "data": "quotationStatus",
                 },
+                {
+                    "data": "id",
+                    "render": function (data) {
+                        return '<a href="op/quotation/deleteById?id=' + data + '" class="btn red btn-sm" type="button" data-msg="确定删除吗？" data-model="ajaxToDo" data-callback="drawTable()"><i class="fa fa-trash"></i></a>';
+                    }
+                },
             ],
             "columnDefs": [
                 {
@@ -146,13 +154,15 @@
                 }
             ],
             "drawCallback": function () {
-                var rows = $('#quotation_table').find("tbody tr");
-
+                var rows = $('#onoff_op_quotation_table').find("tbody tr");
                 rows.each(function (i, e) {
                     var row = quotationTable.row($(this));
-                    $(this).after(moreInfo(row.data()));
+                    var data = row.data();
+                    if (data != null) {
+                        $(this).after(moreInfo(data));
+                    }
                 })
-            }
+            },
         });
 
 
@@ -164,7 +174,7 @@
         var quotation = data;
         var applyList = data.applicationList;
         if (applyList != null && applyList.length > 0) {
-            html += '<tr class="application-outer-tr"><td colspan="7" style="padding: 0" class="application-outer-td"><table class="table" style="margin-bottom: 0">';
+            html += '<tr class="application-outer-tr"><td colspan="7" style="padding: 0" class="application-outer-td"><table class="table" style="margin-bottom: 0;width:100%">';
             for (var j = 0; j < applyList.length; j++) {
                 var application = applyList[j];
                 var user = application.user;

@@ -94,6 +94,12 @@ public class Surveyor implements Serializable {
     @TableField(value = "portrait_url")
     private String portraitUrl;
 
+    /**
+     * 能够船检的类型(onoff / prepurchase)
+     */
+    @TableField(value = "survey_type")
+    private String surveyType;
+
     @TableField(exist = false)
     private List<Port> portList;
 
@@ -308,5 +314,13 @@ public class Surveyor implements Serializable {
 
     public void setPastEvaluation(Double pastEvaluation) {
         this.pastEvaluation = pastEvaluation;
+    }
+
+    public String getSurveyType() {
+        return surveyType;
+    }
+
+    public void setSurveyType(String surveyType) {
+        this.surveyType = surveyType;
     }
 }

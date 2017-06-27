@@ -19,4 +19,10 @@ public interface IMessageService extends ISuperService<Message> {
     //单独发
     void publicOne(int id, String title, String content);
 
+    void commentMessage(int id, int type);
+
+    void addApplicationMessage(int id);
+
+    void publicPreInspectionEnd(int inspectionId);
+
 }

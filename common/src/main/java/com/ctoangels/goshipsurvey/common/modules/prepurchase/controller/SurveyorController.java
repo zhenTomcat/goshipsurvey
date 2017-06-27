@@ -96,6 +96,19 @@ public class SurveyorController extends BaseController {
                 }
                 portValue = portValue.substring(0, portValue.length() - 1);
             }
+
+            String surveyValue = "";
+            String surveyString = s.getSurveyType();
+            String[] userSurveys;
+            if (StringUtils.isNotEmpty(surveyString)) {
+                userSurveys = surveyString.split(",");
+                for (String ss : userSurveys) {
+                    surveyValue += getSurveyTypeDict().get(Integer.parseInt(ss) - 1).getDes() + ",";
+                }
+                surveyValue = surveyValue.substring(0, surveyValue.length() - 1);
+            }
+            s.setSurveyType(surveyValue);
+
             s.setSurveyPort(portValue);
         }
 
@@ -122,6 +135,7 @@ public class SurveyorController extends BaseController {
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String add(ModelMap map) {
         map.put("shipType", getShipTypeDict());
+        map.put("surveyType", getSurveyTypeDict());
         map.put("staticPath", staticPath);
         return "sys/surveyor/add";
     }
@@ -152,6 +166,12 @@ public class SurveyorController extends BaseController {
             map.put("userShipTypes", userShipTypes);
         }
 
+        String userSurveyType = surveyor.getSurveyType();
+        if (StringUtils.isNotEmpty(userSurveyType)) {
+            String[] userSurveyTypes = userSurveyType.split(",");
+            map.put("userSurveyTypes", userSurveyTypes);
+        }
+
         String portString = surveyor.getSurveyPort();
         if (StringUtils.isNotEmpty(portString)) {
             String[] userPorts;
@@ -169,6 +189,7 @@ public class SurveyorController extends BaseController {
         map.put("staticPath", staticPath);
         map.put("surveyor", surveyor);
         map.put("shipType", getShipTypeDict());
+        map.put("surveyType", getSurveyTypeDict());
         return "sys/surveyor/edit";
     }
 
@@ -215,6 +236,33 @@ public class SurveyorController extends BaseController {
     @ResponseBody
     public JSONObject editTimeComplete(Surveyor surveyor) {
         JSONObject jsonObject = new JSONObject();
+        surveyor.setUpdateInfo(getCurrentUser().getName());
+        if (surveyorService.updateSelectiveById(surveyor)) {
+            jsonObject.put("status", 1);
+        } else {
+            jsonObject.put("status", 0);
+        }
+        return jsonObject;
+    }
+
+    @RequestMapping(value = "/editSurveyType", method = RequestMethod.GET)
+    public String editSurveyType(ModelMap map, @RequestParam(required = false) Integer id) {
+        Surveyor surveyor = surveyorService.selectById(id);
+        map.put("surveyor", surveyor);
+        String userSurveyType = surveyor.getSurveyType();
+        if (StringUtils.isNotEmpty(userSurveyType)) {
+            String[] userSurveyTypes = userSurveyType.split(",");
+            map.put("userSurveyTypes", userSurveyTypes);
+        }
+        map.put("surveyType", getSurveyTypeDict());
+        return "sys/surveyor/editSurveyType";
+    }
+
+    @RequestMapping(value = "/editSurveyTypeComplete", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject editSurveyTypeComplete(Surveyor surveyor) {
+        JSONObject jsonObject = new JSONObject();
+        if (surveyor.getSurveyType() == null) surveyor.setSurveyType("");
         surveyor.setUpdateInfo(getCurrentUser().getName());
         if (surveyorService.updateSelectiveById(surveyor)) {
             jsonObject.put("status", 1);

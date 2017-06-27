@@ -4,7 +4,7 @@
 
     <!-- 通用查询结果列-->
     <sql id="Base_Column_List">
-		id, op_id AS opId, op_name AS opName, ship_id AS shipId, ship_name AS shipName, imo, ship_type AS shipType, inspection_type AS inspectionType, port_id AS portId, port_name AS portName, start_date AS startDate, end_date AS endDate, total_price AS totalPrice, quotation_status AS quotationStatus, delivery_by AS deliveryBy, accepted_by AS acceptedBy , re_delivery_by AS reDeliveryBy, re_accepted_by AS reAcceptedBy, charter, owner, ship_particulars AS shipParticulars,ship_particulars_url AS shipParticularsUrl, port_agency AS portAgency,blank_loi_url AS blankLoiUrl, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
+		id, op_id AS opId, op_name AS opName, ship_id AS shipId, ship_name AS shipName, imo, ship_type AS shipType, inspection_type AS inspectionType, port_id AS portId, port_name AS portName, start_date AS startDate, end_date AS endDate, current_quantity AS currentQuantity, current_quantity_url AS currentQuantityUrl, bonus_plan AS bonusPlan, total_price AS totalPrice, quotation_status AS quotationStatus, delivery_by AS deliveryBy, accepted_by AS acceptedBy , re_delivery_by AS reDeliveryBy, re_accepted_by AS reAcceptedBy, charter, owner, ship_particulars AS shipParticulars,ship_particulars_url AS shipParticularsUrl, port_agency AS portAgency,blank_loi_url AS blankLoiUrl, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
 	</sql>
 
     <select id="getById" resultType="Quotation">
@@ -15,6 +15,7 @@
         SELECT quo.*,1 AS proType
         FROM t_quotation quo
         <where>
+            AND quo.del_flag=0
             AND quo.end_date &gt;= (select date_format(now(),'%Y-%m-%d'))
             AND quo.op_id=#{opId}
         </where>
@@ -23,24 +24,24 @@
     </select>
 
     <resultMap id="OPQuotationMap" type="Quotation">
-        <result property="id" column="id"></result>
+        <result property="id" column="id"/>
         <collection property="applicationList" column="{quotationId=id,proType=proType}"
-                    select="com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.QuotationApplicationMapper.getApplications"></collection>
+                    select="com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.QuotationApplicationMapper.getApplications"/>
     </resultMap>
 
 
     <select id="getSurveyorList" resultMap="surveyorQuotationMap">
         SELECT quo.*,#{surveyorId} AS surveyor_id,1 AS `type`  FROM t_quotation quo
-        WHERE quo.end_date &gt;=(select date_format(now(),'%Y-%m-%d'))
+        WHERE quo.end_date &gt;=(select date_format(now(),'%Y-%m-%d')) and quo.quotation_status !=0 and quo.del_flag=0
         ORDER BY quo.update_date desc
         limit #{start},#{length}
     </select>
 
     <resultMap id="surveyorQuotationMap" type="Quotation">
-        <result property="id" column="id"></result>
+        <result property="id" column="id"/>
         <association property="application" column="{surveyor_id=surveyor_id,quotation_id=id,type=type}"
                      javaType="QuotationApplication"
-                     select="com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.QuotationApplicationMapper.getBySurveyorId"></association>
+                     select="com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.QuotationApplicationMapper.getBySurveyorId"/>
     </resultMap>
 
 

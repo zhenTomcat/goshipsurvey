@@ -106,13 +106,14 @@ public class Const {
     //user type
     public static final Integer USER_TYPE_ADMIN = 1;
     public static final Integer USER_TYPE_OP = 2;
-    public static final Integer USER_TYPE_SURVEYOR_PERSONAL =3;
+    public static final Integer USER_TYPE_SURVEYOR_PERSONAL = 3;
     public static final Integer USER_TYPE_SURVEYOR_COMPANY = 4;
 
 
     //project type
     public static final Integer PROJECT_TYPE_HIRE = 1;
     public static final Integer PROJECT_TYPE_PURCHASE = 2;
+    public static final Integer PROJECT_MENU_NOT_SHOW = 3;
 
     //消息是否已阅读
     public static final Integer MESSAGE_UNREAD = 0;
@@ -120,6 +121,10 @@ public class Const {
     //消息不置顶
     public static final Integer MESSAGE_NOT_TOP = 0;
 
-    public static final Integer REPORT_UNSUBMIT=0;
-    public static final Integer REPORT_SUBMIT=1;
+    public static final Integer REPORT_UNSUBMIT = 0;
+    public static final Integer REPORT_SUBMIT = 1;
+
+
+    public static final Integer MESSAGE_OP_TO_COMPANY = 1;
+    public static final Integer MESSAGE_COMPANY_TO_OP = 2;
 }

@@ -4,13 +4,17 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="go" uri="http://www.ctoangels.com/jsp/jstl/common" %>
 <style>
-    table th, td {
-        text-align: center;
+    #add_quotation_form .modal-dialog {
+        width: 90%;
+        margin: 0px auto;
     }
 
-    .modal-dialog {
-        width: 90%;
-        margin: 30px auto;
+    #add_quotation_form .modal-dialog .modal-body {
+        padding: 5px;
+    }
+
+    #add_quotation_form .form-group {
+        margin-bottom: 5px;
     }
 
     #ship-list, #port-list {
@@ -43,7 +47,7 @@
     }
 </style>
 <form class="form-horizontal" action="op/quotation/add" method="post" id="quotation-add-form">
-    <div id="form_modal2" class="modal fade" role="dialog" aria-hidden="true">
+    <div id="add_quotation_form" class="modal fade" role="dialog" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">
 
@@ -122,9 +126,9 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="form-group col-md-8">
-                                <label class="control-label col-sm-3">Inspection date(LMT)</label>
-                                <div class="col-sm-9" style="padding-left: 7.5px">
+                            <div class="form-group col-md-6">
+                                <label class="control-label col-sm-4">Inspection date(LMT)</label>
+                                <div class="col-sm-8" style="padding-left: 7.5px">
                                     <div class="input-group input-large date-picker input-daterange">
                                         <input type="text" class="form-control " name="startDate">
                                         <span class="input-group-addon"> to </span>
@@ -133,7 +137,46 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-12" style="border-top: 1px solid #e5e5e5;padding-top: 10px">
+                        <div class="form-group col-md-6">
+                            <label class="control-label col-sm-4">Current quantity of bunkers from ship</label>
+                            <div class="col-sm-8">
+                                <textarea name="currentQuantity"
+                                          style="height:100px;resize: none;width: 94%;margin-left: 2%"
+                                          class="form-control "></textarea>
+                                <div class="col-sm-12" style="margin-top: 5px">
+                                    <button type="button" style="margin-left: 10px" id="currentQuantity-btn"
+                                            title="A photo about current quantity"
+                                            class="col-sm-4 btn btn-sm blue current-quantity-btn">
+                                        <i class="fa fa-upload"></i>
+                                        upload
+                                    </button>
+                                    <div class="col-sm-6 btn-group upload-file-div" style="display: none">
+                                        <input class="form-control ship-particulars-url-input"
+                                               data-loi="true"
+                                               name="currentQuantityUrl"
+                                               type="hidden"/>
+                                        <a class="btn btn-sm green"
+                                           target="_blank"
+                                           href=";">View</a>
+                                        <span class="input-group-btn">
+                                        <button class="btn red btn-sm" type="button" title="delete"
+                                                onclick="delFileAndInput(this)">
+                                            <i class="fa fa-ban"></i></button>
+                                    </span>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        <div class="form-group col-md-6">
+                            <label class="col-sm-4 control-label">Bonus plan</label>
+                            <div class="form-group col-sm-8">
+                                        <textarea class="form-control"
+                                                  name="bonusPlan"
+                                                  style="height:100px;resize: none;width: 94%;margin-left: 2%"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-12" style="border-top: 1px solid #e5e5e5;padding-top: 10px;">
                             <div class="col-md-8">
                                 <div class="form-group col-md-12">
                                     <label class="col-sm-3 control-label">On hire</label>
@@ -193,7 +236,8 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <label class="col-sm-3 control-label">Ship particulars</label>
+                                    <label class="col-sm-3 control-label">Ship particulars <i
+                                            class="fa fa-info-circle"></i></label>
                                     <div class="form-group col-md-9">
                                         <textarea class="form-control ship-particulars-textarea"
                                                   name="shipParticulars"
@@ -225,7 +269,7 @@
                             <div class="col-md-4">
                                 <label class="col-md-12 control-label"
                                        style="margin-bottom: 15px;text-align: left">Port
-                                    agency</label>
+                                    agency <i class="fa fa-info-circle"></i></label>
                                 <textarea
                                         class="form-control port-agency-textarea "
                                         name="portAgency"
@@ -257,6 +301,9 @@
                     </div>
                 </div>
                 <div class="modal-footer">
+                    <label style="float: left"> <i class="fa fa-info-circle">This information can't be read by surveyor,
+                        until chosen
+                        surveyor/company.</i></label>
                     <button id="closeModal" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                     <shiro:hasPermission name="op/quotation/add">
                         <button type="button" onclick="severCheck()" class="btn btn-primary">Save</button>
@@ -272,18 +319,19 @@
 
     initUploaders_loi_without_sign_and_ship_particulars("particulars-btn", "shipinfo", "${staticPath}/");
     initUploaders_loi_without_sign_and_ship_particulars("loi-btn", "shipinfo", "${staticPath}/");
+    initUploaders_quotation_oil_photo("currentQuantity-btn", "shipinfo", "${staticPath}/");
 
     function severCheck() {
         if (check()) {
             $("#quotation-add-form").ajaxSubmit({
                 success: function (data) {
                     if (data.success) {
-                        drawTable();
                         $("#closeModal").click();
+                        drawTable();
                     } else {
                         alert("add quotation error")
                     }
-                }
+                },
             });
         }
     }
@@ -342,7 +390,7 @@
     }
 
     $(document).scroll(function () {
-        $('#form_modal2 .date-picker').datepicker('place'); //#modal is the id of the modal
+        $('#add_quotation_form .date-picker').datepicker('place'); //#modal is the id of the modal
     });
 
     //点击document隐藏下拉层

@@ -48,6 +48,13 @@
                                         <i class="icon-social-dribbble font-blue-soft"></i>
                                         <span class="caption-subject font-blue-soft bold uppercase">Scheduled inspections</span>
                                     </div>
+                                    <div class="col-md-4">
+                                        <div class="btn-group" style="float: right">
+                                            <a href="surveyor/inspection" data-target="navTab" style="float: right"
+                                               class="btn blue"><i class="fa fa-angle-left"></i> Back
+                                            </a>
+                                        </div>
+                                    </div>
                                     <c:set value="${inspection.quotation}" var="quotation"></c:set>
                                     <c:set value="${inspection.surveyor}" var="surveyor"></c:set>
                                     <c:set value="${inspection.company}" var="company"></c:set>
@@ -118,11 +125,12 @@
                                                                 <table class="table table-striped table-bordered table-hover  ">
                                                                     <thead>
                                                                     <tr>
-                                                                        <th>Surveyor name / Company</th>
-                                                                        <th>Passport</th>
-                                                                        <th>Surveyor CV</th>
-                                                                        <th>L.O.I</th>
-                                                                        <th>Inspection report</th>
+                                                                        <th style="width: 20%">Surveyor name / Company
+                                                                        </th>
+                                                                        <th style="width: 20%">Passport</th>
+                                                                        <th style="width: 20%">Surveyor CV</th>
+                                                                        <th style="width: 20%">L.O.I</th>
+                                                                        <th style="width: 20%">Inspection report</th>
                                                                     </tr>
                                                                     </thead>
                                                                     <tbody>
@@ -130,7 +138,8 @@
                                                                         <td>${surveyor.firstName} ${surveyor.lastName}
                                                                             / ${company.name}</td>
                                                                         <td>
-                                                                            <div class="col-sm-5 view-div">
+                                                                            <div class="view-div"
+                                                                                 style="display: inline-block">
                                                                                 <c:if test="${(not empty inspection.passportUrl) && (inspection.passportUrl!='')}">
                                                                                     <a class="btn btn-sm green"
                                                                                        target="_blank"
@@ -155,7 +164,8 @@
                                                                                data-model="dialog">VIEW</a>
                                                                         </td>
                                                                         <td>
-                                                                            <div class="col-sm-5 view-div">
+                                                                            <div class="view-div"
+                                                                                 style="display: inline-block">
                                                                                 <c:if test="${(not empty inspection.loiUrl) && (inspection.loiUrl!='')}">
                                                                                     <a class="btn btn-sm green"
                                                                                        target="_blank"
@@ -176,7 +186,8 @@
                                                                             </shiro:hasPermission>
                                                                         </td>
                                                                         <td>
-                                                                            <div class="col-sm-5 view-div">
+                                                                            <div class="view-div"
+                                                                                 style="display: inline-block">
                                                                                 <c:if test="${(not empty inspection.reportUrl) && (inspection.reportUrl!='')}">
                                                                                     <a class="btn btn-sm green"
                                                                                        target="_blank"

@@ -16,6 +16,7 @@ import com.ctoangels.goshipsurvey.common.modules.sys.service.IMessageService;
 import com.ctoangels.goshipsurvey.common.util.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -44,7 +45,9 @@ public class OPRecordController extends BaseController {
     IMessageService messageService;
 
     @RequestMapping
-    public String list() {
+    public String list(ModelMap map) {
+        map.put("shipType", getShipTypeDict());
+        map.put("inspectionType", getInspectionTypeDict());
         return "goshipsurvey/op/record/list";
     }
 

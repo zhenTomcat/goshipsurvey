@@ -166,6 +166,43 @@ function initUploaders_logo(buttonId, bucket, domain, imgId, inputId) {
     uploader.init();
 }
 
+
+function initUploaders_quotation_oil_photo(buttonId, bucket, domain) {
+    var uploader = new plupload.Uploader({
+        runtimes: 'html5,flash,silverlight,html4',
+        browse_button: buttonId,
+        flash_swf_url: domain + 'assets/plugins/plupload-2.1.2/js/Moxie.swf',
+        silverlight_xap_url: domain + 'assets/plugins/plupload-2.1.2/js/Moxie.xap',
+        url: 'http://oss.aliyuncs.com',
+        filters: {
+            mime_types: [ //只允许上传图片和zip,rar文件
+                {title: "Image files", extensions: "jpg,gif,png,bmp,jpeg"},
+                {title: "Zip files", extensions: "zip,rar"}
+            ],
+            max_file_size: '10mb', //最大只能上传10mb的文件
+            prevent_duplicates: false //不允许选取重复文件
+        },
+        init: {
+            FilesAdded: function (up) {
+                set_upload_param(up, '', false, domain);
+            },
+            BeforeUpload: function (up, file) {
+                set_upload_param(up, file.name, true, domain);
+            },
+            FileUploaded: function () {
+                var btn = $("#" + buttonId);
+                var fileDiv = btn.siblings(".upload-file-div");
+                fileDiv.css("display", "none");
+                var href = "http://" + bucket + ".oss-cn-shanghai.aliyuncs.com/" + g_object_name;
+                fileDiv.find("input").val(href);
+                fileDiv.find("a").attr("href", href);
+                fileDiv.css("display", "inline-block");
+            }
+        }
+    });
+    uploader.init();
+}
+
 function initUploaders_loi_without_sign_and_ship_particulars(buttonId, bucket, domain) {
     var uploader = new plupload.Uploader({
         runtimes: 'html5,flash,silverlight,html4',
@@ -619,7 +656,7 @@ function initUploaders_surveyor_passport(buttonId, bucket, domain, obj) {
 }
 
 
-function initUploaders_report_grade(buttonId,bucket,domain,gradeId){
+function initUploaders_report_grade(buttonId, bucket, domain, gradeId) {
     var uploader = new plupload.Uploader({
         runtimes: 'html5,flash,silverlight,html4',
         browse_button: buttonId,
@@ -644,24 +681,23 @@ function initUploaders_report_grade(buttonId,bucket,domain,gradeId){
             },
             FileUploaded: function () {
                 $.ajax({
-                    url:"prepurchase/surveyor/reportEditGrade",
-                    type:"GET",
-                    dataType:"json",
-                    data:{
-                        fileName:nativeName,
-                        sitePhoto:"http://" + bucket + ".oss-cn-shanghai.aliyuncs.com/" + g_object_name ,
-                        id:gradeId
+                    url: "prepurchase/surveyor/reportEditGrade",
+                    type: "GET",
+                    dataType: "json",
+                    data: {
+                        fileName: nativeName,
+                        sitePhoto: "http://" + bucket + ".oss-cn-shanghai.aliyuncs.com/" + g_object_name,
+                        id: gradeId
 
                     },
-                    success:function (data) {
-                        if(data.mes){
+                    success: function (data) {
+                        if (data.mes) {
                             var html = '<a target="_blank" href="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '">' + nativeName + '</a>';
-
                             $("#"+buttonId).parent().prev().html(html);
                             $("#"+buttonId).parent().html('<button onclick="removeGrade(this,'+gradeId+')" type="button" class="btn red">Delete</button>');
                         }
                     },
-                    error:function () {
+                    error: function () {
 
                     }
                 });

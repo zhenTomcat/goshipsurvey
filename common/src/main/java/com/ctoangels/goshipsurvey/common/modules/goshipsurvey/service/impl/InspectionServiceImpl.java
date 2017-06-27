@@ -12,6 +12,7 @@ import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.PurchaseInsp
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.CommentMapper;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
 import com.ctoangels.goshipsurvey.common.modules.sys.mapper.UserMapper;
+import com.ctoangels.goshipsurvey.common.modules.sys.service.IMessageService;
 import com.ctoangels.goshipsurvey.common.util.Const;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,7 @@ import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Inspection;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IInspectionService;
 import com.baomidou.framework.service.impl.SuperServiceImpl;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -48,6 +50,9 @@ public class InspectionServiceImpl extends SuperServiceImpl<InspectionMapper, In
     @Autowired
     CommentMapper commentMapper;
 
+    @Autowired
+    IMessageService messageService;
+
     @Override
     public boolean initInspection(int quotationId, int applicationId) {
         //更新所以询价申请状态
@@ -58,6 +63,7 @@ public class InspectionServiceImpl extends SuperServiceImpl<InspectionMapper, In
         int surveyorId = 0;
         int companyId = 0;
         double totalPrice = 0;
+        List<Integer> failureIds = new ArrayList<>();
         for (QuotationApplication qa : applicationList) {
             if (qa.getId() == applicationId) {
                 qa.setApplicationStatus(Const.QUO_APPLY_SUCCESS);
@@ -66,6 +72,7 @@ public class InspectionServiceImpl extends SuperServiceImpl<InspectionMapper, In
                 companyId = qa.getUserId();
             } else {
                 qa.setApplicationStatus(Const.QUO_APPLY_FAILURE);
+                failureIds.add(qa.getUserId());
             }
         }
         if (quotationApplicationMapper.updateBatchById(applicationList) < 0) {
@@ -107,6 +114,12 @@ public class InspectionServiceImpl extends SuperServiceImpl<InspectionMapper, In
             return false;
         }
 
+        //发送信息
+        String shipName = quotation.getShipName();
+        String content1 = shipName + "船租还船检验,船东已接受您的检验申请,请尽快上传护照及loi文件,并查看代理信息安排人员验船";
+        messageService.publicOne(companyId, content1, content1);
+        String content2 = shipName + "船租还船检验,验船申请失败";
+        messageService.publicSome(failureIds, content2, content2);
         return true;
     }
 
@@ -152,6 +165,16 @@ public class InspectionServiceImpl extends SuperServiceImpl<InspectionMapper, In
 
         if (inspectionMapper.updateSelectiveById(i) < 0) {
             return false;
+        } else {
+            Inspection inspection = inspectionMapper.selectById(id);
+            String shipName = quotationMapper.selectById(inspection.getQuotationId()).getShipName();
+            if (!"report".equals(type)) {
+                String content = shipName + "船租还船检验,验船师已上传相关文件,请及时查看";
+                messageService.publicOne(inspection.getOpId(), content, content);
+            } else {
+                String content = shipName + "船租还船检验,检验报告已出,请及时在网上查看,并对本次船检做出评价";
+                messageService.publicOne(inspection.getOpId(), content, content);
+            }
         }
 
         return true;

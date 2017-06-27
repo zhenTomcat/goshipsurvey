@@ -1,10 +1,17 @@
 package com.ctoangels.goshipsurvey.common.modules.goshipsurvey.controller.surveyor;
 
 import com.alibaba.fastjson.JSONObject;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Quotation;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.QuotationApplication;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IQuotationApplicationService;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IQuotationService;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.PurchaseQuotation;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IPurchaseQuotationService;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IShipDetailService;
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
+import com.ctoangels.goshipsurvey.common.modules.sys.service.IMessageService;
 import com.ctoangels.goshipsurvey.common.util.Const;
+import com.ctoangels.goshipsurvey.common.util.Tools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -22,6 +29,18 @@ public class SurveyorQuotationApplicationController extends BaseController {
     @Autowired
     IQuotationApplicationService quotationApplicationService;
 
+    @Autowired
+    IQuotationService quotationService;
+
+    @Autowired
+    IPurchaseQuotationService purchaseQuotationService;
+
+    @Autowired
+    IShipDetailService shipDetailService;
+
+    @Autowired
+    IMessageService messageService;
+
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
@@ -30,7 +49,28 @@ public class SurveyorQuotationApplicationController extends BaseController {
         qa.setUserId(getCurrentUser().getId());
         qa.setCreateInfo(getCurrentUser().getName());
         qa.setApplicationStatus(Const.QUO_APPLY_ING);
-        jsonObject.put("success", quotationApplicationService.insert(qa));
+        if (quotationApplicationService.insert(qa)) {
+            jsonObject.put("success", true);
+            messageService.addApplicationMessage(qa.getId());
+        } else {
+            jsonObject.put("success", false);
+        }
+        return jsonObject;
+    }
+
+    @RequestMapping(value = "/cancel")
+    @ResponseBody
+    public JSONObject cancel(@RequestParam(required = false) Integer id) {
+        JSONObject jsonObject = new JSONObject();
+        QuotationApplication qa = new QuotationApplication();
+        qa.setId(id);
+        qa.setDelFlag(Const.DEL_FLAG_DELETE);
+        qa.setUpdateInfo(getCurrentUser().getName());
+        if (quotationApplicationService.updateSelectiveById(qa)) {
+            jsonObject.put("status", 1);
+        } else {
+            jsonObject.put("status", 0);
+        }
         return jsonObject;
     }
 }
