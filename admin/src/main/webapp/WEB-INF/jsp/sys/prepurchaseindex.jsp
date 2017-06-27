@@ -118,7 +118,8 @@
 <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
 --%>
 <script src="${global}/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="${global}/plugins/js.cookie.min.js" type="text/javascript"></script>
+<%--<script src="${global}/plugins/js.cookie.min.js" type="text/javascript"></script>--%>
+<script src="http://windyeel.oss-cn-shanghai.aliyuncs.com/global/plugins/jquery.cookie.js" type="text/javascript"></script>
 <script src="${global}/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
 <script src="${global}/plugins/jquery.blockui.min.js" type="text/javascript"></script>
 <script src="${global}/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>

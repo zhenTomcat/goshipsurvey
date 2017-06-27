@@ -78,7 +78,7 @@
                                     <div class="tab-content">
                                         <div class="tab-pane fade active in" id="tab_1_1">
                                             <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                                                   id="quotation_table">
+                                                   id="onoff_op_record_quotation_table">
                                                 <thead>
                                                 <tr>
                                                     <th style="width: 15%">Ship name</th>
@@ -95,7 +95,7 @@
                                         </div>
                                         <div class="tab-pane fade" id="tab_1_2">
                                             <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                                                   id="inspection_table">
+                                                   id="onoff_op_record_inspection_table">
                                                 <thead>
                                                 <tr>
                                                     <th style="width: 10%">Ship name</th>
@@ -183,7 +183,6 @@
         </div>
     </div>
 </div>
-
 <script>
     var quotationTable;
     var inspectionTable;
@@ -194,14 +193,14 @@
         drawInspectionTable();
     });
 
-
     function drawQuotationTable() {
-        quotationTable = $('#quotation_table').DataTable({
+        quotationTable = $('#onoff_op_record_quotation_table').DataTable({
             "ordering": false,
             "pagingType": "simple_numbers",
             "processing": true,
             "autoWidth": false,
             "serverSide": true,
+            'bStateSave': true,
             "ajax": {
                 "url": "op/record/list/quotation",
                 "type": "post",
@@ -260,12 +259,13 @@
         });
     }
     function drawInspectionTable() {
-        inspectionTable = $('#inspection_table').DataTable({
+        inspectionTable = $('#onoff_op_record_inspection_table').DataTable({
             "ordering": false,
             "pagingType": "simple_numbers",
             "processing": true,
             "autoWidth": false,
             "serverSide": true,
+            'bStateSave': true,
             "ajax": {
                 "url": "op/record/list/inspection",
                 "type": "post",
@@ -332,17 +332,6 @@
                     }
                 },
             ],
-//            "drawCallback": function (settings, json) {
-//                var rows = $('#inspection_table').find("tbody tr");
-//                rows.each(function (i, e) {
-//                    var row = inspectionTable.row($(this));
-//                    row.child(moreInfo(row.data())).show();
-//                })
-//            },
-//            "fnCreatedRow": function (nRow, aData, iDataIndex) {
-//                var row = inspectionTable.row($(nRow));
-//                row.child(moreInfo(aData)).show();
-//            }
         });
         inspectionTable.on('click', 'td.comment-detail', function () {
             var tr = $(this).closest('tr');

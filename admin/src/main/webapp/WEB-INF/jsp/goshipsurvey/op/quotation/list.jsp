@@ -49,7 +49,7 @@
                                     <div class="tab-content">
                                         <div class="tab-pane fade active in" id="tab_1_1">
                                             <table class="table  table-bordered"
-                                                   id="quotation_table">
+                                                   id="onoff_op_quotation_table">
                                                 <thead>
                                                 <tr>
                                                     <th width="15%">Ship name</th>
@@ -77,19 +77,20 @@
     </div>
 </div>
 <script>
-    var quotationTable = $("#quotation_table");
+    var quotationTable = $("#onoff_op_quotation_table");
     $(document).ready(function () {
         drawTable();
     })
 
     function drawTable() {
-        quotationTable = $('#quotation_table').DataTable({
+        quotationTable = $('#onoff_op_quotation_table').DataTable({
             "ordering": false,
             "pagingType": "simple_numbers",
             "destroy": true,
             "processing": true,
             "autoWidth": false,
             "serverSide": true,
+            'bStateSave': true,
             "ajax": {
                 "url": "op/quotation/list",
                 "type": "get",
@@ -153,7 +154,7 @@
                 }
             ],
             "drawCallback": function () {
-                var rows = $('#quotation_table').find("tbody tr");
+                var rows = $('#onoff_op_quotation_table').find("tbody tr");
                 rows.each(function (i, e) {
                     var row = quotationTable.row($(this));
                     var data = row.data();

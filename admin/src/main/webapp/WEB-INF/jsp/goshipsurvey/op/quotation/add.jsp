@@ -236,7 +236,8 @@
                                     </div>
                                 </div>
                                 <div class="col-md-12">
-                                    <label class="col-sm-3 control-label">Ship particulars <i class="fa fa-info-circle"></i></label>
+                                    <label class="col-sm-3 control-label">Ship particulars <i
+                                            class="fa fa-info-circle"></i></label>
                                     <div class="form-group col-md-9">
                                         <textarea class="form-control ship-particulars-textarea"
                                                   name="shipParticulars"
@@ -268,7 +269,7 @@
                             <div class="col-md-4">
                                 <label class="col-md-12 control-label"
                                        style="margin-bottom: 15px;text-align: left">Port
-                                    agency  <i class="fa fa-info-circle"></i></label>
+                                    agency <i class="fa fa-info-circle"></i></label>
                                 <textarea
                                         class="form-control port-agency-textarea "
                                         name="portAgency"
@@ -300,7 +301,8 @@
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <label style="float: left"> <i class="fa fa-info-circle">This information can't be read by surveyor, until chosen
+                    <label style="float: left"> <i class="fa fa-info-circle">This information can't be read by surveyor,
+                        until chosen
                         surveyor/company.</i></label>
                     <button id="closeModal" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                     <shiro:hasPermission name="op/quotation/add">
@@ -325,6 +327,7 @@
                 success: function (data) {
                     if (data.success) {
                         $("#closeModal").click();
+                        drawTable();
                     } else {
                         alert("add quotation error")
                     }

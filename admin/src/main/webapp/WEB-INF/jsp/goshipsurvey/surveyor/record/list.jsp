@@ -60,7 +60,7 @@
                                     <div class="tab-content">
                                         <div class="tab-pane fade active in" id="tab_1_2">
                                             <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                                                   id="inspection_table">
+                                                   id="onoff_surveyor_record_inspection_table">
                                                 <thead>
                                                 <tr>
                                                     <th>Ship name</th>
@@ -153,12 +153,13 @@
     var starRatingNot = $("#star-rating-outer-not");
     var starRatingHave = $("#star-rating-outer-have");
     $(document).ready(function () {
-        inspectionTable = $('#inspection_table').DataTable({
+        inspectionTable = $('#onoff_surveyor_record_inspection_table').DataTable({
             "ordering": false,
             "pagingType": "simple_numbers",
             "processing": true,
             "autoWidth": false,
             "serverSide": true,
+            'bStateSave': true,
             "ajax": {
                 "url": "surveyor/record/list",
                 "type": "post",

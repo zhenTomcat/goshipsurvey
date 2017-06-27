@@ -29,7 +29,7 @@
                                     <%--</div>--%>
                                     <div class="tab-pane fade active in" id="tab_1_1">
                                         <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                                               id="quotation_table">
+                                               id="onoff_surveyor_quotation_table">
                                             <thead>
                                             <tr>
                                                 <th width="9%">Public date</th>
@@ -59,7 +59,7 @@
 </div>
 <a id="goToSurveyorInfo" style="display: none" data-model="dialog"></a>
 <script>
-    var quotationTable = $("#quotation_table");//已申请的quotation表格
+    var quotationTable = $("#onoff_surveyor_quotation_table");//已申请的quotation表格
     var surveyList;
     var surveyorSelectHtml;
     $(document).ready(function () {
@@ -68,13 +68,14 @@
 
     //绘制页面表格
     function drawTable() {
-        quotationTable = $('#quotation_table').DataTable({
+        quotationTable = $('#onoff_surveyor_quotation_table').DataTable({
             "ordering": false,
             "pagingType": "simple_numbers",
             "processing": true,
             "autoWidth": false,
             "serverSide": true,
             "destroy": true,
+            'bStateSave': true,
             "ajax": {
                 "url": "surveyor/quotation/list",
                 "type": "post",
