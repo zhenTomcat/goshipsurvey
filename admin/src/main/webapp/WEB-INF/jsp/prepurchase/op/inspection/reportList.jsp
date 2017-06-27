@@ -93,7 +93,7 @@
                     "data": "purchaseQuotation.totalPrice",
                 },
                 {
-                    "data": "opGrade",
+                    "data": "totalGrade",
                 },
                 {
                     "data": "",
@@ -116,10 +116,18 @@
                         return row.surveyor.firstName + " " + row.surveyor.lastName+"/"+row.op.name;
                     }
                 },{
+                    "targets": 7,
+                    "render": function (data, type, row) {
+                        if(row.submitStatus==1){
+                            return row.totalGrade;
+                        }
+                        return "";
+                    }
+                },{
                     "targets": 8,
                     "render": function (data, type, row) {
                         if(row.submitStatus==1){
-                            return '<a data-target="navTab" href="/prepurchase/op/reportInfo?reportId=${i.inspectionReportId}" >View</a>';
+                            return '<a data-target="navTab" href="/prepurchase/op/reportInfo?reportId='+row.inspectionReportId+'" >View</a>';
                         }
                         return "";
                     }
@@ -127,7 +135,7 @@
                     "targets": 9,
                     "render": function (data, type, row) {
                         if(row.submitStatus==1){
-                            return '<li class="fa fa-download"></li>';
+                            return '<a href="'+row.reportUrl+'" download="REPORT"><li class="fa fa-download"></li></a>';
                         }
                         return ""
                     }

@@ -76,6 +76,7 @@ public class Grade implements Serializable {
 	@TableField(value = "file_name")
 	private String fileName;
 
+
 	@TableField(exist = false)
 	private List<Grade> grades;
 
@@ -192,7 +193,7 @@ public class Grade implements Serializable {
 	}
 
 	public String getFileName() {
-		return fileName;
+		return this.fileName;
 	}
 
 	public void setFileName(String fileName) {

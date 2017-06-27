@@ -53,6 +53,7 @@
     .li-left{margin-left: 2px}
     .li-right{margin-right: 2px}
     textarea{ resize:none;}
+    #div_grade{margin-top: 10px;}
 </style>
     <div class="row">
         <div class="col-md-12">
@@ -98,14 +99,14 @@
                     <div class=" form-body">
                         <div class="line1 col-md-12"></div>
                         <div class="tab-content " id="div_from">
-                            <div class="tab-pane active" id="tab1">
+                            <div class="tab-pane tab-left active" id="tab1">
                                 <div class="tab-pane-div">
                                     <form action="prepurchase/surveyor/reportEditShip" method="post">
-                                        <input type="hidden" value="${report.id}" name="reportId"/>
+                                        <input type="hidden" value="${report.id}" name="reportId" id="reportId"/>
                                         <div class="col-md-6">
                                             <div style="border: solid black 2px" class="col-md-12">
                                                 <div class="col-md-8" style="margin-top: 20px;margin-bottom: 20px">
-                                                    <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/GWTcR228ek.jpg" style="width: 100%;height: 300px"/>
+                                                    <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/GWTcR228ek.jpg" style="width: 100%;height: 250px"/>
                                                 </div>
                                                 <div class="col-md-4" style="margin-top: 20px;margin-bottom: 20px">
                                                     <p style="color: #00a8c6">Ship Name</p>
@@ -181,9 +182,13 @@
                                                     <label class="col-md-4 control-label">Call Sign:</label>
                                                     <div class="col-md-8"><input disabled class="form-control" type="text" value="${report.shipDetail.callSign}" name="callSign"/></div>
                                                 </div>
-                                                <div class="col-md-6 form-group">
+                                                <div class="col-md-12 form-group">
                                                     <label class="col-md-4 control-label">Inspection date:</label>
                                                     <div class="col-md-8"><input disabled class="form-control" type="text" value="" name=""/></div>
+                                                </div>
+                                                <div class="col-md-12 form-group">
+                                                    <label class="col-md-9 control-label">Known the buyers by site surveyor,but WOG:</label>
+                                                    <div class="col-md-3"><input disabled  class="form-control" type="text" value="${report.shipDetail.wog}" name="wog"/></div>
                                                 </div>
                                             </div>
                                         </div>
@@ -287,8 +292,55 @@
                                 </div>
                             </div>
                             <div class="tab-pane" id="tab2">
+                                <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12" style="float: right;margin-top: 5px">
+                                    <a class="dashboard-stat dashboard-stat-v2 green" href="#" style="margin: 0px">
+                                        <div class="visual">
+                                            <i class="fa fa-shopping-cart"></i>
+                                        </div>
+                                        <div class="details">
+                                            <div class="number">
+                                                <span data-counter="counterup" id="totalGrade">${totalGrade}</span> </div>
+                                            <div class="desc"> Grade </div>
+                                        </div>
+                                    </a>
+                                </div>
+                                <div class="col-md-12" id="div_grade">
+                                    <input type="hidden" name="id" value="${report.id}"/>
+                                    <div class="col-md-12">
+                                        <div class="portlet box green">
+                                            <div class="portlet-title">
+                                                <div class="caption">
+                                                    Grading </div>
+                                                <div class="tools">
+                                                </div>
+                                            </div>
+                                            <div class="portlet-body">
+                                                <table class="table table-striped table-bordered table-hover" id="table_garade" >
+                                                    <thead>
+                                                    <tr>
+                                                        <th style="width: 15%"> Inspection item </th>
+                                                        <th style="width: 2%"> Grade </th>
+                                                        <th >Remark</th>
+                                                        <th style="width: 15%">Site photo</th>
+                                                    </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                    <tr style="display: none"></tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="suspend">
+                                    <dl>
+                                        <dt class="IE6PNG"></dt>
+                                        <dd class="suspendQQ"><a href="javascript:;" onclick="viewHull(this)"></a></dd>
+                                        <dd class="suspendTel"><a href="javascript:;" onclick="viewMachine(this)"></a></dd>
+                                    </dl>
+                                </div>
                             </div>
-                            <div class="tab-pane" id="tab3">
+                            <div class="tab-pane tab-left" id="tab3">
                                 <div class="tab-pane-div" >
                                         <input type="hidden" name="id" value="${report.id}"/>
                                         <div class="col-md-12">
@@ -328,7 +380,7 @@
                                         </div>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="tab4">
+                            <div class="tab-pane tab-left" id="tab4">
                                 <div class="tab-pane-div">
                                     <div class="col-md-12">
                                         <div class="col-md-3" style="margin-bottom: 20px;">
@@ -358,7 +410,7 @@
                                     </c:forEach>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="tab5">
+                            <div class="tab-pane tab-left" id="tab5">
                                 <div class="tab-pane-div" >
                                         <center><h2>Surveyor’s summary</h2></center>
                                         <c:if test="${report.conditionInspection.hull!='' && report.conditionInspection.hull!=null}">
@@ -643,7 +695,7 @@
                                             </c:if>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="tab6" data-flag="flag">
+                            <div class="tab-pane tab-left" id="tab6" data-flag="flag">
                                 <div class="tab-pane-div" >
                                     <c:forEach items="${report.technicalAppendices}" var="t">
                                         <c:if test="${t.catagory!='Vessel tank capacity' && ! empty t.technicalAppendixInfo}">
@@ -682,49 +734,52 @@
                                                     </div>
                                             </div>
                                         </c:if>
-                                    </c:forEach>
-                                    <c:if test="${flag}">
-                                        <div class="col-md-12">
-                                            <div class="portlet box green">
-                                                <div class="portlet-title">
-                                                    <div class="caption">
-                                                        Vessel tank capacity </div>
-                                                    <div class="tools">
+                                        <c:if test="${t.catagory=='Cargo tank capacities(Only tanker)'}">
+                                            <c:if test="${flag}">
+                                                <div class="col-md-12">
+                                                    <div class="portlet box green">
+                                                        <div class="portlet-title">
+                                                            <div class="caption">
+                                                                Vessel tank capacity </div>
+                                                            <div class="tools">
+                                                            </div>
+                                                        </div>
+                                                        <c:forEach items="${technicalAppendices}" var="te">
+                                                            <c:if test="${! empty te.technicalAppendixInfo}">
+                                                                <div class="portlet-body">
+                                                                    <form action="prepurchase/surveyor/reportEditTechnical" method="post" >
+                                                                        <table class="table table-striped table-bordered table-hover" >
+                                                                            <thead>
+                                                                            <tr>
+                                                                                <th> ${te.title1} </th>
+                                                                                <th> ${te.title2} </th>
+                                                                                <th> ${te.title3} </th>
+                                                                            </tr>
+                                                                            </thead>
+                                                                            <tbody>
+                                                                            <c:forEach items="${te.technicalAppendixInfo}" var="ta">
+                                                                                <tr>
+                                                                                    <td>${ta.one}</td>
+                                                                                    <td>${ta.two}</td>
+                                                                                    <td>${ta.three}</td>
+                                                                                </tr>
+                                                                            </c:forEach>
+                                                                            </tbody>
+                                                                        </table>
+                                                                    </form>
+                                                                </div>
+                                                            </c:if>
+                                                        </c:forEach>
+
                                                     </div>
                                                 </div>
-                                                <c:forEach items="${technicalAppendices}" var="te">
-                                                    <c:if test="${! empty te.technicalAppendixInfo}">
-                                                        <div class="portlet-body">
-                                                            <form action="prepurchase/surveyor/reportEditTechnical" method="post" >
-                                                                <table class="table table-striped table-bordered table-hover" >
-                                                                    <thead>
-                                                                    <tr>
-                                                                        <th> ${te.title1} </th>
-                                                                        <th> ${te.title2} </th>
-                                                                        <th> ${te.title3} </th>
-                                                                    </tr>
-                                                                    </thead>
-                                                                    <tbody>
-                                                                    <c:forEach items="${te.technicalAppendixInfo}" var="ta">
-                                                                        <tr>
-                                                                            <td>${ta.one}</td>
-                                                                            <td>${ta.two}</td>
-                                                                            <td>${ta.three}</td>
-                                                                        </tr>
-                                                                    </c:forEach>
-                                                                    </tbody>
-                                                                </table>
-                                                            </form>
-                                                        </div>
-                                                    </c:if>
-                                                </c:forEach>
+                                            </c:if>
+                                        </c:if>
+                                    </c:forEach>
 
-                                            </div>
-                                        </div>
-                                    </c:if>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="tab7">
+                            <div class="tab-pane tab-left" id="tab7">
                                 <div class="tab-pane-div"  >
                                     <div class="portlet-body">
                                         <table class="table table-striped table-bordered table-hover" id="default_table">
@@ -741,7 +796,7 @@
                                                     <tr>
                                                         <td>${i.count}</td>
                                                         <td><a href="${d.attachmentUrl}">${d.title}</a></td>
-                                                        <td><li class="fa fa-download"></li></td>
+                                                        <td><a href="${d.attachmentUrl}" download="下载"><li class="fa fa-download"></li></a></td>
                                                     </tr>
                                                 </c:if>
                                             </c:forEach>
@@ -750,7 +805,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="tab-pane" id="tab8">
+                            <div class="tab-pane tab-left" id="tab8">
 
                             </div>
                         </div>
@@ -761,104 +816,90 @@
     </div>
 
 
+<%--显示船体评分信息--%>
+<div id="hull" class="modal fade" tabindex="-1" data-backdrop="make" data-keyboard="false">
+    <div style="width: 50%" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #4bccd8">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">船体状态评估与等级划分说明</h4>
+            </div>
+            <div  class="modal-body col-md-12">
+                <div class="col-md-12">
+                    <div class="portlet-body">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                            <tr>
+                                <th style="width: 15%"> Grade </th>
+                                <th style="width: 15%"> Standard </th>
+                                <th >技术状态</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${hullGrades}" var="h">
+                                <tr>
+                                    <td>${h.grade}</td>
+                                    <td>${h.standard}</td>
+                                    <td>${h.technicalCondition}</td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="closeHull" type="button" data-dismiss="modal" class="btn dark btn-outline">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<a href="#hull" id="viewHull"   data-toggle="modal"  class="btn btn-sm margin-bottom-5 green" style="display: none"></a>
 
+<%--显示电气设备评分信息--%>
+<div id="machine" class="modal fade" tabindex="-1" data-backdrop="make" data-keyboard="false">
+    <div style="width: 50%" class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header" style="background-color: #4bccd8">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
+                <h4 class="modal-title">机械设备状态评估与等级划分说明</h4>
+            </div>
+            <div  class="modal-body col-md-12">
+                <div class="col-md-12">
+                    <div class="portlet-body">
+                        <table class="table table-striped table-bordered table-hover" >
+                            <thead>
+                            <tr>
+                                <th style="width: 15%"> Grade </th>
+                                <th style="width: 15%"> Standard </th>
+                                <th >技术状态</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <c:forEach items="${machineGrades}" var="m">
+                                <tr>
+                                    <td>${m.grade}</td>
+                                    <td>${m.standard}</td>
+                                    <td style="font-size: xx-small">${m.technicalCondition}</td>
+                                </tr>
+                            </c:forEach>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button id="closeMachine" type="button" data-dismiss="modal" class="btn dark btn-outline">关闭</button>
+            </div>
+        </div>
+    </div>
+</div>
+<a href="#machine" id="viewMachine"   data-toggle="modal"  class="btn btn-sm margin-bottom-5 green" style="display: none"></a>
 <script>
     var width = $(window).width();
-    $(".tab-pane").css("margin-left",width*0.1);
-    function defectAddRow(obj){
-        var trNum=$(obj).closest("table").find("tbody tr").length-1;
-        var reportId=$("#reportId").val();
-        html= '<tr>' +
-                '<td style="display: none;"> '+
-                '<input type="text"  value="'+reportId+'" name="defects['+trNum+'].inspectionReportId" /></td>'+
-                '<td><textarea class="form-control" rows="2" name="defects['+trNum+'].description"></textarea></td>' +
-                '<td><input type="text" class="form-control" name="defects['+trNum+'].estimatCost"/></td>' +
-                '<td><button type="button" onclick="deleteRow(this)">Delete</button> </td></tr>';
-        $(obj).closest("table").find("tbody tr:last").after(html);
-    }
-
-    function defectDeleteRow(obj) {
-        var count=0;
-        var tableObj= $(obj).closest("table");
-        $(obj).parent().parent().remove();
-        tableObj.find("tbody tr").each(function () {
-            if(count==0){
-                count++;
-            }else {
-                var num=count-2;
-                var one="defects["+num+"].inspectionReportId";
-                var two="defects["+num+"].description";
-                var three="defects["+num+"].estimatCost";
-                $(this).find("td").first().find("textarea").attr("name",one);
-                $(this).find("td").first().next().find("input").attr("name",two);
-                $(this).find("td").last().prev().find("input").attr("name",three);
-            }
-            count++;
-        });
+    $(".tab-left").css("margin-left",width*0.1);
 
 
-    }
-
-    function addRow(obj) {
-       var trLength= $(obj).closest("table").find("tbody tr").length-1;
-        var html="";
-        if($(obj).attr("data-num")==2){
-            html= '<tr >' +
-                    '<td onclick="one(this)"><input type="text" name="technicalAppendixInfo['+trLength+'].one" class="form-control" /></td>' +
-                    '<td><input type="text" class="form-control" name="technicalAppendixInfo['+trLength+'].two"/></td>' +
-                    '<td><button data-num="2" type="button" onclick="deleteRow(this)">Delete</button> </td></tr>'
-        }else {
-            html= '<tr >' +
-                    '<td onclick="one(this)"><input type="text" class="form-control" name="technicalAppendixInfo['+trLength+'].one"/></td>' +
-                    '<td><input type="text" class="form-control" name="technicalAppendixInfo['+trLength+'].two"/></td>'+
-                    '<td><input type="text" class="form-control" name="technicalAppendixInfo['+trLength+'].three"/></td>' +
-                    '<td><button type="button" onclick="deleteRow(this)">Delete</button> </td></tr>';
-        }
-
-        $(obj).closest("table").find("tbody tr:last").after(html);
-    }
-    function deleteRow(obj) {
-        var count=0;
-        var tableObj= $(obj).closest("table");
-        $(obj).parent().parent().remove();
-        tableObj.find("tbody tr").each(function () {
-            if(count==0){
-                count++;
-            }else {
-                var num=count-2;
-                var one="technicalAppendixInfo["+num+"].one";
-                var two="technicalAppendixInfo["+num+"].two";
-
-                $(this).find("td").first().find("input").attr("name",one);
-                $(this).find("td").first().next().find("input").attr("name",two);
-                if($(obj).attr("data-num")!=2){
-                    var three="technicalAppendixInfo["+num+"].three";
-                    $(this).find("td").last().prev().find("input").attr("name",three);
-                }
-            }
-            count++;
-        });
-
-
-    }
-   function addRow1(obj) {
-        $("#addRow1").click();
-   }
-   function sure(obj) {
-       var html='<tr><td>—'+$("#title").val()+'</td>' +
-               '<td></td>' +
-               '<td><button onclick="upload_attachment(this)" type="button">Browse</button></td></tr>';
-       $("#default_table").find("tbody tr:last").after(html);
-       $(obj).prev().click();
-   }
-   function upload_attachment(obj) {
-       initUploaders_attachment(obj, "shipinfo", "${staticPath}/",obj,"删除");
-   }
-
-   function clearTd(obj) {
-       $(obj).parent().prev().html("");
-       $(obj).parent().html('<button type="button" onclick="upload_attachment(this)">Browse</button>');
-   }
 
    //鼠标移入事件
     function mouseOver(obj){
@@ -868,168 +909,85 @@
         });
     }
 
-    //移除相册
-    function removePhoto(obj,id){
-        if(confirm("确定删除？")){
-            $.ajax({
-                url:"prepurchase/surveyor/deleteAlbum",
-                type:"GET",
-                dataType:"json",
-                data:{
-                    albumId:id,
-                },
-                success:function (data) {
-                    if(data){
-                        $(obj).parent().parent().parent().remove();
-                    }
-                },
-                error:function () {
 
-                }
-            });
-        }
+</script>
+<script type="text/javascript">
 
+    $(document).ready(function(){
+
+        $(".suspend").mouseover(function() {
+            $(this).stop();
+            $(this).animate({width: 160}, 400);
+        })
+
+        $(".suspend").mouseout(function() {
+            $(this).stop();
+            $(this).animate({width: 40}, 400);
+        });
+
+    });
+
+    //触发船体状态评估
+    function viewHull(obj) {
+        $("#viewHull").click();
     }
 
-    //编辑相册
-    function editPhoto(obj,id,albumName) {
-        $(".photo_name").removeClass("photo_name");
-        $(obj).parent().attr("class","photo_name");
-        $(obj).parent().attr("data-id",id);
-
-        $("#photoName").val(albumName);
-        $("#edit").click();
+    //触发机械设备状态评估
+    function viewMachine(obj) {
+        $("#viewMachine").click();
     }
+    $(document).ready(function(){
+        gradeList();
+    });
 
-    //确定相册名称
-    function surePhotoName(obj) {
-        if($("#photoName").val()==""){
-            alert("相册名称不能为空!")
-        }else{
-            var albumId=$(".photo_name").attr("data-id");
-            $.ajax({
-                url:"prepurchase/surveyor/editAlbum",
-                type:"GET",
-                dataType:"json",
-                data:{
-                    albumId:albumId,
-                    albumName:$("#photoName").val(),
-                },
-                success:function (data) {
-                    if(data){
-                        $(".photo_name").next().find("p:first").html($("#photoName").val());
-                        $(obj).prev().click();
-                        $(".photo_name").removeAttr("data-id");
-                        $(".photo_name").removeClass("photo_name");
-                    }
-                },
-                error:function () {
-
-                }
-            });
-        }
-    }
-
-    //创建一个新的相册
-    function createAlbum(obj) {
-        $("#addAblum").click();
-        $(".photo_name").removeClass("photo_name");
-        $(obj).attr("class","photo_name")
-
-    }
-    //确定相册名称
-    function sureAlbumName(obj) {
-        var albumName=$('#album_name').val();
+    /*异步加载Grade的信息*/
+    function gradeList() {
         var reportId=$("#reportId").val();
         $.ajax({
-            url:"prepurchase/surveyor/createAlbum",
+            url:"prepurchase/surveyor/getGradeList",
             type:"GET",
             dataType:"json",
             data:{
-                albumName:albumName,
                 reportId:reportId
             },
             success:function (data) {
-                if(data){
-                    var createDate=new Date().format('dd/MM/yyyy');
-                    //相册名称
-                    var html='<div class="divPhoto"><div class="divImg" onmouseover="mouseOver(this)">'+
-                            '<div><span  onclick="javascript:editPhoto(this);" class="span-left"><li class="li-left fa fa-edit"></li></span>'+
-                            '<span onclick="javascript:removePhoto(this);" class="span-right"><li class="li-right fa fa-remove"></li> </span>'+
-                            '<a data-model="dialog" href="prepurchase/surveyor/viewImg"  >'+
-                            '<img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/GWTcR228ek.jpg" style="width: 200px;height: 200px;"/> </a> </div>'+
-                            '<div style="width: 200px"><p style="float: left;margin-right: 10px;">'+albumName+'</p><p style="float: left;margin-right: 10px">(0)</p>'+
-                            '<p style="float: left;margin: 0px">Create at '+createDate+'</p></div></div></div>';
-                    $(".photo_name").closest("form").find(".divPhoto:last").after(html);
-                    $(obj).prev().click();
-                    $(".photo_name").removeClass("photo_name");
+                if(data.mes){
+                    var grades=data.grades;
+                    var html='';
+                    for(var i=0;i<grades.length;i++){
+                        var g=grades[i].grade;
+                        if(g==null){
+                            g='';
+                        }
+
+                        if(grades[i].rank==1){
+                            html+='<tr class="item'+i+'" style="background-color: #9C9C9C;">'+
+                                    '<td style="text-align: center;font-weight:bolder ;font-size: larger">'+grades[i].item+'</td>'+
+                                    '<td class="grade1">'+g+'</td>'+
+                                    '<td ></td>'+
+                                    '<td></td>'+
+                                    '</tr>';
+                        }else if(grades[i].rank==2){
+                            html+='<tr class="item'+i+'" style="background-color:#01a0e4">'+
+                                    '<td  style="font-size: larger">'+grades[i].item+'</td>'+
+                                    '<td class="grade2">'+g+'</td>'+
+                                    '<td ></td>'+
+                                    '<td></td>'+
+                                    '</tr>'
+                        }else if(grades[i].rank==3){
+                            html+= '<tr>'+
+                                    '<td>'+grades[i].item+'</td>'+
+                                    '<td>'+g+'</td>'+
+                                    '<td>'+grades[i].remark+'</td></tr>';
+                        }
+                    }
+                    $("#table_garade").find("tbody tr:last").after(html);
+
                 }
             },
             error:function () {
 
             }
         });
-
     }
-
-    //格式化日期
-    Date.prototype.format =function(format) {
-        var o = {
-            "M+": this.getMonth() + 1, //month
-            "d+": this.getDate(), //day
-            "h+": this.getHours(), //hour
-            "m+": this.getMinutes(), //minute
-            "s+": this.getSeconds(), //second
-            "q+": Math.floor((this.getMonth() + 3) / 3), //quarter
-            "S": this.getMilliseconds() //millisecond
-        }
-        if (/(y+)/.test(format)) format = format.replace(RegExp.$1,
-                (this.getFullYear() + "").substr(4 - RegExp.$1.length));
-        for (var k in o)if (new RegExp("(" + k + ")").test(format))
-            format = format.replace(RegExp.$1,
-                    RegExp.$1.length == 1 ? o[k] :
-                            ("00" + o[k]).substr(("" + o[k]).length));
-        return format;
-    }
-</script>
-<script>
-
- /*   if($(".info").find("a").attr("href")=="#tab1"){
-        $("#back").hide();
-    }*/
-    function nextLi() {
-        if($("#div_from .active").attr("data-flag")=='flag'){
-            $("#div_from .active").find("form").each(function () {
-                $(this).ajaxSubmit({
-                    success:function (data) {
-
-                    },
-                    error:function () {
-
-                    }
-                });
-            });
-        }else {
-            $("#div_from .active").find("form").ajaxSubmit({
-                success:function (data) {
-
-                },
-                error:function () {
-
-                }
-            });
-        }
-
-        var obj=$("#ul_li .active").next();
-        $(".active").removeClass("active");
-        obj.find("a").click();
-
-    }
-
-   /* function prevLi() {
-        var obj=$(".info").prev();
-        $(".info").removeClass("info");
-        obj.find("a").click();
-        obj.addClass("info");
-    }*/
 </script>

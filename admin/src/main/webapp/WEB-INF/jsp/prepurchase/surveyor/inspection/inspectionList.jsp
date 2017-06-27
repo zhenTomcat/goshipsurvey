@@ -159,7 +159,9 @@
                 rows.each(function (i, e) {
                     count++;
                     var row = inspectionTable.row($(this));
-                    $(this).after(moreInfo(row.data(),count))
+                    if(row.data()!=null){
+                        $(this).after(moreInfo(row.data(),count))
+                    }
                 })
             },
             "initComplete": function () {
@@ -202,8 +204,8 @@
         html += '<label class="control-label">'+data.shipDetail.imo+'</label>';
         html += '</div>';
         html += '<div class="col-md-12">';
-        html += '<label class="control-label">Type：</label>';
-        html += '<label class="control-label">'+data.shipDetail.type+'</label>';
+        html += '<label class="control-label">ShipType：</label>';
+        html += '<label class="control-label">'+data.shipDetail.shipType+'</label>';
         html += '</div>';
         html += '<div class="col-md-12">';
         html += '<label class="control-label">Class：</label>';

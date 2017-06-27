@@ -12,6 +12,7 @@ import com.ctoangels.goshipsurvey.common.util.Const;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.framework.service.impl.SuperServiceImpl;
@@ -64,6 +65,12 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
 
     @Autowired
     IGradeService gradeService;
+
+    @Autowired
+    private GradeMapper gradeMapper;
+
+    @Autowired
+    private IInspectionReportService inspectionReportService;
 
 
     @Override
@@ -136,46 +143,7 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
         if (commentMapper.insert(comment) < 0) {
             return false;
         }
-
-        //report
-        InspectionReport report = new InspectionReport();
-        report.setShipId(inspection.getShipId());
-
-        //插入一条报告
-        inspectionReportMapper.insert(report);
-
-        //创建两个默认相册
-        Galleries galleries = new Galleries();
-        galleries.setName("未命名");
-        galleries.setNumber(0);
-        galleries.setInspectionReportId(report.getId());
-        galleries.setCreateDate(new Date());
-        galleries.setDelFlag(Const.DEL_FLAG_NORMAL);
-        galleriesMapper.insert(galleries);
-
-        Galleries galleries1 = new Galleries();
-        galleries1.setName("Certificate");
-        galleries1.setNumber(0);
-        galleries1.setInspectionReportId(report.getId());
-        galleries1.setCreateDate(new Date());
-        galleries1.setDelFlag(Const.DEL_FLAG_NORMAL);
-        galleriesMapper.insert(galleries1);
-
-        //创建16个Technical appendix
-        technicalAppendixService.createTechnicalAppendix(report.getId());
-
-        //创建12Document
-        documentService.createDocuments(report.getId());
-
-
-
-
-        //更新PurchaseInspection
-        inspection.setInspectionReportId(report.getId());
-        inspection.setSubmitStatus(Const.REPORT_UNSUBMIT);
-        purchaseInspectionMapper.updateById(inspection);
-
-
+        inspectionReportService.createReport(inspection);
 
         return true;
     }
@@ -235,4 +203,5 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
         int total=purchaseInspectionMapper.selectCountByEw(ew);
         return total;
     }
+
 }

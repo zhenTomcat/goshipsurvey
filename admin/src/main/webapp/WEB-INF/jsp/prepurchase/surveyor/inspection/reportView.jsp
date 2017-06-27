@@ -143,7 +143,7 @@
                                                         <div class="col-md-6">
                                                             <div style="border: solid black 2px" class="col-md-12">
                                                                 <div class="col-md-8" style="margin-top: 20px;margin-bottom: 20px">
-                                                                    <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/GWTcR228ek.jpg" style="width: 100%;height: 300px"/>
+                                                                    <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/GWTcR228ek.jpg" style="width: 100%;height: 250px"/>
                                                                 </div>
                                                                 <div class="col-md-4" style="margin-top: 20px;margin-bottom: 20px">
                                                                     <p style="color: #00a8c6">Ship Name</p><input type="hidden" value="${report.shipDetail.id}" name="id"/>
@@ -219,9 +219,13 @@
                                                                     <label class="col-md-4 control-label">Call Sign:</label>
                                                                     <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.callSign}" name="callSign"/></div>
                                                                 </div>
-                                                                <div class="col-md-6 form-group">
+                                                                <div class="col-md-12 form-group">
                                                                     <label class="col-md-4 control-label">Inspection date:</label>
                                                                     <div class="col-md-8"><input readonly class="form-control" type="text" value="" name=""/></div>
+                                                                </div>
+                                                                <div class="col-md-12 form-group">
+                                                                    <label class="col-md-9 control-label">Known the buyers by site surveyor,but WOG:</label>
+                                                                    <div class="col-md-3"><input readonly class="form-control" type="text" value="${report.shipDetail.wog}" name="wog"/></div>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -615,7 +619,7 @@
                                                                                                 <td><input class="form-control" type="text" name="technicalAppendixInfo[${i.index}].three" value="${ta.three}"/></td>
                                                                                             </c:if>
 
-                                                                                            <td><button
+                                                                                            <td><button class="btn red"
                                                                                                     <c:if test="${t.title3==''|| t.title3==null}">
                                                                                                         data-num="2"
                                                                                                     </c:if>
@@ -630,49 +634,51 @@
                                                                 </form>
                                                             </div>
                                                         </c:if>
-                                                    </c:forEach>
-                                                    <div class="col-md-12">
-                                                        <div class="portlet box green">
-                                                            <div class="portlet-title">
-                                                                <div class="caption">
-                                                                    Vessel tank capacity </div>
-                                                                <div class="tools">
+                                                        <c:if test="${t.catagory=='Cargo tank capacities(Only tanker)'}">
+                                                            <div class="col-md-12">
+                                                                <div class="portlet box green">
+                                                                    <div class="portlet-title">
+                                                                        <div class="caption">
+                                                                            Vessel tank capacity </div>
+                                                                        <div class="tools">
+                                                                        </div>
+                                                                    </div>
+                                                                    <c:forEach items="${technicalAppendices}" var="te">
+                                                                        <div class="portlet-body">
+                                                                            <form action="prepurchase/surveyor/reportEditTechnical" method="post" >
+                                                                                <table class="table table-striped table-bordered table-hover" >
+                                                                                    <thead>
+                                                                                    <tr>
+                                                                                        <th> ${te.title1} </th>
+                                                                                        <th> ${te.title2} </th>
+                                                                                        <th> ${te.title3} </th>
+                                                                                        <th style="width: 5%"> <button data-num="3" type="button" onclick="addRow(this)">
+                                                                                            <img class="add_img" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/add.png" />
+                                                                                        </button>
+                                                                                        </th>
+                                                                                    </tr>
+                                                                                    </thead>
+                                                                                    <tbody>
+                                                                                    <tr style="display: none"></tr>
+                                                                                    <input name="id" type="hidden" value="${te.id}"/>
+                                                                                    <c:forEach items="${te.technicalAppendixInfo}" var="ta" varStatus="i">
+                                                                                        <tr>
+                                                                                            <td><input class="form-control" type="text" name="technicalAppendixInfo[${i.index}].one" value="${ta.one}"/></td>
+                                                                                            <td><input class="form-control" type="text" name="technicalAppendixInfo[${i.index}].two" value="${ta.two}"/></td>
+                                                                                            <td><input class="form-control" type="text" name="technicalAppendixInfo[${i.index}].three" value="${ta.three}"/></td>
+                                                                                            <td><button class="btn red" type="button" onclick="deleteRow(this)">Delete</button> </td>
+                                                                                        </tr>
+                                                                                    </c:forEach>
+                                                                                    </tbody>
+                                                                                </table>
+                                                                            </form>
+                                                                        </div>
+                                                                    </c:forEach>
+
                                                                 </div>
                                                             </div>
-                                                            <c:forEach items="${technicalAppendices}" var="te">
-                                                                <div class="portlet-body">
-                                                                    <form action="prepurchase/surveyor/reportEditTechnical" method="post" >
-                                                                        <table class="table table-striped table-bordered table-hover" >
-                                                                            <thead>
-                                                                            <tr>
-                                                                                <th> ${te.title1} </th>
-                                                                                <th> ${te.title2} </th>
-                                                                                <th> ${te.title3} </th>
-                                                                                <th style="width: 5%"> <button data-num="3" type="button" onclick="addRow(this)">
-                                                                                    <img class="add_img" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/add.png" />
-                                                                                </button>
-                                                                                </th>
-                                                                            </tr>
-                                                                            </thead>
-                                                                            <tbody>
-                                                                            <tr style="display: none"></tr>
-                                                                                <input name="id" type="hidden" value="${te.id}"/>
-                                                                                <c:forEach items="${te.technicalAppendixInfo}" var="ta" varStatus="i">
-                                                                                    <tr>
-                                                                                        <td><input class="form-control" type="text" name="technicalAppendixInfo[${i.index}].one" value="${ta.one}"/></td>
-                                                                                        <td><input class="form-control" type="text" name="technicalAppendixInfo[${i.index}].two" value="${ta.two}"/></td>
-                                                                                        <td><input class="form-control" type="text" name="technicalAppendixInfo[${i.index}].three" value="${ta.three}"/></td>
-                                                                                        <td><button  type="button" onclick="deleteRow(this)">Delete</button> </td>
-                                                                                    </tr>
-                                                                                </c:forEach>
-                                                                            </tbody>
-                                                                        </table>
-                                                                    </form>
-                                                                </div>
-                                                            </c:forEach>
-
-                                                        </div>
-                                                    </div>
+                                                        </c:if>
+                                                    </c:forEach>
                                                 </div>
                                             </div>
                                             <div class="tab-pane tab-left" id="tab7">
@@ -702,7 +708,7 @@
                                                                         </td>
                                                                         <td>
                                                                             <c:if test="${d.attachmentUrl!='' && d.attachmentUrl!=null}">
-                                                                                <button onclick="clearTd(this)" type="button" style="color: red">Delete</button>
+                                                                                <button class="btn red" onclick="clearTd(this)" type="button" class="btn red">Delete</button>
                                                                             </c:if>
                                                                             <c:if test="${d.attachmentUrl=='' || d.attachmentUrl==null}">
                                                                                 <button type="button" onmouseover="upload_attachment(this,'${i.index}','${report.id}','${d.id}')">Browse</button>

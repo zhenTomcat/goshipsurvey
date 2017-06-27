@@ -13,7 +13,9 @@ import java.util.List;
 public interface GradeMapper extends AutoMapper<Grade> {
 
 
-    List<Grade> selectGradesByParentItem(String parentItem,Integer reportId);
+    List<Grade> selectGradesByParentItem(String parentItem, Integer reportId);
 
-    Grade selectGradeByItem(String parentItem,Integer reportId);
+    Grade selectGradeByItem(String parentItem,Integer reportId,Integer parentRank);
+
+    List<Grade> getListByParentItem(String parentItem,Integer reportId);
 }

@@ -25,7 +25,7 @@
                     <table class="table table-striped table-bordered table-hover table-checkable order-column" id="inspection_table">
                         <thead>
                         <tr>
-                            <th> Ship name </th>
+                            <th style="width: 15%"> Ship name </th>
                             <th> IMO </th>
                             <th> ship type </th>
                             <th> Inspection port </th>
@@ -41,33 +41,6 @@
                         </tr>
                         </thead>
                         <tbody>
-                        <c:if test="${! empty inspections}" var="a">
-                            <c:forEach items="${inspections}" var="i">
-                                <tr >
-                                    <fmt:formatDate value="${i.purchaseQuotation.startDate}" pattern="dd/MM/yyyy" var="startDate"/>
-                                    <fmt:formatDate value="${i.purchaseQuotation.endDate}" pattern="dd/MM/yyyy" var="endDate"/>
-                                    <td>
-                                        <a data-model="dialog" href="surveyor/info?id=${i.surveyor.id}">${i.surveyor.firstName} ${i.surveyor.lastName}</a>/
-                                        <a data-model="dialog" href="user/companyInfo?id=${i.companyId}">${i.op.name}</a>
-                                    </td>
-                                    <td> < </td>
-                                    <td>  </td>
-                                    <td> ${i.purchaseQuotation.totalPrice} </td>
-                                    <td> ${i.companyGrade} </td>
-                                    <td>
-                                        <c:if test="${i.submitStatus==1}">
-                                            <a data-target="navTab" href="/prepurchase/op/reportInfo?reportId=${i.inspectionReportId}" >View</a> <li class="fa fa-link"></li>
-                                        </c:if>
-                                    </td>
-
-                                </tr>
-                            </c:forEach>
-                        </c:if>
-                        <c:if test="${! a}" >
-                            <tr>
-                                <td colspan="11">没有任何报告</td>
-                            </tr>
-                        </c:if>
                         </tbody>
                     </table>
             </div>
@@ -129,7 +102,7 @@
                     "data": "purchaseQuotation.totalPrice",
                 },
                 {
-                    "data": "companyGrade",
+                    "data": "totalGrade",
                 },
                 {
                     "data": "",
@@ -159,6 +132,14 @@
                     "targets": 7,
                     "render": function (data, type, row) {
                             return '<a download="'+row.loi+'" href="'+row.loiUrl+'">'+row.loi+'</a>';
+                    }
+                },{
+                    "targets": 9,
+                    "render": function (data, type, row) {
+                        if(row.submitStatus==1){
+                            return row.totalGrade;
+                        }
+                        return "";
                     }
                 },{
                     "targets": 10,

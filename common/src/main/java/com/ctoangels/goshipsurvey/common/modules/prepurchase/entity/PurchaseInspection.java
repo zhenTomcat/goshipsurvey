@@ -117,6 +117,9 @@ public class PurchaseInspection implements Serializable {
     @TableField(value = "passport_url")
     private String passportUrl;
 
+    @TableField(value = "report_url")
+    private String reportUrl;
+
     /**
      * 报告提交状态
      */
@@ -363,5 +366,13 @@ public class PurchaseInspection implements Serializable {
 
     public void setTotalGrade(Double totalGrade) {
         this.totalGrade = totalGrade;
+    }
+
+    public String getReportUrl() {
+        return reportUrl;
+    }
+
+    public void setReportUrl(String reportUrl) {
+        this.reportUrl = reportUrl;
     }
 }

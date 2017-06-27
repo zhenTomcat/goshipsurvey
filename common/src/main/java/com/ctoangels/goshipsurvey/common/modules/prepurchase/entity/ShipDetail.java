@@ -190,6 +190,8 @@ public class ShipDetail implements Serializable {
     @TableField(value = "del_flag")
     private Integer delFlag;
 
+    private Integer wog;
+
 
     public Integer getId() {
         return id;
@@ -549,6 +551,14 @@ public class ShipDetail implements Serializable {
 
     public void setDelFlag(Integer delFlag) {
         this.delFlag = delFlag;
+    }
+
+    public Integer getWog() {
+        return wog;
+    }
+
+    public void setWog(Integer wog) {
+        this.wog = wog;
     }
 
     public void setCreateInfo(String userName) {

@@ -43,28 +43,6 @@ public class GradeServiceImpl extends SuperServiceImpl<GradeMapper, Grade> imple
         ew.addFilter("inspection_report_id={0}",reportId);
         List<Grade>grades=gradeMapper.selectList(ew);
 
-
-       if(grades.size()<=0 || grades==null){
-           //从评分模板中获取信息
-           EntityWrapper<GradeModel> ew1=new EntityWrapper<>();
-           List<GradeModel>gradeModels=gradeModelService.selectList(ew1);
-
-           try {
-               for (GradeModel g: gradeModels){
-                   Grade grade=new Grade();
-                   BeanUtils.copyProperties(grade, g);
-                   grade.setId(null);
-                   grade.setInspectionReportId(reportId);
-                   gradeMapper.insert(grade);
-                   grades.add(grade);
-               }
-           } catch (IllegalAccessException e) {
-               e.printStackTrace();
-           } catch (InvocationTargetException e) {
-               e.printStackTrace();
-           }
-       }
-
         return grades;
     }
 
@@ -96,6 +74,7 @@ public class GradeServiceImpl extends SuperServiceImpl<GradeMapper, Grade> imple
 
     private List<Double> calculateGrade(Grade grade){
         String parentItem=grade.getParentItem();
+        Integer parentRank=grade.getRank()-1;
         Integer reportId=grade.getInspectionReportId();
         int count=0;
         double totalGrade=0.0;
@@ -121,10 +100,11 @@ public class GradeServiceImpl extends SuperServiceImpl<GradeMapper, Grade> imple
             totalGrades.add(f1);
 
             if(count!=3){
-                Grade grade1=gradeMapper.selectGradeByItem(parentItem,reportId);
+                Grade grade1=gradeMapper.selectGradeByItem(parentItem,reportId,parentRank);
                 grade1.setGrade(avgGrade);
                 gradeMapper.updateById(grade1);
                 parentItem=grade1.getParentItem();
+                parentRank=grade1.getRank()-1;
             }
             if(count==3){
                 totalGrade=avgGrade;
