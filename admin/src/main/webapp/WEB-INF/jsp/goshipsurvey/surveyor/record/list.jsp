@@ -153,6 +153,12 @@
     var starRatingNot = $("#star-rating-outer-not");
     var starRatingHave = $("#star-rating-outer-have");
     $(document).ready(function () {
+        $.cookie("onOffLastPage", "surveyor/record");
+        drawTable();
+    });
+
+
+    function drawTable() {
         inspectionTable = $('#onoff_surveyor_record_inspection_table').DataTable({
             "ordering": false,
             "pagingType": "simple_numbers",
@@ -233,8 +239,7 @@
                 tr.attr("data-not-first", true);
             }
         });
-
-    });
+    }
 
     function moreInfo(data) {
         var html = "";

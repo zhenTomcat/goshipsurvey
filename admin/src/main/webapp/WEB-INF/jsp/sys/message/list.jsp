@@ -170,6 +170,11 @@
 
     var messageTable;
     $(document).ready(function () {
+        $.cookie("onOffLastPage", "message");
+        drawTable();
+    });
+
+    function drawTable() {
         messageTable = $('#message_table').DataTable({
             "ordering": false,
             "pagingType": "simple_numbers",
@@ -240,7 +245,8 @@
                 drawICheck('defaultCheck', 'chx_default');
             },
         });
-    });
+    }
+
 
     function refreshTable(toFirst) {
         if (toFirst) {//表格重绘，并跳转到第一页

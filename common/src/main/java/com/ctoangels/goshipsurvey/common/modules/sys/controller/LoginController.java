@@ -57,9 +57,6 @@ public class LoginController extends BaseController {
     @Autowired
     private IStyleService styleService;
 
-    @Autowired
-    private IPublicShipService publicShipService;
-
     @Value("${site_path}")
     private String sitePath;
 

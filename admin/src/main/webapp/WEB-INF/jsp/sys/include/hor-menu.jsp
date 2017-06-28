@@ -57,13 +57,15 @@
                     <li class="dropdown dropdown-user dropdown-dark">
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                            data-close-others="true">
-                            <span class="username username-hide-on-mobile"> ${user.name} </span>
+                            <span class="username username-hide-on-mobile"> ${user.name} <span
+                                    class="badge badge-danger unreadCount"> 0 </span></span>
                             <img alt="" class="img-circle" src="${ctx}/assets/layouts/layout/img/avatar.png"/>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-default">
                             <li>
                                 <a href="message" data-target='navTab'>
-                                    <i class="fa fa-comment"></i>Message </a>
+                                    <i class="fa fa-comment"></i>Message<span
+                                        class="badge badge-danger unreadCount"> 0 </span> </a>
                             </li>
                             <shiro:hasPermission name="surveyor/list">
                                 <li>

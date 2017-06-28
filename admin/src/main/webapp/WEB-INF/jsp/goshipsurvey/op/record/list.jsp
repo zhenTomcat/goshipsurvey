@@ -203,6 +203,7 @@
     var starRatingNot = $("#star-rating-outer-not");
     var starRatingHave = $("#star-rating-outer-have");
     $(document).ready(function () {
+        $.cookie("onOffLastPage", "op/record");
         drawQuotationTable();
         drawInspectionTable();
     });

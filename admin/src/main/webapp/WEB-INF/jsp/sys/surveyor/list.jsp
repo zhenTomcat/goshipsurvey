@@ -154,6 +154,12 @@
 
     var surveyorTable;
     $(document).ready(function () {
+        $.cookie("onOffLastPage", "surveyor");
+        drawTable();
+
+    });
+
+    function drawTable() {
         surveyorTable = $('#surveyor_table').DataTable({
             "ordering": false,
             "pagingType": "simple_numbers",
@@ -219,7 +225,7 @@
                 drawICheck('defaultCheck', 'chx_default');
             },
         });
-    });
+    }
 
     function refreshTable(toFirst) {
         if (toFirst) {//表格重绘，并跳转到第一页

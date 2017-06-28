@@ -92,6 +92,7 @@
 
     var quotationTable = $("#onoff_op_quotation_table");
     $(document).ready(function () {
+        $.cookie("onOffLastPage", "op/quotation");
         drawTable();
     })
 

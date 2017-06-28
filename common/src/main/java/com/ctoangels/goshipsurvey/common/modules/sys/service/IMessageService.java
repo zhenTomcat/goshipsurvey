@@ -2,6 +2,7 @@ package com.ctoangels.goshipsurvey.common.modules.sys.service;
 
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.Message;
 import com.baomidou.framework.service.ISuperService;
+import com.ctoangels.goshipsurvey.common.util.Const;
 
 import java.util.List;
 
@@ -24,5 +25,7 @@ public interface IMessageService extends ISuperService<Message> {
     void addApplicationMessage(int id);
 
     void publicPreInspectionEnd(int inspectionId);
+
+    int getUnreadMessageCount(Integer userId);
 
 }

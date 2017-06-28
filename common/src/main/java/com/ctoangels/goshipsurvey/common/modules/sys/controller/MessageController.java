@@ -5,9 +5,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.Message;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.IMessageService;
-import com.ctoangels.goshipsurvey.common.util.Const;
-import com.ctoangels.goshipsurvey.common.util.DateUtil;
-import com.ctoangels.goshipsurvey.common.util.StringUtils;
+import com.ctoangels.goshipsurvey.common.util.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -15,7 +13,10 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.socket.TextMessage;
 
+import javax.annotation.Resource;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
@@ -29,6 +30,9 @@ public class MessageController extends BaseController {
 
     @Autowired
     IMessageService messageService;
+
+    @Resource
+    MyWebSocketHandler myWebSocketHandler;
 
     @RequestMapping(method = RequestMethod.GET)
     public String list(ModelMap map) {
@@ -95,6 +99,8 @@ public class MessageController extends BaseController {
                 result.put("status", 0);
             }
         }
+        Integer userId = getCurrentUser().getId();
+        myWebSocketHandler.sendOneUser(new MyWebSocketMessage("未读信息数目改变", messageService.getUnreadMessageCount(userId), false), userId);
         return result;
     }
 
@@ -114,6 +120,8 @@ public class MessageController extends BaseController {
                 result.put("status", 0);
             }
         }
+        Integer userId = getCurrentUser().getId();
+        myWebSocketHandler.sendOneUser(new MyWebSocketMessage("未读信息数目改变", messageService.getUnreadMessageCount(userId), false), userId);
         return result;
     }
 
@@ -132,6 +140,8 @@ public class MessageController extends BaseController {
                 result.put("status", 0);
             }
         }
+        Integer userId = getCurrentUser().getId();
+        myWebSocketHandler.sendOneUser(new MyWebSocketMessage("未读信息数目改变", messageService.getUnreadMessageCount(userId), false), userId);
         return result;
     }
 
@@ -142,5 +152,14 @@ public class MessageController extends BaseController {
         map.put("message", message);
         return "sys/message/info";
     }
+
+
+    @RequestMapping(value = "/testWebSocket", method = {RequestMethod.POST, RequestMethod.GET}, produces = "application/json; charset=utf-8")
+    @ResponseBody
+    public String testWebSocket() throws IOException {
+//        myWebSocketHandler.sendMessageToJsp(new TextMessage("lalal"), "AAA");
+        return "1";
+    }
+
 
 }

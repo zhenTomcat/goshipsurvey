@@ -63,6 +63,7 @@
     var surveyList;
     var surveyorSelectHtml;
     $(document).ready(function () {
+        $.cookie("onOffLastPage", "surveyor/quotation");
         drawTable();
     })
 
