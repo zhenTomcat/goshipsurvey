@@ -177,6 +177,9 @@ public class Quotation implements Serializable {
     @TableField(exist = false)
     private List<QuotationApplication> applicationList;
 
+    @TableField(exist = false)
+    private String[] inspectionTypes;
+
     public Integer getId() {
         return this.id;
     }
@@ -468,5 +471,13 @@ public class Quotation implements Serializable {
 
     public void setBonusPlan(String bonusPlan) {
         this.bonusPlan = bonusPlan;
+    }
+
+    public String[] getInspectionTypes() {
+        return inspectionTypes;
+    }
+
+    public void setInspectionTypes(String[] inspectionTypes) {
+        this.inspectionTypes = inspectionTypes;
     }
 }

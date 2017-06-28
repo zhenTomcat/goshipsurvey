@@ -46,13 +46,20 @@
         cursor: pointer;
     }
 </style>
-<form class="form-horizontal" action="op/quotation/addComplete" method="post" id="quotation-add-form">
+<form class="form-horizontal" action="op/quotation/editComplete" method="post" id="quotation-edit-form">
+    <input type="hidden" value="${quotation.id}" name="id"/>
+    <input type="hidden" value="${quotation.opId}" name="opId"/>
+    <input type="hidden" value="${quotation.opName}" name="opName"/>
+    <input type="hidden" value=" <fmt:formatDate value="${quotation.createDate}" pattern="yyyy-MM-dd"/> "
+           name="createDate"/>
+    <input type="hidden" value="${quotation.quotationStatus}" name="quotationStatus"/>
+    <input type="hidden" value="${quotation.createBy}" name="createBy"/>
+    <input type="hidden" value="${quotation.delFlag}" name="delFlag"/>
     <div class="modal-dialog">
         <div class="modal-content">
-
             <div class="modal-header" style="background-color: #32c5d2;">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-                <h4 class="modal-title" style="color: white">New Quotations</h4>
+                <h4 class="modal-title" style="color: white">Edit Quotations</h4>
             </div>
             <div class="modal-body">
                 <div class="container-fluid">
@@ -68,20 +75,20 @@
                             </div>
                         </div>
                     </div>
-                    <input type="hidden" id="shipId" name="shipId" value="0">
+                    <input type="hidden" id="shipId" name="shipId" value="${quotation.shipId}">
                     <div class="row">
                         <div class="form-group col-md-4">
                             <label class="col-sm-6 control-label">Ship name</label>
                             <div class="col-sm-6">
                                 <input id="shipName" name="shipName" type="text"
-                                       class="form-control ">
+                                       class="form-control " value="${quotation.shipName}">
                             </div>
                         </div>
                         <div class="form-group col-md-4">
                             <label class="col-sm-6 control-label">IMO</label>
                             <div class="col-sm-6">
                                 <input id="imo" name="imo" type="text"
-                                       class="form-control ">
+                                       class="form-control " value="${quotation.imo}">
                             </div>
                         </div>
                         <div class="form-group col-md-4">
@@ -89,7 +96,9 @@
                             <div class="col-sm-6">
                                 <select class="form-control" name="shipType" id="shipTypeSelect">
                                     <c:forEach items="${shipType}" var="s">
-                                        <option value="${s.value}">${s.des}</option>
+                                        <option value="${s.value}"
+                                                <c:if test="${quotation.shipType==s.value}">selected</c:if>
+                                        >${s.des}</option>
                                     </c:forEach>
                                 </select>
                             </div>
@@ -100,7 +109,7 @@
                             <label class="col-sm-6 control-label">Inspection port</label>
                             <div class="col-sm-6">
                                 <input id="portName" name="portName" type="text"
-                                       class="form-control " autocomplete="off">
+                                       class="form-control " autocomplete="off" value="${quotation.portName}">
                                 <div id="port-list">
                                     <ul id="portList">
                                     </ul>
@@ -115,7 +124,11 @@
                                         <label class="mt-checkbox col-sm-3">
                                             <input type="checkbox" value="${ins.value}"
                                                    class="inspectionTypeCheckBox"
-                                                   name="inspectionType">
+                                                   name="inspectionType"
+                                            <c:forEach items="${quotation.inspectionTypes}" var="ss">
+                                                   <c:if test="${ss==ins.value}">checked</c:if>
+                                            </c:forEach>
+                                            >
                                                 ${ins.des}
                                             <span></span>
                                         </label>
@@ -129,9 +142,11 @@
                             <label class="control-label col-sm-4">Inspection date(LMT)</label>
                             <div class="col-sm-8" style="padding-left: 7.5px">
                                 <div class="input-group input-large date-picker input-daterange">
-                                    <input type="text" class="form-control " name="startDate">
+                                    <input type="text" class="form-control " name="startDate"
+                                           value="<fmt:formatDate value="${quotation.startDate}" pattern="yyyy-MM-dd"/>">
                                     <span class="input-group-addon"> to </span>
-                                    <input type="text" class="form-control " name="endDate">
+                                    <input type="text" class="form-control " name="endDate"
+                                           value="<fmt:formatDate value="${quotation.endDate}" pattern="yyyy-MM-dd"/>">
                                 </div>
                             </div>
                         </div>
@@ -142,7 +157,7 @@
                         <div class="col-sm-8">
                                 <textarea name="currentQuantity"
                                           style="height:100px;resize: none;width: 94%;margin-left: 2%"
-                                          class="form-control "></textarea>
+                                          class="form-control ">${quotation.currentQuantity}</textarea>
                             <div class="col-sm-12" style="margin-top: 5px">
                                 <button type="button" style="margin-left: 10px" id="currentQuantity-btn"
                                         title="A photo about current quantity"
@@ -150,14 +165,16 @@
                                     <i class="fa fa-upload"></i>
                                     upload
                                 </button>
-                                <div class="col-sm-6 btn-group upload-file-div" style="display: none">
+                                <div class="col-sm-6 btn-group upload-file-div"
+                                     <c:if test="${quotation.currentQuantityUrl==''}">style="display: none"</c:if>
+                                >
                                     <input class="form-control ship-particulars-url-input"
                                            data-loi="true"
-                                           name="currentQuantityUrl"
+                                           name="currentQuantityUrl" value="${quotation.currentQuantityUrl}"
                                            type="hidden"/>
                                     <a class="btn btn-sm green"
                                        target="_blank"
-                                       href=";">View</a>
+                                       href="${quotation.currentQuantityUrl}">View</a>
                                     <span class="input-group-btn">
                                         <button class="btn red btn-sm" type="button" title="delete"
                                                 onclick="delFileAndInput(this)">
@@ -171,9 +188,9 @@
                     <div class="form-group col-md-6">
                         <label class="col-sm-4 control-label">Bonus plan</label>
                         <div class="form-group col-sm-8">
-                                        <textarea class="form-control"
-                                                  name="bonusPlan"
-                                                  style="height:100px;resize: none;width: 94%;margin-left: 2%"></textarea>
+                            <textarea class="form-control"
+                                      name="bonusPlan"
+                                      style="height:100px;resize: none;width: 94%;margin-left: 2%">${quotation.bonusPlan}</textarea>
                         </div>
                     </div>
                     <div class="col-md-12" style="border-top: 1px solid #e5e5e5;padding-top: 10px;">
@@ -186,7 +203,7 @@
                                 <label class="col-sm-6 control-label">Delivery by</label>
                                 <div class="col-sm-6">
                                     <input id="" name="deliveryBy" type="text" disabled
-                                           data-value="1"
+                                           data-value="1" value="${quotation.deliveryBy}"
                                            class="form-control other-detail-input">
                                 </div>
                             </div>
@@ -194,7 +211,7 @@
                                 <label class="col-sm-6 control-label">Accepted by</label>
                                 <div class="col-sm-6">
                                     <input name="acceptedBy" type="text" disabled
-                                           data-value="1"
+                                           data-value="1" value="${quotation.acceptedBy}"
                                            class="form-control other-detail-input">
                                 </div>
                             </div>
@@ -206,7 +223,7 @@
                                 <label class="col-sm-6 control-label">Re-delivery by</label>
                                 <div class="col-sm-6">
                                     <input name="reDeliveryBy" type="text" disabled
-                                           data-value="2"
+                                           data-value="2" value="${quotation.reDeliveryBy}"
                                            class="form-control other-detail-input">
                                 </div>
                             </div>
@@ -214,7 +231,7 @@
                                 <label class="col-sm-6 control-label">Re-accepted by</label>
                                 <div class="col-sm-6">
                                     <input name="reAcceptedBy" type="text" disabled
-                                           data-value="2"
+                                           data-value="2" value="${quotation.reAcceptedBy}"
                                            class="form-control other-detail-input">
                                 </div>
                             </div>
@@ -226,7 +243,7 @@
                                 <label class="col-sm-6 control-label">Charter</label>
                                 <div class="col-sm-6">
                                     <input name="charter" type="text" disabled
-                                           data-value="3"
+                                           data-value="3" value="${quotation.charter}"
                                            class="form-control other-detail-input">
                                 </div>
                             </div>
@@ -234,7 +251,7 @@
                                 <label class="col-sm-6 control-label">Owner</label>
                                 <div class="col-sm-6">
                                     <input name="owner" type="text" disabled
-                                           data-value="3"
+                                           data-value="3" value="${quotation.owner}"
                                            class="form-control other-detail-input">
                                 </div>
                             </div>
@@ -244,7 +261,7 @@
                                 <div class="form-group col-md-9">
                                         <textarea class="form-control ship-particulars-textarea"
                                                   name="shipParticulars"
-                                                  style="height:100px;resize: none;width: 94%;margin-left: 2%"></textarea>
+                                                  style="height:100px;resize: none;width: 94%;margin-left: 2%">${quotation.shipParticulars}</textarea>
                                     <br/>
                                     <button type="button" style="margin-left: 10px" id="particulars-btn"
                                             class="col-sm-4 btn btn-sm blue ship-particulars-btn">
@@ -252,14 +269,16 @@
                                         Ship
                                         particulars upload
                                     </button>
-                                    <div class="col-sm-6 btn-group upload-file-div" style="display: none">
+                                    <div class="col-sm-6 btn-group upload-file-div"
+                                         <c:if test="${quotation.shipParticularsUrl==''}">style="display: none"</c:if>
+                                    >
                                         <input class="form-control ship-particulars-url-input"
                                                data-loi="true"
-                                               name="shipParticularsUrl"
+                                               name="shipParticularsUrl" value="${quotation.shipParticularsUrl}"
                                                type="hidden"/>
                                         <a class="btn btn-sm green"
                                            target="_blank"
-                                           href=";">DOWNLOAD</a>
+                                           href="${quotation.shipParticularsUrl}">DOWNLOAD</a>
                                         <span class="input-group-btn">
                                                 <button class="btn red btn-sm" type="button" title="delete"
                                                         onclick="delFileAndInput(this)">
@@ -276,7 +295,7 @@
                             <textarea
                                     class="form-control port-agency-textarea "
                                     name="portAgency"
-                                    style="height:230px;resize: none;width: 94%"></textarea>
+                                    style="height:230px;resize: none;width: 94%">${quotation.portAgency}</textarea>
                             <br><br>
                             <button type="button" id="loi-btn"
                                     class="col-sm-6 btn btn-sm blue loi-btn">
@@ -285,14 +304,16 @@
                                 without
                                 sign upload
                             </button>
-                            <div class="col-sm-6 btn-group upload-file-div" style="display: none">
+                            <div class="col-sm-6 btn-group upload-file-div"
+                                 <c:if test="${quotation.blankLoiUrl==''}">style="display: none"</c:if>
+                            >
                                 <input class="form-control ship-particulars-url-input"
                                        data-loi="true"
-                                       name="blankLoiUrl"
+                                       name="blankLoiUrl" value="${quotation.blankLoiUrl}"
                                        type="hidden"/>
                                 <a class="btn btn-sm green"
                                    target="_blank"
-                                   href=";">DOWNLOAD</a>
+                                   href="${quotation.blankLoiUrl}">DOWNLOAD</a>
                                 <span class="input-group-btn">
                                                 <button class="btn red btn-sm" type="button" title="delete"
                                                         onclick="delFileAndInput(this)">
@@ -308,16 +329,42 @@
                     until chosen
                     surveyor/company.</i></label>
                 <button id="closeModal" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
-                <shiro:hasPermission name="op/quotation/add">
+                <shiro:hasPermission name="op/quotation/edit">
                     <button type="button" onclick="severCheck()" class="btn btn-primary">Save</button>
                 </shiro:hasPermission>
             </div>
         </div>
     </div>
 </form>
-
 <script>
+
+
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
+
+    $(document).ready(function () {
+        var inspectionTypes = $("#quotation-edit-form .inspectionTypeCheckBox");
+        console.log(inspectionTypes.length);
+        for (var i = 0, length = inspectionTypes.length; i < length; i++) {
+            var value = inspectionTypes[i].value;
+            if (inspectionTypes[i].checked) {
+                $("#quotation-edit-form  .other-detail-input[data-value='" + value + "']").attr("disabled", false);
+            } else {
+                $("#quotation-edit-form  .other-detail-input[data-value='" + value + "']").val("");
+            }
+        }
+    });
+
+    if (jQuery().datepicker) {
+        $('.date-picker').datepicker({
+            rtl: App.isRTL(),
+            orientation: "left",
+            autoclose: true,
+            startDate: new Date(),
+            format: 'yyyy-mm-dd'
+        });
+        $('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
+    }
+
 
     initUploaders_loi_without_sign_and_ship_particulars("particulars-btn", "shipinfo", "${staticPath}/");
     initUploaders_loi_without_sign_and_ship_particulars("loi-btn", "shipinfo", "${staticPath}/");
@@ -325,13 +372,13 @@
 
     function severCheck() {
         if (check()) {
-            $("#quotation-add-form").ajaxSubmit({
+            $("#quotation-edit-form").ajaxSubmit({
                 success: function (data) {
                     if (data.success) {
                         $("#closeModal").click();
                         drawTable();
                     } else {
-                        alert("add quotation error")
+                        alert("edit quotation error")
                     }
                 },
             });
@@ -340,7 +387,7 @@
 
     function check() {
         var flag = true;
-        $("#quotation-add-form input.form-control.required").each(function () {
+        $("#quotation-edit-form input.form-control.required").each(function () {
             var value = $(this).val();
             if (value == null || value.trim() == "") {
                 $(this).tips({
@@ -356,7 +403,7 @@
 
         if (flag) {
             var flag2 = false;
-            var checkBoxs = $("#quotation-add-form .inspectionTypeCheckBox");
+            var checkBoxs = $("#quotation-edit-form .inspectionTypeCheckBox");
             checkBoxs.each(function () {
                 if (this.checked) {
                     flag2 = true;
@@ -365,7 +412,7 @@
             })
 
             if (!flag2) {
-                $("#quotation-add-form .inspectionTypeCheckBox:first").tips({
+                $("#quotation-edit-form .inspectionTypeCheckBox:first").tips({
                     side: 1,
                     msg: "至少选择一个",
                     bg: '#FF5080',
@@ -377,18 +424,6 @@
 
         }
         return flag;
-    }
-
-
-    if (jQuery().datepicker) {
-        $('.date-picker').datepicker({
-            rtl: App.isRTL(),
-            orientation: "left",
-            autoclose: true,
-            startDate: new Date(),
-            format: 'yyyy-mm-dd'
-        });
-        $('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
     }
 
 
@@ -488,7 +523,7 @@
     $(".inspectionTypeCheckBox").on("click", function () {
         var flag = this.checked;
         var value = this.value;
-        $(".other-detail-input[data-value='" + value + "']").attr("disabled", !flag).val("");
+        $("#quotation-edit-form .other-detail-input[data-value='" + value + "']").attr("disabled", !flag).val("");
     })
 
 

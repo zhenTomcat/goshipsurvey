@@ -160,6 +160,7 @@
             "autoWidth": false,
             "processing": true,
             "serverSide": true,
+            'bStateSave': true,
             "ajax": {
                 "url": "surveyor/list",
                 "type": "get",

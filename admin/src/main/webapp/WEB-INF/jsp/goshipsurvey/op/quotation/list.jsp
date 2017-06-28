@@ -38,7 +38,7 @@
                                     <shiro:hasPermission name="op/quotation/add">
                                         <div class="col-md-4">
                                             <div class="btn-group">
-                                                <a href="#add_quotation_form" data-toggle="modal"
+                                                <a onclick="showModelForm(this)" data-url="op/quotation/add"
                                                    class="btn blue"><i class="fa fa-plus"></i> New quotation
                                                 </a>
                                             </div>
@@ -76,7 +76,20 @@
         </div>
     </div>
 </div>
+<div id="modal_form" class="modal fade" role="dialog" aria-hidden="true"></div>
+<a id="modal_form_switch" data-toggle="modal" href="#modal_form" style="display: none">a</a>
 <script>
+    function showModelForm(obj) {
+        var url = $(obj).attr("data-url");
+        var md = $(obj).attr("md");
+        if (md == 'ajax') {
+        } else {
+            $("#modal_form").load(url);
+            $("#modal_form_switch").click();
+        }
+        return false;
+    }
+
     var quotationTable = $("#onoff_op_quotation_table");
     $(document).ready(function () {
         drawTable();
@@ -126,12 +139,22 @@
                 },
                 {
                     "data": "id",
-                    "render": function (data) {
-                        return '<a href="op/quotation/deleteById?id=' + data + '" class="btn red btn-sm" type="button" data-msg="确定删除吗？" data-model="ajaxToDo" data-callback="drawTable()"><i class="fa fa-trash"></i></a>';
-                    }
                 },
             ],
             "columnDefs": [
+                {
+                    "targets": 0,
+                    "render": function (data, type, row) {
+                        var status = row.quotationStatus;
+                        if (status != 0) {
+                            return row.shipName;
+                        } else {
+//                            return '<a  href="op/quotation/edit?id=' + row.id + '"  data-toggle="modal" >' + row.shipName + '</a>'
+                            return '<a onclick="showModelForm(this)"  data-url="op/quotation/edit?id=' + row.id + '"  >' + row.shipName + '</a>';
+
+                        }
+                    }
+                },
                 {
                     "targets": 5,
                     "render": function (data, type, row) {
@@ -139,7 +162,8 @@
                         var endDate = new Date(row.endDate).Format("yyyy-MM-dd");
                         return startDate + " to " + endDate;
                     }
-                }, {
+                },
+                {
                     "targets": 6,
                     "render": function (data, type, row) {
                         var status = row.quotationStatus;
@@ -149,6 +173,15 @@
                             return '<a class="btn btn-sm green">询价中...</a>';
                         } else if (status == 2) {
                             return '<a class="btn btn-sm green">已邀请验船</a>';
+                        }
+                    }
+                },
+                {
+                    "targets": 7,
+                    "render": function (data, type, row) {
+                        var status = row.quotationStatus;
+                        if (status != 2) {
+                            return '<a href="op/quotation/deleteById?id=' + row.id + '" class="btn red btn-sm" type="button" data-msg="确定删除吗？" data-model="ajaxToDo" data-callback="drawTable()"><i class="fa fa-trash"></i></a>';
                         }
                     }
                 }
@@ -164,8 +197,6 @@
                 })
             },
         });
-
-
     }
 
 
@@ -174,7 +205,7 @@
         var quotation = data;
         var applyList = data.applicationList;
         if (applyList != null && applyList.length > 0) {
-            html += '<tr class="application-outer-tr"><td colspan="7" style="padding: 0" class="application-outer-td"><table class="table" style="margin-bottom: 0;width:100%">';
+            html += '<tr class="application-outer-tr"><td colspan="8" style="padding: 0" class="application-outer-td"><table class="table" style="margin-bottom: 0;width:100%">';
             for (var j = 0; j < applyList.length; j++) {
                 var application = applyList[j];
                 var user = application.user;
@@ -243,8 +274,6 @@
             }
         })
     }
-
 </script>
-<jsp:include page="add.jsp"/>
 
 

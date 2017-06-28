@@ -72,7 +72,14 @@ public class OPQuotationController extends BaseController {
         return jsonObject;
     }
 
-    @RequestMapping(value = "/add", method = RequestMethod.POST)
+    @RequestMapping(value = "/add", method = RequestMethod.GET)
+    public String add(ModelMap map) {
+        map.put("inspectionType", getInspectionTypeDict());
+        map.put("shipType", getShipTypeDict());
+        return "goshipsurvey/op/quotation/add";
+    }
+
+    @RequestMapping(value = "/addComplete", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject addComplete(Quotation quotation) {
         JSONObject jsonObject = new JSONObject();
@@ -86,6 +93,27 @@ public class OPQuotationController extends BaseController {
         } else {
             jsonObject.put("success", false);
         }
+        return jsonObject;
+    }
+
+    @RequestMapping(value = "/edit", method = RequestMethod.GET)
+    public String edit(ModelMap map, @RequestParam(required = false) Integer id) {
+        Quotation q = quotationService.selectById(id);
+        String inspectionType = q.getInspectionType();
+        String[] inspectionTypes = inspectionType.split(",");
+        q.setInspectionTypes(inspectionTypes);
+        map.put("quotation", q);
+        map.put("inspectionType", getInspectionTypeDict());
+        map.put("shipType", getShipTypeDict());
+        return "goshipsurvey/op/quotation/edit";
+    }
+
+    @RequestMapping(value = "/editComplete", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject editComplete(Quotation quotation) {
+        JSONObject jsonObject = new JSONObject();
+        quotation.setUpdateInfo(getCurrentUser().getName());
+        jsonObject.put("success", quotationService.updateById(quotation));
         return jsonObject;
     }
 
