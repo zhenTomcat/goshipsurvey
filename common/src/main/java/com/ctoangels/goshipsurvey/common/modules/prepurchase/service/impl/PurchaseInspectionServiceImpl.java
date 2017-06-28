@@ -13,6 +13,7 @@ import com.ctoangels.goshipsurvey.common.util.Const;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import com.baomidou.framework.service.impl.SuperServiceImpl;
@@ -69,6 +70,12 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
 
     @Autowired
     IGradeService gradeService;
+
+    @Autowired
+    private GradeMapper gradeMapper;
+
+    @Autowired
+    private IInspectionReportService inspectionReportService;
 
 
     @Override
@@ -143,6 +150,7 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
         if (commentMapper.insert(comment) < 0) {
             return false;
         }
+        inspectionReportService.createReport(inspection);
 
         //发送信息
         String shipName = shipDetailMapper.selectById(quotation.getShipId()).getShipName();
@@ -246,4 +254,5 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
         int total = purchaseInspectionMapper.selectCountByEw(ew);
         return total;
     }
+
 }

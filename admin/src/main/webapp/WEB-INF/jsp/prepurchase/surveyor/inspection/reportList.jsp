@@ -101,7 +101,7 @@
                     "data": "surveyor.firstName",
                 },
                 {
-                    "data": "opGrade",
+                    "data": "totalGrade",
                 },
                 {
                     "data": "",

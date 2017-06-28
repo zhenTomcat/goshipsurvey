@@ -4,7 +4,7 @@
 
     <!-- 通用查询结果列-->
     <sql id="Base_Column_List">
-		id, purchase_quo_id AS purchaseQuoId, ship_id AS shipId, company_id AS companyId, survey_id AS surveyId, op_id AS opId, loi, passport, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag, remark, inspection_report_id AS inspectionReportId, total_grade AS totalGrade, user_id AS userId, submit_status AS submitStatus, loi_url AS loiUrl, passport_url AS passportUrl
+		id, purchase_quo_id AS purchaseQuoId, ship_id AS shipId, company_id AS companyId, survey_id AS surveyId, op_id AS opId, loi, passport, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag, remark, inspection_report_id AS inspectionReportId, total_grade AS totalGrade, user_id AS userId, submit_status AS submitStatus, loi_url AS loiUrl, passport_url AS passportUrl, report_url AS reportUrl
 	</sql>
     <select id="selectByInspection" resultMap="Inspection">
 			select * from t_purchase_inspection p join t_ship_detail s on p.ship_id=s.id where p.company_id=#{0} limit #{1},#{2}

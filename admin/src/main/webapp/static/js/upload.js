@@ -455,7 +455,7 @@ function initUploaders_attachment(buttonId, bucket, domain, obj, count, reportId
                     '<input name="documents[' + count + '].attachmentUrl" type="hidden" value="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '" >' +
                     '<input name="documents[' + count + '].attachmentName" type="hidden" value="' + nativeName + '"/>';
                 $(obj).parent().prev().html(html);
-                var html1 = '<button onclick="clearTd(this,' + count + ',' + reportId + ',' + documentId + ')" type="button" style="color: red">Delete</button>';
+                var html1 = '<button class="btn red" onclick="clearTd(this,' + count + ',' + reportId + ',' + documentId + ')" type="button" >Delete</button>';
                 $(obj).parent().html(html1);
             }
         }
@@ -693,8 +693,8 @@ function initUploaders_report_grade(buttonId, bucket, domain, gradeId) {
                     success: function (data) {
                         if (data.mes) {
                             var html = '<a target="_blank" href="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '">' + nativeName + '</a>';
-                            $(buttonId).parent().prev().html(html);
-                            $(buttonId).parent().html('<button onclick="removeGrade(this,' + gradeId + ')" type="button" class="btn red">Delete</button>');
+                            $("#"+buttonId).parent().prev().html(html);
+                            $("#"+buttonId).parent().html('<button onclick="removeGrade(this,'+gradeId+')" type="button" class="btn red">Delete</button>');
                         }
                     },
                     error: function () {

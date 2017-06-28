@@ -2,6 +2,8 @@ package com.ctoangels.goshipsurvey.common.modules.prepurchase.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Dict;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IDictService;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.*;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.*;
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
@@ -29,6 +31,17 @@ public class InspectionReportController extends BaseController {
 
     @Value("${static_path}")
     private String staticPath;
+
+    @Value("${oss.endpoint}")
+    private String endpoint;
+
+    @Value("${oss.accessId}")
+    private String accessId;
+
+    @Value("${oss.accessKey}")
+    private String accessKey;
+    @Value("${oss.bucket}")
+    private String bucket;
 
     @Autowired
     private IPurchaseInspectionService purchaseInspectionService;
@@ -68,6 +81,12 @@ public class InspectionReportController extends BaseController {
 
     @Autowired
     private IGradeService gradeService;
+
+    @Autowired
+    private IDictService dictService;
+
+    @Autowired
+    private ITechnicalModelContentService technicalModelContentService;
 
 
     //获取InspectionReport的列表信息
@@ -112,9 +131,14 @@ public class InspectionReportController extends BaseController {
 
         //获取 Vessel tank capacity 这个表下的所有信息
         List<TechnicalAppendix> technicalAppendices = technicalAppendixService.selectListByReportId(purchaseInspection.getInspectionReportId(), "Vessel tank capacity");
+        List<Dict> dicts = dictService.getListByType("shipType");
 
-        List<GradeCondition> hullGrades = gradeConditionService.selectGradeConditionByType("船体");
-        List<GradeCondition> machineGrades = gradeConditionService.selectGradeConditionByType("机械");
+        //p评分标准
+        List<GradeCondition> hullGrades=gradeConditionService.selectGradeConditionByType("船体");
+        List<GradeCondition> machineGrades=gradeConditionService.selectGradeConditionByType("机械");
+
+        modelMap.put("totalGrade",purchaseInspection.getTotalGrade());
+        modelMap.put("dicts", dicts);
 
         modelMap.put("totalGrade", purchaseInspection.getTotalGrade());
         modelMap.put("hullGrades", hullGrades);
@@ -348,6 +372,22 @@ public class InspectionReportController extends BaseController {
     }
 
 
+    //获取   Technical appendix & equipment information的第一张表的Equipmet的列表信息
+    @RequestMapping(value = "/surveyor/technicalModelList")
+    @ResponseBody
+    public JSONObject technicalModelList(@RequestParam (required = false) String catagory,@RequestParam(required = false)String title) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            List<TechnicalModelContent> contents=technicalModelContentService.selectByCatagoryAndTitle(catagory,title);
+            jsonObject.put("contents", contents);
+            jsonObject.put("mes", true);
+        } catch (Exception e) {
+            jsonObject.put("mes", false);
+            e.printStackTrace();
+        }
+        return jsonObject;
+    }
+
     //添加或者更新Documents
     @RequestMapping(value = "/surveyor/reportEditDocument")
     @ResponseBody
@@ -373,6 +413,9 @@ public class InspectionReportController extends BaseController {
             PurchaseInspection inspection = purchaseInspectionService.selectByReportId(reportId);
             inspection.setSubmitStatus(Const.REPORT_SUBMIT);
             purchaseInspectionService.updateById(inspection);
+
+            iInspectionReportService.downloadReportByReportId(reportId,endpoint,accessId,accessKey,bucket);
+
             jsonObject.put("mes", true);
             messageService.publicPreInspectionEnd(inspection.getId());
         } catch (Exception e) {
@@ -381,6 +424,10 @@ public class InspectionReportController extends BaseController {
         }
         return jsonObject;
     }
+
+
+
+
 
     @RequestMapping(value = "/op/report", method = RequestMethod.GET)
     public String opReportList() {
@@ -428,6 +475,13 @@ public class InspectionReportController extends BaseController {
             }
         }
 
+        List<GradeCondition> hullGrades=gradeConditionService.selectGradeConditionByType("船体");
+        List<GradeCondition> machineGrades=gradeConditionService.selectGradeConditionByType("机械");
+
+        PurchaseInspection purchaseInspection=purchaseInspectionService.selectByReportId(reportId);
+        modelMap.put("totalGrade",purchaseInspection.getTotalGrade());
+        modelMap.put("hullGrades", hullGrades);
+        modelMap.put("machineGrades", machineGrades);
         modelMap.put("flag", flag);
         modelMap.put("report", inspectionReport);
         modelMap.put("technicalAppendices", technicalAppendices);
@@ -446,5 +500,15 @@ public class InspectionReportController extends BaseController {
         return "prepurchase/op/inspection/viewImg";
     }
 
+    //下载报告
+    @RequestMapping(value = "/op/reportDownload", method = RequestMethod.GET)
+    public String download(@RequestParam(required = false) Integer inspectionId) {
+        try {
+            String url=iInspectionReportService.downloadReportByReportId(inspectionId,endpoint,accessId,accessKey,bucket);
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return "prepurchase/op/inspection/viewImg";
+    }
 
 }

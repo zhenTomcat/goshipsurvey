@@ -293,7 +293,7 @@
                     }
                 },
                 {
-                    "data": "",
+                    "data": "totalGrade",
                 },
                 {
                     "data": "inspectionReportId",

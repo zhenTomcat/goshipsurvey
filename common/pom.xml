@@ -185,6 +185,14 @@
             <version>4.5.2</version>
         </dependency>
 
+        <dependency>
+            <groupId>com.jacob</groupId>
+            <artifactId>jacob</artifactId>
+            <version>1.18</version>
+        </dependency>
+
+
+
     </dependencies>
     <build>
         <finalName>common</finalName>
