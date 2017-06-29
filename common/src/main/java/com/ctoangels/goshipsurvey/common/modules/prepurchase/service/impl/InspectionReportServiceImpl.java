@@ -106,6 +106,7 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
     @Async
     public void createReport(PurchaseInspection inspection){
 
+
         //report
         InspectionReport report = new InspectionReport();
         report.setShipId(inspection.getShipId());
@@ -177,6 +178,8 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
         PurchaseInspection purchaseInspection =purchaseInspectionMapper.selectByReportId(report.getId());
 
         ShipDetail shipDetail=report.getShipDetail();
+
+
 
         File modelExcel=null;
         modelExcel = new File(getClass().getClassLoader().getResource("REPORT.xls").getFile());
@@ -277,6 +280,7 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
         //*DEFECTS*//*
         HSSFSheet sheet1 = wb.getSheetAt(4);
         List<Defect> defects=report.getDefects();
+       int m=0;
         for(int i=0;i<defects.size();i++){
             float defaultCount=0.00f;
             float fontCountInline=2.3f;
@@ -327,7 +331,16 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
             row.getCell(1).setCellValue(defects.get(i).getDescription());
             row.getCell(4).setCellValue(defects.get(i).getEstimatCost());
 
+            m=i;
+
         }
+
+        //获取defect中的该sheet的页数
+       int sheetBeforePage=2;
+       int flag=6;
+       int height=getRowsHeight(wb,sheet1,m+2,sheetBeforePage,flag);//flag表示的是对应excel的目录的第几行
+
+       sheetBeforePage+=height;
 
         /*Condition inspection*/
         ConditionInspection conditionInspection=report.getConditionInspection();
@@ -352,69 +365,87 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
        int count=2;
        if(conditionInspection!=null){
            if(conditionInspection.getHull()!=null && conditionInspection.getHull()!=""){
-               addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getHull(),"Hull");
-               count+=3;
+               count=addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getHull(),"Hull");
+               sheet2.createRow(count);
+               count++;
            }
            if(conditionInspection.getDeck()!=null && conditionInspection.getDeck()!=""){
-               addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getDeck(),"Forward mooring deck/Aft mooring deck/Main deck");
-               count+=3;
+               count=addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getDeck(),"Forward mooring deck/Aft mooring deck/Main deck");
+               sheet2.createRow(count);
+               count++;
            }
 
            if(conditionInspection.getDeckMarchinery()!=null && conditionInspection.getDeckMarchinery()!=""){
-               addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getDeckMarchinery(),"Deck marchinery (mooring,crane,outfittings,etc.)");
-               count+=3;
+               count=addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getDeckMarchinery(),"Deck marchinery (mooring,crane,outfittings,etc.)");
+               sheet2.createRow(count);
+               count++;
            }
 
            if(conditionInspection.getBallastTank()!=null && conditionInspection.getBallastTank()!=""){
-               addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getDeckMarchinery(),"Ballast tanks & Void spaces");
-               count+=3;
+               count=addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getDeckMarchinery(),"Ballast tanks & Void spaces");
+               sheet2.createRow(count);
+               count++;
            }
            if(conditionInspection.getAccommodation()!=null && conditionInspection.getAccommodation()!=""){
-               addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getAccommodation(),"Accommodation & deck");
-               count+=3;
+               count=addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getAccommodation(),"Accommodation & deck");
+               sheet2.createRow(count);
+               count++;
            }
            if(conditionInspection.getNavigationBridge()!=null && conditionInspection.getNavigationBridge()!=""){
-               addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getNavigationBridge(),"Navigation bridge & Commuication equipments");
-               count+=3;
+               count=addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getNavigationBridge(),"Navigation bridge & Commuication equipments");
+               sheet2.createRow(count);
+               count++;
            }
            if(conditionInspection.getMachinerySpace()!=null && conditionInspection.getMachinerySpace()!=""){
-               addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getMachinerySpace(),"Machinery space & Engine room machinery");
-               count+=3;
+               count=addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getMachinerySpace(),"Machinery space & Engine room machinery");
+               sheet2.createRow(count);
+               count++;
            }
            if(conditionInspection.getLifeSaving()!=null && conditionInspection.getLifeSaving()!=""){
-               addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getLifeSaving(),"Life saving ,Fire and safety equipment");
-               count+=3;
+               count=addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getLifeSaving(),"Life saving ,Fire and safety equipment");
+               sheet2.createRow(count);
+               count++;
            }
            if(conditionInspection.getGalley()!=null && conditionInspection.getGalley()!=""){
-               addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getGalley(),"Galley,provision and refrigerated rooms");
-               count+=3;
+               count=addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getGalley(),"Galley,provision and refrigerated rooms");
+               sheet2.createRow(count);
+               count++;
            }
            if(conditionInspection.getBallastWater()!=null && conditionInspection.getBallastWater()!=""){
-               addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getBallastWater(),"Ballast water treatment system");
-               count+=3;
+               count=addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getBallastWater(),"Ballast water treatment system");
+               sheet2.createRow(count);
+               count++;
            }
            if(conditionInspection.getCargoTank()!=null && conditionInspection.getCargoTank()!=""){
-               addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getCargoTank(),"Cargo tanks");
-               count+=3;
+               count=addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getCargoTank(),"Cargo tanks");
+               sheet2.createRow(count);
+               count++;
            }
            if(conditionInspection.getCargoControlRoom()!=null && conditionInspection.getCargoControlRoom()!=""){
-               addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getCargoControlRoom(),"Cargo control room");
-               count+=3;
+               count=addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getCargoControlRoom(),"Cargo control room");
+               sheet2.createRow(count);
+               count++;
            }
            if(conditionInspection.getPumpRoom()!=null && conditionInspection.getPumpRoom()!=""){
-               addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getPumpRoom(),"Pump room");
-               count+=3;
+               count= addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getPumpRoom(),"Pump room");
+               sheet2.createRow(count);
+               count++;
            }
 
            if(conditionInspection.getPipelines()!=null && conditionInspection.getPipelines()!=""){
-               addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getPipelines(),"Pipelines");
-               count+=3;
+               count=addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getPipelines(),"Pipelines");
+               sheet2.createRow(count);
+               count++;
            }
            if(conditionInspection.getInterGasSystem()!=null && conditionInspection.getInterGasSystem()!=""){
-               addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getInterGasSystem(),"Inter gas system");
-               count+=3;
+               count=addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getInterGasSystem(),"Inter gas system");
+               sheet2.createRow(count);
            }
        }
+
+       flag=8;
+       height=getRowsHeight(wb,sheet2,count,sheetBeforePage,flag);//flag表示的是对应excel的第几个目录
+       sheetBeforePage+=height;
 
          /*TechnicalAppendix*/
          List<TechnicalAppendix>  technicalAppendixs=report.getTechnicalAppendices();
@@ -428,7 +459,10 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
        HSSFFont font1=wb.createFont();
        font1.setFontHeight((short)320);
        cellStyle3.setFont(font1);
+
+
        int num=6;
+       sheet3.createRow(num-1);
        for(TechnicalAppendix technicalAppendix:technicalAppendixs){
            if(technicalAppendix.getTechnicalAppendixInfo().size()>0 && technicalAppendix.getTechnicalAppendixInfo()!=null){
                //标题
@@ -524,7 +558,7 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
                    }
                    num++;
                }
-
+                sheet3.createRow(num);
                num++;
 
            }
@@ -532,6 +566,10 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
 
 
        }
+
+       flag=10;
+       height=getRowsHeight(wb,sheet3,num-1,sheetBeforePage,flag);//flag表示的是对应excel的第几个目录
+       sheetBeforePage+=height;
 
        /*documents*/
        List<Document>  documents=report.getDocuments();
@@ -544,6 +582,7 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
        cellStyle6.setBorderRight(HSSFCellStyle.BORDER_THIN);//右边框
 
        int i=3;
+       sheet4.createRow(i-2);
        for(Document d:documents){
            if(d.getAttachmentName()!=null && d.getAttachmentName()!=""){
                Row row=sheet4.createRow(i);
@@ -563,10 +602,18 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
 
 
        }
+       flag=12;
+       height=getRowsHeight(wb,sheet4,i-1,sheetBeforePage,flag);//flag表示的是对应excel的第几个目录
+       sheetBeforePage+=height;
 
         /*Grading*/
        List<Grade>  grades=gradeMapper.getListByParentItem("0",report.getId());
        HSSFSheet sheet5 = wb.getSheetAt(9);
+
+       sheet5.createRow(1);
+       sheet5.createRow(8);
+       sheet5.createRow(9);
+       sheet5.createRow(16);
 
        //一级标题的样式
        CellStyle cellStyle7=wb.createCellStyle();
@@ -671,9 +718,11 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
 
 
        }
+       flag=14;
+       height=getRowsHeight(wb,sheet5,j-1,sheetBeforePage,flag);//flag表示的是对应excel的第几个目录
 
 
-        // 第六步，将文件存到指定位置
+       // 第六步，将文件存到指定位置
         try {
             FileOutputStream fout = new FileOutputStream("luzhen" + ".xls");
             wb.write(fout);
@@ -681,8 +730,6 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
         } catch (Exception e) {
             e.printStackTrace();
         }
-        File excel = new File("luzhen" + ".xls");
-        HttpServletRequest request;
         String basePath = ContextLoader.getCurrentWebApplicationContext().getServletContext().getRealPath("/");
         String path=basePath.substring(0,basePath.lastIndexOf("admin"))+"admin";
         path.replace("\"","\"\"");
@@ -743,7 +790,7 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
 
     }
 
-    public  void addCellInfo(ConditionInspection conditionInspection,HSSFSheet sheet,int count
+    public  Integer addCellInfo(ConditionInspection conditionInspection,HSSFSheet sheet,int count
             ,CellStyle cellStyle1,CellStyle cellStyle2,String description,String catagory){
         Row row1=sheet.createRow(count);
         conditionInspectionCreateCell(row1,conditionInspection,sheet,count,cellStyle1,"");
@@ -754,6 +801,8 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
         float hieght=conditionInspectionCreateCell(row2,conditionInspection,sheet,count,cellStyle2,description);
         row2.setHeightInPoints(hieght);
         row2.getCell(0).setCellValue(description);
+        count++;
+        return count;
 
     }
 
@@ -774,7 +823,7 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
         outFilePath+="\\REPORT.pdf";
         String url="";
         ComThread.InitSTA(true);
-        ActiveXComponent ax=new ActiveXComponent("Excel.Application");
+        ActiveXComponent ax=new ActiveXComponent("KET.Application");
         try{
             ax.setProperty("Visible", new Variant(false));
             ax.setProperty("AutomationSecurity", new Variant(3)); //禁用宏
@@ -782,18 +831,19 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
             Dispatch excel=Dispatch.invoke(excels,"Open",Dispatch.Method,new Object[]{
                             inFilePath,
                             new Variant(false),
-                            new Variant(false)
+                            new Variant(false),
                     },
                     new int[9]).toDispatch();
             //转换格式
             Dispatch.invoke(excel,"ExportAsFixedFormat",Dispatch.Method,new Object[]{
                     new Variant(0), //PDF格式=0
                     outFilePath,
-                    new Variant(0)  //0=标准 (生成的PDF图片不会变模糊) 1=最小文件 (生成的PDF图片糊的一塌糊涂)
+                    new Variant(0),  //0=标准 (生成的PDF图片不会变模糊) 1=最小文件 (生成的PDF图片糊的一塌糊涂)
             },new int[1]);
 
 
-            Dispatch.call(excel, "Close",new Variant(false));
+            Dispatch.call(excel, "Close",new Variant(true));
+
 
             if(ax!=null){
                 ax.invoke("Quit",new Variant[]{});
@@ -840,5 +890,25 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
         }
         String url="http://"+bucket+"."+endpoint+"/"+s+".pdf";
         return url;
+    }
+
+
+    //改方法通过获取每一行的高度的磅数加在一起，算出每一个sheet需要的页数（也就是打印出来的页数）
+    public Integer getRowsHeight(HSSFWorkbook wb,HSSFSheet sheet,Integer rows,Integer sheetBeforePage,int flag){
+        //获取目录的sheet
+        HSSFSheet sheet1=wb.getSheetAt(1);
+        //打印出一个分页需要
+        int totalRowsHeight=51*14;
+
+        int height=0;
+        for(int j=0;j<=rows;j++){
+            height+=sheet.getRow(j).getHeightInPoints();
+        }
+        int pages=height / totalRowsHeight+1;
+
+        sheet1.getRow(flag).getCell(6).setCellValue(sheetBeforePage+1);
+
+
+        return pages;
     }
 }
