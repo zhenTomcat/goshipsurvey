@@ -155,7 +155,7 @@
                 <ul class="loginbar pull-right">
                     <c:if test="${not empty sessionScope.sessionUser}">
                         <li>
-                            <a href="prepurchaseindex">${sessionScope.sessionUser.name}</a>
+                            <a href="prepurchaseindex" id="userName">${sessionScope.sessionUser.name}</a>
                         </li>
                     </c:if>
                     <c:if test="${empty sessionScope.sessionUser}">
@@ -216,13 +216,13 @@
     <!--=== Service Block ===-->
     <div class="container content-sm box-shadow" id="service-choose">
         <div class="row ">
-            <a href="onoff">
+            <a href="onoff" id="onoff-entrance">
                 <div class="col-md-6 content-boxes-v6 md-margin-bottom-50">
                     <i class="rounded-x fa fa-cog"></i>
                     <h1 class="title-v3-md text-uppercase margin-bottom-10">On/Off hire inspection</h1>
                 </div>
             </a>
-            <a href="prepurchase">
+            <a href="prepurchase" id="prepurchase-entrance">
                 <div class="col-md-6 content-boxes-v6 md-margin-bottom-50">
                     <i class="rounded-x fa fa-cogs"></i>
                     <h2 class="title-v3-md text-uppercase margin-bottom-10">Pre-purchase inspection</h2>
@@ -310,7 +310,14 @@
 <script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/html5shiv.js"></script>
 <script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/placeholder-IE-fixes.js"></script>
 <![endif]-->
-
+<script>
+    $(document).ready(function () {
+        if ($("#userName").length > 0) {
+            $("#onoff-entrance").attr("href", "onoffindex");
+            $("#prepurchase-entrance").attr("href", "prepurchaseindex");
+        }
+    })
+</script>
 </body>
 
 </html>

@@ -71,6 +71,7 @@
 <script>
     var inspectionTable = $("#onoff_surveyor_inspection_table");
     $(document).ready(function () {
+        $.cookie("onOffLastPage", "surveyor/inspection");
         drawTable();
     })
 

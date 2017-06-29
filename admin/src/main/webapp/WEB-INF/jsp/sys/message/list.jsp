@@ -127,7 +127,7 @@
             </button>
         </div>
         <table class="table  table-checkable table-bordered"
-               id="surveyor_table">
+               id="message_table">
             <thead>
             <tr>
                 <th width="10%">
@@ -168,15 +168,21 @@
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
 
 
-    var surveyorTable;
+    var messageTable;
     $(document).ready(function () {
-        surveyorTable = $('#surveyor_table').DataTable({
+        $.cookie("onOffLastPage", "message");
+        drawTable();
+    });
+
+    function drawTable() {
+        messageTable = $('#message_table').DataTable({
             "ordering": false,
             "pagingType": "simple_numbers",
             "pageLength": 20,
             "autoWidth": false,
             "processing": true,
             "serverSide": true,
+            'bStateSave': true,
             "ajax": {
                 "url": "message/list",
                 "type": "get",
@@ -239,13 +245,14 @@
                 drawICheck('defaultCheck', 'chx_default');
             },
         });
-    });
+    }
+
 
     function refreshTable(toFirst) {
         if (toFirst) {//表格重绘，并跳转到第一页
-            surveyorTable.draw();
+            messageTable.draw();
         } else {//表格重绘，保持在当前页
-            surveyorTable.draw(false);
+            messageTable.draw(false);
         }
     }
 

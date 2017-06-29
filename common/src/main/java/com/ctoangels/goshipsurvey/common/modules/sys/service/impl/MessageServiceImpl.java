@@ -18,6 +18,8 @@ import com.ctoangels.goshipsurvey.common.modules.sys.controller.RightController;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
 import com.ctoangels.goshipsurvey.common.modules.sys.mapper.UserMapper;
 import com.ctoangels.goshipsurvey.common.util.Const;
+import com.ctoangels.goshipsurvey.common.util.MyWebSocketHandler;
+import com.ctoangels.goshipsurvey.common.util.MyWebSocketMessage;
 import com.ctoangels.goshipsurvey.common.util.Tools;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.subject.Subject;
@@ -31,6 +33,7 @@ import com.ctoangels.goshipsurvey.common.modules.sys.mapper.MessageMapper;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.Message;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.IMessageService;
 import com.baomidou.framework.service.impl.SuperServiceImpl;
+import org.springframework.web.socket.TextMessage;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,6 +73,9 @@ public class MessageServiceImpl extends SuperServiceImpl<MessageMapper, Message>
     @Autowired
     QuotationApplicationMapper quotationApplicationMapper;
 
+    @Autowired
+    MyWebSocketHandler myWebSocketHandler;
+
     @Override
     @Async
     public void publicAll(String title, String content, Integer type) {
@@ -100,6 +106,7 @@ public class MessageServiceImpl extends SuperServiceImpl<MessageMapper, Message>
             }
             messageMapper.insertBatch(list);
         }
+        myWebSocketHandler.sendManyUsers("您有一条新消息", true, ids);
     }
 
     @Override
@@ -116,6 +123,7 @@ public class MessageServiceImpl extends SuperServiceImpl<MessageMapper, Message>
         m.setReadStatus(Const.MESSAGE_UNREAD);
         m.setCreateInfo(u.getName());
         messageMapper.insert(m);
+        myWebSocketHandler.sendOneUser(new MyWebSocketMessage("您有一条消息", getUnreadMessageCount(id), true), id);
     }
 
     @Override
@@ -172,5 +180,10 @@ public class MessageServiceImpl extends SuperServiceImpl<MessageMapper, Message>
         String shipName = shipDetailMapper.selectById(i.getShipId()).getShipName();
         String title = shipName + "船买卖船勘验,验船报告已出,请及时在网上查看,也可下载PDF版本,并对本次验船做出评价";
         publicOne(i.getOpId(), title, title);
+    }
+
+    @Override
+    public int getUnreadMessageCount(Integer userId) {
+        return messageMapper.getUnreadMessageCount(userId);
     }
 }

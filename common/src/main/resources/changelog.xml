@@ -198,6 +198,16 @@
             insert INTO t_dict(type,value,des,del_flag) VALUES('surveyType',2,'Pre-purchase',0);
         </sql>
     </changeSet>
+    <changeSet author="WangShun" id="15950097942-016">
+        <sql>
+            alter table t_quotation CHANGE current_quantity current_quantity text DEFAULT NULL;
+        </sql>
+    </changeSet>
+    <changeSet author="WangShun" id="15950097942-017">
+        <sql>
+            alter table sys_message CHANGE title title text DEFAULT NULL;
+        </sql>
+    </changeSet>
 </databaseChangeLog>
 
 

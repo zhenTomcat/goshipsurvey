@@ -71,6 +71,7 @@
 <script>
     var inspectionTable = $("#onoff_op_inspection_table");
     $(document).ready(function () {
+        $.cookie("onOffLastPage", "op/inspection");
         drawTable();
     })
 
@@ -160,7 +161,6 @@
             inspectionTable.draw(false);
         }
     }
-
 
 </script>
 

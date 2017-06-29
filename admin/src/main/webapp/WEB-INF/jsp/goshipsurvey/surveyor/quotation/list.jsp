@@ -63,6 +63,7 @@
     var surveyList;
     var surveyorSelectHtml;
     $(document).ready(function () {
+        $.cookie("onOffLastPage", "surveyor/quotation");
         drawTable();
     })
 
@@ -225,7 +226,7 @@
         html += "</div>";
         html += '<div class="col-md-3">';
         html += '<label class="col-md-12 text-left">Bonus plan:</label>';
-        html += '<div class="col-md-12 text-left" style="padding-left:30px; ">' + data.bonusPlan + '</div>';
+        html += '<div class="col-md-12 text-left" style="padding-left:30px;word-wrap: break-word;">' + data.bonusPlan + '</div>';
         html += "</div>";
         //Agency details and loi
         var application = data.application;

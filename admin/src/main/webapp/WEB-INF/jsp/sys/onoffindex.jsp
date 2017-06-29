@@ -118,7 +118,8 @@
 --%>
 <script src="${global}/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <%--<script src="${global}/plugins/js.cookie.min.js" type="text/javascript"></script>--%>
-<script src="http://windyeel.oss-cn-shanghai.aliyuncs.com/global/plugins/jquery.cookie.js" type="text/javascript"></script>
+<script src="http://windyeel.oss-cn-shanghai.aliyuncs.com/global/plugins/jquery.cookie.js"
+        type="text/javascript"></script>
 <script src="${global}/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
 <script src="${global}/plugins/jquery.blockui.min.js" type="text/javascript"></script>
 <script src="${global}/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
@@ -184,6 +185,7 @@
 
     $(document).ready(function () {
         initPage();
+        webSocketMessage();
     });
 
     function nofind(type) {
@@ -200,7 +202,7 @@
     }
 
     function initPage() {
-        var url1 = "op/record";
+        var url1 = $.cookie("onOffLastPage") || "op/record";
         var url2 = "surveyor/record";
         var a = $("a[href='" + url1 + "']");
         if (a.length > 0) {
@@ -235,5 +237,46 @@
             a.html(a.html() + selectedSpan);
         }
     })
+
+
+    function webSocketMessage() {
+        console.log("WebSocket:开始")
+        var path = "localhost:8080/";
+//        var path = "http://www.goshipsurvey.com/admin/";
+        var userId = 'lys';
+        var jspCode = userId + "AAA";
+        var websocket;
+        if ('WebSocket' in window) {
+            websocket = new WebSocket("ws://" + path + "wsMy?jspCode=" + jspCode);
+            console.log("WebSocket:开始1")
+        } else if ('MozWebSocket' in window) {
+            websocket = new MozWebSocket("ws://" + path + "wsMy?jspCode=" + jspCode);
+            console.log("WebSocket:开始2")
+        } else {
+            websocket = new SockJS("http://" + path + "wsMy/sockjs?jspCode=" + jspCode);
+            console.log("WebSocket:开始3")
+        }
+        websocket.onopen = function (event) {
+            console.log("WebSocket:已连接");
+            console.log(event);
+        };
+        websocket.onmessage = function (event) {
+            var data = JSON.parse(event.data);
+            console.log("WebSocket:收到一条消息", data);
+            console.log("WebSocket:收到一条消息", data.unreadCount);
+            $(".unreadCount").html(data.unreadCount);
+            if (data["alert"]) {
+                alert(data.messageContent);
+            }
+        };
+        websocket.onerror = function (event) {
+            console.log("WebSocket:发生错误 ");
+            console.log(event);
+        };
+        websocket.onclose = function (event) {
+            console.log("WebSocket:已关闭");
+            console.log(event);
+        }
+    }
 </script>
 </html>

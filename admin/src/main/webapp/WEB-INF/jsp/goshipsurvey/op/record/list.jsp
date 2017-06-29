@@ -59,7 +59,7 @@
                                     <shiro:hasPermission name="op/quotation/add">
                                         <div class="col-md-4">
                                             <div class="btn-group">
-                                                <a href="#add_quotation_form" data-toggle="modal"
+                                                <a onclick="showModelForm(this)" data-url="op/quotation/add"
                                                    class="btn blue"><i class="fa fa-plus"></i> New quotation
                                                 </a>
                                             </div>
@@ -183,12 +183,27 @@
         </div>
     </div>
 </div>
+<div id="modal_form" class="modal fade" role="dialog" aria-hidden="true"></div>
+<a id="modal_form_switch" data-toggle="modal" href="#modal_form" style="display: none">a</a>
 <script>
+    function showModelForm(obj) {
+        var url = $(obj).attr("data-url");
+        var md = $(obj).attr("md");
+        if (md == 'ajax') {
+        } else {
+            $("#modal_form").load(url);
+            $("#modal_form_switch").click();
+        }
+        return false;
+    }
+
+
     var quotationTable;
     var inspectionTable;
     var starRatingNot = $("#star-rating-outer-not");
     var starRatingHave = $("#star-rating-outer-have");
     $(document).ready(function () {
+        $.cookie("onOffLastPage", "op/record");
         drawQuotationTable();
         drawInspectionTable();
     });
@@ -438,4 +453,3 @@
         })
     }
 </script>
-<jsp:include page="../quotation/add.jsp"/>

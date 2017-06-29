@@ -100,10 +100,10 @@
                                                                         <td>${quotation.portName}</td>
                                                                         <td><fmt:formatDate
                                                                                 value="${quotation.startDate}"
-                                                                                pattern="yyyy-MM-dd"></fmt:formatDate>
+                                                                                pattern="yyyy-MM-dd"/>
                                                                             to <fmt:formatDate
                                                                                     value="${quotation.endDate}"
-                                                                                    pattern="yyyy-MM-dd"></fmt:formatDate></td>
+                                                                                    pattern="yyyy-MM-dd"/></td>
                                                                         <td>$:${quotation.totalPrice}</td>
                                                                     </tr>
                                                                     </tbody>
@@ -230,60 +230,93 @@
                                                                 </div>
                                                                 <div class="portlet-body">
                                                                     <div class="container-fluid">
-                                                                        <div class="col-md-8">
-                                                                            <c:forEach
-                                                                                    items="${inspection.inspectionTypes}"
-                                                                                    var="type">
-                                                                                <div class="form-group col-md-12">
-                                                                                    <label class="col-sm-2 control-label inspection-type-label">${inspectionType[type-1].des}</label>
+                                                                        <div class="row">
+                                                                            <div class="col-md-8">
+                                                                                <c:forEach
+                                                                                        items="${inspection.inspectionTypes}"
+                                                                                        var="type">
+                                                                                    <div class="form-group col-md-12">
+                                                                                        <label class="col-sm-2 control-label inspection-type-label">${inspectionType[type-1].des}</label>
+                                                                                    </div>
+                                                                                    <div class="form-group col-md-6">
+                                                                                        <label class="col-sm-12 control-label delivery-by-label">
+                                                                                                ${dLabel[type]}
+                                                                                            : ${quotation[delivery[type]]}
+                                                                                        </label>
+                                                                                    </div>
+                                                                                    <div class="form-group col-md-6">
+                                                                                        <label class="col-sm-12 control-label delivery-by-label">
+                                                                                                ${aLabel[type]}
+                                                                                            : ${quotation[accepted[type]]}
+                                                                                        </label>
+                                                                                    </div>
+                                                                                </c:forEach>
+                                                                                <div class="form-group col-md-3">
+                                                                                    <label class="col-sm-10 control-label">Ship
+                                                                                        particulars : </label>
+                                                                                    <div class="col-sm-4 view-ship-particulars"
+                                                                                         style="margin-top: 10px">
+                                                                                        <c:if test="${(!empty quotation.shipParticularsUrl) && (quotation.shipParticularsUrl!='')}">
+                                                                                            <a class="btn btn-sm green"
+                                                                                               target="_blank"
+                                                                                               href="${quotation.shipParticularsUrl}">DOWNLOAD</a>
+                                                                                        </c:if>
+                                                                                    </div>
                                                                                 </div>
-                                                                                <div class="form-group col-md-6">
-                                                                                    <label class="col-sm-12 control-label delivery-by-label">
-                                                                                            ${dLabel[type]}
-                                                                                        : ${quotation[delivery[type]]}
-                                                                                    </label>
+                                                                                <div class="form-group col-md-9"
+                                                                                     style="padding-top: 10px;word-wrap: break-word">
+                                                                                    ${quotation.shipParticulars}
                                                                                 </div>
-                                                                                <div class="form-group col-md-6">
-                                                                                    <label class="col-sm-12 control-label delivery-by-label">
-                                                                                            ${aLabel[type]}
-                                                                                        : ${quotation[accepted[type]]}
-                                                                                    </label>
+                                                                            </div>
+                                                                            <div class="col-md-4 margin-bottom-10">
+                                                                                <label class="col-sm-12 control-label"
+                                                                                       style="padding-left: 0">Port
+                                                                                    agency :</label>
+                                                                                <div class="form-group col-md-12"
+                                                                                     style="word-wrap: break-word">
+                                                                                    ${quotation.portAgency}
                                                                                 </div>
-                                                                            </c:forEach>
-                                                                            <div class="form-group col-md-3">
-                                                                                <label class="col-sm-10 control-label">Ship
-                                                                                    particulars : </label>
-                                                                                <div class="col-sm-4 view-ship-particulars"
-                                                                                     style="margin-top: 10px">
-                                                                                    <c:if test="${(!empty quotation.shipParticularsUrl) && (quotation.shipParticularsUrl!='')}">
+
+                                                                                <label class="col-sm-2 control-label">L.O.I</label>
+                                                                                <br><br>
+                                                                                <div class="col-sm-6 view-loi">
+                                                                                    <c:if test="${(!empty quotation.blankLoiUrl) && (quotation.blankLoiUrl!='')}">
                                                                                         <a class="btn btn-sm green"
                                                                                            target="_blank"
-                                                                                           href="${quotation.shipParticularsUrl}">DOWNLOAD</a>
+                                                                                           href="${quotation.blankLoiUrl}">DOWNLOAD</a>
                                                                                     </c:if>
                                                                                 </div>
                                                                             </div>
-                                                                            <div class="form-group col-md-9"
-                                                                                 style="padding-top: 10px;word-wrap: break-word">
-                                                                                ${quotation.shipParticulars}
-                                                                            </div>
                                                                         </div>
-                                                                        <div class="col-md-4 margin-bottom-10">
-                                                                            <label class="col-sm-12 control-label"
-                                                                                   style="padding-left: 0">Port
-                                                                                agency :</label>
-                                                                            <div class="form-group col-md-12"
-                                                                                 style="word-wrap: break-word">
-                                                                                ${quotation.portAgency}
+                                                                        <div class="row">
+                                                                            <div class="col-md-6">
+                                                                                <div class="form-group col-md-4">
+                                                                                    <label class="col-sm-12 control-label">Current
+                                                                                        quantity of bunkers from ship
+                                                                                        :</label>
+                                                                                    <div class="col-sm-12 view-ship-particulars"
+                                                                                         style="margin-top: 10px">
+                                                                                        <c:if test="${(!empty quotation.currentQuantityUrl) && (quotation.currentQuantityUrl!='')}">
+                                                                                            <a class="btn btn-sm green"
+                                                                                               target="_blank"
+                                                                                               href="${quotation.currentQuantityUrl}">DOWNLOAD</a>
+                                                                                        </c:if>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="form-group col-md-8"
+                                                                                     style="padding-top: 10px;word-wrap: break-word">
+                                                                                    ${quotation.currentQuantity}
+                                                                                </div>
                                                                             </div>
-
-                                                                            <label class="col-sm-2 control-label">L.O.I</label>
-                                                                            <br><br>
-                                                                            <div class="col-sm-6 view-loi">
-                                                                                <c:if test="${(!empty quotation.blankLoiUrl) && (quotation.blankLoiUrl!='')}">
-                                                                                    <a class="btn btn-sm green"
-                                                                                       target="_blank"
-                                                                                       href="${quotation.blankLoiUrl}">DOWNLOAD</a>
-                                                                                </c:if>
+                                                                            <div class="col-md-6">
+                                                                                <div class="form-group col-md-4">
+                                                                                    <label class="col-sm-12 control-label">Bonus
+                                                                                        plan :</label>
+                                                                                </div>
+                                                                                <div class="form-group col-md-8"
+                                                                                     style="padding-top: 10px;word-wrap: break-word">
+                                                                                    ${quotation.bonusPlan}
+                                                                                </div>
                                                                             </div>
                                                                         </div>
                                                                     </div>
