@@ -127,7 +127,7 @@
                     "targets": 8,
                     "render": function (data, type, row) {
                         if(row.submitStatus==1){
-                            return '<a data-target="navTab" href="/prepurchase/op/reportInfo?reportId='+row.inspectionReportId+'" >View</a>';
+                            return '<a data-target="navTab" href="prepurchase/op/reportInfo?reportId='+row.inspectionReportId+'" >View</a>';
                         }
                         return "";
                     }

@@ -131,10 +131,10 @@
                     "targets": 10,
                     "render": function (data, type, row) {
                         if(row.submitStatus==1){
-                            return '<a data-target="navTab" href="/prepurchase/surveyor/reportEdit?inspectionId='+row.id+'" >View</a> <li class="fa fa-link"></li>';
+                            return '<a data-target="navTab" href="prepurchase/surveyor/reportEdit?inspectionId='+row.id+'" >View</a> <li class="fa fa-link"></li>';
                         }
                         if(row.submitStatus==0){
-                            return '<a data-target="navTab" href="/prepurchase/surveyor/reportEdit?inspectionId='+row.id+'" >Edit</a> <li class="fa fa-edit"></li></li>';
+                            return '<a data-target="navTab" href="prepurchase/surveyor/reportEdit?inspectionId='+row.id+'" >Edit</a> <li class="fa fa-edit"></li></li>';
                         }
                         return "";
                     }
