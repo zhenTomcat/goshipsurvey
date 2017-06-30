@@ -159,8 +159,8 @@
                 {
                     "targets": 5,
                     "render": function (data, type, row) {
-                        var startDate = new Date(row.startDate).Format("yyyy-MM-dd");
-                        var endDate = new Date(row.endDate).Format("yyyy-MM-dd");
+                        var startDate = new Date(row.startDate.replace("-", "/")).Format("yyyy-MM-dd");
+                        var endDate = new Date(row.endDate.replace("-", "/")).Format("yyyy-MM-dd");
                         return startDate + " to " + endDate;
                     }
                 },
@@ -184,6 +184,7 @@
                         if (status != 2) {
                             return '<a href="op/quotation/deleteById?id=' + row.id + '" class="btn red btn-sm" type="button" data-msg="确定删除吗？" data-model="ajaxToDo" data-callback="drawTable()"><i class="fa fa-trash"></i></a>';
                         }
+                        return "";
                     }
                 }
             ],

@@ -215,8 +215,8 @@
                 {
                     "targets": 4,
                     "render": function (data, type, row) {
-                        var surveyTimeStart = new Date(row.surveyTimeStart).Format("yyyy-MM-dd");
-                        var surveyTimeEnd = new Date(row.surveyTimeEnd).Format("yyyy-MM-dd");
+                        var surveyTimeStart = new Date(row.surveyTimeStart.replace("-", "/")).Format("yyyy-MM-dd");
+                        var surveyTimeEnd = new Date(row.surveyTimeEnd.replace("-", "/")).Format("yyyy-MM-dd");
 //                    return '<a href="surveyor/editTime?id=' + row.id + '" data-model="dialog">' + surveyTimeStart + ' to ' + surveyTimeEnd + '</a>';
                         return '<a href="#time_modal" data-toggle="modal" onclick="changeEditTimeId(' + row.id + ')">' + surveyTimeStart + ' to ' + surveyTimeEnd + '</a>';
                     }

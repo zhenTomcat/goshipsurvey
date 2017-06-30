@@ -92,7 +92,7 @@
                 {
                     "data": "createDate",
                     "render": function (data) {
-                        return new Date(data).Format("yyyy-MM-dd");
+                        return new Date(data.replace("-", "/")).Format("yyyy-MM-dd");
                     }
                 },
                 {
