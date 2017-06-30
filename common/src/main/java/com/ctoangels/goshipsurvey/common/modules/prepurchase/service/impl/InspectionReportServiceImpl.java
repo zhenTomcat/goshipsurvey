@@ -3,6 +3,10 @@ package com.ctoangels.goshipsurvey.common.modules.prepurchase.service.impl;
 import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.ObjectMetadata;
 import com.aliyun.oss.model.PutObjectResult;
+import com.artofsolving.jodconverter.DocumentConverter;
+import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeConnection;
+import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConnection;
+import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConverter;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Dict;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IDictService;
@@ -10,6 +14,7 @@ import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.*;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.*;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.*;
 import com.ctoangels.goshipsurvey.common.util.Const;
+import com.ctoangels.goshipsurvey.common.util.MyWebSocketHandler;
 import com.jacob.activeX.ActiveXComponent;
 import com.jacob.com.ComThread;
 import com.jacob.com.Dispatch;
@@ -19,6 +24,8 @@ import org.apache.poi.hssf.usermodel.*;
 import org.apache.poi.hssf.util.HSSFColor;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.ss.util.CellRangeAddress;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.i18n.LocaleContextHolder;
 import org.springframework.scheduling.annotation.Async;
@@ -74,6 +81,9 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
 
     @Autowired
     private PurchaseInspectionMapper purchaseInspectionMapper;
+
+    private static Logger logger = LoggerFactory.getLogger(InspectionReportServiceImpl.class);
+
 
     @Override
     public InspectionReport selectByPurchaseInspectionId(Integer purchaseInspectionId) {
@@ -166,13 +176,16 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
 
     @Override
     @Async
-    public String downloadReportByReportId(Integer inspectionId,String endpoint,String accessId,String accessKey,String bucket) throws Exception {
+    public String downloadReportByReportId(Integer inspectionId,String endpoint,String accessId,String accessKey,String bucket){
         String url=exportSpecExcel(inspectionId,endpoint,accessId,accessKey,bucket);
         return url;
     }
 
+
+
+
     //导出报告
-   public String exportSpecExcel(Integer reportId,String endpoint,String accessId,String accessKey,String bucket) throws Exception {
+   public String exportSpecExcel(Integer reportId,String endpoint,String accessId,String accessKey,String bucket){
         List<Dict> dicts=dictService.getListByType("shipType");
         InspectionReport report=inspectionReportMapper.selectByPurchaseInspectionId(reportId);
         PurchaseInspection purchaseInspection =purchaseInspectionMapper.selectByReportId(report.getId());
@@ -190,8 +203,10 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
             is = new FileInputStream(modelExcel);
             wb = new HSSFWorkbook(is);
         } catch (FileNotFoundException e) {
+            logger.info(e.toString());
             e.printStackTrace();
         } catch (IOException e) {
+            logger.info(e.toString());
             e.printStackTrace();
         }
 
@@ -728,6 +743,7 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
             wb.write(fout);
             fout.close();
         } catch (Exception e) {
+            logger.info(e.toString());
             e.printStackTrace();
         }
         String basePath = ContextLoader.getCurrentWebApplicationContext().getServletContext().getRealPath("/");
@@ -820,42 +836,48 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
     //excel转成pdf
     public  String xlsToPdf(String inFilePath,String outFilePath,String endpoint,String accessId,String accessKey,String bucket){
         inFilePath+="\\luzhen.xls";
+
         outFilePath+="\\REPORT.pdf";
-        String url="";
-        ComThread.InitSTA(true);
-        ActiveXComponent ax=new ActiveXComponent("KET.Application");
-        try{
-            ax.setProperty("Visible", new Variant(false));
-            ax.setProperty("AutomationSecurity", new Variant(3)); //禁用宏
-            Dispatch excels=ax.getProperty("Workbooks").toDispatch();
-            Dispatch excel=Dispatch.invoke(excels,"Open",Dispatch.Method,new Object[]{
-                            inFilePath,
-                            new Variant(false),
-                            new Variant(false),
-                    },
-                    new int[9]).toDispatch();
-            //转换格式
-            Dispatch.invoke(excel,"ExportAsFixedFormat",Dispatch.Method,new Object[]{
-                    new Variant(0), //PDF格式=0
-                    outFilePath,
-                    new Variant(0),  //0=标准 (生成的PDF图片不会变模糊) 1=最小文件 (生成的PDF图片糊的一塌糊涂)
-            },new int[1]);
-
-
-            Dispatch.call(excel, "Close",new Variant(true));
-
-
-            if(ax!=null){
-                ax.invoke("Quit",new Variant[]{});
-                ax=null;
-            }
-            ComThread.Release();
-           url= uploadFile2OSS(outFilePath,endpoint,accessId,accessKey,bucket);
-        }catch(Exception es){
-            es.printStackTrace();
-            ComThread.Release();
+        //String OpenOffice_HOME = "D:/Program Files/OpenOffice.org 3";// 这里是OpenOffice的安装目录,C:\Program Files (x86)\OpenOffice 4
+        String OpenOffice_HOME="";
+        String osName = System.getProperty("os.name");
+        if (Pattern.matches("Windows.*", osName)) {
+            OpenOffice_HOME = "C:\\Program Files (x86)\\OpenOffice 4\\program\\";
+        } else {
+            OpenOffice_HOME = "\\opt\\openoffice4\\program\\";
         }
-        return url;
+
+        Process pro = null;
+        try {
+            File inputFile = new File(inFilePath);
+            // 如果目标路径不存在, 则新建该路径
+            File outputFile = new File(outFilePath);
+            // 启动OpenOffice的服务
+           /* String[] command = {OpenOffice_HOME+"soffice","-headless -accept=\"socket,host=127.0.0.1,port=8100;urp;\" -nofirststartwizard"};
+            pro = Runtime.getRuntime().exec(command);*/
+            // connect to an OpenOffice.org instance running on port 8100
+            OpenOfficeConnection connection = new SocketOpenOfficeConnection("127.0.0.1", 8100);
+            //OpenOfficeConnection connection = new SocketOpenOfficeConnection(8100);
+            connection.connect();
+
+            // convert
+            DocumentConverter converter = new OpenOfficeDocumentConverter(connection);
+            converter.convert(inputFile, outputFile);
+            //converter.convert(inputFile,xml,outputFile,pdf);
+
+            // close the connection
+            connection.disconnect();
+            // 封闭OpenOffice服务的进程
+           /* pro.destroy()*/;
+            String url= uploadFile2OSS(outFilePath,endpoint,accessId,accessKey,bucket);
+            return url;
+        } catch (Exception e) {
+            logger.error(e.toString());
+        }
+
+       return null;
+
+
     }
 
     public String uploadFile2OSS(String filePath,String endpoint,String accessId,String accessKey,String bucket) {

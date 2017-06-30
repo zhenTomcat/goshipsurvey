@@ -52,7 +52,7 @@
 
     $(document).ready(function () {
         drawTable();
-    })
+    });
 
     function drawTable() {
         reportTable = $('#report_table').DataTable({
