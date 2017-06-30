@@ -22,12 +22,15 @@ public class HandShake implements HandshakeInterceptor {
     private static Logger logger = LoggerFactory.getLogger(HandShake.class);
 
     @Override
-    public boolean beforeHandshake(ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse, WebSocketHandler webSocketHandler, Map<String, Object> map) throws Exception {
+    public boolean beforeHandshake(ServerHttpRequest serverHttpRequest, ServerHttpResponse serverHttpResponse, WebSocketHandler webSocketHandler, Map<String, Object> map) {
         logger.info("握手前");
-//        String jspCode = ((ServletServerHttpRequest) serverHttpRequest).getServletRequest().getParameter("jspCode");
-        // 标记用户
-        Subject subject = SecurityUtils.getSubject();
-        map.put("userId", ((User) subject.getPrincipal()).getId());
+        try {
+            Subject subject = SecurityUtils.getSubject();
+            map.put("userId", ((User) subject.getPrincipal()).getId());
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
         return true;
     }
 

@@ -137,6 +137,7 @@
                     console.log(data);
 
                     if ("success" == data.result) {
+                        $.cookie('isLogin', 1);
                         saveCookie();
                         var proType = $("#proType").val();
                         if (proType == 1) {

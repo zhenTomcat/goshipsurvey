@@ -5,6 +5,7 @@
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+    String wsPath = request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <c:set var="global" value="http://windyeel.oss-cn-shanghai.aliyuncs.com/global"/>
@@ -180,7 +181,9 @@
 <script src="${ctx}/static/js/handsontable/languages.js"></script>
 <script src="${ctx}/static/js/handsontable/handsontable.js"></script>
 <input id="index-user-type" type="hidden" value="${sessionScope.sessionUser.type}">
+<input id="isLogin" type="hidden" value="${param.isLogin}">
 </body>
+<script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
 <script>
 
     $(document).ready(function () {
@@ -241,19 +244,19 @@
 
     function webSocketMessage() {
         console.log("WebSocket:开始")
+        <%--var path = "<%=wsPath%>";--%>
+//        var path = "www.goshipsurvey.com:8889/admin/";
         var path = "localhost:8080/";
-//        var path = "http://www.goshipsurvey.com/admin/";
-        var userId = 'lys';
-        var jspCode = userId + "AAA";
+        console.log(path);
         var websocket;
         if ('WebSocket' in window) {
-            websocket = new WebSocket("ws://" + path + "wsMy?jspCode=" + jspCode);
+            websocket = new WebSocket("ws://" + path + "wsMy");
             console.log("WebSocket:开始1")
         } else if ('MozWebSocket' in window) {
-            websocket = new MozWebSocket("ws://" + path + "wsMy?jspCode=" + jspCode);
+            websocket = new MozWebSocket("ws://" + path + "wsMy");
             console.log("WebSocket:开始2")
         } else {
-            websocket = new SockJS("http://" + path + "wsMy/sockjs?jspCode=" + jspCode);
+            websocket = new SockJS("http://" + path + "wsMy/sockjs");
             console.log("WebSocket:开始3")
         }
         websocket.onopen = function (event) {
@@ -263,11 +266,28 @@
         websocket.onmessage = function (event) {
             var data = JSON.parse(event.data);
             console.log("WebSocket:收到一条消息", data);
+            var unreadCount = data.unreadCount;
             console.log("WebSocket:收到一条消息", data.unreadCount);
-            $(".unreadCount").html(data.unreadCount);
+            if (unreadCount != 0) {
+                $(".unreadCount").html(data.unreadCount);
+                $(".unreadCount").css("display", "inline-block");
+
+                var isLogin = $.cookie('isLogin');
+                console.log(isLogin);
+                if (isLogin == 1) {
+                    console.log("aaa", isLogin);
+                    unreadAlert("teal", '<a href="message" data-target="navTab" style="color:white">您有' + unreadCount + '未读消息</a>');
+                    $.cookie('isLogin', 0);
+                }
+            } else {
+                $(".unreadCount").css("display", "none");
+            }
+            $.cookie('isLogin', 0);
             if (data["alert"]) {
                 alert(data.messageContent);
             }
+
+
         };
         websocket.onerror = function (event) {
             console.log("WebSocket:发生错误 ");
@@ -277,6 +297,20 @@
             console.log("WebSocket:已关闭");
             console.log(event);
         }
+    }
+
+    function unreadAlert(theme, msg) {
+        var settings = {
+            theme: theme,
+            sticky: false,
+            horizontalEdge: "bottom",
+            verticalEdge: "right"
+        }
+        if (!settings.sticky) {
+            settings.life = 10000;
+        }
+        $.notific8('zindex', 11500);
+        $.notific8(msg, settings);
     }
 </script>
 </html>

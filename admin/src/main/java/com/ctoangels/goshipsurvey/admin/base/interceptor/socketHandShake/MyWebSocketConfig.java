@@ -31,7 +31,7 @@ public class MyWebSocketConfig extends WebMvcConfigurerAdapter implements WebSoc
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry webSocketHandlerRegistry) {
         logger.info("注册sebSocket handler");
-        webSocketHandlerRegistry.addHandler(handler, "/wsMy").addInterceptors(new HandShake());
-        webSocketHandlerRegistry.addHandler(handler, "/wsMy/sockjs").addInterceptors(new HandShake()).withSockJS();
+        webSocketHandlerRegistry.addHandler(handler, "wsMy").addInterceptors(new HandShake()).setAllowedOrigins("*");
+        webSocketHandlerRegistry.addHandler(handler, "wsMy/sockjs").addInterceptors(new HandShake()).withSockJS();
     }
 }
