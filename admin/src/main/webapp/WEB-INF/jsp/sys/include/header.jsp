@@ -26,7 +26,7 @@
                         <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown"
                            data-close-others="true">
                             <span class="username username-hide-on-mobile"> ${user.name}   <span
-                                    class="badge badge-danger unreadCount"> 0 </span></span>
+                                    class="badge badge-danger unreadCount"></span></span>
                             <img alt="" class="img-circle" src="${ctx}/assets/layouts/layout/img/avatar.png"/>
 
                         </a>
@@ -34,7 +34,8 @@
                             <shiro:hasPermission name="message/list">
                                 <li>
                                     <a href="message" data-target='navTab'>
-                                        <i class="fa fa-comment"></i>Message <span class="badge badge-danger unreadCount"> 0 </span></a>
+                                        <i class="fa fa-comment"></i>Message <span
+                                            class="badge badge-danger unreadCount"></span></a>
                                 </li>
                             </shiro:hasPermission>
                             <shiro:hasPermission name="surveyor/list">

@@ -273,12 +273,12 @@
     <!--=== End Header ===-->
 
     <!--=== Slider ===-->
-    <div class="tp-banner-container" style="height:300px">
+    <div class="tp-banner-container" style="height:200px">
         <div class="tp-banner">
             <ul>
                 <li class="revolution-mch-1" data-transition="fade" data-slotamount="5" data-masterspeed="1000"
                     data-title="Slide 1">
-                    <img src="http://shipinfo.img-cn-shanghai.aliyuncs.com/unify/assets/img/sliders/ship1.jpg@x300-5rc"
+                    <img src="http://shipinfo.img-cn-shanghai.aliyuncs.com/unify/assets/img/sliders/ship1.jpg@x200-5rc"
                          alt="darkblurbg" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
                     <div class="tp-caption re-title-v1 sft start" data-x="center" data-hoffset="0" data-y="70"
                          data-speed="1500" data-start="500" data-easing="Back.easeInOut" data-endeasing="Power1.easeIn"

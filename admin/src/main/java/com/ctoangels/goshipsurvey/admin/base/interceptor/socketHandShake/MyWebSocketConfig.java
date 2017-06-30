@@ -1,6 +1,5 @@
 package com.ctoangels.goshipsurvey.admin.base.interceptor.socketHandShake;
 
-import com.ctoangels.goshipsurvey.admin.base.interceptor.dataSourceSelect.DataSourceInterceptor;
 import com.ctoangels.goshipsurvey.common.util.MyWebSocketHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -32,7 +31,7 @@ public class MyWebSocketConfig extends WebMvcConfigurerAdapter implements WebSoc
     @Override
     public void registerWebSocketHandlers(WebSocketHandlerRegistry webSocketHandlerRegistry) {
         logger.info("注册sebSocket handler");
-        webSocketHandlerRegistry.addHandler(handler, "/wsMy").addInterceptors(new HandShake());
-        webSocketHandlerRegistry.addHandler(handler, "/wsMy/sockjs").addInterceptors(new HandShake()).withSockJS();
+        webSocketHandlerRegistry.addHandler(handler, "wsMy").addInterceptors(new HandShake()).setAllowedOrigins("*");
+        webSocketHandlerRegistry.addHandler(handler, "wsMy/sockjs").addInterceptors(new HandShake()).withSockJS();
     }
 }
