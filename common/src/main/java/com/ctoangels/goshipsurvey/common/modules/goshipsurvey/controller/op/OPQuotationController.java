@@ -126,9 +126,13 @@ public class OPQuotationController extends BaseController {
         quotation.setUpdateInfo(getCurrentUser().getName());
         if (quotationService.updateById(quotation)) {
             jsonObject.put("success", true);
-            logger.info("startQuotation" + Thread.currentThread().getId());
             String title = "本区域有可进行租还船检验船舶,请及时查看";
-            messageService.publicAll(title, title, Const.USER_TYPE_SURVEYOR_COMPANY);
+            Integer specifiedId = quotation.getSpecifiedId();
+            if (specifiedId == null) {
+                messageService.publicAll(title, title, Const.USER_TYPE_SURVEYOR_COMPANY);
+            } else {
+                messageService.publicOne(specifiedId, title, title);
+            }
         } else {
             jsonObject.put("success", false);
         }

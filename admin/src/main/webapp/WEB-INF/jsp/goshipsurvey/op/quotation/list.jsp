@@ -159,8 +159,8 @@
                 {
                     "targets": 5,
                     "render": function (data, type, row) {
-                        var startDate = new Date(row.startDate.replace("-", "/")).Format("yyyy-MM-dd");
-                        var endDate = new Date(row.endDate.replace("-", "/")).Format("yyyy-MM-dd");
+                        var startDate = new Date(row.startDate.replace(/-/g, "/")).Format("yyyy-MM-dd");
+                        var endDate = new Date(row.endDate.replace(/-/g, "/")).Format("yyyy-MM-dd");
                         return startDate + " to " + endDate;
                     }
                 },

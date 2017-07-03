@@ -2,6 +2,9 @@ package com.ctoangels.goshipsurvey.common.modules.sys.service.impl;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.framework.service.impl.SuperServiceImpl;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.ctoangels.goshipsurvey.common.modules.go.entity.PublicShip;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.Role;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
 import com.ctoangels.goshipsurvey.common.modules.sys.mapper.UserMapper;
@@ -147,5 +150,17 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
     @Override
     public List<Integer> getAllId(Integer role) {
         return userMapper.getAllId(role);
+    }
+
+    @Override
+    public List<User> getSurveyorList(String keyword) {
+        EntityWrapper<User> ew = new EntityWrapper<>();
+        ew.addFilter("(type = {0} or type={1} )", Const.USER_TYPE_SURVEYOR_COMPANY, Const.USER_TYPE_ADMIN);
+        if (!StringUtils.isEmpty(keyword)) {
+            ew.addFilter("CONCAT(name,email) like {0}", "%" + keyword + "%");
+        }
+        ew.setSqlSelect("id,name,email");
+        Page p = new Page<>(1, 10);
+        return userMapper.selectPage(p, ew);
     }
 }

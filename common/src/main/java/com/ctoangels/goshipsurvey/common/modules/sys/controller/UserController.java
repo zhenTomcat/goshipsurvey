@@ -240,5 +240,13 @@ public class UserController extends BaseController {
         return "sys/user/opInfo";
     }
 
+    @RequestMapping(value = "/searchSurveyors")
+    @ResponseBody
+    public JSONObject searchSurveyors(@RequestParam(required = false) String keyword) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("list", userService.getSurveyorList(keyword));
+        return jsonObject;
+    }
+
 
 }

@@ -92,7 +92,7 @@
                 {
                     "data": "createDate",
                     "render": function (data) {
-                        return new Date(data.replace("-", "/")).Format("yyyy-MM-dd");
+                        return new Date(data.replace(/-/g, "/")).Format("yyyy-MM-dd");
                     }
                 },
                 {
@@ -132,8 +132,8 @@
             "columnDefs": [{
                 "targets": 5,
                 "render": function (data, type, row) {
-                    var startDate = new Date(row.startDate).Format("yyyy-MM-dd");
-                    var endDate = new Date(row.endDate).Format("yyyy-MM-dd");
+                    var startDate = new Date(row.startDate.replace(/-/g, "/")).Format("yyyy-MM-dd");
+                    var endDate = new Date(row.endDate.replace(/-/g, "/")).Format("yyyy-MM-dd");
                     return startDate + " to " + endDate;
                 }
             }, {
