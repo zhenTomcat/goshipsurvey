@@ -111,19 +111,21 @@ public class MessageServiceImpl extends SuperServiceImpl<MessageMapper, Message>
 
     @Override
     @Async
-    public void publicOne(int id, String title, String content) {
-        Tools.loggerThreadId("publicOne");
-        User u = (User) SecurityUtils.getSubject().getPrincipal();
-        Integer sender = u.getId();
-        Message m = new Message();
-        m.setReceiver(id);
-        m.setSender(sender);
-        m.setTitle(title);
-        m.setContent(content);
-        m.setReadStatus(Const.MESSAGE_UNREAD);
-        m.setCreateInfo(u.getName());
-        messageMapper.insert(m);
-        myWebSocketHandler.sendOneUser(new MyWebSocketMessage("您有一条消息", getUnreadMessageCount(id), true), id);
+    public void publicOne(Integer id, String title, String content) {
+        if (id != null) {
+            Tools.loggerThreadId("publicOne");
+            User u = (User) SecurityUtils.getSubject().getPrincipal();
+            Integer sender = u.getId();
+            Message m = new Message();
+            m.setReceiver(id);
+            m.setSender(sender);
+            m.setTitle(title);
+            m.setContent(content);
+            m.setReadStatus(Const.MESSAGE_UNREAD);
+            m.setCreateInfo(u.getName());
+            messageMapper.insert(m);
+            myWebSocketHandler.sendOneUser(new MyWebSocketMessage("您有一条消息", getUnreadMessageCount(id), true), id);
+        }
     }
 
     @Override

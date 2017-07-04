@@ -29,7 +29,7 @@ public interface IQuotationService extends ISuperService<Quotation> {
 
     List<Quotation> getSurveyorList(Integer surveyorId, Integer start, Integer length);
 
-    int getSurveyorTotal();
+    int getSurveyorTotal(Integer surveyorId);
 
 
 }

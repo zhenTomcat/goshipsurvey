@@ -64,7 +64,7 @@ public class SurveyorQuotationController extends BaseController {
             q.setShipType(getShipTypeDict().get(shipType - 1).getDes());
         }
         jsonObject.put(Const.DRAW, request.getParameter(Const.DRAW));
-        int total = quotationService.getSurveyorTotal();
+        int total = quotationService.getSurveyorTotal(getCurrentUser().getId());
         jsonObject.put(Const.RECORDSTOTAL, total);
         jsonObject.put(Const.RECORDSFILTERED, total);
         jsonObject.put(Const.NDATA, list);

@@ -18,7 +18,7 @@ public interface IMessageService extends ISuperService<Message> {
     void publicSome(List<Integer> ids, String title, String content);
 
     //单独发
-    void publicOne(int id, String title, String content);
+    void publicOne(Integer id, String title, String content);
 
     void commentMessage(int id, int type);
 

@@ -219,6 +219,11 @@
             alter table t_inspection_report add submit_status7 int(11) NULL;
         </sql>
     </changeSet>
+    <changeSet author="WangShun" id="15950097942-018">
+        <sql>
+            alter table t_quotation ADD specified_id int(11) DEFAULT NULL COMMENT '指定验船公司的id';
+        </sql>
+    </changeSet>
 </databaseChangeLog>
 
 

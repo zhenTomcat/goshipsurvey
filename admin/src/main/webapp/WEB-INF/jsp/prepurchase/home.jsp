@@ -210,7 +210,7 @@
             margin-left: 20px;
             position: absolute;
             min-height: 65px;
-            top: 430px;
+            top: 330px;
             font-size: 12px;
             right: 10px;
             border-radius: 3px;
@@ -283,9 +283,8 @@
                          alt="darkblurbg" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
                     <div class="tp-caption re-title-v1 sft start" data-x="center" data-hoffset="0" data-y="70"
                          data-speed="1500" data-start="500" data-easing="Back.easeInOut" data-endeasing="Power1.easeIn"
-                         data-endspeed="300">
-                        PRE-PURCHASE <br><br>
-                        &nbsp;&nbsp;&nbsp;INSPECTION
+                         data-endspeed="300" style="font-size: 50px">
+                        PRE-PURCHASE  &nbsp;&nbsp;&nbsp;INSPECTION
                     </div>
                 </li>
             </ul>

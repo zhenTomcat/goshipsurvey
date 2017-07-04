@@ -127,4 +127,5 @@ public class Const {
 
     public static final Integer MESSAGE_OP_TO_COMPANY = 1;
     public static final Integer MESSAGE_COMPANY_TO_OP = 2;
+
 }

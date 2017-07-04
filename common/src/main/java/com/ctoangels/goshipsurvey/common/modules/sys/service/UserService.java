@@ -24,4 +24,5 @@ public interface UserService extends ISuperService<User> {
 
     List<Integer> getAllId(Integer role);
 
+    List<User> getSurveyorList(String keyword);
 }

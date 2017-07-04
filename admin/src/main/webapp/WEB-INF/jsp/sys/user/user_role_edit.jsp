@@ -16,7 +16,7 @@
     </div>
     <div class="modal-body">
         <div class="container-fluid">
-            <input type="hidden" name="userId" value="${userId}"/>
+            <input type="hidden" name="id" value="${userId}"/>
             <table class="table table-bordered table-hover">
                 <thead>
                 <tr>

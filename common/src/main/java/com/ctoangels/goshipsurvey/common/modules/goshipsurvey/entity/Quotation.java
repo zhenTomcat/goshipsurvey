@@ -168,6 +168,12 @@ public class Quotation implements Serializable {
     private Integer delFlag;
 
 
+    /**
+     * 指定的验船公司id
+     */
+    @TableField(value = "specified_id")
+    private Integer specifiedId;
+
     @TableField(exist = false)
     private Inspection inspection;
 
@@ -479,5 +485,13 @@ public class Quotation implements Serializable {
 
     public void setInspectionTypes(String[] inspectionTypes) {
         this.inspectionTypes = inspectionTypes;
+    }
+
+    public Integer getSpecifiedId() {
+        return specifiedId;
+    }
+
+    public void setSpecifiedId(Integer specifiedId) {
+        this.specifiedId = specifiedId;
     }
 }

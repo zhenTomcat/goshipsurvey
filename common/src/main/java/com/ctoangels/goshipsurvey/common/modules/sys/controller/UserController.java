@@ -80,7 +80,7 @@ public class UserController extends BaseController {
 
     @RequestMapping(value = "/add", method = RequestMethod.GET)
     public String toAdd(ModelMap map) {
-        map.put("del_flag", 1);
+        map.put("del_flag", 0);
         map.put("allocatable", 1);
         List<Role> roles = roleService.selectByMap(map);
         map.put("roles", roles);
@@ -100,6 +100,7 @@ public class UserController extends BaseController {
             String password = new SimpleHash("SHA-1", user.getLoginName(), user.getPassword()).toString();
             user.setPassword(password);
             user.setDelFlag(Const.DEL_FLAG_NORMAL);
+
             userService.insert(user);
             jsonObject.put("status", 1);
         }
@@ -171,6 +172,7 @@ public class UserController extends BaseController {
     public String toEditRole(@RequestParam Integer id, ModelMap map) {
         List<Role> roles = userService.getRoles(id);
         map.put("userId", id);
+//        List<Role> roles = roleService.selectList(getEntityWrapper());
         map.put("roles", roles);
         return "sys/user/user_role_edit";
     }
@@ -238,6 +240,14 @@ public class UserController extends BaseController {
         User op = userService.selectById(id);
         map.put("op", op);
         return "sys/user/opInfo";
+    }
+
+    @RequestMapping(value = "/searchSurveyors")
+    @ResponseBody
+    public JSONObject searchSurveyors(@RequestParam(required = false) String keyword) {
+        JSONObject jsonObject = new JSONObject();
+        jsonObject.put("list", userService.getSurveyorList(keyword));
+        return jsonObject;
     }
 
 
