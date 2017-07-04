@@ -9,6 +9,7 @@ import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IQuotation
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.IMessageService;
+import com.ctoangels.goshipsurvey.common.modules.sys.service.UserService;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.impl.MessageServiceImpl;
 import com.ctoangels.goshipsurvey.common.util.Const;
 import com.ctoangels.goshipsurvey.common.util.DateUtil;
@@ -39,6 +40,9 @@ public class OPQuotationController extends BaseController {
 
     @Autowired
     IMessageService messageService;
+
+    @Autowired
+    UserService userService;
 
     @RequestMapping
     public String list(ModelMap map) {
@@ -102,9 +106,11 @@ public class OPQuotationController extends BaseController {
         String inspectionType = q.getInspectionType();
         String[] inspectionTypes = inspectionType.split(",");
         q.setInspectionTypes(inspectionTypes);
+        User specifiedUser = userService.selectById(q.getSpecifiedId());
         map.put("quotation", q);
         map.put("inspectionType", getInspectionTypeDict());
         map.put("shipType", getShipTypeDict());
+        map.put("specifiedUser", specifiedUser);
         return "goshipsurvey/op/quotation/edit";
     }
 

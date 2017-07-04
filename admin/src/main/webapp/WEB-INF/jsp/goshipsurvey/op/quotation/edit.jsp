@@ -3,6 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="go" uri="http://www.ctoangels.com/jsp/jstl/common" %>
+<% String info = "This information can't be read by surveyor,until chosen surveyor/company.";%>
 <style>
     #modal_form .modal-dialog {
         width: 90%;
@@ -44,6 +45,10 @@
     #ship-list li:hover, #port-list li:hover {
         background-color: #32c5d2;
         cursor: pointer;
+    }
+
+    .select2-dropdown {
+        z-index: 999999;
     }
 </style>
 <form class="form-horizontal" action="op/quotation/editComplete" method="post" id="quotation-edit-form">
@@ -153,7 +158,7 @@
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label col-sm-4">Current quantity of bunkers from ship<i
-                                class="fa fa-info-circle"></i></label>
+                                class="fa fa-info-circle" title="<%=info%>"></i></label>
                         <div class="col-sm-8">
                                 <textarea name="currentQuantity"
                                           style="height:100px;resize: none;width: 94%;margin-left: 2%"
@@ -197,7 +202,7 @@
                         <div class="col-md-8">
                             <div class="form-group col-md-12">
                                 <label class="col-sm-3 control-label">On hire<i
-                                        class="fa fa-info-circle"></i></label>
+                                        class="fa fa-info-circle" title="<%=info%>"></i></label>
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="col-sm-6 control-label">Delivery by</label>
@@ -217,7 +222,7 @@
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="col-sm-3 control-label">Off hire<i
-                                        class="fa fa-info-circle"></i></label>
+                                        class="fa fa-info-circle" title="<%=info%>"></i></label>
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="col-sm-6 control-label">Re-delivery by</label>
@@ -237,7 +242,7 @@
                             </div>
                             <div class="form-group col-md-12">
                                 <label class="col-sm-3 control-label">Condition<i
-                                        class="fa fa-info-circle"></i></label>
+                                        class="fa fa-info-circle" title="<%=info%>"></i></label>
                             </div>
                             <div class="form-group col-md-6">
                                 <label class="col-sm-6 control-label">Charter</label>
@@ -257,7 +262,7 @@
                             </div>
                             <div class="col-md-12">
                                 <label class="col-sm-3 control-label">Ship particulars <i
-                                        class="fa fa-info-circle"></i></label>
+                                        class="fa fa-info-circle" title="<%=info%>"></i></label>
                                 <div class="form-group col-md-9">
                                         <textarea class="form-control ship-particulars-textarea"
                                                   name="shipParticulars"
@@ -291,7 +296,7 @@
                         <div class="col-md-4">
                             <label class="col-md-12 control-label"
                                    style="margin-bottom: 15px;text-align: left">Port
-                                agency <i class="fa fa-info-circle"></i></label>
+                                agency <i class="fa fa-info-circle" title="<%=info%>"></i></label>
                             <textarea
                                     class="form-control port-agency-textarea "
                                     name="portAgency"
@@ -315,19 +320,35 @@
                                    target="_blank"
                                    href="${quotation.blankLoiUrl}">DOWNLOAD</a>
                                 <span class="input-group-btn">
-                                                <button class="btn red btn-sm" type="button" title="delete"
-                                                        onclick="delFileAndInput(this)">
-                                                    <i class="fa fa-ban"></i></button>
-                                            </span>
+                                    <button class="btn red btn-sm" type="button" title="delete"
+                                            onclick="delFileAndInput(this)">
+                                        <i class="fa fa-ban"></i></button>
+                                </span>
                             </div>
                         </div>
                     </div>
                 </div>
             </div>
             <div class="modal-footer">
-                <label style="float: left"> <i class="fa fa-info-circle">This information can't be read by surveyor,
-                    until chosen
-                    surveyor/company.</i></label>
+                <div class="form-group col-md-6" style="float: left">
+                    <label class="col-sm-5 control-label">选择指定的验船公司 <i class="fa fa-info-circle"
+                                                                       title="如果选择指定的验船公司,您的验船信息将不会发给其他验船公司"></i></label>
+                    <div class="col-sm-1"> <span class="input-group-btn">
+                            <button class="btn red btn-sm" type="button" title="delete"
+                                    onclick="PortMultiSelect.removeItem(this)">
+                                <i class="fa fa-trash"></i></button>
+                        </span></div>
+                    <div class="col-sm-6 btn-group">
+                        <select id="surveyorsSelect"
+                                name="specifiedId"
+                                class="js-data-example-ajax">
+                            <c:if test="${!empty specifiedUser}">
+                                <option value="${specifiedUser.id}">${specifiedUser.name},${specifiedUser.email}</option>
+                            </c:if>
+                        </select>
+
+                    </div>
+                </div>
                 <button id="closeModal" type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
                 <shiro:hasPermission name="op/quotation/edit">
                     <button type="button" onclick="severCheck()" class="btn btn-primary">Save</button>
@@ -337,8 +358,6 @@
     </div>
 </form>
 <script>
-
-
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
 
     $(document).ready(function () {
@@ -353,7 +372,6 @@
             }
         }
     });
-
     if (jQuery().datepicker) {
         $('.date-picker').datepicker({
             rtl: App.isRTL(),
@@ -533,4 +551,90 @@
         div.find("a").attr("href", "");
         div.css("display", "none");
     }
+
+
+    var PortMultiSelect = function () {
+        var handleDemo = function () {
+            $.fn.select2.defaults.set("theme", "bootstrap");
+            var placeholder = "Select a State";
+            $(".select2, .select2-multiple").select2({
+                placeholder: placeholder,
+                width: null
+            });
+            $(".select2-allow-clear").select2({
+                allowClear: true,
+                placeholder: placeholder,
+                width: null
+            });
+            function formatRepo(repo) {
+                if (repo.loading) return repo.text;
+                var markup = repo.name + "," + repo.email
+
+                return markup;
+            }
+
+            function formatRepoSelection(repo) {
+                return repo.text || repo.name + "," + repo.email;
+            }
+
+            $(".js-data-example-ajax").select2({
+                width: "off",
+                ajax: {
+                    url: "user/searchSurveyors",
+                    dataType: 'json',
+                    delay: 10,
+                    data: function (params) {
+                        return {
+                            keyword: params.term,
+                            page: params.page
+                        };
+                    },
+                    processResults: function (data, page) {
+                        return {
+                            results: data.list
+                        };
+                    },
+                    cache: true
+                },
+                escapeMarkup: function (markup) {
+                    return markup;
+                },
+                minimumInputLength: 1,
+                templateResult: formatRepo,
+                templateSelection: formatRepoSelection
+            });
+            $("button[data-select2-open]").click(function () {
+                $("#" + $(this).data("select2-open")).select2("open");
+            });
+            $(":checkbox").on("click", function () {
+                $(this).parent().nextAll("select").prop("disabled", !this.checked);
+            });
+            $(".select2, .select2-multiple, .select2-allow-clear, .js-data-example-ajax").on("select2:open", function () {
+                if ($(this).parents("[class*='has-']").length) {
+                    var classNames = $(this).parents("[class*='has-']")[0].className.split(/\s+/);
+
+                    for (var i = 0; i < classNames.length; ++i) {
+                        if (classNames[i].match("has-")) {
+                            $("body > .select2-container").addClass(classNames[i]);
+                        }
+                    }
+                }
+            });
+            $(".js-btn-set-scaling-classes").on("click", function () {
+                $("#select2-multiple-input-sm, #select2-single-input-sm").next(".select2-container--bootstrap").addClass("input-sm");
+                $("#select2-multiple-input-lg, #select2-single-input-lg").next(".select2-container--bootstrap").addClass("input-lg");
+                $(this).removeClass("btn-primary btn-outline").prop("disabled", true);
+            });
+        }
+        return {
+            init: function () {
+                handleDemo();
+            },
+            removeItem: function (obj) {
+                $("#surveyorsSelect option").remove();
+            }
+        };
+    }();
+    PortMultiSelect.init();
+
 </script>

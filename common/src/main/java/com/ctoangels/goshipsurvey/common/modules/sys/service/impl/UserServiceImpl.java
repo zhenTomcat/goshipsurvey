@@ -50,7 +50,7 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
 
     public List<Role> getRoles(Integer userId) {
         Map<String, Object> map = new HashMap<>();
-        map.put("del_flag", 1);
+        map.put("del_flag", 0);
         map.put("allocatable", 1);
         List<Role> roles = roleMapper.selectByMap(map);
         map = new HashMap<>();

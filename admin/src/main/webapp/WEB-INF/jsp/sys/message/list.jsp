@@ -206,7 +206,7 @@
                 {
                     "data": "createDate",
                     "render": function (data) {
-                        return new Date(data.replace("-", "/")).Format("yyyy-MM-dd");
+                        return new Date(data.replace(/-/g, "/")).Format("yyyy-MM-dd");
                     }
                 },
                 {
@@ -214,7 +214,7 @@
                     "class": "readDateTd",
                     "render": function (data) {
                         if (data != null) {
-                            return new Date(data.replace("-", "/")).Format("yyyy-MM-dd");
+                            return new Date(data.replace(/-/g, "/")).Format("yyyy-MM-dd");
                         }
                         return "";
                     }
