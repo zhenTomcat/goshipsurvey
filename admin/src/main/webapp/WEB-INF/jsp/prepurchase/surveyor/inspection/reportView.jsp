@@ -23,7 +23,7 @@
     #div_grade{margin-top: 10px;}
     .divPhoto{
         float: left;
-        background-color: #9C9C9C;
+        background-color: white;
         margin-right: 100px;
         margin-bottom: 20px;
     }
@@ -411,7 +411,7 @@
                                                                                 </td>
                                                                                 <td><textarea class="form-control" rows="2" name="defects[${i.index}].description">${d.description}</textarea></td>
                                                                                 <td><input type="text" class="form-control" name="defects[${i.index}].estimatCost" value="${d.estimatCost}" /></td>
-                                                                                <td><button type="button" onclick="defectDeleteRow(this)">Delete</button> </td>
+                                                                                <td><button type="button" onclick="defectDeleteRow(this)" class="btn red">Delete</button> </td>
                                                                             </tr>
                                                                         </c:forEach>
                                                                         </tbody>
@@ -423,12 +423,12 @@
                                                 </div>
                                             </div>
                                             <div class="tab-pane tab-left" id="tab4">
-                                                <div class="tab-pane-div">
+                                                <div class="tab-pane-div col-md-12" style="background-color: #cccccc">
                                                     <form action="" method="post">
                                                         <div class="col-md-12">
-                                                            <div class="col-md-3" style="margin-bottom: 20px;">
-                                                                <button  type="button" >Upload photo</button>&nbsp;&nbsp;
-                                                                <button  type="button" onclick="createAlbum(this)">Creat album</button>
+                                                            <div class="col-md-3" style="margin-bottom: 20px;margin-top: 10px">
+                                                                <%--<button  type="button" class="">Upload photo</button>&nbsp;&nbsp;--%>
+                                                                <button class="btn blue" type="button" onclick="createAlbum(this)">Creat album</button>
                                                             </div>
                                                         </div>
                                                         <c:forEach items="${report.galleries}" var="g">
@@ -711,7 +711,7 @@
                                                                                 <button class="btn red" onclick="clearTd(this)" type="button" class="btn red">Delete</button>
                                                                             </c:if>
                                                                             <c:if test="${d.attachmentUrl=='' || d.attachmentUrl==null}">
-                                                                                <button type="button" onmouseover="upload_attachment(this,'${i.index}','${report.id}','${d.id}')">Browse</button>
+                                                                                <button type="button" class="btn blue" onmouseover="upload_attachment(this,'${i.index}','${report.id}','${d.id}')">Browse</button>
                                                                             </c:if>
                                                                         </td>
                                                                     </tr>
@@ -824,6 +824,8 @@
             $(this).stop();
             $(this).animate({width: 40}, 400);
         });
+
+
 
     });
     $("input").attr("disabled","disabled");

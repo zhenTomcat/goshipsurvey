@@ -1,7 +1,11 @@
 package com.ctoangels.goshipsurvey.common.modules.prepurchase.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.InspectionReport;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.TechnicalAppendix;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.InspectionReportMapper;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IInspectionReportService;
+import com.ctoangels.goshipsurvey.common.util.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +27,9 @@ public class DocumentServiceImpl extends SuperServiceImpl<DocumentMapper, Docume
 
     @Autowired
     private IDocumentService documentService;
+
+    @Autowired
+    private InspectionReportMapper inspectionReportMapper;
 
     @Override
     public Boolean createDocuments(Integer reportId) {
@@ -93,6 +100,10 @@ public class DocumentServiceImpl extends SuperServiceImpl<DocumentMapper, Docume
             }
             documentService.insertOrUpdate(d);
         }
+
+        InspectionReport report = inspectionReportMapper.selectById(documents.get(0).getInspectionReportId());
+        report.setSubmitStatus7(Const.REPORT_SUBMIT);
+        inspectionReportMapper.updateById(report);
         return true;
     }
 }

@@ -54,15 +54,15 @@
 </style>
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-    <h4 class="modal-title" style="color: white">Hull</h4>
+    <h4 class="modal-title" style="color: white">${albumName}</h4>
 </div>
 <div class="col-md-12 line1"></div>
 <form action="" method="post" class="form-horizontal" id="defForm">
     <input id="galleriesId" value="${galleriesId}"type="hidden"/>
     <div class="col-md-12">
         <div class="col-md-3" style="margin-top: 20px;margin-bottom: 20px;">
-            <button disabled id="upload_img" type="button" >Upload photo</button>&nbsp;&nbsp;
-            <button  disabled type="button" >Delect</button>
+            <button disabled id="upload_img" type="button" class="btn blue"><li class="fa fa-upload"/>Upload photo</button>&nbsp;&nbsp;
+            <button  disabled type="button" class="btn red"><li class="fa fa-remove"/> Delect</button>
         </div>
     </div>
     <div id="div-img" class="page col-md-12">

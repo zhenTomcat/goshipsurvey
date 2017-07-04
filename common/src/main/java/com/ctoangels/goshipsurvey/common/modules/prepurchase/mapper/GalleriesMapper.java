@@ -10,5 +10,6 @@ import com.baomidou.mybatisplus.mapper.AutoMapper;
  */
 public interface GalleriesMapper extends AutoMapper<Galleries> {
 
+    Galleries selectByReportIdAndAlbum(Integer reportId,String albumName);
 
 }

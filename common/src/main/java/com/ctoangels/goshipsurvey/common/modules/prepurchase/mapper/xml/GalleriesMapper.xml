@@ -10,8 +10,12 @@
 	<select id="selectGalleriesById" resultMap="GalleriesMedia">
 		select * from t_galleries g  where g.inspection_report_id=#{id} and del_flag=0
 	</select>
+    <select id="selectByReportIdAndAlbum"
+            resultType="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Galleries">
+		select * from t_galleries g where g.inspection_report_id=#{0} and g.name=#{1}
+	</select>
 
-	<resultMap id="GalleriesMedia" type="Galleries">
+    <resultMap id="GalleriesMedia" type="Galleries">
 		<result property="id" column="id"/>
 		<result property="inspectionReportId" column="inspection_report_id"/>
 		<collection property="medias" column="{id=id}" ofType="Media"

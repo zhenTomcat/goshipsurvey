@@ -7,6 +7,7 @@ import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.InspectionRe
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.TechnicalAppendixInfo;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IInspectionReportService;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.ITechnicalAppendixInfoService;
+import com.ctoangels.goshipsurvey.common.util.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
@@ -184,6 +185,10 @@ public class TechnicalAppendixServiceImpl extends SuperServiceImpl<TechnicalAppe
             technicalAppendixInfoService.insert(info);
         }
 
+        int reportId=technicalAppendixMapper.selectById(technicalAppendix.getId()).getInspectionReportId();
+        InspectionReport report=iInspectionReportService.selectById(reportId);
+        report.setSubmitStatus6(Const.REPORT_SUBMIT);
+        iInspectionReportService.updateById(report);
 
         return null;
     }

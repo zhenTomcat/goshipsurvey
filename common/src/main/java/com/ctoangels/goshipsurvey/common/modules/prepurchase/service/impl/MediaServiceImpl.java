@@ -1,7 +1,9 @@
 package com.ctoangels.goshipsurvey.common.modules.prepurchase.service.impl;
 
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Galleries;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.InspectionReport;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IGalleriesService;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IInspectionReportService;
 import com.ctoangels.goshipsurvey.common.util.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

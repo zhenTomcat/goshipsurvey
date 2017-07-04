@@ -323,7 +323,8 @@ function initUploaders_passprot_loi_report(buttonId, bucket, domain, type) {
 
         filters: {
             mime_types: [
-                {title: "Text files", extensions: "pdf,doc,docx"}
+                {title: "Text files", extensions: "pdf,doc,docx"},
+                {title: "Image files", extensions: "jpg,gif,png,bmp,jpeg"}
             ],
             max_file_size: '10mb', //最大只能上传10mb的文件
             prevent_duplicates: true //不允许选取重复文件
@@ -426,7 +427,7 @@ function initUploaders_head_img(buttonId, bucket, domain) {
     uploader.init();
 }
 
-function initUploaders_attachment(buttonId, bucket, domain, obj, count, reportId, documentId) {
+function initUploaders_attachment(buttonId, bucket, domain) {
     var uploader = new plupload.Uploader({
         runtimes: 'html5,flash,silverlight,html4',
         browse_button: buttonId,
@@ -449,14 +450,22 @@ function initUploaders_attachment(buttonId, bucket, domain, obj, count, reportId
                 set_upload_param(up, file.name, true, domain);
             },
             FileUploaded: function () {
+                var count=$("#"+buttonId).attr("data-count");
+                var reportId=$("#"+buttonId).attr("data-reportId");
+                var documentId=$("#"+buttonId).attr("data-documentId");
+                var button_id=$("#"+buttonId).attr("data-buttonId");
+                console.log(count);
+                console.log(reportId);
+                console.log(documentId);
+                console.log(button_id);
                 var html = '<a target="_blank" href="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '">' + nativeName + '</a>' +
                     '<input type="hidden" name="documents[' + count + '].id" value="' + documentId + '">' +
                     '<input type="hidden" name="documents[' + count + '].inspectionReportId" value="' + reportId + '">' +
                     '<input name="documents[' + count + '].attachmentUrl" type="hidden" value="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '" >' +
                     '<input name="documents[' + count + '].attachmentName" type="hidden" value="' + nativeName + '"/>';
-                $(obj).parent().prev().html(html);
+                $("#"+button_id).parent().prev().html(html);
                 var html1 = '<button class="btn red" onclick="clearTd(this,' + count + ',' + reportId + ',' + documentId + ')" type="button" >Delete</button>';
-                $(obj).parent().html(html1);
+                $("#"+button_id).parent().html(html1);
             }
         }
     });
@@ -522,6 +531,8 @@ function initUploaders_img(buttonId, bucket, domain, divId, galleriesId) {
                 set_upload_param(up, file.name, true, domain);
             },
             FileUploaded: function () {
+                var imgName1=g_object_name;
+                var imgName2=nativeName;
                 $.ajax({
                     url: "prepurchase/surveyor/addImg",
                     type: "GET",
@@ -539,9 +550,9 @@ function initUploaders_img(buttonId, bucket, domain, divId, galleriesId) {
                                 '<div><span  onclick="javascript:;" class="span-left">' +
                                 '<input class="icheck" data-imgId="" style=" margin-left: 3px; margin-top: 5px;" type="checkbox"/></span> ' +
                                 ' <span onclick="javascript:removeImg(this);" class="span-right"> <li class="fa fa-remove span-li"></li> </span>' +
-                                ' <img src="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '" style="width: 150px;height: 150px;"/></div>' +
-                                '<div style="width: 150px"><input name="fileUrl" type="hidden" value="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '" >' +
-                                ' <p >' + nativeName + '</p></div></div></div>');
+                                ' <img src="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + imgName1 + '" style="width: 150px;height: 150px;"/></div>' +
+                                '<div style="width: 150px"><input name="fileUrl" type="hidden" value="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + imgName1 + '" >' +
+                                ' <p >' + imgName2 + '</p></div></div></div>');
 
                             $("#" + "album" + galleriesId).html("(" + data.number + ")");
                         }
@@ -665,8 +676,6 @@ function initUploaders_report_grade(buttonId, bucket, domain, gradeId) {
         url: 'http://oss.aliyuncs.com',
         filters: {
             mime_types: [ //上传pdf,txt和zip,rar文件
-                {title: "Zip files", extensions: "zip,rar"},
-                {title: "Text files", extensions: "txt,pdf"},
                 {title: "Image files", extensions: "jpg,gif,png,bmp,jpeg"},
             ],
             max_file_size: '100mb', //最大只能上传100mb的文件
@@ -695,6 +704,11 @@ function initUploaders_report_grade(buttonId, bucket, domain, gradeId) {
                             var html = '<a target="_blank" href="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '">' + nativeName + '</a>';
                             $("#"+buttonId).parent().prev().html(html);
                             $("#"+buttonId).parent().html('<button onclick="removeGrade(this,'+gradeId+')" type="button" class="btn red">Delete</button>');
+
+                            $("#album"+parseInt(data.totalGrades[0])).html('('+parseInt(data.totalGrades[1])+')');
+
+                            console.log(parseInt(data.totalGrades[0]));
+                            console.log(parseInt(data.totalGrades[1]));
                         }
                     },
                     error: function () {

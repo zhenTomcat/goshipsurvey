@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Dict;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IDictService;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.*;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.GalleriesMapper;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.*;
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.IMessageService;
@@ -88,6 +89,9 @@ public class InspectionReportController extends BaseController {
     @Autowired
     private ITechnicalModelContentService technicalModelContentService;
 
+    @Autowired
+    private GalleriesMapper galleriesMapper;
+
 
     //获取InspectionReport的列表信息
     @RequestMapping(value = "/surveyor/report")
@@ -163,6 +167,7 @@ public class InspectionReportController extends BaseController {
             shipDetailService.updateById(shipDetail);
             InspectionReport report = iInspectionReportService.selectById(reportId);
             report.setShipId(shipDetail.getId());
+            report.setSubmitStatus1(Const.REPORT_SUBMIT);
             iInspectionReportService.updateById(report);
             jsonObject.put("mes", true);
         } catch (Exception e) {
@@ -195,7 +200,6 @@ public class InspectionReportController extends BaseController {
         JSONObject jsonObject = new JSONObject();
         try {
             List<Double> totalGrades = gradeService.updateGradeById(grade);
-
             jsonObject.put("mes", true);
             jsonObject.put("totalGrades", totalGrades);
         } catch (Exception e) {
@@ -235,6 +239,7 @@ public class InspectionReportController extends BaseController {
         galleries.setDelFlag(Const.DEL_FLAG_NORMAL);
         try {
             galleriesService.insert(galleries);
+            jsonObject.put("galleries",galleries);
             jsonObject.put("mes", true);
         } catch (Exception e) {
             e.printStackTrace();
@@ -291,6 +296,7 @@ public class InspectionReportController extends BaseController {
 
         modelMap.put("medias", medias);
         modelMap.put("galleriesId", galleriesId);
+        modelMap.put("albumName", galleriesService.selectById(galleriesId).getName());
         if (inspection.getSubmitStatus() == 1) {
             return "prepurchase/surveyor/inspection/imgView";
         }
@@ -335,6 +341,24 @@ public class InspectionReportController extends BaseController {
         return jsonObject;
     }
 
+    //修改第四栏照片的提交状态
+    @RequestMapping(value = "/surveyor/imgSubmit")
+    @ResponseBody
+    public JSONObject imgSubmit(@RequestParam (required = false) Integer reportId) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            InspectionReport report = iInspectionReportService.selectById(reportId);
+            report.setSubmitStatus4(Const.REPORT_SUBMIT);
+            iInspectionReportService.updateById(report);
+            jsonObject.put("mes", true);
+        } catch (Exception e) {
+            e.printStackTrace();
+            jsonObject.put("mes", false);
+        }
+
+        return jsonObject;
+    }
+
 
     //添加或者更新   Surveyor’s summary
     @RequestMapping(value = "/surveyor/reportEditSummary")
@@ -346,6 +370,7 @@ public class InspectionReportController extends BaseController {
 
             InspectionReport report = iInspectionReportService.selectById(reportId);
             report.setConditionInspectionId(conditionInspection.getId());
+            report.setSubmitStatus5(Const.REPORT_SUBMIT);
             iInspectionReportService.updateById(report);
             jsonObject.put("mes", true);
         } catch (Exception e) {

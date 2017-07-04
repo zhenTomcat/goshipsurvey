@@ -1,23 +1,22 @@
 package com.ctoangels.goshipsurvey.common.modules.prepurchase.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
-import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.GradeModel;
-import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.PurchaseInspection;
-import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IGradeModelService;
-import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IPurchaseInspectionService;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.*;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.GalleriesMapper;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.*;
+import com.ctoangels.goshipsurvey.common.util.Const;
 import org.apache.commons.beanutils.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.GradeMapper;
-import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Grade;
-import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IGradeService;
 import com.baomidou.framework.service.impl.SuperServiceImpl;
 
 import java.lang.reflect.InvocationTargetException;
 import java.math.BigDecimal;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -37,6 +36,15 @@ public class GradeServiceImpl extends SuperServiceImpl<GradeMapper, Grade> imple
     @Autowired
     private IPurchaseInspectionService purchaseInspectionService;
 
+    @Autowired
+    private IInspectionReportService iInspectionReportService;
+
+    @Autowired
+    private GalleriesMapper galleriesMapper;
+
+    @Autowired
+    private IMediaService mediaService;
+
     @Override
     public List<Grade> selectListGrade(Integer reportId) {
         EntityWrapper<Grade> ew=new EntityWrapper<>();
@@ -49,11 +57,39 @@ public class GradeServiceImpl extends SuperServiceImpl<GradeMapper, Grade> imple
     @Override
     public List<Double> updateGradeById(Grade grade) {
         Grade grade1=gradeMapper.selectById(grade.getId());
-        if(grade.getFileName()!=null && grade.getFileName()!=""){
+        InspectionReport report=iInspectionReportService.selectById(grade1.getInspectionReportId());
+        if(report.getSubmitStatus2()==0){
+            report.setSubmitStatus2(Const.REPORT_SUBMIT);
+            iInspectionReportService.updateById(report);
+        }
+        if(grade.getFileName()!=null){
             grade1.setFileName(grade.getFileName());
             grade1.setSitePhoto(grade.getSitePhoto());
             gradeMapper.updateById(grade1);
+
+            if(!grade.getFileName().equals("")){
+                Galleries galleries=galleriesMapper.selectByReportIdAndAlbum(grade1.getInspectionReportId(),"Grade");
+                galleries.setNumber(galleries.getNumber()+1);
+                Media media=new Media();
+                media.setFileName(grade.getFileName());
+                media.setGalleriesId(galleries.getId());
+                media.setFileUrl(grade.getSitePhoto());
+                media.setCreateDate(new Date());
+                media.setDelFlag(Const.DEL_FLAG_NORMAL);
+
+                galleriesMapper.updateById(galleries);
+                mediaService.insert(media);
+
+                List<Double> number=new ArrayList<>();
+                number.add(Double.valueOf(galleries.getId()));
+                number.add(Double.valueOf(galleries.getNumber()));
+                return number;
+
+            }
+
             return null;
+        }else {
+
         }
         if(grade.getGrade()!=null){
             grade1.setGrade(grade.getGrade());
@@ -62,7 +98,7 @@ public class GradeServiceImpl extends SuperServiceImpl<GradeMapper, Grade> imple
             return totalGrades;
 
         }
-        if(grade.getRemark()!=null && grade.getRemark()!=""){
+        if(grade.getRemark()!=null){
             grade1.setRemark(grade.getRemark());
             gradeMapper.updateById(grade1);
             return null;

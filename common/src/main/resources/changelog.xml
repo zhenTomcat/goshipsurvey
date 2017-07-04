@@ -208,6 +208,17 @@
             alter table sys_message CHANGE title title text DEFAULT NULL;
         </sql>
     </changeSet>
+    <changeSet author="LuZhen" id="17317309132-011">
+        <sql>
+            alter table t_inspection_report add submit_status1 int(11) NULL;
+            alter table t_inspection_report add submit_status2 int(11) NULL;
+            alter table t_inspection_report add submit_status3 int(11) NULL;
+            alter table t_inspection_report add submit_status4 int(11) NULL;
+            alter table t_inspection_report add submit_status5 int(11) NULL;
+            alter table t_inspection_report add submit_status6 int(11) NULL;
+            alter table t_inspection_report add submit_status7 int(11) NULL;
+        </sql>
+    </changeSet>
 </databaseChangeLog>
 
 

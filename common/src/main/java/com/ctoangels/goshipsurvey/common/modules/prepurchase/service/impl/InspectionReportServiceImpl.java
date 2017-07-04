@@ -82,6 +82,7 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
     @Autowired
     private PurchaseInspectionMapper purchaseInspectionMapper;
 
+
     private static Logger logger = LoggerFactory.getLogger(InspectionReportServiceImpl.class);
 
 
@@ -100,6 +101,7 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
         //将页面删除的给删掉
         EntityWrapper<Defect> ew=new EntityWrapper<>();
         ew.addFilter("inspection_report_id={0}",inspectionReport.getId());
+
         List<Defect> defects=defectService.selectList(ew);
         for (Defect defect:defects){
             defectService.deleteSelective(defect);
@@ -109,6 +111,10 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
         for(Defect defect:defects1){
             defectService.insertOrUpdate(defect);
         }
+
+        InspectionReport report = inspectionReportMapper.selectById(inspectionReport.getId());
+        report.setSubmitStatus3(Const.REPORT_SUBMIT);
+        inspectionReportMapper.updateById(report);
         return true;
     }
 
@@ -120,6 +126,14 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
         //report
         InspectionReport report = new InspectionReport();
         report.setShipId(inspection.getShipId());
+
+        report.setSubmitStatus1(Const.REPORT_UNSUBMIT);
+        report.setSubmitStatus2(Const.REPORT_UNSUBMIT);
+        report.setSubmitStatus3(Const.REPORT_UNSUBMIT);
+        report.setSubmitStatus4(Const.REPORT_UNSUBMIT);
+        report.setSubmitStatus5(Const.REPORT_UNSUBMIT);
+        report.setSubmitStatus6(Const.REPORT_UNSUBMIT);
+        report.setSubmitStatus7(Const.REPORT_UNSUBMIT);
 
         //插入一条报告
         inspectionReportMapper.insert(report);
@@ -140,6 +154,14 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
         galleries1.setCreateDate(new Date());
         galleries1.setDelFlag(Const.DEL_FLAG_NORMAL);
         galleriesMapper.insert(galleries1);
+
+        Galleries galleries3 = new Galleries();
+        galleries3.setName("Grade");
+        galleries3.setNumber(0);
+        galleries3.setInspectionReportId(report.getId());
+        galleries3.setCreateDate(new Date());
+        galleries3.setDelFlag(Const.DEL_FLAG_NORMAL);
+        galleriesMapper.insert(galleries3);
 
         //创建16个Technical appendix
         technicalAppendixService.createTechnicalAppendix(report.getId());

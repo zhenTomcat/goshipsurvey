@@ -23,7 +23,7 @@
     #div_grade{margin-top: 10px;}
     .divPhoto{
         float: left;
-        background-color: #9C9C9C;
+        background-color: white;
         margin-right: 100px;
         margin-bottom: 20px;
     }
@@ -65,6 +65,13 @@
 </style>
     <div class="row">
         <input value="${report.id}" id="reportId" type="hidden"/>
+        <input value="${report.submitStatus1}" id="submitStatus1" type="hidden"/>
+        <input value="${report.submitStatus2}" id="submitStatus2" type="hidden"/>
+        <input value="${report.submitStatus3}" id="submitStatus3" type="hidden"/>
+        <input value="${report.submitStatus4}" id="submitStatus4" type="hidden"/>
+        <input value="${report.submitStatus5}" id="submitStatus5" type="hidden"/>
+        <input value="${report.submitStatus6}" id="submitStatus6" type="hidden"/>
+        <input value="${report.submitStatus7}" id="submitStatus7" type="hidden"/>
         <div class="col-md-12">
             <div class="portlet box green" style="margin-bottom: 0px">
                 <div class="portlet-title" >
@@ -85,7 +92,7 @@
                                         <a id="#tab1" href="javascript:;" onclick="liNow(this)"  class="step" aria-expanded="true">
                                             <span class="number"> 1 </span></br>
                                             <span class="desc">
-                                                    <i class="fa fa-check"></i> Ship details </span>
+                                                Ship details </span>
                                         </a>
                                     </li>
                                     <li>
@@ -340,8 +347,9 @@
                                     </div>
                                 </div>
                                 <div class="tab-pane" id="tab2">
+
                                     <div class="col-lg-2 col-md-2 col-sm-4 col-xs-12" style="float: right;margin-top: 5px">
-                                        <a class="dashboard-stat dashboard-stat-v2 green" href="#" style="margin: 0px">
+                                        <a class="dashboard-stat dashboard-stat-v2 green" href="javascript:;" style="margin: 0px">
                                             <div class="visual">
                                                 <i class="fa fa-shopping-cart"></i>
                                             </div>
@@ -352,7 +360,7 @@
                                             </div>
                                         </a>
                                     </div>
-                                    <div class="col-md-12" id="div_grade">
+                                     <div class="col-md-12" id="div_grade">
                                         <input type="hidden" name="id" value="${report.id}"/>
                                         <div class="col-md-12">
                                             <div class="portlet box green">
@@ -434,15 +442,16 @@
                                     </div>
                                 </div>
                                 <div class="tab-pane tab-left " id="tab4">
-                                    <div class="tab-pane-div">
-                                        <form action="" method="post">
+                                    <div class="tab-pane-div col-md-12" style="background-color: #cccccc">
+                                        <form action="prepurchase/surveyor/imgSubmit" method="post">
+                                            <input name="reportId" value="${report.id}" type="hidden"/>
                                             <div class="col-md-12">
-                                                <div class="col-md-3" style="margin-bottom: 20px;">
-                                                    <button  type="button" >Upload photo</button>&nbsp;&nbsp;
-                                                    <button  type="button" onclick="createAlbum(this)">Creat album</button>
+                                                <div class="col-md-3" style="margin-bottom: 20px;margin-top: 10px">
+                                                    <%--<button  type="button" class="btn blue" >Upload photo</button>&nbsp;&nbsp;--%>
+                                                    <button  type="button" class="btn blue" onclick="createAlbum(this)">Creat album</button>
                                                 </div>
                                             </div>
-                                            <c:forEach items="${report.galleries}" var="g">
+                                            <c:forEach items="${report.galleries}" var="g" varStatus="m">
                                                 <fmt:formatDate value="${g.createDate}" pattern="dd/MM/yyyy" var="createDate"/>
                                                 <div class="divPhoto">
                                                     <div class="divImg" onmouseover="mouseOver(this)">
@@ -450,7 +459,7 @@
                                                             <span  onclick="javascript:editPhoto(this,'${g.id}','${g.name}');" class="span-left">
                                                                 <li class="li-left fa fa-edit"></li>
                                                             </span>
-                                                            <span onclick="javascript:removePhoto(this,'${g.id}');" class="span-right">
+                                                            <span onclick="javascript:removePhoto(this,'${g.id}','${g.name}');" class="span-right">
                                                                 <li class="li-right fa fa-remove"></li>
                                                             </span>
                                                             <a data-model="dialog" href="prepurchase/surveyor/img?galleriesId=${g.id}&reportId=${report.id}"  >
@@ -722,6 +731,8 @@
                                 <div class="tab-pane tab-left " id="tab7">
                                     <div class="tab-pane-div"  >
                                         <form action="prepurchase/surveyor/reportEditDocument" method="post">
+                                            <input style="display: none;" type="button" id="uploadAttachment"
+                                                   data-count="" data-reportId="" data-documentId="" data-buttonId=""/>
                                             <div class="portlet-body">
                                             <table class="table table-striped table-bordered table-hover" id="default_table">
                                                 <thead>
@@ -748,10 +759,10 @@
                                                             </td>
                                                             <td>
                                                                 <c:if test="${d.attachmentUrl!='' && d.attachmentUrl!=null}">
-                                                                    <button onclick="clearTd(this,'${i.index}','${report.id}','${d.id}')" type="button" style="color: red">Delete</button>
+                                                                    <button onclick="clearTd(this,'${i.index}','${report.id}','${d.id}')" type="button" class="btn red">Delete</button>
                                                                 </c:if>
                                                                 <c:if test="${d.attachmentUrl=='' || d.attachmentUrl==null}">
-                                                                    <button class="btn blue" type="button" onmouseover="upload_attachment(this,'${i.index}','${report.id}','${d.id}')">Browse</button>
+                                                                    <button class="btn blue" id="button_id${i.index}" type="button" onclick="upload_attachment(this,'${i.index}','${report.id}','${d.id}')">Browse</button>
                                                                 </c:if>
                                                             </td>
                                                         </tr>
@@ -781,7 +792,7 @@
                                 </a>
                             </div>
                             <div class="col-md-3">
-                                <a href="javascript:;" onclick="submitReport()" class="btn green button-submit"> Submit
+                                <a id="submit" href="javascript:;" onclick="submitReport()" class="btn green button-submit"> Submit
                                     <i class="fa fa-check"></i>
                                 </a>
                             </div>
@@ -943,6 +954,7 @@
 
 
 <script>
+
     var width = $(window).width();
     $(".tab-left ").css("margin-left",width*0.1);
     function defectAddRow(obj){
@@ -1042,22 +1054,28 @@
 
        var html='<tr><td>—'+$("#title").val()+'<input type="hidden" name="documents['+trNum+'].title" value="'+$("#title").val()+'"/></td>' +
                '<td></td>' +
-               '<td><button onmouseover="upload_attachment(this,'+trNum+','+reportId+','+0+')" type="button">Browse</button></td></tr>';
+               '<td><button id="button_id'+trNum+'" onclick="upload_attachment(this,'+trNum+','+reportId+','+0+')" type="button" class="btn blue">Browse</button></td></tr>';
        $("#default_table").find("tbody tr:last").after(html);
        $(obj).prev().click();
    }
+
+    initUploaders_attachment("uploadAttachment", "shipinfo", "${staticPath}/");
    function upload_attachment(obj,count,reportId,documentId) {
-       initUploaders_attachment(obj, "shipinfo", "${staticPath}/",obj,count,reportId,documentId);
-       $(obj).mouseout(function () {
-           return false;
-       });
-       return false;
+
+       var buttonId=$(obj).attr("id");
+       $("#uploadAttachment").attr("data-count",count);
+       $("#uploadAttachment").attr("data-reportId",reportId);
+       $("#uploadAttachment").attr("data-documentId",documentId);
+       $("#uploadAttachment").attr("data-buttonId",buttonId);
+       $("#uploadAttachment").click();
+
    }
 
    function clearTd(obj,count,reportId,documentId) {
-       alert(count);
-       $(obj).parent().prev().html("");
-       $(obj).parent().html('<button class="btn blue" type="button" onmouseover="upload_attachment(this,'+count+','+reportId+','+documentId+')">Browse</button>');
+       if(confirm("确定删除吗？")){
+           $(obj).parent().prev().html("");
+           $(obj).parent().html('<button class="btn blue" id="button_id'+count+'" type="button" onclick="upload_attachment(this,'+count+','+reportId+','+documentId+')">Browse</button>');
+       }
    }
 
    //鼠标移入事件
@@ -1069,36 +1087,44 @@
     }
 
     //移除相册
-    function removePhoto(obj,id){
-        if(confirm("确定删除？")){
-            $.ajax({
-                url:"prepurchase/surveyor/deleteAlbum",
-                type:"GET",
-                dataType:"json",
-                data:{
-                    albumId:id,
-                },
-                success:function (data) {
-                    if(data){
-                        $(obj).parent().parent().parent().remove();
-                    }
-                },
-                error:function () {
+    function removePhoto(obj,id,albumName){
+        if(albumName=="Grade" || albumName=="Certificate"){
+            alert("该相册不可编辑删除")
+        }else {
+            if(confirm("确定删除？")){
+                $.ajax({
+                    url:"prepurchase/surveyor/deleteAlbum",
+                    type:"GET",
+                    dataType:"json",
+                    data:{
+                        albumId:id,
+                    },
+                    success:function (data) {
+                        if(data){
+                            $(obj).parent().parent().parent().remove();
+                        }
+                    },
+                    error:function () {
 
-                }
-            });
+                    }
+                });
+            }
         }
 
     }
 
     //编辑相册
     function editPhoto(obj,id,albumName) {
-        $(".photo_name").removeClass("photo_name");
-        $(obj).parent().attr("class","photo_name");
-        $(obj).parent().attr("data-id",id);
+        if(albumName=="Grade" || albumName=="Certificate"){
+            alert("该相册不可编辑")
+        }else {
+            $(".photo_name").removeClass("photo_name");
+            $(obj).parent().attr("class","photo_name");
+            $(obj).parent().attr("data-id",id);
 
-        $("#photoName").val(albumName);
-        $("#edit").click();
+            $("#photoName").val(albumName);
+            $("#edit").click();
+        }
     }
 
     //确定相册名称
@@ -1134,7 +1160,7 @@
     function createAlbum(obj) {
         $("#addAblum").click();
         $(".photo_name").removeClass("photo_name");
-        $(obj).attr("class","photo_name")
+        $(obj).addClass("photo_name");
 
     }
     //确定相册名称
@@ -1150,12 +1176,13 @@
                 reportId:reportId
             },
             success:function (data) {
-                if(data){
+                if(data.mes){
+                    galleriesId=data.galleries.id;
                     var createDate=new Date().format('dd/MM/yyyy');
                     //相册名称
                     var html='<div class="divPhoto"><div class="divImg" onmouseover="mouseOver(this)">'+
-                            '<div><span  onclick="javascript:editPhoto(this);" class="span-left"><li class="li-left fa fa-edit"></li></span>'+
-                            '<span onclick="javascript:removePhoto(this);" class="span-right"><li class="li-right fa fa-remove"></li> </span>'+
+                            '<div><span  onclick="javascript:editPhoto(this,'+galleriesId+',\''+albumName+'\');" class="span-left"><li class="li-left fa fa-edit"></li></span>'+
+                            '<span onclick="javascript:removePhoto(this,'+galleriesId+',\''+albumName+'\');" class="span-right"><li class="li-right fa fa-remove"></li> </span>'+
                             '<a data-model="dialog" href="prepurchase/surveyor/viewImg"  >'+
                             '<img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/GWTcR228ek.jpg" style="width: 200px;height: 200px;"/> </a> </div>'+
                             '<div style="width: 200px"><p style="float: left;margin-right: 10px;">'+albumName+'</p><p style="float: left;margin-right: 10px">(0)</p>'+
@@ -1244,11 +1271,8 @@
 </script>
 <script>
 
- /*   if($(".info").find("a").attr("href")=="#tab1"){
-        $("#back").hide();
-    }*/
-
-
+    //一进去编辑报告，提交按钮就不能被看见
+    $("#submit").hide();
     function liNow(obj) {
         $("#ul_li .active").removeClass("active");
         $("#div_from .active").removeClass("active");
@@ -1284,9 +1308,11 @@
             $(obj).parent().addClass("active")
             $("#tab8").addClass("active");
             $("#next").hide();
+            $("#submit").show();
         }
         if($(obj).attr("id")!='#tab8'){
             $("#next").show();
+            $("#submit").hide();
         }
 
     }
@@ -1321,10 +1347,16 @@
         var obj=$("#ul_li .active").next();
 
         $(".active").removeClass("active");
+
         if(obj.find("a").attr("id")=='#tab8'){
             $(objButton).hide();
         }
+        if(obj.find("a").attr("id")!='#tab8'){
+            $("#submit").hide();
+        }
         obj.find("a").click();
+
+        $(".scroll-to-top").click();
 
     }
 
@@ -1372,6 +1404,42 @@
             $(this).stop();
             $(this).animate({width: 40}, 400);
         });
+
+        if($("#submitStatus1").val()==1){
+            $(document.getElementById("#tab1")).find("span:first").html('<i class="fa fa-check"></i>');
+            $(document.getElementById("#tab1")).find("span:first").css("background-color","#36c6d3");
+            $(document.getElementById("#tab1")).find("span:first").css("color","white");
+        }
+        if($("#submitStatus2").val()==1){
+            $(document.getElementById("#tab2")).find("span:first").html('<i class="fa fa-check"></i>');
+            $(document.getElementById("#tab2")).find("span:first").css("background-color","#36c6d3");
+            $(document.getElementById("#tab2")).find("span:first").css("color","white");
+        }
+        if($("#submitStatus3").val()==1){
+            $(document.getElementById("#tab3")).find("span:first").html('<i class="fa fa-check"></i>');
+            $(document.getElementById("#tab3")).find("span:first").css("background-color","#36c6d3");
+            $(document.getElementById("#tab3")).find("span:first").css("color","white");
+        }
+        if($("#submitStatus4").val()==1){
+            $(document.getElementById("#tab4")).find("span:first").html('<i class="fa fa-check"></i>');
+            $(document.getElementById("#tab4")).find("span:first").css("background-color","#36c6d3");
+            $(document.getElementById("#tab4")).find("span:first").css("color","white");
+        }
+        if($("#submitStatus5").val()==1){
+            $(document.getElementById("#tab5")).find("span:first").html('<i class="fa fa-check"></i>');
+            $(document.getElementById("#tab5")).find("span:first").css("background-color","#36c6d3");
+            $(document.getElementById("#tab5")).find("span:first").css("color","white");
+        }
+        if($("#submitStatus6").val()==1){
+            $(document.getElementById("#tab6")).find("span:first").html('<i class="fa fa-check"></i>');
+            $(document.getElementById("#tab6")).find("span:first").css("background-color","#36c6d3");
+            $(document.getElementById("#tab6")).find("span:first").css("color","white");
+        }
+        if($("#submitStatus7").val()==1){
+            $(document.getElementById("#tab7")).find("span:first").html('<i class="fa fa-check"></i>');
+            $(document.getElementById("#tab7")).find("span:first").css("background-color","#36c6d3");
+            $(document.getElementById("#tab7")).find("span:first").css("color","white");
+        }
 
 
     });
@@ -1432,12 +1500,12 @@
                         }else if(grades[i].rank==3){
                             html+= '<tr>'+
                                     '<td>'+grades[i].item+'</td>'+
-                                    '<td><input data-flag1="'+flag_1+'" data-flag2="'+flag_2+'" data-id="'+grades[i].id+'" onblur="editGrade(this)" class="input-xsmall" value="'+g+'"/></td>'+
-                                    '<td><input style="width: 100%;height: 100%" data-id="'+grades[i].id+'" onblur="editRemark(this)" value="'+grades[i].remark+'"/></td>'+
+                                    '<td><input type="text" data-flag1="'+flag_1+'" data-flag2="'+flag_2+'" data-id="'+grades[i].id+'" onblur="editGrade(this)" class="input-xsmall" value="'+g+'"/></td>'+
+                                    '<td><input type="text" style="width: 100%;height: 100%" data-id="'+grades[i].id+'" onblur="editRemark(this)" value="'+grades[i].remark+'"/></td>'+
                                     '<td><a target="_blank" href="'+grades[i].sitePhoto+'">' + grades[i].fileName + '</a></td>'+
                                     '<td>';
                                     if(grades[i].fileName==null || grades[i].fileName==''){
-                                       html+= '<input data-id="'+grades[i].id+'"  data-flag="0" id="upload_id'+grades[i].id+'" type="button" class="upload_grade btn blue" value="Upload"/>';
+                                       html+= '<button data-id="'+grades[i].id+'"  data-flag="0" id="upload_id'+grades[i].id+'" type="button" class="upload_grade btn blue" >Upload</button>';
                                     }else{
                                         html+= '<button onclick="removeGrade(this,'+grades[i].id+')" type="button" class="btn red">Delete</button>';
                                     }
@@ -1472,7 +1540,7 @@
                 success:function (data) {
                     if(data.mes){
                         $(obj).parent().prev().html("");
-                        $(obj).parent().html('<input data-id="'+gradeId+'"  id="upload_id'+gradeId+'" type="button" class="upload_grade btn blue" value="Upload"/>');
+                        $(obj).parent().html('<button data-id="'+gradeId+'"  id="upload_id'+gradeId+'" type="button" class="upload_grade btn blue" >Upload</button>');
                         initUploaders_report_grade("upload_id"+gradeId, "shipinfo", "${staticPath}/",gradeId);
                     }
                 },
