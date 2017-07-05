@@ -170,7 +170,6 @@
 
     var messageTable;
     $(document).ready(function () {
-        $.cookie("onOffLastPage", "message");
         drawTable();
     });
 

@@ -154,9 +154,7 @@
 
     var surveyorTable;
     $(document).ready(function () {
-        $.cookie("onOffLastPage", "surveyor");
         drawTable();
-
     });
 
     function drawTable() {

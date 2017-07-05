@@ -154,7 +154,6 @@
     var starRatingNot = $("#star-rating-outer-not");
     var starRatingHave = $("#star-rating-outer-have");
     $(document).ready(function () {
-        $.cookie("onOffLastPage", "surveyor/record");
         drawTable();
     });
 
