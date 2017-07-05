@@ -157,7 +157,7 @@
                         </div>
                     </div>
                     <div class="form-group col-md-6">
-                        <label class="control-label col-sm-4">Current quantity of bunkers from ship<i
+                        <label class="control-label col-sm-4">Current quantity of bunkers from ship <i
                                 class="fa fa-info-circle" title="<%=info%>"></i></label>
                         <div class="col-sm-8">
                                 <textarea name="currentQuantity"
@@ -201,7 +201,7 @@
                     <div class="col-md-12" style="border-top: 1px solid #e5e5e5;padding-top: 10px;">
                         <div class="col-md-8">
                             <div class="form-group col-md-12">
-                                <label class="col-sm-3 control-label">On hire<i
+                                <label class="col-sm-3 control-label">On hire <i
                                         class="fa fa-info-circle" title="<%=info%>"></i></label>
                             </div>
                             <div class="form-group col-md-6">
@@ -221,7 +221,7 @@
                                 </div>
                             </div>
                             <div class="form-group col-md-12">
-                                <label class="col-sm-3 control-label">Off hire<i
+                                <label class="col-sm-3 control-label">Off hire <i
                                         class="fa fa-info-circle" title="<%=info%>"></i></label>
                             </div>
                             <div class="form-group col-md-6">
@@ -241,7 +241,7 @@
                                 </div>
                             </div>
                             <div class="form-group col-md-12">
-                                <label class="col-sm-3 control-label">Condition<i
+                                <label class="col-sm-3 control-label">Condition <i
                                         class="fa fa-info-circle" title="<%=info%>"></i></label>
                             </div>
                             <div class="form-group col-md-6">
