@@ -875,8 +875,8 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
             // 如果目标路径不存在, 则新建该路径
             File outputFile = new File(outFilePath);
             // 启动OpenOffice的服务
-           /* String[] command = {OpenOffice_HOME+"soffice","-headless -accept=\"socket,host=127.0.0.1,port=8100;urp;\" -nofirststartwizard"};
-            pro = Runtime.getRuntime().exec(command);*/
+            String[] command = {OpenOffice_HOME+"soffice","-headless -accept=\"socket,host=127.0.0.1,port=8100;urp;\" -nofirststartwizard"};
+            pro = Runtime.getRuntime().exec(command);
             // connect to an OpenOffice.org instance running on port 8100
             OpenOfficeConnection connection = new SocketOpenOfficeConnection("127.0.0.1", 8100);
             //OpenOfficeConnection connection = new SocketOpenOfficeConnection(8100);
@@ -890,11 +890,12 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
             // close the connection
             connection.disconnect();
             // 封闭OpenOffice服务的进程
-           /* pro.destroy()*/;
+            pro.destroy();
             String url= uploadFile2OSS(outFilePath,endpoint,accessId,accessKey,bucket);
             return url;
         } catch (Exception e) {
             logger.error(e.toString());
+            e.printStackTrace();
         }
 
        return null;

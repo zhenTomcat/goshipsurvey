@@ -62,7 +62,7 @@
             "autoWidth": false,
             "serverSide": true,
             "ajax": {
-                "url": "prepurchase/op/inspection/list",
+                "url": "prepurchase/surveyor/inspection/list",
                 "type": "post",
                 "data": function (data) {
                     data.keyword = $("#keyword").val();
