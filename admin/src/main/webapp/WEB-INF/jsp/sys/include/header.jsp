@@ -33,19 +33,19 @@
                         <ul class="dropdown-menu dropdown-menu-default">
                             <shiro:hasPermission name="message/list">
                                 <li>
-                                    <a href="message" data-target='navTab'>
+                                    <a href="message" class="ajaxify" data-target='navTab'>
                                         <i class="fa fa-comment"></i>Message <span
                                             class="badge badge-danger unreadCount"></span></a>
                                 </li>
                             </shiro:hasPermission>
                             <shiro:hasPermission name="surveyor/list">
                                 <li>
-                                    <a href="surveyor" data-target='navTab'>
+                                    <a href="surveyor" class="ajaxify" data-target='navTab'>
                                         <i class="fa fa-users"></i>Surveyor management </a>
                                 </li>
                             </shiro:hasPermission>
                             <li>
-                                <a href="user/companyEdit" data-target='navTab'>
+                                <a href="user/companyEdit" class="ajaxify" data-target='navTab'>
                                     <i class="fa fa-user"></i>My profile </a>
                             </li>
                             <li>

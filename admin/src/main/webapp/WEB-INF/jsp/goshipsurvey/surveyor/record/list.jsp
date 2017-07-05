@@ -58,20 +58,21 @@
                                 </div>
                                 <div class="portlet-body">
                                     <div class="tab-content">
-                                        <div class="tab-pane fade active in" id="tab_1_2">
+                                        <div class="tab-pane fade active in " id="tab_1_2">
                                             <table class="table table-striped table-bordered table-hover table-checkable order-column"
                                                    id="onoff_surveyor_record_inspection_table">
                                                 <thead>
                                                 <tr>
-                                                    <th>Ship name</th>
-                                                    <th>imo</th>
-                                                    <th>Ship type</th>
-                                                    <th>Inspection type</th>
-                                                    <th>Inspection port</th>
-                                                    <th>Inspection date(LMT)</th>
-                                                    <th>Total price</th>
-                                                    <th>Inspection report</th>
-                                                    <th>Comment</th>
+                                                    <th style="width:10%;">Ship name</th>
+                                                    <th style="width:10%;">imo</th>
+                                                    <th style="width:10%;">Ship type</th>
+                                                    <th style="width:10%;">Inspection type</th>
+                                                    <th style="width:10%;">Inspection port</th>
+                                                    <th style="width:10%;">Inspection date(LMT)</th>
+                                                    <th style="width:10%;">Total price</th>
+                                                    <th style="width:10%;">Surveyor</th>
+                                                    <th style="width:10%;">Inspection report</th>
+                                                    <th style="width:10%;">Comment</th>
                                                 </tr>
                                                 </thead>
                                             </table>
@@ -153,7 +154,6 @@
     var starRatingNot = $("#star-rating-outer-not");
     var starRatingHave = $("#star-rating-outer-have");
     $(document).ready(function () {
-        $.cookie("onOffLastPage", "surveyor/record");
         drawTable();
     });
 
@@ -200,6 +200,12 @@
                     }
                 },
                 {
+                    "data": "surveyor",
+                    "render": function (data) {
+                        return data.firstName + " " + data.lastName;
+                    }
+                },
+                {
                     "data": "reportUrl",
                     "render": function (data) {
                         return "<a class='btn btn-sm green' target='_blank' href='" + data + "'>VIEW</a>";
@@ -221,10 +227,6 @@
                     return startDate + " to " + endDate;
                 }
             }],
-//            "fnCreatedRow": function (nRow, aData, iDataIndex) {
-//                var row = inspectionTable.row($(nRow));
-//                row.child(moreInfo(aData)).show();
-//            }
         });
 
         inspectionTable.on('click', 'td.comment-detail', function () {
