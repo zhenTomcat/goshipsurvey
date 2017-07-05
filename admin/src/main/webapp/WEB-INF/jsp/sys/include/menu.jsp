@@ -8,7 +8,7 @@
     <div class="page-sidebar navbar-collapse collapse">
         <ul class="page-sidebar-menu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
             <c:forEach items="${menuList}" var="menu" varStatus="status">
-                <li class="nav-item <c:if test="${status.index == 0}">active</c:if>">
+                <li class="nav-item">
                     <c:choose>
                         <c:when test="${(not empty menu.menuUrl)&&(menu.menuUrl!='#')}">
                             <a href="${menu.menuUrl}" class="ajaxify nav-link">

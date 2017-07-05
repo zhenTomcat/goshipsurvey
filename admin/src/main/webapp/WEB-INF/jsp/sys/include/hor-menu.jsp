@@ -17,7 +17,7 @@
                     <li class="classic-menu-dropdown">
                         <c:choose>
                             <c:when test="${(not empty menu.menuUrl)&&(menu.menuUrl!='#')}">
-                                <a href="${menu.menuUrl}" data-hover="megamenu-dropdown" data-target="navTab"
+                                <a href="${menu.menuUrl}" class="ajaxify nav-link" data-hover="megamenu-dropdown"
                                    data-close-others="true">
                                     <c:if test="${not empty menu.menuIcon }"><i class="${menu.menuIcon}"></i></c:if>
                                         ${menu.menuName}
@@ -33,7 +33,7 @@
                                 <ul class="dropdown-menu pull-left">
                                     <c:forEach items="${menu.subMenu}" var="sub">
                                         <li>
-                                            <a href="${sub.menuUrl}" data-target="navTab">
+                                            <a href="${sub.menuUrl}" class="ajaxify nav-link">
                                                 <c:if test="${not empty sub.menuIcon }"><i
                                                         class="${sub.menuIcon}"></i></c:if>
                                                 </i>${sub.menuName}</a>
@@ -63,18 +63,18 @@
                         </a>
                         <ul class="dropdown-menu dropdown-menu-default">
                             <li>
-                                <a href="message" data-target='navTab'>
+                                <a href="message" class="ajaxify" data-target='navTab'>
                                     <i class="fa fa-comment"></i>Message<span
                                         class="badge badge-danger unreadCount"> 0 </span> </a>
                             </li>
                             <shiro:hasPermission name="surveyor/list">
                                 <li>
-                                    <a href="surveyor" data-target='navTab'>
+                                    <a href="surveyor" class="ajaxify" data-target='navTab'>
                                         <i class="fa fa-users"></i>Surveyor management </a>
                                 </li>
                             </shiro:hasPermission>
                             <li>
-                                <a href="user/companyEdit" data-target='navTab'>
+                                <a href="user/companyEdit" class="ajaxify" data-target='navTab'>
                                     <i class="fa fa-user"></i>My profile </a>
                             </li>
                             <li>

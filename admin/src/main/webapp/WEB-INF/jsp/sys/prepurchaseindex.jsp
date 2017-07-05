@@ -213,15 +213,23 @@
     }
 
     function initPage() {
-        var url1 = $.cookie("prePurchaseLastPage") || "prepurchase/op/record";
-        var url2 = "prepurchase/surveyor/record";
-        var a = $("a[href='" + url1 + "']");
-        if (a.length > 0) {
-            a.click();
+        var url;
+        if (window.location.hash) {
+            url = window.location.hash.substring(1);
         } else {
-            $("a[href='" + url2 + "']").click();
+            var url1 = "prepurchase/op/record";
+            var url2 = "prepurchase/surveyor/record";
+            var a = $("a[href='" + url1 + "']");
+            if (a.length > 0) {
+                url = url1
+            } else {
+                url = url2;
+            }
         }
+        $("a[href='" + url + "']").click();
+
     }
+
     function hashChange() {
         initPage();
     }
@@ -323,5 +331,13 @@
         $.notific8('zindex', 11500);
         $.notific8(msg, settings);
     }
+</script>
+<script>
+    $('.page-header').on('click', ' li > a.ajaxify', function (e) {
+        e.preventDefault();
+        console.log(1);
+        var url = $(this).attr("href");
+        Layout.loadAjaxContent(url, $(this));
+    });
 </script>
 </html>
