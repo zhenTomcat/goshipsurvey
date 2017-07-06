@@ -450,10 +450,10 @@ function initUploaders_attachment(buttonId, bucket, domain) {
                 set_upload_param(up, file.name, true, domain);
             },
             FileUploaded: function () {
-                var count=$("#"+buttonId).attr("data-count");
-                var reportId=$("#"+buttonId).attr("data-reportId");
-                var documentId=$("#"+buttonId).attr("data-documentId");
-                var button_id=$("#"+buttonId).attr("data-buttonId");
+                var count = $("#" + buttonId).attr("data-count");
+                var reportId = $("#" + buttonId).attr("data-reportId");
+                var documentId = $("#" + buttonId).attr("data-documentId");
+                var button_id = $("#" + buttonId).attr("data-buttonId");
                 console.log(count);
                 console.log(reportId);
                 console.log(documentId);
@@ -463,9 +463,9 @@ function initUploaders_attachment(buttonId, bucket, domain) {
                     '<input type="hidden" name="documents[' + count + '].inspectionReportId" value="' + reportId + '">' +
                     '<input name="documents[' + count + '].attachmentUrl" type="hidden" value="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '" >' +
                     '<input name="documents[' + count + '].attachmentName" type="hidden" value="' + nativeName + '"/>';
-                $("#"+button_id).parent().prev().html(html);
+                $("#" + button_id).parent().prev().html(html);
                 var html1 = '<button class="btn red" onclick="clearTd(this,' + count + ',' + reportId + ',' + documentId + ')" type="button" >Delete</button>';
-                $("#"+button_id).parent().html(html1);
+                $("#" + button_id).parent().html(html1);
             }
         }
     });
@@ -483,10 +483,11 @@ function initUploaders_purchase_op_agency_loi(buttonId, bucket, domain) {
 
         filters: {
             mime_types: [
-                {title: "Text files", extensions: "pdf,doc,docx"}
+                {title: "Text files", extensions: "pdf,doc,docx"},
+                {title: "Image files", extensions: "jpg,gif,png,bmp,jpeg"},
             ],
             max_file_size: '10mb', //最大只能上传10mb的文件
-            prevent_duplicates: true //不允许选取重复文件
+            prevent_duplicates: false //不允许选取重复文件
         },
         init: {
             FilesAdded: function (up) {
@@ -498,10 +499,11 @@ function initUploaders_purchase_op_agency_loi(buttonId, bucket, domain) {
             FileUploaded: function () {
                 var btn = $("#" + buttonId);
                 var href = "http://" + bucket + ".oss-cn-shanghai.aliyuncs.com/" + g_object_name;
-                btn.parent().find("input").attr("value", href);
-                var a = btn.parent().find("a");
-                a.attr("href", href);
-                a.css("display", "inline-block");
+                var fileDiv = btn.siblings(".upload-file-div");
+                fileDiv.css("display", "none");
+                fileDiv.find("input").val(href);
+                fileDiv.find("a").attr("href", href);
+                fileDiv.css("display", "inline-block");
             }
         }
     });
@@ -531,8 +533,8 @@ function initUploaders_img(buttonId, bucket, domain, divId, galleriesId) {
                 set_upload_param(up, file.name, true, domain);
             },
             FileUploaded: function () {
-                var imgName1=g_object_name;
-                var imgName2=nativeName;
+                var imgName1 = g_object_name;
+                var imgName2 = nativeName;
                 $.ajax({
                     url: "prepurchase/surveyor/addImg",
                     type: "GET",
@@ -702,10 +704,10 @@ function initUploaders_report_grade(buttonId, bucket, domain, gradeId) {
                     success: function (data) {
                         if (data.mes) {
                             var html = '<a target="_blank" href="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '">' + nativeName + '</a>';
-                            $("#"+buttonId).parent().prev().html(html);
-                            $("#"+buttonId).parent().html('<button onclick="removeGrade(this,'+gradeId+')" type="button" class="btn red">Delete</button>');
+                            $("#" + buttonId).parent().prev().html(html);
+                            $("#" + buttonId).parent().html('<button onclick="removeGrade(this,' + gradeId + ')" type="button" class="btn red">Delete</button>');
 
-                            $("#album"+parseInt(data.totalGrades[0])).html('('+parseInt(data.totalGrades[1])+')');
+                            $("#album" + parseInt(data.totalGrades[0])).html('(' + parseInt(data.totalGrades[1]) + ')');
 
                             console.log(parseInt(data.totalGrades[0]));
                             console.log(parseInt(data.totalGrades[1]));

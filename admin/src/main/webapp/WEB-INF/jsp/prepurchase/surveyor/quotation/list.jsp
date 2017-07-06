@@ -29,7 +29,7 @@
                                     <%--</div>--%>
                                     <div class="tab-pane fade active in" id="tab_1_1">
                                         <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                                               id="quotation_table">
+                                               id="pre_surveyor_quotation_table">
                                             <thead>
                                             <tr>
                                                 <th width="9%">Public date</th>
@@ -57,9 +57,23 @@
         </div>
     </div>
 </div>
-<a id="goToSurveyorInfo" style="display: none" data-model="dialog"></a>
+<a id="goToSurveyorInfo" data-url="" style="display: none" onclick="showModelForm(this)">a</a>
+<div id="modal_form" class="modal fade" role="dialog" aria-hidden="true"></div>
+<a id="modal_form_switch" data-toggle="modal" href="#modal_form" style="display: none">a</a>
 <script>
-    var quotationTable = $("#quotation_table");//已申请的quotation表格
+    function showModelForm(obj) {
+        var url = $(obj).attr("data-url");
+        var md = $(obj).attr("md");
+        if (md == 'ajax') {
+        } else {
+            $("#modal_form").load(url);
+            $("#modal_form_switch").click();
+        }
+        return false;
+    }
+
+
+    var quotationTable;//
     var surveyList;
     var surveyorSelectHtml;
     $(document).ready(function () {
@@ -68,12 +82,13 @@
 
     //绘制页面表格
     function drawTable() {
-        quotationTable = $('#quotation_table').DataTable({
+        quotationTable = $('#pre_surveyor_quotation_table').DataTable({
             "ordering": false,
             "pagingType": "simple_numbers",
             "processing": true,
             "autoWidth": false,
             "serverSide": true,
+            'bStateSave': true,
             "ajax": {
                 "url": "prepurchase/surveyor/quotation/list",
                 "type": "post",
@@ -193,7 +208,7 @@
                 surveyList = data.list;
                 surveyorSelectHtml = "";
                 surveyorSelectHtml += '<select  class="form-control surveyor-select">';
-                surveyorSelectHtml += '<option value="0">请选择验船师</option>';
+                surveyorSelectHtml += '<option value="0">Please choose surveyor</option>';
                 $(surveyList).each(function () {
                     surveyorSelectHtml += '<option value="' + this.id + '">' + this.firstName + " " + this.lastName + '</option>';
                 })
@@ -245,16 +260,16 @@
         html += '<div class="col-md-3">';
         html += '<label class="col-md-12 text-left">Our price & surveyor:</label>';
         if (application == null) {
-            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5">Price:</label> <div class="input-group col-md-7"> <input type="text" class="form-control price-input"> </div></div>';
+            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5">Price:$ </label> <div class="input-group col-md-7"> <input type="text" class="form-control price-input"> </div></div>';
             html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">Surveyor:</label> <div class="input-group col-md-7"> ';
             html += surveyorSelectHtml;
             html += ' </div></div>';
             html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">SurveyorCV:</label>  <a class="col-md-3" href="javascript:void(0)" onclick="goToViewSurveyor(this)"  style="padding-top: 8px; vertical-align: middle">VIEW</a></div>';
         } else {
             var surveyor = application.surveyor;
-            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5">Price:</label> <div class="input-group col-md-7"> ' + application.totalPrice + '</div></div>';
-            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">Surveyor:</label> <div class="input-group col-md-7">' + surveyor.firstName + " " + surveyor.lastName + '</div></div>';
-            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">SurveyorCV:</label>  <a class="col-md-7" data-model="dialog"  href="surveyor/info?id=' + surveyor.id + '" style="padding-top: 8px; vertical-align: middle">VIEW</a></div>';
+            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5">Price:</label> <div class="input-group col-md-7">$  ' + application.totalPrice + '</div></div>';
+            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">Surveyor:</label> <div style="padding-top: 8px" class="input-group col-md-7">' + surveyor.firstName + " " + surveyor.lastName + '</div></div>';
+            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">SurveyorCV:</label>  <a class="col-md-7" onclick="showModelForm(this)"  data-url="surveyor/edit?dialog=1&id=' + surveyor.id + '" style="padding-top: 8px; vertical-align: middle">VIEW</a></div>';
         }
         html += "</div>";
         return html;
@@ -268,7 +283,7 @@
         if (detail.length == 0) {
             $(obj).tips({
                 side: 1,
-                msg: "请输入正确的金额和验船师",
+                msg: "Please input price and choose surveyor",
                 bg: '#FF5080',
                 time: 5,
             });
@@ -280,7 +295,7 @@
         if (totalPrice == null || (totalPrice.trim() == "") || (isNaN(totalPrice)) || totalPrice < 0) {
             priceInput.tips({
                 side: 1,
-                msg: "请输入正确的金额",
+                msg: "Please input price",
                 bg: '#FF5080',
                 time: 5,
             });
@@ -291,7 +306,7 @@
         if (surveyId == 0) {
             surveyorSelect.tips({
                 side: 1,
-                msg: "请选择验船师",
+                msg: "Please choose surveyor",
                 bg: '#FF5080',
                 time: 5,
             });
@@ -321,12 +336,12 @@
         if (id == 0) {
             select.tips({
                 side: 1,
-                msg: "请选择验船师",
+                msg: "Please choose surveyor",
                 bg: '#FF5080',
                 time: 5,
             });
         } else {
-            $("#goToSurveyorInfo").attr("href", "surveyor/info?id=" + id).click();
+            $("#goToSurveyorInfo").attr("data-url", "surveyor/edit?dialog=1&id=" + id).click();
         }
     }
 </script>

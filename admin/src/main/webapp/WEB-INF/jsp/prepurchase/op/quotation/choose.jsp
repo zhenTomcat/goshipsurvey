@@ -205,10 +205,10 @@
                                                         </button>
                                                     </c:if>
                                                     <c:if test="${application.applicationStatus==1}">
-                                                        已邀请
+                                                        Chosen
                                                     </c:if>
                                                     <c:if test="${application.applicationStatus==2}">
-                                                        下次合作
+                                                        Abandoned
                                                     </c:if>
                                                 </th>
                                             </tr>

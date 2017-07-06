@@ -65,7 +65,7 @@
                                     <div class="tab-content">
                                         <div class="tab-pane fade active in" id="tab_1_2">
                                             <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                                                   id="inspection_table">
+                                                   id="pre_surveyor_record_inspection_table">
                                                 <thead>
                                                 <tr>
                                                     <th style="width: 15%">Ship name</th>
@@ -77,6 +77,7 @@
                                                     <th style="width: 8%">Grading</th>
                                                     <th style="width: 8%">Surveyor</th>
                                                     <th style="width: 15%">Link of inspection report</th>
+                                                    <th style="width: 10%">Comment</th>
                                                 </tr>
                                                 </thead>
                                             </table>
@@ -158,12 +159,13 @@
     var starRatingNot = $("#star-rating-outer-not");
     var starRatingHave = $("#star-rating-outer-have");
     $(document).ready(function () {
-        inspectionTable = $('#inspection_table').DataTable({
+        inspectionTable = $('#pre_surveyor_record_inspection_table').DataTable({
             "ordering": false,
             "pagingType": "simple_numbers",
             "processing": true,
             "autoWidth": false,
             "serverSide": true,
+            'bStateSave': true,
             "ajax": {
                 "url": "prepurchase/surveyor/record/inspection/list",
                 "type": "get",
@@ -206,8 +208,15 @@
                 {
                     "data": "inspectionReportId",
                     "render": function (data) {
-                        return '<a data-target="navTab" href="prepurchase/op/reportInfo?reportId=' + data + '" >View</a> <li class="fa fa-link"></li>'
+                        return '<a class="ajaxify"  data-target="navTab" href="prepurchase/op/reportInfo?reportId=' + data + '" >View</a> <li class="fa fa-link"></li>'
 
+                    }
+                },
+                {
+                    "data": "",
+                    "class": "comment-detail",
+                    "render": function (data) {
+                        return '<a href="javascript:void(0)">COMMENT</a>';
                     }
                 },
             ],
@@ -219,18 +228,19 @@
                     return startDate + " to " + endDate;
                 }
             }],
-            "drawCallback": function (settings, json) {
-                var rows = $('#inspection_table').find("tbody tr");
-                rows.each(function (i, e) {
-                    var row = inspectionTable.row($(this));
-                    var data = row.data();
-                    if (data != null) {
-                        row.child(moreInfo(data)).show();
-                    }
-                })
+        });
+        inspectionTable.on('click', 'td.comment-detail', function () {
+            var tr = $(this).closest('tr');
+            var row = inspectionTable.row(tr);
+            var flag = tr.attr("data-not-first");
+            if (flag) {
+                tr.next().toggle();
+            } else {
+                row.child(moreInfo(row.data())).show();
+                tr.next().addClass("detail-row");
+                tr.attr("data-not-first", true);
             }
         });
-
     });
 
     function moreInfo(data) {

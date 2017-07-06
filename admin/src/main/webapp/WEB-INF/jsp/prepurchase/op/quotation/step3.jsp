@@ -59,26 +59,44 @@
                                           style="height:200px;resize: none;"></textarea>
                                 <div style="margin-top: 5px">
                                     <button type="button" id="agencyBtn"
-                                            class="btn btn-sm blue">
+                                            class="btn btn-sm blue col-sm-3">
                                         <i class="fa fa-upload"></i>
                                         Upload
                                     </button>
-                                    <input type="hidden" name="agencyUrl" id="agencyUrl">
-                                    <a class="btn btn-sm green"
-                                       target="_blank" style="display: none"
-                                       href="#">DOWNLOAD</a>
+
+
+                                    <div class="btn-group upload-file-div col-sm-5" style="display: none">
+                                        <input type="hidden" name="agencyUrl" class="uploadUrl" id="agencyUrl">
+                                        <a class="btn btn-sm green"
+                                           target="_blank"
+                                           href=";">View</a>
+                                        <span class="input-group-btn">
+                                            <button class="btn red btn-sm" type="button" title="delete"
+                                                    onclick="delFileAndInput(this)">
+                                                <i class="fa fa-ban"></i></button>
+                                         </span>
+                                    </div>
+
                                 </div>
                             </div>
                             <div class=" col-md-6">
                                 <label class="col-md-12" style="color: #888">LOI</label>
                                 <div>
-                                    <button id="loiBtn" type="button" class="btn btn-sm blue"><i
+                                    <button id="loiBtn" type="button" class="col-sm-3 btn btn-sm blue"><i
                                             class="fa fa-upload"></i>
                                         Upload
                                     </button>
-                                    <input type="hidden" name="loiUrl" id="loiUrl">
-                                    <a class="btn btn-sm green" style="display: none" target="_blank"
-                                       href="#">DOWNLOAD</a>
+                                    <div class="btn-group upload-file-div col-sm-5" style="display: none">
+                                        <input type="hidden" name="loiUrl" class="uploadUrl" id="loiUrl">
+                                        <a class="btn btn-sm green"
+                                           target="_blank"
+                                           href=";">View</a>
+                                        <span class="input-group-btn">
+                                            <button class="btn red btn-sm" type="button" title="delete"
+                                                    onclick="delFileAndInput(this)">
+                                                <i class="fa fa-ban"></i></button>
+                                         </span>
+                                    </div>
                                 </div>
                                 <div class="notice" style="margin: 80px 0px 0 50px;">
                                     Notice:
@@ -102,4 +120,10 @@
 <script>
     initUploaders_purchase_op_agency_loi("agencyBtn", "shipinfo", "${staticPath}/");
     initUploaders_purchase_op_agency_loi("loiBtn", "shipinfo", "${staticPath}/");
+    function delFileAndInput(obj) {
+        var div = $(obj).parent().parent();
+        div.find("input").val("");
+        div.find("a").attr("href", "");
+        div.css("display", "none");
+    }
 </script>

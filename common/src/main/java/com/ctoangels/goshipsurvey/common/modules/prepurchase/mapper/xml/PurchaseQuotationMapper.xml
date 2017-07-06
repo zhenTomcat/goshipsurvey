@@ -22,6 +22,7 @@
         <where>
             AND pq.end_date &gt;= (select date_format(now(),'%Y-%m-%d'))
             AND pq.op_id=#{opId}
+            AND pq.del_flag=0
         </where>
         order by pq.update_date desc
         limit #{start},#{length}
@@ -36,7 +37,7 @@
 
     <select id="getSurveyorList" resultMap="surveyorQuotationMap">
         SELECT pq.*,#{surveyorId} AS surveyor_id,2 AS `type`  FROM t_purchase_quotation pq
-        WHERE pq.end_date &gt;=(select date_format(now(),'%Y-%m-%d'))
+        WHERE pq.end_date &gt;=(select date_format(now(),'%Y-%m-%d')) AND pq.del_flag=0
         ORDER BY pq.update_date desc
         limit #{start},#{length}
     </select>

@@ -28,7 +28,7 @@ public class HandShake implements HandshakeInterceptor {
             Subject subject = SecurityUtils.getSubject();
             map.put("userId", ((User) subject.getPrincipal()).getId());
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.info(e.getMessage());
             return false;
         }
         return true;

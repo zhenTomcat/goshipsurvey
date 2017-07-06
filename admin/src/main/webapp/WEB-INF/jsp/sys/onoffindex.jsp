@@ -76,6 +76,11 @@
                 position: fixed;
             }
         }
+
+        .sweet-alert {
+            z-index: 120000;
+        }
+
     </style>
 </head>
 <body onhashchange="hashChange()" class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
@@ -295,7 +300,7 @@
             }
             $.cookie('isLogin', 0);
             if (data["alert"]) {
-                alert(data.messageContent);
+                swal({type: "info", title: data.messageContent});
             }
 
 

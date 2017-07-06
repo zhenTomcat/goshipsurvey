@@ -232,7 +232,7 @@
         <div class="container">
             <!-- Logo -->
             <a class="logo" href="javascript:void(0)">
-                <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/img/banner_transparent.png"
+                <img src="static/img/banner_transparent.png"
                      alt="Logo">
             </a>
             <!-- End Logo -->

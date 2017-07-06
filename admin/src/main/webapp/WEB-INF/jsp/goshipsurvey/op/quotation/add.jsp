@@ -152,7 +152,7 @@
                         <label class="control-label col-sm-4">Current quantity of bunkers from ship <i
                                 class="fa fa-info-circle" title="<%=info%>"></i></label>
                         <div class="col-sm-8">
-                                <textarea name="currentQuantity"
+                                <textarea name="currentQuantity" wrap="hard"
                                           style="height:100px;resize: none;width: 94%;margin-left: 2%"
                                           class="form-control "></textarea>
                             <div class="col-sm-12" style="margin-top: 5px">
@@ -183,7 +183,7 @@
                     <div class="form-group col-md-6">
                         <label class="col-sm-4 control-label">Bonus plan</label>
                         <div class="form-group col-sm-8">
-                                        <textarea class="form-control"
+                                        <textarea class="form-control" wrap="hard"
                                                   name="bonusPlan"
                                                   style="height:100px;resize: none;width: 94%;margin-left: 2%"></textarea>
                         </div>
@@ -254,7 +254,7 @@
                                 <label class="col-sm-3 control-label">Ship particulars <i
                                         class="fa fa-info-circle" title="<%=info%>"></i></label>
                                 <div class="form-group col-md-9">
-                                        <textarea class="form-control ship-particulars-textarea"
+                                        <textarea class="form-control ship-particulars-textarea" wrap="hard"
                                                   name="shipParticulars"
                                                   style="height:100px;resize: none;width: 94%;margin-left: 2%"></textarea>
                                     <br/>
@@ -285,7 +285,7 @@
                             <label class="col-md-12 control-label"
                                    style="margin-bottom: 15px;text-align: left">Port
                                 agency <i class="fa fa-info-circle" title="<%=info%>"></i></label>
-                            <textarea
+                            <textarea wrap="hard"
                                     class="form-control port-agency-textarea "
                                     name="portAgency"
                                     style="height:230px;resize: none;width: 94%"></textarea>
@@ -306,10 +306,10 @@
                                    target="_blank"
                                    href=";">DOWNLOAD</a>
                                 <span class="input-group-btn">
-                                                <button class="btn red btn-sm" type="button" title="delete"
-                                                        onclick="delFileAndInput(this)">
-                                                    <i class="fa fa-ban"></i></button>
-                                            </span>
+                                <button class="btn red btn-sm" type="button" title="delete"
+                                        onclick="delFileAndInput(this)">
+                                    <i class="fa fa-ban"></i></button>
+                                </span>
                             </div>
                         </div>
                     </div>

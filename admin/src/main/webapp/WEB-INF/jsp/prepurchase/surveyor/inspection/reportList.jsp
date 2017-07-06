@@ -18,30 +18,33 @@
     <div class="col-md-12">
         <!-- BEGIN SAMPLE TABLE PORTLET-->
         <div class="portlet box green">
-            <div class="portlet-title" >
-                <center><div class="caption"><h3>Reports</h3></div></center>
+            <div class="portlet-title">
+                <center>
+                    <div class="caption"><h3>Reports</h3></div>
+                </center>
             </div>
             <div class="portlet-body">
-                    <table class="table table-striped table-bordered table-hover table-checkable order-column" id="report_table">
-                        <thead>
-                        <tr>
-                            <th> Public date </th>
-                            <th> Ship name </th>
-                            <th> IMO </th>
-                            <th> ship type </th>
-                            <th> Inspection port </th>
-                            <th> Inspection dates(LMT)</th>
+                <table class="table table-striped table-bordered table-hover table-checkable order-column"
+                       id="pre_surveyor_report_table">
+                    <thead>
+                    <tr>
+                        <th> Public date</th>
+                        <th> Ship name</th>
+                        <th> IMO</th>
+                        <th> ship type</th>
+                        <th> Inspection port</th>
+                        <th> Inspection dates(LMT)</th>
 
-                            <th> Consignor </th>
-                            <th> Price </th>
-                            <th> Surveyor </th>
-                            <th> Grading </th>
-                            <th> Link to report </th>
-                        </tr>
-                        </thead>
-                        <tbody>
-                        </tbody>
-                    </table>
+                        <th> Consignor</th>
+                        <th> Price</th>
+                        <th> Surveyor</th>
+                        <th> Grading</th>
+                        <th> Link to report</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    </tbody>
+                </table>
             </div>
         </div>
         <!-- END SAMPLE TABLE PORTLET-->
@@ -55,12 +58,13 @@
     });
 
     function drawTable() {
-        reportTable = $('#report_table').DataTable({
+        reportTable = $('#pre_surveyor_report_table').DataTable({
             "ordering": false,
             "pagingType": "simple_numbers",
             "processing": true,
             "autoWidth": false,
             "serverSide": true,
+            'bStateSave': true,
             "ajax": {
                 "url": "prepurchase/surveyor/inspection/list",
                 "type": "post",
@@ -122,19 +126,19 @@
                         var endDate = new Date(row.purchaseQuotation.endDate).Format("dd/MM/yyyy");
                         return startDate + " - " + endDate;
                     }
-                },{
+                }, {
                     "targets": 8,
                     "render": function (data, type, row) {
                         return row.surveyor.firstName + " " + row.surveyor.lastName;
                     }
-                },{
+                }, {
                     "targets": 10,
                     "render": function (data, type, row) {
-                        if(row.submitStatus==1){
-                            return '<a data-target="navTab" href="prepurchase/surveyor/reportEdit?inspectionId='+row.id+'" >View</a> <li class="fa fa-link"></li>';
+                        if (row.submitStatus == 1) {
+                            return '<a class="ajaxify"  data-target="navTab" href="prepurchase/surveyor/reportEdit?inspectionId=' + row.id + '" >View</a> <li class="fa fa-link"></li>';
                         }
-                        if(row.submitStatus==0){
-                            return '<a data-target="navTab" href="prepurchase/surveyor/reportEdit?inspectionId='+row.id+'" >Edit</a> <li class="fa fa-edit"></li></li>';
+                        if (row.submitStatus == 0) {
+                            return '<a class="ajaxify" data-target="navTab" href="prepurchase/surveyor/reportEdit?inspectionId=' + row.id + '" >Edit</a> <li class="fa fa-edit"></li></li>';
                         }
                         return "";
                     }

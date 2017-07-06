@@ -79,6 +79,10 @@
                 position: fixed;
             }
         }
+
+        .sweet-alert {
+            z-index: 120000;
+        }
     </style>
 </head>
 <body onhashchange="hashChange()"
@@ -216,6 +220,11 @@
         var url;
         if (window.location.hash) {
             url = window.location.hash.substring(1);
+            console.log(url);
+            if ($("a[href='" + url + "']").length <= 0) {
+                Layout.loadAjaxContent(url, $(this));
+                return;
+            }
         } else {
             var url1 = "prepurchase/op/record";
             var url2 = "prepurchase/surveyor/record";
@@ -303,7 +312,7 @@
             }
             $.cookie('isLogin', 0);
             if (data["alert"]) {
-                alert(data.messageContent);
+                swal({type: "info", title: data.messageContent});
             }
 
 
@@ -333,11 +342,18 @@
     }
 </script>
 <script>
-    $('.page-header').on('click', ' li > a.ajaxify', function (e) {
+    //    $('.page-header').on('click', ' li > a.ajaxify', function (e) {
+    //        e.preventDefault();
+    //        console.log(1);
+    //        var url = $(this).attr("href");
+    //        Layout.loadAjaxContent(url, $(this));
+    //    });
+
+    $('body').delegate('.ajaxify', 'click', function (e) {
         e.preventDefault();
         console.log(1);
         var url = $(this).attr("href");
         Layout.loadAjaxContent(url, $(this));
-    });
+    })
 </script>
 </html>

@@ -124,6 +124,20 @@ public class PurchaseQuotationController extends BaseController {
         return jsonObject;
     }
 
+    @RequestMapping(value = "/op/quotation/delete")
+    @ResponseBody
+    public JSONObject delete(PurchaseQuotation purchaseQuotation) {
+        JSONObject result = new JSONObject();
+        purchaseQuotation.setUpdateInfo(getCurrentUser().getName());
+        purchaseQuotation.setDelFlag(Const.DEL_FLAG_DELETE);
+        if (purchaseQuotationService.updateSelectiveById(purchaseQuotation)) {
+            result.put("status", 1);
+        } else {
+            result.put("status", 0);
+        }
+        return result;
+    }
+
 
     //surveyor
     @RequestMapping(value = "/surveyor/quotation")

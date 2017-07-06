@@ -52,10 +52,19 @@
                         <div class="col-md-12">
                             <div class="portlet light">
                                 <div class="portlet-title">
-                                    <div class="caption">
+                                    <div class="caption col-md-8">
                                         <i class="icon-social-dribbble font-blue-soft"></i>
                                         <span class="caption-subject font-blue-soft bold uppercase">My record</span>
                                     </div>
+                                    <shiro:hasPermission name="op/quotation/add">
+                                        <div class="col-md-4">
+                                            <div class="btn-group">
+                                                <a href="prepurchase/op/quotation/add" data-target="navTab"
+                                                   class="ajaxify  btn blue"><i class="fa fa-plus"></i> New quotation
+                                                </a>
+                                            </div>
+                                        </div>
+                                    </shiro:hasPermission>
                                 </div>
                                 <div class="portlet-body">
                                     <ul class="nav nav-tabs">
@@ -69,7 +78,7 @@
                                     <div class="tab-content">
                                         <div class="tab-pane fade active in" id="tab_1_1">
                                             <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                                                   id="quotation_table">
+                                                   id="pre_op_record_quotation_table">
                                                 <thead>
                                                 <tr>
                                                     <th style="width: 15%">Ship name</th>
@@ -86,7 +95,7 @@
                                         </div>
                                         <div class="tab-pane fade" id="tab_1_2">
                                             <table class="table table-striped table-bordered table-hover table-checkable order-column"
-                                                   id="inspection_table">
+                                                   id="pre_op_record_inspection_table">
                                                 <thead>
                                                 <tr>
                                                     <th style="width: 15%">Ship name</th>
@@ -97,6 +106,7 @@
                                                     <th style="width: 10%">Total price</th>
                                                     <th style="width: 10%">Grading</th>
                                                     <th style="width: 15%">Link of inspection report</th>
+                                                    <th style="width: 15%">Comment</th>
                                                 </tr>
                                                 </thead>
                                             </table>
@@ -183,12 +193,13 @@
 
 
     function drawQuotationTable() {
-        quotationTable = $('#quotation_table').DataTable({
+        quotationTable = $('#pre_op_record_quotation_table').DataTable({
             "ordering": false,
             "pagingType": "simple_numbers",
             "processing": true,
             "autoWidth": false,
             "serverSide": true,
+            'bStateSave': true,
             "ajax": {
                 "url": "prepurchase/op/record/quotation/list",
                 "type": "get",
@@ -256,12 +267,13 @@
         });
     }
     function drawInspectionTable() {
-        inspectionTable = $('#inspection_table').DataTable({
+        inspectionTable = $('#pre_op_record_inspection_table').DataTable({
             "ordering": false,
             "pagingType": "simple_numbers",
             "processing": true,
             "autoWidth": false,
             "serverSide": true,
+            'bStateSave': true,
             "ajax": {
                 "url": "prepurchase/op/record/inspection/list",
                 "type": "get",
@@ -298,8 +310,14 @@
                 {
                     "data": "inspectionReportId",
                     "render": function (data) {
-                        return '<a data-target="navTab" href="prepurchase/op/reportInfo?reportId=' + data + '" >View</a> <li class="fa fa-link"></li>'
-
+                        return '<a class="ajaxify"  data-target="navTab" href="prepurchase/op/reportInfo?reportId=' + data + '" >View</a> <li class="fa fa-link"></li>'
+                    }
+                },
+                {
+                    "data": "",
+                    "class": "comment-detail",
+                    "render": function (data) {
+                        return '<a href="javascript:void(0)">COMMENT</a>';
                     }
                 },
             ],
@@ -311,15 +329,18 @@
                     return startDate + " to " + endDate;
                 }
             }],
-            "drawCallback": function (settings, json) {
-                var rows = $('#inspection_table').find("tbody tr");
-                rows.each(function (i, e) {
-                    var row = inspectionTable.row($(this));
-                    var data=row.data();
-                    if(data!=null){
-                        row.child(moreInfo(data)).show();
-                    }
-                })
+        });
+
+        inspectionTable.on('click', 'td.comment-detail', function () {
+            var tr = $(this).closest('tr');
+            var row = inspectionTable.row(tr);
+            var flag = tr.attr("data-not-first");
+            if (flag) {
+                tr.next().toggle();
+            } else {
+                row.child(moreInfo(row.data())).show();
+                tr.next().addClass("detail-row");
+                tr.attr("data-not-first", true);
             }
         });
     }

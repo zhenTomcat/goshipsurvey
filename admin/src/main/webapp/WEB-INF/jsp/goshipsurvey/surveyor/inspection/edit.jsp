@@ -255,7 +255,7 @@
                                                                                     <label class="col-sm-10 control-label">Ship
                                                                                         particulars : </label>
                                                                                     <div class="col-sm-4 view-ship-particulars"
-                                                                                         style="margin-top: 10px">
+                                                                                         style="margin-top: 10px;white-space: pre">
                                                                                         <c:if test="${(!empty quotation.shipParticularsUrl) && (quotation.shipParticularsUrl!='')}">
                                                                                             <a class="btn btn-sm green"
                                                                                                target="_blank"
@@ -270,10 +270,10 @@
                                                                             </div>
                                                                             <div class="col-md-4 margin-bottom-10">
                                                                                 <label class="col-sm-12 control-label"
-                                                                                       style="padding-left: 0">Port
+                                                                                       style="padding-left: 0;">Port
                                                                                     agency :</label>
-                                                                                <div class="form-group col-md-12"
-                                                                                     style="word-wrap: break-word">
+                                                                                <div class="form-group col-md-12 new-comment-content"
+                                                                                     style="word-wrap: break-word;">
                                                                                     ${quotation.portAgency}
                                                                                 </div>
 
@@ -361,6 +361,10 @@
         })
     }
 
-
+    $(function () {
+        var element = $("div[class='new-comment-content']");
+        var temp = element.text().replace(/\n/g, '<br/>');
+        element.html(temp);
+    });
 </script>
 
