@@ -192,6 +192,9 @@ public class ShipDetail implements Serializable {
 
     private Integer wog;
 
+    /*船的图片*/
+    @TableField(value = "ship_img")
+    private String shipImg;
 
     public Integer getId() {
         return id;
@@ -559,6 +562,14 @@ public class ShipDetail implements Serializable {
 
     public void setWog(Integer wog) {
         this.wog = wog;
+    }
+
+    public String getShipImg() {
+        return shipImg;
+    }
+
+    public void setShipImg(String shipImg) {
+        this.shipImg = shipImg;
     }
 
     public void setCreateInfo(String userName) {

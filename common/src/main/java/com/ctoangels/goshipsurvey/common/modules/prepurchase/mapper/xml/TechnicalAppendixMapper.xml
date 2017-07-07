@@ -4,7 +4,7 @@
 
 	<!-- 通用查询结果列-->
 	<sql id="Base_Column_List">
-		id, inspection_report_id AS inspectionReportId, catagory, title1, ,title2, title3, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
+		id, inspection_report_id AS inspectionReportId, catagory, title1, ,title2, title3, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag, flag
 	</sql>
 	<select id="selectTechnicalAppendixByid" resultMap="TechnicalAppendix">
 		select * from t_technical_appendix t where t.inspection_report_id=#{id}

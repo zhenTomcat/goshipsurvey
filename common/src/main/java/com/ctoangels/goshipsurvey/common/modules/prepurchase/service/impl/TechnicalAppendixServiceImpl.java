@@ -48,6 +48,7 @@ public class TechnicalAppendixServiceImpl extends SuperServiceImpl<TechnicalAppe
             for (int i = 0; i < 15; i++) {
                 TechnicalAppendix technicalAppendix = new TechnicalAppendix();
                 technicalAppendix.setInspectionReportId(reportId);
+                technicalAppendix.setFlag(0);
                 if (i == 0) {
 
                     technicalAppendix.setCatagory("Navigation & Communications Equipments");
@@ -122,36 +123,41 @@ public class TechnicalAppendixServiceImpl extends SuperServiceImpl<TechnicalAppe
                 } else if (i == 10) {
                     technicalAppendix.setCatagory("Propulsion machinery");
                     technicalAppendix.setTitle1("Name of Equipmet");
-                    technicalAppendix.setTitle2("Frames");
+                    technicalAppendix.setTitle2("Specification");
                     technicalAppendix.setTitle3(null);
+                    technicalAppendix.setFlag(1);
                     technicalAppendixService.insert(technicalAppendix);
                     continue;
                 } else if (i == 11) {
                     technicalAppendix.setCatagory("Auxilliaries machinery");
                     technicalAppendix.setTitle1("Name of Equipmet");
-                    technicalAppendix.setTitle2("Frames");
+                    technicalAppendix.setTitle2("Specification");
                     technicalAppendix.setTitle3(null);
+                    technicalAppendix.setFlag(1);
                     technicalAppendixService.insert(technicalAppendix);
                     continue;
                 } else if (i == 12) {
                     technicalAppendix.setCatagory("Main deck and equipment");
                     technicalAppendix.setTitle1("Name of Equipmet");
-                    technicalAppendix.setTitle2("Frames");
+                    technicalAppendix.setTitle2("Specification");
                     technicalAppendix.setTitle3(null);
+                    technicalAppendix.setFlag(1);
                     technicalAppendixService.insert(technicalAppendix);
                     continue;
                 } else if (i == 13) {
                     technicalAppendix.setCatagory("Cargo handling equipment");
                     technicalAppendix.setTitle1("Name of Equipmet");
-                    technicalAppendix.setTitle2("Frames");
+                    technicalAppendix.setTitle2("Specification");
                     technicalAppendix.setTitle3(null);
+                    technicalAppendix.setFlag(1);
                     technicalAppendixService.insert(technicalAppendix);
                     continue;
                 } else if (i == 14) {
                     technicalAppendix.setCatagory("Lifesaving & firefighting equipment");
                     technicalAppendix.setTitle1("Name of Equipmet");
-                    technicalAppendix.setTitle2("Frames");
+                    technicalAppendix.setTitle2("Specification");
                     technicalAppendix.setTitle3(null);
+                    technicalAppendix.setFlag(1);
                     technicalAppendixService.insert(technicalAppendix);
                     continue;
                 }

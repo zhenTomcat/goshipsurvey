@@ -68,7 +68,7 @@
     <div id="div-img" class="page col-md-12">
         <c:forEach items="${medias}" var="m">
             <div class="div-photo">
-                <div class="div-img" onmouseover="mouseOverImg(this)">
+                <div class="div-img">
                     <div >
                     <span  onclick="javascript:;" class="span-left">
                         <input class="icheck" data-imgId="${m.id}" style=" margin-left: 3px; margin-top: 5px;" type="checkbox"/>

@@ -224,6 +224,16 @@
             alter table t_quotation ADD specified_id int(11) DEFAULT NULL COMMENT '指定验船公司的id';
         </sql>
     </changeSet>
+    <changeSet author="LuZhen" id="17317309132-012">
+        <sql>
+            alter table t_technical_appendix add flag int(11) DEFAULT NULL COMMENT '指定最后五条记录为textarea';
+        </sql>
+    </changeSet>
+    <changeSet author="LuZhen" id="17317309132-013">
+        <sql>
+            alter table t_ship_detail add ship_img varchar(155) DEFAULT NULL COMMENT '船的图片';
+        </sql>
+    </changeSet>
 </databaseChangeLog>
 
 

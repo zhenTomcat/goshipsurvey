@@ -24,7 +24,7 @@
     .divPhoto{
         float: left;
         background-color: white;
-        margin-right: 100px;
+        margin-right: 80px;
         margin-bottom: 20px;
     }
     .divImg{
@@ -75,7 +75,7 @@
         <div class="col-md-12">
             <div class="portlet box green" style="margin-bottom: 0px">
                 <div class="portlet-title" >
-                    <div class="caption"><h4>Report of Star Deltas</h4></div>
+                    <div class="caption"><h4>Report of ${report.shipDetail.shipName}</h4></div>
                     <div class="tools" style="padding-top: 10px">
                         <div>
                             <a id="reportList" data-target="navTab" href="prepurchase/surveyor/report" class="btn blue"><li class="fa fa-bars"></li>Report List</a>
@@ -155,7 +155,22 @@
                                             <div class="col-md-6">
                                                 <div style="border: solid black 2px" class="col-md-12">
                                                     <div class="col-md-8" style="margin-top: 20px;margin-bottom: 20px">
-                                                        <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/GWTcR228ek.jpg" style="width: 100%;height: 250px"/>
+                                                        <c:if test="${report.shipDetail.shipImg!=null}" var="rss">
+                                                            <div onmouseover="mouseOverShipImg(this)">
+                                                                <button onclick="javascript:removeShipImg(this);"
+                                                                      style="width:30px;display:none;background: rgb(0, 0, 0);color:white;position:absolute;top:0px;right:15px;z-index: 999;">
+                                                                <li class="li-right fa fa-trash-o"></li></button>
+                                                                    <img src="${report.shipDetail.shipImg}" style="width: 100%;height: 250px"/>
+
+                                                                <input value="${report.shipDetail.shipImg}" name="shipImg" type="hidden">
+                                                            </div>
+                                                        </c:if>
+
+                                                        <c:if test="${! rss}">
+                                                            <button id="upload_ship_img" style="width: 100%">
+                                                                <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/zQnJWazGDX.jpg" style="width: 100%;height: 250px"/>
+                                                            </button>
+                                                        </c:if>
                                                     </div>
                                                     <div class="col-md-4" style="margin-top: 20px;margin-bottom: 20px">
                                                         <p style="color: #00a8c6">Ship Name</p><input type="hidden" value="${report.shipDetail.id}" name="id"/>
@@ -169,59 +184,59 @@
                                                 <div class="col-md-12" style="margin-top:30px ">
                                                     <div class="col-md-6 form-group">
                                                         <label class="col-md-4 control-label">LOA(m):</label>
-                                                        <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.loa}" name="loa"/></div>
+                                                        <div class="col-md-8"><input  class="form-control" type="text" value="${report.shipDetail.loa}" name="loa"/></div>
                                                     </div>
                                                     <div class="col-md-6 form-group">
                                                         <label class="col-md-4 control-label">Beam(m): </label>
-                                                        <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.beam}" name="beam"/></div>
+                                                        <div class="col-md-8"><input  class="form-control" type="text" value="${report.shipDetail.beam}" name="beam"/></div>
                                                     </div>
                                                     <div class="col-md-6 form-group">
                                                         <label class="col-md-4 control-label">Dwt(ton): </label>
-                                                        <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.dwt}" name="dwt"/></div>
+                                                        <div class="col-md-8"><input  class="form-control" type="text" value="${report.shipDetail.dwt}" name="dwt"/></div>
                                                     </div>
                                                     <div class="col-md-6 form-group">
                                                         <label class="col-md-4 control-label">Draft(m): </label>
-                                                        <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.draft}" name="draft"/></div>
+                                                        <div class="col-md-8"><input  class="form-control" type="text" value="${report.shipDetail.draft}" name="draft"/></div>
                                                     </div>
                                                     <div class="col-md-6 form-group">
                                                         <label class="col-md-4 control-label">GT: </label>
-                                                        <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.ggt}" name="ggt"/></div>
+                                                        <div class="col-md-8"><input  class="form-control" type="text" value="${report.shipDetail.ggt}" name="ggt"/></div>
                                                     </div>
                                                     <div class="col-md-6 form-group">
                                                         <label class="col-md-4 control-label">LDT: </label>
-                                                        <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.ldt}" name="ldt"/></div>
+                                                        <div class="col-md-8"><input  class="form-control" type="text" value="${report.shipDetail.ldt}" name="ldt"/></div>
                                                     </div>
                                                     <div class="col-md-6 form-group">
                                                         <label class="col-md-4 control-label">SS(m/y): </label>
-                                                        <div class="col-md-8 "><input readonly class="form-control" type="text" value="${report.shipDetail.ss}" name="ss"/></div>
+                                                        <div class="col-md-8 "><input  class="form-control" type="text" value="${report.shipDetail.ss}" name="ss"/></div>
                                                     </div>
                                                     <div class="col-md-6 form-group">
                                                         <label class="col-md-4 control-label">Bunkers: </label>
-                                                        <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.bunkers}" name="bunkers"/></div>
+                                                        <div class="col-md-8"><input  class="form-control" type="text" value="${report.shipDetail.bunkers}" name="bunkers"/></div>
                                                     </div>
                                                     <div class="form-group col-md-6">
                                                         <label class="col-sm-4 control-label">Class:</label>
-                                                        <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.shipClass}" name="shipClass"/></div>
+                                                        <div class="col-md-8"><input  class="form-control" type="text" value="${report.shipDetail.shipClass}" name="shipClass"/></div>
                                                     </div>
                                                     <div class="col-md-6 form-group">
                                                         <label class="col-sm-4 control-label">Flag:</label>
-                                                        <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.flag}" name="flag"/></div>
+                                                        <div class="col-md-8"><input  class="form-control" type="text" value="${report.shipDetail.flag}" name="flag"/></div>
                                                     </div>
                                                     <div class="col-md-6 form-group">
                                                         <label class="col-md-4 control-label">Builder:</label>
-                                                        <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.builder}" name="builder"/></div>
+                                                        <div class="col-md-8"><input  class="form-control" type="text" value="${report.shipDetail.builder}" name="builder"/></div>
                                                     </div>
                                                     <div class="col-md-6 form-group">
                                                         <label class="col-md-4 control-label">ex.Name:</label>
-                                                        <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.exName}" name="exName"/></div>
+                                                        <div class="col-md-8"><input  class="form-control" type="text" value="${report.shipDetail.exName}" name="exName"/></div>
                                                     </div>
                                                     <div class="col-md-6 form-group">
                                                         <label class="col-md-4 control-label">Location:</label>
-                                                        <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.location}" name="location"/></div>
+                                                        <div class="col-md-8"><input  class="form-control" type="text" value="${report.shipDetail.location}" name="location"/></div>
                                                     </div>
                                                     <div class="col-md-6 form-group">
                                                         <label class="col-md-4 control-label">ShipType:</label>
-                                                        <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.shipType}"/></div>
+                                                        <div class="col-md-8"><input  class="form-control" type="text" value="${report.shipDetail.shipType}"/></div>
                                                         <c:forEach items="${dicts}" var="d">
                                                             <c:if test="${d.des==report.shipDetail.shipType}">
                                                                 <input  class="form-control" type="hidden" value="${d.value}" name="shipType"/>
@@ -230,16 +245,16 @@
                                                     </div>
                                                     <div class="col-md-6 form-group">
                                                         <label class="col-md-4 control-label">Build Year:</label>
-                                                        <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.buildYear}" name="buildYear"/></div>
+                                                        <div class="col-md-8"><input  class="form-control" type="text" value="${report.shipDetail.buildYear}" name="buildYear"/></div>
                                                     </div>
                                                     <div class="col-md-6 form-group">
                                                         <label class="col-md-4 control-label">Call Sign:</label>
-                                                        <div class="col-md-8"><input readonly class="form-control" type="text" value="${report.shipDetail.callSign}" name="callSign"/></div>
+                                                        <div class="col-md-8"><input  class="form-control" type="text" value="${report.shipDetail.callSign}" name="callSign"/></div>
                                                     </div>
                                                     <div class="col-md-12 form-group">
                                                         <label class="col-md-4 control-label">Inspection date:</label>
 
-                                                        <div class="col-md-8"><input readonly class="form-control" type="text" value="" name=""/></div>
+                                                        <div class="col-md-8"><input  class="form-control" type="text" value="" name=""/></div>
                                                     </div>
                                                     <div class="col-md-12 form-group">
                                                         <label class="col-md-9 control-label">Known the buyers by site surveyor,but WOG:</label>
@@ -256,27 +271,27 @@
                                                     </div>
                                                     <div class="col-md-6 form-group">
                                                         <label class="col-md-3">Maker:</label>
-                                                        <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.meMaker}" name="meMaker"/></div>
+                                                        <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.meMaker}" name="meMaker"/></div>
                                                     </div>
                                                     <div class="col-md-6 form-group">
                                                         <label class="col-md-3">Type:</label>
-                                                        <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.meType}" name="meType"/></div>
+                                                        <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.meType}" name="meType"/></div>
                                                     </div>
                                                     <div class="col-md-6 form-group">
                                                         <label class="col-md-3">MCR KW:</label>
-                                                        <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.meMcrKw}" name="meMcrKw"/></div>
+                                                        <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.meMcrKw}" name="meMcrKw"/></div>
                                                     </div>
                                                     <div class="col-md-6 form-group">
                                                         <label class="col-md-3">MCR RPM:</label>
-                                                        <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.meMcrRpm}" name="meMcrRpm"/></div>
+                                                        <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.meMcrRpm}" name="meMcrRpm"/></div>
                                                     </div>
-                                                    <div class="col-md-6 form-group">
-                                                        <label class="col-md-4">Running hours: </label>
-                                                        <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.meRunningHours}" name="meRunningHours"/></div>
+                                                    <div class="col-md-12 form-group">
+                                                        <label class="col-md-3">Running hours: </label>
+                                                        <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.meRunningHours}" name="meRunningHours"/></div>
                                                     </div>
-                                                    <div class="col-md-6 form-group">
+                                                    <div class="col-md-12 form-group">
                                                         <label class="col-md-3">Critical RPM:</label>
-                                                        <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.meCriticalRpm}" name="meCriticalRpm"/></div>
+                                                        <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.meCriticalRpm}" name="meCriticalRpm"/></div>
                                                     </div>
                                                     <div class="col-md-12 form-group">
                                                         <div class="col-md-12"><input class="form-control" placeholder="Others"  type="text" value="${report.shipDetail.meOthers}" name="meOthers"/></div>
@@ -290,27 +305,27 @@
                                                     </div>
                                                     <div class="col-md-6 form-group">
                                                         <label class="col-md-3">Maker:</label>
-                                                        <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.apMaker}" name="apMaker"/></div>
+                                                        <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.apMaker}" name="apMaker"/></div>
                                                     </div>
                                                     <div class="col-md-6 form-group">
                                                         <label class="col-md-3">Type:</label>
-                                                        <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.apType}" name="apType"/></div>
+                                                        <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.apType}" name="apType"/></div>
                                                     </div>
                                                     <div class="col-md-6 form-group">
                                                         <label class="col-md-3">Load:</label>
-                                                        <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.apLoad}" name="apLoad"/></div>
+                                                        <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.apLoad}" name="apLoad"/></div>
                                                     </div>
                                                     <div class="col-md-6 form-group">
                                                         <label class="col-md-3">A1 r/h:</label>
-                                                        <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.apA1}" name="apA1"/></div>
+                                                        <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.apA1}" name="apA1"/></div>
                                                     </div>
                                                     <div class="col-md-6 form-group">
                                                         <label class="col-md-3">A2 r/h: </label>
-                                                        <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.apA2}" name="apA2"/></div>
+                                                        <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.apA2}" name="apA2"/></div>
                                                     </div>
                                                     <div class="col-md-6 form-group">
                                                         <label class="col-md-3">A3 r/h:</label>
-                                                        <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.apA3}" name="apA3"/></div>
+                                                        <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.apA3}" name="apA3"/></div>
                                                     </div>
                                                     <div class="col-md-12 form-group">
                                                         <div class="col-md-12"><input class="form-control" placeholder="Others"  type="text" value="${report.shipDetail.apOthers}" name="apOthers"/></div>
@@ -324,19 +339,19 @@
                                                     </div>
                                                     <div class="col-md-6 form-group">
                                                         <label class="col-md-3">Maker:</label>
-                                                        <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.boMaker}" name="boMaker"/></div>
+                                                        <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.boMaker}" name="boMaker"/></div>
                                                     </div>
                                                     <div class="col-md-6 form-group">
                                                         <label class="col-md-3">Type:</label>
-                                                        <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.boType}" name="boType"/></div>
+                                                        <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.boType}" name="boType"/></div>
                                                     </div>
-                                                    <div class="col-md-5 form-group">
-                                                        <label class="col-md-7">Evaporation:</label>
-                                                        <div class="col-md-5"><input class="input-xsmall" type="text" value="${report.shipDetail.boEvaporation}" name="boEvaporation"/></div>
+                                                    <div class="col-md-12 form-group">
+                                                        <label class="col-md-3">Evaporation:</label>
+                                                        <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.boEvaporation}" name="boEvaporation"/></div>
                                                     </div>
-                                                    <div class="col-md-7 form-group">
-                                                        <label class="col-md-4">Heating area:</label>
-                                                        <div class="col-md-4"><input class="input-small" type="text" value="${report.shipDetail.boHeatingArea}" name="boHeatingArea"/></div>
+                                                    <div class="col-md-12 form-group">
+                                                        <label class="col-md-3">Heating area:</label>
+                                                        <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.boHeatingArea}" name="boHeatingArea"/></div>
                                                     </div>
                                                     <div class="col-md-12 form-group">
                                                         <div class="col-md-12"><input class="form-control" placeholder="Others"  type="text" value="${report.shipDetail.boOthers}" name="boOthers"/></div>
@@ -424,12 +439,13 @@
                                                             <tbody>
                                                             <tr style="display: none"></tr>
                                                             <c:forEach items="${report.defects}" var="d" varStatus="i">
-                                                                <tr >
+                                                                <tr>
                                                                     <td style="display: none">
                                                                         <input type="text" value="${d.inspectionReportId}" name="defects[${i.index}].inspectionReportId"/>
                                                                     </td>
                                                                     <td><textarea class="form-control" rows="2" name="defects[${i.index}].description">${d.description}</textarea></td>
-                                                                    <td><input type="text" class="form-control" name="defects[${i.index}].estimatCost" value="${d.estimatCost}" /></td>
+                                                                    <td><input type="text" onkeyup="onKeyPrice(this);"
+                                                                               class="form-control" name="defects[${i.index}].estimatCost" value="${d.estimatCost}" /></td>
                                                                     <td><button type="button" class="btn red" onclick="defectDeleteRow(this)">Delete</button> </td>
                                                                 </tr>
                                                             </c:forEach>
@@ -460,7 +476,7 @@
                                                                 <li class="li-left fa fa-edit"></li>
                                                             </span>
                                                             <span onclick="javascript:removePhoto(this,'${g.id}','${g.name}');" class="span-right">
-                                                                <li class="li-right fa fa-remove"></li>
+                                                                <li class="li-right fa fa-trash-o"></li>
                                                             </span>
                                                             <a data-model="dialog" href="prepurchase/surveyor/img?galleriesId=${g.id}&reportId=${report.id}"  >
                                                                 <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/GWTcR228ek.jpg"
@@ -626,7 +642,7 @@
                                                                                 <c:if test="${t.title3==''|| t.title3==null}">
                                                                                     data-num="2"
                                                                                 </c:if>
-                                                                                type="button" onclick="addRow(this,'${t.catagory}','${t.title1}')">
+                                                                                type="button" onclick="addRow(this,'${t.catagory}','${t.title1}','${t.flag}')">
                                                                             <img class="add_img" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/add.png" />
                                                                         </button>
                                                                         </th>
@@ -644,16 +660,18 @@
                                                                                 </div>
                                                                             </td>
                                                                             <td>
-                                                                            <c:if test="${t.catagory=='Navigation & Communications Equipments'}">
-                                                                                <div class="input-icon input-icon-sm right">
-                                                                                    <i class="fa fa-sort-desc" style="color: black;" onclick="selectOneInfo(this,'${t.catagory}','${t.title2}')"></i>
-                                                                                    <input class="form-control" type="text" name="technicalAppendixInfo[${i.index}].two" value="${ta.two}"/>
-                                                                                </div>
-                                                                            </c:if>
-                                                                            <c:if test="${t.catagory!='Navigation & Communications Equipments'}">
-                                                                                    <input class="form-control" type="text" name="technicalAppendixInfo[${i.index}].two" value="${ta.two}"/>
-                                                                            </c:if>
-
+                                                                                <c:if test="${t.catagory=='Navigation & Communications Equipments'}">
+                                                                                    <div class="input-icon input-icon-sm right">
+                                                                                        <i class="fa fa-sort-desc" style="color: black;" onclick="selectOneInfo(this,'${t.catagory}','${t.title2}')"></i>
+                                                                                        <input class="form-control" type="text" name="technicalAppendixInfo[${i.index}].two" value="${ta.two}"/>
+                                                                                    </div>
+                                                                                </c:if>
+                                                                                <c:if test="${t.catagory!='Navigation & Communications Equipments' && t.flag==0}">
+                                                                                        <input class="form-control" type="text" name="technicalAppendixInfo[${i.index}].two" value="${ta.two}"/>
+                                                                                </c:if>
+                                                                                <c:if test="${t.flag==1}">
+                                                                                    <textarea class="form-control" rows="2" contenteditable="true" name="technicalAppendixInfo[${i.index}].two">${ta.two}</textarea>
+                                                                                </c:if>
                                                                             </td>
                                                                             <c:if test="${t.title3!=''&& t.title3!=null}">
                                                                                 <td><input class="form-control" type="text" name="technicalAppendixInfo[${i.index}].three" value="${ta.three}"/></td>
@@ -663,7 +681,8 @@
                                                                                     <c:if test="${t.title3==''|| t.title3==null}">
                                                                                         data-num="2"
                                                                                     </c:if>
-                                                                                    type="button" onclick="deleteRow(this)">Delete</button> </td>
+                                                                                    type="button" onclick="deleteRow(this)">Delete</button>
+                                                                            </td>
                                                                         </tr>
                                                                     </c:forEach>
 
@@ -690,9 +709,9 @@
                                                                     <table class="table table-striped table-bordered table-hover" >
                                                                         <thead>
                                                                         <tr>
-                                                                            <th> ${te.title1} </th>
-                                                                            <th> ${te.title2} </th>
-                                                                            <th> ${te.title3} </th>
+                                                                            <th style="width: 30%"> ${te.title1} </th>
+                                                                            <th style="width: 40%"> ${te.title2} </th>
+                                                                            <th style="width: 20%"> ${te.title3} </th>
                                                                             <th style="width: 10%"> <button data-num="3" type="button" onclick="addRow(this,'Vessel tank capacity','${te.title1}')">
                                                                                 <img class="add_img" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/add.png" />
                                                                             </button>
@@ -731,8 +750,6 @@
                                 <div class="tab-pane tab-left " id="tab7">
                                     <div class="tab-pane-div"  >
                                         <form action="prepurchase/surveyor/reportEditDocument" method="post">
-                                            <input style="display: none;" type="button" id="uploadAttachment"
-                                                   data-count="" data-reportId="" data-documentId="" data-buttonId=""/>
                                             <div class="portlet-body">
                                             <table class="table table-striped table-bordered table-hover" id="default_table">
                                                 <thead>
@@ -762,7 +779,8 @@
                                                                     <button onclick="clearTd(this,'${i.index}','${report.id}','${d.id}')" type="button" class="btn red">Delete</button>
                                                                 </c:if>
                                                                 <c:if test="${d.attachmentUrl=='' || d.attachmentUrl==null}">
-                                                                    <button class="btn blue" id="button_id${i.index}" type="button" onclick="upload_attachment(this,'${i.index}','${report.id}','${d.id}')">Browse</button>
+                                                                    <button  class="btn blue attachment" id="button_id${i.index}" data-count="${i.index}"
+                                                                             data-reportId="${report.id}" data-documentId="${d.id}" type="button">Browse</button>
                                                                 </c:if>
                                                             </td>
                                                         </tr>
@@ -957,6 +975,16 @@
 
     var width = $(window).width();
     $(".tab-left ").css("margin-left",width*0.1);
+    //删除船的图片
+    function removeShipImg(obj){
+        var html='<button id="upload_ship_img" style="width: 100%">'+
+                ' <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/zQnJWazGDX.jpg" style="width: 100%;height: 250px"/> </button>';
+        $(obj).parent().parent().html(html);
+        initUploaders_ship_img("upload_ship_img", "shipinfo", "${staticPath}/");
+
+    }
+
+    //defect添加一行
     function defectAddRow(obj){
         var trNum=$(obj).closest("table").find("tbody tr").length-1;
         var reportId=$("#reportId").val();
@@ -969,6 +997,7 @@
         $(obj).closest("table").find("tbody tr:last").after(html);
     }
 
+    //defect删除一行
     function defectDeleteRow(obj) {
         var count=0;
         var tableObj= $(obj).closest("table");
@@ -991,7 +1020,19 @@
 
     }
 
-    function addRow(obj,catagory,title) {
+    //defect输入价格带有逗号
+    function onKeyPrice(t) {
+        var stmp = "";
+        if(t.value==stmp) return;
+        var ms = t.value.replace(/[^\d\.]/g,"").replace(/(\.\d{2}).+$/,"$1").replace(/^0+([1-9])/,"$1").replace(/^0+$/,"0");
+        var txt = ms.split(".");
+        while(/\d{4}(,|$)/.test(txt[0]))
+            txt[0] = txt[0].replace(/(\d)(\d{3}(,|$))/,"$1,$2");
+        t.value = stmp = txt[0]+(txt.length>1?"."+txt[1]:"");
+    }
+
+
+    function addRow(obj,catagory,title,flag) {
        var trLength= $(obj).closest("table").find("tbody tr").length-1;
         var html="";
         if($(obj).attr("data-num")==2){
@@ -999,9 +1040,14 @@
             html= '<tr >' +
                     '<td ><div class="input-icon input-icon-sm right">' +
                     '<i class="fa fa-sort-desc" style="color: black;" onclick="selectOneInfo(this,\''+catagory+'\',\''+title+'\')"></i>'+
-                    '<input type="text" name="technicalAppendixInfo['+trLength+'].one" class="form-control" /></td>' +
-                    '<td><input type="text" class="form-control" name="technicalAppendixInfo['+trLength+'].two"/></td>' +
-                    '<td><button data-num="2" type="button" onclick="deleteRow(this)" class="btn red">Delete</button> </td></tr>'
+                    '<input type="text" name="technicalAppendixInfo['+trLength+'].one" class="form-control" /></td>' ;
+                if(flag==1){
+                    html+='<td><textarea class="form-control" rows="2" contenteditable="true" name="technicalAppendixInfo['+trLength+'].two">${ta.two}</textarea></td>';
+                }else{
+                    html+='<td><input type="text" class="form-control" name="technicalAppendixInfo['+trLength+'].two"/></td>';
+                }
+
+                   html+='<td><button data-num="2" type="button" onclick="deleteRow(this)" class="btn red">Delete</button> </td></tr>';
         }else {
             html= '<tr >' +
                     '<td ><div class="input-icon input-icon-sm right">' +
@@ -1021,6 +1067,8 @@
 
         $(obj).closest("table").find("tbody tr:last").after(html);
     }
+
+
     function deleteRow(obj) {
         var count=0;
         var tableObj= $(obj).closest("table");
@@ -1045,6 +1093,7 @@
 
 
     }
+
    function addRow1(obj) {
         $("#addRow1").click();
    }
@@ -1059,26 +1108,33 @@
        $(obj).prev().click();
    }
 
-    initUploaders_attachment("uploadAttachment", "shipinfo", "${staticPath}/");
-   function upload_attachment(obj,count,reportId,documentId) {
 
-       var buttonId=$(obj).attr("id");
-       $("#uploadAttachment").attr("data-count",count);
-       $("#uploadAttachment").attr("data-reportId",reportId);
-       $("#uploadAttachment").attr("data-documentId",documentId);
-       $("#uploadAttachment").attr("data-buttonId",buttonId);
-       $("#uploadAttachment").click();
-
-   }
 
    function clearTd(obj,count,reportId,documentId) {
-       if(confirm("确定删除吗？")){
-           $(obj).parent().prev().html("");
-           $(obj).parent().html('<button class="btn blue" id="button_id'+count+'" type="button" onclick="upload_attachment(this,'+count+','+reportId+','+documentId+')">Browse</button>');
-       }
+       swal({
+                   title: "确定删除吗?",
+                   text: "Your will not be able to recover this imaginary file!",
+                   type: "warning",
+                   showCancelButton: true,
+                   confirmButtonColor: "#DD6B55",
+                   confirmButtonText: "确认",
+                   cancelButtonText: "取消",
+                   closeOnConfirm: false,
+                   closeOnCancel: false
+               },
+               function(isConfirm){
+                   if (isConfirm) {
+                       swal("Deleted!", "Your imaginary file has been deleted.", "success");
+                       $(obj).parent().prev().html("");
+                       $(obj).parent().html('<button class="btn blue" id="button_id'+count+'" data-count="'+count+'" data-reportId="'+reportId+'" data-documentId="'+documentId+'" type="button" ">Browse</button>');
+                       initUploaders_attachment("button_id"+count, "shipinfo", "${staticPath}/");
+                   } else {
+                       swal("Cancelled", "Your imaginary file is safe :)", "error");
+                   }
+               });
    }
 
-   //鼠标移入事件
+   //第四个图片Galleries：鼠标移入事件
     function mouseOver(obj){
         $(obj).find("span").show();
         $(obj).mouseout(function () {
@@ -1086,10 +1142,18 @@
         });
     }
 
+    //第一个船舶图片：shipDetail
+    function mouseOverShipImg(obj){
+        $(obj).find("button").show();
+        $(obj).mouseout(function () {
+            $(obj).find("button").hide();
+        });
+    }
+
     //移除相册
     function removePhoto(obj,id,albumName){
         if(albumName=="Grade" || albumName=="Certificate"){
-            alert("该相册不可编辑删除")
+            var s=swal({type:"error",title:"该相册不可删除"});
         }else {
             if(confirm("确定删除？")){
                 $.ajax({
@@ -1116,7 +1180,7 @@
     //编辑相册
     function editPhoto(obj,id,albumName) {
         if(albumName=="Grade" || albumName=="Certificate"){
-            alert("该相册不可编辑")
+            swal({type:"warning",title:"该相册不可编辑"})
         }else {
             $(".photo_name").removeClass("photo_name");
             $(obj).parent().attr("class","photo_name");
@@ -1130,7 +1194,7 @@
     //确定相册名称
     function surePhotoName(obj) {
         if($("#photoName").val()==""){
-            alert("相册名称不能为空!")
+            swal({type:"warning",title:"相册名称不能为空!"})
         }else{
             var albumId=$(".photo_name").attr("data-id");
             $.ajax({
@@ -1182,8 +1246,8 @@
                     //相册名称
                     var html='<div class="divPhoto"><div class="divImg" onmouseover="mouseOver(this)">'+
                             '<div><span  onclick="javascript:editPhoto(this,'+galleriesId+',\''+albumName+'\');" class="span-left"><li class="li-left fa fa-edit"></li></span>'+
-                            '<span onclick="javascript:removePhoto(this,'+galleriesId+',\''+albumName+'\');" class="span-right"><li class="li-right fa fa-remove"></li> </span>'+
-                            '<a data-model="dialog" href="prepurchase/surveyor/viewImg"  >'+
+                            '<span onclick="javascript:removePhoto(this,'+galleriesId+',\''+albumName+'\');" class="span-right"><li class="li-right fa fa-trash-o"></li> </span>'+
+                            '<a data-model="dialog" href="prepurchase/surveyor/img?galleriesId='+galleriesId+'&reportId='+reportId+'"  >'+
                             '<img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/GWTcR228ek.jpg" style="width: 200px;height: 200px;"/> </a> </div>'+
                             '<div style="width: 200px"><p style="float: left;margin-right: 10px;">'+albumName+'</p><p style="float: left;margin-right: 10px">(0)</p>'+
                             '<p style="float: left;margin: 0px">Create at '+createDate+'</p></div></div></div>';
@@ -1199,7 +1263,7 @@
 
     }
 
-    //Tech. & Equip. info.第一个表格的操作
+    //Tech. & Equip. info.下拉列表的操作
     function selectOneInfo(obj,catagory,title) {
         if($(obj).next().next().attr("data-flag")!=0){
             $.ajax({
@@ -1212,7 +1276,7 @@
                 },
                 success:function (data) {
                     var width= $(obj).next().width();
-                    html='<select data-flag="0" multiple class="form-control" style="position: absolute;z-index: 100000;width: '+width+'">';
+                    html='<select data-flag="0" size="8" multiple class="form-control" style="position: absolute;z-index: 100000; width: '+width+'">';
                     var contents=data.contents;
                     for(var i=0;i<contents.length;i++){
                         html+='<option onclick="selectOption(this)" value="'+contents[i].content+'">'+contents[i].content+'</option>';
@@ -1240,13 +1304,12 @@
     }
 
 
+    //Tech. & Equip. info.下拉列表选中
     function selectOption(obj) {
         var data=$(obj).val();
         $(obj).parent().prev().val(data);
         $(obj).parent().hide();
     }
-
-
 
 
     //格式化日期
@@ -1273,6 +1336,8 @@
 
     //一进去编辑报告，提交按钮就不能被看见
     $("#submit").hide();
+
+    //1~8的水平导航栏
     function liNow(obj) {
         $("#ul_li .active").removeClass("active");
         $("#div_from .active").removeClass("active");
@@ -1318,6 +1383,7 @@
     }
 
 
+    //save保存
     function nextLi(objButton) {
         if($("#div_from .active").attr("data-flag")=='flag'){
             $("#div_from .active").find("form").each(function () {
@@ -1380,7 +1446,7 @@
               },
               success:function (data) {
                   if(data){
-                      alert("SUCCESS");
+                      swal({type:"success",title:"SUCCESS"})
                       $("#reportList").click();
                   }
               },
@@ -1404,6 +1470,14 @@
             $(this).stop();
             $(this).animate({width: 40}, 400);
         });
+
+        //遍历document的上传文件
+        $(".attachment").each(function () {
+            initUploaders_attachment($(this).attr("id"), "shipinfo", "${staticPath}/");
+        });
+
+        //上传船的图片
+        initUploaders_ship_img("upload_ship_img", "shipinfo", "${staticPath}/");
 
         if($("#submitStatus1").val()==1){
             $(document.getElementById("#tab1")).find("span:first").html('<i class="fa fa-check"></i>');
@@ -1498,10 +1572,15 @@
                                     '</tr>'
                             flag_2='item'+i;
                         }else if(grades[i].rank==3){
-                            html+= '<tr>'+
-                                    '<td>'+grades[i].item+'</td>'+
-                                    '<td><input type="text" data-flag1="'+flag_1+'" data-flag2="'+flag_2+'" data-id="'+grades[i].id+'" onblur="editGrade(this)" class="input-xsmall" value="'+g+'"/></td>'+
-                                    '<td><input type="text" style="width: 100%;height: 100%" data-id="'+grades[i].id+'" onblur="editRemark(this)" value="'+grades[i].remark+'"/></td>'+
+                                    html+= '<tr>';
+                                    if(g!=null && g!="" && g<=5){
+                                        html+='<td style="background-color:yellow">'+grades[i].item+'</td>';
+                                    }else{
+                                        html+='<td>'+grades[i].item+'</td>';
+                                    }
+
+                                   html+= '<td><input type="number" min="1" max="10" data-flag1="'+flag_1+'" data-flag2="'+flag_2+'" data-id="'+grades[i].id+'" onblur="editGrade(this)" class="input-xsmall" value="'+g+'"/></td>'+
+                                    '<td><input type="text" style="width: 100%;height: 100%" data-id="'+grades[i].id+'" onblur="editRemark(this)"  value="'+grades[i].remark+'"/></td>'+
                                     '<td><a target="_blank" href="'+grades[i].sitePhoto+'">' + grades[i].fileName + '</a></td>'+
                                     '<td>';
                                     if(grades[i].fileName==null || grades[i].fileName==''){
@@ -1552,28 +1631,46 @@
     }
 
     function editGrade(obj) {
-        $.ajax({
-            url:"prepurchase/surveyor/reportEditGrade",
-            type:"GET",
-            dataType:"json",
-            data:{
-                grade:$(obj).val(),
-                id:$(obj).attr("data-id")
+        var grade=$(obj).val();
+        if(grade!="e" && grade!="E" && grade<=10 && grade>=1){
+            $.ajax({
+                url:"prepurchase/surveyor/reportEditGrade",
+                type:"GET",
+                dataType:"json",
+                data:{
+                    grade:$(obj).val(),
+                    id:$(obj).attr("data-id")
 
-            },
-            success:function (data) {
-                if(data.mes){
-                    var flag1=$(obj).attr("data-flag1");
-                    var flag2=$(obj).attr("data-flag2");
-                    $("."+flag2).find(".grade2").html(data.totalGrades[0]);
-                    $("."+flag1).find(".grade1").html(data.totalGrades[1]);
-                    $("#totalGrade").html(data.totalGrades[2]);
+                },
+                success:function (data) {
+                    if(data.mes){
+                        var flag1=$(obj).attr("data-flag1");
+                        var flag2=$(obj).attr("data-flag2");
+                        $("."+flag2).find(".grade2").html(data.totalGrades[0]);
+                        $("."+flag1).find(".grade1").html(data.totalGrades[1]);
+                        $("#totalGrade").html(data.totalGrades[2]);
+                    }
+                },
+                error:function () {
+
                 }
-            },
-            error:function () {
-
+            });
+            if(grade<=5){
+                $(obj).parent().prev().css("background-color","yellow");
+            }else {
+                $(obj).parent().prev().css("background-color","white");
             }
-        });
+        }else{
+            $(obj).tips({
+                side: 1,
+                msg: "请输入评分在1~10之间",
+                bg: '#AE81FF',
+                time: 2
+            });
+            $(obj).val("");
+            $(obj).focus();
+        }
+
     }
     function editRemark(obj) {
         $.ajax({

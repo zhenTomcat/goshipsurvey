@@ -22,8 +22,8 @@
     .tab-pane-div{margin-top: 30px;width: 90%}
     .divPhoto{
         float: left;
-        background-color: #9C9C9C;
-        margin-right: 100px;
+        background-color: white;
+        margin-right: 80px;
         margin-bottom: 20px;
     }
     .divImg{
@@ -106,7 +106,14 @@
                                         <div class="col-md-6">
                                             <div style="border: solid black 2px" class="col-md-12">
                                                 <div class="col-md-8" style="margin-top: 20px;margin-bottom: 20px">
-                                                    <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/GWTcR228ek.jpg" style="width: 100%;height: 250px"/>
+                                                        <div style="width: 100%">
+                                                            <c:if test="${report.shipDetail.shipImg!=null && report.shipDetail.shipImg!=''}" var="ss">
+                                                                <img src="${report.shipDetail.shipImg}" style="width: 100%;height: 250px"/>
+                                                            </c:if>
+                                                            <c:if test="${! ss}">
+                                                                <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/zQnJWazGDX.jpg" style="width: 100%;height: 250px"/>
+                                                            </c:if>
+                                                        </div>
                                                 </div>
                                                 <div class="col-md-4" style="margin-top: 20px;margin-bottom: 20px">
                                                     <p style="color: #00a8c6">Ship Name</p>
@@ -201,30 +208,30 @@
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">Maker:</label>
-                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.meMaker}" name="meMaker"/></div>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.meMaker}" name="meMaker"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">Type:</label>
-                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.meType}" name="meType"/></div>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.meType}" name="meType"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">MCR KW:</label>
-                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.meMcrKw}" name="meMcrKw"/></div>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.meMcrKw}" name="meMcrKw"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">MCR RPM:</label>
-                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.meMcrRpm}" name="meMcrRpm"/></div>
-                                                </div>
-                                                <div class="col-md-6 form-group">
-                                                    <label class="col-md-4">Running hours: </label>
-                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.meRunningHours}" name="meRunningHours"/></div>
-                                                </div>
-                                                <div class="col-md-6 form-group">
-                                                    <label class="col-md-3">Critical RPM:</label>
-                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.meCriticalRpm}" name="meCriticalRpm"/></div>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.meMcrRpm}" name="meMcrRpm"/></div>
                                                 </div>
                                                 <div class="col-md-12 form-group">
-                                                    <div class="col-md-12"><input class="form-control" placeholder="Others"  type="text" value="${report.shipDetail.meOthers}" name="meOthers"/></div>
+                                                    <label class="col-md-3">Running hours: </label>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.meRunningHours}" name="meRunningHours"/></div>
+                                                </div>
+                                                <div class="col-md-12 form-group">
+                                                    <label class="col-md-3">Critical RPM:</label>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.meCriticalRpm}" name="meCriticalRpm"/></div>
+                                                </div>
+                                                <div class="col-md-12 form-group">
+                                                    <div class="col-md-12"><input disabled class="form-control" placeholder="Others"  type="text" value="${report.shipDetail.meOthers}" name="meOthers"/></div>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
@@ -235,27 +242,27 @@
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">Maker:</label>
-                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.apMaker}" name="apMaker"/></div>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.apMaker}" name="apMaker"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">Type:</label>
-                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.apType}" name="apType"/></div>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.apType}" name="apType"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">Load:</label>
-                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.apLoad}" name="apLoad"/></div>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.apLoad}" name="apLoad"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">A1 r/h:</label>
-                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.apA1}" name="apA1"/></div>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.apA1}" name="apA1"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">A2 r/h: </label>
-                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.apA2}" name="apA2"/></div>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.apA2}" name="apA2"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">A3 r/h:</label>
-                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.apA3}" name="apA3"/></div>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.apA3}" name="apA3"/></div>
                                                 </div>
                                                 <div class="col-md-12 form-group">
                                                     <div class="col-md-12"><input disabled class="form-control" placeholder="Others"  type="text" value="${report.shipDetail.apOthers}" name="apOthers"/></div>
@@ -269,19 +276,19 @@
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">Maker:</label>
-                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.boMaker}" name="boMaker"/></div>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.boMaker}" name="boMaker"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">Type:</label>
-                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.boType}" name="boType"/></div>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.boType}" name="boType"/></div>
                                                 </div>
-                                                <div class="col-md-5 form-group">
-                                                    <label class="col-md-7">Evaporation:</label>
-                                                    <div class="col-md-5"><input disabled class="input-xsmall" type="text" value="${report.shipDetail.boEvaporation}" name="boEvaporation"/></div>
+                                                <div class="col-md-12 form-group">
+                                                    <label class="col-md-3">Evaporation:</label>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.boEvaporation}" name="boEvaporation"/></div>
                                                 </div>
-                                                <div class="col-md-7 form-group">
-                                                    <label class="col-md-4">Heating area:</label>
-                                                    <div class="col-md-4"><input disabled class="input-small" type="text" value="${report.shipDetail.boHeatingArea}" name="boHeatingArea"/></div>
+                                                <div class="col-md-12 form-group">
+                                                    <label class="col-md-3">Heating area:</label>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.boHeatingArea}" name="boHeatingArea"/></div>
                                                 </div>
                                                 <div class="col-md-12 form-group">
                                                     <div class="col-md-12"><input disabled class="form-control" placeholder="Others"  type="text" value="${report.shipDetail.boOthers}" name="boOthers"/></div>
@@ -381,10 +388,10 @@
                                 </div>
                             </div>
                             <div class="tab-pane tab-left" id="tab4">
-                                <div class="tab-pane-div">
+                                <div class="tab-pane-div col-md-12" style="background-color: #cccccc">
                                     <div class="col-md-12">
-                                        <div class="col-md-3" style="margin-bottom: 20px;">
-                                            <button  type="button" >Download</button>&nbsp;&nbsp;
+                                        <div class="col-md-3" style="margin-bottom: 20px;margin-top: 10px">
+                                            <button type="button" class="btn blue"><li class="fa fa-cloud-download"/>Download</button>&nbsp;&nbsp;
                                         </div>
                                     </div>
                                     <c:forEach items="${report.galleries}" var="g">
@@ -711,9 +718,9 @@
                                                             <table class="table table-striped table-bordered table-hover" >
                                                                 <thead>
                                                                 <tr>
-                                                                    <th> ${t.title1} </th>
-                                                                    <th> ${t.title2} </th>
-                                                                    <c:if test="${t.title3!=''|| t.title3!=null}">
+                                                                    <th style="width: 50%"> ${t.title1} </th>
+                                                                    <th > ${t.title2} </th>
+                                                                    <c:if test="${t.title3!=''&& t.title3!=null}">
                                                                         <th> ${t.title3} </th>
                                                                     </c:if>
                                                                 </tr>
@@ -721,11 +728,23 @@
                                                                 <tbody>
                                                                 <c:forEach items="${t.technicalAppendixInfo}" var="ta">
                                                                     <tr>
-                                                                        <td>${ta.one}</td>
-                                                                        <td>${ta.two}</td>
-                                                                        <c:if test="${t.title3!=''|| t.title3!=null}">
+                                                                        <td
+                                                                                <c:if test="${t.flag==1}">
+                                                                                    style="background-color: #dbe5f1"
+                                                                                </c:if>
+                                                                                >${ta.one}</td>
+                                                                        <td>
+                                                                            <c:if test="${t.flag==0}">
+                                                                                ${ta.two}
+                                                                            </c:if>
+                                                                            <c:if test="${t.flag==1}">
+                                                                                <div style="white-space: pre-wrap;word-wrap: break-word; ">${ta.two}</div>
+                                                                            </c:if>
+                                                                        </td>
+                                                                        <c:if test="${t.title3!=''&& t.title3!=null}">
                                                                             <td>${ta.three}</td>
                                                                         </c:if>
+
                                                                     </tr>
                                                                 </c:forEach>
                                                                 </tbody>
@@ -751,9 +770,9 @@
                                                                         <table class="table table-striped table-bordered table-hover" >
                                                                             <thead>
                                                                             <tr>
-                                                                                <th> ${te.title1} </th>
-                                                                                <th> ${te.title2} </th>
-                                                                                <th> ${te.title3} </th>
+                                                                                <th style="width: 30%"> ${te.title1} </th>
+                                                                                <th style="width: 40%"> ${te.title2} </th>
+                                                                                <th style="width: 30%"> ${te.title3} </th>
                                                                             </tr>
                                                                             </thead>
                                                                             <tbody>
@@ -795,7 +814,7 @@
                                                 <c:if test="${d.attachmentName!=''&& d.attachmentName!=null}">
                                                     <tr>
                                                         <td>${i.count}</td>
-                                                        <td><a href="${d.attachmentUrl}">${d.title}</a></td>
+                                                        <td><a target="_blank" href="${d.attachmentUrl}">${d.title}</a></td>
                                                         <td><a href="${d.attachmentUrl}" download="下载"><li class="fa fa-download"></li></a></td>
                                                     </tr>
                                                 </c:if>
@@ -895,25 +914,11 @@
     </div>
 </div>
 <a href="#machine" id="viewMachine"   data-toggle="modal"  class="btn btn-sm margin-bottom-5 green" style="display: none"></a>
-<script>
-    var width = $(window).width();
-    $(".tab-left").css("margin-left",width*0.1);
-
-
-
-   //鼠标移入事件
-    function mouseOver(obj){
-        $(obj).find("span").show();
-        $(obj).mouseout(function () {
-            $(obj).find("span").hide();
-        });
-    }
-
-
-</script>
 <script type="text/javascript">
 
     $(document).ready(function(){
+        var width = $(window).width();
+        $(".tab-left").css("margin-left",width*0.1);
 
         $(".suspend").mouseover(function() {
             $(this).stop();
@@ -926,6 +931,17 @@
         });
 
     });
+    //鼠标移入事件
+    function mouseOver(obj){
+        $(obj).find("span").show();
+        $(obj).mouseout(function () {
+            if(!$(obj).find("input").prop("checked")){
+                $(obj).find("span").hide();
+            }else {
+                $(obj).find("span").show();
+            }
+        });
+    }
 
     //触发船体状态评估
     function viewHull(obj) {

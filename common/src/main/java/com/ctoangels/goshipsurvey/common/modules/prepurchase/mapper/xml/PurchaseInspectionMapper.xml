@@ -7,12 +7,12 @@
 		id, purchase_quo_id AS purchaseQuoId, ship_id AS shipId, company_id AS companyId, survey_id AS surveyId, op_id AS opId, loi, passport, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag, remark, inspection_report_id AS inspectionReportId, total_grade AS totalGrade, user_id AS userId, submit_status AS submitStatus, loi_url AS loiUrl, passport_url AS passportUrl, report_url AS reportUrl
 	</sql>
     <select id="selectByInspection" resultMap="Inspection">
-			select * from t_purchase_inspection p join t_ship_detail s on p.ship_id=s.id where p.company_id=#{0} limit #{1},#{2}
+			select * from t_purchase_inspection p join t_ship_detail s on p.ship_id=s.id where p.company_id=#{0} order by p.submit_status asc , p.create_date desc limit #{1},#{2}
 
 	</select>
 
     <select id="selectByOpInspection" resultMap="Inspection">
-		select * from t_purchase_inspection p join t_ship_detail s on p.ship_id=s.id where p.op_id=#{0} limit #{1},#{2}
+		select * from t_purchase_inspection p join t_ship_detail s on p.ship_id=s.id where  p.op_id=#{0} limit #{1},#{2}
 	</select>
 	<select id="selectByReportId"
 			resultType="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.PurchaseInspection">

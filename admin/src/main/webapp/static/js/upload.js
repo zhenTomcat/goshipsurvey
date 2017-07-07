@@ -436,8 +436,8 @@ function initUploaders_attachment(buttonId, bucket, domain) {
         url: 'http://oss.aliyuncs.com',
         filters: {
             mime_types: [ //上传pdf,txt和zip,rar文件
-                {title: "Zip files", extensions: "zip,rar"},
-                {title: "Text files", extensions: "txt,pdf"}
+                {title: "Image files", extensions: "jpg,gif,png,bmp,jpeg"},
+                {title: "Text files", extensions: "pdf"}
             ],
             max_file_size: '100mb', //最大只能上传10mb的文件
             prevent_duplicates: true //不允许选取重复文件
@@ -450,22 +450,17 @@ function initUploaders_attachment(buttonId, bucket, domain) {
                 set_upload_param(up, file.name, true, domain);
             },
             FileUploaded: function () {
-                var count = $("#" + buttonId).attr("data-count");
-                var reportId = $("#" + buttonId).attr("data-reportId");
-                var documentId = $("#" + buttonId).attr("data-documentId");
-                var button_id = $("#" + buttonId).attr("data-buttonId");
-                console.log(count);
-                console.log(reportId);
-                console.log(documentId);
-                console.log(button_id);
+                var count=$("#"+buttonId).attr("data-count");
+                var reportId=$("#"+buttonId).attr("data-reportId");
+                var documentId=$("#"+buttonId).attr("data-documentId");
                 var html = '<a target="_blank" href="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '">' + nativeName + '</a>' +
                     '<input type="hidden" name="documents[' + count + '].id" value="' + documentId + '">' +
                     '<input type="hidden" name="documents[' + count + '].inspectionReportId" value="' + reportId + '">' +
                     '<input name="documents[' + count + '].attachmentUrl" type="hidden" value="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '" >' +
                     '<input name="documents[' + count + '].attachmentName" type="hidden" value="' + nativeName + '"/>';
-                $("#" + button_id).parent().prev().html(html);
+                $("#"+buttonId).parent().prev().html(html);
                 var html1 = '<button class="btn red" onclick="clearTd(this,' + count + ',' + reportId + ',' + documentId + ')" type="button" >Delete</button>';
-                $("#" + button_id).parent().html(html1);
+                $("#"+buttonId).parent().html(html1);
             }
         }
     });
@@ -510,7 +505,7 @@ function initUploaders_purchase_op_agency_loi(buttonId, bucket, domain) {
     uploader.init();
 }
 
-function initUploaders_img(buttonId, bucket, domain, divId, galleriesId) {
+function initUploaders_img(buttonId, bucket, domain, divId) {
     var uploader = new plupload.Uploader({
         runtimes: 'html5,flash,silverlight,html4',
         browse_button: buttonId,
@@ -520,7 +515,6 @@ function initUploaders_img(buttonId, bucket, domain, divId, galleriesId) {
         filters: {
             mime_types: [ //只允许上传图片和zip,rar文件
                 {title: "Image files", extensions: "jpg,gif,png,bmp,jpeg"},
-                {title: "Zip files", extensions: "zip,rar"}
             ],
             max_file_size: '10mb', //最大只能上传10mb的文件
             prevent_duplicates: false //不允许选取重复文件
@@ -535,6 +529,7 @@ function initUploaders_img(buttonId, bucket, domain, divId, galleriesId) {
             FileUploaded: function () {
                 var imgName1 = g_object_name;
                 var imgName2 = nativeName;
+                var galleriesId=$("#"+buttonId).attr("data-galleriesId")
                 $.ajax({
                     url: "prepurchase/surveyor/addImg",
                     type: "GET",
@@ -551,8 +546,8 @@ function initUploaders_img(buttonId, bucket, domain, divId, galleriesId) {
                                 '<div class="div-img" onmouseover="mouseOverImg(this)">' +//文件原名称
                                 '<div><span  onclick="javascript:;" class="span-left">' +
                                 '<input class="icheck" data-imgId="" style=" margin-left: 3px; margin-top: 5px;" type="checkbox"/></span> ' +
-                                ' <span onclick="javascript:removeImg(this);" class="span-right"> <li class="fa fa-remove span-li"></li> </span>' +
-                                ' <img src="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + imgName1 + '" style="width: 150px;height: 150px;"/></div>' +
+                                ' <span onclick="javascript:removeImg(this);" class="span-right"> <li class="fa fa-trash-o span-li"></li> </span>' +
+                                ' <a href="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + imgName1 + '"> <img src="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + imgName1 + '" style="width: 150px;height: 150px;"/></a></div>' +
                                 '<div style="width: 150px"><input name="fileUrl" type="hidden" value="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + imgName1 + '" >' +
                                 ' <p >' + imgName2 + '</p></div></div></div>');
 
@@ -611,8 +606,8 @@ function initUploaders_surveyor_loi(buttonId, bucket, domain, obj) {
         url: 'http://oss.aliyuncs.com',
         filters: {
             mime_types: [ //上传pdf,txt和zip,rar文件
-                {title: "Zip files", extensions: "zip,rar"},
-                {title: "Text files", extensions: "txt,pdf"}
+                {title: "Image files", extensions: "jpg,gif,png,bmp,jpeg"},
+                {title: "Text files", extensions: "doc,docx,pdf"}
             ],
             max_file_size: '100mb', //最大只能上传100mb的文件
             prevent_duplicates: true //不允许选取重复文件
@@ -644,8 +639,8 @@ function initUploaders_surveyor_passport(buttonId, bucket, domain, obj) {
         url: 'http://oss.aliyuncs.com',
         filters: {
             mime_types: [ //上传pdf,txt和zip,rar文件
-                {title: "Zip files", extensions: "zip,rar"},
-                {title: "Text files", extensions: "txt,pdf"}
+                {title: "Image files", extensions: "jpg,gif,png,bmp,jpeg"},
+                {title: "Text files", extensions: "doc,docx,pdf"}
             ],
             max_file_size: '100mb', //最大只能上传100mb的文件
             prevent_duplicates: true //不允许选取重复文件
@@ -717,6 +712,41 @@ function initUploaders_report_grade(buttonId, bucket, domain, gradeId) {
 
                     }
                 });
+            }
+        }
+    });
+    uploader.init();
+}
+
+function initUploaders_ship_img(buttonId, bucket, domain) {
+    var uploader = new plupload.Uploader({
+        runtimes: 'html5,flash,silverlight,html4',
+        browse_button: buttonId,
+        flash_swf_url: domain + 'assets/plugins/plupload-2.1.2/js/Moxie.swf',
+        silverlight_xap_url: domain + 'assets/plugins/plupload-2.1.2/js/Moxie.xap',
+        url: 'http://oss.aliyuncs.com',
+        filters: {
+            mime_types: [ //只允许上传图片和zip,rar文件
+                {title: "Image files", extensions: "jpg,gif,png,bmp,jpeg"}
+            ],
+            max_file_size: '10mb', //最大只能上传10mb的文件
+            prevent_duplicates: false //不允许选取重复文件
+        },
+        init: {
+            FilesAdded: function (up) {
+                set_upload_param(up, '', false, domain);
+            },
+            BeforeUpload: function (up, file) {
+                set_upload_param(up, file.name, true, domain);
+            },
+            FileUploaded: function () {
+
+                var html='<div onmouseover="mouseOverShipImg(this)">'+
+                        '<button onclick="javascript:removeShipImg(this);" style="width:30px;display:none;background: rgb(0, 0, 0);color:white;position:absolute;top:0px;right:15px;z-index: 999;">'+
+                        '<li class="li-right fa fa-trash-o"></li></button>'+
+                        '<img src="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '" style="width: 100%;height: 250px"/> '+
+                        '<input value="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '" name="shipImg" type="hidden"></div>';
+                $("#"+buttonId).parent().html(html);
             }
         }
     });

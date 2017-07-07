@@ -94,16 +94,22 @@ public class DocumentServiceImpl extends SuperServiceImpl<DocumentMapper, Docume
 
     @Override
     public Boolean insertOrUpdateDocument(List<Document> documents) {
+        Integer reportId=null;
         for (Document d:documents){
             if(d.getId()==0){
                 d.setId(null);
             }
+            if(reportId==null){
+                reportId=d.getInspectionReportId();
+            }
             documentService.insertOrUpdate(d);
         }
 
-        InspectionReport report = inspectionReportMapper.selectById(documents.get(0).getInspectionReportId());
-        report.setSubmitStatus7(Const.REPORT_SUBMIT);
-        inspectionReportMapper.updateById(report);
+        if(reportId!=null){
+            InspectionReport report = inspectionReportMapper.selectById(reportId);
+            report.setSubmitStatus7(Const.REPORT_SUBMIT);
+            inspectionReportMapper.updateById(report);
+        }
         return true;
     }
 }
