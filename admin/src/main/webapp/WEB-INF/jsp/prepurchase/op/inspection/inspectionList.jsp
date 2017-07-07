@@ -146,7 +146,7 @@
                     "targets": 10,
                     "render": function (data, type, row) {
                         if(row.submitStatus==1){
-                            return '<a class="ajaxify"  data-target="navTab" href="prepurchase/op/reportInfo?reportId='+row.inspectionReportId+'" >View</a> <li class="fa fa-link"></li>';
+                            return '<a class="ajaxify" active-li-href="prepurchase/op/report"  data-target="navTab" href="prepurchase/op/reportInfo?reportId='+row.inspectionReportId+'" >View</a> <li class="fa fa-link"></li>';
                         }
                         return "";
                     }

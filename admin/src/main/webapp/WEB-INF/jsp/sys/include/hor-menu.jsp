@@ -17,7 +17,7 @@
                     <li class="classic-menu-dropdown">
                         <c:choose>
                             <c:when test="${(not empty menu.menuUrl)&&(menu.menuUrl!='#')}">
-                                <a href="${menu.menuUrl}" class="ajaxify nav-link" data-hover="megamenu-dropdown"
+                                <a href="${menu.menuUrl}" active-li-href="${menu.menuUrl}" class="ajaxify nav-link" data-hover="megamenu-dropdown"
                                    data-close-others="true">
                                     <c:if test="${not empty menu.menuIcon }"><i class="${menu.menuIcon}"></i></c:if>
                                         ${menu.menuName}

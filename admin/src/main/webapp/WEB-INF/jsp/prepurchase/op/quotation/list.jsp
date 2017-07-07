@@ -46,7 +46,8 @@
                                     <shiro:hasPermission name="op/quotation/add">
                                         <div class="col-md-4">
                                             <div class="btn-group">
-                                                <a href="prepurchase/op/quotation/add" data-target="navTab"
+                                                <a href="prepurchase/op/quotation/add"
+                                                   active-li-href="prepurchase/op/quotation" data-target="navTab"
                                                    class="ajaxify  btn blue"><i class="fa fa-plus"></i> New quotation
                                                 </a>
                                             </div>
@@ -156,10 +157,10 @@
                             if (row.applicationCount == 0) {
                                 return 'Quotation..';
                             }
-                            return '<a class="ajaxify" href="prepurchase/op/quotation/choose?quotationId=' + row.id + '">Go to choose surveyor</a>';
+                            return '<a class="ajaxify" active-li-href="prepurchase/op/quotation" href="prepurchase/op/quotation/choose?quotationId=' + row.id + '">Go to choose surveyor</a>';
                         }
                         if (status == 2) {
-                            return '<a class="ajaxify" data-target="navTab" href="prepurchase/op/quotation/choose?quotationId=' + row.id + '">Chosen</a>';
+                            return '<a class="ajaxify" active-li-href="prepurchase/op/quotation" data-target="navTab" href="prepurchase/op/quotation/choose?quotationId=' + row.id + '">Chosen</a>';
                         }
                         if (status == 3) {
                             return 'Cancelled';

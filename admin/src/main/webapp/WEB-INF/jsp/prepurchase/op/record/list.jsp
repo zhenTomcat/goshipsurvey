@@ -59,7 +59,8 @@
                                     <shiro:hasPermission name="op/quotation/add">
                                         <div class="col-md-4">
                                             <div class="btn-group">
-                                                <a href="prepurchase/op/quotation/add" data-target="navTab"
+                                                <a href="prepurchase/op/quotation/add"
+                                                   active-li-href="prepurchase/op/quotation" data-target="navTab"
                                                    class="ajaxify  btn blue"><i class="fa fa-plus"></i> New quotation
                                                 </a>
                                             </div>

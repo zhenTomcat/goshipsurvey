@@ -148,10 +148,10 @@
                     "render": function (data, type, row) {
                         var status = row.submitStatus;
                         if (status == 1) {
-                            return '<a class="ajaxify"  data-target="navTab" href="prepurchase/surveyor/reportEdit?inspectionId=' + row.id + '" >View</a> <li class="fa fa-link"></li>';
+                            return '<a class="ajaxify" active-li-href="prepurchase/surveyor/report"   data-target="navTab" href="prepurchase/surveyor/reportEdit?inspectionId=' + row.id + '" >View</a> <li class="fa fa-link"></li>';
                         }
                         if (status == 0) {
-                            return '<a  class="ajaxify"  data-target="navTab" href="prepurchase/surveyor/reportEdit?inspectionId=' + row.id + '" >Edit</a> <li class="fa fa-edit"></li>';
+                            return '<a  class="ajaxify" active-li-href="prepurchase/surveyor/report"   data-target="navTab" href="prepurchase/surveyor/reportEdit?inspectionId=' + row.id + '" >Edit</a> <li class="fa fa-edit"></li>';
                         }
                         return ""
                     }
@@ -196,89 +196,87 @@
         });
     }
     function moreInfo(data, count) {
-        var html = '<tr style="display:none "><td colspan="11">';
+        var html = '<tr style="display:none "><td colspan="11" style="padding: 0">';
         html += ' <div class="col-md-12" style="background-color: rgba(223, 222, 144, 0.58)">';
         html += '<div class="col-md-3" >';
         html += '<div class="col-md-12">';
-        html += '<label class="control-label label-top">Ship Name：</label>';
-        html += '<label style="width: auto;padding-left: 0px;" class="control-label label-top">' + data.shipDetail.shipName + '</label>';
+        html += '<label class="control-label label-top col-md-6 text-right">Ship Name：</label>';
+        html += '<label  class="control-label label-top col-md-6 text-left">' + data.shipDetail.shipName + '</label>';
         html += '</div>';
         html += '<div class="col-md-12">';
-        html += '<label class="control-label">IMO：</label>';
-        html += '<label class="control-label">' + data.shipDetail.imo + '</label>';
+        html += '<label class="control-label col-md-6 text-right">IMO：</label>';
+        html += '<label class="control-label col-md-6 text-left">' + data.shipDetail.imo + '</label>';
         html += '</div>';
         html += '<div class="col-md-12">';
-        html += '<label class="control-label">ShipType：</label>';
-        html += '<label class="control-label">' + data.shipDetail.shipType + '</label>';
+        html += '<label class="control-label col-md-6 text-right">ShipType：</label>';
+        html += '<label class="control-label col-md-6 text-left">' + data.shipDetail.shipType + '</label>';
         html += '</div>';
         html += '<div class="col-md-12">';
-        html += '<label class="control-label">Class：</label>';
-        html += '<label class="control-label">' + data.shipDetail.shipClass + '</label>';
+        html += '<label class="control-label col-md-6 text-right">Class：</label>';
+        html += '<label class="control-label col-md-6 text-left">' + data.shipDetail.shipClass + '</label>';
         html += '</div>';
         html += '<div class="col-md-12">';
-        html += '<label class="control-label">Flag：</label>';
-        html += '<label class="control-label">' + data.shipDetail.flag + '</label>';
+        html += '<label class="control-label col-md-6 text-right">Flag：</label>';
+        html += '<label class="control-label col-md-6 text-left">' + data.shipDetail.flag + '</label>';
         html += '</div>';
         html += '<div class="col-md-12">';
-        html += '<label class="control-label">Build Year：</label>';
-        html += '<label class="control-label">' + data.shipDetail.buildYear + '</label>';
+        html += '<label class="control-label col-md-6 text-right">Build Year：</label>';
+        html += '<label class="control-label col-md-6 text-left">' + data.shipDetail.buildYear + '</label>';
         html += '</div>';
         html += '<div class="col-md-12">';
-        html += '<label class="control-label">Builder：</label>';
-        html += '<label class="control-label">' + data.shipDetail.builder + '</label>';
+        html += '<label class="control-label col-md-6 text-right">Builder：</label>';
+        html += '<label class="control-label col-md-6 text-left">' + data.shipDetail.builder + '</label>';
         html += '</div>';
         html += '</div>';
         html += '<div class="col-md-3">';
         html += '<div class="col-md-12">';
-        html += '<label class="control-label label-top">LOA(m)：</label>';
-        html += '<label style="width: auto;padding-left: 0px;" class="control-label label-top">' + data.shipDetail.loa + '</label>';
+        html += '<label class="control-label label-top text-right col-md-6">LOA(m)：</label>';
+        html += '<label class="control-label label-top col-md-6 text-left">' + data.shipDetail.loa + '</label>';
         html += '</div>';
         html += '<div class="col-md-12">';
-        html += '<label class="control-label">Beam(m)：</label>';
-        html += '<label class="control-label">' + data.shipDetail.beam + '</label>';
+        html += '<label class="control-label text-right col-md-6">Beam(m)：</label>';
+        html += '<label class="control-label text-left col-md-6">' + data.shipDetail.beam + '</label>';
         html += '</div>';
         html += '<div class="col-md-12">';
-        html += '<label class="control-label">Dwt(ton)：</label>';
-        html += '<label class="control-label">' + data.shipDetail.dwt + '</label>';
+        html += '<label class="control-label text-right col-md-6">Dwt(ton)：</label>';
+        html += '<label class="control-label text-left col-md-6">' + data.shipDetail.dwt + '</label>';
         html += '</div>';
         html += '<div class="col-md-12">';
-        html += '<label class="control-label">draft(m)：</label>';
-        html += '<label class="control-label">' + data.shipDetail.draft + '</label>';
+        html += '<label class="control-label text-right col-md-6">draft(m)：</label>';
+        html += '<label class="control-label text-left col-md-6">' + data.shipDetail.draft + '</label>';
         html += '</div>';
         html += '<div class="col-md-12">';
-        html += '<label class="control-label">GT：</label>';
-        html += '<label class="control-label">' + data.shipDetail.ggt + '</label>';
+        html += '<label class="control-label text-right col-md-6">GT：</label>';
+        html += '<label class="control-label text-left col-md-6">' + data.shipDetail.ggt + '</label>';
         html += '</div>';
         html += '<div class="col-md-12">';
-        html += '<label class="control-label">ex.Name：</label>';
-        html += '<label class="control-label">' + data.shipDetail.exName + '</label>';
+        html += '<label class="control-label text-right col-md-6">ex.Name：</label>';
+        html += '<label class="control-label text-left col-md-6">' + data.shipDetail.exName + '</label>';
         html += '</div>';
         html += '<div class="col-md-12">';
-        html += '<label class="control-label">Call Sign：</label>';
-        html += '<label class="control-label">' + data.shipDetail.callSign + '</label>';
+        html += '<label class="control-label text-right col-md-6">Call Sign：</label>';
+        html += '<label class="control-label text-left col-md-6">' + data.shipDetail.callSign + '</label>';
         html += '</div>';
         html += '<div class="col-md-12">';
-        html += '<label class="control-label">LDT(ton)：</label>';
-        html += '<label class="control-label">' + data.shipDetail.ldt + '</label>';
+        html += '<label class="control-label col-md-6 text-right ">LDT(ton)：</label>';
+        html += '<label class="control-label col-md-6 text-left ">' + data.shipDetail.ldt + '</label>';
         html += '</div>';
         html += '</div>';
         html += '<div class="col-md-3">';
-        html += '<div  class="col-md-6">';
-        html += '<label class="control-label">Agency details:</label>';
+        html += '<label class="control-label text-left  col-md-12">Agency details:</label>';
+        html += '<div  class="col-md-12 text-left" style="margin-left: 10px;white-space: pre-wrap;word-wrap: break-word">';
+        html += data.purchaseQuotation.agencyDetail;
         html += '</div>';
-        html += '<div  class="col-md-12" style="margin-left: 10px">';
-        html += '<label class="control-label">' + data.purchaseQuotation.agencyDetail + '</label>';
-        html += '</div>';
-        html += '<div class="col-md-12">';
-        html += '<label class="control-label">LOI：</label>';
-        html += '<label class="control-label">';
+        html += '<label class="control-label text-left  col-md-12">LOI：</label>';
+
         if (data.purchaseQuotation.loiUrl != null && data.purchaseQuotation.loiUrl != "") {
+            html += '<label class="control-label">';
             html += '<a download="download" class="btn btn-circle purple-sharp" href="' + data.purchaseQuotation.loiUrl + '">';
             html += '<li class="fa fa-download"></li>Download</a>';
+            html += '</label>';
         }
 
-        html += '</label>';
-        html += '</div>';
+
         html += '</div>';
         html += '<div class="col-md-3">';
 
@@ -286,38 +284,38 @@
         html += '<label class="control-label">Our price & surveyour:</label>';
         html += '</div>';
         html += '<div class="col-md-12">';
-        html += '<label class="control-label">Price：</label>';
-        html += '<label class="control-label">' + data.purchaseQuotation.totalPrice + '</label>';
+        html += '<label class="control-label col-md-6 text-right">Price：</label>';
+        html += '<label class="control-label col-md-6 text-left">$' + data.purchaseQuotation.totalPrice + '</label>';
         html += '</div>';
         html += '<div class="col-md-12">';
-        html += '<label class="control-label">Surveyor：</label>';
-        html += '<label class="control-label">' + data.surveyor.firstName + '' + data.surveyor.lastName + '</label>';
+        html += '<label class="control-label col-md-6 text-right">Surveyor：</label>';
+        html += '<label class="control-label col-md-6 text-left">' + data.surveyor.firstName + '' + data.surveyor.lastName + '</label>';
         html += '</div>';
         html += '<div class="col-md-12">';
-        html += '<label class="control-label">Surveyor CV：</label>';
-        html += '<label class="control-label"><a data-model="dialog" href="surveyor/info?id=' + data.surveyor.id + '">View</a></label>';
+        html += '<label class="control-label col-md-6 text-right">Surveyor CV：</label>';
+        html += '<label class="control-label col-md-6 text-left"><a data-model="dialog" href="surveyor/info?id=' + data.surveyor.id + '">View</a></label>';
         html += '</div>';
         html += '<form method="post" action="prepurchase/surveyor/saveLoiPassport" >';
         html += '<input type="hidden" value="' + data.id + '" name="id"/>';
         html += '<div class="col-md-12">';
-        html += '<label class="control-label">Passport：</label>';
-        html += '<label class="control-label passport"><a  href="' + data.passportUrl + '" target="_blank">' + data.passport + '</a></label>';
-        html += '<label class="control-label">';
+        html += '<label class="control-label col-md-6 text-right">Passport：</label>';
+        html += '<label class="control-label passport col-md-5 text-left"><a  href="' + data.passportUrl + '" target="_blank">' + data.passport + '</a>&nbsp;</label>';
+        html += '<label class="control-label col-md-1" style="padding: 0">';
         if (data.loi == null || data.loi == '') {
             html += '<button id="passport_button' + count + '" type="button" class="btn btn-sm blue passport_button">';
-            html += '<li class="fa fa-upload"></li>Browse';
+            html += '<li class="fa fa-upload"></li>';
             html += '</button>';
         }
 
         html += '</label>';
         html += '</div>';
         html += '<div class="col-md-12">';
-        html += '<label class="control-label">LOI：</label>';
-        html += '<label class="control-label loi"><a target="_blank" href="' + data.loiUrl + '">' + data.loi + '</a></label>';
-        html += '<label class="control-label">';
+        html += '<label class="control-label col-md-6 text-right">LOI：</label>';
+        html += '<label class="control-label loi col-md-5 text-left"><a target="_blank" href="' + data.loiUrl + '">' + data.loi + '</a>&nbsp;</label>';
+        html += '<label class="control-label col-md-1" style="padding: 0">';
         if (data.loi == null || data.loi == '') {
             html += '<button id="loi' + count + '"  type="button" class="btn btn-sm blue loi_button">';
-            html += '<li class="fa fa-upload"></li>Browse';
+            html += '<li class="fa fa-upload"></li>';
             html += '</button>';
         }
         html += '</label>';
@@ -362,7 +360,7 @@
         if (check(obj)) {
             $(obj).closest('form').ajaxSubmit({
                 success: function (data) {
-                    alert("提交成功");
+                    swal({type: "info", title: "提交成功"});
                     $(obj).parent().parent().parent().prev().find("button").parent().html("");
                     $(obj).parent().parent().parent().prev().prev().find("button").parent().html("");
                     $(obj).parent().html("");
@@ -379,7 +377,7 @@
         var loi = $(obj).parent().parent().parent().prev().find(".loi").find("a").html();
         var passport = $(obj).parent().parent().parent().prev().prev().find(".passport").find("a").html();
         if (loi == '' || passport == '') {
-            alert("请将信息上传完整");
+            swal({type: "warning", title: "请将信息上传完整"});
             return false;
         }
         return true;

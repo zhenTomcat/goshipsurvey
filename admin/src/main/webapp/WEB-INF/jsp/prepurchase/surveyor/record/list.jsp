@@ -208,7 +208,7 @@
                 {
                     "data": "inspectionReportId",
                     "render": function (data) {
-                        return '<a class="ajaxify"  data-target="navTab" href="prepurchase/op/reportInfo?reportId=' + data + '" >View</a> <li class="fa fa-link"></li>'
+                        return '<a class="ajaxify" active-li-href="prepurchase/surveyor/report"  data-target="navTab" href="prepurchase/op/reportInfo?reportId=' + data + '" >View</a> <li class="fa fa-link"></li>'
 
                     }
                 },
