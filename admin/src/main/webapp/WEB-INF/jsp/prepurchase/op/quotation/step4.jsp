@@ -58,11 +58,17 @@
                                     <div style="margin: 10px 0px 0 50px;">
                                         Notice:
                                         <hr style="margin: 10px 0;">
-                                        请核对所有信息正确无误,我们会立刻将您填写的信息(除代理信息和LOI外)
-                                        推送给相关验船师及验船公司,请密切注意平台信息变化.同时一旦有公司接
-                                        单,平台会在第一时间发邮件提醒贵公司,请贵公司及时操作,选择您需要的验船师.
+                                        Please kindly check all the details provided by your good company, we shall
+                                        immediately send all the information (except the local agent details as well as
+                                        the LOI) to the relevant surveyors and/or the survey companies. Please closely
+                                        monitor the the status of your order on the platform. Once the order is
+                                        accepted, the platform is to send you the email in the first place to remind you
+                                        to follow up with the selection of the surveyor.
                                         <hr style="margin: 10px 0;">
-                                        如果您没有时间选择,也可以让本平台按照如下原则代为选择(平台将在验船开始前7天自动选择)
+                                        If you simply have no time to make such selection, the platform is then to make
+                                        the selection on your behalf in accordance with the following listed criteria
+                                        (the selection is automatically made by the platform 7 days prior to the
+                                        inspection)
                                         <div class="md-radio-inline">
                                             <div class="md-radio">
                                                 <input id="radio1" type="radio" name="radio" class="md-radiobtn">
@@ -70,7 +76,7 @@
                                                     <span class="inc"></span>
                                                     <span class="check"></span>
                                                     <span class="box"></span>
-                                                    价格低优先
+                                                    Low price preferred
                                                 </label>
                                             </div>
                                             <div class="md-radio">
@@ -79,7 +85,7 @@
                                                     <span class="inc"></span>
                                                     <span class="check"></span>
                                                     <span class="box"></span>
-                                                    评价高优先
+                                                    High rating preferred
                                                 </label>
                                             </div>
                                         </div>
@@ -87,7 +93,7 @@
                                 </div>
                                 <div class="col-md-6" style="padding:50px 0 0 100px;">
                                     <div style="margin: auto">
-                                        如果已核对完毕,请点这里发布到网上
+                                        Please click here to upload once you finish off checking.
                                         <button type="button" onclick="public_to_net(this)" class="btn blue"
                                                 data-target="navTab"
                                                 id="publicBtn"
@@ -127,7 +133,7 @@
                     btn.prop("disabled", false);
                 }
             })
-        }else{
+        } else {
             btn.attr("disabled", false);
         }
     }

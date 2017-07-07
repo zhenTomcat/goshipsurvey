@@ -33,18 +33,20 @@
     }
 
     #ship-list li {
-        width: 298px;
-        padding: 2px 5px;
+        width: 400px;
+        padding: 1px 7px;
     }
 
-    #port-list ul {
-        width: 160px;
-        padding: 2px 5px;
+    #port-list li {
+        width: 250px;
+        padding: 1px 7px;
     }
 
     #ship-list li:hover, #port-list li:hover {
         background-color: #32c5d2;
         cursor: pointer;
+        padding: 5px 11px;
+        font-size: 20px;
     }
 
     .required-label:after {
@@ -152,7 +154,7 @@
                         <label class="control-label col-sm-4">Current quantity of bunkers from ship <i
                                 class="fa fa-info-circle" title="<%=info%>"></i></label>
                         <div class="col-sm-8">
-                                <textarea name="currentQuantity" wrap="hard"
+                                <textarea name="currentQuantity"
                                           style="height:100px;resize: none;width: 94%;margin-left: 2%"
                                           class="form-control "></textarea>
                             <div class="col-sm-12" style="margin-top: 5px">
@@ -183,7 +185,7 @@
                     <div class="form-group col-md-6">
                         <label class="col-sm-4 control-label">Bonus plan</label>
                         <div class="form-group col-sm-8">
-                                        <textarea class="form-control" wrap="hard"
+                                        <textarea class="form-control"
                                                   name="bonusPlan"
                                                   style="height:100px;resize: none;width: 94%;margin-left: 2%"></textarea>
                         </div>
@@ -254,7 +256,7 @@
                                 <label class="col-sm-3 control-label">Ship particulars <i
                                         class="fa fa-info-circle" title="<%=info%>"></i></label>
                                 <div class="form-group col-md-9">
-                                        <textarea class="form-control ship-particulars-textarea" wrap="hard"
+                                        <textarea class="form-control ship-particulars-textarea"
                                                   name="shipParticulars"
                                                   style="height:100px;resize: none;width: 94%;margin-left: 2%"></textarea>
                                     <br/>
@@ -285,7 +287,7 @@
                             <label class="col-md-12 control-label"
                                    style="margin-bottom: 15px;text-align: left">Port
                                 agency <i class="fa fa-info-circle" title="<%=info%>"></i></label>
-                            <textarea wrap="hard"
+                            <textarea
                                     class="form-control port-agency-textarea "
                                     name="portAgency"
                                     style="height:230px;resize: none;width: 94%"></textarea>
@@ -447,7 +449,7 @@
                     })
                 }
                 $("#shipList").html(html);
-                $("#ship-list").css("display", "inline-block");
+                $("#ship-list").css("display", "block");
             },
             error: function () {
                 console.log("searchList error");
@@ -497,7 +499,7 @@
                     })
                 }
                 $("#portList").html(html);
-                $("#port-list").css("display", "inline-block");
+                $("#port-list").css("display", "block");
             },
             error: function () {
                 console.log("searchList error");

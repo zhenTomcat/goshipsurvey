@@ -126,8 +126,6 @@ function initUploaders(buttonId, bucket, domain) {
                     '<span onclick="javascript:this.parentNode.remove();" class="glyphicon glyphicon-remove" style="background: rgba(0,0,0,.5);color:white;position:absolute;top:0px;right:5px;z-index: 999;"></span>' +
                     '<img src="http://' + bucket + '.img-cn-shanghai.aliyuncs.com/' + g_object_name + '?x-oss-process=image/resize,m_fill,h_100,w_100" ' +
                     'style="max-height: 100px;margin-right:5px;" onclick="" class="min-img" data-url="' + g_object_name + '" >' + '</div>');
-
-
             }
         }
     });
@@ -483,7 +481,7 @@ function initUploaders_purchase_op_agency_loi(buttonId, bucket, domain) {
 
         filters: {
             mime_types: [
-                {title: "Text files", extensions: "pdf,doc,docx"},
+                {title: "Text files", extensions: "pdf,doc,docx,xls,xlsx"},
                 {title: "Image files", extensions: "jpg,gif,png,bmp,jpeg"},
             ],
             max_file_size: '10mb', //最大只能上传10mb的文件

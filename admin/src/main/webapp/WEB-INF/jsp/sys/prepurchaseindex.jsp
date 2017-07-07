@@ -270,11 +270,11 @@
     function webSocketMessage() {
         console.log("WebSocket:开始")
         var path = "<%=wsPath%>";
-        if (path.indexOf("localhost") >= 0) {
-            path = "localhost:8080/";
-        } else {
-            path = "www.goshipsurvey.com:8889/admin/";
-        }
+//        if (path.indexOf("localhost") >= 0) {
+//            path = "localhost:8080/";
+//        } else {
+//            path = "www.goshipsurvey.com:8889/admin/";
+//        }
         console.log(path);
         var websocket;
         if ('WebSocket' in window) {

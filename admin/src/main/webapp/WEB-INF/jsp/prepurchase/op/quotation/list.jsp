@@ -156,10 +156,10 @@
                             if (row.applicationCount == 0) {
                                 return 'Quotation..';
                             }
-                            return '<a data-target="navTab" href="prepurchase/op/quotation/choose?quotationId=' + row.id + '">Go to choose surveyor</a>';
+                            return '<a class="ajaxify" href="prepurchase/op/quotation/choose?quotationId=' + row.id + '">Go to choose surveyor</a>';
                         }
                         if (status == 2) {
-                            return '<a data-target="navTab" href="prepurchase/op/quotation/choose?quotationId=' + row.id + '">Chosen</a>';
+                            return '<a class="ajaxify" data-target="navTab" href="prepurchase/op/quotation/choose?quotationId=' + row.id + '">Chosen</a>';
                         }
                         if (status == 3) {
                             return 'Cancelled';
@@ -228,7 +228,7 @@
         html += "</div>";
         html += '<div class="col-md-4">';
         html += '<label class="col-md-12 text-left">Agency details:</label>';
-        html += '<div class="col-md-12 text-left" style="padding-left:30px; ">' + data.agencyDetail + '</div>';
+        html += '<div class="col-md-12 text-left" style="padding-left:30px;white-space: pre-wrap;word-wrap: break-word;  ">' + data.agencyDetail + '</div>';
         var agencyUrl = data.agencyUrl;
         if (agencyUrl != null && agencyUrl != "") {
             html += '<a target="_blank" style="float: left;margin-left:10px" href="' + agencyUrl + '" class="btn green">View</a>';
