@@ -61,6 +61,9 @@ public class TechnicalAppendix implements Serializable {
 	@TableField(value = "del_flag")
 	private Integer delFlag;
 
+	/** 指定最后五条记录为textarea */
+	private Integer flag;
+
 	@TableField(exist = false)
 	private List<TechnicalAppendixInfo> technicalAppendixInfo;
 
@@ -159,5 +162,13 @@ public class TechnicalAppendix implements Serializable {
 
 	public void setTitle3(String title3) {
 		this.title3 = title3;
+	}
+
+	public Integer getFlag() {
+		return flag;
+	}
+
+	public void setFlag(Integer flag) {
+		this.flag = flag;
 	}
 }

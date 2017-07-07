@@ -90,7 +90,7 @@
             <div class="col-md-12" style="text-align: center">
                 <br>
                 <div id="detail_alert"></div>
-                <button type="button" class="btn green" onclick="saveInfo(2)">确定</button>
+                <button type="button" class="btn green" data-dismiss="modal">确定</button>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <button id="close" type="button" class="btn default" data-dismiss="modal">关闭</button>
                 <br><br>
@@ -99,6 +99,7 @@
     </div>
 </form>
 <script>
+    initUploaders_img("upload_img", "shipinfo", "${staticPath}/","div-img",$("#galleriesId").val());
     //鼠标移入事件
     function mouseOverImg(obj){
         $(obj).find("span").show();
@@ -169,6 +170,6 @@
         });
     }
 
-    initUploaders_img("upload_img", "shipinfo", "${staticPath}/","div-img",$("#galleriesId").val());
+
 
 </script>

@@ -63,7 +63,7 @@
                     <div class="col-md-12">
                         <div class="portlet box green">
                             <div class="portlet-title" >
-                                <div class="caption"><h3>Report of Star Deltas</h3></div>
+                                <div class="caption"><h3>Report of ${report.shipDetail.shipName}</h3></div>
                                 <div class="tools" style="padding-top: 20px">
                                     <div>
                                         <a data-target="navTab" href="prepurchase/surveyor/report" class="btn blue"><li class="fa fa-bars"></li>Report List</a>
@@ -143,7 +143,18 @@
                                                         <div class="col-md-6">
                                                             <div style="border: solid black 2px" class="col-md-12">
                                                                 <div class="col-md-8" style="margin-top: 20px;margin-bottom: 20px">
-                                                                    <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/GWTcR228ek.jpg" style="width: 100%;height: 250px"/>
+                                                                    <c:if test="${report.shipDetail.shipImg!=null && report.shipDetail.shipImg!=''}" var="rss">
+                                                                        <button  style="width: 100%">
+                                                                            <div>
+                                                                                <img src="${report.shipDetail.shipImg}" style="width: 100%;height: 250px"/>
+                                                                            </div>
+                                                                        </button>
+                                                                    </c:if>
+                                                                    <c:if test="${! rss}">
+                                                                        <button id="upload_ship_img" style="width: 100%">
+                                                                            <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/zQnJWazGDX.jpg" style="width: 100%;height: 250px"/>
+                                                                        </button>
+                                                                    </c:if>
                                                                 </div>
                                                                 <div class="col-md-4" style="margin-top: 20px;margin-bottom: 20px">
                                                                     <p style="color: #00a8c6">Ship Name</p><input type="hidden" value="${report.shipDetail.id}" name="id"/>
@@ -238,27 +249,27 @@
                                                                 </div>
                                                                 <div class="col-md-6 form-group">
                                                                     <label class="col-md-3">Maker:</label>
-                                                                    <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.meMaker}" name="meMaker"/></div>
+                                                                    <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.meMaker}" name="meMaker"/></div>
                                                                 </div>
                                                                 <div class="col-md-6 form-group">
                                                                     <label class="col-md-3">Type:</label>
-                                                                    <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.meType}" name="meType"/></div>
+                                                                    <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.meType}" name="meType"/></div>
                                                                 </div>
                                                                 <div class="col-md-6 form-group">
                                                                     <label class="col-md-3">MCR KW:</label>
-                                                                    <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.meMcrKw}" name="meMcrKw"/></div>
+                                                                    <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.meMcrKw}" name="meMcrKw"/></div>
                                                                 </div>
                                                                 <div class="col-md-6 form-group">
                                                                     <label class="col-md-3">MCR RPM:</label>
-                                                                    <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.meMcrRpm}" name="meMcrRpm"/></div>
+                                                                    <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.meMcrRpm}" name="meMcrRpm"/></div>
                                                                 </div>
-                                                                <div class="col-md-6 form-group">
-                                                                    <label class="col-md-4">Running hours: </label>
-                                                                    <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.meRunningHours}" name="meRunningHours"/></div>
+                                                                <div class="col-md-12 form-group">
+                                                                    <label class="col-md-3">Running hours: </label>
+                                                                    <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.meRunningHours}" name="meRunningHours"/></div>
                                                                 </div>
-                                                                <div class="col-md-6 form-group">
+                                                                <div class="col-md-12 form-group">
                                                                     <label class="col-md-3">Critical RPM:</label>
-                                                                    <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.meCriticalRpm}" name="meCriticalRpm"/></div>
+                                                                    <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.meCriticalRpm}" name="meCriticalRpm"/></div>
                                                                 </div>
                                                                 <div class="col-md-12 form-group">
                                                                     <div class="col-md-12"><input class="form-control" placeholder="Others"  type="text" value="${report.shipDetail.meOthers}" name="meOthers"/></div>
@@ -272,27 +283,27 @@
                                                                 </div>
                                                                 <div class="col-md-6 form-group">
                                                                     <label class="col-md-3">Maker:</label>
-                                                                    <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.apMaker}" name="apMaker"/></div>
+                                                                    <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.apMaker}" name="apMaker"/></div>
                                                                 </div>
                                                                 <div class="col-md-6 form-group">
                                                                     <label class="col-md-3">Type:</label>
-                                                                    <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.apType}" name="apType"/></div>
+                                                                    <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.apType}" name="apType"/></div>
                                                                 </div>
                                                                 <div class="col-md-6 form-group">
                                                                     <label class="col-md-3">Load:</label>
-                                                                    <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.apLoad}" name="apLoad"/></div>
+                                                                    <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.apLoad}" name="apLoad"/></div>
                                                                 </div>
                                                                 <div class="col-md-6 form-group">
                                                                     <label class="col-md-3">A1 r/h:</label>
-                                                                    <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.apA1}" name="apA1"/></div>
+                                                                    <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.apA1}" name="apA1"/></div>
                                                                 </div>
                                                                 <div class="col-md-6 form-group">
                                                                     <label class="col-md-3">A2 r/h: </label>
-                                                                    <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.apA2}" name="apA2"/></div>
+                                                                    <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.apA2}" name="apA2"/></div>
                                                                 </div>
                                                                 <div class="col-md-6 form-group">
                                                                     <label class="col-md-3">A3 r/h:</label>
-                                                                    <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.apA3}" name="apA3"/></div>
+                                                                    <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.apA3}" name="apA3"/></div>
                                                                 </div>
                                                                 <div class="col-md-12 form-group">
                                                                     <div class="col-md-12"><input class="form-control" placeholder="Others"  type="text" value="${report.shipDetail.apOthers}" name="apOthers"/></div>
@@ -306,19 +317,19 @@
                                                                 </div>
                                                                 <div class="col-md-6 form-group">
                                                                     <label class="col-md-3">Maker:</label>
-                                                                    <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.boMaker}" name="boMaker"/></div>
+                                                                    <div class="col-md-5"><input class="form-control" type="text" value="${report.shipDetail.boMaker}" name="boMaker"/></div>
                                                                 </div>
                                                                 <div class="col-md-6 form-group">
                                                                     <label class="col-md-3">Type:</label>
-                                                                    <div class="col-md-5"><input class="input-small" type="text" value="${report.shipDetail.boType}" name="boType"/></div>
+                                                                    <div class="col-md-5"><input class="form-control" type="text" value="${report.shipDetail.boType}" name="boType"/></div>
                                                                 </div>
-                                                                <div class="col-md-5 form-group">
-                                                                    <label class="col-md-7">Evaporation:</label>
-                                                                    <div class="col-md-5"><input class="input-xsmall" type="text" value="${report.shipDetail.boEvaporation}" name="boEvaporation"/></div>
+                                                                <div class="col-md-12 form-group">
+                                                                    <label class="col-md-3">Evaporation:</label>
+                                                                    <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.boEvaporation}" name="boEvaporation"/></div>
                                                                 </div>
-                                                                <div class="col-md-7 form-group">
-                                                                    <label class="col-md-4">Heating area:</label>
-                                                                    <div class="col-md-4"><input class="input-small" type="text" value="${report.shipDetail.boHeatingArea}" name="boHeatingArea"/></div>
+                                                                <div class="col-md-12 form-group">
+                                                                    <label class="col-md-3">Heating area:</label>
+                                                                    <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.boHeatingArea}" name="boHeatingArea"/></div>
                                                                 </div>
                                                                 <div class="col-md-12 form-group">
                                                                     <div class="col-md-12"><input class="form-control" placeholder="Others"  type="text" value="${report.shipDetail.boOthers}" name="boOthers"/></div>
@@ -597,9 +608,9 @@
                                                                             <table class="table table-striped table-bordered table-hover" >
                                                                                 <thead>
                                                                                 <tr>
-                                                                                    <th> ${t.title1} </th>
+                                                                                    <th > ${t.title1} </th>
                                                                                     <th> ${t.title2} </th>
-                                                                                    <c:if test="${t.title3!=''|| t.title3!=null}">
+                                                                                    <c:if test="${t.title3!=''&& t.title3!=null}">
                                                                                         <th> ${t.title3} </th>
                                                                                     </c:if>
                                                                                     <th style="width: 5%"> <button data-num="3" type="button" onclick="addRow(this)">
@@ -613,17 +624,23 @@
                                                                                     <input name="id" type="hidden" value="${t.id}"/>
                                                                                     <c:forEach items="${t.technicalAppendixInfo}" var="ta" varStatus="i">
                                                                                         <tr>
-                                                                                            <td><input class="form-control" type="text" name="technicalAppendixInfo[${i.index}].one" value="${ta.one}"/></td>
-                                                                                            <td><input class="form-control" type="text" name="technicalAppendixInfo[${i.index}].two" value="${ta.two}"/></td>
-                                                                                            <c:if test="${t.title3!=''|| t.title3!=null}">
-                                                                                                <td><input class="form-control" type="text" name="technicalAppendixInfo[${i.index}].three" value="${ta.three}"/></td>
+                                                                                            <td><input class="form-control" type="text" value="${ta.one}"/></td>
+                                                                                            <c:if test="${t.flag==0}">
+                                                                                                <td><input class="form-control" type="text"  value="${ta.two}"/></td>
+                                                                                            </c:if>
+                                                                                            <c:if test="${t.flag==1}">
+                                                                                                <td><textarea class="form-control" rows="2" >${ta.two}</textarea></td>
+                                                                                            </c:if>
+                                                                                            <c:if test="${t.title3!=''&& t.title3!=null}">
+                                                                                                <td><input class="form-control" type="text"  value="${ta.three}"/></td>
                                                                                             </c:if>
 
                                                                                             <td><button class="btn red"
                                                                                                     <c:if test="${t.title3==''|| t.title3==null}">
                                                                                                         data-num="2"
                                                                                                     </c:if>
-                                                                                                    type="button" onclick="deleteRow(this)">Delete</button> </td>
+                                                                                                    type="button" onclick="deleteRow(this)">Delete</button>
+                                                                                            </td>
                                                                                         </tr>
                                                                                     </c:forEach>
 
@@ -649,10 +666,10 @@
                                                                                 <table class="table table-striped table-bordered table-hover" >
                                                                                     <thead>
                                                                                     <tr>
-                                                                                        <th> ${te.title1} </th>
-                                                                                        <th> ${te.title2} </th>
-                                                                                        <th> ${te.title3} </th>
-                                                                                        <th style="width: 5%"> <button data-num="3" type="button" onclick="addRow(this)">
+                                                                                        <th style="width: 30%"> ${te.title1} </th>
+                                                                                        <th style="width: 40%"> ${te.title2} </th>
+                                                                                        <th style="width: 20%"> ${te.title3} </th>
+                                                                                        <th style="width: 10%"> <button data-num="3" type="button" onclick="addRow(this)">
                                                                                             <img class="add_img" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/add.png" />
                                                                                         </button>
                                                                                         </th>

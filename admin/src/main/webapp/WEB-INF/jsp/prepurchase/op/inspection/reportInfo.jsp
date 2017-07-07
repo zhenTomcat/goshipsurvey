@@ -106,7 +106,11 @@
                                         <div class="col-md-6">
                                             <div style="border: solid black 2px" class="col-md-12">
                                                 <div class="col-md-8" style="margin-top: 20px;margin-bottom: 20px">
-                                                    <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/GWTcR228ek.jpg" style="width: 100%;height: 250px"/>
+                                                    <button  style="width: 100%">
+                                                        <div >
+                                                            <img src="${report.shipDetail.shipImg}" style="width: 100%;height: 250px"/>
+                                                        </div>
+                                                    </button>
                                                 </div>
                                                 <div class="col-md-4" style="margin-top: 20px;margin-bottom: 20px">
                                                     <p style="color: #00a8c6">Ship Name</p>
@@ -201,27 +205,27 @@
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">Maker:</label>
-                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.meMaker}" name="meMaker"/></div>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.meMaker}" name="meMaker"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">Type:</label>
-                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.meType}" name="meType"/></div>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.meType}" name="meType"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">MCR KW:</label>
-                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.meMcrKw}" name="meMcrKw"/></div>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.meMcrKw}" name="meMcrKw"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">MCR RPM:</label>
-                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.meMcrRpm}" name="meMcrRpm"/></div>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.meMcrRpm}" name="meMcrRpm"/></div>
                                                 </div>
-                                                <div class="col-md-6 form-group">
+                                                <div class="col-md-12 form-group">
                                                     <label class="col-md-4">Running hours: </label>
-                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.meRunningHours}" name="meRunningHours"/></div>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.meRunningHours}" name="meRunningHours"/></div>
                                                 </div>
-                                                <div class="col-md-6 form-group">
+                                                <div class="col-md-12 form-group">
                                                     <label class="col-md-3">Critical RPM:</label>
-                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.meCriticalRpm}" name="meCriticalRpm"/></div>
+                                                    <div class="col-md-9"><input disabled class="input-small" type="text" value="${report.shipDetail.meCriticalRpm}" name="meCriticalRpm"/></div>
                                                 </div>
                                                 <div class="col-md-12 form-group">
                                                     <div class="col-md-12"><input class="form-control" placeholder="Others"  type="text" value="${report.shipDetail.meOthers}" name="meOthers"/></div>
@@ -235,27 +239,27 @@
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">Maker:</label>
-                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.apMaker}" name="apMaker"/></div>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.apMaker}" name="apMaker"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">Type:</label>
-                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.apType}" name="apType"/></div>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.apType}" name="apType"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">Load:</label>
-                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.apLoad}" name="apLoad"/></div>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.apLoad}" name="apLoad"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">A1 r/h:</label>
-                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.apA1}" name="apA1"/></div>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.apA1}" name="apA1"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">A2 r/h: </label>
-                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.apA2}" name="apA2"/></div>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.apA2}" name="apA2"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">A3 r/h:</label>
-                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.apA3}" name="apA3"/></div>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.apA3}" name="apA3"/></div>
                                                 </div>
                                                 <div class="col-md-12 form-group">
                                                     <div class="col-md-12"><input disabled class="form-control" placeholder="Others"  type="text" value="${report.shipDetail.apOthers}" name="apOthers"/></div>
@@ -269,19 +273,19 @@
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">Maker:</label>
-                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.boMaker}" name="boMaker"/></div>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.boMaker}" name="boMaker"/></div>
                                                 </div>
                                                 <div class="col-md-6 form-group">
                                                     <label class="col-md-3">Type:</label>
-                                                    <div class="col-md-5"><input disabled class="input-small" type="text" value="${report.shipDetail.boType}" name="boType"/></div>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.boType}" name="boType"/></div>
                                                 </div>
-                                                <div class="col-md-5 form-group">
-                                                    <label class="col-md-7">Evaporation:</label>
-                                                    <div class="col-md-5"><input disabled class="input-xsmall" type="text" value="${report.shipDetail.boEvaporation}" name="boEvaporation"/></div>
+                                                <div class="col-md-12 form-group">
+                                                    <label class="col-md-3">Evaporation:</label>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.boEvaporation}" name="boEvaporation"/></div>
                                                 </div>
-                                                <div class="col-md-7 form-group">
-                                                    <label class="col-md-4">Heating area:</label>
-                                                    <div class="col-md-4"><input disabled class="input-small" type="text" value="${report.shipDetail.boHeatingArea}" name="boHeatingArea"/></div>
+                                                <div class="col-md-12 form-group">
+                                                    <label class="col-md-3">Heating area:</label>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.boHeatingArea}" name="boHeatingArea"/></div>
                                                 </div>
                                                 <div class="col-md-12 form-group">
                                                     <div class="col-md-12"><input disabled class="form-control" placeholder="Others"  type="text" value="${report.shipDetail.boOthers}" name="boOthers"/></div>
