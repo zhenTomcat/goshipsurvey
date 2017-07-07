@@ -52,7 +52,7 @@
             <div class="div-photo">
                 <div class="div-img" onmouseover="mouseOverImg(this)">
                     <div >
-                        <span onclick="javascript:removeImg(this,'${m.id}');" class="span-right">
+                        <span onclick="javascript:viewSpan(this);" class="span-right">
                             <input class="icheck" data-imgId="${m.id}" style=" margin-left: 3px; margin-top: 5px;" type="checkbox"/>
                         </span>
                         <a href="${m.fileUrl}" target="_blank"> <img src="${m.fileUrl}" style="width: 150px;height: 150px;"/></a>
@@ -80,7 +80,11 @@
     function mouseOverImg(obj){
         $(obj).find("span").show();
         $(obj).mouseout(function () {
-            $(obj).find("span").hide();
+            if(!$(obj).find("input").prop("checked")){
+                $(obj).find("span").hide();
+            }else {
+                $(obj).find("span").show();
+            }
         });
     }
 
