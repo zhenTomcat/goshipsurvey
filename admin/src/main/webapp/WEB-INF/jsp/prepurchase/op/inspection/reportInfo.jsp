@@ -106,11 +106,14 @@
                                         <div class="col-md-6">
                                             <div style="border: solid black 2px" class="col-md-12">
                                                 <div class="col-md-8" style="margin-top: 20px;margin-bottom: 20px">
-                                                    <button  style="width: 100%">
-                                                        <div >
-                                                            <img src="${report.shipDetail.shipImg}" style="width: 100%;height: 250px"/>
+                                                        <div style="width: 100%">
+                                                            <c:if test="${report.shipDetail.shipImg!=null && report.shipDetail.shipImg!=''}" var="ss">
+                                                                <img src="${report.shipDetail.shipImg}" style="width: 100%;height: 250px"/>
+                                                            </c:if>
+                                                            <c:if test="${! ss}">
+                                                                <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/zQnJWazGDX.jpg" style="width: 100%;height: 250px"/>
+                                                            </c:if>
                                                         </div>
-                                                    </button>
                                                 </div>
                                                 <div class="col-md-4" style="margin-top: 20px;margin-bottom: 20px">
                                                     <p style="color: #00a8c6">Ship Name</p>
@@ -220,15 +223,15 @@
                                                     <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.meMcrRpm}" name="meMcrRpm"/></div>
                                                 </div>
                                                 <div class="col-md-12 form-group">
-                                                    <label class="col-md-4">Running hours: </label>
+                                                    <label class="col-md-3">Running hours: </label>
                                                     <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.meRunningHours}" name="meRunningHours"/></div>
                                                 </div>
                                                 <div class="col-md-12 form-group">
                                                     <label class="col-md-3">Critical RPM:</label>
-                                                    <div class="col-md-9"><input disabled class="input-small" type="text" value="${report.shipDetail.meCriticalRpm}" name="meCriticalRpm"/></div>
+                                                    <div class="col-md-9"><input disabled class="form-control" type="text" value="${report.shipDetail.meCriticalRpm}" name="meCriticalRpm"/></div>
                                                 </div>
                                                 <div class="col-md-12 form-group">
-                                                    <div class="col-md-12"><input class="form-control" placeholder="Others"  type="text" value="${report.shipDetail.meOthers}" name="meOthers"/></div>
+                                                    <div class="col-md-12"><input disabled class="form-control" placeholder="Others"  type="text" value="${report.shipDetail.meOthers}" name="meOthers"/></div>
                                                 </div>
                                             </div>
                                             <div class="col-md-12">
@@ -388,7 +391,7 @@
                                 <div class="tab-pane-div">
                                     <div class="col-md-12">
                                         <div class="col-md-3" style="margin-bottom: 20px;">
-                                            <button  type="button" >Download</button>&nbsp;&nbsp;
+                                            <button type="button" class="btn blue"><li class="fa fa-cloud-download"/>Download</button>&nbsp;&nbsp;
                                         </div>
                                     </div>
                                     <c:forEach items="${report.galleries}" var="g">
@@ -715,9 +718,9 @@
                                                             <table class="table table-striped table-bordered table-hover" >
                                                                 <thead>
                                                                 <tr>
-                                                                    <th> ${t.title1} </th>
-                                                                    <th> ${t.title2} </th>
-                                                                    <c:if test="${t.title3!=''|| t.title3!=null}">
+                                                                    <th style="width: 50%"> ${t.title1} </th>
+                                                                    <th > ${t.title2} </th>
+                                                                    <c:if test="${t.title3!=''&& t.title3!=null}">
                                                                         <th> ${t.title3} </th>
                                                                     </c:if>
                                                                 </tr>
@@ -725,11 +728,23 @@
                                                                 <tbody>
                                                                 <c:forEach items="${t.technicalAppendixInfo}" var="ta">
                                                                     <tr>
-                                                                        <td>${ta.one}</td>
-                                                                        <td>${ta.two}</td>
-                                                                        <c:if test="${t.title3!=''|| t.title3!=null}">
+                                                                        <td
+                                                                                <c:if test="${t.flag==1}">
+                                                                                    style="background-color: #dbe5f1"
+                                                                                </c:if>
+                                                                                >${ta.one}</td>
+                                                                        <td>
+                                                                            <c:if test="${t.flag==0}">
+                                                                                ${ta.two}
+                                                                            </c:if>
+                                                                            <c:if test="${t.flag==1}">
+                                                                                <div style="white-space: pre-wrap;word-wrap: break-word; ">${ta.two}</div>
+                                                                            </c:if>
+                                                                        </td>
+                                                                        <c:if test="${t.title3!=''&& t.title3!=null}">
                                                                             <td>${ta.three}</td>
                                                                         </c:if>
+
                                                                     </tr>
                                                                 </c:forEach>
                                                                 </tbody>
@@ -755,9 +770,9 @@
                                                                         <table class="table table-striped table-bordered table-hover" >
                                                                             <thead>
                                                                             <tr>
-                                                                                <th> ${te.title1} </th>
-                                                                                <th> ${te.title2} </th>
-                                                                                <th> ${te.title3} </th>
+                                                                                <th style="width: 30%"> ${te.title1} </th>
+                                                                                <th style="width: 40%"> ${te.title2} </th>
+                                                                                <th style="width: 30%"> ${te.title3} </th>
                                                                             </tr>
                                                                             </thead>
                                                                             <tbody>
@@ -799,7 +814,7 @@
                                                 <c:if test="${d.attachmentName!=''&& d.attachmentName!=null}">
                                                     <tr>
                                                         <td>${i.count}</td>
-                                                        <td><a href="${d.attachmentUrl}">${d.title}</a></td>
+                                                        <td><a target="_blank" href="${d.attachmentUrl}">${d.title}</a></td>
                                                         <td><a href="${d.attachmentUrl}" download="下载"><li class="fa fa-download"></li></a></td>
                                                     </tr>
                                                 </c:if>

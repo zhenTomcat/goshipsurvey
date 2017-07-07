@@ -61,8 +61,8 @@
     <input id="galleriesId" value="${galleriesId}"type="hidden"/>
     <div class="col-md-12">
         <div class="col-md-3" style="margin-top: 20px;margin-bottom: 20px;">
-            <button id="upload_img" type="button" class="btn blue"><li class="fa fa-upload"/>Upload photo</button>&nbsp;&nbsp;
-            <button  type="button" class="btn red" onclick="deleteImgs()"><li class="fa fa-remove"/>Delect</button>
+            <button id="upload_img" data-galleriesId="${galleriesId}" type="button" class="btn blue"><li class="fa fa-upload"/>Upload photo</button>&nbsp;&nbsp;
+            <button  type="button" class="btn red" onclick="deleteImgs()"><li class="fa fa-trash-o"/>Delect</button>
         </div>
     </div>
     <div id="div-img" class="page col-md-12">
@@ -74,9 +74,9 @@
                         <input class="icheck" data-imgId="${m.id}" style=" margin-left: 3px; margin-top: 5px;" type="checkbox"/>
                     </span>
                         <span  onclick="javascript:removeImg(this,'${m.id}');" class="span-right">
-                        <li class="fa fa-remove span-li"></li>
+                        <li class="fa fa-trash-o span-li"></li>
                     </span>
-                        <img src="${m.fileUrl}" style="width: 150px;height: 150px;"/>
+                        <a target="_blank" href="${m.fileUrl}"> <img src="${m.fileUrl}" style="width: 150px;height: 150px;"/></a>
                     </div>
                     <div style="width: 150px">
                         <p>${m.fileName}</p>
@@ -99,7 +99,10 @@
     </div>
 </form>
 <script>
-    initUploaders_img("upload_img", "shipinfo", "${staticPath}/","div-img",$("#galleriesId").val());
+
+    $(document).ready(function () {
+        initUploaders_img("upload_img", "shipinfo", "${staticPath}/","div-img");
+    });
     //鼠标移入事件
     function mouseOverImg(obj){
         $(obj).find("span").show();
@@ -110,44 +113,67 @@
 
     //移除单张照片
     function removeImg(obj,imgId){
-        if(confirm("确定要删除？")){
-            $.ajax({
-                url:"prepurchase/surveyor/deleteImg",
-                type:"GET",
-                dataType:"json",
-                data:{
-                    imgId:imgId,
-                },
-                success:function (data) {
-                    if(data){
-                        $(obj).closest(".div-photo").remove();
-                        $("#"+"album"+${galleriesId}).html("("+data.number+")");
-                    }
-                },
-                error:function () {
+        swal({
+            title: "确定删除吗?",
+            text: "Your will not be able to recover this imaginary file!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "确认",
+            cancelButtonText: "取消"
+            },
+            function(isConfirm){
+                if (isConfirm) {
+                    $.ajax({
+                        url:"prepurchase/surveyor/deleteImg",
+                        type:"GET",
+                        dataType:"json",
+                        data:{
+                            imgId:imgId,
+                        },
+                        success:function (data) {
+                            if(data){
+                                $(obj).closest(".div-photo").remove();
+                                $("#"+"album"+${galleriesId}).html("("+data.number+")");
+                            }
+                        },
+                        error:function () {
 
+                        }
+                    });
                 }
             });
-        }
     }
 
     //批量删除照片
     function deleteImgs() {
-        var t=confirm("确定要删除吗？");
-        if(t) {
-            var count = 0;
-            $(".icheck").each(function () {
-                if ($(this).prop("checked")) {
-                    count++
-                    removeImgs($(this),$(this).attr("data-imgId"));
+        swal({
+            title: "确定删除吗?",
+            text: "Your will not be able to recover this imaginary file!",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "确认",
+            cancelButtonText: "取消",
+            closeOnConfirm: false
+            },
+            function(isConfirm){
+                if (isConfirm) {
+                    var count = 0;
+                    $(".icheck").each(function () {
+                        if ($(this).prop("checked")) {
+                            count++;
+                            removeImgs($(this),$(this).attr("data-imgId"));
 
+                        }
+                    });
+                    if (count == 0) {
+                        swal("Cancelled", "至少选择一个文件或图片", "error");
+                        return;
+                    }
+                    swal("Deleted!", "删除成功", "success");
                 }
             });
-            if (count == 0) {
-                alert("至少选择一个!");
-                return;
-            }
-        }
     }
     //移除多张照片
     function removeImgs(obj,imgId){

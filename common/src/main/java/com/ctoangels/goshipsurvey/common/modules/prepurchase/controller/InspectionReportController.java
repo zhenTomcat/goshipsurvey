@@ -522,6 +522,7 @@ public class InspectionReportController extends BaseController {
         List<Media> medias = mediaService.selectList(ew);
         modelMap.put("medias", medias);
         modelMap.put("galleriesId", galleriesId);
+        modelMap.put("albumName", galleriesService.selectById(galleriesId).getName());
         return "prepurchase/op/inspection/viewImg";
     }
 

@@ -317,11 +317,11 @@
                                                                 </div>
                                                                 <div class="col-md-6 form-group">
                                                                     <label class="col-md-3">Maker:</label>
-                                                                    <div class="col-md-5"><input class="form-control" type="text" value="${report.shipDetail.boMaker}" name="boMaker"/></div>
+                                                                    <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.boMaker}" name="boMaker"/></div>
                                                                 </div>
                                                                 <div class="col-md-6 form-group">
                                                                     <label class="col-md-3">Type:</label>
-                                                                    <div class="col-md-5"><input class="form-control" type="text" value="${report.shipDetail.boType}" name="boType"/></div>
+                                                                    <div class="col-md-9"><input class="form-control" type="text" value="${report.shipDetail.boType}" name="boType"/></div>
                                                                 </div>
                                                                 <div class="col-md-12 form-group">
                                                                     <label class="col-md-3">Evaporation:</label>
@@ -451,7 +451,7 @@
                                                                             <li class="li-left fa fa-edit"></li>
                                                                         </span>
                                                                         <span  class="span-right">
-                                                                            <li class="li-right fa fa-remove"></li>
+                                                                            <li class="li-right fa fa-trash-o"></li>
                                                                         </span>
                                                                         <a data-model="dialog" href="prepurchase/surveyor/img?galleriesId=${g.id}&reportId=${report.id}"  >
                                                                             <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/GWTcR228ek.jpg"

@@ -155,17 +155,15 @@
                                             <div class="col-md-6">
                                                 <div style="border: solid black 2px" class="col-md-12">
                                                     <div class="col-md-8" style="margin-top: 20px;margin-bottom: 20px">
-
-
                                                         <c:if test="${report.shipDetail.shipImg!=null}" var="rss">
-                                                            <button  style="width: 100%"><div onmouseover="mouseOver(this)">
-                                                                <span onclick="javascript:removeShipImg(this);"
+                                                            <div onmouseover="mouseOverShipImg(this)">
+                                                                <button onclick="javascript:removeShipImg(this);"
                                                                       style="width:30px;display:none;background: rgb(0, 0, 0);color:white;position:absolute;top:0px;right:15px;z-index: 999;">
-                                                                <li class="li-right fa fa-remove"></li></span>
+                                                                <li class="li-right fa fa-trash-o"></li></button>
                                                                     <img src="${report.shipDetail.shipImg}" style="width: 100%;height: 250px"/>
-                                                                </div>
+
                                                                 <input value="${report.shipDetail.shipImg}" name="shipImg" type="hidden">
-                                                            </button>
+                                                            </div>
                                                         </c:if>
 
                                                         <c:if test="${! rss}">
@@ -478,7 +476,7 @@
                                                                 <li class="li-left fa fa-edit"></li>
                                                             </span>
                                                             <span onclick="javascript:removePhoto(this,'${g.id}','${g.name}');" class="span-right">
-                                                                <li class="li-right fa fa-remove"></li>
+                                                                <li class="li-right fa fa-trash-o"></li>
                                                             </span>
                                                             <a data-model="dialog" href="prepurchase/surveyor/img?galleriesId=${g.id}&reportId=${report.id}"  >
                                                                 <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/GWTcR228ek.jpg"
@@ -981,7 +979,7 @@
     function removeShipImg(obj){
         var html='<button id="upload_ship_img" style="width: 100%">'+
                 ' <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/zQnJWazGDX.jpg" style="width: 100%;height: 250px"/> </button>';
-        $(obj).parent().parent().parent().html(html);
+        $(obj).parent().parent().html(html);
         initUploaders_ship_img("upload_ship_img", "shipinfo", "${staticPath}/");
 
     }
@@ -1136,11 +1134,19 @@
                });
    }
 
-   //鼠标移入事件
+   //第四个图片Galleries：鼠标移入事件
     function mouseOver(obj){
         $(obj).find("span").show();
         $(obj).mouseout(function () {
             $(obj).find("span").hide();
+        });
+    }
+
+    //第一个船舶图片：shipDetail
+    function mouseOverShipImg(obj){
+        $(obj).find("button").show();
+        $(obj).mouseout(function () {
+            $(obj).find("button").hide();
         });
     }
 
@@ -1240,7 +1246,7 @@
                     //相册名称
                     var html='<div class="divPhoto"><div class="divImg" onmouseover="mouseOver(this)">'+
                             '<div><span  onclick="javascript:editPhoto(this,'+galleriesId+',\''+albumName+'\');" class="span-left"><li class="li-left fa fa-edit"></li></span>'+
-                            '<span onclick="javascript:removePhoto(this,'+galleriesId+',\''+albumName+'\');" class="span-right"><li class="li-right fa fa-remove"></li> </span>'+
+                            '<span onclick="javascript:removePhoto(this,'+galleriesId+',\''+albumName+'\');" class="span-right"><li class="li-right fa fa-trash-o"></li> </span>'+
                             '<a data-model="dialog" href="prepurchase/surveyor/img?galleriesId='+galleriesId+'&reportId='+reportId+'"  >'+
                             '<img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/GWTcR228ek.jpg" style="width: 200px;height: 200px;"/> </a> </div>'+
                             '<div style="width: 200px"><p style="float: left;margin-right: 10px;">'+albumName+'</p><p style="float: left;margin-right: 10px">(0)</p>'+

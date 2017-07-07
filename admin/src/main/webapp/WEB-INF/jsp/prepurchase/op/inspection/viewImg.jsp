@@ -37,14 +37,14 @@
 </style>
 <div class="modal-header">
     <button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>
-    <h4 class="modal-title" style="color: white">Hull</h4>
+    <h4 class="modal-title" style="color: white">${albumName}</h4>
 </div>
 <div class="col-md-12 line1"></div>
 <form action="" method="post" class="form-horizontal" id="defForm">
     <div class="col-md-12">
-        <div class="col-md-3" style="margin-top: 20px;margin-bottom: 20px;">
-            <button id="upload_img" type="button" >Download</button>&nbsp;&nbsp;
-            <button  type="button" onclick="deleteImgs()">Download all</button>
+        <div class="col-md-12" style="margin-top: 20px;margin-bottom: 20px;">
+            <button id="upload_img" type="button" class="btn blue"><li class="fa fa-cloud-download"/>Download</button>&nbsp;&nbsp;
+            <button  type="button" onclick="deleteImgs()" class="btn green"><li class="fa fa-cloud-download"/>Download all</button>
         </div>
     </div>
     <div id="div-img" class="page col-md-12">
@@ -55,7 +55,7 @@
                         <span onclick="javascript:removeImg(this,'${m.id}');" class="span-right">
                             <input class="icheck" data-imgId="${m.id}" style=" margin-left: 3px; margin-top: 5px;" type="checkbox"/>
                         </span>
-                        <img src="${m.fileUrl}" style="width: 150px;height: 150px;"/>
+                        <a href="${m.fileUrl}" target="_blank"> <img src="${m.fileUrl}" style="width: 150px;height: 150px;"/></a>
                     </div>
                     <div style="width: 150px">
                         <p>${m.fileName}</p>

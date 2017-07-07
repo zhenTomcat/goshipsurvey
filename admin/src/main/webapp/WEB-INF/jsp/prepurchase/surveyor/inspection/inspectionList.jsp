@@ -141,7 +141,13 @@
                 }, {
                     "targets": 9,
                     "render": function (data, type, row) {
-                        return '<a href="javascript:;" onclick="unfold(this)">View</a>&nbsp;<li class="fa fa-sort-desc"/>';
+                        var loi = row.loiUrl;
+                        if(loi==null || loi==""){
+                            return '<li class="fa fa-upload"/><a href="javascript:;"  onclick="unfold(this)">View</a>&nbsp;<li class="fa fa-sort-desc"/>';
+                        }else {
+                            return '<a href="javascript:;" data-loiUrl="'+loi+'" onclick="unfold(this)">View</a>&nbsp;<li class="fa fa-sort-desc"/>';
+                        }
+
                     }
                 }, {
                     "targets": 10,
@@ -164,6 +170,9 @@
                     count++;
                     var row = inspectionTable.row($(this));
                     if (row.data() != null) {
+                        if(row.data().submitStatus==0){
+                            $(this).css("background-color","yellow");
+                        }
                         $(this).after(moreInfo(row.data(), count))
                     }
                 })
@@ -342,28 +351,42 @@
 <script>
 
     //展开
-    function unfold(obj, loi) {
-
+    function unfold(obj) {
+        var loiUrl=$(obj).attr("data-loiUrl");
         $(obj).closest("tr").next().show();
-        $(obj).closest("tr").css("background-color", "yellow");
-        $(obj).parent().html('<a href="javascript:;" onclick="merge(this)">View</a>&nbsp;<li class="fa fa-sort-up"></li>');
+        if(loiUrl==null || loiUrl==""){
+            $(obj).parent().html('<li class="fa fa-upload"/><a href="javascript:;" onclick="merge(this)">View</a>&nbsp;<li class="fa fa-sort-up"></li>');
+        }else {
+            $(obj).parent().html('<a href="javascript:;" data-loiUrl="'+loiUrl+'" onclick="merge(this)">View</a>&nbsp;<li class="fa fa-sort-up"></li>');
+        }
     }
 
     //合并
     function merge(obj) {
+        var loiUrl=$(obj).attr("data-loiUrl");
         $(obj).closest("tr").css("background-color", "white");
         $(obj).parent().parent().next().hide();
-        $(obj).parent().html('<a href="javascript:;" onclick="unfold(this)">View</a>&nbsp;<li class="fa fa-sort-desc"></li>');
+
+        if(loiUrl==null || loiUrl==""){
+            $(obj).parent().html('<li class="fa fa-upload"/><a href="javascript:;" onclick="unfold(this)">View</a>&nbsp;<li class="fa fa-sort-desc"></li>');
+        }else {
+            $(obj).parent().html('<a href="javascript:;" data-loiUrl="'+loiUrl+'" onclick="unfold(this)">View</a>&nbsp;<li class="fa fa-sort-desc"></li>');
+        }
     }
 
     function submitLoiAndPassport(obj) {
         if (check(obj)) {
             $(obj).closest('form').ajaxSubmit({
                 success: function (data) {
-                    swal({type: "info", title: "提交成功"});
+                    swal({type: "success", title: "提交成功"});
+                    $(obj).closest("tr").prev().find("td:last").prev().find("a").attr("data-loiUrl","loiurl");
+                    $(obj).closest("tr").prev().find("td:last").prev().find("a").prev().remove();
+
                     $(obj).parent().parent().parent().prev().find("button").parent().html("");
                     $(obj).parent().parent().parent().prev().prev().find("button").parent().html("");
                     $(obj).parent().html("");
+
+
 
                 },
                 error: function () {
