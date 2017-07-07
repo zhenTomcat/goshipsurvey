@@ -3,7 +3,7 @@
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <style>
-    #ship-list, #port-list {
+    #ship-list {
         display: none;
         position: absolute;
         z-index: 1000;
@@ -12,7 +12,7 @@
         color: black;
     }
 
-    #ship-list ul, #port-list ul {
+    #ship-list ul {
         margin: 0px;
         padding: 0px;
         list-style-type: none;
@@ -20,17 +20,14 @@
 
     #ship-list li {
         width: 298px;
-        padding: 2px 5px;
+        padding: 1px 5px;
     }
 
-    #port-list ul {
-        width: 160px;
-        padding: 2px 5px;
-    }
-
-    #ship-list li:hover, #port-list li:hover {
+    #ship-list li:hover {
+        padding: 3px 11px;
         background-color: #32c5d2;
         cursor: pointer;
+        font-size: 20px;
     }
 </style>
 <div class="tab-pane fade active in" id="step1">

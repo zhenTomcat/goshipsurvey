@@ -220,9 +220,8 @@
         var url;
         if (window.location.hash) {
             url = window.location.hash.substring(1);
-            console.log(url);
             if ($("a[href='" + url + "']").length <= 0) {
-                Layout.loadAjaxContent(url, $(this));
+                Layout.loadAjaxContent(url, $("a[href='" + url + "']"));
                 return;
             }
         } else {
@@ -259,7 +258,6 @@
         }
         websocket.onopen = function (event) {
             console.log("WebSocket:已连接");
-            console.log(event);
         };
         websocket.onmessage = function (event) {
             var data = JSON.parse(event.data);

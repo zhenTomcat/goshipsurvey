@@ -121,15 +121,15 @@
             $("#add_purchase_quotation_form").ajaxSubmit({
                 success: function (data) {
                     if (data.success) {
-                        alert("success");
+                        swal({type: "success", title: "Success!"});
                         $("a[href='prepurchase/op/quotation']").click();
                     } else {
-                        alert("failure");
+                        swal({type: "warning", title: "Error!"});
                         btn.attr("disabled", false);
                     }
                 },
                 error: function () {
-                    alert("error");
+                    swal({type: "warning", title: "Error!"});
                     btn.prop("disabled", false);
                 }
             })

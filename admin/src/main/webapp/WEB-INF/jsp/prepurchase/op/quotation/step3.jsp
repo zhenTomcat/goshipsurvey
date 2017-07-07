@@ -118,8 +118,11 @@
     </div>
 </div>
 <script>
-    initUploaders_purchase_op_agency_loi("agencyBtn", "shipinfo", "${staticPath}/");
-    initUploaders_purchase_op_agency_loi("loiBtn", "shipinfo", "${staticPath}/");
+    $(document).ready(function () {
+        initUploaders_purchase_op_agency_loi("agencyBtn", "shipinfo", "${staticPath}/");
+        initUploaders_purchase_op_agency_loi("loiBtn", "shipinfo", "${staticPath}/");
+    })
+
     function delFileAndInput(obj) {
         var div = $(obj).parent().parent();
         div.find("input").val("");

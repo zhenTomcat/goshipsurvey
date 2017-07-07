@@ -127,6 +127,9 @@
                 },
                 {
                     "data": "application.totalPrice",
+                    "render": function (data) {
+                        return "$" + data;
+                    }
                 },
                 {
                     "data": "application.surveyor",

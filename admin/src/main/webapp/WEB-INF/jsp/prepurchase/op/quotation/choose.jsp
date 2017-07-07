@@ -242,14 +242,13 @@
             data: {quotationId: quotationId, applicationId: applicationId},
             success: function (data) {
                 if (data.success) {
-                    alert(" success");
                     $("#refreshPage").click();
                 } else {
-                    alert(" failure");
+                    swal({type: "warning", title: "failure"});
                 }
             },
             error: function () {
-                alert("error");
+                swal({type: "warning", title: "failure"});
             }
         })
     }
