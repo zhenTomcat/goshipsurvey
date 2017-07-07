@@ -445,7 +445,7 @@
                                                         <c:forEach items="${report.galleries}" var="g">
                                                             <fmt:formatDate value="${g.createDate}" pattern="dd/MM/yyyy" var="createDate"/>
                                                             <div class="divPhoto">
-                                                                <div class="divImg" onmouseover="mouseOver(this)">
+                                                                <div class="divImg">
                                                                     <div >
                                                                         <span   class="span-left">
                                                                             <li class="li-left fa fa-edit"></li>

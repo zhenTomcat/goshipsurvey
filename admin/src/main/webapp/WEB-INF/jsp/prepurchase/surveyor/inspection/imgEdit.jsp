@@ -107,7 +107,14 @@
     function mouseOverImg(obj){
         $(obj).find("span").show();
         $(obj).mouseout(function () {
-            $(obj).find("span").hide();
+            $(obj).find("span").each(function () {
+                if(!$(obj).find("input").prop("checked")){
+                    $(obj).find("span").hide();
+                }else {
+                    $(obj).find("span").show();
+                }
+            });
+
         });
     }
 

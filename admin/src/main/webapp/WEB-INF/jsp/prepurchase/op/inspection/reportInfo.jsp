@@ -22,8 +22,8 @@
     .tab-pane-div{margin-top: 30px;width: 90%}
     .divPhoto{
         float: left;
-        background-color: #9C9C9C;
-        margin-right: 100px;
+        background-color: white;
+        margin-right: 80px;
         margin-bottom: 20px;
     }
     .divImg{
@@ -388,9 +388,9 @@
                                 </div>
                             </div>
                             <div class="tab-pane tab-left" id="tab4">
-                                <div class="tab-pane-div">
+                                <div class="tab-pane-div col-md-12" style="background-color: #cccccc">
                                     <div class="col-md-12">
-                                        <div class="col-md-3" style="margin-bottom: 20px;">
+                                        <div class="col-md-3" style="margin-bottom: 20px;margin-top: 10px">
                                             <button type="button" class="btn blue"><li class="fa fa-cloud-download"/>Download</button>&nbsp;&nbsp;
                                         </div>
                                     </div>
@@ -914,25 +914,11 @@
     </div>
 </div>
 <a href="#machine" id="viewMachine"   data-toggle="modal"  class="btn btn-sm margin-bottom-5 green" style="display: none"></a>
-<script>
-    var width = $(window).width();
-    $(".tab-left").css("margin-left",width*0.1);
-
-
-
-   //鼠标移入事件
-    function mouseOver(obj){
-        $(obj).find("span").show();
-        $(obj).mouseout(function () {
-            $(obj).find("span").hide();
-        });
-    }
-
-
-</script>
 <script type="text/javascript">
 
     $(document).ready(function(){
+        var width = $(window).width();
+        $(".tab-left").css("margin-left",width*0.1);
 
         $(".suspend").mouseover(function() {
             $(this).stop();
@@ -945,6 +931,17 @@
         });
 
     });
+    //鼠标移入事件
+    function mouseOver(obj){
+        $(obj).find("span").show();
+        $(obj).mouseout(function () {
+            if(!$(obj).find("input").prop("checked")){
+                $(obj).find("span").hide();
+            }else {
+                $(obj).find("span").show();
+            }
+        });
+    }
 
     //触发船体状态评估
     function viewHull(obj) {
