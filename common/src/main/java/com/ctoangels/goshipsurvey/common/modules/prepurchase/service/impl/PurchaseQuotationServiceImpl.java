@@ -1,6 +1,7 @@
 package com.ctoangels.goshipsurvey.common.modules.prepurchase.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.QuotationApplication;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.QuotationApplicationMapper;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.ShipDetail;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.ShipDetailMapper;
@@ -86,4 +87,5 @@ public class PurchaseQuotationServiceImpl extends SuperServiceImpl<PurchaseQuota
     public List<PurchaseQuotation> getSurveyorList(Integer surveyorId, Integer start, Integer length) {
         return purchaseQuotationMapper.getSurveyorList(surveyorId, start, length);
     }
+
 }

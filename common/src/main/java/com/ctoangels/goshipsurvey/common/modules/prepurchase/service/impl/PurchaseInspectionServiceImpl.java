@@ -10,6 +10,7 @@ import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.*;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.IMessageService;
 import com.ctoangels.goshipsurvey.common.util.Const;
+import com.ctoangels.goshipsurvey.common.util.Tools;
 import org.apache.commons.beanutils.BeanUtils;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -133,8 +134,8 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
         inspection.setSurveyId(surveyorId);
         inspection.setPurchaseQuoId(quotationId);
         inspection.setShipId(quotation.getShipId());
-        User user = (User) SecurityUtils.getSubject().getPrincipal();
-        inspection.setCreateInfo(user.getName());
+        String userName = Tools.getUsername();
+        inspection.setCreateInfo(userName);
         if (purchaseInspectionMapper.insert(inspection) < 0) {
             return false;
         }
@@ -144,12 +145,13 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
         comment.setCompanyId(companyId);
         comment.setSurveyorId(surveyorId);
         comment.setOpId(quotation.getOpId());
-        comment.setCreateInfo(user.getName());
+        comment.setCreateInfo(userName);
         comment.setProType(Const.PROJECT_TYPE_PURCHASE);
         comment.setInspectionId(inspection.getId());
         if (commentMapper.insert(comment) < 0) {
             return false;
         }
+
         inspectionReportService.createReport(inspection);
 
         //发送信息
@@ -219,4 +221,53 @@ public class PurchaseInspectionServiceImpl extends SuperServiceImpl<PurchaseInsp
         return total;
     }
 
+    @Override
+    public void autoSelectSurveyors() {
+        //1.找出所有被要求自动选择验船师的quotation(还未选择验船师的)
+        List<PurchaseQuotation> quotations = purchaseQuotationMapper.getAutoSelectQuotation();
+        for (PurchaseQuotation q : quotations) {
+            List<QuotationApplication> applications = q.getApplications();
+            if (applications != null && applications.size() > 0) {
+                QuotationApplication qaSelect = null;
+                //2.按要求找出合适的验船师
+                if (q.getSelectStatus() == Const.PURCHASE_QUOTATION_AUTO_SELECT_PRICE) {
+                    qaSelect = getPricePrefer(applications);
+                } else if (q.getSelectStatus() == Const.PURCHASE_QUOTATION_AUTO_SELECT_EVALUATION) {
+                    qaSelect = getEvaluationPrefer(applications);
+                }
+                //3.更新状态
+                if (qaSelect != null) {
+                    initInspection(q.getId(), qaSelect.getId());
+                }
+            }
+        }
+    }
+
+    private QuotationApplication getPricePrefer(List<QuotationApplication> applications) {
+        QuotationApplication qaSelect = applications.get(0);
+        double lowPrice = qaSelect.getTotalPrice();
+        for (int i = 1, size = applications.size(); i < size; i++) {
+            QuotationApplication qa = applications.get(i);
+            double price = qa.getTotalPrice();
+            if (price < lowPrice) {
+                qaSelect = qa;
+                lowPrice = price;
+            }
+        }
+        return qaSelect;
+    }
+
+    private QuotationApplication getEvaluationPrefer(List<QuotationApplication> applications) {
+        QuotationApplication qaSelect = applications.get(0);
+        double highEvaluation = qaSelect.getSurveyor().getPastEvaluation();
+        for (int i = 1, size = applications.size(); i < size; i++) {
+            QuotationApplication qa = applications.get(i);
+            double evaluation = qa.getSurveyor().getPastEvaluation();
+            if (evaluation > highEvaluation) {
+                qaSelect = qa;
+                highEvaluation = evaluation;
+            }
+        }
+        return qaSelect;
+    }
 }

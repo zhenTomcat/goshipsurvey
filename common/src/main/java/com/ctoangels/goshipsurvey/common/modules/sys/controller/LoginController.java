@@ -6,6 +6,7 @@ import com.ctoangels.goshipsurvey.common.modules.go.entity.PublicShip;
 import com.ctoangels.goshipsurvey.common.modules.go.service.IPublicShipService;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Style;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IStyleService;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IPurchaseInspectionService;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.Button;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.Menu;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
@@ -57,6 +58,9 @@ public class LoginController extends BaseController {
     @Autowired
     private IStyleService styleService;
 
+    @Autowired
+    private IPurchaseInspectionService purchaseInspectionService;
+
     @Value("${site_path}")
     private String sitePath;
 
@@ -93,8 +97,8 @@ public class LoginController extends BaseController {
     @RequestMapping(value = "/login_toLogin")
     public String toLogin() throws Exception {
         JSONObject jsonObject = new JSONObject();
-        // TODO: 29/11/2016 改成读取properties 此处系统中似乎没有用的上
         jsonObject.put("sysname", sysName);
+//        purchaseInspectionService.autoSelectSurveyors();
         return "sys/admin/login";
     }
 

@@ -12,7 +12,12 @@
 
     <!--异步配置-->
     <task:executor id="asyncExecutor" pool-size="50-100" queue-capacity="20"/>
-    <task:annotation-driven executor="asyncExecutor"/>
+    <task:scheduler id="scheduler" pool-size="5"/>
+    <task:annotation-driven executor="asyncExecutor" scheduler="scheduler"/>
+    <!--定时任务-->
+    <bean id="autoSelectSurveyorScheduler"
+          class="com.ctoangels.goshipsurvey.admin.base.scheduler.AutoSelectSurveyorScheduler"/>
+
 
     <context:component-scan base-package="com.ctoangels.goshipsurvey.common">
         <context:exclude-filter type="annotation" expression="org.springframework.stereotype.Controller"/>

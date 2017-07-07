@@ -2,6 +2,7 @@ package com.ctoangels.goshipsurvey.common.modules.prepurchase.entity;
 
 import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 import com.baomidou.mybatisplus.annotations.IdType;
 
@@ -69,7 +70,7 @@ public class PurchaseQuotation implements Serializable {
      * 是否默认系统自动选择serveyor
      */
     @TableField(value = "select_status")
-    private String selectStatus;
+    private Integer selectStatus;
 
     /**  */
     @TableField(value = "op_id")
@@ -128,6 +129,9 @@ public class PurchaseQuotation implements Serializable {
 
     @TableField(exist = false)
     private QuotationApplication application;
+
+    @TableField(exist = false)
+    private List<QuotationApplication> applications;
 
     public Integer getId() {
         return id;
@@ -193,11 +197,11 @@ public class PurchaseQuotation implements Serializable {
         this.loiUrl = loiUrl;
     }
 
-    public String getSelectStatus() {
+    public Integer getSelectStatus() {
         return selectStatus;
     }
 
-    public void setSelectStatus(String selectStatus) {
+    public void setSelectStatus(Integer selectStatus) {
         this.selectStatus = selectStatus;
     }
 
@@ -311,5 +315,11 @@ public class PurchaseQuotation implements Serializable {
         this.updateBy = userName;
     }
 
+    public List<QuotationApplication> getApplications() {
+        return applications;
+    }
 
+    public void setApplications(List<QuotationApplication> applications) {
+        this.applications = applications;
+    }
 }

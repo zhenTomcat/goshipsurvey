@@ -16,10 +16,13 @@
 package com.ctoangels.goshipsurvey.common.util;
 
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.RightController;
+import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
+import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.*;
+import java.security.Security;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -319,6 +322,28 @@ public class Tools {
             content = "当前线程id:";
         }
         logger.info(content + Thread.currentThread().getId());
+    }
+
+    public static String getUsername() {
+        String userName = "system";
+        try {
+            User user = (User) SecurityUtils.getSubject().getPrincipal();
+            userName = user.getName();
+        } catch (Exception e) {
+
+        }
+        return userName;
+    }
+
+    public static int getUserId() {
+        int id = 0;
+        try {
+            User user = (User) SecurityUtils.getSubject().getPrincipal();
+            id = user.getId();
+        } catch (Exception e) {
+
+        }
+        return id;
     }
 
 }

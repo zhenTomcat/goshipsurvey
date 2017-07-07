@@ -71,7 +71,8 @@
                                         inspection)
                                         <div class="md-radio-inline">
                                             <div class="md-radio">
-                                                <input id="radio1" type="radio" name="radio" class="md-radiobtn">
+                                                <input id="radio1" type="radio" name="selectStatus" value="1"
+                                                       class="md-radiobtn">
                                                 <label for="radio1">
                                                     <span class="inc"></span>
                                                     <span class="check"></span>
@@ -80,7 +81,8 @@
                                                 </label>
                                             </div>
                                             <div class="md-radio">
-                                                <input id="radio2" type="radio" name="radio" class="md-radiobtn">
+                                                <input id="radio2" type="radio" name="selectStatus" value="2"
+                                                       class="md-radiobtn">
                                                 <label for="radio2">
                                                     <span class="inc"></span>
                                                     <span class="check"></span>

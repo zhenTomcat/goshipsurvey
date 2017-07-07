@@ -128,4 +128,7 @@ public class Const {
     public static final Integer MESSAGE_OP_TO_COMPANY = 1;
     public static final Integer MESSAGE_COMPANY_TO_OP = 2;
 
+    public static final Integer PURCHASE_QUOTATION_AUTO_SELECT_PRICE = 1;
+    public static final Integer PURCHASE_QUOTATION_AUTO_SELECT_EVALUATION = 2;
+
 }

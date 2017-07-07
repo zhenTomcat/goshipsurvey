@@ -24,4 +24,6 @@ public interface PurchaseQuotationMapper extends AutoMapper<PurchaseQuotation> {
     List<PurchaseQuotation> getOPRecordList(@Param(value = "opId") Integer opId,
                                             @Param(value = "start") Integer start,
                                             @Param(value = "length") Integer length);
+
+    List<PurchaseQuotation> getAutoSelectQuotation();
 }

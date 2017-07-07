@@ -90,8 +90,7 @@ public class MessageServiceImpl extends SuperServiceImpl<MessageMapper, Message>
         Tools.loggerThreadId("publicSome");
         logger.info("publicMessage" + Thread.currentThread().getId());
         if (ids != null && ids.size() > 0) {
-            User u = (User) SecurityUtils.getSubject().getPrincipal();
-            Integer sender = u.getId();
+            Integer sender = Tools.getUserId();
             ids.remove(sender);
             List<Message> list = new ArrayList<>();
             for (Integer id : ids) {
@@ -101,7 +100,7 @@ public class MessageServiceImpl extends SuperServiceImpl<MessageMapper, Message>
                 m.setTitle(title);
                 m.setContent(content);
                 m.setReadStatus(Const.MESSAGE_UNREAD);
-                m.setCreateInfo(u.getName());
+                m.setCreateInfo(Tools.getUsername());
                 list.add(m);
             }
             messageMapper.insertBatch(list);
@@ -114,15 +113,14 @@ public class MessageServiceImpl extends SuperServiceImpl<MessageMapper, Message>
     public void publicOne(Integer id, String title, String content) {
         if (id != null) {
             Tools.loggerThreadId("publicOne");
-            User u = (User) SecurityUtils.getSubject().getPrincipal();
-            Integer sender = u.getId();
+            Integer sender = Tools.getUserId();
             Message m = new Message();
             m.setReceiver(id);
             m.setSender(sender);
             m.setTitle(title);
             m.setContent(content);
             m.setReadStatus(Const.MESSAGE_UNREAD);
-            m.setCreateInfo(u.getName());
+            m.setCreateInfo(Tools.getUsername());
             messageMapper.insert(m);
             myWebSocketHandler.sendOneUser(new MyWebSocketMessage("您有一条消息", getUnreadMessageCount(id), true), id);
         }

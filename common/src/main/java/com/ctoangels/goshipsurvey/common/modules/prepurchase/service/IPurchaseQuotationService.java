@@ -1,5 +1,6 @@
 package com.ctoangels.goshipsurvey.common.modules.prepurchase.service;
 
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.QuotationApplication;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.PurchaseQuotation;
 import com.baomidou.framework.service.ISuperService;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.ShipDetail;
@@ -26,4 +27,9 @@ public interface IPurchaseQuotationService extends ISuperService<PurchaseQuotati
     List<PurchaseQuotation> getOPRecordList(Integer opId, Integer start, Integer length);
 
     int getRecordTotal(Integer opId);
+
+
+
+
+
 }

@@ -43,12 +43,12 @@
     </select>
 
     <resultMap id="surveyorQuotationMap" type="PurchaseQuotation">
-        <result property="id" column="id"></result>
+        <result property="id" column="id"/>
         <association property="application" column="{surveyor_id=surveyor_id,quotation_id=id,type=type}"
                      javaType="QuotationApplication"
-                     select="com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.QuotationApplicationMapper.getBySurveyorId"></association>
+                     select="com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.QuotationApplicationMapper.getBySurveyorId"/>
         <collection property="shipDetail" column="ship_id" ofType="ShipDetail"
-                    select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.ShipDetailMapper.getById"></collection>
+                    select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.ShipDetailMapper.getById"/>
     </resultMap>
 
 
@@ -63,12 +63,27 @@
         limit #{start},#{length}
     </select>
 
+
+    <select id="getAutoSelectQuotation" resultMap="getAutoSelectQuotationApplications">
+         SELECT pq.*,2 AS proType  FROM t_purchase_quotation pq
+         WHERE pq.public_status=1
+         and  TIMESTAMPDIFF(DAY,now(),pq.start_date) &lt;=7
+         and TIMESTAMPDIFF(DAY,now(),pq.start_date) &gt;=0
+         and pq.select_status is not null
+         and del_flag=0;
+    </select>
+    <resultMap id="getAutoSelectQuotationApplications" type="PurchaseQuotation">
+        <result property="id" column="id"/>
+        <collection property="applications" column="{quotationId=id,proType=proType}"
+                    select="com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.QuotationApplicationMapper.getApplications"/>
+    </resultMap>
+
     <resultMap id="recordMap" type="PurchaseQuotation">
-        <result property="id" column="id"></result>
+        <result property="id" column="id"/>
         <association property="shipDetail" column="ship_id" javaType="ShipDetail"
-                     select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.ShipDetailMapper.getById"></association>
+                     select="com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.ShipDetailMapper.getById"/>
         <association property="application" column="{quotationId=id,proType=proType}" javaType="QuotationApplication"
-                     select="com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.QuotationApplicationMapper.getSuccessApplication"></association>
+                     select="com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.QuotationApplicationMapper.getSuccessApplication"/>
     </resultMap>
 
 </mapper>
