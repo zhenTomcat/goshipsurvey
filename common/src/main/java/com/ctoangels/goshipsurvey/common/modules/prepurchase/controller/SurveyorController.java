@@ -157,7 +157,7 @@ public class SurveyorController extends BaseController {
     }
 
     @RequestMapping(value = "/edit", method = RequestMethod.GET)
-    public String edit(ModelMap map, @RequestParam(required = false) int id) {
+    public String edit(ModelMap map, @RequestParam(required = false) int id, @RequestParam(required = false) Integer dialog) {
         Surveyor surveyor = surveyorService.selectById(id);
 
         String userShipType = surveyor.getShipType();
@@ -190,6 +190,10 @@ public class SurveyorController extends BaseController {
         map.put("surveyor", surveyor);
         map.put("shipType", getShipTypeDict());
         map.put("surveyType", getSurveyTypeDict());
+
+        if (dialog == 1) {
+            return "sys/surveyor/edit2";
+        }
         return "sys/surveyor/edit";
     }
 
@@ -302,7 +306,6 @@ public class SurveyorController extends BaseController {
         map.put("shipType", getShipTypeDict());
         return "sys/surveyor/info";
     }
-
 
     @RequestMapping(value = "/getSurveyors", method = RequestMethod.GET)
     @ResponseBody

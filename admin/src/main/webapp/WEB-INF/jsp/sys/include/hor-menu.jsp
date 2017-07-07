@@ -9,7 +9,7 @@
     <div class="page-header-inner ">
         <div class="page-logo">
             <a href="index.html">
-                <img src="${ctx}/static/img/banner.png" alt="logo" class="logo-default"/> </a>
+                <img src="static/img/banner_transparent.png" alt="logo" class="logo-default"/> </a>
         </div>
         <div class="hor-menu  hidden-sm hidden-xs">
             <ul class="nav navbar-nav">
@@ -17,7 +17,7 @@
                     <li class="classic-menu-dropdown">
                         <c:choose>
                             <c:when test="${(not empty menu.menuUrl)&&(menu.menuUrl!='#')}">
-                                <a href="${menu.menuUrl}" class="ajaxify nav-link" data-hover="megamenu-dropdown"
+                                <a href="${menu.menuUrl}" active-li-href="${menu.menuUrl}" class="ajaxify nav-link" data-hover="megamenu-dropdown"
                                    data-close-others="true">
                                     <c:if test="${not empty menu.menuIcon }"><i class="${menu.menuIcon}"></i></c:if>
                                         ${menu.menuName}
@@ -59,7 +59,7 @@
                            data-close-others="true">
                             <span class="username username-hide-on-mobile"> ${user.name} <span
                                     class="badge badge-danger unreadCount"> 0 </span></span>
-                            <img alt="" class="img-circle" src="${ctx}/assets/layouts/layout/img/avatar.png"/>
+                            <img alt="" class="img-circle" src="assets/layouts/layout/img/avatar.png"/>
                         </a>
                         <ul class="dropdown-menu dropdown-menu-default">
                             <li>

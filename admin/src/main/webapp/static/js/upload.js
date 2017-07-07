@@ -126,8 +126,6 @@ function initUploaders(buttonId, bucket, domain) {
                     '<span onclick="javascript:this.parentNode.remove();" class="glyphicon glyphicon-remove" style="background: rgba(0,0,0,.5);color:white;position:absolute;top:0px;right:5px;z-index: 999;"></span>' +
                     '<img src="http://' + bucket + '.img-cn-shanghai.aliyuncs.com/' + g_object_name + '?x-oss-process=image/resize,m_fill,h_100,w_100" ' +
                     'style="max-height: 100px;margin-right:5px;" onclick="" class="min-img" data-url="' + g_object_name + '" >' + '</div>');
-
-
             }
         }
     });
@@ -453,7 +451,6 @@ function initUploaders_attachment(buttonId, bucket, domain) {
                 var count=$("#"+buttonId).attr("data-count");
                 var reportId=$("#"+buttonId).attr("data-reportId");
                 var documentId=$("#"+buttonId).attr("data-documentId");
-
                 var html = '<a target="_blank" href="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '">' + nativeName + '</a>' +
                     '<input type="hidden" name="documents[' + count + '].id" value="' + documentId + '">' +
                     '<input type="hidden" name="documents[' + count + '].inspectionReportId" value="' + reportId + '">' +
@@ -479,10 +476,11 @@ function initUploaders_purchase_op_agency_loi(buttonId, bucket, domain) {
 
         filters: {
             mime_types: [
-                {title: "Text files", extensions: "pdf,doc,docx"}
+                {title: "Text files", extensions: "pdf,doc,docx,xls,xlsx"},
+                {title: "Image files", extensions: "jpg,gif,png,bmp,jpeg"},
             ],
             max_file_size: '10mb', //最大只能上传10mb的文件
-            prevent_duplicates: true //不允许选取重复文件
+            prevent_duplicates: false //不允许选取重复文件
         },
         init: {
             FilesAdded: function (up) {
@@ -494,10 +492,11 @@ function initUploaders_purchase_op_agency_loi(buttonId, bucket, domain) {
             FileUploaded: function () {
                 var btn = $("#" + buttonId);
                 var href = "http://" + bucket + ".oss-cn-shanghai.aliyuncs.com/" + g_object_name;
-                btn.parent().find("input").attr("value", href);
-                var a = btn.parent().find("a");
-                a.attr("href", href);
-                a.css("display", "inline-block");
+                var fileDiv = btn.siblings(".upload-file-div");
+                fileDiv.css("display", "none");
+                fileDiv.find("input").val(href);
+                fileDiv.find("a").attr("href", href);
+                fileDiv.css("display", "inline-block");
             }
         }
     });
@@ -527,8 +526,8 @@ function initUploaders_img(buttonId, bucket, domain, divId, galleriesId) {
                 set_upload_param(up, file.name, true, domain);
             },
             FileUploaded: function () {
-                var imgName1=g_object_name;
-                var imgName2=nativeName;
+                var imgName1 = g_object_name;
+                var imgName2 = nativeName;
                 $.ajax({
                     url: "prepurchase/surveyor/addImg",
                     type: "GET",
@@ -698,10 +697,10 @@ function initUploaders_report_grade(buttonId, bucket, domain, gradeId) {
                     success: function (data) {
                         if (data.mes) {
                             var html = '<a target="_blank" href="http://' + bucket + '.oss-cn-shanghai.aliyuncs.com/' + g_object_name + '">' + nativeName + '</a>';
-                            $("#"+buttonId).parent().prev().html(html);
-                            $("#"+buttonId).parent().html('<button onclick="removeGrade(this,'+gradeId+')" type="button" class="btn red">Delete</button>');
+                            $("#" + buttonId).parent().prev().html(html);
+                            $("#" + buttonId).parent().html('<button onclick="removeGrade(this,' + gradeId + ')" type="button" class="btn red">Delete</button>');
 
-                            $("#album"+parseInt(data.totalGrades[0])).html('('+parseInt(data.totalGrades[1])+')');
+                            $("#album" + parseInt(data.totalGrades[0])).html('(' + parseInt(data.totalGrades[1]) + ')');
 
                             console.log(parseInt(data.totalGrades[0]));
                             console.log(parseInt(data.totalGrades[1]));

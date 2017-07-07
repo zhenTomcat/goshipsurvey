@@ -21,7 +21,7 @@
                 <center><div class="caption"><h3>Reports</h3></div></center>
             </div>
             <div class="portlet-body">
-                <table class="table table-striped table-bordered table-hover table-checkable order-column" id="report_table">
+                <table class="table table-striped table-bordered table-hover table-checkable order-column" id="pre_op_report_table">
                     <thead>
                     <tr>
                         <th> Ship name </th>
@@ -53,12 +53,13 @@
     })
 
     function drawTable() {
-        reportTable = $('#report_table').DataTable({
+        reportTable = $('#pre_op_report_table').DataTable({
             "ordering": false,
             "pagingType": "simple_numbers",
             "processing": true,
             "autoWidth": false,
             "serverSide": true,
+            'bStateSave': true,
             "ajax": {
                 "url": "prepurchase/op/inspection/list",
                 "type": "post",
@@ -127,7 +128,7 @@
                     "targets": 8,
                     "render": function (data, type, row) {
                         if(row.submitStatus==1){
-                            return '<a data-target="navTab" href="prepurchase/op/reportInfo?reportId='+row.inspectionReportId+'" >View</a>';
+                            return '<a class="ajaxify" active-li-href="prepurchase/op/report"   data-target="navTab" href="prepurchase/op/reportInfo?reportId='+row.inspectionReportId+'" >View</a>';
                         }
                         return "";
                     }

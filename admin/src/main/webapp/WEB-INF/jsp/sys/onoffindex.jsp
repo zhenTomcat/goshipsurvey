@@ -76,6 +76,11 @@
                 position: fixed;
             }
         }
+
+        .sweet-alert {
+            z-index: 120000;
+        }
+
     </style>
 </head>
 <body onhashchange="hashChange()" class="page-header-fixed page-sidebar-closed-hide-logo page-content-white">
@@ -251,14 +256,15 @@
 
 
     function webSocketMessage() {
-        console.log("WebSocket:开始")
+        console.log("WebSocket:开始");
         var path = "<%=wsPath%>";
-        if (path.indexOf("localhost") >= 0) {
-            path = "localhost:8080/";
-        } else {
-            path = "www.goshipsurvey.com:8889/admin/";
-        }
-        console.log(path);
+        console.log("wsPath:" + path);
+//        if (path.indexOf("localhost") >= 0) {
+//            path = "localhost:8080/";
+//        } else {
+//            path = "www.goshipsurvey.com:8889/admin/";
+//        }
+//        console.log(path);
         var websocket;
         if ('WebSocket' in window) {
             websocket = new WebSocket("ws://" + path + "wsMy");
@@ -295,7 +301,7 @@
             }
             $.cookie('isLogin', 0);
             if (data["alert"]) {
-                alert(data.messageContent);
+                swal({type: "info", title: data.messageContent});
             }
 
 

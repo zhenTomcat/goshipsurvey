@@ -167,15 +167,16 @@
                                         <tbody>
                                         <c:forEach items="${list}" var="application">
                                             <tr>
-                                                <th>${application.user.name}</th>
-                                                <th><a data-model="dialog"
-                                                       href="user/companyInfo?id=${application.user.id}">View</a></th>
-                                                <th>${application.user.address}</th>
-                                                <th>${application.surveyor.lastName}</th>
-                                                <th><a data-model="dialog"
-                                                       href="surveyor/info?id=${application.surveyor.id}">View</a>
+                                                <th style="width: 10%">${application.user.name}</th>
+                                                <th style="width: 10%"><a data-model="dialog"
+                                                                          href="user/companyInfo?id=${application.user.id}">View</a>
                                                 </th>
-                                                <th>
+                                                <th style="width: 10%">${application.user.address}</th>
+                                                <th style="width: 10%">${application.surveyor.firstName} ${application.surveyor.lastName}</th>
+                                                <th style="width: 10%"><a data-model="dialog"
+                                                                          href="surveyor/info?id=${application.surveyor.id}">View</a>
+                                                </th>
+                                                <th style="width: 10%">
                                                     <div class="rating">
                                                         <div class="op-point-div" style="width: 100px;margin: auto">
                                                             <input type="radio" value="5" <c:if
@@ -196,8 +197,8 @@
                                                         </div>
                                                     </div>
                                                 </th>
-                                                <th>${application.totalPrice}</th>
-                                                <th>
+                                                <th style="width: 10%">${application.totalPrice}</th>
+                                                <th style="width: 10%">
                                                     <c:if test="${application.applicationStatus==0}">
                                                         <button type="button"
                                                                 onclick="initInspection(${param.quotationId},${application.id})"
@@ -205,10 +206,10 @@
                                                         </button>
                                                     </c:if>
                                                     <c:if test="${application.applicationStatus==1}">
-                                                        已邀请
+                                                        Chosen
                                                     </c:if>
                                                     <c:if test="${application.applicationStatus==2}">
-                                                        下次合作
+                                                        Abandoned
                                                     </c:if>
                                                 </th>
                                             </tr>

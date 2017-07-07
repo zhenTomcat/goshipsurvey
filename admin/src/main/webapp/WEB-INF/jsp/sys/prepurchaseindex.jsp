@@ -79,6 +79,10 @@
                 position: fixed;
             }
         }
+
+        .sweet-alert {
+            z-index: 120000;
+        }
     </style>
 </head>
 <body onhashchange="hashChange()"
@@ -216,6 +220,11 @@
         var url;
         if (window.location.hash) {
             url = window.location.hash.substring(1);
+            console.log(url);
+            if ($("a[href='" + url + "']").length <= 0) {
+                Layout.loadAjaxContent(url, $(this));
+                return;
+            }
         } else {
             var url1 = "prepurchase/op/record";
             var url2 = "prepurchase/surveyor/record";
@@ -234,39 +243,9 @@
         initPage();
     }
 
-    var selectedSpan = "<span class='selected'></span>";
-    $(".classic-menu-dropdown > a").on("click", function () {
-        var thisOne = $(this);
-        var href = thisOne.attr("href");
-        if (href != "javascript:;") {
-            $(".classic-menu-dropdown .selected").remove();
-            $(".classic-menu-dropdown.active").removeClass("active");
-            thisOne.parent().addClass("active");
-            thisOne.html(thisOne.html() + selectedSpan);
-        }
-    })
-    $(".dropdown-menu li > a").on("click", function () {
-        var thisOne = $(this);
-        var href = thisOne.attr("href");
-        if (href != "javascript:;") {
-            $(".classic-menu-dropdown .selected").remove();
-            $(".classic-menu-dropdown.active").removeClass("active");
-            var a = thisOne.parent().parent().siblings("a");
-            a.parent().addClass("active");
-            a.html(a.html() + selectedSpan);
-        }
-    })
-
-
     function webSocketMessage() {
         console.log("WebSocket:开始")
         var path = "<%=wsPath%>";
-        if (path.indexOf("localhost") >= 0) {
-            path = "localhost:8080/";
-        } else {
-            path = "www.goshipsurvey.com:8889/admin/";
-        }
-        console.log(path);
         var websocket;
         if ('WebSocket' in window) {
             websocket = new WebSocket("ws://" + path + "wsMy");
@@ -284,7 +263,6 @@
         };
         websocket.onmessage = function (event) {
             var data = JSON.parse(event.data);
-            console.log("WebSocket:收到一条消息", data);
             var unreadCount = data.unreadCount;
             console.log("WebSocket:收到一条消息", data.unreadCount);
             if (unreadCount != 0) {
@@ -303,7 +281,7 @@
             }
             $.cookie('isLogin', 0);
             if (data["alert"]) {
-                alert(data.messageContent);
+                swal({type: "info", title: data.messageContent});
             }
 
 
@@ -333,11 +311,44 @@
     }
 </script>
 <script>
-    $('.page-header').on('click', ' li > a.ajaxify', function (e) {
+    $('body').delegate('.ajaxify', 'click', function (e) {
         e.preventDefault();
-        console.log(1);
         var url = $(this).attr("href");
         Layout.loadAjaxContent(url, $(this));
-    });
+
+        $(".classic-menu-dropdown .selected").remove();
+        $(".classic-menu-dropdown.active").removeClass("active");
+        var activeLiHref = $(this).attr('active-li-href');
+        var activeLi = $('a[href="' + activeLiHref + '"]');
+        if (activeLi.length > 0) {
+            activeLi.parent().addClass("active");
+            activeLi.html(activeLi.html() + selectedSpan);
+        }
+    })
+
+
+    var selectedSpan = "<span class='selected'></span>";
+    $(".dropdown-menu li > a").on("click", function () {
+        var thisOne = $(this);
+        var href = thisOne.attr("href");
+        if (href != "javascript:;") {
+            $(".classic-menu-dropdown .selected").remove();
+            $(".classic-menu-dropdown.active").removeClass("active");
+            var a = thisOne.parent().parent().siblings("a");
+            a.parent().addClass("active");
+            a.html(a.html() + selectedSpan);
+        }
+    })
+    //    $(".classic-menu-dropdown > a").on("click", function () {
+    //        var thisOne = $(this);
+    //        var href = thisOne.attr("href");
+    //        if (href != "javascript:;") {
+    //            $(".classic-menu-dropdown .selected").remove();
+    //            $(".classic-menu-dropdown.active").removeClass("active");
+    //            thisOne.parent().addClass("active");
+    //            thisOne.html(thisOne.html() + selectedSpan);
+    //        }
+    //    })
+
 </script>
 </html>

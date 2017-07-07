@@ -59,14 +59,14 @@ public class PurchaseQuotationServiceImpl extends SuperServiceImpl<PurchaseQuota
     @Override
     public int getOPTotal(Integer opId) {
         EntityWrapper<PurchaseQuotation> ew = new EntityWrapper();
-        ew.addFilter("op_id={0} and end_date>={1}", opId, DateUtil.formatDate(new Date(), "yyyy-MM-dd"));
+        ew.addFilter("op_id={0} and end_date>={1} and del_flag=0", opId, DateUtil.formatDate(new Date(), "yyyy-MM-dd"));
         return purchaseQuotationMapper.selectCountByEw(ew);
     }
 
     @Override
     public int getSurveyorTotal() {
         EntityWrapper<PurchaseQuotation> ew = new EntityWrapper();
-        ew.addFilter("end_date>={0}", DateUtil.formatDate(new Date(), "yyyy-MM-dd"));
+        ew.addFilter("end_date>={0} and del_flag=0", DateUtil.formatDate(new Date(), "yyyy-MM-dd"));
         return purchaseQuotationMapper.selectCountByEw(ew);
     }
 

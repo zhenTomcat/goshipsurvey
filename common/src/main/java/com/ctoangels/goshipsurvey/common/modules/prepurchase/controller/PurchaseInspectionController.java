@@ -3,7 +3,9 @@ package com.ctoangels.goshipsurvey.common.modules.prepurchase.controller;
 import com.alibaba.fastjson.JSONObject;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.PurchaseInspection;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IPurchaseInspectionService;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IShipDetailService;
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
+import com.ctoangels.goshipsurvey.common.modules.sys.service.IMessageService;
 import com.ctoangels.goshipsurvey.common.util.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -17,30 +19,34 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import java.util.List;
 
 /**
- *
  * PurchaseInspection 控制层
- *
  */
 @Controller
 @RequestMapping("prepurchase")
-public class PurchaseInspectionController  extends BaseController {
+public class PurchaseInspectionController extends BaseController {
     @Value("${static_path}")
     private String staticPath;
 
     @Autowired
     private IPurchaseInspectionService purchaseInspectionService;
 
+    @Autowired
+    private IMessageService messageService;
+
+    @Autowired
+    private IShipDetailService shipDetailService;
+
     //获取surveyor所有的信息
     @RequestMapping(value = "/surveyor/inspection")
-    public String surveyorList(){
+    public String surveyorList() {
         return "prepurchase/surveyor/inspection/inspectionList";
     }
 
     @RequestMapping(value = "/surveyor/inspection/list")
     @ResponseBody
-    public JSONObject surveyorList(ModelMap modelMap){
-        JSONObject jsonObject=new JSONObject();
-        int id=getCurrentUser().getId();
+    public JSONObject surveyorList(ModelMap modelMap) {
+        JSONObject jsonObject = new JSONObject();
+        int id = getCurrentUser().getId();
 
         int start = 0;
         int length = 10;
@@ -51,8 +57,8 @@ public class PurchaseInspectionController  extends BaseController {
             length = Integer.parseInt(request.getParameter(Const.LENGTH));
         }
 
-        List<PurchaseInspection> inspections=purchaseInspectionService.selectByInspection(id,start, length);
-        Integer total=purchaseInspectionService.getInspectionCount(id);
+        List<PurchaseInspection> inspections = purchaseInspectionService.selectByInspection(id, start, length);
+        Integer total = purchaseInspectionService.getInspectionCount(id);
 
         jsonObject.put(Const.DRAW, request.getParameter(Const.DRAW));
         jsonObject.put(Const.RECORDSTOTAL, total);
@@ -64,19 +70,23 @@ public class PurchaseInspectionController  extends BaseController {
     //surveyour提交loi和passport
     @RequestMapping(value = "/surveyor/saveLoiPassport")
     @ResponseBody
-    public JSONObject saveLoiPassport(PurchaseInspection inspection){
-        JSONObject jsonObject=new JSONObject();
-        try{
-            PurchaseInspection inspection1=purchaseInspectionService.selectById(inspection.getId());
+    public JSONObject saveLoiPassport(PurchaseInspection inspection) {
+        JSONObject jsonObject = new JSONObject();
+        try {
+            PurchaseInspection inspection1 = purchaseInspectionService.selectById(inspection.getId());
             inspection1.setLoi(inspection.getLoi());
             inspection1.setLoiUrl(inspection.getLoiUrl());
             inspection1.setPassport(inspection.getPassport());
             inspection1.setPassportUrl(inspection.getPassportUrl());
             purchaseInspectionService.updateById(inspection1);
 
-            jsonObject.put("mes",true);
-        }catch (Exception e){
-            jsonObject.put("mes",false);
+            String shipName = shipDetailService.selectById(inspection1.getShipId()).getShipName();
+            String content = shipName + "船买卖检验,验船师已上传相关文件,请及时查看";
+            messageService.publicOne(inspection1.getOpId(), content, content);
+
+            jsonObject.put("mes", true);
+        } catch (Exception e) {
+            jsonObject.put("mes", false);
             e.printStackTrace();
         }
         return jsonObject;
@@ -85,15 +95,15 @@ public class PurchaseInspectionController  extends BaseController {
 
     //获取op所有的信息
     @RequestMapping(value = "/op/inspection")
-    public String opList(){
+    public String opList() {
         return "prepurchase/op/inspection/inspectionList";
     }
 
     @RequestMapping(value = "/op/inspection/list")
     @ResponseBody
-    public JSONObject opList(ModelMap modelMap){
-        JSONObject jsonObject=new JSONObject();
-        int id=getCurrentUser().getId();
+    public JSONObject opList(ModelMap modelMap) {
+        JSONObject jsonObject = new JSONObject();
+        int id = getCurrentUser().getId();
 
         int start = 0;
         int length = 10;
@@ -104,8 +114,8 @@ public class PurchaseInspectionController  extends BaseController {
             length = Integer.parseInt(request.getParameter(Const.LENGTH));
         }
 
-        List<PurchaseInspection> inspections=purchaseInspectionService.selectByOpInspection(id,start, length);
-        Integer total=purchaseInspectionService.getOpInspectionCount(id);
+        List<PurchaseInspection> inspections = purchaseInspectionService.selectByOpInspection(id, start, length);
+        Integer total = purchaseInspectionService.getOpInspectionCount(id);
 
         jsonObject.put(Const.DRAW, request.getParameter(Const.DRAW));
         jsonObject.put(Const.RECORDSTOTAL, total);

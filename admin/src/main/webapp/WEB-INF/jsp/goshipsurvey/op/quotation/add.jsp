@@ -33,18 +33,20 @@
     }
 
     #ship-list li {
-        width: 298px;
-        padding: 2px 5px;
+        width: 400px;
+        padding: 1px 7px;
     }
 
-    #port-list ul {
-        width: 160px;
-        padding: 2px 5px;
+    #port-list li {
+        width: 250px;
+        padding: 1px 7px;
     }
 
     #ship-list li:hover, #port-list li:hover {
         background-color: #32c5d2;
         cursor: pointer;
+        padding: 5px 11px;
+        font-size: 20px;
     }
 
     .required-label:after {
@@ -306,10 +308,10 @@
                                    target="_blank"
                                    href=";">DOWNLOAD</a>
                                 <span class="input-group-btn">
-                                                <button class="btn red btn-sm" type="button" title="delete"
-                                                        onclick="delFileAndInput(this)">
-                                                    <i class="fa fa-ban"></i></button>
-                                            </span>
+                                <button class="btn red btn-sm" type="button" title="delete"
+                                        onclick="delFileAndInput(this)">
+                                    <i class="fa fa-ban"></i></button>
+                                </span>
                             </div>
                         </div>
                     </div>
@@ -447,7 +449,7 @@
                     })
                 }
                 $("#shipList").html(html);
-                $("#ship-list").css("display", "inline-block");
+                $("#ship-list").css("display", "block");
             },
             error: function () {
                 console.log("searchList error");
@@ -497,7 +499,7 @@
                     })
                 }
                 $("#portList").html(html);
-                $("#port-list").css("display", "inline-block");
+                $("#port-list").css("display", "block");
             },
             error: function () {
                 console.log("searchList error");

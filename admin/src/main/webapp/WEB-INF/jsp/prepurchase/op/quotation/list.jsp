@@ -46,8 +46,9 @@
                                     <shiro:hasPermission name="op/quotation/add">
                                         <div class="col-md-4">
                                             <div class="btn-group">
-                                                <a href="prepurchase/op/quotation/add" data-target="navTab"
-                                                   class="btn blue"><i class="fa fa-plus"></i> New quotation
+                                                <a href="prepurchase/op/quotation/add"
+                                                   active-li-href="prepurchase/op/quotation" data-target="navTab"
+                                                   class="ajaxify  btn blue"><i class="fa fa-plus"></i> New quotation
                                                 </a>
                                             </div>
                                         </div>
@@ -57,17 +58,18 @@
                                     <div class="tab-content">
                                         <div class="tab-pane fade active in" id="tab_1_1">
                                             <table class="table  table-checkable table-bordered"
-                                                   id="quotation_table">
+                                                   id="pre_op_quotation_table">
                                                 <thead>
                                                 <tr>
-                                                    <th width="15%">Ship name</th>
+                                                    <th width="10%">Ship name</th>
                                                     <th width="10%">imo</th>
                                                     <th width="10%">Ship type</th>
                                                     <th width="15%">Inspection port</th>
-                                                    <th width="25%">Inspection date(LMT)</th>
-                                                    <th width="10%">Available surveyors</th>
+                                                    <th width="20%">Inspection date(LMT)</th>
+                                                    <th width="8%">Available surveyors</th>
                                                     <th width="10%">Status</th>
                                                     <th width="10%">More Detail</th>
+                                                    <th width="7%">Deal</th>
                                                 </tr>
                                                 <tbody></tbody>
                                                 </thead>
@@ -91,12 +93,13 @@
     })
 
     function drawTable() {
-        quotationTable = $('#quotation_table').DataTable({
+        quotationTable = $('#pre_op_quotation_table').DataTable({
             "ordering": false,
             "pagingType": "simple_numbers",
             "processing": true,
             "autoWidth": false,
             "serverSide": true,
+            'bStateSave': true,
             "ajax": {
                 "url": "prepurchase/op/quotation/list",
                 "type": "post",
@@ -131,41 +134,59 @@
                     "data": "publicStatus",
                 },
                 {
-                    "data": "quotationStatus"
+                    "data": "id"
+                },
+                {
+                    "data": "id"
                 },
             ],
-            "columnDefs": [{
-                "targets": 4,
-                "render": function (data, type, row) {
-                    var startDate = new Date(row.startDate).Format("yyyy-MM-dd");
-                    var endDate = new Date(row.endDate).Format("yyyy-MM-dd");
-                    return startDate + " to " + endDate;
-                }
-            }, {
-                "targets": 6,
-                "render": function (data, type, row) {
-                    var status = row.publicStatus;
-                    if (status == 1) {
-                        if (row.applicationCount == 0) {
-                            return 'Quotation..';
+            "columnDefs": [
+                {
+                    "targets": 4,
+                    "render": function (data, type, row) {
+                        var startDate = new Date(row.startDate).Format("yyyy-MM-dd");
+                        var endDate = new Date(row.endDate).Format("yyyy-MM-dd");
+                        return startDate + " to " + endDate;
+                    }
+                },
+                {
+                    "targets": 6,
+                    "render": function (data, type, row) {
+                        var status = row.publicStatus;
+                        if (status == 1) {
+                            if (row.applicationCount == 0) {
+                                return 'Quotation..';
+                            }
+                            return '<a class="ajaxify" active-li-href="prepurchase/op/quotation" href="prepurchase/op/quotation/choose?quotationId=' + row.id + '">Go to choose surveyor</a>';
                         }
-                        return '<a data-target="navTab" href="prepurchase/op/quotation/choose?quotationId=' + row.id + '">Go to choose surveyor</a>';
+                        if (status == 2) {
+                            return '<a class="ajaxify" active-li-href="prepurchase/op/quotation" data-target="navTab" href="prepurchase/op/quotation/choose?quotationId=' + row.id + '">Chosen</a>';
+                        }
+                        if (status == 3) {
+                            return 'Cancelled';
+                        }
+                        return ""
                     }
-                    if (status == 2) {
-                        return '<a data-target="navTab" href="prepurchase/op/quotation/choose?quotationId=' + row.id + '">Chosen</a>';
+                },
+                {
+                    "targets": 7,
+                    "class": "details-control",
+                    "render": function (data, type, row) {
+                        return '<a  href="javascript:void(0)">VIEW</a>';
                     }
-                    if (status == 3) {
-                        return 'Cancelled';
+                },
+                {
+                    "targets": 8,
+                    "render": function (data, type, row) {
+                        if (row.publicStatus <= 1) {
+                            return '' +
+                                    <%--<shiro:hasPermission name="right/deleteBtn">--%>
+                                    '<a   href="prepurchase/op/quotation/delete?id=' + row.id + '" data-msg="Delete?"  data-model="ajaxToDo" data-callback="refreshTable" style="color:red"><i class=" fa fa-trash-o"></i></a>';
+                            <%--</shiro:hasPermission>--%>
+                        }
+                        return "";
                     }
-                    return ""
                 }
-            }, {
-                "targets": 7,
-                "class": "details-control",
-                "render": function (data, type, row) {
-                    return '<a  href="javascript:void(0)">VIEW</a>';
-                }
-            }
             ],
         });
 
@@ -174,7 +195,7 @@
             var row = quotationTable.row(tr);
             var flag = tr.attr("data-not-first");
             if (flag) {
-                    tr.next().toggle();
+                tr.next().toggle();
             } else {
                 row.child(moreInfo(row.data())).show();
                 tr.next().addClass("detail-row");
@@ -208,7 +229,7 @@
         html += "</div>";
         html += '<div class="col-md-4">';
         html += '<label class="col-md-12 text-left">Agency details:</label>';
-        html += '<div class="col-md-12 text-left" style="padding-left:30px; ">' + data.agencyDetail + '</div>';
+        html += '<div class="col-md-12 text-left" style="padding-left:30px;white-space: pre-wrap;word-wrap: break-word;  ">' + data.agencyDetail + '</div>';
         var agencyUrl = data.agencyUrl;
         if (agencyUrl != null && agencyUrl != "") {
             html += '<a target="_blank" style="float: left;margin-left:10px" href="' + agencyUrl + '" class="btn green">View</a>';
