@@ -56,7 +56,7 @@
                                         <i class="icon-social-dribbble font-blue-soft"></i>
                                         <span class="caption-subject font-blue-soft bold uppercase">My record</span>
                                     </div>
-                                    <shiro:hasPermission name="op/quotation/add">
+                                    <shiro:hasPermission name="prepurchase/op/quotation/add">
                                         <div class="col-md-4">
                                             <div class="btn-group">
                                                 <a href="prepurchase/op/quotation/add"

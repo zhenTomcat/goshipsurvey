@@ -24,7 +24,7 @@
             AND pq.op_id=#{opId}
             AND pq.del_flag=0
         </where>
-        order by pq.update_date desc
+        order by pq.update_date desc,pq.id desc
         limit #{start},#{length}
     </select>
 
@@ -38,7 +38,7 @@
     <select id="getSurveyorList" resultMap="surveyorQuotationMap">
         SELECT pq.*,#{surveyorId} AS surveyor_id,2 AS `type`  FROM t_purchase_quotation pq
         WHERE pq.end_date &gt;=(select date_format(now(),'%Y-%m-%d')) AND pq.del_flag=0
-        ORDER BY pq.update_date desc
+        ORDER BY pq.update_date desc,pq.id desc
         limit #{start},#{length}
     </select>
 
@@ -59,7 +59,7 @@
             AND pq.public_status > 1
             AND pq.op_id=#{opId}
         </where>
-        order by pq.update_date desc
+        order by pq.update_date desc,pq.id desc
         limit #{start},#{length}
     </select>
 
@@ -72,6 +72,7 @@
          and pq.select_status is not null
          and del_flag=0;
     </select>
+
     <resultMap id="getAutoSelectQuotationApplications" type="PurchaseQuotation">
         <result property="id" column="id"/>
         <collection property="applications" column="{quotationId=id,proType=proType}"

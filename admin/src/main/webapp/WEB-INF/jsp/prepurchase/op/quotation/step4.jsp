@@ -51,65 +51,63 @@
                     </div>
                 </div>
                 <div class="portlet-body form">
-                    <form role="form" class="form-horizontal">
-                        <div class="form-body">
-                            <div class="row">
-                                <div class=" col-md-6">
-                                    <div style="margin: 10px 0px 0 50px;">
-                                        Notice:
-                                        <hr style="margin: 10px 0;">
-                                        Please kindly check all the details provided by your good company, we shall
-                                        immediately send all the information (except the local agent details as well as
-                                        the LOI) to the relevant surveyors and/or the survey companies. Please closely
-                                        monitor the the status of your order on the platform. Once the order is
-                                        accepted, the platform is to send you the email in the first place to remind you
-                                        to follow up with the selection of the surveyor.
-                                        <hr style="margin: 10px 0;">
-                                        If you simply have no time to make such selection, the platform is then to make
-                                        the selection on your behalf in accordance with the following listed criteria
-                                        (the selection is automatically made by the platform 7 days prior to the
-                                        inspection)
-                                        <div class="md-radio-inline">
-                                            <div class="md-radio">
-                                                <input id="radio1" type="radio" name="selectStatus" value="1"
-                                                       class="md-radiobtn">
-                                                <label for="radio1">
-                                                    <span class="inc"></span>
-                                                    <span class="check"></span>
-                                                    <span class="box"></span>
-                                                    Low price preferred
-                                                </label>
-                                            </div>
-                                            <div class="md-radio">
-                                                <input id="radio2" type="radio" name="selectStatus" value="2"
-                                                       class="md-radiobtn">
-                                                <label for="radio2">
-                                                    <span class="inc"></span>
-                                                    <span class="check"></span>
-                                                    <span class="box"></span>
-                                                    High rating preferred
-                                                </label>
-                                            </div>
+                    <div class="form-body">
+                        <div class="row">
+                            <div class=" col-md-6">
+                                <div style="margin: 10px 0px 0 50px;">
+                                    Notice:
+                                    <hr style="margin: 10px 0;">
+                                    Please kindly check all the details provided by your good company, we shall
+                                    immediately send all the information (except the local agent details as well as
+                                    the LOI) to the relevant surveyors and/or the survey companies. Please closely
+                                    monitor the the status of your order on the platform. Once the order is
+                                    accepted, the platform is to send you the email in the first place to remind you
+                                    to follow up with the selection of the surveyor.
+                                    <hr style="margin: 10px 0;">
+                                    If you simply have no time to make such selection, the platform is then to make
+                                    the selection on your behalf in accordance with the following listed criteria
+                                    (the selection is automatically made by the platform 7 days prior to the
+                                    inspection)
+                                    <div class="md-radio-inline">
+                                        <div class="md-radio">
+                                            <input id="radio1" type="radio" name="selectStatus" value="1"
+                                                   class="md-radiobtn">
+                                            <label for="radio1">
+                                                <span class="inc"></span>
+                                                <span class="check"></span>
+                                                <span class="box"></span>
+                                                Low price preferred
+                                            </label>
+                                        </div>
+                                        <div class="md-radio">
+                                            <input id="radio2" type="radio" name="selectStatus" value="2"
+                                                   class="md-radiobtn">
+                                            <label for="radio2">
+                                                <span class="inc"></span>
+                                                <span class="check"></span>
+                                                <span class="box"></span>
+                                                High rating preferred
+                                            </label>
                                         </div>
                                     </div>
                                 </div>
-                                <div class="col-md-6" style="padding:50px 0 0 100px;">
-                                    <div style="margin: auto">
-                                        Please click here to upload once you finish off checking.
-                                        <button type="button" onclick="public_to_net(this)" class="btn blue"
-                                                data-target="navTab"
-                                                id="publicBtn"
-                                                style="display: block;margin-top: 20px;width: 200px">PUBLIC TO NET
-                                        </button>
-                                    </div>
+                            </div>
+                            <div class="col-md-6" style="padding:50px 0 0 100px;">
+                                <div style="margin: auto">
+                                    Please click here to upload once you finish off checking.
+                                    <button type="button" onclick="public_to_net(this)" class="btn blue"
+                                            data-target="navTab"
+                                            id="publicBtn"
+                                            style="display: block;margin-top: 20px;width: 200px">PUBLIC TO NET
+                                    </button>
                                 </div>
                             </div>
                         </div>
-                        <div class="form-actions right">
-                            <a data-toggle="tab" href="#step3"
-                               class="btn default btn-back">Back</a>
-                        </div>
-                    </form>
+                    </div>
+                    <div class="form-actions right">
+                        <a data-toggle="tab" href="#step3"
+                           class="btn default btn-back">Back</a>
+                    </div>
                 </div>
             </div>
         </div>

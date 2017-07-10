@@ -128,7 +128,7 @@
                 {
                     "data": "application.totalPrice",
                     "render": function (data) {
-                        return "$" + data;
+                        return "$" + ( data || "");
                     }
                 },
                 {
