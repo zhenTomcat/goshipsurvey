@@ -43,8 +43,8 @@
 <form action="" method="post" class="form-horizontal" id="defForm">
     <div class="col-md-12">
         <div class="col-md-12" style="margin-top: 20px;margin-bottom: 20px;">
-            <button id="upload_img" type="button" class="btn blue"><li class="fa fa-cloud-download"/>Download</button>&nbsp;&nbsp;
-            <button  type="button" onclick="deleteImgs()" class="btn green"><li class="fa fa-cloud-download"/>Download all</button>
+            <button id="upload_img" type="button" onclick="downloadImg()" class="btn blue"><li class="fa fa-cloud-download"/>Download</button>&nbsp;&nbsp;
+            <button  type="button" onclick="downloadAllImg()" class="btn green"><li class="fa fa-cloud-download"/>Download all</button>
         </div>
     </div>
     <div id="div-img" class="page col-md-12">
@@ -53,9 +53,9 @@
                 <div class="div-img" onmouseover="mouseOverImg(this)">
                     <div >
                         <span onclick="javascript:viewSpan(this);" class="span-right">
-                            <input class="icheck" data-imgId="${m.id}" style=" margin-left: 3px; margin-top: 5px;" type="checkbox"/>
+                            <input data-imgId="${m.id}" style=" margin-left: 3px; margin-top: 5px;" type="checkbox"/>
                         </span>
-                        <a href="${m.fileUrl}" target="_blank"> <img src="${m.fileUrl}" style="width: 150px;height: 150px;"/></a>
+                        <a href="${m.fileUrl}" class="download" target="_blank"> <img src="${m.fileUrl}" style="width: 150px;height: 150px;"/></a>
                     </div>
                     <div style="width: 150px">
                         <p>${m.fileName}</p>
@@ -85,6 +85,58 @@
             }else {
                 $(obj).find("span").show();
             }
+        });
+    }
+
+    //部分下载
+    function downloadImg() {
+        var imgs=new Array();
+        var count=0;
+        $(".download").each(function () {
+            if($(this).prev().find("input").prop("checked")){
+                imgs[count]=$(this).attr("href");
+                count++;
+            }
+        });
+        if(count==0){
+            swal({type:"warning",title:"至少选择一个"});
+            return;
+        }
+        arrayImg(imgs)
+    }
+
+    //全部下载
+    function downloadAllImg() {
+
+        swal({
+                title: "确定全部下载?",
+                text: "Your download all img",
+                type: "warning",
+                showCancelButton: true,
+                confirmButtonColor: "#DD6B55",
+                confirmButtonText: "确认",
+                cancelButtonText: "取消",
+            },
+            function(isConfirm){
+                if (isConfirm) {
+                    var imgs=new Array();
+                    var count=0;
+                    $(".download").each(function () {
+                        imgs[count]=$(this).attr("href");
+                        count++;
+                    });
+                    arrayImg(imgs)
+                }
+            });
+    }
+
+    function arrayImg(imgs) {
+        imgs.map(function(i){
+            var a = document.createElement('a');
+            a.setAttribute('download','');
+            a.href=i;
+            document.body.appendChild(a);
+            a.click();
         });
     }
 

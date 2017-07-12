@@ -48,7 +48,7 @@
         right:10px;
         z-index: 999;
     }
-    .span-right{display:none;background: rgb(0, 0, 0);color:white;position:absolute;top:0px;right:0px;z-index: 999;}
+    .span-right{}
 
     .li-left{margin-left: 2px}
     .li-right{margin-right: 2px}
@@ -391,18 +391,18 @@
                                 <div class="tab-pane-div col-md-12" style="background-color: #cccccc">
                                     <div class="col-md-12">
                                         <div class="col-md-3" style="margin-bottom: 20px;margin-top: 10px">
-                                            <button type="button" class="btn blue"><li class="fa fa-cloud-download"/>Download</button>&nbsp;&nbsp;
+                                            <button type="button" class="btn blue" onclick="downloadAlbum()"><li class="fa fa-cloud-download"/>Download</button>&nbsp;&nbsp;
                                         </div>
                                     </div>
                                     <c:forEach items="${report.galleries}" var="g">
                                         <fmt:formatDate value="${g.createDate}" pattern="dd/MM/yyyy" var="createDate"/>
                                         <div class="divPhoto">
-                                            <div class="divImg" onmouseover="mouseOver(this)">
+                                            <div class="divImg" onmouseover="mouseOverAlbum(this)">
                                                 <div >
-                                                    <span  class="span-right">
-                                                        <input class="icheck" data-imgId="${m.id}" style=" margin-left: 3px; margin-top: 5px;" type="checkbox"/>
+                                                    <span  <%--class="span-right"--%>style="display:none;background: rgb(0, 0, 0);color:white;position:absolute;top:0px;right:0px;z-index: 999;">
+                                                        <input data-imgId="${m.id}" style=" margin-left: 3px; margin-top: 5px;" type="checkbox"/>
                                                     </span>
-                                                    <a data-model="dialog" href="prepurchase/op/viewImg?galleriesId=${g.id}"  >
+                                                    <a data-model="dialog" class="downloadAlbum" data-galleriesId="${g.id}" href="prepurchase/op/viewImg?galleriesId=${g.id}"  >
                                                         <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/GWTcR228ek.jpg"
                                                              style="width: 200px;height: 200px;"/>
                                                     </a>
@@ -932,7 +932,7 @@
 
     });
     //鼠标移入事件
-    function mouseOver(obj){
+    function mouseOverAlbum(obj){
         $(obj).find("span").show();
         $(obj).mouseout(function () {
             if(!$(obj).find("input").prop("checked")){
@@ -1004,6 +1004,66 @@
             error:function () {
 
             }
+        });
+    }
+
+    function downloadAlbum() {
+        swal({
+                    title: "确定全部下载?",
+                    text: "Your download all img",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "确认",
+                    cancelButtonText: "取消",
+                },
+                function(isConfirm){
+                    if (isConfirm) {
+                        var count=0;
+                        $(".downloadAlbum").each(function () {
+                            if($(this).prev().find("input").prop("checked")){
+                                imgsAjax($(this).attr("data-galleriesId"));
+                                count++;
+                            }
+                        });
+                    }
+                });
+    }
+
+    //通过相册id获取所有的照片
+    function imgsAjax(id) {
+        var imgs=new Array();
+        $.ajax({
+            url:"prepurchase/op/viewImg",
+            type:"POST",
+            dataType:"json",
+            data:{
+                galleriesId:id,
+            },
+            success:function (data) {
+                if(data.mes){
+
+                    for(var i=0;i<data.medias.length;i++){
+                        imgs[i]=data.medias[i].fileUrl;
+                        console.log(imgs[i]);
+                    }
+                    arrayImgs(imgs);
+                }
+            },
+            error:function () {
+
+            }
+        });
+
+    }
+
+    function arrayImgs(imgs) {
+        imgs.map(function(i){
+            var a = document.createElement('a');
+            a.setAttribute('download','');
+            a.href=i;
+            document.body.appendChild(a);
+            a.click();
         });
     }
 </script>

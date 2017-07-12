@@ -198,12 +198,20 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
 
     @Override
     @Async
-    public String downloadReportByReportId(Integer inspectionId,String endpoint,String accessId,String accessKey,String bucket){
-        String url=exportSpecExcel(inspectionId,endpoint,accessId,accessKey,bucket);
+    public String downloadReportByReportId(Integer reportId,String endpoint,String accessId,String accessKey,String bucket){
+        String url=exportSpecExcel(reportId,endpoint,accessId,accessKey,bucket);
+        //getAlbums(reportId);
         return url;
     }
 
-
+    /*//将所有的相册的图片转成对应相册的zip
+    public String getAlbums(Integer reportId){
+        EntityWrapper<Galleries> ew=new EntityWrapper<>();
+        ew.addFilter("inspection_report_id={0}",reportId);
+        ew.addFilter("del_flag={0}",reportId);
+        List<Galleries> albums=galleriesMapper.selectList();
+    }
+*/
 
 
     //导出报告
@@ -922,6 +930,7 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
             objectMetadata.setContentDisposition("inline;filename=" + s+".pdf");
             //上传文件
             PutObjectResult putResult = ossClient.putObject(bucket, s+".pdf", fin, objectMetadata);
+
         } catch (IOException e) {
             /*log.error(e.getMessage(), e);*/
         } finally {
