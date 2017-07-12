@@ -197,7 +197,7 @@
                                                         </div>
                                                     </div>
                                                 </th>
-                                                <th style="width: 10%">${application.totalPrice}</th>
+                                                <th style="width: 10%">$:${application.totalPrice}</th>
                                                 <th style="width: 10%">
                                                     <c:if test="${application.applicationStatus==0}">
                                                         <button type="button"

@@ -43,7 +43,7 @@
                                         <i class="icon-social-dribbble font-blue-soft"></i>
                                         <span class="caption-subject font-blue-soft bold uppercase">Quotations</span>
                                     </div>
-                                    <shiro:hasPermission name="op/quotation/add">
+                                    <shiro:hasPermission name="prepurchase/op/quotation/add">
                                         <div class="col-md-4">
                                             <div class="btn-group">
                                                 <a href="prepurchase/op/quotation/add"
@@ -62,14 +62,15 @@
                                                 <thead>
                                                 <tr>
                                                     <th width="10%">Ship name</th>
-                                                    <th width="10%">imo</th>
-                                                    <th width="10%">Ship type</th>
-                                                    <th width="15%">Inspection port</th>
-                                                    <th width="20%">Inspection date(LMT)</th>
+                                                    <th width="8%">imo</th>
+                                                    <th width="8%">Ship type</th>
+                                                    <th width="17%">Inspection port</th>
+                                                    <th width="17%">Inspection date(LMT)</th>
                                                     <th width="8%">Available surveyors</th>
-                                                    <th width="10%">Status</th>
-                                                    <th width="10%">More Detail</th>
-                                                    <th width="7%">Deal</th>
+                                                    <th width="8%">Status</th>
+                                                    <th width="8%">More Detail</th>
+                                                    <th width="8%">Deal</th>
+                                                    <th width="8%">Auto Select</th>
                                                 </tr>
                                                 <tbody></tbody>
                                                 </thead>
@@ -138,6 +139,16 @@
                 },
                 {
                     "data": "id"
+                },
+                {
+                    "data": "selectStatus",
+                    "render": function (data) {
+                        if (data == 1) {
+                            return "Low price preferred";
+                        } else if (data == 2) {
+                            return "High rating preferred";
+                        }
+                    }
                 },
             ],
             "columnDefs": [

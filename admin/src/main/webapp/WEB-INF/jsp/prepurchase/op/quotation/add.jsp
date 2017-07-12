@@ -104,7 +104,6 @@
         <jsp:include page="step2.jsp"></jsp:include>
         <jsp:include page="step3.jsp"></jsp:include>
         <jsp:include page="step4.jsp"></jsp:include>
-        <jsp:include page="step5.jsp"></jsp:include>
     </div>
 </form>
 
