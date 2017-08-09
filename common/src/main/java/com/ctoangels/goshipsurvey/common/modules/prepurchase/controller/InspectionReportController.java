@@ -1,6 +1,8 @@
 package com.ctoangels.goshipsurvey.common.modules.prepurchase.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.aliyun.oss.OSSClient;
+import com.aliyun.oss.model.OSSObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Dict;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IDictService;
@@ -20,6 +22,12 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
+import java.io.File;
+import java.net.URLEncoder;
 import java.util.Date;
 import java.util.List;
 
@@ -526,6 +534,21 @@ public class InspectionReportController extends BaseController {
         return "prepurchase/op/inspection/viewImg";
     }
 
+    //获取相册的所有的图片
+    @RequestMapping(value = "/op/viewImg", method = RequestMethod.POST)
+    @ResponseBody
+    public JSONObject getImgs(@RequestParam(required = false) Integer galleriesId) {
+        JSONObject jsonObject=new JSONObject();
+        EntityWrapper<Media> ew = getEntityWrapper();
+        ew.addFilter("galleries_id={0}", galleriesId);
+        List<Media> medias = mediaService.selectList(ew);
+        jsonObject.put("medias", medias);
+        jsonObject.put("mes", true);
+
+
+        return jsonObject;
+    }
+
     //下载报告
     @RequestMapping(value = "/op/reportDownload", method = RequestMethod.GET)
     public String download(@RequestParam(required = false) Integer inspectionId) {
@@ -536,5 +559,7 @@ public class InspectionReportController extends BaseController {
         }
         return "prepurchase/op/inspection/viewImg";
     }
+
+
 
 }

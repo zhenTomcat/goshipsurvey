@@ -1,16 +1,16 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : wang
-Source Server Version : 50716
-Source Host           : localhost:3306
+Source Server         : goshipyard
+Source Server Version : 50550
+Source Host           : 139.224.62.32:3306
 Source Database       : goshipsurvey
 
 Target Server Type    : MYSQL
-Target Server Version : 50716
+Target Server Version : 50550
 File Encoding         : 65001
 
-Date: 2017-07-08 13:57:28
+Date: 2017-07-12 09:54:59
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -183,7 +183,7 @@ CREATE TABLE `sys_menu` (
   `pro_type` int(3) DEFAULT NULL,
   `del_flag` int(3) NOT NULL DEFAULT '1',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=191 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=195 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_menu
@@ -274,6 +274,10 @@ INSERT INTO `sys_menu` VALUES ('187', 'op/inspection/list', 'op/inspection/list'
 INSERT INTO `sys_menu` VALUES ('188', 'surveyor/record/list', 'surveyor/record/list', '94', '1', null, '2', '1', '', '1', '0');
 INSERT INTO `sys_menu` VALUES ('189', 'surveyor/quotation/list', 'surveyor/quotation/list', '95', '1', null, '2', '1', '', '1', '0');
 INSERT INTO `sys_menu` VALUES ('190', 'surveyor/inspection/list', 'surveyor/inspection/list', '96', '1', null, '2', '1', '', '1', '0');
+INSERT INTO `sys_menu` VALUES ('191', 'prepurchase/op/quotation/delete', 'prepurchase/op/quotation/delete', '130', '104', null, '2', '1', '', '2', '0');
+INSERT INTO `sys_menu` VALUES ('192', 'publicShip/searchOne', 'publicShip/searchOne', '150', '191', null, '2', '1', '', '3', '0');
+INSERT INTO `sys_menu` VALUES ('193', 'publicShip/searchList', 'publicShip/searchList', '150', '192', null, '2', '1', '', '3', '0');
+INSERT INTO `sys_menu` VALUES ('194', 'port/searchList', 'port/searchList', '150', '193', null, '2', '1', '', '3', '0');
 
 -- ----------------------------
 -- Table structure for sys_message
@@ -294,7 +298,7 @@ CREATE TABLE `sys_message` (
   `update_by` varchar(64) DEFAULT NULL,
   `del_flag` int(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=250 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=232 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of sys_message
@@ -339,7 +343,7 @@ INSERT INTO `sys_message` VALUES ('130', '1', '1', 'Aashna船租还船检验,已
 INSERT INTO `sys_message` VALUES ('131', '21', '1', '本区域有可进行租还船检验船舶,请及时查看', '本区域有可进行租还船检验船舶,请及时查看', '0', '2017-06-29', null, '2017-06-27', 'op', '2017-06-27', 'op', '0');
 INSERT INTO `sys_message` VALUES ('132', '21', '3', '本区域有可进行租还船检验船舶,请及时查看', '本区域有可进行租还船检验船舶,请及时查看', '0', null, null, '2017-06-27', 'op', '2017-06-27', 'op', '0');
 INSERT INTO `sys_message` VALUES ('133', '21', '23', '本区域有可进行租还船检验船舶,请及时查看', '本区域有可进行租还船检验船舶,请及时查看', '1', '2017-06-29', null, '2017-06-27', 'op', '2017-06-27', 'op', '0');
-INSERT INTO `sys_message` VALUES ('134', '23', '1', 'Aashna船租还船检验,已有验船师申请检验', 'Aashna船租还船检验,已有验船师申请检验', '1', '2017-07-07', '0', '2017-06-27', 'company', '2017-06-27', 'company', '0');
+INSERT INTO `sys_message` VALUES ('134', '23', '1', 'Aashna船租还船检验,已有验船师申请检验', 'Aashna船租还船检验,已有验船师申请检验', '0', '2017-06-29', '0', '2017-06-27', 'company', '2017-06-27', 'company', '0');
 INSERT INTO `sys_message` VALUES ('135', '1', '3', '本区域有可进行租还船检验船舶,请及时查看', '本区域有可进行租还船检验船舶,请及时查看', '0', null, null, '2017-06-27', 'admin', '2017-06-27', 'admin', '0');
 INSERT INTO `sys_message` VALUES ('136', '1', '23', '本区域有可进行租还船检验船舶,请及时查看', '本区域有可进行租还船检验船舶,请及时查看', '1', '2017-06-29', null, '2017-06-27', 'admin', '2017-06-27', 'admin', '0');
 INSERT INTO `sys_message` VALUES ('137', '1', '1', 'African Cendana船租还船检验,已有验船师申请检验', 'African Cendana船租还船检验,已有验船师申请检验', '1', '2017-06-29', null, '2017-06-27', 'admin', '2017-06-27', 'admin', '0');
@@ -420,41 +424,23 @@ INSERT INTO `sys_message` VALUES ('211', '1', '1', '26 Agustos船买卖船勘验
 INSERT INTO `sys_message` VALUES ('212', '1', '1', '26 Agustos船买卖船勘验,验船师已对本次验船做出评价', '26 Agustos船买卖船勘验,验船师已对本次验船做出评价', '0', null, null, '2017-07-04', 'admin', '2017-07-04', 'admin', '0');
 INSERT INTO `sys_message` VALUES ('213', '1', '3', '本区域内有可进行买卖船勘验船舶,请及时查看', '本区域内有可进行买卖船勘验船舶,请及时查看', '0', null, null, '2017-07-05', 'admin', '2017-07-05', 'admin', '0');
 INSERT INTO `sys_message` VALUES ('214', '1', '23', '本区域内有可进行买卖船勘验船舶,请及时查看', '本区域内有可进行买卖船勘验船舶,请及时查看', '0', null, null, '2017-07-05', 'admin', '2017-07-05', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('215', '1', '3', '本区域有可进行租还船检验船舶,请及时查看', '本区域有可进行租还船检验船舶,请及时查看', '0', null, null, '2017-07-06', 'admin', '2017-07-06', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('216', '1', '23', '本区域有可进行租还船检验船舶,请及时查看', '本区域有可进行租还船检验船舶,请及时查看', '0', null, null, '2017-07-06', 'admin', '2017-07-06', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('217', '1', '1', 'Alessandra M船租还船检验,已有验船师申请检验', 'Alessandra M船租还船检验,已有验船师申请检验', '0', null, null, '2017-07-06', 'admin', '2017-07-06', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('218', '1', '1', 'Alessandra M船租还船检验,船东已接受您的检验申请,请尽快上传护照及loi文件,并查看代理信息安排人员验船', 'Alessandra M船租还船检验,船东已接受您的检验申请,请尽快上传护照及loi文件,并查看代理信息安排人员验船', '0', null, null, '2017-07-06', 'admin', '2017-07-06', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('219', '1', '3', '本区域有可进行租还船检验船舶,请及时查看', '本区域有可进行租还船检验船舶,请及时查看', '0', null, null, '2017-07-06', 'admin', '2017-07-06', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('220', '1', '23', '本区域有可进行租还船检验船舶,请及时查看', '本区域有可进行租还船检验船舶,请及时查看', '0', null, null, '2017-07-06', 'admin', '2017-07-06', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('221', '1', '1', 'Lucien G A船租还船检验,已有验船师申请检验', 'Lucien G A船租还船检验,已有验船师申请检验', '0', null, null, '2017-07-06', 'admin', '2017-07-06', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('222', '1', '1', 'Lucien G A船租还船检验,船东已接受您的检验申请,请尽快上传护照及loi文件,并查看代理信息安排人员验船', 'Lucien G A船租还船检验,船东已接受您的检验申请,请尽快上传护照及loi文件,并查看代理信息安排人员验船', '0', null, null, '2017-07-06', 'admin', '2017-07-06', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('223', '1', '3', '本区域内有可进行买卖船勘验船舶,请及时查看', '本区域内有可进行买卖船勘验船舶,请及时查看', '0', null, null, '2017-07-06', 'admin', '2017-07-06', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('224', '1', '23', '本区域内有可进行买卖船勘验船舶,请及时查看', '本区域内有可进行买卖船勘验船舶,请及时查看', '0', null, null, '2017-07-06', 'admin', '2017-07-06', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('225', '1', '1', 'Abdullah船买卖船检验,已有验船师申请勘验', 'Abdullah船买卖船检验,已有验船师申请勘验', '0', null, null, '2017-07-06', 'admin', '2017-07-06', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('226', '1', '3', '本区域有可进行租还船检验船舶,请及时查看', '本区域有可进行租还船检验船舶,请及时查看', '0', null, null, '2017-07-07', 'admin', '2017-07-07', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('227', '1', '23', '本区域有可进行租还船检验船舶,请及时查看', '本区域有可进行租还船检验船舶,请及时查看', '0', null, null, '2017-07-07', 'admin', '2017-07-07', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('228', '1', '1', 'Athanassios G.O.船租还船检验,已有验船师申请检验', 'Athanassios G.O.船租还船检验,已有验船师申请检验', '0', null, null, '2017-07-07', 'admin', '2017-07-07', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('229', '1', '1', 'Athanassios G.O.船租还船检验,船东已接受您的检验申请,请尽快上传护照及loi文件,并查看代理信息安排人员验船', 'Athanassios G.O.船租还船检验,船东已接受您的检验申请,请尽快上传护照及loi文件,并查看代理信息安排人员验船', '0', null, null, '2017-07-07', 'admin', '2017-07-07', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('230', '1', '3', '本区域有可进行租还船检验船舶,请及时查看', '本区域有可进行租还船检验船舶,请及时查看', '0', null, null, '2017-07-07', 'admin', '2017-07-07', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('231', '1', '23', '本区域有可进行租还船检验船舶,请及时查看', '本区域有可进行租还船检验船舶,请及时查看', '0', null, null, '2017-07-07', 'admin', '2017-07-07', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('232', '1', '1', '26 Agustos船买卖检验,验船师已上传相关文件,请及时查看', '26 Agustos船买卖检验,验船师已上传相关文件,请及时查看', '0', null, null, '2017-07-07', 'admin', '2017-07-07', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('233', '1', '1', '26 Agustos船买卖检验,验船师已上传相关文件,请及时查看', '26 Agustos船买卖检验,验船师已上传相关文件,请及时查看', '1', '2017-07-07', null, '2017-07-07', 'admin', '2017-07-07', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('234', '1', '1', '26 Agustos船买卖检验,验船师已上传相关文件,请及时查看', '26 Agustos船买卖检验,验船师已上传相关文件,请及时查看', '1', '2017-07-07', null, '2017-07-07', 'admin', '2017-07-07', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('235', '1', '3', '本区域内有可进行买卖船勘验船舶,请及时查看', '本区域内有可进行买卖船勘验船舶,请及时查看', '0', null, null, '2017-07-07', 'admin', '2017-07-07', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('236', '1', '23', '本区域内有可进行买卖船勘验船舶,请及时查看', '本区域内有可进行买卖船勘验船舶,请及时查看', '0', null, null, '2017-07-07', 'admin', '2017-07-07', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('237', '1', '3', '本区域内有可进行买卖船勘验船舶,请及时查看', '本区域内有可进行买卖船勘验船舶,请及时查看', '0', null, null, '2017-07-07', 'admin', '2017-07-07', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('238', '1', '23', '本区域内有可进行买卖船勘验船舶,请及时查看', '本区域内有可进行买卖船勘验船舶,请及时查看', '0', null, null, '2017-07-07', 'admin', '2017-07-07', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('239', '1', '1', 'ABM Discovery船买卖船检验,已有验船师申请勘验', 'ABM Discovery船买卖船检验,已有验船师申请勘验', '0', null, null, '2017-07-07', 'admin', '2017-07-07', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('240', '1', '1', 'ABM Discovery船买卖船勘验,船东已接受您的检验申请,请尽快上传护照及loi文件,并查看代理信息安排人员验船', 'ABM Discovery船买卖船勘验,船东已接受您的检验申请,请尽快上传护照及loi文件,并查看代理信息安排人员验船', '0', null, null, '2017-07-07', 'admin', '2017-07-07', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('241', '1', '1', 'ABY Scarlett船买卖船检验,已有验船师申请勘验', 'ABY Scarlett船买卖船检验,已有验船师申请勘验', '0', null, null, '2017-07-07', 'admin', '2017-07-07', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('242', '1', '3', '本区域内有可进行买卖船勘验船舶,请及时查看', '本区域内有可进行买卖船勘验船舶,请及时查看', '0', null, null, '2017-07-07', 'admin', '2017-07-07', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('243', '1', '23', '本区域内有可进行买卖船勘验船舶,请及时查看', '本区域内有可进行买卖船勘验船舶,请及时查看', '0', null, null, '2017-07-07', 'admin', '2017-07-07', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('244', '1', '1', 'Abdullah船买卖船检验,已有验船师申请勘验', 'Abdullah船买卖船检验,已有验船师申请勘验', '0', null, null, '2017-07-07', 'admin', '2017-07-07', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('245', '1', '3', '本区域内有可进行买卖船勘验船舶,请及时查看', '本区域内有可进行买卖船勘验船舶,请及时查看', '0', null, null, '2017-07-07', 'admin', '2017-07-07', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('246', '1', '23', '本区域内有可进行买卖船勘验船舶,请及时查看', '本区域内有可进行买卖船勘验船舶,请及时查看', '0', null, null, '2017-07-07', 'admin', '2017-07-07', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('247', '1', '1', 'Abdullah船买卖船勘验,船东已接受您的检验申请,请尽快上传护照及loi文件,并查看代理信息安排人员验船', 'Abdullah船买卖船勘验,船东已接受您的检验申请,请尽快上传护照及loi文件,并查看代理信息安排人员验船', '0', null, null, '2017-07-07', 'admin', '2017-07-07', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('248', '1', '1', 'Alpha Progress船买卖船检验,已有验船师申请勘验', 'Alpha Progress船买卖船检验,已有验船师申请勘验', '0', null, null, '2017-07-07', 'admin', '2017-07-07', 'admin', '0');
-INSERT INTO `sys_message` VALUES ('249', '0', '1', 'Alpha Progress船买卖船勘验,船东已接受您的检验申请,请尽快上传护照及loi文件,并查看代理信息安排人员验船', 'Alpha Progress船买卖船勘验,船东已接受您的检验申请,请尽快上传护照及loi文件,并查看代理信息安排人员验船', '0', null, null, '2017-07-07', 'system', '2017-07-07', 'system', '0');
+INSERT INTO `sys_message` VALUES ('215', '1', '1', '26 Agustos船买卖船勘验,验船报告已出,请及时在网上查看,也可下载PDF版本,并对本次验船做出评价', '26 Agustos船买卖船勘验,验船报告已出,请及时在网上查看,也可下载PDF版本,并对本次验船做出评价', '0', null, null, '2017-07-05', 'admin', '2017-07-05', 'admin', '0');
+INSERT INTO `sys_message` VALUES ('216', '1', '1', '26 Agustos船买卖船勘验,验船报告已出,请及时在网上查看,也可下载PDF版本,并对本次验船做出评价', '26 Agustos船买卖船勘验,验船报告已出,请及时在网上查看,也可下载PDF版本,并对本次验船做出评价', '0', null, null, '2017-07-05', 'admin', '2017-07-05', 'admin', '0');
+INSERT INTO `sys_message` VALUES ('217', '1', '1', '26 Agustos船买卖船勘验,验船报告已出,请及时在网上查看,也可下载PDF版本,并对本次验船做出评价', '26 Agustos船买卖船勘验,验船报告已出,请及时在网上查看,也可下载PDF版本,并对本次验船做出评价', '0', null, null, '2017-07-05', 'admin', '2017-07-05', 'admin', '0');
+INSERT INTO `sys_message` VALUES ('218', '1', '1', '26 Agustos船买卖船勘验,验船报告已出,请及时在网上查看,也可下载PDF版本,并对本次验船做出评价', '26 Agustos船买卖船勘验,验船报告已出,请及时在网上查看,也可下载PDF版本,并对本次验船做出评价', '0', null, null, '2017-07-05', 'admin', '2017-07-05', 'admin', '0');
+INSERT INTO `sys_message` VALUES ('219', '1', '1', '26 Agustos船买卖船勘验,验船报告已出,请及时在网上查看,也可下载PDF版本,并对本次验船做出评价', '26 Agustos船买卖船勘验,验船报告已出,请及时在网上查看,也可下载PDF版本,并对本次验船做出评价', '0', null, null, '2017-07-05', 'admin', '2017-07-05', 'admin', '0');
+INSERT INTO `sys_message` VALUES ('220', '1', '1', '26 Agustos船买卖船勘验,验船报告已出,请及时在网上查看,也可下载PDF版本,并对本次验船做出评价', '26 Agustos船买卖船勘验,验船报告已出,请及时在网上查看,也可下载PDF版本,并对本次验船做出评价', '0', null, null, '2017-07-05', 'admin', '2017-07-05', 'admin', '0');
+INSERT INTO `sys_message` VALUES ('221', '1', '1', '26 Agustos船买卖船勘验,验船报告已出,请及时在网上查看,也可下载PDF版本,并对本次验船做出评价', '26 Agustos船买卖船勘验,验船报告已出,请及时在网上查看,也可下载PDF版本,并对本次验船做出评价', '0', null, null, '2017-07-05', 'admin', '2017-07-05', 'admin', '0');
+INSERT INTO `sys_message` VALUES ('222', '1', '1', '26 Agustos船买卖船勘验,验船报告已出,请及时在网上查看,也可下载PDF版本,并对本次验船做出评价', '26 Agustos船买卖船勘验,验船报告已出,请及时在网上查看,也可下载PDF版本,并对本次验船做出评价', '0', null, null, '2017-07-05', 'admin', '2017-07-05', 'admin', '0');
+INSERT INTO `sys_message` VALUES ('223', '1', '1', 'Yin Nian船买卖船检验,已有验船师申请勘验', 'Yin Nian船买卖船检验,已有验船师申请勘验', '0', null, null, '2017-07-05', 'admin', '2017-07-05', 'admin', '0');
+INSERT INTO `sys_message` VALUES ('224', '23', '1', 'Yin Nian船买卖船检验,已有验船师申请勘验', 'Yin Nian船买卖船检验,已有验船师申请勘验', '0', null, null, '2017-07-05', 'company', '2017-07-05', 'company', '0');
+INSERT INTO `sys_message` VALUES ('225', '1', '1', 'Yin Nian船买卖船勘验,船东已接受您的检验申请,请尽快上传护照及loi文件,并查看代理信息安排人员验船', 'Yin Nian船买卖船勘验,船东已接受您的检验申请,请尽快上传护照及loi文件,并查看代理信息安排人员验船', '0', null, null, '2017-07-05', 'admin', '2017-07-05', 'admin', '0');
+INSERT INTO `sys_message` VALUES ('226', '1', '23', 'Yin Nian船买卖船勘验,验船申请失败', 'Yin Nian船买卖船勘验,验船申请失败', '0', null, null, '2017-07-05', 'admin', '2017-07-05', 'admin', '0');
+INSERT INTO `sys_message` VALUES ('227', '1', '1', 'Yin Nian船买卖船勘验,验船报告已出,请及时在网上查看,也可下载PDF版本,并对本次验船做出评价', 'Yin Nian船买卖船勘验,验船报告已出,请及时在网上查看,也可下载PDF版本,并对本次验船做出评价', '0', null, null, '2017-07-05', 'admin', '2017-07-05', 'admin', '0');
+INSERT INTO `sys_message` VALUES ('228', '1', '1', 'Yin Nian船买卖船勘验,验船报告已出,请及时在网上查看,也可下载PDF版本,并对本次验船做出评价', 'Yin Nian船买卖船勘验,验船报告已出,请及时在网上查看,也可下载PDF版本,并对本次验船做出评价', '0', null, null, '2017-07-05', 'admin', '2017-07-05', 'admin', '0');
+INSERT INTO `sys_message` VALUES ('229', '1', '3', '本区域内有可进行买卖船勘验船舶,请及时查看', '本区域内有可进行买卖船勘验船舶,请及时查看', '0', null, null, '2017-07-10', 'admin', '2017-07-10', 'admin', '0');
+INSERT INTO `sys_message` VALUES ('230', '1', '23', '本区域内有可进行买卖船勘验船舶,请及时查看', '本区域内有可进行买卖船勘验船舶,请及时查看', '0', null, null, '2017-07-10', 'admin', '2017-07-10', 'admin', '0');
+INSERT INTO `sys_message` VALUES ('231', '1', '1', 'Yin Nian船买卖船勘验,验船报告已出,请及时在网上查看,也可下载PDF版本,并对本次验船做出评价', 'Yin Nian船买卖船勘验,验船报告已出,请及时在网上查看,也可下载PDF版本,并对本次验船做出评价', '0', null, null, '2017-07-10', 'admin', '2017-07-10', 'admin', '0');
 
 -- ----------------------------
 -- Table structure for sys_office
@@ -505,7 +491,7 @@ CREATE TABLE `sys_role_resource` (
   PRIMARY KEY (`id`),
   KEY `role_id_idx` (`role_id`) USING BTREE,
   KEY `resource_id_idx` (`resource_id`) USING BTREE
-) ENGINE=InnoDB AUTO_INCREMENT=1547 DEFAULT CHARSET=utf8 COMMENT='权限和资源（菜单+按钮）';
+) ENGINE=InnoDB AUTO_INCREMENT=1819 DEFAULT CHARSET=utf8 COMMENT='权限和资源（菜单+按钮）';
 
 -- ----------------------------
 -- Records of sys_role_resource
@@ -543,142 +529,151 @@ INSERT INTO `sys_role_resource` VALUES ('759', '3', '134', '1');
 INSERT INTO `sys_role_resource` VALUES ('760', '3', '135', '1');
 INSERT INTO `sys_role_resource` VALUES ('761', '3', '136', '1');
 INSERT INTO `sys_role_resource` VALUES ('762', '3', '150', '1');
-INSERT INTO `sys_role_resource` VALUES ('1411', '2', '91', '1');
-INSERT INTO `sys_role_resource` VALUES ('1412', '2', '110', '2');
-INSERT INTO `sys_role_resource` VALUES ('1413', '2', '111', '2');
-INSERT INTO `sys_role_resource` VALUES ('1414', '2', '112', '2');
-INSERT INTO `sys_role_resource` VALUES ('1415', '2', '92', '1');
-INSERT INTO `sys_role_resource` VALUES ('1416', '2', '120', '2');
-INSERT INTO `sys_role_resource` VALUES ('1417', '2', '121', '2');
-INSERT INTO `sys_role_resource` VALUES ('1418', '2', '152', '2');
-INSERT INTO `sys_role_resource` VALUES ('1419', '2', '93', '1');
-INSERT INTO `sys_role_resource` VALUES ('1420', '2', '113', '2');
-INSERT INTO `sys_role_resource` VALUES ('1421', '2', '61', '3');
-INSERT INTO `sys_role_resource` VALUES ('1422', '2', '115', '2');
-INSERT INTO `sys_role_resource` VALUES ('1423', '2', '116', '2');
-INSERT INTO `sys_role_resource` VALUES ('1424', '2', '117', '2');
-INSERT INTO `sys_role_resource` VALUES ('1425', '2', '118', '2');
-INSERT INTO `sys_role_resource` VALUES ('1426', '2', '119', '2');
-INSERT INTO `sys_role_resource` VALUES ('1427', '2', '156', '2');
-INSERT INTO `sys_role_resource` VALUES ('1428', '2', '159', '2');
-INSERT INTO `sys_role_resource` VALUES ('1429', '2', '160', '2');
-INSERT INTO `sys_role_resource` VALUES ('1430', '2', '62', '3');
-INSERT INTO `sys_role_resource` VALUES ('1431', '2', '129', '1');
-INSERT INTO `sys_role_resource` VALUES ('1432', '2', '137', '2');
-INSERT INTO `sys_role_resource` VALUES ('1433', '2', '25', '3');
-INSERT INTO `sys_role_resource` VALUES ('1434', '2', '26', '3');
-INSERT INTO `sys_role_resource` VALUES ('1435', '2', '130', '1');
-INSERT INTO `sys_role_resource` VALUES ('1436', '2', '140', '2');
-INSERT INTO `sys_role_resource` VALUES ('1437', '2', '28', '3');
-INSERT INTO `sys_role_resource` VALUES ('1438', '2', '141', '2');
-INSERT INTO `sys_role_resource` VALUES ('1439', '2', '32', '3');
-INSERT INTO `sys_role_resource` VALUES ('1440', '2', '33', '3');
-INSERT INTO `sys_role_resource` VALUES ('1441', '2', '142', '2');
-INSERT INTO `sys_role_resource` VALUES ('1442', '2', '31', '3');
-INSERT INTO `sys_role_resource` VALUES ('1443', '2', '131', '1');
-INSERT INTO `sys_role_resource` VALUES ('1444', '2', '164', '2');
-INSERT INTO `sys_role_resource` VALUES ('1445', '2', '65', '3');
-INSERT INTO `sys_role_resource` VALUES ('1446', '2', '132', '1');
-INSERT INTO `sys_role_resource` VALUES ('1447', '2', '182', '2');
-INSERT INTO `sys_role_resource` VALUES ('1448', '2', '66', '3');
-INSERT INTO `sys_role_resource` VALUES ('1449', '2', '183', '2');
-INSERT INTO `sys_role_resource` VALUES ('1450', '2', '184', '2');
-INSERT INTO `sys_role_resource` VALUES ('1451', '2', '185', '2');
-INSERT INTO `sys_role_resource` VALUES ('1452', '2', '145', '1');
-INSERT INTO `sys_role_resource` VALUES ('1453', '2', '148', '2');
-INSERT INTO `sys_role_resource` VALUES ('1454', '2', '36', '3');
-INSERT INTO `sys_role_resource` VALUES ('1455', '2', '37', '3');
-INSERT INTO `sys_role_resource` VALUES ('1456', '2', '38', '3');
-INSERT INTO `sys_role_resource` VALUES ('1457', '2', '39', '3');
-INSERT INTO `sys_role_resource` VALUES ('1458', '2', '40', '3');
-INSERT INTO `sys_role_resource` VALUES ('1459', '2', '41', '3');
-INSERT INTO `sys_role_resource` VALUES ('1460', '2', '60', '3');
-INSERT INTO `sys_role_resource` VALUES ('1461', '2', '146', '1');
-INSERT INTO `sys_role_resource` VALUES ('1462', '2', '149', '2');
-INSERT INTO `sys_role_resource` VALUES ('1463', '2', '52', '3');
-INSERT INTO `sys_role_resource` VALUES ('1464', '2', '150', '1');
-INSERT INTO `sys_role_resource` VALUES ('1465', '2', '154', '1');
-INSERT INTO `sys_role_resource` VALUES ('1466', '2', '155', '2');
-INSERT INTO `sys_role_resource` VALUES ('1467', '2', '54', '3');
-INSERT INTO `sys_role_resource` VALUES ('1468', '2', '55', '3');
-INSERT INTO `sys_role_resource` VALUES ('1469', '2', '56', '3');
-INSERT INTO `sys_role_resource` VALUES ('1470', '2', '57', '3');
-INSERT INTO `sys_role_resource` VALUES ('1471', '4', '94', '1');
-INSERT INTO `sys_role_resource` VALUES ('1472', '4', '122', '2');
-INSERT INTO `sys_role_resource` VALUES ('1473', '4', '128', '2');
-INSERT INTO `sys_role_resource` VALUES ('1474', '4', '188', '2');
-INSERT INTO `sys_role_resource` VALUES ('1475', '4', '95', '1');
-INSERT INTO `sys_role_resource` VALUES ('1476', '4', '127', '2');
-INSERT INTO `sys_role_resource` VALUES ('1477', '4', '157', '2');
-INSERT INTO `sys_role_resource` VALUES ('1478', '4', '189', '2');
-INSERT INTO `sys_role_resource` VALUES ('1479', '4', '96', '1');
-INSERT INTO `sys_role_resource` VALUES ('1480', '4', '124', '2');
-INSERT INTO `sys_role_resource` VALUES ('1481', '4', '125', '2');
-INSERT INTO `sys_role_resource` VALUES ('1482', '4', '126', '2');
-INSERT INTO `sys_role_resource` VALUES ('1483', '4', '151', '2');
-INSERT INTO `sys_role_resource` VALUES ('1484', '4', '153', '2');
-INSERT INTO `sys_role_resource` VALUES ('1485', '4', '190', '2');
-INSERT INTO `sys_role_resource` VALUES ('1486', '4', '133', '1');
-INSERT INTO `sys_role_resource` VALUES ('1487', '4', '139', '2');
-INSERT INTO `sys_role_resource` VALUES ('1488', '4', '27', '3');
-INSERT INTO `sys_role_resource` VALUES ('1489', '4', '134', '1');
-INSERT INTO `sys_role_resource` VALUES ('1490', '4', '143', '2');
-INSERT INTO `sys_role_resource` VALUES ('1491', '4', '34', '3');
-INSERT INTO `sys_role_resource` VALUES ('1492', '4', '35', '3');
-INSERT INTO `sys_role_resource` VALUES ('1493', '4', '135', '1');
-INSERT INTO `sys_role_resource` VALUES ('1494', '4', '162', '2');
-INSERT INTO `sys_role_resource` VALUES ('1495', '4', '64', '3');
-INSERT INTO `sys_role_resource` VALUES ('1496', '4', '163', '2');
-INSERT INTO `sys_role_resource` VALUES ('1497', '4', '136', '1');
-INSERT INTO `sys_role_resource` VALUES ('1498', '4', '165', '2');
-INSERT INTO `sys_role_resource` VALUES ('1499', '4', '166', '2');
-INSERT INTO `sys_role_resource` VALUES ('1500', '4', '167', '2');
-INSERT INTO `sys_role_resource` VALUES ('1501', '4', '168', '2');
-INSERT INTO `sys_role_resource` VALUES ('1502', '4', '169', '2');
-INSERT INTO `sys_role_resource` VALUES ('1503', '4', '170', '2');
-INSERT INTO `sys_role_resource` VALUES ('1504', '4', '171', '2');
-INSERT INTO `sys_role_resource` VALUES ('1505', '4', '172', '2');
-INSERT INTO `sys_role_resource` VALUES ('1506', '4', '173', '2');
-INSERT INTO `sys_role_resource` VALUES ('1507', '4', '174', '2');
-INSERT INTO `sys_role_resource` VALUES ('1508', '4', '175', '2');
-INSERT INTO `sys_role_resource` VALUES ('1509', '4', '176', '2');
-INSERT INTO `sys_role_resource` VALUES ('1510', '4', '177', '2');
-INSERT INTO `sys_role_resource` VALUES ('1511', '4', '178', '2');
-INSERT INTO `sys_role_resource` VALUES ('1512', '4', '179', '2');
-INSERT INTO `sys_role_resource` VALUES ('1513', '4', '180', '2');
-INSERT INTO `sys_role_resource` VALUES ('1514', '4', '181', '2');
-INSERT INTO `sys_role_resource` VALUES ('1515', '4', '145', '1');
-INSERT INTO `sys_role_resource` VALUES ('1516', '4', '148', '2');
-INSERT INTO `sys_role_resource` VALUES ('1517', '4', '36', '3');
-INSERT INTO `sys_role_resource` VALUES ('1518', '4', '37', '3');
-INSERT INTO `sys_role_resource` VALUES ('1519', '4', '38', '3');
-INSERT INTO `sys_role_resource` VALUES ('1520', '4', '39', '3');
-INSERT INTO `sys_role_resource` VALUES ('1521', '4', '40', '3');
-INSERT INTO `sys_role_resource` VALUES ('1522', '4', '41', '3');
-INSERT INTO `sys_role_resource` VALUES ('1523', '4', '60', '3');
-INSERT INTO `sys_role_resource` VALUES ('1524', '4', '146', '1');
-INSERT INTO `sys_role_resource` VALUES ('1525', '4', '149', '2');
-INSERT INTO `sys_role_resource` VALUES ('1526', '4', '42', '3');
-INSERT INTO `sys_role_resource` VALUES ('1527', '4', '43', '3');
-INSERT INTO `sys_role_resource` VALUES ('1528', '4', '44', '3');
-INSERT INTO `sys_role_resource` VALUES ('1529', '4', '45', '3');
-INSERT INTO `sys_role_resource` VALUES ('1530', '4', '46', '3');
-INSERT INTO `sys_role_resource` VALUES ('1531', '4', '47', '3');
-INSERT INTO `sys_role_resource` VALUES ('1532', '4', '48', '3');
-INSERT INTO `sys_role_resource` VALUES ('1533', '4', '49', '3');
-INSERT INTO `sys_role_resource` VALUES ('1534', '4', '50', '3');
-INSERT INTO `sys_role_resource` VALUES ('1535', '4', '51', '3');
-INSERT INTO `sys_role_resource` VALUES ('1536', '4', '52', '3');
-INSERT INTO `sys_role_resource` VALUES ('1537', '4', '53', '3');
-INSERT INTO `sys_role_resource` VALUES ('1538', '4', '58', '3');
-INSERT INTO `sys_role_resource` VALUES ('1539', '4', '59', '3');
-INSERT INTO `sys_role_resource` VALUES ('1540', '4', '150', '1');
-INSERT INTO `sys_role_resource` VALUES ('1541', '4', '154', '1');
-INSERT INTO `sys_role_resource` VALUES ('1542', '4', '155', '2');
-INSERT INTO `sys_role_resource` VALUES ('1543', '4', '54', '3');
-INSERT INTO `sys_role_resource` VALUES ('1544', '4', '55', '3');
-INSERT INTO `sys_role_resource` VALUES ('1545', '4', '56', '3');
-INSERT INTO `sys_role_resource` VALUES ('1546', '4', '57', '3');
+INSERT INTO `sys_role_resource` VALUES ('1674', '4', '94', '1');
+INSERT INTO `sys_role_resource` VALUES ('1675', '4', '122', '2');
+INSERT INTO `sys_role_resource` VALUES ('1676', '4', '128', '2');
+INSERT INTO `sys_role_resource` VALUES ('1677', '4', '188', '2');
+INSERT INTO `sys_role_resource` VALUES ('1678', '4', '95', '1');
+INSERT INTO `sys_role_resource` VALUES ('1679', '4', '127', '2');
+INSERT INTO `sys_role_resource` VALUES ('1680', '4', '157', '2');
+INSERT INTO `sys_role_resource` VALUES ('1681', '4', '189', '2');
+INSERT INTO `sys_role_resource` VALUES ('1682', '4', '96', '1');
+INSERT INTO `sys_role_resource` VALUES ('1683', '4', '124', '2');
+INSERT INTO `sys_role_resource` VALUES ('1684', '4', '125', '2');
+INSERT INTO `sys_role_resource` VALUES ('1685', '4', '126', '2');
+INSERT INTO `sys_role_resource` VALUES ('1686', '4', '151', '2');
+INSERT INTO `sys_role_resource` VALUES ('1687', '4', '153', '2');
+INSERT INTO `sys_role_resource` VALUES ('1688', '4', '190', '2');
+INSERT INTO `sys_role_resource` VALUES ('1689', '4', '133', '1');
+INSERT INTO `sys_role_resource` VALUES ('1690', '4', '139', '2');
+INSERT INTO `sys_role_resource` VALUES ('1691', '4', '27', '3');
+INSERT INTO `sys_role_resource` VALUES ('1692', '4', '134', '1');
+INSERT INTO `sys_role_resource` VALUES ('1693', '4', '143', '2');
+INSERT INTO `sys_role_resource` VALUES ('1694', '4', '34', '3');
+INSERT INTO `sys_role_resource` VALUES ('1695', '4', '35', '3');
+INSERT INTO `sys_role_resource` VALUES ('1696', '4', '135', '1');
+INSERT INTO `sys_role_resource` VALUES ('1697', '4', '162', '2');
+INSERT INTO `sys_role_resource` VALUES ('1698', '4', '64', '3');
+INSERT INTO `sys_role_resource` VALUES ('1699', '4', '163', '2');
+INSERT INTO `sys_role_resource` VALUES ('1700', '4', '136', '1');
+INSERT INTO `sys_role_resource` VALUES ('1701', '4', '165', '2');
+INSERT INTO `sys_role_resource` VALUES ('1702', '4', '166', '2');
+INSERT INTO `sys_role_resource` VALUES ('1703', '4', '167', '2');
+INSERT INTO `sys_role_resource` VALUES ('1704', '4', '168', '2');
+INSERT INTO `sys_role_resource` VALUES ('1705', '4', '169', '2');
+INSERT INTO `sys_role_resource` VALUES ('1706', '4', '170', '2');
+INSERT INTO `sys_role_resource` VALUES ('1707', '4', '171', '2');
+INSERT INTO `sys_role_resource` VALUES ('1708', '4', '172', '2');
+INSERT INTO `sys_role_resource` VALUES ('1709', '4', '173', '2');
+INSERT INTO `sys_role_resource` VALUES ('1710', '4', '174', '2');
+INSERT INTO `sys_role_resource` VALUES ('1711', '4', '175', '2');
+INSERT INTO `sys_role_resource` VALUES ('1712', '4', '176', '2');
+INSERT INTO `sys_role_resource` VALUES ('1713', '4', '177', '2');
+INSERT INTO `sys_role_resource` VALUES ('1714', '4', '178', '2');
+INSERT INTO `sys_role_resource` VALUES ('1715', '4', '179', '2');
+INSERT INTO `sys_role_resource` VALUES ('1716', '4', '180', '2');
+INSERT INTO `sys_role_resource` VALUES ('1717', '4', '181', '2');
+INSERT INTO `sys_role_resource` VALUES ('1718', '4', '145', '1');
+INSERT INTO `sys_role_resource` VALUES ('1719', '4', '148', '2');
+INSERT INTO `sys_role_resource` VALUES ('1720', '4', '36', '3');
+INSERT INTO `sys_role_resource` VALUES ('1721', '4', '37', '3');
+INSERT INTO `sys_role_resource` VALUES ('1722', '4', '38', '3');
+INSERT INTO `sys_role_resource` VALUES ('1723', '4', '39', '3');
+INSERT INTO `sys_role_resource` VALUES ('1724', '4', '40', '3');
+INSERT INTO `sys_role_resource` VALUES ('1725', '4', '41', '3');
+INSERT INTO `sys_role_resource` VALUES ('1726', '4', '60', '3');
+INSERT INTO `sys_role_resource` VALUES ('1727', '4', '146', '1');
+INSERT INTO `sys_role_resource` VALUES ('1728', '4', '149', '2');
+INSERT INTO `sys_role_resource` VALUES ('1729', '4', '42', '3');
+INSERT INTO `sys_role_resource` VALUES ('1730', '4', '43', '3');
+INSERT INTO `sys_role_resource` VALUES ('1731', '4', '44', '3');
+INSERT INTO `sys_role_resource` VALUES ('1732', '4', '45', '3');
+INSERT INTO `sys_role_resource` VALUES ('1733', '4', '46', '3');
+INSERT INTO `sys_role_resource` VALUES ('1734', '4', '47', '3');
+INSERT INTO `sys_role_resource` VALUES ('1735', '4', '48', '3');
+INSERT INTO `sys_role_resource` VALUES ('1736', '4', '49', '3');
+INSERT INTO `sys_role_resource` VALUES ('1737', '4', '50', '3');
+INSERT INTO `sys_role_resource` VALUES ('1738', '4', '51', '3');
+INSERT INTO `sys_role_resource` VALUES ('1739', '4', '52', '3');
+INSERT INTO `sys_role_resource` VALUES ('1740', '4', '53', '3');
+INSERT INTO `sys_role_resource` VALUES ('1741', '4', '58', '3');
+INSERT INTO `sys_role_resource` VALUES ('1742', '4', '59', '3');
+INSERT INTO `sys_role_resource` VALUES ('1743', '4', '150', '1');
+INSERT INTO `sys_role_resource` VALUES ('1744', '4', '192', '2');
+INSERT INTO `sys_role_resource` VALUES ('1745', '4', '193', '2');
+INSERT INTO `sys_role_resource` VALUES ('1746', '4', '194', '2');
+INSERT INTO `sys_role_resource` VALUES ('1747', '4', '154', '1');
+INSERT INTO `sys_role_resource` VALUES ('1748', '4', '155', '2');
+INSERT INTO `sys_role_resource` VALUES ('1749', '4', '54', '3');
+INSERT INTO `sys_role_resource` VALUES ('1750', '4', '55', '3');
+INSERT INTO `sys_role_resource` VALUES ('1751', '4', '56', '3');
+INSERT INTO `sys_role_resource` VALUES ('1752', '4', '57', '3');
+INSERT INTO `sys_role_resource` VALUES ('1753', '2', '91', '1');
+INSERT INTO `sys_role_resource` VALUES ('1754', '2', '110', '2');
+INSERT INTO `sys_role_resource` VALUES ('1755', '2', '111', '2');
+INSERT INTO `sys_role_resource` VALUES ('1756', '2', '112', '2');
+INSERT INTO `sys_role_resource` VALUES ('1757', '2', '92', '1');
+INSERT INTO `sys_role_resource` VALUES ('1758', '2', '120', '2');
+INSERT INTO `sys_role_resource` VALUES ('1759', '2', '121', '2');
+INSERT INTO `sys_role_resource` VALUES ('1760', '2', '152', '2');
+INSERT INTO `sys_role_resource` VALUES ('1761', '2', '187', '2');
+INSERT INTO `sys_role_resource` VALUES ('1762', '2', '93', '1');
+INSERT INTO `sys_role_resource` VALUES ('1763', '2', '113', '2');
+INSERT INTO `sys_role_resource` VALUES ('1764', '2', '61', '3');
+INSERT INTO `sys_role_resource` VALUES ('1765', '2', '115', '2');
+INSERT INTO `sys_role_resource` VALUES ('1766', '2', '116', '2');
+INSERT INTO `sys_role_resource` VALUES ('1767', '2', '117', '2');
+INSERT INTO `sys_role_resource` VALUES ('1768', '2', '118', '2');
+INSERT INTO `sys_role_resource` VALUES ('1769', '2', '119', '2');
+INSERT INTO `sys_role_resource` VALUES ('1770', '2', '156', '2');
+INSERT INTO `sys_role_resource` VALUES ('1771', '2', '159', '2');
+INSERT INTO `sys_role_resource` VALUES ('1772', '2', '160', '2');
+INSERT INTO `sys_role_resource` VALUES ('1773', '2', '62', '3');
+INSERT INTO `sys_role_resource` VALUES ('1774', '2', '186', '2');
+INSERT INTO `sys_role_resource` VALUES ('1775', '2', '129', '1');
+INSERT INTO `sys_role_resource` VALUES ('1776', '2', '137', '2');
+INSERT INTO `sys_role_resource` VALUES ('1777', '2', '25', '3');
+INSERT INTO `sys_role_resource` VALUES ('1778', '2', '26', '3');
+INSERT INTO `sys_role_resource` VALUES ('1779', '2', '130', '1');
+INSERT INTO `sys_role_resource` VALUES ('1780', '2', '140', '2');
+INSERT INTO `sys_role_resource` VALUES ('1781', '2', '28', '3');
+INSERT INTO `sys_role_resource` VALUES ('1782', '2', '141', '2');
+INSERT INTO `sys_role_resource` VALUES ('1783', '2', '32', '3');
+INSERT INTO `sys_role_resource` VALUES ('1784', '2', '33', '3');
+INSERT INTO `sys_role_resource` VALUES ('1785', '2', '142', '2');
+INSERT INTO `sys_role_resource` VALUES ('1786', '2', '31', '3');
+INSERT INTO `sys_role_resource` VALUES ('1787', '2', '191', '2');
+INSERT INTO `sys_role_resource` VALUES ('1788', '2', '131', '1');
+INSERT INTO `sys_role_resource` VALUES ('1789', '2', '164', '2');
+INSERT INTO `sys_role_resource` VALUES ('1790', '2', '65', '3');
+INSERT INTO `sys_role_resource` VALUES ('1791', '2', '132', '1');
+INSERT INTO `sys_role_resource` VALUES ('1792', '2', '182', '2');
+INSERT INTO `sys_role_resource` VALUES ('1793', '2', '66', '3');
+INSERT INTO `sys_role_resource` VALUES ('1794', '2', '183', '2');
+INSERT INTO `sys_role_resource` VALUES ('1795', '2', '184', '2');
+INSERT INTO `sys_role_resource` VALUES ('1796', '2', '185', '2');
+INSERT INTO `sys_role_resource` VALUES ('1797', '2', '145', '1');
+INSERT INTO `sys_role_resource` VALUES ('1798', '2', '148', '2');
+INSERT INTO `sys_role_resource` VALUES ('1799', '2', '36', '3');
+INSERT INTO `sys_role_resource` VALUES ('1800', '2', '37', '3');
+INSERT INTO `sys_role_resource` VALUES ('1801', '2', '38', '3');
+INSERT INTO `sys_role_resource` VALUES ('1802', '2', '39', '3');
+INSERT INTO `sys_role_resource` VALUES ('1803', '2', '40', '3');
+INSERT INTO `sys_role_resource` VALUES ('1804', '2', '41', '3');
+INSERT INTO `sys_role_resource` VALUES ('1805', '2', '60', '3');
+INSERT INTO `sys_role_resource` VALUES ('1806', '2', '146', '1');
+INSERT INTO `sys_role_resource` VALUES ('1807', '2', '149', '2');
+INSERT INTO `sys_role_resource` VALUES ('1808', '2', '52', '3');
+INSERT INTO `sys_role_resource` VALUES ('1809', '2', '150', '1');
+INSERT INTO `sys_role_resource` VALUES ('1810', '2', '192', '2');
+INSERT INTO `sys_role_resource` VALUES ('1811', '2', '193', '2');
+INSERT INTO `sys_role_resource` VALUES ('1812', '2', '194', '2');
+INSERT INTO `sys_role_resource` VALUES ('1813', '2', '154', '1');
+INSERT INTO `sys_role_resource` VALUES ('1814', '2', '155', '2');
+INSERT INTO `sys_role_resource` VALUES ('1815', '2', '54', '3');
+INSERT INTO `sys_role_resource` VALUES ('1816', '2', '55', '3');
+INSERT INTO `sys_role_resource` VALUES ('1817', '2', '56', '3');
+INSERT INTO `sys_role_resource` VALUES ('1818', '2', '57', '3');
 
 -- ----------------------------
 -- Table structure for sys_user
@@ -721,11 +716,11 @@ CREATE TABLE `sys_user` (
 -- ----------------------------
 -- Records of sys_user
 -- ----------------------------
-INSERT INTO `sys_user` VALUES ('1', 'admin', 'admin', '223ce7b851123353479d85757fbbf4e320d1e251', '1', '4', null, '7', '0:0:0:0:0:0:0:1', '106@qq.com', '123', 'China', 'asdsa', null, 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/CaCNkQiTWa.jpg', '2017-07-07 20:42:50', '32432432', '423423', '2,3,5,6,7', '2017-04-26 00:00:00', '2017-06-01 00:00:00', null, null, null, null, null, null, '2017-06-01 11:13:12', 'admin', '0');
+INSERT INTO `sys_user` VALUES ('1', 'admin', 'admin', '223ce7b851123353479d85757fbbf4e320d1e251', '1', '4', null, '7', '0:0:0:0:0:0:0:1', '106@qq.com', '123', 'China', 'asdsa', null, 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/CaCNkQiTWa.jpg', '2017-07-10 16:10:07', '32432432', '423423', '2,3,5,6,7', '2017-04-26 00:00:00', '2017-06-01 00:00:00', null, null, null, null, null, null, '2017-06-01 11:13:12', 'admin', '0');
 INSERT INTO `sys_user` VALUES ('3', 'luzhen', 'luzhen', '18d5907164eddc5f29f39732c8eb4254e6082f10', '2', '2', null, '1', null, '601590910@qq.com', null, null, null, null, null, '2017-04-11 15:44:43', null, null, null, null, null, null, null, null, null, null, null, null, null, '0');
-INSERT INTO `sys_user` VALUES ('21', 'op', 'op', 'd08d2a2f7474063d875c868f95e0484990e67688', '2', null, null, null, null, null, null, null, null, null, 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/BRS3FYwC8t.jpg', '2017-07-04 10:07:28', null, null, null, null, null, '0', null, null, null, null, null, '2017-06-22 16:48:58', null, '0');
+INSERT INTO `sys_user` VALUES ('21', 'op', 'op', 'd08d2a2f7474063d875c868f95e0484990e67688', '2', null, null, null, null, null, null, null, null, null, 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/BRS3FYwC8t.jpg', '2017-07-10 03:15:22', null, null, null, null, null, '0', null, null, null, null, null, '2017-06-22 16:48:58', null, '0');
 INSERT INTO `sys_user` VALUES ('22', 'personal', 'personal', '03dbd66a9b55981f2a2d2034e6e9c46336795f23', '3', null, null, null, null, '12312', '21321321', 'China', 'Shanghai', null, 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/drE4atz2x7.jpg', '2017-05-18 14:35:21', '12312312', null, '2,5', '2017-05-02 00:00:00', '2017-06-09 00:00:00', '0', null, null, null, null, null, '2017-05-02 15:31:47', 'personal', '0');
-INSERT INTO `sys_user` VALUES ('23', 'company', 'company', '4b0a4fa32810ca0c12accaa78f2e498f53810921', '4', null, null, null, null, '555@qq.com', null, null, null, null, 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/FS2DeEDNZi.jpg', '2017-07-04 10:11:47', null, null, null, null, null, '0', null, null, null, null, null, '2017-06-22 16:50:14', null, '0');
+INSERT INTO `sys_user` VALUES ('23', 'company', 'company', '4b0a4fa32810ca0c12accaa78f2e498f53810921', '4', null, null, null, null, '555@qq.com', null, null, null, null, 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/FS2DeEDNZi.jpg', '2017-07-05 07:12:15', null, null, null, null, null, '0', null, null, null, null, null, '2017-06-22 16:50:14', null, '0');
 INSERT INTO `sys_user` VALUES ('24', '巴拉哥', 'captlam@parakougroup.com', '05c57776a901c6803759fe0759935b8c1217d07e', null, null, null, null, null, 'captlam@parakougroup.com', '1', null, null, null, null, '2017-07-04 10:01:20', '林总', null, null, null, null, null, null, null, null, null, null, null, null, '0');
 
 -- ----------------------------
@@ -772,7 +767,7 @@ CREATE TABLE `t_comment` (
   `update_by` varchar(45) DEFAULT NULL,
   `del_flag` int(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=26 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_comment
@@ -791,12 +786,7 @@ INSERT INTO `t_comment` VALUES ('21', '1', null, null, '17', null, null, '1', '2
 INSERT INTO `t_comment` VALUES ('22', '21', null, null, '20', null, null, '23', '1', '8', '2017-07-04', 'op', '2017-07-04', 'op', '0');
 INSERT INTO `t_comment` VALUES ('23', '21', null, null, '20', null, null, '23', '1', '9', '2017-07-04', 'op', '2017-07-04', 'op', '0');
 INSERT INTO `t_comment` VALUES ('24', '1', '5', 'good', '17', '5', 'good', '1', '2', '18', '2017-07-04', 'admin', '2017-07-04', 'admin', '0');
-INSERT INTO `t_comment` VALUES ('25', '1', null, null, '17', null, null, '1', '1', '10', '2017-07-06', 'admin', '2017-07-06', 'admin', '0');
-INSERT INTO `t_comment` VALUES ('26', '1', null, null, '17', null, null, '1', '1', '11', '2017-07-06', 'admin', '2017-07-06', 'admin', '0');
-INSERT INTO `t_comment` VALUES ('27', '1', null, null, '17', null, null, '1', '1', '12', '2017-07-07', 'admin', '2017-07-07', 'admin', '0');
-INSERT INTO `t_comment` VALUES ('28', '1', null, null, '19', null, null, '1', '2', '19', '2017-07-07', 'admin', '2017-07-07', 'admin', '0');
-INSERT INTO `t_comment` VALUES ('29', '1', null, null, '17', null, null, '1', '2', '20', '2017-07-07', 'admin', '2017-07-07', 'admin', '0');
-INSERT INTO `t_comment` VALUES ('30', '1', null, null, '19', null, null, '1', '2', '21', '2017-07-07', 'system', '2017-07-07', 'system', '0');
+INSERT INTO `t_comment` VALUES ('25', '1', null, null, '19', null, null, '1', '2', '19', '2017-07-05', 'admin', '2017-07-05', 'admin', '0');
 
 -- ----------------------------
 -- Table structure for t_company
@@ -885,12 +875,13 @@ CREATE TABLE `t_condition_inspection` (
   `update_by` varchar(45) DEFAULT NULL,
   `del_flag` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_condition_inspection
 -- ----------------------------
 INSERT INTO `t_condition_inspection` VALUES ('3', '“XXXXXXX” was berthed port side to the quay and was discharging a cargo of iron ore. She has a bulbous bow and an anchor casting in way of the shell. We noticed that the port side anchor lower fluke had been in contact with the shell plating causing deep grooving. A photograph clearly illustrates the problem. It may be necessary to provide a doubling plate to prevent further damage to the forward hull plating. The general appearance of the port side shell was satisfactory although the paint coatings need attention at the next dry docking particularly in the wind and water areas. The port side shell was free from significant contact damage, although the shell markings were neither clear nor easily readable including draught marks, and this will again need to be rectified at the next dry docking. \n\nThe starboard side shell plating could only be viewed from the upper deck but appeared to be in a similar condition to the port side.', 'The forward mooring deck was found in a satisfactory condition with signs of recent maintenance having been carried out by the crew. We did however notice that there was no anti slip paint applied in the working areas and would recommend that when the mooring deck is next painted that anti slip paint in order to assist the crew when handling mooring ropes in wet weather.', 'The upper deck was well painted and again there was evidence of recent maintenance by the crew. Those areas between the hatches were also found in a satisfactory condition and with evidence of recent maintenance. All the sounding pipes and vent pipe headers were found in a satisfactory condition, including the temperature pipes to the cargo holds which were clearly marked and will enable the crew to monitor cargo temperatures at various levels in the hold when carrying cargoes such as coal.\n\nThe pipe protection pipes along the deck were constructed in chequered plate and were in good condition and were well painted.', 'Three water ballast tanks were made available for survey : the Fore Peak and Topside tanks no 1 starboard and no 4 port. All three ballast tanks were found in very good condition, well maintained and with recent signs of maintenance having been carried out by the crew. All coatings were intact and there were no signs of any diminution of the steel. All three tanks inspected were clean and free from sludge and sand and also there were no sacrificial anodes fitted.\n\nThe water ballast tanks surveyed are considered to be in very good condition and the BV class reports indicate that all water ballast tanks are in good condition and that it is not necessary to carry out annual class surveys of the ballast tanks.', 'There is accommodation provided for up to 25 persons and the Master and Chief Engineer have a suite consisting of day room, bedroom and\nbathroom. All other officers have a cabin with attached bathroom and also most of the crew. There are a small number of cabins with a shared bathroom via doors from the adjacent cabin. There is a hospital and also a gymnasium and both Officers and crew have their own combined mess/smoking rooms.', 'The Wheelhouse afforded the navigating Officers with good forward visibility. All the navigational equipment was stated by the crew to be in good working order. There are two radars one with ARPA and two GPS units, and all the navigational charts were up to date as were all the bridge publications and notices.', 'The engine room was very clean and there were no significant oil/water leakages in any pipelines or valves. The engine room bilges were exceptionally clean and the engine room floor plates, generally constructed from chequered plate were clean well painted and free from any significant oil/grease deposits. The purifiers for oil and lubricating oil were very clean and the drip trays were devoid of any oil leakages.\nAll the engine store rooms were clearly labelled with the spare parts available which are typical for a Japanese shipyard delivered ship.\nThere is a well stocked engine room workshop consisting of welding equipment, lathe, drilling and grinding machines and tool racks.\n\nEngine Control Room\nThe engine control room was found in good order and consisted of the main switchboard and the main engine console. All the equipment was stated by the ship’s staff to be in good working order.\n\nMain Engine\nThe main engine was found in good condition and there were no significant oil/water leakages.\nThe floor plates in way of the main engine at the top, manoeuvring platform and also the lower platform were well coated, free from oil/grease deposits and were constructed from anti slip material.\n\nAuxiliary Engines\nThere are three diesel generators which were found in good order. The three generators were very clean and free from any significant oil/water leakages.\n\nBoiler/Economiser\nThe boilers were found in good condition and well maintained.\n\nSteering Gear\nThe steering gear was tested in emergency mode including moving the rudder through 10 degrees to port and also to starboard using each pump in turn without problem.\n\nEngine Room Crane\nThere is a 5 tonne safe working engine room crane which although not working was stated by the crew to be in good working order.\n\n', 'There are two totally enclosed lifeboats and both were found in good order and well maintained, both lifeboat engines were started up, including engaging the propeller both ahead and astern without problem.\n\nThe liferafts both port and starboard and also a 6 man liferaft forward were all found in good condition.\n\nThere is a foam fixed fire fighting system for the engine room which was found in good condition. Additionally there is a fixed water fire main with fire hoses and nozzles which was found in a satisfactory condition.\n\nThere are portable fire extinguishers in both the engine room and also the engine room and all were found in order and were positioned in accordance with the Fire & Safety plan.', 'There are four cold rooms located under the galley space on the upper deck level. The provisions rooms can be accessed directly from the stern upper deck by an external door on both sides of the provisions crane area.\n\nThere is a dry provisions store space with a door to the lobby which provides access to the dairy, fish, meat and vegetable rooms. All spaces were bright, clean and fitted with a common type of cooler unit. Temperatures being maintained were in accordance with normal requirements. There was no sign of frost in the Reefer spaces.\n\nThe galley and mess rooms are separate for Officers (stbd side) and the crew (on port) spaces were provided with adequate equipment to accommodate dual nationality cooking arrangements.', 'Without this device', 'GOOD', 'GOOD', null, null, null, null, null, null, null, null, null, null);
+INSERT INTO `t_condition_inspection` VALUES ('4', 'The vessel was inspected whilst she was anchored in Fujairah Roads, U.A.E. on 20th December, 2014. She was in ballasted condition with a draft of 8.0 fwd and 10.0 meters aft.\nThe hull plating and steelwork appears to be structurally sound but the coating was seen to be in fair condition. There was a large rust stained area under the drainage pipes. There were isolated paint damages from scratching in way of no. 2w, 3w and 4w WBT shell plating areas. The upper part was stain rusted, however the coating in general was still intact. The entire anti-fouled area was seen with numerous areas of worn paint and rust, mostly in way of Nos. 2-4 P/S COTs. The hull was rust stained over its top coating. The submerged part of the vessel was noted with visible sea growth. The bulbous bow was seen with numerous anchor chain scratching and rust was present in the areas where the coating had broken down.\nThe anti-fouling certificate was issued in Bahrain where vessel underwent her 2nd Special Survey in 16th March 2010. The vessel’s appeared to be free from deep indentations.\nAn ESP assessment was conducted in 2010 during the vessel’s dry docking at which time the rating for the hull, cargo and ballast tanks was “good”.\nAll markings, Load Line, Name and Port of Registry were clearly visible, except the fwd draft which not visible on the lower side.', 'The mooring winches and anchor windlasses on the forecastle deck were seen free from oil leaks but with several rusted areas including over the controller. Even so they, appeared to be in working condition. The mooring ropes were seen rusted but still satisfactory. The forward deck was noted with isolated pitting arrested by coating. The forepeak store was fully coated and noted to be in good condition; however the lower side of the collision bulkhead was seen with worn paint and rust on the lower side wings.\nOn the forecastle deck, the two tongue-type towing brackets fitted centrally on the forward part of the foc’sle were seen in good condition and fully coated. Both stoppers have a SWL of 200T and were properly marked. The chafing chain was secured on the deck platform near the SPM Bracket and was also in good condition. The bulwark brackets were seen rusted.', 'The aft mooring deck was also found in a satisfactory condition with signs of recent maintenance but again little anti slip paint had been applied and we would recommend that when next painted , anti slip paint be used particularly in the mooring working areas where the crew are handling mooring ropes in wet conditions.\nThe deck outfitting items such as tank vent headers, air and sounding pipes were found in a satisfactory condition.\nThe mooring machinery was found in a satisfactory condition and reasonably well maintained. The anchor windlass brake linings were satisfactory and those roller fairleads that we tried turned easily reflecting that the crew have been carrying out the greasing.\nAll the winches both forward, aft and also in way of additional deck mooring stations located between hatches 1-2 and 6-7 were found in a satisfactory condition.', 'We were able to inspect the forepeak void space, lower forepeak and aft peak.\nThe lower forepeak was seen with many rust corroded areas and pitting on the lower platforms. The bracket toes ends were seen corroded at the welding seams in between the collision bulkhead connected to the platform plate.\nThe aft peak tank was noted with detached rust scale in way of the welding seam.', 'The Officers’ and Crew accommodation spaces and living areas are built to European standards. Every cabin has an en-suite toilet and shower room.\nThe Senior Officers’ cabins have a dayroom with a separate bedroom but all other cabins consist of a single room. The accommodation is in extremely good condition, however, the external porthole frames were seen to be rusted on the upper level.\nThe vessel is fitted with a hospital which has two beds. The hospital has its own bathroom with a full sized bath tub.\nThere is an elevator facility access from the ‘D’ deck to the Engine Room decks located on the port side of the internal accommodation stair cases which was found to be in good condition.\nThe toilets in the accommodation are designed with a vacuum system and holding tank, all in good working.', 'The Navigating and Bridge deck is in good order, clean and well maintained with the usual safety instructions, turning circles, etc. The Radio Room is located on the starboard side of the bridge.\nNavigation equipment was seen to be in good order. The ECDIS was not approved and is used for Deck Officer training only.\nThe communications equipment: Inmarsat C, F, Iridium telephone, FBB band and the VDR-MDP-A3 were in good condition.', 'Main Engine\nThe main engine was seen without major oil or water leaks. The two turbochargers and the gas exhaust were free of soot traces.\nAccording to the logbook records, the vessel is running in loaded condition as follows;\n- 13.4 knots speed @ 70.o RPM with 79.8mt/24hrs consumption\n- 13.5 knots speed @ 70.o RPM with 83.0 mt/24hrs consumption\n- 13.6 knots speed @ 70.1 RPM with 79.7 mt/24hrs consumption\n- 13.9 knots speed @ 71 RPM with 82.5 mt/24hrs consumption\n- 14.7 knots speed @ 72.5 RPM with 94.9 mt/24hrs consumption\n\nAuxiliary Engines\nThere are three MAN B&W 6L28/32H Ssangyong diesel generators, each with an output of 1,710 BHP at 720 RPM and an Emergency diesel-driven generator with an output of 1,180 kW. Nos. 2 and 3 diesel generators were seen in working condition without oil and water leaks with normal exhaust gas temperatures. The emergency generator compartment located on the main deck level, funnel block port side was seen in good condition. The exhaust outlet temperatures for no.1 DG were (340-365), no. 2 DG (340-360) and no. 3 DG (330-350).\nDaily consumption of the DG is 5.0 mt/24 hrs (Heavy FO/per unit).\n\nBoiler/Economiser\nThere are two Mitsubishi fully automatic, forced draft, heavy fuel burning marine boilers, each with a rated evaporation capacity of 40,000 kg/hr at a working pressure of 16kg/sq.cm, which are sufficient to supply steam for the cargo pump turbines, inert gas, fuel heating and accommodation requirements. The boilers were seen in working condition without any gas leak or soot traces.\nThere is also an Exhaust Gas Economiser boiler of Mitsubishi manufacture and forced circulating fin tube type which was seen in good condition and working properly.\n\nAuxiliary Machinery\nThe purifier room located on the stbd side was seen without oil leaks and was clean and tidy. The vessel is fully automated using bridge controls. The machinery spaces can be operated in UMS mode and this is in use when the vessel is on the open sea.\n\nEngine Control Room\nThe Engine Control Room located port side of the 3rd Engine Deck has a frontal view to the main engine top. The space was clean and tidy and appeared to have a full working panel. There is a lift access on the port side in way of the ECR.\n\nSteering Gear\nThe steering gear compartment is entered either through the rear of the boiler flat or directly from the deck, at the after end of the engine casing. The access doors and stairs were seen to be in good condition and compartments were found to be clean and tidy.\nThere were no apparent oil leaks from the ram seals or seawater leaks from the rudder-post glands. The oil save-alls were clean and dry.\nThe hydraulic electrical power packs for the mooring winches located on the forward port side of the steering flat were seen free of oil leaks and in working condition.\nThe emergency fire pump driven by 132 kW electrical motor, located in the forward part of the steering compartment locker, was seen with a water leak but still in good condition.', 'There are two enclosed GRP life boats, each of 36 person capacity, fitted on the upper deck, port and stbd., of the raised launch platform. The lifeboat and its securing arrangements were seen in a well maintained condition, fully coated and marked. Access stairs to the launch platform were noted to be in good condition.\nAll lifesaving inventories were properly maintained and in date with periodical checks being carried out.\nThe life Boats were annually checked in Feb. 2014.\nThere was a foam analysis report issued on 6 Feb. 2014 for the 6,000 ltrs capacity foam system.\nThe Emergency DG (MAN D2866LXE30 KWA312) was seen in good condition.\nThe Engine and Pump room has a separate low expansion foam system for fire fighting which was last inspected in October 2014.\nThe fixed CO2 fire fighting used for local applications workshop, purifiers etc. was inspected in Feb. 2014.', 'There are four cold rooms located under the galley space on the upper deck level. The provisions rooms can be accessed directly from the stern upper deck by an external door on both sides of the provisions crane area.\nThere is a dry provisions store space with a door to the lobby which provides access to the dairy, fish, meat and vegetable rooms. All spaces were bright, clean and fitted with a common type of cooler unit. Temperatures being maintained were in accordance with normal requirements. There was no sign of frost in the Reefer spaces.\nThe galley and mess rooms are separate for Officers (stbd side) and the crew (on port) spaces were provided with adequate equipment to accommodate dual nationality cooking arrangements.', 'Good condition, New device.', 'The side rolling hatch covers were in good condition and were well coated both on top and on the under sides. The hatch cover rubber packings were in good condition but there were signs of corrosion in way of the channels which contain the rubber packings. When it becomes necessary to change the rubber packings in the future the channels should be descaled and painted prior to fitting new rubber.\nIncidentally there did not appear to be any spare rubber packing or corner pieces available on board.\n\nThe hatch cover quick acting cleats appeared to be fairly new and additional cleats were in place in way of no4 hold which is the heavy weather water ballast hold.\nWe noticed that the main deck has ashear and that the height of the forward no1 hatch coaming is very low and although there were no signs of any water ingress into no1 cargo hold we would recommend that this hold be closely checked when water sensitive cargoes are carried. Incidentally there were no signs of water ingress into any other cargo hold.\nThe hatch coamings were found in a satisfactory condition including the top plate with the stainless steel compression bar.\nHowever we noted that the hatch cover resting pads have had additional flat bars welded to the pads. This may indicate that the ship has suffered from hatch cover problems in the past with correct alignment of the covers in the closed position. However we must say that there does not appear to be any water ingress into any of the seven cargo holds.\nIn recent times there has only been one water sensitive cargo carried and we enquired if there was an ultrasonic test report available: however this was not the case so we would strongly recommend that any prospective buyer arranges such a test to be carried out.', 'A thorough inspection of all the cargo holds was not fully possible due to the presence of cargo or dust and dirt from the iron ore cargo.\nCargo holds no 1, 3 and 4 were entered and the others were inspected as far as possible from the deck as admission was refused by the stevedores who were discharging the ship.\nCargo hold no1 was reasonably accessible including an area of tank top. The overall condition of this hold was satisfactory. We understand that at the previous dry docking in China all cargo holds had been sand blasted and coated. However due to the recent cargoes carried of iron ore and coal and only one grain cargo it is difficult to say if the cargo holds could be quickly made load ready for grain or other sensitive cargoes.\n\nAs far as could be seen the coatings of no1 and the other cargo holds appear to be satisfactory but it must be remembered that all the holds contained varying amounts of iron ore cargo and all of them were covered in dust and residues from the iron ore cargo Structurally no1 cargo hold was fine and the area of tank top available appeared to be free from significant contact grab damage.\n\nNo3 cargo hold also had an area of tank top available for inspection and the tank top appeared to be free from significant grab damage.\nHowever there was evidence of some pitting particularly on the transverse bulkheads probably caused by the frequent carriage of coal cargoes. Although not excessive the pitting needs to be monitored and checked on a regular basis by the crew.', null, null, null, null, null, null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for t_defect
@@ -906,13 +897,15 @@ CREATE TABLE `t_defect` (
   `update_date` date DEFAULT NULL,
   `update_by` varchar(155) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_defect
 -- ----------------------------
 INSERT INTO `t_defect` VALUES ('4', '14', 'Minor rusted spots or blisters were found in TST\'s & on main deck. Minor damages were found in cargo holds', '500,000', null, null, null, null);
 INSERT INTO `t_defect` VALUES ('5', '14', 'There is no Main Engine required Tier I, NOx rating. This has been missed by both Class and Flag for the Main Engine, according to onboard records. An upgrade is required. The former is a very elusive regulation in Marpol Annex 6, which applied retrospectively to vessels built between 1990 and 2000 as it required a retrofit of fuel injection equipment to lower emissions. Upgrade kits are available and in some cases a flag\ndispensation can be achieved on economic grounds to avoid doing the upgrade. Sellers were aware of this point.', '1,000,000', null, null, null, null);
+INSERT INTO `t_defect` VALUES ('6', '15', 'One of log should be repair in dock.', '300,000', null, null, null, null);
+INSERT INTO `t_defect` VALUES ('7', '15', 'The cargo line U bolts were wasted and rusted; however, the managers are planning to renew the U bolts. The air and hydraulic lines were rusted especially in the contact area with the frame and the U bolts. The cargo line flanges were rusted on their edges and the bolts were heavily corroded.', '50,000', null, null, null, null);
 
 -- ----------------------------
 -- Table structure for t_dict
@@ -965,7 +958,7 @@ CREATE TABLE `t_document` (
   `update_by` varchar(45) DEFAULT NULL,
   `del_flag` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=205 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=181 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_document
@@ -982,42 +975,18 @@ INSERT INTO `t_document` VALUES ('165', 'Painting scheme', '', '', null, '14', n
 INSERT INTO `t_document` VALUES ('166', 'IOPP', '', '', null, '14', null, null, null, null, null);
 INSERT INTO `t_document` VALUES ('167', 'Maker listn', '', '', null, '14', null, null, null, null, null);
 INSERT INTO `t_document` VALUES ('168', 'Cargo history', '', '', null, '14', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('169', 'Class status', null, null, null, '15', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('170', 'HPVQ', null, null, null, '15', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('171', 'Crew list', null, null, null, '15', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('172', 'Certificate of fitness appendix for list of cargoes', null, null, null, '15', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('173', 'Voyage reports showing speed and consumptions', null, null, null, '15', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('174', 'Copy of last CSR', null, null, null, '15', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('175', 'Capacity plan', null, null, null, '15', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('176', 'Mooring plan', null, null, null, '15', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('177', 'Painting scheme', null, null, null, '15', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('178', 'IOPP', null, null, null, '15', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('179', 'Maker listn', null, null, null, '15', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('180', 'Cargo history', null, null, null, '15', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('181', 'Class status', null, null, null, '16', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('182', 'HPVQ', null, null, null, '16', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('183', 'Crew list', null, null, null, '16', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('184', 'Certificate of fitness appendix for list of cargoes', null, null, null, '16', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('185', 'Voyage reports showing speed and consumptions', null, null, null, '16', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('186', 'Copy of last CSR', null, null, null, '16', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('187', 'Capacity plan', null, null, null, '16', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('188', 'Mooring plan', null, null, null, '16', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('189', 'Painting scheme', null, null, null, '16', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('190', 'IOPP', null, null, null, '16', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('191', 'Maker listn', null, null, null, '16', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('192', 'Cargo history', null, null, null, '16', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('193', 'Class status', null, null, null, '17', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('194', 'HPVQ', null, null, null, '17', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('195', 'Crew list', null, null, null, '17', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('196', 'Certificate of fitness appendix for list of cargoes', null, null, null, '17', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('197', 'Voyage reports showing speed and consumptions', null, null, null, '17', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('198', 'Copy of last CSR', null, null, null, '17', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('199', 'Capacity plan', null, null, null, '17', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('200', 'Mooring plan', null, null, null, '17', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('201', 'Painting scheme', null, null, null, '17', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('202', 'IOPP', null, null, null, '17', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('203', 'Maker listn', null, null, null, '17', null, null, null, null, null);
-INSERT INTO `t_document` VALUES ('204', 'Cargo history', null, null, null, '17', null, null, null, null, null);
+INSERT INTO `t_document` VALUES ('169', 'Class status', 'certification.pdf', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/jhkbxxHpcZ.pdf', null, '15', null, null, null, null, null);
+INSERT INTO `t_document` VALUES ('170', 'HPVQ', '', '', null, '15', null, null, null, null, null);
+INSERT INTO `t_document` VALUES ('171', 'Crew list', '', '', null, '15', null, null, null, null, null);
+INSERT INTO `t_document` VALUES ('172', 'Certificate of fitness appendix for list of cargoes', '1.pdf', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/YNehiDcddc.pdf', null, '15', null, null, null, null, null);
+INSERT INTO `t_document` VALUES ('173', 'Voyage reports showing speed and consumptions', '', '', null, '15', null, null, null, null, null);
+INSERT INTO `t_document` VALUES ('174', 'Copy of last CSR', 'certification1.pdf', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/CZr8wKRmsJ.pdf', null, '15', null, null, null, null, null);
+INSERT INTO `t_document` VALUES ('175', 'Capacity plan', '', '', null, '15', null, null, null, null, null);
+INSERT INTO `t_document` VALUES ('176', 'Mooring plan', 'REPORT   KANDLA OFF HIRE.pdf', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/7isp7aCyme.pdf', null, '15', null, null, null, null, null);
+INSERT INTO `t_document` VALUES ('177', 'Painting scheme', '', '', null, '15', null, null, null, null, null);
+INSERT INTO `t_document` VALUES ('178', 'IOPP', 'certification2.pdf', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/xpe8Sa4i5h.pdf', null, '15', null, null, null, null, null);
+INSERT INTO `t_document` VALUES ('179', 'Maker listn', '', '', null, '15', null, null, null, null, null);
+INSERT INTO `t_document` VALUES ('180', 'Cargo history', 'certification3.pdf', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/sChEdjKwi8.pdf', null, '15', null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for t_galleries
@@ -1034,7 +1003,7 @@ CREATE TABLE `t_galleries` (
   `update_by` varchar(155) DEFAULT NULL,
   `del_flag` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=39 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=35 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_galleries
@@ -1042,15 +1011,11 @@ CREATE TABLE `t_galleries` (
 INSERT INTO `t_galleries` VALUES ('27', '未命名', '0', '14', '2017-07-04', null, null, null, '0');
 INSERT INTO `t_galleries` VALUES ('28', 'Certificate', '0', '14', '2017-07-04', null, null, null, '0');
 INSERT INTO `t_galleries` VALUES ('29', 'Grade', '1', '14', '2017-07-04', null, null, null, '0');
-INSERT INTO `t_galleries` VALUES ('30', '未命名', '0', '15', '2017-07-07', null, null, null, '0');
-INSERT INTO `t_galleries` VALUES ('31', 'Certificate', '0', '15', '2017-07-07', null, null, null, '0');
-INSERT INTO `t_galleries` VALUES ('32', 'Grade', '0', '15', '2017-07-07', null, null, null, '0');
-INSERT INTO `t_galleries` VALUES ('33', '未命名', '0', '16', '2017-07-07', null, null, null, '0');
-INSERT INTO `t_galleries` VALUES ('34', 'Certificate', '0', '16', '2017-07-07', null, null, null, '0');
-INSERT INTO `t_galleries` VALUES ('35', 'Grade', '0', '16', '2017-07-07', null, null, null, '0');
-INSERT INTO `t_galleries` VALUES ('36', '未命名', '0', '17', '2017-07-07', null, null, null, '0');
-INSERT INTO `t_galleries` VALUES ('37', 'Certificate', '0', '17', '2017-07-07', null, null, null, '0');
-INSERT INTO `t_galleries` VALUES ('38', 'Grade', '0', '17', '2017-07-07', null, null, null, '0');
+INSERT INTO `t_galleries` VALUES ('30', '未命名', '0', '15', '2017-07-05', null, null, null, '0');
+INSERT INTO `t_galleries` VALUES ('31', 'Certificate', '9', '15', '2017-07-05', null, null, null, '0');
+INSERT INTO `t_galleries` VALUES ('32', 'Grade', '7', '15', '2017-07-05', null, null, null, '0');
+INSERT INTO `t_galleries` VALUES ('33', '船体', '0', '15', '2017-07-05', null, null, null, '0');
+INSERT INTO `t_galleries` VALUES ('34', '机舱', '0', '15', '2017-07-05', null, null, null, '0');
 
 -- ----------------------------
 -- Table structure for t_grade
@@ -1073,7 +1038,7 @@ CREATE TABLE `t_grade` (
   `rank` int(11) DEFAULT NULL COMMENT '等级',
   `file_name` varchar(155) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=1481 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=741 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_grade
@@ -1448,1116 +1413,376 @@ INSERT INTO `t_grade` VALUES ('367', '磁罗经', '5.0000', '8.0000', '', '', '3
 INSERT INTO `t_grade` VALUES ('368', '4、船上办公室', '3.0000', '8.0000', '', '', '驾驶台', '14', null, '', null, '', '', '2', null);
 INSERT INTO `t_grade` VALUES ('369', '船上办公室设备', '2.0000', '8.0000', '', '', '4、船上办公室', '14', null, '', null, '', '', '3', null);
 INSERT INTO `t_grade` VALUES ('370', '配载仪', '4.0000', '8.0000', '', '', '4、船上办公室', '14', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('371', '船体', '5.0000', null, '', '', '0', '15', null, '', null, '', '', '1', null);
-INSERT INTO `t_grade` VALUES ('372', '1、船体外板', '5.0000', null, '', '', '船体', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('373', '船底板', '5.0000', null, '', '', '1、船体外板', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('374', '左舷顶列板', '5.0000', null, '', '', '1、船体外板', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('375', '右舷顶列板', '5.0000', null, '', '', '1、船体外板', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('376', '左舷船壳板', '3.0000', null, '', '', '1、船体外板', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('377', '右舷船壳板', '3.0000', null, '', '', '1、船体外板', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('378', '附属件', '1.0000', null, '', '', '1、船体外板', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('379', '舭龙骨', '2.0000', null, '', '', '1、船体外板', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('380', '海底阀箱', '2.0000', null, '', '', '1、船体外板', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('381', '通海阀', '2.0000', null, '', '', '1、船体外板', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('382', '牺牲阳极（锌块）', '2.0000', null, '', '', '1、船体外板', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('383', '外加电流保护系统', '2.0000', null, '', '', '1、船体外板', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('384', '防海生物系统', '2.0000', null, '', '', '1、船体外板', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('385', '球鼻艏', '2.0000', null, '', '', '1、船体外板', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('386', '挡浪板', '2.0000', null, '', '', '1、船体外板', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('387', '2、船首结构', '4.0000', null, '', '', '船体', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('388', '首楼甲板', '5.0000', null, '', '', '2、船首结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('389', '首桅', '4.0000', null, '', '', '2、船首结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('390', '首尖舱', '3.0000', null, '', '', '2、船首结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('391', '锚链舱', '3.0000', null, '', '', '2、船首结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('392', '首物料间', '1.0000', null, '', '', '2、船首结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('393', '前液压设备间', '2.0000', null, '', '', '2、船首结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('394', '前油漆间', '2.0000', null, '', '', '2、船首结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('395', '3、船体结构', '5.0000', null, '', '', '船体', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('396', '主甲板', '5.0000', null, '', '', '3、船体结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('397', '货舱', '5.0000', null, '', '', '3、船体结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('398', '顶边水舱', '3.0000', null, '', '', '3、船体结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('399', '底边水舱', '3.0000', null, '', '', '3、船体结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('400', '双层底', '3.0000', null, '', '', '3、船体结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('401', '箱形龙骨（管弄）', '3.0000', null, '', '', '3、船体结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('402', '横舱壁上墩', '2.0000', null, '', '', '3、船体结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('403', '横舱壁下墩', '2.0000', null, '', '', '3、船体结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('404', '横舱壁', '2.0000', null, '', '', '3、船体结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('405', '通风道', '2.0000', null, '', '', '3、船体结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('406', '桅屋', '1.0000', null, '', '', '3、船体结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('407', '纵舱壁', '3.0000', null, '', '', '3、船体结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('408', '舱口围', '4.0000', null, '', '', '3、船体结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('409', '舱口盖', '4.0000', null, '', '', '3、船体结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('410', '4、船尾部结构', '4.0000', null, '', '', '船体', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('411', '后主甲板', '4.0000', null, '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('412', '尾楼甲板', '4.0000', null, '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('413', '机舱', '5.0000', null, '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('414', '舵机间', '5.0000', null, '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('415', '机舱风机间', '3.0000', null, '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('416', '舵杆', '5.0000', null, '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('417', '尾淡水舱', '4.0000', null, '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('418', '尾尖舱', '3.0000', null, '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('419', '尾轴冷却水舱', '3.0000', null, '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('420', '烟囱', '2.0000', null, '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('421', '主桅（雷达）', '4.0000', null, '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('422', 'CO2间', '3.0000', null, '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('423', '蓄电池间', '3.0000', null, '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('424', '后物料间', '2.0000', null, '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('425', '空调设备间', '3.0000', null, '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('426', '应急发电机间', '3.0000', null, '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('427', '5、生活区', '3.0000', null, '', '', '船体', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('428', '总体保养', '4.0000', null, '', '', '5、生活区', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('429', '外甲板及梯道', '3.0000', null, '', '', '5、生活区', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('430', '居住区', '3.0000', null, '', '', '5、生活区', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('431', '公共场所', '3.0000', null, '', '', '5、生活区', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('432', '厨房', '3.0000', null, '', '', '5、生活区', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('433', '洗衣间', '3.0000', null, '', '', '5、生活区', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('434', '病房', '2.0000', null, '', '', '5、生活区', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('435', '药物间', '3.0000', null, '', '', '5、生活区', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('436', '甲板/轮机办公室', '2.0000', null, '', '', '5、生活区', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('437', '生活区物料间', '2.0000', null, '', '', '5、生活区', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('438', '冰库', '3.0000', null, '', '', '5、生活区', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('439', '理货间', '3.0000', null, '', '', '5、生活区', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('440', '6、防腐', '5.0000', null, '', '', '船体', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('441', '船体外壳油漆', '5.0000', null, '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('442', '干舷 ', '5.0000', null, '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('443', '直底', '5.0000', null, '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('444', '平底', '5.0000', null, '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('445', '水尺及载重线标志', '5.0000', null, '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('446', '左甲板油漆', '4.0000', null, '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('447', '右甲板油漆', '4.0000', null, '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('448', '货舱间甲板油漆', '4.0000', null, '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('449', '舱口围油漆', '3.0000', null, '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('450', '舱盖油漆', '3.0000', null, '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('451', '生活区油漆', '2.0000', null, '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('452', '货舱油漆', '3.0000', null, '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('453', '压载舱油漆', '4.0000', null, '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('454', '淡水舱油漆', '4.0000', null, '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('455', '干隔舱油漆', '3.0000', null, '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('456', '货舱壁顶凳和底登内部油漆', '3.0000', null, '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('457', '管弄内油漆', '3.0000', null, '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('458', '压载舱牺牲阳极', '4.0000', null, '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('459', '甲板', '5.0000', null, '', '', '0', '15', null, '', null, '', '', '1', null);
-INSERT INTO `t_grade` VALUES ('460', '1、系泊设备', '5.0000', null, '', '', '甲板', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('461', '锚机', '5.0000', null, '', '', '1、系泊设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('462', '绞缆机', '5.0000', null, '', '', '1、系泊设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('463', '止链器', '4.0000', null, '', '', '1、系泊设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('464', '导缆轮和滚筒', '4.0000', null, '', '', '1、系泊设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('465', '锚和锚链', '5.0000', null, '', '', '1、系泊设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('466', '系缆索/钢缆', '4.0000', null, '', '', '1、系泊设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('467', '液压系统', '5.0000', null, '', '', '1、系泊设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('468', '2、载重线项目', '4.0000', null, '', '', '甲板', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('469', '干舷标志', '4.0000', null, '', '', '2、载重线项目', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('470', '水密门', '4.0000', null, '', '', '2、载重线项目', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('471', '水密小舱口', '4.0000', null, '', '', '2、载重线项目', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('472', '空气管', '4.0000', null, '', '', '2、载重线项目', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('473', '测量管', '4.0000', null, '', '', '2、载重线项目', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('474', '通风筒', '4.0000', null, '', '', '2、载重线项目', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('475', '天窗', '4.0000', null, '', '', '2、载重线项目', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('476', '舷墙/栏杆', '4.0000', null, '', '', '2、载重线项目', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('477', '甲板安全通道及保护索', '4.0000', null, '', '', '2、载重线项目', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('478', '舷梯/引水梯', '4.0000', null, '', '', '2、载重线项目', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('479', '窗户/舷窗', '3.0000', null, '', '', '2、载重线项目', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('480', '疏排水孔', '3.0000', null, '', '', '2、载重线项目', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('481', '3、消防设备', '5.0000', null, '', '', '甲板', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('482', '主消防泵', '5.0000', null, '', '', '3、消防设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('483', '应急消防泵/自吸装置/原动机', '5.0000', null, '', '', '3、消防设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('484', '消防总管', '5.0000', null, '', '', '3、消防设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('485', '消防皮龙 / 箱', '4.0000', null, '', '', '3、消防设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('486', '固定式CO2系统（包括释放前报警装置）', '4.0000', null, '', '', '3、消防设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('487', '灭火器', '4.0000', null, '', '', '3、消防设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('488', '消防栓', '4.0000', null, '', '', '3、消防设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('489', '速闭阀', '4.0000', null, '', '', '3、消防设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('490', '消防员装备', '5.0000', null, '', '', '3、消防设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('491', '火警探测与报警系统', '5.0000', null, '', '', '3、消防设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('492', '油漆间防火装置', '4.0000', null, '', '', '3、消防设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('493', '分油机间防火装置', '4.0000', null, '', '', '3、消防设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('494', '水雾自动喷淋系统', '4.0000', null, '', '', '3、消防设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('495', '风油遥控应急切断', '4.0000', null, '', '', '3、消防设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('496', '4、救生设备', '5.0000', null, '', '', '甲板', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('497', '救生艇及自动脱钩装置', '5.0000', null, '', '', '4、救生设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('498', '艇机', '5.0000', null, '', '', '4、救生设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('499', '吊艇架', '5.0000', null, '', '', '4、救生设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('500', '放艇试验', '5.0000', null, '', '', '4、救生设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('501', '救生筏及静水压力释放器', '4.0000', null, '', '', '4、救生设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('502', '驾驶室烟火报警装置', '3.0000', null, '', '', '4、救生设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('503', '无线电示位标（EPIRB）', '4.0000', null, '', '', '4、救生设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('504', '救生圈', '4.0000', null, '', '', '4、救生设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('505', '救生衣、保温服', '4.0000', null, '', '', '4、救生设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('371', '船体', '5.0000', '8.2098', '', '', '0', '15', null, '', null, '', '', '1', null);
+INSERT INTO `t_grade` VALUES ('372', '1、船体外板', '5.0000', '8.5263', '', '', '船体', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('373', '船底板', '5.0000', '9.0000', '', '', '1、船体外板', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('374', '左舷顶列板', '5.0000', '8.0000', '', '', '1、船体外板', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('375', '右舷顶列板', '5.0000', '8.0000', '', '', '1、船体外板', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('376', '左舷船壳板', '3.0000', '9.0000', '', '', '1、船体外板', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('377', '右舷船壳板', '3.0000', '9.0000', '', '', '1、船体外板', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('378', '附属件', '1.0000', '7.0000', '', '', '1、船体外板', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('379', '舭龙骨', '2.0000', '9.0000', '', '', '1、船体外板', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('380', '海底阀箱', '2.0000', '8.0000', '', '', '1、船体外板', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('381', '通海阀', '2.0000', '8.0000', '', '', '1、船体外板', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('382', '牺牲阳极（锌块）', '2.0000', '9.0000', '', '', '1、船体外板', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('383', '外加电流保护系统', '2.0000', '9.0000', '', '', '1、船体外板', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('384', '防海生物系统', '2.0000', '9.0000', '', '', '1、船体外板', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('385', '球鼻艏', '2.0000', '8.0000', '', '', '1、船体外板', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('386', '挡浪板', '2.0000', '9.0000', '', '', '1、船体外板', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('387', '2、船首结构', '4.0000', '8.5000', '', '', '船体', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('388', '首楼甲板', '5.0000', '9.0000', '', '', '2、船首结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('389', '首桅', '4.0000', '9.0000', '', '', '2、船首结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('390', '首尖舱', '3.0000', '8.0000', '', '', '2、船首结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('391', '锚链舱', '3.0000', '8.0000', '', '', '2、船首结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('392', '首物料间', '1.0000', '9.0000', '', '', '2、船首结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('393', '前液压设备间', '2.0000', '8.0000', '', '', '2、船首结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('394', '前油漆间', '2.0000', '8.0000', '', '', '2、船首结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('395', '3、船体结构', '5.0000', '8.4286', '', '', '船体', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('396', '主甲板', '5.0000', '8.0000', '', '', '3、船体结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('397', '货舱', '5.0000', '8.0000', '', '', '3、船体结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('398', '顶边水舱', '3.0000', '9.0000', '', '', '3、船体结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('399', '底边水舱', '3.0000', '9.0000', '', '', '3、船体结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('400', '双层底', '3.0000', '8.0000', '', '', '3、船体结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('401', '箱形龙骨（管弄）', '3.0000', '9.0000', '', '', '3、船体结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('402', '横舱壁上墩', '2.0000', '8.0000', '', '', '3、船体结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('403', '横舱壁下墩', '2.0000', '8.0000', '', '', '3、船体结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('404', '横舱壁', '2.0000', '9.0000', '', '', '3、船体结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('405', '通风道', '2.0000', '9.0000', '', '', '3、船体结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('406', '桅屋', '1.0000', '9.0000', '', '', '3、船体结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('407', '纵舱壁', '3.0000', '8.0000', '', '', '3、船体结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('408', '舱口围', '4.0000', '8.0000', '', '', '3、船体结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('409', '舱口盖', '4.0000', '9.0000', '', '', '3、船体结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('410', '4、船尾部结构', '4.0000', '8.0357', '', '', '船体', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('411', '后主甲板', '4.0000', '8.0000', '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('412', '尾楼甲板', '4.0000', '7.0000', '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('413', '机舱', '5.0000', '9.0000', '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('414', '舵机间', '5.0000', '9.0000', '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('415', '机舱风机间', '3.0000', '6.0000', '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('416', '舵杆', '5.0000', '9.0000', '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('417', '尾淡水舱', '4.0000', '8.0000', '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('418', '尾尖舱', '3.0000', '8.0000', '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('419', '尾轴冷却水舱', '3.0000', '8.0000', '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('420', '烟囱', '2.0000', '10.0000', '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('421', '主桅（雷达）', '4.0000', '9.0000', '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('422', 'CO2间', '3.0000', '8.0000', '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('423', '蓄电池间', '3.0000', '8.0000', '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('424', '后物料间', '2.0000', '4.0000', '杂乱，无人打扫', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('425', '空调设备间', '3.0000', '7.0000', '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('426', '应急发电机间', '3.0000', '8.0000', '', '', '4、船尾部结构', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('427', '5、生活区', '3.0000', '8.3824', '', '', '船体', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('428', '总体保养', '4.0000', '8.0000', '', '', '5、生活区', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('429', '外甲板及梯道', '3.0000', '9.0000', '', '', '5、生活区', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('430', '居住区', '3.0000', '9.0000', '', '', '5、生活区', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('431', '公共场所', '3.0000', '8.0000', '', '', '5、生活区', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('432', '厨房', '3.0000', '8.0000', '', '', '5、生活区', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('433', '洗衣间', '3.0000', '8.0000', '', '', '5、生活区', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('434', '病房', '2.0000', '8.0000', '', '', '5、生活区', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('435', '药物间', '3.0000', '9.0000', '', '', '5、生活区', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('436', '甲板/轮机办公室', '2.0000', '7.0000', '', '', '5、生活区', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('437', '生活区物料间', '2.0000', '8.0000', '', '', '5、生活区', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('438', '冰库', '3.0000', '9.0000', '', '', '5、生活区', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('439', '理货间', '3.0000', '9.0000', '', '', '5、生活区', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('440', '6、防腐', '5.0000', '7.4783', '', '', '船体', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('441', '船体外壳油漆', '5.0000', '7.0000', '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('442', '干舷 ', '5.0000', '7.0000', '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('443', '直底', '5.0000', '8.0000', '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('444', '平底', '5.0000', '8.0000', '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('445', '水尺及载重线标志', '5.0000', '9.0000', '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('446', '左甲板油漆', '4.0000', '8.0000', '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('447', '右甲板油漆', '4.0000', '8.0000', '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('448', '货舱间甲板油漆', '4.0000', '8.0000', '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('449', '舱口围油漆', '3.0000', '7.0000', '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('450', '舱盖油漆', '3.0000', '8.0000', '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('451', '生活区油漆', '2.0000', '8.0000', '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('452', '货舱油漆', '3.0000', '7.0000', '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('453', '压载舱油漆', '4.0000', '8.0000', '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('454', '淡水舱油漆', '4.0000', '8.0000', '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('455', '干隔舱油漆', '3.0000', '6.0000', '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('456', '货舱壁顶凳和底登内部油漆', '3.0000', '7.0000', '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('457', '管弄内油漆', '3.0000', '8.0000', '', '', '6、防腐', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('458', '压载舱牺牲阳极', '4.0000', '4.0000', '大部分需要更换', '', '6、防腐', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('459', '甲板', '5.0000', '8.0388', '', '', '0', '15', null, '', null, '', '', '1', null);
+INSERT INTO `t_grade` VALUES ('460', '1、系泊设备', '5.0000', '7.9062', '', '', '甲板', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('461', '锚机', '5.0000', '9.0000', '', '', '1、系泊设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('462', '绞缆机', '5.0000', '9.0000', '', '', '1、系泊设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('463', '止链器', '4.0000', '8.0000', '', '', '1、系泊设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('464', '导缆轮和滚筒', '4.0000', '8.0000', '', '', '1、系泊设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('465', '锚和锚链', '5.0000', '7.0000', '', '', '1、系泊设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('466', '系缆索/钢缆', '4.0000', '6.0000', '', '', '1、系泊设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('467', '液压系统', '5.0000', '8.0000', '', '', '1、系泊设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('468', '2、载重线项目', '4.0000', '7.1522', '', '', '甲板', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('469', '干舷标志', '4.0000', '9.0000', '', '', '2、载重线项目', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('470', '水密门', '4.0000', '8.0000', '', '', '2、载重线项目', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('471', '水密小舱口', '4.0000', '7.0000', '', '', '2、载重线项目', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('472', '空气管', '4.0000', '8.0000', '', '', '2、载重线项目', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('473', '测量管', '4.0000', '7.0000', '', '', '2、载重线项目', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('474', '通风筒', '4.0000', '8.0000', '', '', '2、载重线项目', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('475', '天窗', '4.0000', '5.0000', '许多打不开', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/Bps7nJh4Ba.jpg', '2、载重线项目', '15', null, '', null, '', '', '3', 'RogerFederer.jpg');
+INSERT INTO `t_grade` VALUES ('476', '舷墙/栏杆', '4.0000', '5.0000', '腐蚀严重，需要更换。', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/rjcN6R538P.jpg', '2、载重线项目', '15', null, '', null, '', '', '3', '费德勒2.jpg');
+INSERT INTO `t_grade` VALUES ('477', '甲板安全通道及保护索', '4.0000', '6.0000', '', '', '2、载重线项目', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('478', '舷梯/引水梯', '4.0000', '8.0000', '', '', '2、载重线项目', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('479', '窗户/舷窗', '3.0000', '8.0000', '', '', '2、载重线项目', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('480', '疏排水孔', '3.0000', '7.0000', '', '', '2、载重线项目', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('481', '3、消防设备', '5.0000', '8.1639', '', '', '甲板', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('482', '主消防泵', '5.0000', '9.0000', '', '', '3、消防设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('483', '应急消防泵/自吸装置/原动机', '5.0000', '9.0000', '', '', '3、消防设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('484', '消防总管', '5.0000', '8.0000', '', '', '3、消防设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('485', '消防皮龙 / 箱', '4.0000', '8.0000', '', '', '3、消防设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('486', '固定式CO2系统（包括释放前报警装置）', '4.0000', '9.0000', '', '', '3、消防设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('487', '灭火器', '4.0000', '8.0000', '', '', '3、消防设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('488', '消防栓', '4.0000', '7.0000', '', '', '3、消防设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('489', '速闭阀', '4.0000', '7.0000', '', '', '3、消防设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('490', '消防员装备', '5.0000', '7.0000', '', '', '3、消防设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('491', '火警探测与报警系统', '5.0000', '9.0000', '', '', '3、消防设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('492', '油漆间防火装置', '4.0000', '9.0000', '', '', '3、消防设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('493', '分油机间防火装置', '4.0000', '8.0000', '', '', '3、消防设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('494', '水雾自动喷淋系统', '4.0000', '8.0000', '', '', '3、消防设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('495', '风油遥控应急切断', '4.0000', '8.0000', '', '', '3、消防设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('496', '4、救生设备', '5.0000', '8.3571', '', '', '甲板', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('497', '救生艇及自动脱钩装置', '5.0000', '9.0000', '', '', '4、救生设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('498', '艇机', '5.0000', '8.0000', '', '', '4、救生设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('499', '吊艇架', '5.0000', '7.0000', '', '', '4、救生设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('500', '放艇试验', '5.0000', '8.0000', '', '', '4、救生设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('501', '救生筏及静水压力释放器', '4.0000', '8.0000', '', '', '4、救生设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('502', '驾驶室烟火报警装置', '3.0000', '9.0000', '', '', '4、救生设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('503', '无线电示位标（EPIRB）', '4.0000', '9.0000', '', '', '4、救生设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('504', '救生圈', '4.0000', '9.0000', '', '', '4、救生设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('505', '救生衣、保温服', '4.0000', '9.0000', '', '', '4、救生设备', '15', null, '', null, '', '', '3', null);
 INSERT INTO `t_grade` VALUES ('506', '冲洗眼睛系统', '3.0000', null, '', '', '4、救生设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('507', '自助式逃生、应急呼吸器（EEBD）', '3.0000', null, '', '', '4、救生设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('508', '5、防污设备', '4.0000', null, '', '', '甲板', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('509', '油水分离器、15PPM监测装置', '5.0000', null, '', '', '5、防污设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('510', '防油污器材，集油盘', '4.0000', null, '', '', '5、防污设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('511', '垃圾收集、处理和焚烧', '5.0000', null, '', '', '5、防污设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('512', '焚烧炉', '3.0000', null, '', '', '5、防污设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('513', '生活污水处理与排放', '5.0000', null, '', '', '5、防污设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('514', '6、操舵系统', '5.0000', null, '', '', '甲板', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('515', '舵机', '5.0000', null, '', '', '6、操舵系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('516', '液压系统', '5.0000', null, '', '', '6、操舵系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('517', '舵角指示器', '5.0000', null, '', '', '6、操舵系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('518', '自动舵', '5.0000', null, '', '', '6、操舵系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('519', '驾控、通讯', '5.0000', null, '', '', '6、操舵系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('520', '舵叶', '4.0000', null, '', '', '6、操舵系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('521', '7、管系', '5.0000', null, '', '', '甲板', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('522', '燃/柴油系统', '5.0000', null, '', '', '7、管系', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('523', '液压油系统', '4.0000', null, '', '', '7、管系', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('524', '压缩空气系统', '5.0000', null, '', '', '7、管系', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('525', '控制空气系统', '5.0000', null, '', '', '7、管系', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('526', '电缆管', '3.0000', null, '', '', '7、管系', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('527', '淡水系统', '5.0000', null, '', '', '7、管系', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('528', '蒸汽和冷凝系统', '4.0000', null, '', '', '7、管系', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('529', '海水系统', '5.0000', null, '', '', '7、管系', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('530', '8、起重装置', '4.0000', null, '', '', '甲板', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('531', '燃油管吊', '3.0000', null, '', '', '8、起重装置', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('532', '起货机', '4.0000', null, '', '', '8、起重装置', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('533', '单轨吊（机舱物料和备件吊）', '3.0000', null, '', '', '8、起重装置', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('534', '苏伊士运河吊杆', '4.0000', null, '', '', '8、起重装置', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('535', '机舱行车', '4.0000', null, '', '', '8、起重装置', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('536', '9、舱盖', '5.0000', null, '', '', '甲板', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('537', '舱口围板', '5.0000', null, '', '', '9、舱盖', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('538', '压条', '5.0000', null, '', '', '9、舱盖', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('539', '垫块', '4.0000', null, '', '', '9、舱盖', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('540', '轨道', '5.0000', null, '', '', '9、舱盖', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('541', '舱盖板', '4.0000', null, '', '', '9、舱盖', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('542', '舱盖密封', '5.0000', null, '', '', '9、舱盖', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('543', '关闭装置', '5.0000', null, '', '', '9、舱盖', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('544', '滚轮', '5.0000', null, '', '', '9、舱盖', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('545', '液压系统', '5.0000', null, '', '', '9、舱盖', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('546', '开舱设备', '5.0000', null, '', '', '9、舱盖', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('547', '货舱', '5.0000', null, '', '', '0', '15', null, '', null, '', '', '1', null);
-INSERT INTO `t_grade` VALUES ('548', '仪器', '5.0000', null, '', '', '货舱', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('549', '货舱进水报警装置', '5.0000', null, '', '', '仪器', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('507', '自助式逃生、应急呼吸器（EEBD）', '3.0000', '8.0000', '', '', '4、救生设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('508', '5、防污设备', '4.0000', '8.8636', '', '', '甲板', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('509', '油水分离器、15PPM监测装置', '5.0000', '9.0000', '', '', '5、防污设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('510', '防油污器材，集油盘', '4.0000', '9.0000', '', '', '5、防污设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('511', '垃圾收集、处理和焚烧', '5.0000', '9.0000', '', '', '5、防污设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('512', '焚烧炉', '3.0000', '8.0000', '', '', '5、防污设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('513', '生活污水处理与排放', '5.0000', '9.0000', '', '', '5、防污设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('514', '6、操舵系统', '5.0000', '8.3793', '', '', '甲板', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('515', '舵机', '5.0000', '9.0000', '', '', '6、操舵系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('516', '液压系统', '5.0000', '8.0000', '', '', '6、操舵系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('517', '舵角指示器', '5.0000', '9.0000', '', '', '6、操舵系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('518', '自动舵', '5.0000', '9.0000', '', '', '6、操舵系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('519', '驾控、通讯', '5.0000', '8.0000', '', '', '6、操舵系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('520', '舵叶', '4.0000', '7.0000', '舵叶锌块腐蚀严重', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/FndneYAbJ7.jpg', '6、操舵系统', '15', null, '', null, '', '', '3', '美国夜景.jpg');
+INSERT INTO `t_grade` VALUES ('521', '7、管系', '5.0000', '7.8333', '', '', '甲板', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('522', '燃/柴油系统', '5.0000', '8.0000', '', '', '7、管系', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('523', '液压油系统', '4.0000', '7.0000', '', '', '7、管系', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('524', '压缩空气系统', '5.0000', '8.0000', '', '', '7、管系', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('525', '控制空气系统', '5.0000', '8.0000', '', '', '7、管系', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('526', '电缆管', '3.0000', '6.0000', '', '', '7、管系', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('527', '淡水系统', '5.0000', '7.0000', '', '', '7、管系', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('528', '蒸汽和冷凝系统', '4.0000', '9.0000', '', '', '7、管系', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('529', '海水系统', '5.0000', '9.0000', '', '', '7、管系', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('530', '8、起重装置', '4.0000', '7.7222', '', '', '甲板', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('531', '燃油管吊', '3.0000', '9.0000', '', '', '8、起重装置', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('532', '起货机', '4.0000', '8.0000', '', '', '8、起重装置', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('533', '单轨吊（机舱物料和备件吊）', '3.0000', '8.0000', '', '', '8、起重装置', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('534', '苏伊士运河吊杆', '4.0000', '7.0000', '', '', '8、起重装置', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('535', '机舱行车', '4.0000', '7.0000', '', '', '8、起重装置', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('536', '9、舱盖', '5.0000', '7.8958', '', '', '甲板', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('537', '舱口围板', '5.0000', '9.0000', '', '', '9、舱盖', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('538', '压条', '5.0000', '8.0000', '', '', '9、舱盖', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('539', '垫块', '4.0000', '7.0000', '', '', '9、舱盖', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('540', '轨道', '5.0000', '7.0000', '', '', '9、舱盖', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('541', '舱盖板', '4.0000', '9.0000', '', '', '9、舱盖', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('542', '舱盖密封', '5.0000', '7.0000', '', '', '9、舱盖', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('543', '关闭装置', '5.0000', '7.0000', '', '', '9、舱盖', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('544', '滚轮', '5.0000', '8.0000', '', '', '9、舱盖', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('545', '液压系统', '5.0000', '8.0000', '', '', '9、舱盖', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('546', '开舱设备', '5.0000', '9.0000', '', '', '9、舱盖', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('547', '货舱', '5.0000', '8.7143', '', '', '0', '15', null, '', null, '', '', '1', null);
+INSERT INTO `t_grade` VALUES ('548', '仪器', '5.0000', '8.7143', '', '', '货舱', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('549', '货舱进水报警装置', '5.0000', '9.0000', '', '', '仪器', '15', null, '', null, '', '', '3', null);
 INSERT INTO `t_grade` VALUES ('550', '有毒气体探测仪', '4.0000', null, '', '', '仪器', '15', null, '', null, '', '', '3', null);
 INSERT INTO `t_grade` VALUES ('551', '货舱测温管及货舱温度计', '4.0000', null, '', '', '仪器', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('552', '便携式货舱灯', '2.0000', null, '', '', '仪器', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('553', '轮机', '5.0000', null, '', '', '0', '15', null, '', null, '', '', '1', null);
-INSERT INTO `t_grade` VALUES ('554', '1、机舱', '4.0000', null, '', '', '轮机', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('555', '总体保养', '4.0000', null, '', '', '1、机舱', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('556', '专用工具（齐全、完好）', '3.0000', null, '', '', '1、机舱', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('557', '工作间', '3.0000', null, '', '', '1、机舱', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('558', '2、主机', '5.0000', null, '', '', '轮机', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('559', '底座', '3.0000', null, '', '', '2、主机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('560', '缸盖', '5.0000', null, '', '', '2、主机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('561', '排气阀', '5.0000', null, '', '', '2、主机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('562', '缸套', '5.0000', null, '', '', '2、主机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('563', '活塞、连杆、轴承', '5.0000', null, '', '', '2、主机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('564', '十字头轴承', '5.0000', null, '', '', '2、主机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('565', '曲轴，主轴承', '5.0000', null, '', '', '2、主机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('566', '盘车机', '2.0000', null, '', '', '2、主机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('567', '推力块', '5.0000', null, '', '', '2、主机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('568', '拉紧螺栓', '3.0000', null, '', '', '2、主机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('569', '支撑物', '3.0000', null, '', '', '2、主机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('570', '贯穿螺栓', '5.0000', null, '', '', '2、主机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('571', '凸轮', '4.0000', null, '', '', '2、主机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('572', '增压器', '4.0000', null, '', '', '2、主机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('573', '空冷器', '4.0000', null, '', '', '2、主机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('574', '扫气总管', '4.0000', null, '', '', '2、主机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('575', '排烟管', '4.0000', null, '', '', '2、主机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('576', '燃油系统', '4.0000', null, '', '', '2、主机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('577', '冷却系统', '4.0000', null, '', '', '2、主机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('578', '润滑系统（包括气缸油系统）', '4.0000', null, '', '', '2、主机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('579', '启动空气系统', '4.0000', null, '', '', '2、主机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('580', '控制空气系统', '4.0000', null, '', '', '2、主机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('581', '调速器', '3.0000', null, '', '', '2、主机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('582', '减震器', '2.0000', null, '', '', '2、主机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('583', '3、推进装置', '5.0000', null, '', '', '轮机', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('584', '轴系', '5.0000', null, '', '', '3、推进装置', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('585', '中间轴承', '4.0000', null, '', '', '3、推进装置', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('586', '轴接地装置', '2.0000', null, '', '', '3、推进装置', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('587', '轴封', '4.0000', null, '', '', '3、推进装置', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('588', '尾管轴承', '4.0000', null, '', '', '3、推进装置', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('589', '螺旋桨', '5.0000', null, '', '', '3、推进装置', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('552', '便携式货舱灯', '2.0000', '8.0000', '', '', '仪器', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('553', '轮机', '5.0000', '8.5282', '', '', '0', '15', null, '', null, '', '', '1', null);
+INSERT INTO `t_grade` VALUES ('554', '1、机舱', '4.0000', '7.4000', '', '', '轮机', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('555', '总体保养', '4.0000', '8.0000', '', '', '1、机舱', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('556', '专用工具（齐全、完好）', '3.0000', '6.0000', '缺少部分工具', '', '1、机舱', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('557', '工作间', '3.0000', '8.0000', '', '', '1、机舱', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('558', '2、主机', '5.0000', '8.0521', '', '', '轮机', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('559', '底座', '3.0000', '10.0000', '', '', '2、主机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('560', '缸盖', '5.0000', '10.0000', '', '', '2、主机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('561', '排气阀', '5.0000', '9.0000', '', '', '2、主机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('562', '缸套', '5.0000', '8.0000', '', '', '2、主机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('563', '活塞、连杆、轴承', '5.0000', '8.0000', '', '', '2、主机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('564', '十字头轴承', '5.0000', '8.0000', '', '', '2、主机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('565', '曲轴，主轴承', '5.0000', '7.0000', '', '', '2、主机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('566', '盘车机', '2.0000', '9.0000', '', '', '2、主机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('567', '推力块', '5.0000', '8.0000', '', '', '2、主机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('568', '拉紧螺栓', '3.0000', '8.0000', '', '', '2、主机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('569', '支撑物', '3.0000', '8.0000', '', '', '2、主机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('570', '贯穿螺栓', '5.0000', '7.0000', '', '', '2、主机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('571', '凸轮', '4.0000', '7.0000', '', '', '2、主机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('572', '增压器', '4.0000', '8.0000', '', '', '2、主机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('573', '空冷器', '4.0000', '8.0000', '', '', '2、主机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('574', '扫气总管', '4.0000', '9.0000', '', '', '2、主机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('575', '排烟管', '4.0000', '7.0000', '', '', '2、主机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('576', '燃油系统', '4.0000', '7.0000', '', '', '2、主机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('577', '冷却系统', '4.0000', '8.0000', '', '', '2、主机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('578', '润滑系统（包括气缸油系统）', '4.0000', '9.0000', '', '', '2、主机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('579', '启动空气系统', '4.0000', '7.0000', '', '', '2、主机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('580', '控制空气系统', '4.0000', '8.0000', '', '', '2、主机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('581', '调速器', '3.0000', '8.0000', '', '', '2、主机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('582', '减震器', '2.0000', '8.0000', '', '', '2、主机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('583', '3、推进装置', '5.0000', '8.8333', '', '', '轮机', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('584', '轴系', '5.0000', '9.0000', '', '', '3、推进装置', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('585', '中间轴承', '4.0000', '8.0000', '', '', '3、推进装置', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('586', '轴接地装置', '2.0000', '9.0000', '', '', '3、推进装置', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('587', '轴封', '4.0000', '9.0000', '', '', '3、推进装置', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('588', '尾管轴承', '4.0000', '9.0000', '', '', '3、推进装置', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('589', '螺旋桨', '5.0000', '9.0000', '', '', '3、推进装置', '15', null, '', null, '', '', '3', null);
 INSERT INTO `t_grade` VALUES ('590', '备用尾轴', '2.0000', null, '', '', '3、推进装置', '15', null, '', null, '', '', '3', null);
 INSERT INTO `t_grade` VALUES ('591', '备用螺旋桨', '2.0000', null, '', '', '3、推进装置', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('592', '4、副机', '5.0000', null, '', '', '轮机', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('593', '主发电原动机', '5.0000', null, '', '', '4、副机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('594', '底座', '3.0000', null, '', '', '4、副机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('595', '增压器', '4.0000', null, '', '', '4、副机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('596', '燃油系统', '4.0000', null, '', '', '4、副机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('597', '冷却系统', '4.0000', null, '', '', '4、副机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('598', '润滑系统', '4.0000', null, '', '', '4、副机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('599', '应急发电机', '4.0000', null, '', '', '4、副机', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('600', '5、蒸汽系统', '4.0000', null, '', '', '轮机', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('601', '辅锅炉', '4.0000', null, '', '', '5、蒸汽系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('602', '废汽锅炉', '5.0000', null, '', '', '5、蒸汽系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('603', '吹灰器', '3.0000', null, '', '', '5、蒸汽系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('604', '给水和冷凝', '5.0000', null, '', '', '5、蒸汽系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('605', '蒸汽管系、阀', '4.0000', null, '', '', '5、蒸汽系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('606', '大气冷凝器', '4.0000', null, '', '', '5、蒸汽系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('607', '热水井', '5.0000', null, '', '', '5、蒸汽系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('608', '给水泵 ', '5.0000', null, '', '', '5、蒸汽系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('609', '锅炉循环泵', '5.0000', null, '', '', '5、蒸汽系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('610', '6、燃油系统', '5.0000', null, '', '', '轮机', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('611', '泵', '5.0000', null, '', '', '6、燃油系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('612', '管系、阀', '4.0000', null, '', '', '6、燃油系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('613', '重油分油机', '4.0000', null, '', '', '6、燃油系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('614', '柴油分油机', '4.0000', null, '', '', '6、燃油系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('615', '混油装置', '3.0000', null, '', '', '6、燃油系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('616', '加热器', '5.0000', null, '', '', '6、燃油系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('617', '滤器', '3.0000', null, '', '', '6、燃油系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('618', '燃油柜', '4.0000', null, '', '', '6、燃油系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('619', '油舱加热管', '4.0000', null, '', '', '6、燃油系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('620', '7、滑油系统', '5.0000', null, '', '', '轮机', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('621', '泵', '5.0000', null, '', '', '7、滑油系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('622', '管系、阀', '4.0000', null, '', '', '7、滑油系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('623', '冷却器', '5.0000', null, '', '', '7、滑油系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('624', '净油机', '4.0000', null, '', '', '7、滑油系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('625', '滤器', '3.0000', null, '', '', '7、滑油系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('626', '滑油柜', '4.0000', null, '', '', '7、滑油系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('627', '8、海水冷却系统', '5.0000', null, '', '', '轮机', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('628', '泵', '5.0000', null, '', '', '8、海水冷却系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('629', '管系、阀', '4.0000', null, '', '', '8、海水冷却系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('630', '冷却器', '5.0000', null, '', '', '8、海水冷却系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('631', '滤器', '3.0000', null, '', '', '8、海水冷却系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('632', '9、污水和压载系统', '4.0000', null, '', '', '轮机', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('633', '泵', '5.0000', null, '', '', '9、污水和压载系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('634', '管系、阀', '4.0000', null, '', '', '9、污水和压载系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('635', '压载控制台', '3.0000', null, '', '', '9、污水和压载系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('636', '污水井报警系统', '3.0000', null, '', '', '9、污水和压载系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('637', '压载水清洗系统', '3.0000', null, '', '', '9、污水和压载系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('638', '阀操作系统', '4.0000', null, '', '', '9、污水和压载系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('639', '10、淡水冷却系统', '5.0000', null, '', '', '轮机', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('640', '泵', '5.0000', null, '', '', '10、淡水冷却系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('641', '管系、阀', '4.0000', null, '', '', '10、淡水冷却系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('642', '淡/海水冷却器', '5.0000', null, '', '', '10、淡水冷却系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('643', '11、压缩空气系统', '4.0000', null, '', '', '轮机', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('644', '空压机', '5.0000', null, '', '', '11、压缩空气系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('645', '应急空压机', '3.0000', null, '', '', '11、压缩空气系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('646', '空气瓶', '5.0000', null, '', '', '11、压缩空气系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('647', '空气干燥/冷却器', '3.0000', null, '', '', '11、压缩空气系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('648', '管系、阀', '4.0000', null, '', '', '11、压缩空气系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('649', '控制空气干燥器', '3.0000', null, '', '', '11、压缩空气系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('650', '控制空气管系、阀', '4.0000', null, '', '', '11、压缩空气系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('651', '12、辅助系统', '3.0000', null, '', '', '轮机', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('652', '冷藏系统', '3.0000', null, '', '', '12、辅助系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('653', '造水机', '3.0000', null, '', '', '12、辅助系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('654', '日用淡水系统', '4.0000', null, '', '', '12、辅助系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('655', '空调系统', '3.0000', null, '', '', '12、辅助系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('656', '13、压载水处理系统', '5.0000', null, '', '', '轮机', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('657', '电解单元', '5.0000', null, '', '', '13、压载水处理系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('658', '反冲洗滤器', '3.0000', null, '', '', '13、压载水处理系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('659', '中和单元', '4.0000', null, '', '', '13、压载水处理系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('660', 'TRO检测单元', '5.0000', null, '', '', '13、压载水处理系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('661', '控制系统', '5.0000', null, '', '', '13、压载水处理系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('662', '电气', '4.0000', null, '', '', '0', '15', null, '', null, '', '', '1', null);
-INSERT INTO `t_grade` VALUES ('663', '1、电力系统', '5.0000', null, '', '', '电气', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('664', '主发电机', '5.0000', null, '', '', '1、电力系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('665', '联轴节', '2.0000', null, '', '', '1、电力系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('666', '轴承', '2.0000', null, '', '', '1、电力系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('667', '空气滤器', '1.0000', null, '', '', '1、电力系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('668', '应急发电机', '5.0000', null, '', '', '1、电力系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('669', '通用蓄电池', '4.0000', null, '', '', '1、电力系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('670', '变压器', '4.0000', null, '', '', '1、电力系统', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('671', '2、配电装置', '5.0000', null, '', '', '电气', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('672', '主配电板、应急配电板', '5.0000', null, '', '', '2、配电装置', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('673', '断路器', '3.0000', null, '', '', '2、配电装置', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('674', '启动器', '3.0000', null, '', '', '2、配电装置', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('675', '3、电器设备', '4.0000', null, '', '', '电气', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('676', '马达', '4.0000', null, '', '', '3、电器设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('677', '马达（泵）', '4.0000', null, '', '', '3、电器设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('678', '马达（风机）', '4.0000', null, '', '', '3、电器设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('679', '马达（其它）', '4.0000', null, '', '', '3、电器设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('680', '绝缘测试', '3.0000', null, '', '', '3、电器设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('681', '加热器', '3.0000', null, '', '', '3、电器设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('682', '照明', '3.0000', null, '', '', '3、电器设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('683', '4、自动化控制', '5.0000', null, '', '', '电气', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('684', '主机遥控和安保', '5.0000', null, '', '', '4、自动化控制', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('685', '副机自动控制和安保', '5.0000', null, '', '', '4、自动化控制', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('686', '机舱监测报警系统（包括DEAD MAN）', '5.0000', null, '', '', '4、自动化控制', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('687', '自动化电站综合保护装置', '5.0000', null, '', '', '4、自动化控制', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('688', '锅炉自动控制', '5.0000', null, '', '', '4、自动化控制', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('689', '5、惰气系统（油轮）', '4.0000', null, '', '', '电气', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('690', '惰气风机', '5.0000', null, '', '', '5、惰气系统（油轮）', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('691', '洗涤塔', '5.0000', null, '', '', '5、惰气系统（油轮）', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('692', '惰气海水泵', '5.0000', null, '', '', '5、惰气系统（油轮）', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('693', '水封泵', '5.0000', null, '', '', '5、惰气系统（油轮）', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('694', '氧份仪', '4.0000', null, '', '', '5、惰气系统（油轮）', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('695', '水封塔', '5.0000', null, '', '', '5、惰气系统（油轮）', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('696', '惰气总管控制阀', '4.0000', null, '', '', '5、惰气系统（油轮）', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('697', '大舱呼吸阀（P/V）', '3.0000', null, '', '', '5、惰气系统（油轮）', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('698', '惰气管路系统', '4.0000', null, '', '', '5、惰气系统（油轮）', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('699', '6、货油系统（油轮）', '5.0000', null, '', '', '电气', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('700', '货油泵', '5.0000', null, '', '', '6、货油系统（油轮）', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('701', '货油泵原动机（蒸汽透平）', '5.0000', null, '', '', '6、货油系统（油轮）', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('702', '货油泵调速器', '4.0000', null, '', '', '6、货油系统（油轮）', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('703', '货油泵应急停泵装置', '4.0000', null, '', '', '6、货油系统（油轮）', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('704', '油泵间风机', '4.0000', null, '', '', '6、货油系统（油轮）', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('705', '真空抽除器', '4.0000', null, '', '', '6、货油系统（油轮）', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('706', '货油泵大气冷凝器', '5.0000', null, '', '', '6、货油系统（油轮）', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('707', '专用海水冷却泵', '5.0000', null, '', '', '6、货油系统（油轮）', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('708', '货泵间海底阀', '4.0000', null, '', '', '6、货油系统（油轮）', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('709', '喷射泵', '3.0000', null, '', '', '6、货油系统（油轮）', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('710', '货油管路', '4.0000', null, '', '', '6、货油系统（油轮）', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('711', '原油洗舱机', '3.0000', null, '', '', '6、货油系统（油轮）', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('712', '油轮专用检测仪器', '3.0000', null, '', '', '6、货油系统（油轮）', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('713', '驾驶台', '4.0000', null, '', '', '0', '15', null, '', null, '', '', '1', null);
-INSERT INTO `t_grade` VALUES ('714', '1、总体保养', '4.0000', null, '', '', '驾驶台', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('715', '驾驶室', '4.0000', null, '', '', '1、总体保养', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('716', '海图室', '3.0000', null, '', '', '1、总体保养', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('717', '蓄电池间', '3.0000', null, '', '', '1、总体保养', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('718', '2、通讯设备', '5.0000', null, '', '', '驾驶台', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('719', 'GMDSS装置', '5.0000', null, '', '', '2、通讯设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('720', '天线', '5.0000', null, '', '', '2、通讯设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('721', 'AIS', '5.0000', null, '', '', '2、通讯设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('722', 'VHF', '5.0000', null, '', '', '2、通讯设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('723', '卫通', '5.0000', null, '', '', '2、通讯设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('724', 'VDR/SVDR', '5.0000', null, '', '', '2、通讯设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('725', '应急示位标', '5.0000', null, '', '', '2、通讯设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('726', '船内通讯', '5.0000', null, '', '', '2、通讯设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('727', '手提对讲机', '4.0000', null, '', '', '2、通讯设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('728', '通讯用蓄电池', '5.0000', null, '', '', '2、通讯设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('729', '3、航行设备', '5.0000', null, '', '', '驾驶台', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('730', '雷达', '5.0000', null, '', '', '3、航行设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('731', 'GPS / DGPS', '5.0000', null, '', '', '3、航行设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('732', '气象传真', '4.0000', null, '', '', '3、航行设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('733', '航行灯/信号灯', '5.0000', null, '', '', '3、航行设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('734', '计程仪', '5.0000', null, '', '', '3、航行设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('735', '测深仪', '5.0000', null, '', '', '3、航行设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('736', '电罗经', '5.0000', null, '', '', '3、航行设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('737', '磁罗经', '5.0000', null, '', '', '3、航行设备', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('738', '4、船上办公室', '3.0000', null, '', '', '驾驶台', '15', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('739', '船上办公室设备', '2.0000', null, '', '', '4、船上办公室', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('740', '配载仪', '4.0000', null, '', '', '4、船上办公室', '15', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('741', '船体', '5.0000', null, '', '', '0', '16', null, '', null, '', '', '1', null);
-INSERT INTO `t_grade` VALUES ('742', '1、船体外板', '5.0000', null, '', '', '船体', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('743', '船底板', '5.0000', null, '', '', '1、船体外板', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('744', '左舷顶列板', '5.0000', null, '', '', '1、船体外板', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('745', '右舷顶列板', '5.0000', null, '', '', '1、船体外板', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('746', '左舷船壳板', '3.0000', null, '', '', '1、船体外板', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('747', '右舷船壳板', '3.0000', null, '', '', '1、船体外板', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('748', '附属件', '1.0000', null, '', '', '1、船体外板', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('749', '舭龙骨', '2.0000', null, '', '', '1、船体外板', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('750', '海底阀箱', '2.0000', null, '', '', '1、船体外板', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('751', '通海阀', '2.0000', null, '', '', '1、船体外板', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('752', '牺牲阳极（锌块）', '2.0000', null, '', '', '1、船体外板', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('753', '外加电流保护系统', '2.0000', null, '', '', '1、船体外板', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('754', '防海生物系统', '2.0000', null, '', '', '1、船体外板', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('755', '球鼻艏', '2.0000', null, '', '', '1、船体外板', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('756', '挡浪板', '2.0000', null, '', '', '1、船体外板', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('757', '2、船首结构', '4.0000', null, '', '', '船体', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('758', '首楼甲板', '5.0000', null, '', '', '2、船首结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('759', '首桅', '4.0000', null, '', '', '2、船首结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('760', '首尖舱', '3.0000', null, '', '', '2、船首结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('761', '锚链舱', '3.0000', null, '', '', '2、船首结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('762', '首物料间', '1.0000', null, '', '', '2、船首结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('763', '前液压设备间', '2.0000', null, '', '', '2、船首结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('764', '前油漆间', '2.0000', null, '', '', '2、船首结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('765', '3、船体结构', '5.0000', null, '', '', '船体', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('766', '主甲板', '5.0000', null, '', '', '3、船体结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('767', '货舱', '5.0000', null, '', '', '3、船体结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('768', '顶边水舱', '3.0000', null, '', '', '3、船体结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('769', '底边水舱', '3.0000', null, '', '', '3、船体结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('770', '双层底', '3.0000', null, '', '', '3、船体结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('771', '箱形龙骨（管弄）', '3.0000', null, '', '', '3、船体结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('772', '横舱壁上墩', '2.0000', null, '', '', '3、船体结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('773', '横舱壁下墩', '2.0000', null, '', '', '3、船体结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('774', '横舱壁', '2.0000', null, '', '', '3、船体结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('775', '通风道', '2.0000', null, '', '', '3、船体结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('776', '桅屋', '1.0000', null, '', '', '3、船体结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('777', '纵舱壁', '3.0000', null, '', '', '3、船体结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('778', '舱口围', '4.0000', null, '', '', '3、船体结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('779', '舱口盖', '4.0000', null, '', '', '3、船体结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('780', '4、船尾部结构', '4.0000', null, '', '', '船体', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('781', '后主甲板', '4.0000', null, '', '', '4、船尾部结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('782', '尾楼甲板', '4.0000', null, '', '', '4、船尾部结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('783', '机舱', '5.0000', null, '', '', '4、船尾部结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('784', '舵机间', '5.0000', null, '', '', '4、船尾部结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('785', '机舱风机间', '3.0000', null, '', '', '4、船尾部结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('786', '舵杆', '5.0000', null, '', '', '4、船尾部结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('787', '尾淡水舱', '4.0000', null, '', '', '4、船尾部结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('788', '尾尖舱', '3.0000', null, '', '', '4、船尾部结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('789', '尾轴冷却水舱', '3.0000', null, '', '', '4、船尾部结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('790', '烟囱', '2.0000', null, '', '', '4、船尾部结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('791', '主桅（雷达）', '4.0000', null, '', '', '4、船尾部结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('792', 'CO2间', '3.0000', null, '', '', '4、船尾部结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('793', '蓄电池间', '3.0000', null, '', '', '4、船尾部结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('794', '后物料间', '2.0000', null, '', '', '4、船尾部结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('795', '空调设备间', '3.0000', null, '', '', '4、船尾部结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('796', '应急发电机间', '3.0000', null, '', '', '4、船尾部结构', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('797', '5、生活区', '3.0000', null, '', '', '船体', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('798', '总体保养', '4.0000', null, '', '', '5、生活区', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('799', '外甲板及梯道', '3.0000', null, '', '', '5、生活区', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('800', '居住区', '3.0000', null, '', '', '5、生活区', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('801', '公共场所', '3.0000', null, '', '', '5、生活区', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('802', '厨房', '3.0000', null, '', '', '5、生活区', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('803', '洗衣间', '3.0000', null, '', '', '5、生活区', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('804', '病房', '2.0000', null, '', '', '5、生活区', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('805', '药物间', '3.0000', null, '', '', '5、生活区', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('806', '甲板/轮机办公室', '2.0000', null, '', '', '5、生活区', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('807', '生活区物料间', '2.0000', null, '', '', '5、生活区', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('808', '冰库', '3.0000', null, '', '', '5、生活区', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('809', '理货间', '3.0000', null, '', '', '5、生活区', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('810', '6、防腐', '5.0000', null, '', '', '船体', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('811', '船体外壳油漆', '5.0000', null, '', '', '6、防腐', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('812', '干舷 ', '5.0000', null, '', '', '6、防腐', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('813', '直底', '5.0000', null, '', '', '6、防腐', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('814', '平底', '5.0000', null, '', '', '6、防腐', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('815', '水尺及载重线标志', '5.0000', null, '', '', '6、防腐', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('816', '左甲板油漆', '4.0000', null, '', '', '6、防腐', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('817', '右甲板油漆', '4.0000', null, '', '', '6、防腐', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('818', '货舱间甲板油漆', '4.0000', null, '', '', '6、防腐', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('819', '舱口围油漆', '3.0000', null, '', '', '6、防腐', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('820', '舱盖油漆', '3.0000', null, '', '', '6、防腐', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('821', '生活区油漆', '2.0000', null, '', '', '6、防腐', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('822', '货舱油漆', '3.0000', null, '', '', '6、防腐', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('823', '压载舱油漆', '4.0000', null, '', '', '6、防腐', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('824', '淡水舱油漆', '4.0000', null, '', '', '6、防腐', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('825', '干隔舱油漆', '3.0000', null, '', '', '6、防腐', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('826', '货舱壁顶凳和底登内部油漆', '3.0000', null, '', '', '6、防腐', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('827', '管弄内油漆', '3.0000', null, '', '', '6、防腐', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('828', '压载舱牺牲阳极', '4.0000', null, '', '', '6、防腐', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('829', '甲板', '5.0000', null, '', '', '0', '16', null, '', null, '', '', '1', null);
-INSERT INTO `t_grade` VALUES ('830', '1、系泊设备', '5.0000', null, '', '', '甲板', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('831', '锚机', '5.0000', null, '', '', '1、系泊设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('832', '绞缆机', '5.0000', null, '', '', '1、系泊设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('833', '止链器', '4.0000', null, '', '', '1、系泊设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('834', '导缆轮和滚筒', '4.0000', null, '', '', '1、系泊设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('835', '锚和锚链', '5.0000', null, '', '', '1、系泊设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('836', '系缆索/钢缆', '4.0000', null, '', '', '1、系泊设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('837', '液压系统', '5.0000', null, '', '', '1、系泊设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('838', '2、载重线项目', '4.0000', null, '', '', '甲板', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('839', '干舷标志', '4.0000', null, '', '', '2、载重线项目', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('840', '水密门', '4.0000', null, '', '', '2、载重线项目', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('841', '水密小舱口', '4.0000', null, '', '', '2、载重线项目', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('842', '空气管', '4.0000', null, '', '', '2、载重线项目', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('843', '测量管', '4.0000', null, '', '', '2、载重线项目', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('844', '通风筒', '4.0000', null, '', '', '2、载重线项目', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('845', '天窗', '4.0000', null, '', '', '2、载重线项目', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('846', '舷墙/栏杆', '4.0000', null, '', '', '2、载重线项目', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('847', '甲板安全通道及保护索', '4.0000', null, '', '', '2、载重线项目', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('848', '舷梯/引水梯', '4.0000', null, '', '', '2、载重线项目', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('849', '窗户/舷窗', '3.0000', null, '', '', '2、载重线项目', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('850', '疏排水孔', '3.0000', null, '', '', '2、载重线项目', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('851', '3、消防设备', '5.0000', null, '', '', '甲板', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('852', '主消防泵', '5.0000', null, '', '', '3、消防设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('853', '应急消防泵/自吸装置/原动机', '5.0000', null, '', '', '3、消防设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('854', '消防总管', '5.0000', null, '', '', '3、消防设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('855', '消防皮龙 / 箱', '4.0000', null, '', '', '3、消防设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('856', '固定式CO2系统（包括释放前报警装置）', '4.0000', null, '', '', '3、消防设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('857', '灭火器', '4.0000', null, '', '', '3、消防设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('858', '消防栓', '4.0000', null, '', '', '3、消防设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('859', '速闭阀', '4.0000', null, '', '', '3、消防设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('860', '消防员装备', '5.0000', null, '', '', '3、消防设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('861', '火警探测与报警系统', '5.0000', null, '', '', '3、消防设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('862', '油漆间防火装置', '4.0000', null, '', '', '3、消防设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('863', '分油机间防火装置', '4.0000', null, '', '', '3、消防设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('864', '水雾自动喷淋系统', '4.0000', null, '', '', '3、消防设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('865', '风油遥控应急切断', '4.0000', null, '', '', '3、消防设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('866', '4、救生设备', '5.0000', null, '', '', '甲板', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('867', '救生艇及自动脱钩装置', '5.0000', null, '', '', '4、救生设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('868', '艇机', '5.0000', null, '', '', '4、救生设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('869', '吊艇架', '5.0000', null, '', '', '4、救生设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('870', '放艇试验', '5.0000', null, '', '', '4、救生设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('871', '救生筏及静水压力释放器', '4.0000', null, '', '', '4、救生设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('872', '驾驶室烟火报警装置', '3.0000', null, '', '', '4、救生设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('873', '无线电示位标（EPIRB）', '4.0000', null, '', '', '4、救生设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('874', '救生圈', '4.0000', null, '', '', '4、救生设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('875', '救生衣、保温服', '4.0000', null, '', '', '4、救生设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('876', '冲洗眼睛系统', '3.0000', null, '', '', '4、救生设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('877', '自助式逃生、应急呼吸器（EEBD）', '3.0000', null, '', '', '4、救生设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('878', '5、防污设备', '4.0000', null, '', '', '甲板', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('879', '油水分离器、15PPM监测装置', '5.0000', null, '', '', '5、防污设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('880', '防油污器材，集油盘', '4.0000', null, '', '', '5、防污设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('881', '垃圾收集、处理和焚烧', '5.0000', null, '', '', '5、防污设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('882', '焚烧炉', '3.0000', null, '', '', '5、防污设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('883', '生活污水处理与排放', '5.0000', null, '', '', '5、防污设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('884', '6、操舵系统', '5.0000', null, '', '', '甲板', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('885', '舵机', '5.0000', null, '', '', '6、操舵系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('886', '液压系统', '5.0000', null, '', '', '6、操舵系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('887', '舵角指示器', '5.0000', null, '', '', '6、操舵系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('888', '自动舵', '5.0000', null, '', '', '6、操舵系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('889', '驾控、通讯', '5.0000', null, '', '', '6、操舵系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('890', '舵叶', '4.0000', null, '', '', '6、操舵系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('891', '7、管系', '5.0000', null, '', '', '甲板', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('892', '燃/柴油系统', '5.0000', null, '', '', '7、管系', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('893', '液压油系统', '4.0000', null, '', '', '7、管系', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('894', '压缩空气系统', '5.0000', null, '', '', '7、管系', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('895', '控制空气系统', '5.0000', null, '', '', '7、管系', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('896', '电缆管', '3.0000', null, '', '', '7、管系', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('897', '淡水系统', '5.0000', null, '', '', '7、管系', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('898', '蒸汽和冷凝系统', '4.0000', null, '', '', '7、管系', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('899', '海水系统', '5.0000', null, '', '', '7、管系', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('900', '8、起重装置', '4.0000', null, '', '', '甲板', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('901', '燃油管吊', '3.0000', null, '', '', '8、起重装置', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('902', '起货机', '4.0000', null, '', '', '8、起重装置', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('903', '单轨吊（机舱物料和备件吊）', '3.0000', null, '', '', '8、起重装置', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('904', '苏伊士运河吊杆', '4.0000', null, '', '', '8、起重装置', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('905', '机舱行车', '4.0000', null, '', '', '8、起重装置', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('906', '9、舱盖', '5.0000', null, '', '', '甲板', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('907', '舱口围板', '5.0000', null, '', '', '9、舱盖', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('908', '压条', '5.0000', null, '', '', '9、舱盖', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('909', '垫块', '4.0000', null, '', '', '9、舱盖', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('910', '轨道', '5.0000', null, '', '', '9、舱盖', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('911', '舱盖板', '4.0000', null, '', '', '9、舱盖', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('912', '舱盖密封', '5.0000', null, '', '', '9、舱盖', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('913', '关闭装置', '5.0000', null, '', '', '9、舱盖', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('914', '滚轮', '5.0000', null, '', '', '9、舱盖', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('915', '液压系统', '5.0000', null, '', '', '9、舱盖', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('916', '开舱设备', '5.0000', null, '', '', '9、舱盖', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('917', '货舱', '5.0000', null, '', '', '0', '16', null, '', null, '', '', '1', null);
-INSERT INTO `t_grade` VALUES ('918', '仪器', '5.0000', null, '', '', '货舱', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('919', '货舱进水报警装置', '5.0000', null, '', '', '仪器', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('920', '有毒气体探测仪', '4.0000', null, '', '', '仪器', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('921', '货舱测温管及货舱温度计', '4.0000', null, '', '', '仪器', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('922', '便携式货舱灯', '2.0000', null, '', '', '仪器', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('923', '轮机', '5.0000', null, '', '', '0', '16', null, '', null, '', '', '1', null);
-INSERT INTO `t_grade` VALUES ('924', '1、机舱', '4.0000', null, '', '', '轮机', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('925', '总体保养', '4.0000', null, '', '', '1、机舱', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('926', '专用工具（齐全、完好）', '3.0000', null, '', '', '1、机舱', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('927', '工作间', '3.0000', null, '', '', '1、机舱', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('928', '2、主机', '5.0000', null, '', '', '轮机', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('929', '底座', '3.0000', null, '', '', '2、主机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('930', '缸盖', '5.0000', null, '', '', '2、主机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('931', '排气阀', '5.0000', null, '', '', '2、主机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('932', '缸套', '5.0000', null, '', '', '2、主机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('933', '活塞、连杆、轴承', '5.0000', null, '', '', '2、主机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('934', '十字头轴承', '5.0000', null, '', '', '2、主机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('935', '曲轴，主轴承', '5.0000', null, '', '', '2、主机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('936', '盘车机', '2.0000', null, '', '', '2、主机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('937', '推力块', '5.0000', null, '', '', '2、主机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('938', '拉紧螺栓', '3.0000', null, '', '', '2、主机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('939', '支撑物', '3.0000', null, '', '', '2、主机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('940', '贯穿螺栓', '5.0000', null, '', '', '2、主机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('941', '凸轮', '4.0000', null, '', '', '2、主机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('942', '增压器', '4.0000', null, '', '', '2、主机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('943', '空冷器', '4.0000', null, '', '', '2、主机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('944', '扫气总管', '4.0000', null, '', '', '2、主机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('945', '排烟管', '4.0000', null, '', '', '2、主机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('946', '燃油系统', '4.0000', null, '', '', '2、主机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('947', '冷却系统', '4.0000', null, '', '', '2、主机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('948', '润滑系统（包括气缸油系统）', '4.0000', null, '', '', '2、主机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('949', '启动空气系统', '4.0000', null, '', '', '2、主机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('950', '控制空气系统', '4.0000', null, '', '', '2、主机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('951', '调速器', '3.0000', null, '', '', '2、主机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('952', '减震器', '2.0000', null, '', '', '2、主机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('953', '3、推进装置', '5.0000', null, '', '', '轮机', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('954', '轴系', '5.0000', null, '', '', '3、推进装置', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('955', '中间轴承', '4.0000', null, '', '', '3、推进装置', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('956', '轴接地装置', '2.0000', null, '', '', '3、推进装置', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('957', '轴封', '4.0000', null, '', '', '3、推进装置', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('958', '尾管轴承', '4.0000', null, '', '', '3、推进装置', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('959', '螺旋桨', '5.0000', null, '', '', '3、推进装置', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('960', '备用尾轴', '2.0000', null, '', '', '3、推进装置', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('961', '备用螺旋桨', '2.0000', null, '', '', '3、推进装置', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('962', '4、副机', '5.0000', null, '', '', '轮机', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('963', '主发电原动机', '5.0000', null, '', '', '4、副机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('964', '底座', '3.0000', null, '', '', '4、副机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('965', '增压器', '4.0000', null, '', '', '4、副机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('966', '燃油系统', '4.0000', null, '', '', '4、副机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('967', '冷却系统', '4.0000', null, '', '', '4、副机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('968', '润滑系统', '4.0000', null, '', '', '4、副机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('969', '应急发电机', '4.0000', null, '', '', '4、副机', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('970', '5、蒸汽系统', '4.0000', null, '', '', '轮机', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('971', '辅锅炉', '4.0000', null, '', '', '5、蒸汽系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('972', '废汽锅炉', '5.0000', null, '', '', '5、蒸汽系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('973', '吹灰器', '3.0000', null, '', '', '5、蒸汽系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('974', '给水和冷凝', '5.0000', null, '', '', '5、蒸汽系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('975', '蒸汽管系、阀', '4.0000', null, '', '', '5、蒸汽系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('976', '大气冷凝器', '4.0000', null, '', '', '5、蒸汽系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('977', '热水井', '5.0000', null, '', '', '5、蒸汽系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('978', '给水泵 ', '5.0000', null, '', '', '5、蒸汽系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('979', '锅炉循环泵', '5.0000', null, '', '', '5、蒸汽系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('980', '6、燃油系统', '5.0000', null, '', '', '轮机', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('981', '泵', '5.0000', null, '', '', '6、燃油系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('982', '管系、阀', '4.0000', null, '', '', '6、燃油系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('983', '重油分油机', '4.0000', null, '', '', '6、燃油系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('984', '柴油分油机', '4.0000', null, '', '', '6、燃油系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('985', '混油装置', '3.0000', null, '', '', '6、燃油系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('986', '加热器', '5.0000', null, '', '', '6、燃油系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('987', '滤器', '3.0000', null, '', '', '6、燃油系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('988', '燃油柜', '4.0000', null, '', '', '6、燃油系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('989', '油舱加热管', '4.0000', null, '', '', '6、燃油系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('990', '7、滑油系统', '5.0000', null, '', '', '轮机', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('991', '泵', '5.0000', null, '', '', '7、滑油系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('992', '管系、阀', '4.0000', null, '', '', '7、滑油系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('993', '冷却器', '5.0000', null, '', '', '7、滑油系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('994', '净油机', '4.0000', null, '', '', '7、滑油系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('995', '滤器', '3.0000', null, '', '', '7、滑油系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('996', '滑油柜', '4.0000', null, '', '', '7、滑油系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('997', '8、海水冷却系统', '5.0000', null, '', '', '轮机', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('998', '泵', '5.0000', null, '', '', '8、海水冷却系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('999', '管系、阀', '4.0000', null, '', '', '8、海水冷却系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1000', '冷却器', '5.0000', null, '', '', '8、海水冷却系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1001', '滤器', '3.0000', null, '', '', '8、海水冷却系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1002', '9、污水和压载系统', '4.0000', null, '', '', '轮机', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1003', '泵', '5.0000', null, '', '', '9、污水和压载系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1004', '管系、阀', '4.0000', null, '', '', '9、污水和压载系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1005', '压载控制台', '3.0000', null, '', '', '9、污水和压载系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1006', '污水井报警系统', '3.0000', null, '', '', '9、污水和压载系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1007', '压载水清洗系统', '3.0000', null, '', '', '9、污水和压载系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1008', '阀操作系统', '4.0000', null, '', '', '9、污水和压载系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1009', '10、淡水冷却系统', '5.0000', null, '', '', '轮机', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1010', '泵', '5.0000', null, '', '', '10、淡水冷却系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1011', '管系、阀', '4.0000', null, '', '', '10、淡水冷却系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1012', '淡/海水冷却器', '5.0000', null, '', '', '10、淡水冷却系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1013', '11、压缩空气系统', '4.0000', null, '', '', '轮机', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1014', '空压机', '5.0000', null, '', '', '11、压缩空气系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1015', '应急空压机', '3.0000', null, '', '', '11、压缩空气系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1016', '空气瓶', '5.0000', null, '', '', '11、压缩空气系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1017', '空气干燥/冷却器', '3.0000', null, '', '', '11、压缩空气系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1018', '管系、阀', '4.0000', null, '', '', '11、压缩空气系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1019', '控制空气干燥器', '3.0000', null, '', '', '11、压缩空气系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1020', '控制空气管系、阀', '4.0000', null, '', '', '11、压缩空气系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1021', '12、辅助系统', '3.0000', null, '', '', '轮机', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1022', '冷藏系统', '3.0000', null, '', '', '12、辅助系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1023', '造水机', '3.0000', null, '', '', '12、辅助系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1024', '日用淡水系统', '4.0000', null, '', '', '12、辅助系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1025', '空调系统', '3.0000', null, '', '', '12、辅助系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1026', '13、压载水处理系统', '5.0000', null, '', '', '轮机', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1027', '电解单元', '5.0000', null, '', '', '13、压载水处理系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1028', '反冲洗滤器', '3.0000', null, '', '', '13、压载水处理系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1029', '中和单元', '4.0000', null, '', '', '13、压载水处理系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1030', 'TRO检测单元', '5.0000', null, '', '', '13、压载水处理系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1031', '控制系统', '5.0000', null, '', '', '13、压载水处理系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1032', '电气', '4.0000', null, '', '', '0', '16', null, '', null, '', '', '1', null);
-INSERT INTO `t_grade` VALUES ('1033', '1、电力系统', '5.0000', null, '', '', '电气', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1034', '主发电机', '5.0000', null, '', '', '1、电力系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1035', '联轴节', '2.0000', null, '', '', '1、电力系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1036', '轴承', '2.0000', null, '', '', '1、电力系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1037', '空气滤器', '1.0000', null, '', '', '1、电力系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1038', '应急发电机', '5.0000', null, '', '', '1、电力系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1039', '通用蓄电池', '4.0000', null, '', '', '1、电力系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1040', '变压器', '4.0000', null, '', '', '1、电力系统', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1041', '2、配电装置', '5.0000', null, '', '', '电气', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1042', '主配电板、应急配电板', '5.0000', null, '', '', '2、配电装置', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1043', '断路器', '3.0000', null, '', '', '2、配电装置', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1044', '启动器', '3.0000', null, '', '', '2、配电装置', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1045', '3、电器设备', '4.0000', null, '', '', '电气', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1046', '马达', '4.0000', null, '', '', '3、电器设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1047', '马达（泵）', '4.0000', null, '', '', '3、电器设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1048', '马达（风机）', '4.0000', null, '', '', '3、电器设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1049', '马达（其它）', '4.0000', null, '', '', '3、电器设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1050', '绝缘测试', '3.0000', null, '', '', '3、电器设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1051', '加热器', '3.0000', null, '', '', '3、电器设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1052', '照明', '3.0000', null, '', '', '3、电器设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1053', '4、自动化控制', '5.0000', null, '', '', '电气', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1054', '主机遥控和安保', '5.0000', null, '', '', '4、自动化控制', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1055', '副机自动控制和安保', '5.0000', null, '', '', '4、自动化控制', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1056', '机舱监测报警系统（包括DEAD MAN）', '5.0000', null, '', '', '4、自动化控制', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1057', '自动化电站综合保护装置', '5.0000', null, '', '', '4、自动化控制', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1058', '锅炉自动控制', '5.0000', null, '', '', '4、自动化控制', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1059', '5、惰气系统（油轮）', '4.0000', null, '', '', '电气', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1060', '惰气风机', '5.0000', null, '', '', '5、惰气系统（油轮）', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1061', '洗涤塔', '5.0000', null, '', '', '5、惰气系统（油轮）', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1062', '惰气海水泵', '5.0000', null, '', '', '5、惰气系统（油轮）', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1063', '水封泵', '5.0000', null, '', '', '5、惰气系统（油轮）', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1064', '氧份仪', '4.0000', null, '', '', '5、惰气系统（油轮）', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1065', '水封塔', '5.0000', null, '', '', '5、惰气系统（油轮）', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1066', '惰气总管控制阀', '4.0000', null, '', '', '5、惰气系统（油轮）', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1067', '大舱呼吸阀（P/V）', '3.0000', null, '', '', '5、惰气系统（油轮）', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1068', '惰气管路系统', '4.0000', null, '', '', '5、惰气系统（油轮）', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1069', '6、货油系统（油轮）', '5.0000', null, '', '', '电气', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1070', '货油泵', '5.0000', null, '', '', '6、货油系统（油轮）', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1071', '货油泵原动机（蒸汽透平）', '5.0000', null, '', '', '6、货油系统（油轮）', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1072', '货油泵调速器', '4.0000', null, '', '', '6、货油系统（油轮）', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1073', '货油泵应急停泵装置', '4.0000', null, '', '', '6、货油系统（油轮）', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1074', '油泵间风机', '4.0000', null, '', '', '6、货油系统（油轮）', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1075', '真空抽除器', '4.0000', null, '', '', '6、货油系统（油轮）', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1076', '货油泵大气冷凝器', '5.0000', null, '', '', '6、货油系统（油轮）', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1077', '专用海水冷却泵', '5.0000', null, '', '', '6、货油系统（油轮）', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1078', '货泵间海底阀', '4.0000', null, '', '', '6、货油系统（油轮）', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1079', '喷射泵', '3.0000', null, '', '', '6、货油系统（油轮）', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1080', '货油管路', '4.0000', null, '', '', '6、货油系统（油轮）', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1081', '原油洗舱机', '3.0000', null, '', '', '6、货油系统（油轮）', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1082', '油轮专用检测仪器', '3.0000', null, '', '', '6、货油系统（油轮）', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1083', '驾驶台', '4.0000', null, '', '', '0', '16', null, '', null, '', '', '1', null);
-INSERT INTO `t_grade` VALUES ('1084', '1、总体保养', '4.0000', null, '', '', '驾驶台', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1085', '驾驶室', '4.0000', null, '', '', '1、总体保养', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1086', '海图室', '3.0000', null, '', '', '1、总体保养', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1087', '蓄电池间', '3.0000', null, '', '', '1、总体保养', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1088', '2、通讯设备', '5.0000', null, '', '', '驾驶台', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1089', 'GMDSS装置', '5.0000', null, '', '', '2、通讯设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1090', '天线', '5.0000', null, '', '', '2、通讯设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1091', 'AIS', '5.0000', null, '', '', '2、通讯设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1092', 'VHF', '5.0000', null, '', '', '2、通讯设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1093', '卫通', '5.0000', null, '', '', '2、通讯设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1094', 'VDR/SVDR', '5.0000', null, '', '', '2、通讯设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1095', '应急示位标', '5.0000', null, '', '', '2、通讯设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1096', '船内通讯', '5.0000', null, '', '', '2、通讯设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1097', '手提对讲机', '4.0000', null, '', '', '2、通讯设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1098', '通讯用蓄电池', '5.0000', null, '', '', '2、通讯设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1099', '3、航行设备', '5.0000', null, '', '', '驾驶台', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1100', '雷达', '5.0000', null, '', '', '3、航行设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1101', 'GPS / DGPS', '5.0000', null, '', '', '3、航行设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1102', '气象传真', '4.0000', null, '', '', '3、航行设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1103', '航行灯/信号灯', '5.0000', null, '', '', '3、航行设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1104', '计程仪', '5.0000', null, '', '', '3、航行设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1105', '测深仪', '5.0000', null, '', '', '3、航行设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1106', '电罗经', '5.0000', null, '', '', '3、航行设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1107', '磁罗经', '5.0000', null, '', '', '3、航行设备', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1108', '4、船上办公室', '3.0000', null, '', '', '驾驶台', '16', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1109', '船上办公室设备', '2.0000', null, '', '', '4、船上办公室', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1110', '配载仪', '4.0000', null, '', '', '4、船上办公室', '16', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1111', '船体', '5.0000', null, '', '', '0', '17', null, '', null, '', '', '1', null);
-INSERT INTO `t_grade` VALUES ('1112', '1、船体外板', '5.0000', null, '', '', '船体', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1113', '船底板', '5.0000', null, '', '', '1、船体外板', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1114', '左舷顶列板', '5.0000', null, '', '', '1、船体外板', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1115', '右舷顶列板', '5.0000', null, '', '', '1、船体外板', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1116', '左舷船壳板', '3.0000', null, '', '', '1、船体外板', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1117', '右舷船壳板', '3.0000', null, '', '', '1、船体外板', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1118', '附属件', '1.0000', null, '', '', '1、船体外板', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1119', '舭龙骨', '2.0000', null, '', '', '1、船体外板', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1120', '海底阀箱', '2.0000', null, '', '', '1、船体外板', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1121', '通海阀', '2.0000', null, '', '', '1、船体外板', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1122', '牺牲阳极（锌块）', '2.0000', null, '', '', '1、船体外板', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1123', '外加电流保护系统', '2.0000', null, '', '', '1、船体外板', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1124', '防海生物系统', '2.0000', null, '', '', '1、船体外板', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1125', '球鼻艏', '2.0000', null, '', '', '1、船体外板', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1126', '挡浪板', '2.0000', null, '', '', '1、船体外板', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1127', '2、船首结构', '4.0000', null, '', '', '船体', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1128', '首楼甲板', '5.0000', null, '', '', '2、船首结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1129', '首桅', '4.0000', null, '', '', '2、船首结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1130', '首尖舱', '3.0000', null, '', '', '2、船首结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1131', '锚链舱', '3.0000', null, '', '', '2、船首结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1132', '首物料间', '1.0000', null, '', '', '2、船首结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1133', '前液压设备间', '2.0000', null, '', '', '2、船首结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1134', '前油漆间', '2.0000', null, '', '', '2、船首结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1135', '3、船体结构', '5.0000', null, '', '', '船体', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1136', '主甲板', '5.0000', null, '', '', '3、船体结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1137', '货舱', '5.0000', null, '', '', '3、船体结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1138', '顶边水舱', '3.0000', null, '', '', '3、船体结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1139', '底边水舱', '3.0000', null, '', '', '3、船体结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1140', '双层底', '3.0000', null, '', '', '3、船体结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1141', '箱形龙骨（管弄）', '3.0000', null, '', '', '3、船体结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1142', '横舱壁上墩', '2.0000', null, '', '', '3、船体结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1143', '横舱壁下墩', '2.0000', null, '', '', '3、船体结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1144', '横舱壁', '2.0000', null, '', '', '3、船体结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1145', '通风道', '2.0000', null, '', '', '3、船体结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1146', '桅屋', '1.0000', null, '', '', '3、船体结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1147', '纵舱壁', '3.0000', null, '', '', '3、船体结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1148', '舱口围', '4.0000', null, '', '', '3、船体结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1149', '舱口盖', '4.0000', null, '', '', '3、船体结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1150', '4、船尾部结构', '4.0000', null, '', '', '船体', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1151', '后主甲板', '4.0000', null, '', '', '4、船尾部结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1152', '尾楼甲板', '4.0000', null, '', '', '4、船尾部结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1153', '机舱', '5.0000', null, '', '', '4、船尾部结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1154', '舵机间', '5.0000', null, '', '', '4、船尾部结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1155', '机舱风机间', '3.0000', null, '', '', '4、船尾部结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1156', '舵杆', '5.0000', null, '', '', '4、船尾部结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1157', '尾淡水舱', '4.0000', null, '', '', '4、船尾部结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1158', '尾尖舱', '3.0000', null, '', '', '4、船尾部结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1159', '尾轴冷却水舱', '3.0000', null, '', '', '4、船尾部结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1160', '烟囱', '2.0000', null, '', '', '4、船尾部结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1161', '主桅（雷达）', '4.0000', null, '', '', '4、船尾部结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1162', 'CO2间', '3.0000', null, '', '', '4、船尾部结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1163', '蓄电池间', '3.0000', null, '', '', '4、船尾部结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1164', '后物料间', '2.0000', null, '', '', '4、船尾部结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1165', '空调设备间', '3.0000', null, '', '', '4、船尾部结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1166', '应急发电机间', '3.0000', null, '', '', '4、船尾部结构', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1167', '5、生活区', '3.0000', null, '', '', '船体', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1168', '总体保养', '4.0000', null, '', '', '5、生活区', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1169', '外甲板及梯道', '3.0000', null, '', '', '5、生活区', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1170', '居住区', '3.0000', null, '', '', '5、生活区', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1171', '公共场所', '3.0000', null, '', '', '5、生活区', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1172', '厨房', '3.0000', null, '', '', '5、生活区', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1173', '洗衣间', '3.0000', null, '', '', '5、生活区', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1174', '病房', '2.0000', null, '', '', '5、生活区', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1175', '药物间', '3.0000', null, '', '', '5、生活区', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1176', '甲板/轮机办公室', '2.0000', null, '', '', '5、生活区', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1177', '生活区物料间', '2.0000', null, '', '', '5、生活区', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1178', '冰库', '3.0000', null, '', '', '5、生活区', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1179', '理货间', '3.0000', null, '', '', '5、生活区', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1180', '6、防腐', '5.0000', null, '', '', '船体', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1181', '船体外壳油漆', '5.0000', null, '', '', '6、防腐', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1182', '干舷 ', '5.0000', null, '', '', '6、防腐', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1183', '直底', '5.0000', null, '', '', '6、防腐', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1184', '平底', '5.0000', null, '', '', '6、防腐', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1185', '水尺及载重线标志', '5.0000', null, '', '', '6、防腐', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1186', '左甲板油漆', '4.0000', null, '', '', '6、防腐', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1187', '右甲板油漆', '4.0000', null, '', '', '6、防腐', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1188', '货舱间甲板油漆', '4.0000', null, '', '', '6、防腐', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1189', '舱口围油漆', '3.0000', null, '', '', '6、防腐', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1190', '舱盖油漆', '3.0000', null, '', '', '6、防腐', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1191', '生活区油漆', '2.0000', null, '', '', '6、防腐', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1192', '货舱油漆', '3.0000', null, '', '', '6、防腐', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1193', '压载舱油漆', '4.0000', null, '', '', '6、防腐', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1194', '淡水舱油漆', '4.0000', null, '', '', '6、防腐', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1195', '干隔舱油漆', '3.0000', null, '', '', '6、防腐', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1196', '货舱壁顶凳和底登内部油漆', '3.0000', null, '', '', '6、防腐', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1197', '管弄内油漆', '3.0000', null, '', '', '6、防腐', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1198', '压载舱牺牲阳极', '4.0000', null, '', '', '6、防腐', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1199', '甲板', '5.0000', null, '', '', '0', '17', null, '', null, '', '', '1', null);
-INSERT INTO `t_grade` VALUES ('1200', '1、系泊设备', '5.0000', null, '', '', '甲板', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1201', '锚机', '5.0000', null, '', '', '1、系泊设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1202', '绞缆机', '5.0000', null, '', '', '1、系泊设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1203', '止链器', '4.0000', null, '', '', '1、系泊设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1204', '导缆轮和滚筒', '4.0000', null, '', '', '1、系泊设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1205', '锚和锚链', '5.0000', null, '', '', '1、系泊设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1206', '系缆索/钢缆', '4.0000', null, '', '', '1、系泊设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1207', '液压系统', '5.0000', null, '', '', '1、系泊设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1208', '2、载重线项目', '4.0000', null, '', '', '甲板', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1209', '干舷标志', '4.0000', null, '', '', '2、载重线项目', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1210', '水密门', '4.0000', null, '', '', '2、载重线项目', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1211', '水密小舱口', '4.0000', null, '', '', '2、载重线项目', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1212', '空气管', '4.0000', null, '', '', '2、载重线项目', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1213', '测量管', '4.0000', null, '', '', '2、载重线项目', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1214', '通风筒', '4.0000', null, '', '', '2、载重线项目', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1215', '天窗', '4.0000', null, '', '', '2、载重线项目', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1216', '舷墙/栏杆', '4.0000', null, '', '', '2、载重线项目', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1217', '甲板安全通道及保护索', '4.0000', null, '', '', '2、载重线项目', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1218', '舷梯/引水梯', '4.0000', null, '', '', '2、载重线项目', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1219', '窗户/舷窗', '3.0000', null, '', '', '2、载重线项目', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1220', '疏排水孔', '3.0000', null, '', '', '2、载重线项目', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1221', '3、消防设备', '5.0000', null, '', '', '甲板', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1222', '主消防泵', '5.0000', null, '', '', '3、消防设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1223', '应急消防泵/自吸装置/原动机', '5.0000', null, '', '', '3、消防设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1224', '消防总管', '5.0000', null, '', '', '3、消防设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1225', '消防皮龙 / 箱', '4.0000', null, '', '', '3、消防设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1226', '固定式CO2系统（包括释放前报警装置）', '4.0000', null, '', '', '3、消防设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1227', '灭火器', '4.0000', null, '', '', '3、消防设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1228', '消防栓', '4.0000', null, '', '', '3、消防设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1229', '速闭阀', '4.0000', null, '', '', '3、消防设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1230', '消防员装备', '5.0000', null, '', '', '3、消防设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1231', '火警探测与报警系统', '5.0000', null, '', '', '3、消防设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1232', '油漆间防火装置', '4.0000', null, '', '', '3、消防设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1233', '分油机间防火装置', '4.0000', null, '', '', '3、消防设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1234', '水雾自动喷淋系统', '4.0000', null, '', '', '3、消防设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1235', '风油遥控应急切断', '4.0000', null, '', '', '3、消防设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1236', '4、救生设备', '5.0000', null, '', '', '甲板', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1237', '救生艇及自动脱钩装置', '5.0000', null, '', '', '4、救生设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1238', '艇机', '5.0000', null, '', '', '4、救生设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1239', '吊艇架', '5.0000', null, '', '', '4、救生设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1240', '放艇试验', '5.0000', null, '', '', '4、救生设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1241', '救生筏及静水压力释放器', '4.0000', null, '', '', '4、救生设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1242', '驾驶室烟火报警装置', '3.0000', null, '', '', '4、救生设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1243', '无线电示位标（EPIRB）', '4.0000', null, '', '', '4、救生设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1244', '救生圈', '4.0000', null, '', '', '4、救生设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1245', '救生衣、保温服', '4.0000', null, '', '', '4、救生设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1246', '冲洗眼睛系统', '3.0000', null, '', '', '4、救生设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1247', '自助式逃生、应急呼吸器（EEBD）', '3.0000', null, '', '', '4、救生设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1248', '5、防污设备', '4.0000', null, '', '', '甲板', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1249', '油水分离器、15PPM监测装置', '5.0000', null, '', '', '5、防污设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1250', '防油污器材，集油盘', '4.0000', null, '', '', '5、防污设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1251', '垃圾收集、处理和焚烧', '5.0000', null, '', '', '5、防污设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1252', '焚烧炉', '3.0000', null, '', '', '5、防污设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1253', '生活污水处理与排放', '5.0000', null, '', '', '5、防污设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1254', '6、操舵系统', '5.0000', null, '', '', '甲板', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1255', '舵机', '5.0000', null, '', '', '6、操舵系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1256', '液压系统', '5.0000', null, '', '', '6、操舵系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1257', '舵角指示器', '5.0000', null, '', '', '6、操舵系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1258', '自动舵', '5.0000', null, '', '', '6、操舵系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1259', '驾控、通讯', '5.0000', null, '', '', '6、操舵系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1260', '舵叶', '4.0000', null, '', '', '6、操舵系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1261', '7、管系', '5.0000', null, '', '', '甲板', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1262', '燃/柴油系统', '5.0000', null, '', '', '7、管系', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1263', '液压油系统', '4.0000', null, '', '', '7、管系', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1264', '压缩空气系统', '5.0000', null, '', '', '7、管系', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1265', '控制空气系统', '5.0000', null, '', '', '7、管系', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1266', '电缆管', '3.0000', null, '', '', '7、管系', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1267', '淡水系统', '5.0000', null, '', '', '7、管系', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1268', '蒸汽和冷凝系统', '4.0000', null, '', '', '7、管系', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1269', '海水系统', '5.0000', null, '', '', '7、管系', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1270', '8、起重装置', '4.0000', null, '', '', '甲板', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1271', '燃油管吊', '3.0000', null, '', '', '8、起重装置', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1272', '起货机', '4.0000', null, '', '', '8、起重装置', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1273', '单轨吊（机舱物料和备件吊）', '3.0000', null, '', '', '8、起重装置', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1274', '苏伊士运河吊杆', '4.0000', null, '', '', '8、起重装置', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1275', '机舱行车', '4.0000', null, '', '', '8、起重装置', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1276', '9、舱盖', '5.0000', null, '', '', '甲板', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1277', '舱口围板', '5.0000', null, '', '', '9、舱盖', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1278', '压条', '5.0000', null, '', '', '9、舱盖', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1279', '垫块', '4.0000', null, '', '', '9、舱盖', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1280', '轨道', '5.0000', null, '', '', '9、舱盖', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1281', '舱盖板', '4.0000', null, '', '', '9、舱盖', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1282', '舱盖密封', '5.0000', null, '', '', '9、舱盖', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1283', '关闭装置', '5.0000', null, '', '', '9、舱盖', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1284', '滚轮', '5.0000', null, '', '', '9、舱盖', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1285', '液压系统', '5.0000', null, '', '', '9、舱盖', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1286', '开舱设备', '5.0000', null, '', '', '9、舱盖', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1287', '货舱', '5.0000', null, '', '', '0', '17', null, '', null, '', '', '1', null);
-INSERT INTO `t_grade` VALUES ('1288', '仪器', '5.0000', null, '', '', '货舱', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1289', '货舱进水报警装置', '5.0000', null, '', '', '仪器', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1290', '有毒气体探测仪', '4.0000', null, '', '', '仪器', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1291', '货舱测温管及货舱温度计', '4.0000', null, '', '', '仪器', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1292', '便携式货舱灯', '2.0000', null, '', '', '仪器', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1293', '轮机', '5.0000', null, '', '', '0', '17', null, '', null, '', '', '1', null);
-INSERT INTO `t_grade` VALUES ('1294', '1、机舱', '4.0000', null, '', '', '轮机', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1295', '总体保养', '4.0000', null, '', '', '1、机舱', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1296', '专用工具（齐全、完好）', '3.0000', null, '', '', '1、机舱', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1297', '工作间', '3.0000', null, '', '', '1、机舱', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1298', '2、主机', '5.0000', null, '', '', '轮机', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1299', '底座', '3.0000', null, '', '', '2、主机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1300', '缸盖', '5.0000', null, '', '', '2、主机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1301', '排气阀', '5.0000', null, '', '', '2、主机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1302', '缸套', '5.0000', null, '', '', '2、主机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1303', '活塞、连杆、轴承', '5.0000', null, '', '', '2、主机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1304', '十字头轴承', '5.0000', null, '', '', '2、主机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1305', '曲轴，主轴承', '5.0000', null, '', '', '2、主机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1306', '盘车机', '2.0000', null, '', '', '2、主机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1307', '推力块', '5.0000', null, '', '', '2、主机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1308', '拉紧螺栓', '3.0000', null, '', '', '2、主机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1309', '支撑物', '3.0000', null, '', '', '2、主机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1310', '贯穿螺栓', '5.0000', null, '', '', '2、主机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1311', '凸轮', '4.0000', null, '', '', '2、主机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1312', '增压器', '4.0000', null, '', '', '2、主机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1313', '空冷器', '4.0000', null, '', '', '2、主机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1314', '扫气总管', '4.0000', null, '', '', '2、主机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1315', '排烟管', '4.0000', null, '', '', '2、主机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1316', '燃油系统', '4.0000', null, '', '', '2、主机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1317', '冷却系统', '4.0000', null, '', '', '2、主机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1318', '润滑系统（包括气缸油系统）', '4.0000', null, '', '', '2、主机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1319', '启动空气系统', '4.0000', null, '', '', '2、主机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1320', '控制空气系统', '4.0000', null, '', '', '2、主机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1321', '调速器', '3.0000', null, '', '', '2、主机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1322', '减震器', '2.0000', null, '', '', '2、主机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1323', '3、推进装置', '5.0000', null, '', '', '轮机', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1324', '轴系', '5.0000', null, '', '', '3、推进装置', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1325', '中间轴承', '4.0000', null, '', '', '3、推进装置', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1326', '轴接地装置', '2.0000', null, '', '', '3、推进装置', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1327', '轴封', '4.0000', null, '', '', '3、推进装置', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1328', '尾管轴承', '4.0000', null, '', '', '3、推进装置', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1329', '螺旋桨', '5.0000', null, '', '', '3、推进装置', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1330', '备用尾轴', '2.0000', null, '', '', '3、推进装置', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1331', '备用螺旋桨', '2.0000', null, '', '', '3、推进装置', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1332', '4、副机', '5.0000', null, '', '', '轮机', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1333', '主发电原动机', '5.0000', null, '', '', '4、副机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1334', '底座', '3.0000', null, '', '', '4、副机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1335', '增压器', '4.0000', null, '', '', '4、副机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1336', '燃油系统', '4.0000', null, '', '', '4、副机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1337', '冷却系统', '4.0000', null, '', '', '4、副机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1338', '润滑系统', '4.0000', null, '', '', '4、副机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1339', '应急发电机', '4.0000', null, '', '', '4、副机', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1340', '5、蒸汽系统', '4.0000', null, '', '', '轮机', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1341', '辅锅炉', '4.0000', null, '', '', '5、蒸汽系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1342', '废汽锅炉', '5.0000', null, '', '', '5、蒸汽系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1343', '吹灰器', '3.0000', null, '', '', '5、蒸汽系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1344', '给水和冷凝', '5.0000', null, '', '', '5、蒸汽系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1345', '蒸汽管系、阀', '4.0000', null, '', '', '5、蒸汽系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1346', '大气冷凝器', '4.0000', null, '', '', '5、蒸汽系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1347', '热水井', '5.0000', null, '', '', '5、蒸汽系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1348', '给水泵 ', '5.0000', null, '', '', '5、蒸汽系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1349', '锅炉循环泵', '5.0000', null, '', '', '5、蒸汽系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1350', '6、燃油系统', '5.0000', null, '', '', '轮机', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1351', '泵', '5.0000', null, '', '', '6、燃油系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1352', '管系、阀', '4.0000', null, '', '', '6、燃油系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1353', '重油分油机', '4.0000', null, '', '', '6、燃油系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1354', '柴油分油机', '4.0000', null, '', '', '6、燃油系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1355', '混油装置', '3.0000', null, '', '', '6、燃油系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1356', '加热器', '5.0000', null, '', '', '6、燃油系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1357', '滤器', '3.0000', null, '', '', '6、燃油系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1358', '燃油柜', '4.0000', null, '', '', '6、燃油系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1359', '油舱加热管', '4.0000', null, '', '', '6、燃油系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1360', '7、滑油系统', '5.0000', null, '', '', '轮机', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1361', '泵', '5.0000', null, '', '', '7、滑油系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1362', '管系、阀', '4.0000', null, '', '', '7、滑油系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1363', '冷却器', '5.0000', null, '', '', '7、滑油系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1364', '净油机', '4.0000', null, '', '', '7、滑油系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1365', '滤器', '3.0000', null, '', '', '7、滑油系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1366', '滑油柜', '4.0000', null, '', '', '7、滑油系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1367', '8、海水冷却系统', '5.0000', null, '', '', '轮机', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1368', '泵', '5.0000', null, '', '', '8、海水冷却系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1369', '管系、阀', '4.0000', null, '', '', '8、海水冷却系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1370', '冷却器', '5.0000', null, '', '', '8、海水冷却系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1371', '滤器', '3.0000', null, '', '', '8、海水冷却系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1372', '9、污水和压载系统', '4.0000', null, '', '', '轮机', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1373', '泵', '5.0000', null, '', '', '9、污水和压载系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1374', '管系、阀', '4.0000', null, '', '', '9、污水和压载系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1375', '压载控制台', '3.0000', null, '', '', '9、污水和压载系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1376', '污水井报警系统', '3.0000', null, '', '', '9、污水和压载系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1377', '压载水清洗系统', '3.0000', null, '', '', '9、污水和压载系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1378', '阀操作系统', '4.0000', null, '', '', '9、污水和压载系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1379', '10、淡水冷却系统', '5.0000', null, '', '', '轮机', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1380', '泵', '5.0000', null, '', '', '10、淡水冷却系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1381', '管系、阀', '4.0000', null, '', '', '10、淡水冷却系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1382', '淡/海水冷却器', '5.0000', null, '', '', '10、淡水冷却系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1383', '11、压缩空气系统', '4.0000', null, '', '', '轮机', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1384', '空压机', '5.0000', null, '', '', '11、压缩空气系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1385', '应急空压机', '3.0000', null, '', '', '11、压缩空气系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1386', '空气瓶', '5.0000', null, '', '', '11、压缩空气系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1387', '空气干燥/冷却器', '3.0000', null, '', '', '11、压缩空气系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1388', '管系、阀', '4.0000', null, '', '', '11、压缩空气系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1389', '控制空气干燥器', '3.0000', null, '', '', '11、压缩空气系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1390', '控制空气管系、阀', '4.0000', null, '', '', '11、压缩空气系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1391', '12、辅助系统', '3.0000', null, '', '', '轮机', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1392', '冷藏系统', '3.0000', null, '', '', '12、辅助系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1393', '造水机', '3.0000', null, '', '', '12、辅助系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1394', '日用淡水系统', '4.0000', null, '', '', '12、辅助系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1395', '空调系统', '3.0000', null, '', '', '12、辅助系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1396', '13、压载水处理系统', '5.0000', null, '', '', '轮机', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1397', '电解单元', '5.0000', null, '', '', '13、压载水处理系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1398', '反冲洗滤器', '3.0000', null, '', '', '13、压载水处理系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1399', '中和单元', '4.0000', null, '', '', '13、压载水处理系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1400', 'TRO检测单元', '5.0000', null, '', '', '13、压载水处理系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1401', '控制系统', '5.0000', null, '', '', '13、压载水处理系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1402', '电气', '4.0000', null, '', '', '0', '17', null, '', null, '', '', '1', null);
-INSERT INTO `t_grade` VALUES ('1403', '1、电力系统', '5.0000', null, '', '', '电气', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1404', '主发电机', '5.0000', null, '', '', '1、电力系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1405', '联轴节', '2.0000', null, '', '', '1、电力系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1406', '轴承', '2.0000', null, '', '', '1、电力系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1407', '空气滤器', '1.0000', null, '', '', '1、电力系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1408', '应急发电机', '5.0000', null, '', '', '1、电力系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1409', '通用蓄电池', '4.0000', null, '', '', '1、电力系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1410', '变压器', '4.0000', null, '', '', '1、电力系统', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1411', '2、配电装置', '5.0000', null, '', '', '电气', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1412', '主配电板、应急配电板', '5.0000', null, '', '', '2、配电装置', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1413', '断路器', '3.0000', null, '', '', '2、配电装置', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1414', '启动器', '3.0000', null, '', '', '2、配电装置', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1415', '3、电器设备', '4.0000', null, '', '', '电气', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1416', '马达', '4.0000', null, '', '', '3、电器设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1417', '马达（泵）', '4.0000', null, '', '', '3、电器设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1418', '马达（风机）', '4.0000', null, '', '', '3、电器设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1419', '马达（其它）', '4.0000', null, '', '', '3、电器设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1420', '绝缘测试', '3.0000', null, '', '', '3、电器设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1421', '加热器', '3.0000', null, '', '', '3、电器设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1422', '照明', '3.0000', null, '', '', '3、电器设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1423', '4、自动化控制', '5.0000', null, '', '', '电气', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1424', '主机遥控和安保', '5.0000', null, '', '', '4、自动化控制', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1425', '副机自动控制和安保', '5.0000', null, '', '', '4、自动化控制', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1426', '机舱监测报警系统（包括DEAD MAN）', '5.0000', null, '', '', '4、自动化控制', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1427', '自动化电站综合保护装置', '5.0000', null, '', '', '4、自动化控制', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1428', '锅炉自动控制', '5.0000', null, '', '', '4、自动化控制', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1429', '5、惰气系统（油轮）', '4.0000', null, '', '', '电气', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1430', '惰气风机', '5.0000', null, '', '', '5、惰气系统（油轮）', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1431', '洗涤塔', '5.0000', null, '', '', '5、惰气系统（油轮）', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1432', '惰气海水泵', '5.0000', null, '', '', '5、惰气系统（油轮）', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1433', '水封泵', '5.0000', null, '', '', '5、惰气系统（油轮）', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1434', '氧份仪', '4.0000', null, '', '', '5、惰气系统（油轮）', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1435', '水封塔', '5.0000', null, '', '', '5、惰气系统（油轮）', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1436', '惰气总管控制阀', '4.0000', null, '', '', '5、惰气系统（油轮）', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1437', '大舱呼吸阀（P/V）', '3.0000', null, '', '', '5、惰气系统（油轮）', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1438', '惰气管路系统', '4.0000', null, '', '', '5、惰气系统（油轮）', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1439', '6、货油系统（油轮）', '5.0000', null, '', '', '电气', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1440', '货油泵', '5.0000', null, '', '', '6、货油系统（油轮）', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1441', '货油泵原动机（蒸汽透平）', '5.0000', null, '', '', '6、货油系统（油轮）', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1442', '货油泵调速器', '4.0000', null, '', '', '6、货油系统（油轮）', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1443', '货油泵应急停泵装置', '4.0000', null, '', '', '6、货油系统（油轮）', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1444', '油泵间风机', '4.0000', null, '', '', '6、货油系统（油轮）', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1445', '真空抽除器', '4.0000', null, '', '', '6、货油系统（油轮）', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1446', '货油泵大气冷凝器', '5.0000', null, '', '', '6、货油系统（油轮）', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1447', '专用海水冷却泵', '5.0000', null, '', '', '6、货油系统（油轮）', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1448', '货泵间海底阀', '4.0000', null, '', '', '6、货油系统（油轮）', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1449', '喷射泵', '3.0000', null, '', '', '6、货油系统（油轮）', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1450', '货油管路', '4.0000', null, '', '', '6、货油系统（油轮）', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1451', '原油洗舱机', '3.0000', null, '', '', '6、货油系统（油轮）', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1452', '油轮专用检测仪器', '3.0000', null, '', '', '6、货油系统（油轮）', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1453', '驾驶台', '4.0000', null, '', '', '0', '17', null, '', null, '', '', '1', null);
-INSERT INTO `t_grade` VALUES ('1454', '1、总体保养', '4.0000', null, '', '', '驾驶台', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1455', '驾驶室', '4.0000', null, '', '', '1、总体保养', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1456', '海图室', '3.0000', null, '', '', '1、总体保养', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1457', '蓄电池间', '3.0000', null, '', '', '1、总体保养', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1458', '2、通讯设备', '5.0000', null, '', '', '驾驶台', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1459', 'GMDSS装置', '5.0000', null, '', '', '2、通讯设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1460', '天线', '5.0000', null, '', '', '2、通讯设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1461', 'AIS', '5.0000', null, '', '', '2、通讯设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1462', 'VHF', '5.0000', null, '', '', '2、通讯设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1463', '卫通', '5.0000', null, '', '', '2、通讯设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1464', 'VDR/SVDR', '5.0000', null, '', '', '2、通讯设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1465', '应急示位标', '5.0000', null, '', '', '2、通讯设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1466', '船内通讯', '5.0000', null, '', '', '2、通讯设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1467', '手提对讲机', '4.0000', null, '', '', '2、通讯设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1468', '通讯用蓄电池', '5.0000', null, '', '', '2、通讯设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1469', '3、航行设备', '5.0000', null, '', '', '驾驶台', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1470', '雷达', '5.0000', null, '', '', '3、航行设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1471', 'GPS / DGPS', '5.0000', null, '', '', '3、航行设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1472', '气象传真', '4.0000', null, '', '', '3、航行设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1473', '航行灯/信号灯', '5.0000', null, '', '', '3、航行设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1474', '计程仪', '5.0000', null, '', '', '3、航行设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1475', '测深仪', '5.0000', null, '', '', '3、航行设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1476', '电罗经', '5.0000', null, '', '', '3、航行设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1477', '磁罗经', '5.0000', null, '', '', '3、航行设备', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1478', '4、船上办公室', '3.0000', null, '', '', '驾驶台', '17', null, '', null, '', '', '2', null);
-INSERT INTO `t_grade` VALUES ('1479', '船上办公室设备', '2.0000', null, '', '', '4、船上办公室', '17', null, '', null, '', '', '3', null);
-INSERT INTO `t_grade` VALUES ('1480', '配载仪', '4.0000', null, '', '', '4、船上办公室', '17', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('592', '4、副机', '5.0000', '8.8571', '', '', '轮机', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('593', '主发电原动机', '5.0000', '9.0000', '', '', '4、副机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('594', '底座', '3.0000', '9.0000', '', '', '4、副机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('595', '增压器', '4.0000', '8.0000', '', '', '4、副机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('596', '燃油系统', '4.0000', '9.0000', '', '', '4、副机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('597', '冷却系统', '4.0000', '9.0000', '', '', '4、副机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('598', '润滑系统', '4.0000', '8.0000', '', '', '4、副机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('599', '应急发电机', '4.0000', '10.0000', '', '', '4、副机', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('600', '5、蒸汽系统', '4.0000', '8.3250', '', '', '轮机', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('601', '辅锅炉', '4.0000', '9.0000', '', '', '5、蒸汽系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('602', '废汽锅炉', '5.0000', '9.0000', '', '', '5、蒸汽系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('603', '吹灰器', '3.0000', '8.0000', '', '', '5、蒸汽系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('604', '给水和冷凝', '5.0000', '8.0000', '', '', '5、蒸汽系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('605', '蒸汽管系、阀', '4.0000', '8.0000', '', '', '5、蒸汽系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('606', '大气冷凝器', '4.0000', '9.0000', '', '', '5、蒸汽系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('607', '热水井', '5.0000', '8.0000', '', '', '5、蒸汽系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('608', '给水泵 ', '5.0000', '8.0000', '', '', '5、蒸汽系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('609', '锅炉循环泵', '5.0000', '8.0000', '', '', '5、蒸汽系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('610', '6、燃油系统', '5.0000', '8.9167', '', '', '轮机', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('611', '泵', '5.0000', '9.0000', '', '', '6、燃油系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('612', '管系、阀', '4.0000', '9.0000', '', '', '6、燃油系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('613', '重油分油机', '4.0000', '9.0000', '', '', '6、燃油系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('614', '柴油分油机', '4.0000', '9.0000', '', '', '6、燃油系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('615', '混油装置', '3.0000', '9.0000', '', '', '6、燃油系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('616', '加热器', '5.0000', '9.0000', '', '', '6、燃油系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('617', '滤器', '3.0000', '8.0000', '', '', '6、燃油系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('618', '燃油柜', '4.0000', '9.0000', '', '', '6、燃油系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('619', '油舱加热管', '4.0000', '9.0000', '', '', '6、燃油系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('620', '7、滑油系统', '5.0000', '8.6000', '', '', '轮机', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('621', '泵', '5.0000', '9.0000', '', '', '7、滑油系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('622', '管系、阀', '4.0000', '9.0000', '', '', '7、滑油系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('623', '冷却器', '5.0000', '9.0000', '', '', '7、滑油系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('624', '净油机', '4.0000', '8.0000', '', '', '7、滑油系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('625', '滤器', '3.0000', '7.0000', '', '', '7、滑油系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('626', '滑油柜', '4.0000', '9.0000', '', '', '7、滑油系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('627', '8、海水冷却系统', '5.0000', '8.6471', '', '', '轮机', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('628', '泵', '5.0000', '9.0000', '', '', '8、海水冷却系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('629', '管系、阀', '4.0000', '9.0000', '', '', '8、海水冷却系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('630', '冷却器', '5.0000', '9.0000', '', '', '8、海水冷却系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('631', '滤器', '3.0000', '7.0000', '', '', '8、海水冷却系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('632', '9、污水和压载系统', '4.0000', '8.8636', '', '', '轮机', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('633', '泵', '5.0000', '9.0000', '', '', '9、污水和压载系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('634', '管系、阀', '4.0000', '9.0000', '', '', '9、污水和压载系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('635', '压载控制台', '3.0000', '9.0000', '', '', '9、污水和压载系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('636', '污水井报警系统', '3.0000', '9.0000', '', '', '9、污水和压载系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('637', '压载水清洗系统', '3.0000', '8.0000', '', '', '9、污水和压载系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('638', '阀操作系统', '4.0000', '9.0000', '', '', '9、污水和压载系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('639', '10、淡水冷却系统', '5.0000', '8.6429', '', '', '轮机', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('640', '泵', '5.0000', '8.0000', '', '', '10、淡水冷却系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('641', '管系、阀', '4.0000', '9.0000', '', '', '10、淡水冷却系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('642', '淡/海水冷却器', '5.0000', '9.0000', '', '', '10、淡水冷却系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('643', '11、压缩空气系统', '4.0000', '8.2593', '', '', '轮机', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('644', '空压机', '5.0000', '9.0000', '', '', '11、压缩空气系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('645', '应急空压机', '3.0000', '9.0000', '', '', '11、压缩空气系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('646', '空气瓶', '5.0000', '9.0000', '', '', '11、压缩空气系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('647', '空气干燥/冷却器', '3.0000', '9.0000', '', '', '11、压缩空气系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('648', '管系、阀', '4.0000', '7.0000', '', '', '11、压缩空气系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('649', '控制空气干燥器', '3.0000', '9.0000', '', '', '11、压缩空气系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('650', '控制空气管系、阀', '4.0000', '6.0000', '阀漏油，管路需要清洗，标记不清', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/n7KcZrQz4T.jpg', '11、压缩空气系统', '15', null, '', null, '', '', '3', '海边草屋.jpg');
+INSERT INTO `t_grade` VALUES ('651', '12、辅助系统', '3.0000', '8.5385', '', '', '轮机', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('652', '冷藏系统', '3.0000', '9.0000', '', '', '12、辅助系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('653', '造水机', '3.0000', '9.0000', '', '', '12、辅助系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('654', '日用淡水系统', '4.0000', '9.0000', '', '', '12、辅助系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('655', '空调系统', '3.0000', '7.0000', '', '', '12、辅助系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('656', '13、压载水处理系统', '5.0000', '8.6818', '', '', '轮机', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('657', '电解单元', '5.0000', '9.0000', '', '', '13、压载水处理系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('658', '反冲洗滤器', '3.0000', '8.0000', '', '', '13、压载水处理系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('659', '中和单元', '4.0000', '8.0000', '', '', '13、压载水处理系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('660', 'TRO检测单元', '5.0000', '9.0000', '', '', '13、压载水处理系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('661', '控制系统', '5.0000', '9.0000', '', '', '13、压载水处理系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('662', '电气', '4.0000', '8.4683', '', '', '0', '15', null, '', null, '', '', '1', null);
+INSERT INTO `t_grade` VALUES ('663', '1、电力系统', '5.0000', '8.6957', '', '', '电气', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('664', '主发电机', '5.0000', '9.0000', '', '', '1、电力系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('665', '联轴节', '2.0000', '8.0000', '', '', '1、电力系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('666', '轴承', '2.0000', '8.0000', '', '', '1、电力系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('667', '空气滤器', '1.0000', '6.0000', '需要更换', '', '1、电力系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('668', '应急发电机', '5.0000', '9.0000', '', '', '1、电力系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('669', '通用蓄电池', '4.0000', '9.0000', '', '', '1、电力系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('670', '变压器', '4.0000', '9.0000', '', '', '1、电力系统', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('671', '2、配电装置', '5.0000', '9.0000', '', '', '电气', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('672', '主配电板、应急配电板', '5.0000', '9.0000', '', '', '2、配电装置', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('673', '断路器', '3.0000', '9.0000', '', '', '2、配电装置', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('674', '启动器', '3.0000', '9.0000', '', '', '2、配电装置', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('675', '3、电器设备', '4.0000', '8.3200', '', '', '电气', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('676', '马达', '4.0000', '9.0000', '', '', '3、电器设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('677', '马达（泵）', '4.0000', '9.0000', '', '', '3、电器设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('678', '马达（风机）', '4.0000', '9.0000', '', '', '3、电器设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('679', '马达（其它）', '4.0000', '7.0000', '', '', '3、电器设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('680', '绝缘测试', '3.0000', '7.0000', '', '', '3、电器设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('681', '加热器', '3.0000', '9.0000', '', '', '3、电器设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('682', '照明', '3.0000', '8.0000', '', '', '3、电器设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('683', '4、自动化控制', '5.0000', '8.2000', '', '', '电气', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('684', '主机遥控和安保', '5.0000', '9.0000', '', '', '4、自动化控制', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('685', '副机自动控制和安保', '5.0000', '8.0000', '', '', '4、自动化控制', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('686', '机舱监测报警系统（包括DEAD MAN）', '5.0000', '8.0000', '', '', '4、自动化控制', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('687', '自动化电站综合保护装置', '5.0000', '8.0000', '', '', '4、自动化控制', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('688', '锅炉自动控制', '5.0000', '8.0000', '', '', '4、自动化控制', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('689', '5、惰气系统（油轮）', '4.0000', '7.9750', '', '', '电气', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('690', '惰气风机', '5.0000', '8.0000', '', '', '5、惰气系统（油轮）', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('691', '洗涤塔', '5.0000', '8.0000', '', '', '5、惰气系统（油轮）', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('692', '惰气海水泵', '5.0000', '8.0000', '', '', '5、惰气系统（油轮）', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('693', '水封泵', '5.0000', '7.0000', '', '', '5、惰气系统（油轮）', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('694', '氧份仪', '4.0000', '8.0000', '', '', '5、惰气系统（油轮）', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('695', '水封塔', '5.0000', '8.0000', '', '', '5、惰气系统（油轮）', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('696', '惰气总管控制阀', '4.0000', '8.0000', '', '', '5、惰气系统（油轮）', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('697', '大舱呼吸阀（P/V）', '3.0000', '8.0000', '', '', '5、惰气系统（油轮）', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('698', '惰气管路系统', '4.0000', '9.0000', '', '', '5、惰气系统（油轮）', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('699', '6、货油系统（油轮）', '5.0000', '8.4906', '', '', '电气', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('700', '货油泵', '5.0000', '9.0000', '', '', '6、货油系统（油轮）', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('701', '货油泵原动机（蒸汽透平）', '5.0000', '9.0000', '', '', '6、货油系统（油轮）', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('702', '货油泵调速器', '4.0000', '9.0000', '', '', '6、货油系统（油轮）', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('703', '货油泵应急停泵装置', '4.0000', '9.0000', '', '', '6、货油系统（油轮）', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('704', '油泵间风机', '4.0000', '8.0000', '', '', '6、货油系统（油轮）', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('705', '真空抽除器', '4.0000', '9.0000', '', '', '6、货油系统（油轮）', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('706', '货油泵大气冷凝器', '5.0000', '9.0000', '', '', '6、货油系统（油轮）', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('707', '专用海水冷却泵', '5.0000', '9.0000', '', '', '6、货油系统（油轮）', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('708', '货泵间海底阀', '4.0000', '8.0000', '', '', '6、货油系统（油轮）', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('709', '喷射泵', '3.0000', '7.0000', '', '', '6、货油系统（油轮）', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('710', '货油管路', '4.0000', '8.0000', '', '', '6、货油系统（油轮）', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('711', '原油洗舱机', '3.0000', '8.0000', '', '', '6、货油系统（油轮）', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('712', '油轮专用检测仪器', '3.0000', '7.0000', '', '', '6、货油系统（油轮）', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('713', '驾驶台', '4.0000', '7.7370', '', '', '0', '15', null, '', null, '', '', '1', null);
+INSERT INTO `t_grade` VALUES ('714', '1、总体保养', '4.0000', '9.0000', '', '', '驾驶台', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('715', '驾驶室', '4.0000', '9.0000', '', '', '1、总体保养', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('716', '海图室', '3.0000', '9.0000', '', '', '1、总体保养', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('717', '蓄电池间', '3.0000', '9.0000', '', '', '1、总体保养', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('718', '2、通讯设备', '5.0000', '8.3878', '', '', '驾驶台', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('719', 'GMDSS装置', '5.0000', '9.0000', '', '', '2、通讯设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('720', '天线', '5.0000', '8.0000', '', '', '2、通讯设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('721', 'AIS', '5.0000', '8.0000', '', '', '2、通讯设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('722', 'VHF', '5.0000', '9.0000', '', '', '2、通讯设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('723', '卫通', '5.0000', '9.0000', '', '', '2、通讯设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('724', 'VDR/SVDR', '5.0000', '9.0000', '', '', '2、通讯设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('725', '应急示位标', '5.0000', '9.0000', '', '', '2、通讯设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('726', '船内通讯', '5.0000', '5.0000', '部分电话损坏，需要及时更换，缺少报警装置，功能不全。', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/NBnyGbYBwT.jpg', '2、通讯设备', '15', null, '', null, '', '', '3', '绿色壁纸3.jpg');
+INSERT INTO `t_grade` VALUES ('727', '手提对讲机', '4.0000', '9.0000', '', '', '2、通讯设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('728', '通讯用蓄电池', '5.0000', '9.0000', '', '', '2、通讯设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('729', '3、航行设备', '5.0000', '7.7179', '', '', '驾驶台', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('730', '雷达', '5.0000', '9.0000', '', '', '3、航行设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('731', 'GPS / DGPS', '5.0000', '9.0000', '', '', '3、航行设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('732', '气象传真', '4.0000', '9.0000', '', '', '3、航行设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('733', '航行灯/信号灯', '5.0000', '9.0000', '', '', '3、航行设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('734', '计程仪', '5.0000', '2.0000', '两台计程仪，一台损坏，需要进坞修理，目前只有一台工作。', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/mBJ4ptB3y7.jpg', '3、航行设备', '15', null, '', null, '', '', '3', '荷花高清壁纸2.jpg');
+INSERT INTO `t_grade` VALUES ('735', '测深仪', '5.0000', '9.0000', '', '', '3、航行设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('736', '电罗经', '5.0000', '9.0000', '', '', '3、航行设备', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('737', '磁罗经', '5.0000', '6.0000', '需要罗经师校磁。', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/iiTMcNNRjW.jpg', '3、航行设备', '15', null, '', null, '', '', '3', '竹林.jpg');
+INSERT INTO `t_grade` VALUES ('738', '4、船上办公室', '3.0000', '5.0000', '', '', '驾驶台', '15', null, '', null, '', '', '2', null);
+INSERT INTO `t_grade` VALUES ('739', '船上办公室设备', '2.0000', '9.0000', '', '', '4、船上办公室', '15', null, '', null, '', '', '3', null);
+INSERT INTO `t_grade` VALUES ('740', '配载仪', '4.0000', '3.0000', '', '', '4、船上办公室', '15', null, '', null, '', '', '3', null);
 
 -- ----------------------------
 -- Table structure for t_grade_condition
@@ -3010,7 +2235,7 @@ CREATE TABLE `t_inspection` (
   `passport_url` varchar(255) DEFAULT NULL,
   `loi_url` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_inspection
@@ -3024,9 +2249,6 @@ INSERT INTO `t_inspection` VALUES ('6', '1', '17', '23', '6', '2', 'http://shipi
 INSERT INTO `t_inspection` VALUES ('7', '21', '18', '25', '0', '1', null, null, null, null, null, null, '2017-06-29 07:47:42', 'op', '2017-06-29 07:47:42', 'op', '0', '23', null, null);
 INSERT INTO `t_inspection` VALUES ('8', '21', '20', '34', '6', '1', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/FnxRGA7MJ2.pdf', null, null, null, null, null, '2017-07-04 02:08:26', 'op', '2017-07-04 02:10:46', 'company', '0', '23', null, null);
 INSERT INTO `t_inspection` VALUES ('9', '21', '20', '35', '0', '2', null, null, null, null, null, null, '2017-07-04 03:00:25', 'op', '2017-07-04 03:00:25', 'op', '0', '23', null, null);
-INSERT INTO `t_inspection` VALUES ('10', '1', '17', '36', '0', '1', null, null, null, null, null, null, '2017-07-06 15:20:21', 'admin', '2017-07-06 15:20:21', 'admin', '0', '1', null, null);
-INSERT INTO `t_inspection` VALUES ('11', '1', '17', '37', '0', '1', null, null, null, null, null, null, '2017-07-06 15:23:07', 'admin', '2017-07-06 15:23:07', 'admin', '0', '1', null, null);
-INSERT INTO `t_inspection` VALUES ('12', '1', '17', '38', '0', '1', null, null, null, null, null, null, '2017-07-07 13:25:06', 'admin', '2017-07-07 13:25:06', 'admin', '0', '1', null, null);
 
 -- ----------------------------
 -- Table structure for t_inspection_report
@@ -3050,15 +2272,13 @@ CREATE TABLE `t_inspection_report` (
   `submit_status6` int(11) DEFAULT NULL,
   `submit_status7` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=18 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_inspection_report
 -- ----------------------------
 INSERT INTO `t_inspection_report` VALUES ('14', '29', '3', null, null, null, null, null, null, '1', '1', '1', '1', '1', '1', '1');
-INSERT INTO `t_inspection_report` VALUES ('15', '32', null, null, null, null, null, null, null, '0', '0', '0', '0', '0', '0', '0');
-INSERT INTO `t_inspection_report` VALUES ('16', '34', null, null, null, null, null, null, null, '0', '0', '0', '0', '0', '0', '0');
-INSERT INTO `t_inspection_report` VALUES ('17', '35', null, null, null, null, null, null, null, '0', '0', '0', '0', '0', '0', '0');
+INSERT INTO `t_inspection_report` VALUES ('15', '30', '4', null, null, null, null, null, null, '1', '1', '1', '1', '1', '1', '1');
 
 -- ----------------------------
 -- Table structure for t_media
@@ -3076,12 +2296,30 @@ CREATE TABLE `t_media` (
   `update_by` varchar(45) DEFAULT NULL,
   `del_flag` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_media
 -- ----------------------------
 INSERT INTO `t_media` VALUES ('1', '29', null, 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/FxkC3bkzQp.png', 'passport.png', '2017-07-04', null, null, null, '0');
+INSERT INTO `t_media` VALUES ('2', '32', null, 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/Bps7nJh4Ba.jpg', 'RogerFederer.jpg', '2017-07-05', null, null, null, '0');
+INSERT INTO `t_media` VALUES ('3', '32', null, 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/rjcN6R538P.jpg', '费德勒2.jpg', '2017-07-05', null, null, null, '0');
+INSERT INTO `t_media` VALUES ('4', '32', null, 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/FndneYAbJ7.jpg', '美国夜景.jpg', '2017-07-05', null, null, null, '0');
+INSERT INTO `t_media` VALUES ('5', '32', null, 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/n7KcZrQz4T.jpg', '海边草屋.jpg', '2017-07-05', null, null, null, '0');
+INSERT INTO `t_media` VALUES ('6', '32', null, 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/mBJ4ptB3y7.jpg', '荷花高清壁纸2.jpg', '2017-07-05', null, null, null, '0');
+INSERT INTO `t_media` VALUES ('7', '32', null, 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/iiTMcNNRjW.jpg', '竹林.jpg', '2017-07-05', null, null, null, '0');
+INSERT INTO `t_media` VALUES ('8', '32', null, 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/NBnyGbYBwT.jpg', '绿色壁纸3.jpg', '2017-07-05', null, null, null, '0');
+INSERT INTO `t_media` VALUES ('9', '31', 'jpg', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/m57iT5t46i.jpg', 'RogerFederer.jpg', '2017-07-05', null, null, null, '1');
+INSERT INTO `t_media` VALUES ('10', '31', 'jpg', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/Si2SzJNbYb.jpg', '波拉波拉海滩椰树.jpg', '2017-07-05', null, null, null, '0');
+INSERT INTO `t_media` VALUES ('11', '31', 'jpg', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/wmRGZezY2j.jpg', '费德勒.jpg', '2017-07-05', null, null, null, '0');
+INSERT INTO `t_media` VALUES ('12', '31', 'jpg', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/ps43Tcd3bN.jpg', '费德勒2.jpg', '2017-07-05', null, null, null, '0');
+INSERT INTO `t_media` VALUES ('13', '31', 'jpg', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/sKyEn8c7hb.jpg', '风景1.jpg', '2017-07-05', null, null, null, '0');
+INSERT INTO `t_media` VALUES ('14', '31', 'jpg', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/iYfmxZd4rH.jpg', '海边草屋.jpg', '2017-07-05', null, null, null, '0');
+INSERT INTO `t_media` VALUES ('15', '31', 'jpg', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/n6ee8fsn8n.jpg', '海洋岛.jpg', '2017-07-05', null, null, null, '0');
+INSERT INTO `t_media` VALUES ('16', '31', 'jpg', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/nJrpPwz7y5.jpg', '绿色壁纸3.jpg', '2017-07-05', null, null, null, '0');
+INSERT INTO `t_media` VALUES ('17', '31', 'jpg', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/FPJQrtxCta.jpg', '绿色森林.jpg', '2017-07-05', null, null, null, '0');
+INSERT INTO `t_media` VALUES ('18', '31', 'jpg', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/WWBcC5G4XJ.jpg', '美国2.jpg', '2017-07-05', null, null, null, '1');
+INSERT INTO `t_media` VALUES ('19', '31', 'JPG', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/8dSw4QTX5W.JPG', '美国加州.JPG', '2017-07-05', null, null, null, '1');
 
 -- ----------------------------
 -- Table structure for t_port
@@ -3803,15 +3041,13 @@ CREATE TABLE `t_purchase_inspection` (
   `passport_url` varchar(155) DEFAULT NULL,
   `report_url` varchar(155) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=20 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_purchase_inspection
 -- ----------------------------
-INSERT INTO `t_purchase_inspection` VALUES ('18', '30', '29', '1', '17', '1', '新建文本文档.txt', null, '新建文本文档.txt', '2017-07-04', 'admin', '2017-07-04', 'admin', '0', null, '14', '7.8412', '1', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/hYZZHeiWmQ.txt', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/2CpYmppiRC.txt', null);
-INSERT INTO `t_purchase_inspection` VALUES ('19', '33', '32', '1', '19', '1', null, null, null, '2017-07-07', 'admin', '2017-07-07', 'admin', '0', null, '15', null, '0', null, null, null);
-INSERT INTO `t_purchase_inspection` VALUES ('20', '35', '34', '1', '17', '1', null, null, null, '2017-07-07', 'admin', '2017-07-07', 'admin', '0', null, '16', null, '0', null, null, null);
-INSERT INTO `t_purchase_inspection` VALUES ('21', '36', '35', '1', '19', '1', null, null, null, '2017-07-07', 'system', '2017-07-07', 'system', '0', null, '17', null, '0', null, null, null);
+INSERT INTO `t_purchase_inspection` VALUES ('18', '30', '29', '1', '17', '1', null, null, null, '2017-07-04', 'admin', '2017-07-04', 'admin', '0', null, '14', '7.8412', '1', null, null, 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/751ba288-80a8-4486-9151-911a71dbf527.pdf');
+INSERT INTO `t_purchase_inspection` VALUES ('19', '31', '30', '1', '19', '1', 'REPORT   KANDLA OFF HIRE.pdf', null, 'REPORT   KANDLA OFF HIRE.pdf', '2017-07-05', 'admin', '2017-07-05', 'admin', '0', null, '15', '8.2956', '1', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/Ecndi3JnHc.pdf', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/nXyPfrhyBk.pdf', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/4f754d79-493a-4360-9ff9-6e292f0fb51b.pdf');
 
 -- ----------------------------
 -- Table structure for t_purchase_quotation
@@ -3837,18 +3073,14 @@ CREATE TABLE `t_purchase_quotation` (
   `quotation_application_id` int(11) DEFAULT NULL,
   `total_price` double DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=37 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=33 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_purchase_quotation
 -- ----------------------------
 INSERT INTO `t_purchase_quotation` VALUES ('30', '29', '2017-07-18', '2017-07-20', 'ZHOUSHAN,CHN', 'ZHOUSHAN WUXIN OCEAN SHIPPING AGENCY\nAdd: 16th Floor, Building B,Zhong Lang Internation Mansion, Dinghai District Zhoushan, China\nPostcode: 316000 \nTel: 86-0580-2261850/2261950\nMob: 86-13884303244\nFax: 86-0580-2261851\nE-mail: xusir@vip.163.com zswuxin@126.com', '', '', null, '1', '2', '2017-07-04', 'admin', '2017-07-04', 'admin', '0', null, '3000');
-INSERT INTO `t_purchase_quotation` VALUES ('31', '30', '2017-07-11', '2017-07-12', 'Shanghai,CHN', 'Kyi Thanda Oo @ KTO\nAssistant Operations Manager\nBen Line Agencies (Myanmar) Ltd- As Agents only\nOffice: +95 1  370 987 | Myanmar Mobile: +95 9 259202896\n', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/ya4fEhd5Cs.docx', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/btNfWQ8XJi.pdf', null, '1', '1', '2017-07-05', 'admin', '2017-07-06', 'admin', '1', null, null);
-INSERT INTO `t_purchase_quotation` VALUES ('32', '31', '2017-07-04', '2017-07-08', 'sadsadas', 'dasdasdas\ndasdsadadadasd\ndasdasdadadsadsadasdasd', '', '', null, '1', '1', '2017-07-06', 'admin', '2017-07-07', 'admin', '1', null, null);
-INSERT INTO `t_purchase_quotation` VALUES ('33', '32', '2017-07-13', '2017-08-05', 'KAWASAKI,JPN', 'dasdas\nasdsadsadas\ndsadasdas', '', '', null, '1', '2', '2017-07-07', 'admin', '2017-07-07', 'admin', '0', null, '222');
-INSERT INTO `t_purchase_quotation` VALUES ('34', '33', '2017-06-27', '2017-07-07', 'KITAKYUSHU,JPN', 'dsadsa\ndsadsadsa\ndsadsadsadsadsa', '', '', null, '1', '1', '2017-07-07', 'admin', '2017-07-07', 'admin', '0', null, null);
-INSERT INTO `t_purchase_quotation` VALUES ('35', '34', '2017-07-08', '2017-08-03', 'HITACHI,JPN', 'asdas', '', '', '1', '1', '2', '2017-07-07', 'admin', '2017-07-07', 'admin', '0', null, '22');
-INSERT INTO `t_purchase_quotation` VALUES ('36', '35', '2017-07-10', '2017-08-01', 'HITACHI,JPN', 'sadsad', '', '', '1', '1', '2', '2017-07-07', 'admin', '2017-07-07', 'admin', '0', null, '200');
+INSERT INTO `t_purchase_quotation` VALUES ('31', '30', '2017-07-11', '2017-07-12', 'Shanghai,CHN', 'Kyi Thanda Oo @ KTO\nAssistant Operations Manager\nBen Line Agencies (Myanmar) Ltd- As Agents only\nOffice: +95 1  370 987 | Myanmar Mobile: +95 9 259202896\n', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/ya4fEhd5Cs.docx', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/btNfWQ8XJi.pdf', null, '1', '2', '2017-07-05', 'admin', '2017-07-05', 'admin', '0', null, '4500');
+INSERT INTO `t_purchase_quotation` VALUES ('32', '31', '2017-07-05', '2017-08-05', 'KITAKYUSHU,JPN', 'sddfsd', '', '', null, '1', '1', '2017-07-10', 'admin', '2017-07-10', 'admin', '0', null, null);
 
 -- ----------------------------
 -- Table structure for t_quotation
@@ -3889,7 +3121,7 @@ CREATE TABLE `t_quotation` (
   `bonus_plan` text,
   `specified_id` int(11) DEFAULT NULL COMMENT '指定验船公司的id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=40 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_quotation
@@ -3929,10 +3161,6 @@ INSERT INTO `t_quotation` VALUES ('32', '21', 'op', '328', 'Alpha Progress', '95
 INSERT INTO `t_quotation` VALUES ('33', '1', 'admin', '6', 'Aashna', '9592458', '1', '1', null, 'FUKUYAMA,JPN', '2017-07-12', '2017-08-05', null, '0', '2017-07-03 08:24:39', 'admin', '2017-07-03 08:24:39', 'admin', '0', 'dsa', 'dsa', null, null, null, null, '', '', '', '', 'das', '', 'sad', '23');
 INSERT INTO `t_quotation` VALUES ('34', '21', 'op', '1826', 'Cemtex Hunter', '9679660', '1', '1', null, 'NINGBO,CHN', '2017-08-08', '2017-08-08', '900', '2', '2017-07-04 02:06:38', 'op', '2017-07-04 02:06:48', 'op', '0', 'aaaa', 'vvvvvv', null, null, null, null, 'M/T GLORIOUS - FLAG: MARSHALL ISLANDS\nDWT 73980 MTS ON 13.025M  DRFT\nBLT 2/1999 AT ONOMICHI, JAPAN\nLOA 221.3M,  BEAM 38.04M,  DEPTH 19.6M\nGL, SS 02/2019 \nGRT 43357, NRT 20828\nTANKS 10 - EPOXY COATED\nNO COILS (EXCEPT IN SLOPTANKS P+S)\n83.346 (98%) CBM + SLOP TANK(S) (98%) 3.386 CBM\n3 GRADES WITH DOUBLE VALVE SEGREGATION\nCARGO PUMPS 3 SETS X 2.000 CBM/HOUR EACH VERTICAL CENTRIFUGAL\nM/E B&W 7S50MC-C,\nD/GS MAKER DAIHATSU TYPE 6DK-20\nIGS, COW, SBT\nLDT 12862 MTS\n', '', 'Kyi Thanda Oo @ KTO\nAssistant Operations Manager\nBen Line Agencies (Myanmar) Ltd- As Agents only\nOffice: +95 1  370 987 | Myanmar Mobile: +95 9 259202896\n', '', 'fo:12335\nlo:254565', '', '超出10吨10%\n超出30吨  20%', null);
 INSERT INTO `t_quotation` VALUES ('35', '21', 'op', '8', 'Abdullah', '9132923', '1', '2', null, 'MACASSAR( UJUNG PANDANG),IDN', '2017-08-04', '2017-08-04', '9999', '2', '2017-07-04 02:59:15', 'op', '2017-07-04 02:59:51', 'op', '0', null, null, 'ddd', 'dsd', null, null, '', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/WMDeTFamiG.docx', '', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/wewBSErZ2Y.docx', '', 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/xY6reWk6rK.png', 'ddddddd', null);
-INSERT INTO `t_quotation` VALUES ('36', '1', 'admin', '235', 'Alessandra M', '9284518', '1', '1', null, 'KAGOSHIMA,JPN', '2017-06-27', '2017-07-08', '100', '2', '2017-07-06 15:19:45', 'admin', '2017-07-06 15:19:58', 'admin', '0', 'asd', 'sad', null, null, null, null, '', '', '你好\n哈哈   解决', '', 'asd', '', 'sad', null);
-INSERT INTO `t_quotation` VALUES ('37', '1', 'admin', '31010', 'Lucien G A', '9242297', '5', '1', null, 'KAGOSHIMA,JPN', '2017-06-27', '2017-07-08', '333', '2', '2017-07-06 15:22:53', 'admin', '2017-07-06 15:22:53', 'admin', '0', 'asd', 'asd', null, null, null, null, 'hah\n\nhahahahaskdsa\n\ndsfhdsfjhdsiufds', '', 'hah\n\nhahahahaskdsa\n\ndsfhdsfjhdsiufds', '', 'hah\n\nhahahahaskdsa\n\ndsfhdsfjhdsiufds', '', 'hah\n\nhahahahaskdsa\n\ndsfhdsfjhdsiufds', null);
-INSERT INTO `t_quotation` VALUES ('38', '1', 'admin', '887', 'Athanassios G.O.', '9437103', '1', '1', null, 'HITACHI,JPN', '2017-07-04', '2017-07-29', '11', '2', '2017-07-07 11:25:20', 'admin', '2017-07-07 11:25:22', 'admin', '0', 'sad', 'sad', null, null, null, null, 'aaa\naaaaa\naaaaaaaaa', '', 'aaa\naaaaa\naaaaaaaaa', '', 'aaa\naaaaa\naaaaaaaaa', '', 'aaa\naaaaa\naaaaaaaaa', null);
-INSERT INTO `t_quotation` VALUES ('39', '1', 'admin', '1517', 'Bulk Success', '9567087', '1', '1', null, 'KAWASAKI,JPN', '2017-07-12', '2017-08-05', null, '1', '2017-07-07 13:25:52', 'admin', '2017-07-07 13:26:03', 'admin', '0', 'sad', 'dsa', null, null, null, null, 'sd\nasdsadassd\nasdsadassd\nasdsadas', '', 'sd\nasdsadas\nsd\nasdsadas\nsd\nasdsadas\nsd\nasdsadas', '', 'dsd', '', 'sd\nasdsadas', null);
 
 -- ----------------------------
 -- Table structure for t_quotation_application
@@ -3953,7 +3181,7 @@ CREATE TABLE `t_quotation_application` (
   `survey_id` int(11) DEFAULT NULL,
   `type` int(2) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=73 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=67 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_quotation_application
@@ -3979,14 +3207,8 @@ INSERT INTO `t_quotation_application` VALUES ('61', '29', '1', '1', '1212', '201
 INSERT INTO `t_quotation_application` VALUES ('62', '34', '23', '1', '900', '2017-07-04 02:07:58', 'company', '2017-07-04 02:07:58', 'company', '0', null, '20', '1');
 INSERT INTO `t_quotation_application` VALUES ('63', '35', '23', '1', '9999', '2017-07-04 03:00:17', 'company', '2017-07-04 03:00:17', 'company', '0', null, '20', '1');
 INSERT INTO `t_quotation_application` VALUES ('64', '30', '1', '1', '3000', '2017-07-04 08:27:58', 'admin', '2017-07-04 08:27:58', 'admin', '0', null, '17', '2');
-INSERT INTO `t_quotation_application` VALUES ('65', '36', '1', '1', '100', '2017-07-06 15:20:14', 'admin', '2017-07-06 15:20:14', 'admin', '0', null, '17', '1');
-INSERT INTO `t_quotation_application` VALUES ('66', '37', '1', '1', '333', '2017-07-06 15:23:01', 'admin', '2017-07-06 15:23:01', 'admin', '0', null, '17', '1');
-INSERT INTO `t_quotation_application` VALUES ('67', '32', '1', '0', '11', '2017-07-06 17:30:52', 'admin', '2017-07-06 17:30:52', 'admin', '0', null, '17', '2');
-INSERT INTO `t_quotation_application` VALUES ('68', '38', '1', '1', '11', '2017-07-07 13:24:50', 'admin', '2017-07-07 13:24:50', 'admin', '0', null, '17', '1');
-INSERT INTO `t_quotation_application` VALUES ('69', '33', '1', '1', '222', '2017-07-07 16:03:18', 'admin', '2017-07-07 16:03:18', 'admin', '0', null, '19', '2');
-INSERT INTO `t_quotation_application` VALUES ('70', '34', '1', '0', '400', '2017-07-07 18:32:44', 'admin', '2017-07-07 18:32:44', 'admin', '0', null, '17', '2');
-INSERT INTO `t_quotation_application` VALUES ('71', '35', '1', '1', '22', '2017-07-07 18:34:38', 'admin', '2017-07-07 18:34:38', 'admin', '0', null, '17', '2');
-INSERT INTO `t_quotation_application` VALUES ('72', '36', '1', '1', '200', '2017-07-07 20:42:07', 'admin', '2017-07-07 20:42:07', 'admin', '0', null, '19', '2');
+INSERT INTO `t_quotation_application` VALUES ('65', '31', '1', '1', '4500', '2017-07-05 07:11:36', 'admin', '2017-07-05 07:11:36', 'admin', '0', null, '19', '2');
+INSERT INTO `t_quotation_application` VALUES ('66', '31', '23', '2', '4800', '2017-07-05 07:12:38', 'company', '2017-07-05 07:12:38', 'company', '0', null, '20', '2');
 
 -- ----------------------------
 -- Table structure for t_ship_detail
@@ -4039,23 +3261,20 @@ CREATE TABLE `t_ship_detail` (
   `del_flag` int(2) DEFAULT NULL,
   `call_sign` varchar(50) DEFAULT NULL,
   `wog` int(11) DEFAULT NULL,
+  `ship_img` varchar(155) DEFAULT NULL COMMENT '船的图片',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=36 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=32 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_ship_detail
 -- ----------------------------
-INSERT INTO `t_ship_detail` VALUES ('25', 'Alpha Wisdom', '9593440', null, '229.0', '32.3', '81,305', '14.5', '44,230', '', null, null, 'BV', 'Greece', '2012-1-1', 'Hyundai HI (Ulsan)', 'Flora Island', null, 'Shanghai', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2017-06-16', 'admin', '2017-06-16', 'admin', '0', 'SVCE9', null);
-INSERT INTO `t_ship_detail` VALUES ('26', 'Abdullah', '9132923', null, '185.7', '30.4', '45,653', '11.6', '26,070', '', null, null, 'NKK', 'Bangladesh', '1996-1-1', 'Tsuneishi Zosen', 'ID Integrity', null, 'ewr', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2017-06-29', 'admin', '2017-06-29', 'admin', '0', 'S2CW', null);
-INSERT INTO `t_ship_detail` VALUES ('27', '26 Agustos', '9238478', null, '190.0', '32.3', '52,455', '12.0', '30,303', '', null, null, 'NKK', 'Turkey', '2002-3-1', 'Tsuneishi Cebu', 'Pinar K.', null, 'dfs', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2017-06-29', 'admin', '2017-06-29', 'admin', '0', 'TCCF6', null);
-INSERT INTO `t_ship_detail` VALUES ('28', 'Abtenauer', '9655212', null, '180.0', '30.0', '36,056', '10.1', '24,163', '', null, null, 'ABS', 'Marshall Is.', '2014-10-1', 'CSC Jinling Shipyard', '', null, 'sds', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2017-06-29', 'admin', '2017-06-29', 'admin', '0', 'V7CH5', null);
-INSERT INTO `t_ship_detail` VALUES ('29', '26 Agustos', '9238478', null, '190.0', '32.3', '52,455', '12.0', '30,303', '', '', '', 'NKK', 'Turkey', '2002-3-1', 'Tsuneishi Cebu', 'Pinar K.', null, 'ZHOUSHAN,CHN', '1', 'MAN ', 'B. & W. 5S60ME-C8.2', '7500', '80', '1256', '90', 'AAAAAAAAAA', 'YANMAR', 'YANMAR TYPE', '750KW', '2500', '3500', '3600', 'AAAAAAAAAAAA', 'SAAAK', 'SAAAK TYPE', '1256', '3598', 'AAAAAAAAAAAA', null, null, null, null, null, 'TCCF6', '5');
-INSERT INTO `t_ship_detail` VALUES ('30', 'Yin Nian', '9654218', null, '190.0', '32.3', '44,926', '10.5', '29,644', '', null, null, 'CCS', 'China P.R.', '2013-11-1', 'Qingdao Wuchuan HI', '', null, 'Shanghai,CHN', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2017-07-05', 'admin', '2017-07-05', 'admin', '0', 'BPON', null);
-INSERT INTO `t_ship_detail` VALUES ('31', 'Abdullah', '9132923', null, '185.7', '30.4', '45,653', '11.6', '26,070', '', null, null, 'NKK', 'Bangladesh', '1996-1-1', 'Tsuneishi Zosen', 'ID Integrity', null, 'sadsadas', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2017-07-06', 'admin', '2017-07-06', 'admin', '0', 'S2CW', null);
-INSERT INTO `t_ship_detail` VALUES ('32', 'ABM Discovery', '9006643', null, '180.8', '30.5', '39,110', '10.9', '21,941', '', null, null, 'NKK', 'Panama', '1992-7-1', 'I.H.I.', 'Pantanassa', null, 'KAWASAKI,JPN', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2017-07-07', 'admin', '2017-07-07', 'admin', '0', '3EDJ7', null);
-INSERT INTO `t_ship_detail` VALUES ('33', 'ABY Scarlett', '9567051', null, '291.8', '45.0', '175,858', '18.3', '91,971', '', null, null, 'BV', 'Malta', '2014-9-1', 'Jinhai Heavy Ind', 'Luo Jia Shan', null, 'KITAKYUSHU,JPN', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2017-07-07', 'admin', '2017-07-07', 'admin', '0', '9HA3774', null);
-INSERT INTO `t_ship_detail` VALUES ('34', 'Abdullah', '9132923', null, '185.7', '30.4', '45,653', '11.6', '26,070', '', null, null, 'NKK', 'Bangladesh', '1996-1-1', 'Tsuneishi Zosen', 'ID Integrity', null, 'HITACHI,JPN', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2017-07-07', 'admin', '2017-07-07', 'admin', '0', 'S2CW', null);
-INSERT INTO `t_ship_detail` VALUES ('35', 'Alpha Progress', '9597214', null, '229.0', '32.3', '81,251', '14.5', '43,721', '', null, null, 'ABS', 'Greece', '2012-7-1', 'Hyundai Samho HI', '', null, 'HITACHI,JPN', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2017-07-07', 'admin', '2017-07-07', 'admin', '0', 'SVBO9', null);
+INSERT INTO `t_ship_detail` VALUES ('25', 'Alpha Wisdom', '9593440', null, '229.0', '32.3', '81,305', '14.5', '44,230', '', null, null, 'BV', 'Greece', '2012-1-1', 'Hyundai HI (Ulsan)', 'Flora Island', null, 'Shanghai', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2017-06-16', 'admin', '2017-06-16', 'admin', '0', 'SVCE9', null, null);
+INSERT INTO `t_ship_detail` VALUES ('26', 'Abdullah', '9132923', null, '185.7', '30.4', '45,653', '11.6', '26,070', '', null, null, 'NKK', 'Bangladesh', '1996-1-1', 'Tsuneishi Zosen', 'ID Integrity', null, 'ewr', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2017-06-29', 'admin', '2017-06-29', 'admin', '0', 'S2CW', null, null);
+INSERT INTO `t_ship_detail` VALUES ('27', '26 Agustos', '9238478', null, '190.0', '32.3', '52,455', '12.0', '30,303', '', null, null, 'NKK', 'Turkey', '2002-3-1', 'Tsuneishi Cebu', 'Pinar K.', null, 'dfs', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2017-06-29', 'admin', '2017-06-29', 'admin', '0', 'TCCF6', null, null);
+INSERT INTO `t_ship_detail` VALUES ('28', 'Abtenauer', '9655212', null, '180.0', '30.0', '36,056', '10.1', '24,163', '', null, null, 'ABS', 'Marshall Is.', '2014-10-1', 'CSC Jinling Shipyard', '', null, 'sds', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2017-06-29', 'admin', '2017-06-29', 'admin', '0', 'V7CH5', null, null);
+INSERT INTO `t_ship_detail` VALUES ('29', '26 Agustos', '9238478', null, '190.0', '32.3', '52,455', '12.0', '30,303', '', '', '', 'NKK', 'Turkey', '2002-3-1', 'Tsuneishi Cebu', 'Pinar K.', null, 'ZHOUSHAN,CHN', '1', 'MAN ', 'B. & W. 5S60ME-C8.2', '7500', '80', '1256', '90', 'AAAAAAAAAA', 'YANMAR', 'YANMAR TYPE', '750KW', '2500', '3500', '3600', 'AAAAAAAAAAAA', 'SAAAK', 'SAAAK TYPE', '1256', '3598', 'AAAAAAAAAAAA', null, null, null, null, null, 'TCCF6', '5', null);
+INSERT INTO `t_ship_detail` VALUES ('30', 'Yin Nian', '9654218', null, '190.0', '32.3', '44,926', '10.5', '29,644', '', '', '', 'CCS', 'China P.R.', '2013-11-1', 'Qingdao Wuchuan HI', '', null, 'Shanghai,CHN', '1', 'MAN ', 'B. & W. 5S60ME-C8.2', '7500', '3000', '5200', '1256', 'M/E is good condition.', 'YANMAR', 'YAN\'s TYPE', '750KW', '365', '400', '789', 'A/E is good condition.', 'SAAAK', 'SA\'S TYPE', '1254', '9876', 'Boiler is good condition.', null, null, null, null, null, 'BPON', '6', null);
+INSERT INTO `t_ship_detail` VALUES ('31', 'Fassa', '9313503', null, '190.0', '32.3', '55,447', '12.5', '30,936', '', null, null, 'NKK', 'Malta', '2006-1-1', 'Nantong COSCO KHI', '', null, 'KITAKYUSHU,JPN', '1', null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, null, '2017-07-10', 'admin', '2017-07-10', 'admin', '0', '9HJN8', null, null);
 
 -- ----------------------------
 -- Table structure for t_style
@@ -4114,7 +3333,7 @@ CREATE TABLE `t_surveyor` (
 -- ----------------------------
 -- Records of t_surveyor
 -- ----------------------------
-INSERT INTO `t_surveyor` VALUES ('17', 'David', 'BeckHam', 'UK', '2017-05-29', '2017-09-09', '111@qq.com', '15151', '6,13,15,44,60,100', 'asdsadasdasdasdas', '1', '', '2017-06-16', 'admin', '2017-07-06', 'admin', '0', '1,4', '5', null);
+INSERT INTO `t_surveyor` VALUES ('17', 'David', 'BeckHam', 'UK', '2017-05-29', '2017-09-09', '111@qq.com', '15151', '6,13,15,44,60,100', 'asdsadasdasdasdas', '1', '', '2017-06-16', 'admin', '2017-06-26', 'admin', '0', '1,4', '5', null);
 INSERT INTO `t_surveyor` VALUES ('18', 'nobody', 'nonono', 'China', '2017-06-27', '2017-07-06', 'sadas', 'sada', '378', 'asdasdasda', '23', '', '2017-06-22', 'company', '2017-06-27', 'company', '0', '2,5,8', '3', '2');
 INSERT INTO `t_surveyor` VALUES ('19', 'CC', 'CC', '', '2017-06-08', '2017-07-08', '', '', '250', '', '1', '', '2017-06-26', 'admin', '2017-06-26', 'admin', '0', null, '0', '');
 INSERT INTO `t_surveyor` VALUES ('20', 'Nick', 'JAMES', 'USA', '2017-06-29', '2017-06-29', 'JAMES@HOTMAIL.COM', '008613985656565', '534,628,39', 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA,BBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBBB,CCCCCCCCCCCCCCCCCCCCC,DDDDDDDDDDDDDDDDDDDDDDDD,EEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE,FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF.', '23', '', '2017-06-29', 'company', '2017-06-29', 'company', '0', '1,2,3,4,5,6,7,8', '0', '1,2');
@@ -4137,22 +3356,19 @@ CREATE TABLE `t_surveyor_experience` (
   `surveyor_id` int(11) DEFAULT NULL,
   `end_date` date DEFAULT NULL COMMENT '工作结束日期',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=25 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=22 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_surveyor_experience
 -- ----------------------------
 INSERT INTO `t_surveyor_experience` VALUES ('14', '2017-06-28', 'das', 'das', 'das', null, null, null, null, '0', '17', '2017-07-06');
-INSERT INTO `t_surveyor_experience` VALUES ('15', '2017-06-26', 'sad', 'sad', 'asdas', null, null, null, null, '1', '17', '2017-07-07');
+INSERT INTO `t_surveyor_experience` VALUES ('15', '2017-06-26', 'sad', 'sad', 'asdas', null, null, null, null, '0', '17', '2017-07-07');
 INSERT INTO `t_surveyor_experience` VALUES ('16', null, '', '', '', null, null, null, null, '0', '18', null);
 INSERT INTO `t_surveyor_experience` VALUES ('17', null, '', '', '', null, null, null, null, '0', '19', null);
 INSERT INTO `t_surveyor_experience` VALUES ('18', '2011-03-16', 'BULKER；GAS', 'xxxxxx,co.ltd', 'qqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqqq', null, null, null, null, '0', '20', '2013-02-25');
 INSERT INTO `t_surveyor_experience` VALUES ('19', '2013-03-30', 'TANKER', 'IIIIIIIII,CO,LTD', 'WWWWWWWWWWWWWWWWWWWWWWWWWWWW', null, null, null, null, '0', '20', '2016-04-26');
 INSERT INTO `t_surveyor_experience` VALUES ('20', '2016-05-01', 'CHEMICAL', 'GGGGGG.CO.LTD', 'RRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRRR', null, null, null, null, '0', '20', '2017-01-01');
 INSERT INTO `t_surveyor_experience` VALUES ('21', '2017-01-02', 'REEFER', 'PPPPPPPPP.CO,LTD', '9999999999999999999999999999999', null, null, null, null, '0', '20', '2017-06-30');
-INSERT INTO `t_surveyor_experience` VALUES ('22', null, '', '', '', null, null, null, null, '1', '17', null);
-INSERT INTO `t_surveyor_experience` VALUES ('23', '2017-07-18', 'sdasd', 'sadsad', 'asdasdads', null, null, null, null, '1', '17', '2017-08-03');
-INSERT INTO `t_surveyor_experience` VALUES ('24', '2017-07-11', 'asdsad', 'sadasd', 'dsasadas', null, null, null, null, '0', '17', '2017-07-26');
 
 -- ----------------------------
 -- Table structure for t_surveyor_info
@@ -4196,72 +3412,43 @@ CREATE TABLE `t_technical_appendix` (
   `del_flag` int(11) DEFAULT '0',
   `title2` varchar(155) DEFAULT NULL,
   `title3` varchar(155) DEFAULT NULL,
+  `flag` varchar(155) DEFAULT NULL COMMENT '指定最后五条记录为textarea',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=256 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=226 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_technical_appendix
 -- ----------------------------
-INSERT INTO `t_technical_appendix` VALUES ('196', '14', 'Navigation & Communications Equipments', 'Equipment', null, null, null, null, null, 'Maker', 'Type');
-INSERT INTO `t_technical_appendix` VALUES ('197', '14', 'Cargo hold capacities(Only Bulker)', 'Hold #', null, null, null, null, null, '(m3)', null);
-INSERT INTO `t_technical_appendix` VALUES ('198', '14', 'Hatch dimensions(Only Bulker)', 'Hold #', null, null, null, null, null, 'm×m', null);
-INSERT INTO `t_technical_appendix` VALUES ('199', '14', 'Cargo tank capacities(Only tanker)', 'Tank #', null, null, null, null, null, 'Frames', '(m3)');
-INSERT INTO `t_technical_appendix` VALUES ('200', '14', 'Vessel tank capacity', 'Ballast Tank #', null, null, null, null, null, 'Frames', '(m3)');
-INSERT INTO `t_technical_appendix` VALUES ('201', '14', 'Vessel tank capacity', 'Heavy Fuel Oil Capacity Tank #', null, null, null, null, null, 'Frames', '(m3)');
-INSERT INTO `t_technical_appendix` VALUES ('202', '14', 'Vessel tank capacity', 'Diesel Oil Capacity  Tank #', null, null, null, null, null, 'Frames', '(m3)');
-INSERT INTO `t_technical_appendix` VALUES ('203', '14', 'Vessel tank capacity', 'Fresh Water Capacity Tank #', null, null, null, null, null, 'Frames', '(m3)');
-INSERT INTO `t_technical_appendix` VALUES ('204', '14', 'Vessel tank capacity', 'Lube Oil Capacity Tank #', null, null, null, null, null, 'Frames', '(m3)');
-INSERT INTO `t_technical_appendix` VALUES ('205', '14', 'Vessel tank capacity', 'Miscellaneous Tanks Capacity Tank #', null, null, null, null, null, 'Frames', '(m3)');
-INSERT INTO `t_technical_appendix` VALUES ('206', '14', 'Propulsion machinery', 'Name of Equipmet', null, null, null, null, null, 'Frames', null);
-INSERT INTO `t_technical_appendix` VALUES ('207', '14', 'Auxilliaries machinery', 'Name of Equipmet', null, null, null, null, null, 'Frames', null);
-INSERT INTO `t_technical_appendix` VALUES ('208', '14', 'Main deck and equipment', 'Name of Equipmet', null, null, null, null, null, 'Frames', null);
-INSERT INTO `t_technical_appendix` VALUES ('209', '14', 'Cargo handling equipment', 'Name of Equipmet', null, null, null, null, null, 'Frames', null);
-INSERT INTO `t_technical_appendix` VALUES ('210', '14', 'Lifesaving & firefighting equipment', 'Name of Equipmet', null, null, null, null, null, 'Frames', null);
-INSERT INTO `t_technical_appendix` VALUES ('211', '15', 'Navigation & Communications Equipments', 'Equipment', null, null, null, null, null, 'Maker', 'Type');
-INSERT INTO `t_technical_appendix` VALUES ('212', '15', 'Cargo hold capacities(Only Bulker)', 'Hold #', null, null, null, null, null, '(m3)', null);
-INSERT INTO `t_technical_appendix` VALUES ('213', '15', 'Hatch dimensions(Only Bulker)', 'Hold #', null, null, null, null, null, 'm×m', null);
-INSERT INTO `t_technical_appendix` VALUES ('214', '15', 'Cargo tank capacities(Only tanker)', 'Tank #', null, null, null, null, null, 'Frames', '(m3)');
-INSERT INTO `t_technical_appendix` VALUES ('215', '15', 'Vessel tank capacity', 'Ballast Tank #', null, null, null, null, null, 'Frames', '(m3)');
-INSERT INTO `t_technical_appendix` VALUES ('216', '15', 'Vessel tank capacity', 'Heavy Fuel Oil Capacity Tank #', null, null, null, null, null, 'Frames', '(m3)');
-INSERT INTO `t_technical_appendix` VALUES ('217', '15', 'Vessel tank capacity', 'Diesel Oil Capacity  Tank #', null, null, null, null, null, 'Frames', '(m3)');
-INSERT INTO `t_technical_appendix` VALUES ('218', '15', 'Vessel tank capacity', 'Fresh Water Capacity Tank #', null, null, null, null, null, 'Frames', '(m3)');
-INSERT INTO `t_technical_appendix` VALUES ('219', '15', 'Vessel tank capacity', 'Lube Oil Capacity Tank #', null, null, null, null, null, 'Frames', '(m3)');
-INSERT INTO `t_technical_appendix` VALUES ('220', '15', 'Vessel tank capacity', 'Miscellaneous Tanks Capacity Tank #', null, null, null, null, null, 'Frames', '(m3)');
-INSERT INTO `t_technical_appendix` VALUES ('221', '15', 'Propulsion machinery', 'Name of Equipmet', null, null, null, null, null, 'Frames', null);
-INSERT INTO `t_technical_appendix` VALUES ('222', '15', 'Auxilliaries machinery', 'Name of Equipmet', null, null, null, null, null, 'Frames', null);
-INSERT INTO `t_technical_appendix` VALUES ('223', '15', 'Main deck and equipment', 'Name of Equipmet', null, null, null, null, null, 'Frames', null);
-INSERT INTO `t_technical_appendix` VALUES ('224', '15', 'Cargo handling equipment', 'Name of Equipmet', null, null, null, null, null, 'Frames', null);
-INSERT INTO `t_technical_appendix` VALUES ('225', '15', 'Lifesaving & firefighting equipment', 'Name of Equipmet', null, null, null, null, null, 'Frames', null);
-INSERT INTO `t_technical_appendix` VALUES ('226', '16', 'Navigation & Communications Equipments', 'Equipment', null, null, null, null, null, 'Maker', 'Type');
-INSERT INTO `t_technical_appendix` VALUES ('227', '16', 'Cargo hold capacities(Only Bulker)', 'Hold #', null, null, null, null, null, '(m3)', null);
-INSERT INTO `t_technical_appendix` VALUES ('228', '16', 'Hatch dimensions(Only Bulker)', 'Hold #', null, null, null, null, null, 'm×m', null);
-INSERT INTO `t_technical_appendix` VALUES ('229', '16', 'Cargo tank capacities(Only tanker)', 'Tank #', null, null, null, null, null, 'Frames', '(m3)');
-INSERT INTO `t_technical_appendix` VALUES ('230', '16', 'Vessel tank capacity', 'Ballast Tank #', null, null, null, null, null, 'Frames', '(m3)');
-INSERT INTO `t_technical_appendix` VALUES ('231', '16', 'Vessel tank capacity', 'Heavy Fuel Oil Capacity Tank #', null, null, null, null, null, 'Frames', '(m3)');
-INSERT INTO `t_technical_appendix` VALUES ('232', '16', 'Vessel tank capacity', 'Diesel Oil Capacity  Tank #', null, null, null, null, null, 'Frames', '(m3)');
-INSERT INTO `t_technical_appendix` VALUES ('233', '16', 'Vessel tank capacity', 'Fresh Water Capacity Tank #', null, null, null, null, null, 'Frames', '(m3)');
-INSERT INTO `t_technical_appendix` VALUES ('234', '16', 'Vessel tank capacity', 'Lube Oil Capacity Tank #', null, null, null, null, null, 'Frames', '(m3)');
-INSERT INTO `t_technical_appendix` VALUES ('235', '16', 'Vessel tank capacity', 'Miscellaneous Tanks Capacity Tank #', null, null, null, null, null, 'Frames', '(m3)');
-INSERT INTO `t_technical_appendix` VALUES ('236', '16', 'Propulsion machinery', 'Name of Equipmet', null, null, null, null, null, 'Frames', null);
-INSERT INTO `t_technical_appendix` VALUES ('237', '16', 'Auxilliaries machinery', 'Name of Equipmet', null, null, null, null, null, 'Frames', null);
-INSERT INTO `t_technical_appendix` VALUES ('238', '16', 'Main deck and equipment', 'Name of Equipmet', null, null, null, null, null, 'Frames', null);
-INSERT INTO `t_technical_appendix` VALUES ('239', '16', 'Cargo handling equipment', 'Name of Equipmet', null, null, null, null, null, 'Frames', null);
-INSERT INTO `t_technical_appendix` VALUES ('240', '16', 'Lifesaving & firefighting equipment', 'Name of Equipmet', null, null, null, null, null, 'Frames', null);
-INSERT INTO `t_technical_appendix` VALUES ('241', '17', 'Navigation & Communications Equipments', 'Equipment', null, null, null, null, null, 'Maker', 'Type');
-INSERT INTO `t_technical_appendix` VALUES ('242', '17', 'Cargo hold capacities(Only Bulker)', 'Hold #', null, null, null, null, null, '(m3)', null);
-INSERT INTO `t_technical_appendix` VALUES ('243', '17', 'Hatch dimensions(Only Bulker)', 'Hold #', null, null, null, null, null, 'm×m', null);
-INSERT INTO `t_technical_appendix` VALUES ('244', '17', 'Cargo tank capacities(Only tanker)', 'Tank #', null, null, null, null, null, 'Frames', '(m3)');
-INSERT INTO `t_technical_appendix` VALUES ('245', '17', 'Vessel tank capacity', 'Ballast Tank #', null, null, null, null, null, 'Frames', '(m3)');
-INSERT INTO `t_technical_appendix` VALUES ('246', '17', 'Vessel tank capacity', 'Heavy Fuel Oil Capacity Tank #', null, null, null, null, null, 'Frames', '(m3)');
-INSERT INTO `t_technical_appendix` VALUES ('247', '17', 'Vessel tank capacity', 'Diesel Oil Capacity  Tank #', null, null, null, null, null, 'Frames', '(m3)');
-INSERT INTO `t_technical_appendix` VALUES ('248', '17', 'Vessel tank capacity', 'Fresh Water Capacity Tank #', null, null, null, null, null, 'Frames', '(m3)');
-INSERT INTO `t_technical_appendix` VALUES ('249', '17', 'Vessel tank capacity', 'Lube Oil Capacity Tank #', null, null, null, null, null, 'Frames', '(m3)');
-INSERT INTO `t_technical_appendix` VALUES ('250', '17', 'Vessel tank capacity', 'Miscellaneous Tanks Capacity Tank #', null, null, null, null, null, 'Frames', '(m3)');
-INSERT INTO `t_technical_appendix` VALUES ('251', '17', 'Propulsion machinery', 'Name of Equipmet', null, null, null, null, null, 'Frames', null);
-INSERT INTO `t_technical_appendix` VALUES ('252', '17', 'Auxilliaries machinery', 'Name of Equipmet', null, null, null, null, null, 'Frames', null);
-INSERT INTO `t_technical_appendix` VALUES ('253', '17', 'Main deck and equipment', 'Name of Equipmet', null, null, null, null, null, 'Frames', null);
-INSERT INTO `t_technical_appendix` VALUES ('254', '17', 'Cargo handling equipment', 'Name of Equipmet', null, null, null, null, null, 'Frames', null);
-INSERT INTO `t_technical_appendix` VALUES ('255', '17', 'Lifesaving & firefighting equipment', 'Name of Equipmet', null, null, null, null, null, 'Frames', null);
+INSERT INTO `t_technical_appendix` VALUES ('196', '14', 'Navigation & Communications Equipments', 'Equipment', null, null, null, null, null, 'Maker', 'Type', '0');
+INSERT INTO `t_technical_appendix` VALUES ('197', '14', 'Cargo hold capacities(Only Bulker)', 'Hold #', null, null, null, null, null, '(m3)', null, '0');
+INSERT INTO `t_technical_appendix` VALUES ('198', '14', 'Hatch dimensions(Only Bulker)', 'Hold #', null, null, null, null, null, 'm×m', null, '0');
+INSERT INTO `t_technical_appendix` VALUES ('199', '14', 'Cargo tank capacities(Only tanker)', 'Tank #', null, null, null, null, null, 'Frames', '(m3)', '0');
+INSERT INTO `t_technical_appendix` VALUES ('200', '14', 'Vessel tank capacity', 'Ballast Tank #', null, null, null, null, null, 'Frames', '(m3)', '0');
+INSERT INTO `t_technical_appendix` VALUES ('201', '14', 'Vessel tank capacity', 'Heavy Fuel Oil Capacity Tank #', null, null, null, null, null, 'Frames', '(m3)', '0');
+INSERT INTO `t_technical_appendix` VALUES ('202', '14', 'Vessel tank capacity', 'Diesel Oil Capacity  Tank #', null, null, null, null, null, 'Frames', '(m3)', '0');
+INSERT INTO `t_technical_appendix` VALUES ('203', '14', 'Vessel tank capacity', 'Fresh Water Capacity Tank #', null, null, null, null, null, 'Frames', '(m3)', '0');
+INSERT INTO `t_technical_appendix` VALUES ('204', '14', 'Vessel tank capacity', 'Lube Oil Capacity Tank #', null, null, null, null, null, 'Frames', '(m3)', '0');
+INSERT INTO `t_technical_appendix` VALUES ('205', '14', 'Vessel tank capacity', 'Miscellaneous Tanks Capacity Tank #', null, null, null, null, null, 'Frames', '(m3)', '0');
+INSERT INTO `t_technical_appendix` VALUES ('206', '14', 'Propulsion machinery', 'Name of Equipmet', null, null, null, null, null, 'Specification', null, '1');
+INSERT INTO `t_technical_appendix` VALUES ('207', '14', 'Auxilliaries machinery', 'Name of Equipmet', null, null, null, null, null, 'Specification', null, '1');
+INSERT INTO `t_technical_appendix` VALUES ('208', '14', 'Main deck and equipment', 'Name of Equipmet', null, null, null, null, null, 'Specification', null, '1');
+INSERT INTO `t_technical_appendix` VALUES ('209', '14', 'Cargo handling equipment', 'Name of Equipmet', null, null, null, null, null, 'Specification', null, '1');
+INSERT INTO `t_technical_appendix` VALUES ('210', '14', 'Lifesaving & firefighting equipment', 'Name of Equipmet', null, null, null, null, null, 'Specification', null, '1');
+INSERT INTO `t_technical_appendix` VALUES ('211', '15', 'Navigation & Communications Equipments', 'Equipment', null, null, null, null, null, 'Maker', 'Type', '0');
+INSERT INTO `t_technical_appendix` VALUES ('212', '15', 'Cargo hold capacities(Only Bulker)', 'Hold #', null, null, null, null, null, '(m3)', null, '0');
+INSERT INTO `t_technical_appendix` VALUES ('213', '15', 'Hatch dimensions(Only Bulker)', 'Hold #', null, null, null, null, null, 'm×m', null, '0');
+INSERT INTO `t_technical_appendix` VALUES ('214', '15', 'Cargo tank capacities(Only tanker)', 'Tank #', null, null, null, null, null, 'Frames', '(m3)', '0');
+INSERT INTO `t_technical_appendix` VALUES ('215', '15', 'Vessel tank capacity', 'Ballast Tank #', null, null, null, null, null, 'Frames', '(m3)', '0');
+INSERT INTO `t_technical_appendix` VALUES ('216', '15', 'Vessel tank capacity', 'Heavy Fuel Oil Capacity Tank #', null, null, null, null, null, 'Frames', '(m3)', '0');
+INSERT INTO `t_technical_appendix` VALUES ('217', '15', 'Vessel tank capacity', 'Diesel Oil Capacity  Tank #', null, null, null, null, null, 'Frames', '(m3)', '0');
+INSERT INTO `t_technical_appendix` VALUES ('218', '15', 'Vessel tank capacity', 'Fresh Water Capacity Tank #', null, null, null, null, null, 'Frames', '(m3)', '0');
+INSERT INTO `t_technical_appendix` VALUES ('219', '15', 'Vessel tank capacity', 'Lube Oil Capacity Tank #', null, null, null, null, null, 'Frames', '(m3)', '0');
+INSERT INTO `t_technical_appendix` VALUES ('220', '15', 'Vessel tank capacity', 'Miscellaneous Tanks Capacity Tank #', null, null, null, null, null, 'Frames', '(m3)', '0');
+INSERT INTO `t_technical_appendix` VALUES ('221', '15', 'Propulsion machinery', 'Name of Equipmet', null, null, null, null, null, 'Specification', null, '1');
+INSERT INTO `t_technical_appendix` VALUES ('222', '15', 'Auxilliaries machinery', 'Name of Equipmet', null, null, null, null, null, 'Specification', null, '1');
+INSERT INTO `t_technical_appendix` VALUES ('223', '15', 'Main deck and equipment', 'Name of Equipmet', null, null, null, null, null, 'Specification', null, '1');
+INSERT INTO `t_technical_appendix` VALUES ('224', '15', 'Cargo handling equipment', 'Name of Equipmet', null, null, null, null, null, 'Specification', null, '1');
+INSERT INTO `t_technical_appendix` VALUES ('225', '15', 'Lifesaving & firefighting equipment', 'Name of Equipmet', null, null, null, null, null, 'Specification', null, '1');
 
 -- ----------------------------
 -- Table structure for t_technical_appendix_info
@@ -4279,7 +3466,7 @@ CREATE TABLE `t_technical_appendix_info` (
   `update_by` varchar(45) DEFAULT NULL,
   `del_flag` int(11) DEFAULT '0',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=58 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB AUTO_INCREMENT=764 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_technical_appendix_info
@@ -4314,6 +3501,81 @@ INSERT INTO `t_technical_appendix_info` VALUES ('54', 'No. 4 C.C.O Tank', '78-89
 INSERT INTO `t_technical_appendix_info` VALUES ('55', 'No. 5 C.C.O Tank', '56-98', '777', '199', null, null, null, null, null);
 INSERT INTO `t_technical_appendix_info` VALUES ('56', 'No. 5 S.C.O Tank (P)', '56-98', '222', '199', null, null, null, null, null);
 INSERT INTO `t_technical_appendix_info` VALUES ('57', 'Slop Tank (S)', '58-78', '444', '199', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('689', 'No. 1', '25000', null, '212', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('690', 'No. 2', '25897', null, '212', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('691', 'No. 1', '10×10', null, '213', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('692', 'No. 3', '25897', null, '212', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('693', 'D.O. Store Tank (S)', '8-15', '103.9', '217', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('694', 'No. 2', '10×10', null, '213', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('695', 'No. 4', '28974', null, '212', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('696', 'HFO (P)', '66-102', '603', '216', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('697', 'No.1 D.O. Serv. Tank (P)', '12-15', '17.3', '217', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('698', 'No. 3', '10×10', null, '213', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('699', 'No. 5', '26987', null, '212', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('700', 'HFO (S)', '66-102', '650', '216', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('701', 'No. 4', '10×10', null, '213', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('702', 'HFO Sett. Tank (P)', '22-25', '21.6', '216', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('703', 'No. 5', '10×10', null, '213', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('704', 'HFO Serv. Tank (P)', '25-28', '22.6', '216', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('705', 'FPT ', '205-220', '1012', '215', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('706', 'F.W. Tank (P)', '30-42', '138', '218', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('707', 'No.1 WBT (P)', '170-205', '1619', '215', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('708', 'F.W. Tank (S)', '30-42', '138', '218', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('709', 'No.1 WBT (S)', '170-205', '1619', '215', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('710', 'No.2 WBT (P)', '135-170', '1570', '215', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('711', 'No.2 WBT (S)', '135-170', '1570', '215', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('712', 'No.3 WBT (P)', '102-135', '1137', '215', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('713', 'No.3 WBT (S)', '102-135', '1137', '215', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('714', 'No.4 WBT (P)', '66-102', '1229', '215', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('715', 'No.4 WBT (S)', '66-102', '1229', '215', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('716', 'No.5 WBT (P)', '30-66', '1315', '215', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('717', 'No.5 WBT (S)', '30-66', '1315', '215', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('718', 'APT', '-4-10', '659', '215', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('719', 'Magnetic Compass', 'Anschutz', '-', '211', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('720', 'Gyro Compass', 'Anschutz', 'STD-20', '211', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('721', 'M/E Cyl. Oil Store Tank', '16-25', '15', '219', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('722', 'Auto pilot', 'Anschutz', 'NP-20', '211', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('723', 'Manifold Cranes', 'Number x Make: NA Type: NA SWL@metres: NA', null, '224', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('724', 'M/E Sys. Oil Store Tank', '25-28', '24', '219', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('725', 'X-Radar', 'JRC', 'ST340 X-band', '211', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('726', 'Bilge Holding Tank', '18-29', '19', '220', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('727', 'Hatch cover', 'Make: TTS Type: side rolling auto roll system hatch cover Description : hydraulic handling, mechanical automatically cleating', null, '224', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('728', 'H.F.O. Overf. Tank', '18-29', '19', '220', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('729', 'S-Radar', 'JRC', 'ST340 S-band', '211', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('730', 'M/E Cyl. Oil Sett. Tank', '22-25', '18', '219', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('731', 'S/T L.O. Sump Tank', '10-15', '12', '220', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('732', 'A/E L.O. Store Tank (P)', '16-25', '31', '219', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('733', 'INMARSAT-C No.1', 'JRC', 'JUE-75C', '211', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('734', 'Windlass', 'Make: Wuhan Type: 20 HMW Capacity: 200 KN Location: poop deck, main deck total 4', null, '223', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('735', 'M/E L.O. Sump Tank', '21-28', '3', '220', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('736', 'INMARSAT-C No.2', 'JRC', 'JUE-75C', '211', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('737', 'A/E L.O. Store Tank (P)', '20-22', '6', '219', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('738', 'Mooring Winches', 'Make: Wuhan Marine Machinery Plant Type: K81U3 / hydraulic windlass combined with winch Capacity: 312 KN', null, '223', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('739', 'S/T C.F.W Tank', '7-10', '8', '220', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('740', 'Anchor', 'Weight: 11,200 kg Type: SPEK Anchor', null, '223', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('741', 'FBB', 'JRC', '', '211', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('742', 'Chains', 'Diameter: 81 mm Grade: 3a Length: 687.5 m', null, '223', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('743', 'GPS 1', 'JRC', 'JLR 7700 MK II', '211', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('744', 'Rescue Boat Cranes', '', null, '225', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('745', 'GPS 2', 'JRC', 'JLR 6800', '211', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('746', 'Rescue Boats', 'Number of rescue boats: 1 Make: JIANGYIN Beihai LSA Type: Fibre glass, 4.5 m\n Capacity: 6 persons', null, '225', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('747', 'Echo Sounder', 'JRC', 'JFE- 570S', '211', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('748', 'Speed Log', 'JRC', 'EML 500', '211', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('749', 'Weather Facsimile', 'JRC', 'JAX-9A', '211', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('750', 'Navtex Receiver', 'JRC', '', '211', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('751', 'AIS', 'JRC', 'JHS-180', '211', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('752', 'Anemometer', 'JRC', 'KB-101', '211', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('753', 'GMDSS', 'JRC', 'A1 A2 A3', '211', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('754', 'ECDIS NO.1', 'JRC', '', '211', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('755', 'ECDIS NO.2', 'JRC', '', '211', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('756', 'MF/HF', 'JRC', 'JSS-710/720', '211', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('757', 'V-sat', 'JRC', '', '211', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('758', 'VHF/DSC', 'JRC', 'JHS-32A', '211', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('759', 'Two way VHF', 'JRC', '', '211', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('760', 'EPIRB', 'JRC', '', '211', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('761', 'Whistle', 'JRC', '', '211', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('762', 'Talk back', 'OKI', '', '211', null, null, null, null, null);
+INSERT INTO `t_technical_appendix_info` VALUES ('763', 'Public address', 'OKI', '', '211', null, null, null, null, null);
 
 -- ----------------------------
 -- Table structure for t_technical_model

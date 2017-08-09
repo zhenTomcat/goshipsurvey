@@ -15,6 +15,8 @@ now = timestamp = Date.parse(new Date()) / 1000;
 /*原名称*/
 nativeName = "";
 
+ossObj=null;
+
 function send_request() {
     var xmlhttp = null;
     if (window.XMLHttpRequest) {
@@ -37,15 +39,17 @@ function send_request() {
 
 function get_signature(domain) {
     //可以判断当前expire是否超过了当前时间,如果超过了当前时间,就重新取一下.3s 做为缓冲
-    body = send_request(domain);
-    var obj = eval("(" + body + ")");
-    host = obj['host'];
-    policyBase64 = obj['policy'];
-    accessid = obj['accessid'];
-    signature = obj['signature'];
-    expire = parseInt(obj['expire']);
-    callbackbody = obj['callback'];
-    key = obj['dir'];
+    if(ossObj==null){
+        body = send_request(domain);
+        ossObj = eval("(" + body + ")");
+        host = ossObj['host'];
+        policyBase64 = ossObj['policy'];
+        accessid = ossObj['accessid'];
+        signature = ossObj['signature'];
+        expire = parseInt(ossObj['expire']);
+        callbackbody = ossObj['callback'];
+        key = ossObj['dir'];
+    }
     return true;
 }
 
@@ -90,7 +94,8 @@ function set_upload_param(up, filename, ret, domain) {
         'OSSAccessKeyId': accessid,
         'success_action_status': '200', //让服务端返回200,不然，默认会返回204
         'callback': callbackbody,
-        'signature': signature
+        'signature': signature,
+        'Content-Disposition':"attachment;filename="+nativeName+";filename*=UTF-8''"+nativeName
     };
 
     up.setOption({'url': host, 'multipart_params': new_multipart_params});
@@ -752,6 +757,7 @@ function initUploaders_ship_img(buttonId, bucket, domain) {
     });
     uploader.init();
 }
+
 
 
 

@@ -184,6 +184,7 @@
 <script src="${ctx}/static/js/go.common.js"></script>
 <script src="${ctx}/static/js/api.js"></script>
 <script src="${ctx}/static/js/jquery.tips.js"></script>
+<script src="http://gosspublic.alicdn.com/aliyun-oss-sdk-4.4.4.min.js"></script>
 
 <%--handsontable的js--%>
 <script src="${ctx}/static/js/handsontable/pikaday.js"></script>
