@@ -4,6 +4,8 @@ import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.ObjectMetadata;
 import com.aliyun.oss.model.PutObjectResult;
 import com.artofsolving.jodconverter.DocumentConverter;
+import com.artofsolving.jodconverter.DocumentFamily;
+import com.artofsolving.jodconverter.DocumentFormat;
 import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConverter;
@@ -225,6 +227,7 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
 
 
         File modelExcel=null;
+       String s=getClass().getClassLoader().getResource("REPORT.xls").getFile();
         modelExcel = new File(getClass().getClassLoader().getResource("REPORT.xls").getFile());
         FileInputStream is = null; //文件流
         HSSFWorkbook wb = null;
@@ -768,19 +771,23 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
 
 
        // 第六步，将文件存到指定位置
+       String url=null;
         try {
-            FileOutputStream fout = new FileOutputStream("luzhen" + ".xls");
+            String basePath = ContextLoader.getCurrentWebApplicationContext().getServletContext().getRealPath("/");
+            String path=basePath.substring(0,basePath.lastIndexOf("admin"))+"admin";
+            File file=new File(basePath+"luzhen.xls");
+            FileOutputStream fout = new FileOutputStream(file);
             wb.write(fout);
             fout.close();
+
+            path.replace("\"","\"\"");
+            url=xlsToPdf(basePath,basePath,endpoint,accessId,accessKey,bucket);
+
         } catch (Exception e) {
             logger.info(e.toString());
             e.printStackTrace();
         }
-        String basePath = ContextLoader.getCurrentWebApplicationContext().getServletContext().getRealPath("/");
-        String path=basePath.substring(0,basePath.lastIndexOf("admin"))+"admin";
-        path.replace("\"","\"\"");
 
-       String url=xlsToPdf(path,path,endpoint,accessId,accessKey,bucket);
        purchaseInspection.setReportUrl(url);
        purchaseInspectionMapper.updateById(purchaseInspection);
 
@@ -865,16 +872,16 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
 
     //excel转成pdf
     public  String xlsToPdf(String inFilePath,String outFilePath,String endpoint,String accessId,String accessKey,String bucket){
-        inFilePath+="\\luzhen.xls";
+        inFilePath+="luzhen.xls";
 
-        outFilePath+="\\REPORT.pdf";
+        outFilePath+="REPORT.pdf";
         //String OpenOffice_HOME = "D:/Program Files/OpenOffice.org 3";// 这里是OpenOffice的安装目录,C:\Program Files (x86)\OpenOffice 4
         String OpenOffice_HOME="";
         String osName = System.getProperty("os.name");
         if (Pattern.matches("Windows.*", osName)) {
             OpenOffice_HOME = "C:\\Program Files (x86)\\OpenOffice 4\\program\\";
         } else {
-            OpenOffice_HOME = "\\opt\\openoffice4\\program\\";
+            OpenOffice_HOME = "/opt/openoffice4/program/";
         }
 
         Process pro = null;
@@ -882,6 +889,20 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
             File inputFile = new File(inFilePath);
             // 如果目标路径不存在, 则新建该路径
             File outputFile = new File(outFilePath);
+            if(!inputFile.exists()){
+                try{
+                    inputFile.createNewFile();
+                }catch (Exception e){
+                }
+            }
+            if(!outputFile.exists()){
+                try{
+                    outputFile.createNewFile();
+                }catch (Exception e){
+                }
+            }
+
+
             // 启动OpenOffice的服务
             String[] command = {OpenOffice_HOME+"soffice","-headless -accept=\"socket,host=127.0.0.1,port=8100;urp;\" -nofirststartwizard"};
             pro = Runtime.getRuntime().exec(command);
@@ -892,7 +913,15 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
 
             // convert
             DocumentConverter converter = new OpenOfficeDocumentConverter(connection);
-            converter.convert(inputFile, outputFile);
+            DocumentFormat pdf = new DocumentFormat("Portable Document Format", "application/pdf", "pdf");
+            pdf.setExportFilter(DocumentFamily.DRAWING, "draw_pdf_Export");
+            pdf.setExportFilter(DocumentFamily.PRESENTATION, "impress_pdf_Export");
+            pdf.setExportFilter(DocumentFamily.SPREADSHEET, "calc_pdf_Export");
+            pdf.setExportFilter(DocumentFamily.TEXT, "writer_pdf_Export");
+
+            DocumentFormat xls = new DocumentFormat("Microsoft Excel", DocumentFamily.SPREADSHEET, "application/vnd.ms-excel", "xls");
+            xls.setExportFilter(DocumentFamily.SPREADSHEET, "MS Excel 97");
+            converter.convert(inputFile,xls, outputFile,pdf);
             //converter.convert(inputFile,xml,outputFile,pdf);
 
             // close the connection
@@ -900,6 +929,8 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
             // 封闭OpenOffice服务的进程
             pro.destroy();
             String url= uploadFile2OSS(outFilePath,endpoint,accessId,accessKey,bucket);
+            //inputFile.delete();
+            //outputFile.delete();
             return url;
         } catch (Exception e) {
             logger.error(e.toString());
