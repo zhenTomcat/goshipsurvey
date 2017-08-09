@@ -124,7 +124,7 @@
 --%>
 <script src="${global}/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <%--<script src="${global}/plugins/js.cookie.min.js" type="text/javascript"></script>--%>
-<script src="http://windyeel.oss-cn-shanghai.aliyuncs.com/global/plugins/jquery.cookie.js"
+<script src="${global}/plugins/jquery.cookie.js"
         type="text/javascript"></script>
 <script src="${global}/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
 <script src="${global}/plugins/jquery.blockui.min.js" type="text/javascript"></script>
