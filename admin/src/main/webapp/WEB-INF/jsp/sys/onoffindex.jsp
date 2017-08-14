@@ -259,12 +259,6 @@
         console.log("WebSocket:开始");
         var path = "<%=wsPath%>";
         console.log("wsPath:" + path);
-//        if (path.indexOf("localhost") >= 0) {
-//            path = "localhost:8080/";
-//        } else {
-//            path = "www.goshipsurvey.com:8889/admin/";
-//        }
-//        console.log(path);
         var websocket;
         if ('WebSocket' in window) {
             websocket = new WebSocket("ws://" + path + "wsMy");

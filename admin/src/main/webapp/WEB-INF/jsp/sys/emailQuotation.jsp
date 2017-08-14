@@ -17,7 +17,7 @@
 <!--<![endif]-->
 
 <head>
-    <title>主页</title>
+    <title>Quotation</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -41,10 +41,6 @@
     <link rel="stylesheet"
           href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/css/headers/header-default.css">
     <link rel="stylesheet" href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/css/footers/footer-v1.css">
-
-    <!-- CSS Jquery UI -->
-    <link rel="stylesheet"
-          href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/metronic/global/plugins/jquery-ui/jquery-ui.min.css">
 
     <!-- CSS Implementing Plugins -->
     <link rel="stylesheet" href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/animate.css">
@@ -122,11 +118,6 @@
         .header .logo img {
             margin: 0;
         }
-
-        .help-block {
-            margin-top: 0;
-            margin-bottom: 0;
-        }
     </style>
 </head>
 
@@ -170,7 +161,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="static/html/about_us.html">
+                        <a href="about_us.html">
                             Our reports
                         </a>
                     </li>
@@ -188,72 +179,41 @@
             </div>
         </div>
 
-        <h1 style="margin-left: 10%;margin-top: -30px;color: white;">Best service though internet</h1>
+        <div style="width: 80%;margin: -30px auto 10px;padding: 0; color: white;">
+            <h1 style="color: white;">Your quotation</h1>
+            <h3 style="color: white;">We are calculating for you,and price whill be sent to your email.Please note and
+                check your email.</h3>
+        </div>
 
         <div class="row">
-            <form class="form-horizontal" id="quotation-form" method="post" action="emailQuotation/addEmailQuotation"
-                  role="form">
+            <form class="form-horizontal" id="quotation-form" role="form" style="font-size: 30px;">
                 <div class="form-group">
-                    <label class="control-label col-md-3"><h1>Quotation</h1></label>
+                    <label class="control-label col-md-5" style="font-weight: 100;">Ship's name:</label>
+                    <label class="control-label col-md-7"
+                           style="text-align: left;font-style: italic;">${quotation.shipName}</label>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3" for="shipName" style="font-weight: 100;">Enter ship
-                        name</label>
-                    <div class="col-md-6">
-                        <input class="form-control" name="shipName" id="shipName"/>
-                    </div>
-                    <span class="help-block"></span>
+                    <label class="control-label col-md-5" style="font-weight: 100;">IMO:</label>
+                    <label class="control-label col-md-7"
+                           style="text-align: left;font-style: italic;">${quotation.imo}</label>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3" for="imo" style="font-weight: 100;">Enter IMO number</label>
-                    <div class="col-md-6">
-                        <input class="form-control" name="imo" id="imo"/>
-                    </div>
-                    <span class="help-block"></span>
+                    <label class="control-label col-md-5" style="font-weight: 100;">Port:</label>
+                    <label class="control-label col-md-7"
+                           style="text-align: left;font-style: italic;">${quotation.port}</label>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3" style="font-weight: 100;">Select
-                        inspection type</label>
-                    <div class="col-md-6">
-                        <label class="checkbox-inline"><input type="checkbox" name="inspectionType" value="on hire"/>On
-                            hire</label>
-                        <label class="checkbox-inline"><input type="checkbox" name="inspectionType" value="off hire"/>Off
-                            hire</label>
-                        <label class="checkbox-inline"><input type="checkbox" name="inspectionType" value="condition"/>Condition</label>
-                    </div>
-                    <span class="help-block"></span>
+                    <label class="control-label col-md-5" style="font-weight: 100;">Date:</label>
+                    <label class="control-label col-md-7" style="text-align: left;font-style: italic;">
+                        <fmt:formatDate value="${quotation.startDate}" pattern="yyyy-MM-dd"/> ~
+                        <fmt:formatDate value="${quotation.endDate}" pattern="yyyy-MM-dd"/></label>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3" for="port" style="font-weight: 100;">Enter port</label>
-                    <div class="col-md-6">
-                        <input class="form-control" name="port" id="port"/>
-                    </div>
-                    <span class="help-block"></span>
+                    <label class="control-label col-md-5" style="font-weight: 100;">Inspection type:</label>
+                    <label class="control-label col-md-7"
+                           style="text-align: left;font-style: italic;">${quotation.inspectionType}</label>
                 </div>
-                <div class="form-group">
-                    <label class="control-label col-md-3" style="font-weight: 100;">Select date range</label>
-                    <div class="input-group input-large date-picker input-daterange col-md-6"
-                         data-date-format="mm/dd/yyyy" style="padding: 0 15px;float: left;">
-                        <input type="text" class="form-control" name="startDate" id="startDate" autocomplete="false">
-                        <span class="input-group-addon"> to </span>
-                        <input type="text" class="form-control" name="endDate" id="endDate" autocomplete="false">
-                    </div>
-                    <span class="help-block"></span>
-                </div>
-
-                <div class="form-group">
-                    <label class="control-label col-md-3" for="email" style="font-weight: 100;">Enter your email</label>
-                    <div class="col-md-6">
-                        <input class="form-control" name="email" id="email"/>
-                    </div>
-                    <span class="help-block"></span>
-                </div>
-                <button class="btn" data-loading-text="Loading..." id="submitBtn"
-                        style="background-color: #264071;color: white;display: block;margin: 0 auto;width: 150px;">GET
-                    QUOTATION
-                </button>
             </form>
-
         </div>
         <!--/row-->
     </div>
@@ -291,10 +251,10 @@
                         <h2>Login or Register</h2></div>
                     <ul class="list-unstyled">
                         <li style="float: left;margin-right: 10px;">
-                            <a class="btn-u btn-lg" href="login_toLogin">Login</a>
+                            <a class="btn-u btn-lg" href="static/html/download_center.html">Login</a>
                         </li>
                         <li style="float: left;margin-right: 10px;">
-                            <a class="btn-u btn-u-blue btn-lg" href="javascript:void(0)">Register</a>
+                            <a class="btn-u btn-u-blue btn-lg" href="static/html/download_center.html">Register</a>
                         </li>
                     </ul>
                 </div>
@@ -318,16 +278,11 @@
 <script type="text/javascript"
         src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/jquery/jquery.min.js"></script>
 <script type="text/javascript"
-        src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/metronic/global/plugins/jquery-ui/jquery-ui.min.js"></script>
-<script type="text/javascript"
         src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/jquery.validate.min.js"></script>
 <script type="text/javascript"
         src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/jquery/jquery-migrate.min.js"></script>
 <script type="text/javascript"
         src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript"
-        src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/metronic/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/jquery.form.min.js"></script>
 <!--<script type="text/javascript" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/back-to-top.js"></script>-->
 <!--<script type="text/javascript" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/smoothScroll.js"></script>
 <script type="text/javascript" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/jquery.parallax.js"></script>
@@ -342,63 +297,28 @@
 <script type="text/javascript" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/revolution-slider.js"></script>
 <script type="text/javascript" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/style-switcher.js"></script>-->
 <script type="text/javascript">
-    if (jQuery().datepicker) {
-        $('.date-picker').datepicker({
-            startDate: new Date(),
-            orientation: "left",
-            autoclose: true,
-            todayBtn: 'linked',
-            format: 'yyyy-mm-dd',
-        });
-    }
-
-
     $('#quotation-form').validate({
         errorElement: 'span',
-        //				onfocusout: function(element) {
-        //					$(element).valid();
-        //				},
+        onfocusout: function (element) {
+            $(element).valid();
+        },
         focusInvalid: true,
         rules: {
             shipName: {
                 required: true,
             },
-            imo: {
-                required: true,
+            password: {
+                required: true
             },
-            inspectionType: {
-                required: true,
-            },
-            port: {
-                required: true,
-            },
-            startDate: {
-                required: true,
-            },
-            email: {
-                required: true,
-                email: true
-            },
+            address: {
+                required: false,
+                //minlength:8,
+                postcodeVal: true
+            }
         },
         messages: {
             shipName: {
-                required: "Ship name is required",
-            },
-            imo: {
-                required: "IMO number is required",
-            },
-            inspectionType: {
-                required: "Inspection type is required",
-            },
-            port: {
-                required: "Port is required",
-            },
-            startDate: {
-                required: "Start date is required",
-            },
-            email: {
-                required: "Email is required",
-                email: "Incorrect email format",
+                required: "Username is required.",
             },
         },
 
@@ -416,102 +336,11 @@
         errorPlacement: function (error, element) {
             element.parents('.form-group').find('.help-block').html(error);
         },
+
         submitHandler: function (form) {
-            $("#submitBtn").button("loading");
-            $(form).ajaxSubmit({
-                success: function (data) {
-                    if (data.success) {
-                        window.location.href = "emailQuotation/detail";
-                    } else {
-                        console.log("failure");
-                        $("#submitBtn").button("reset");
-                    }
-                },
-                error: function (data) {
-                    console.log("error");
-                    $("#submitBtn").button("reset");
-                }
-            });
+            $(form).ajaxSubmit();
         }
     });
-
-    $("#shipName,#imo").autocomplete({
-        minChars: 0,
-        width: 310,
-        autoFill: false,
-        source: function (request, response) {
-            $.ajax({
-                type: "post",
-                url: "publicShip/searchList",
-                dataType: "json",
-                data: {
-                    keyword: request.term
-                },
-                success: function (data) {
-                    response($.map(data.list, function (item) {
-                        return { //lable为下拉列表显示数据源。value为选中放入到文本框的值，这种方式可以自定义显示
-                            label: item.name + " / " + item.imo + " / " + item.callsign,
-                            imo: item.imo,
-                            shipName: item.name,
-                        }
-                    }));
-                }
-            });
-        },
-        select: function (event, ui) {
-            event.preventDefault();
-            $("#shipName").val(ui.item.shipName);
-            $("#imo").val(ui.item.imo);
-        }
-    });
-
-    $("#port").autocomplete({
-        minChars: 0,
-        width: 310,
-        autoFill: false,
-        source: function (request, response) {
-            $.ajax({
-                type: "post",
-                url: "port/searchList",
-                dataType: "json",
-                data: {
-                    keyword: request.term
-                },
-                success: function (data) {
-                    response($.map(data.list, function (item) {
-                        return { //lable为下拉列表显示数据源。value为选中放入到文本框的值，这种方式可以自定义显示
-                            label: item.portEn + " / " + item.countryCode,
-                        }
-                    }));
-                }
-            });
-        }
-    });
-
-    //			$("#userName").autocomplete({
-    //				source: function(request, response) {
-    //					$.ajax({
-    //						type: "post",
-    //						url: "",
-    //						dataType: "json",
-    //						data: {
-    //							userName: request.term
-    //						},
-    //						success: function(data) {
-    //							response($.map(data, function(item) {
-    //								return { //lable为下拉列表显示数据源。value为选中放入到文本框的值，这种方式可以自定义显示
-    //									lable: item.userName,
-    //									value: item.userName
-    //								}
-    //							}));
-    //						}
-    //					});
-    //				},
-    //				minLength: 1,
-    //				select: function(event, ui) { //移动键盘上下键，自动将下拉列表的数据放入到文本框，不过不写这个配置也是可以的，默认就行，具体这个还不知道是做什么
-    //					$("#userName").val(ui.item.userName);
-    //				}
-    //			});
 </script>
 <!--[if lt IE 9]>
 <script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/respond.js"></script>

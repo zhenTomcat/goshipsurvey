@@ -60,6 +60,9 @@
             <value>
                 /static/** = anon
                 /assets/** = anon
+                /emailQuotation/** = anon
+                /publicShip/** = anon
+                /port/** = anon
                 /welcome = anon
                 /onoff = anon
                 /prepurchase =anon

@@ -1,5 +1,6 @@
 package com.ctoangels.goshipsurvey.common.util;
 
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.EmailQuotation;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.MailAuthenticator;
 
 import javax.activation.DataHandler;
@@ -125,6 +126,17 @@ public class MailUtil {
     }
 
 
+    public static void sendEmailQuotation(EmailQuotation emailQuotation) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("Ship name : " + emailQuotation.getShipName() + "<br>");
+        sb.append("Imo : " + emailQuotation.getImo() + "<br>");
+        sb.append("Inspection type : " + emailQuotation.getInspectionType() + "<br>");
+        sb.append("Port : " + emailQuotation.getPort() + "<br>");
+        sb.append("Date range : " + DateUtil.formatDate(emailQuotation.getStartDate(), "yyyy-MM-dd") + "~" + DateUtil.formatDate(emailQuotation.getEndDate(), "yyyy-MM-dd") + "<br>");
+        sb.append("Email : " + emailQuotation.getEmail() + "<br>");
+        sendEmail(fromAddress, sb.toString(), "有船船要进行检验", null);
+    }
+
     //发送注册时的验证邮件
     public static void sendActivateEmail(String toAddress, String validateCode) {
         StringBuffer sb = new StringBuffer();
@@ -178,7 +190,6 @@ public class MailUtil {
         sb.append(code.toString());
         MailUtil.sendEmail(toAddress, sb.toString(), "更换邮箱", null);
     }
-
 
     //发送询价邮件
     public static void sendEnquiryEmail(String toAddress, String text, List<File> files) {
