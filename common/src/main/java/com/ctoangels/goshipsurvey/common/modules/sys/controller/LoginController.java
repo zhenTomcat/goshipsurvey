@@ -98,7 +98,7 @@ public class LoginController extends BaseController {
     public String toLogin() throws Exception {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("sysname", sysName);
-//        purchaseInspectionService.autoSelectSurveyors();
+        purchaseInspectionService.autoSelectSurveyors();
         return "sys/admin/login";
     }
 

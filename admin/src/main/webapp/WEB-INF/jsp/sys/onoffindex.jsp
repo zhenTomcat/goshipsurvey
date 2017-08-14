@@ -124,7 +124,7 @@
 --%>
 <script src="${global}/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 <%--<script src="${global}/plugins/js.cookie.min.js" type="text/javascript"></script>--%>
-<script src="http://windyeel.oss-cn-shanghai.aliyuncs.com/global/plugins/jquery.cookie.js"
+<script src="${global}/plugins/jquery.cookie.js"
         type="text/javascript"></script>
 <script src="${global}/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
 <script src="${global}/plugins/jquery.blockui.min.js" type="text/javascript"></script>
@@ -259,12 +259,6 @@
         console.log("WebSocket:开始");
         var path = "<%=wsPath%>";
         console.log("wsPath:" + path);
-//        if (path.indexOf("localhost") >= 0) {
-//            path = "localhost:8080/";
-//        } else {
-//            path = "www.goshipsurvey.com:8889/admin/";
-//        }
-//        console.log(path);
         var websocket;
         if ('WebSocket' in window) {
             websocket = new WebSocket("ws://" + path + "wsMy");

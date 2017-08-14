@@ -48,6 +48,17 @@
         .login .content {
             background: rgba(0, 0, 0, 0.5);
         }
+
+        .btn.blue:not(.btn-outline).active, .btn.blue:not(.btn-outline):active, .btn.blue:not(.btn-outline):hover, .open > .btn.blue:not(.btn-outline).dropdown-toggle {
+            color: #FFF;
+            border-color: #1f78b5;
+        }
+
+        .btn.blue:not(.btn-outline):not(.active) {
+            color: #FFF;
+            background-color: lightgrey;
+            border-color: #3598dc;
+        }
     </style>
 </head>
 <body class=" login">
@@ -81,6 +92,15 @@
                  title="<fmt:message key="login_click_change"/>"
                  style="width: 40%; height: 34px; margin-left: 12px;" src="">
         </div>
+        <div class="form-group" id="system-select-div">
+            <div class="btn-group btn-group-circle" data-toggle="buttons">
+                <label class="btn blue active" data-sys="onoffindex">
+                    <input type="radio" class="toggle"> On/Off hire </label>
+                <label class="btn blue" data-sys="prepurchaseindex">
+                    <input type="radio" class="toggle"> Pre-purchase </label>
+            </div>
+        </div>
+
         <div class="form-actions">
             <button onclick="severCheck();" type="button" class="btn green">
                 <fmt:message key="sys.user.login"/></button>
@@ -100,6 +120,8 @@
 <script src="${global}/plugins/backstretch/jquery.backstretch.min.js" type="text/javascript"></script>
 </body>
 <script type="text/javascript">
+    // $('#system-select-div label.active').attr('data-sys')
+
     function changeLanguage(lang) {
         $.ajax({
             url: "changeLang",
@@ -139,15 +161,17 @@
                     if ("success" == data.result) {
                         $.cookie('isLogin', 1);
                         saveCookie();
-                        var proType = $("#proType").val();
-                        if (proType == 1) {
-                            window.location.href = "onoffindex";
-                        }
-                        else if (proType == 2) {
-                            window.location.href = "prepurchaseindex";
-                        } else {
-                            window.location.href = "";
-                        }
+                        // var proType = $("#proType").val();
+                        var proType = $('#system-select-div label.active').attr('data-sys');
+                        window.location.href = proType || "";
+//                        if (proType == 1) {
+//                            window.location.href = "onoffindex";
+//                        }
+//                        else if (proType == 2) {
+//                            window.location.href = "prepurchaseindex";
+//                        } else {
+//                            window.location.href = "";
+//                        }
 
                     } else if ("user error" == data.result) {
                         $("#loginName").tips({
