@@ -11,6 +11,7 @@ import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IQuotation
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.ISurveyorInfoService;
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
 import com.ctoangels.goshipsurvey.common.util.Const;
+import com.ctoangels.goshipsurvey.common.util.Tools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,8 +56,8 @@ public class SurveyorRecordController extends BaseController {
         List<Inspection> list = inspectionService.getCompanyRecordList(getCurrentUser().getId(), start, length);
         for (Inspection i : list) {
             Quotation q = i.getQuotation();
-            q.setInspectionType(transferValuesToDes(q.getInspectionType(), getInspectionTypeDict()));
-            q.setShipType(transferValuesToDes(q.getShipType(), getShipTypeDict()));
+            q.setInspectionType(Tools.transferValuesToDes(q.getInspectionType(), getInspectionTypeDict()));
+            q.setShipType(Tools.transferValuesToDes(q.getShipType(), getShipTypeDict()));
             i.setQuotation(q);
         }
         jsonObject.put(Const.DRAW, request.getParameter(Const.DRAW));

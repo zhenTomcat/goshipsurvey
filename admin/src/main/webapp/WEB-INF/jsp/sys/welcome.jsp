@@ -127,6 +127,35 @@
             margin-top: 0;
             margin-bottom: 0;
         }
+
+        /*html, body {*/
+        /*margin: 0;*/
+        /*min-height: 100%;*/
+        /*height: 100%;*/
+        /*}*/
+
+        /*.wrapper {*/
+        /*position: relative;*/
+        /*min-height: calc(100% - 250px);*/
+        /*padding-bottom: 250px;*/
+        /*background-color: #264071;*/
+        /*}*/
+
+        /*.container-fluid {*/
+        /*min-height: calc(100% - 70px);*/
+        /*}*/
+
+        /*.footer-v1 {*/
+        /*height: 225px;*/
+        /*width: 100%;*/
+        /*position: absolute;*/
+        /*bottom: 0;*/
+        /*}*/
+
+        /*.footer-v1 .copyright {*/
+        /*padding: 0;*/
+        /*height: 225px;*/
+        /*}*/
     </style>
 </head>
 
@@ -164,6 +193,11 @@
         <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
             <div class="container">
                 <ul class="nav navbar-nav" style="margin-top: -60px;float: right;color: white;">
+                    <li>
+                        <a href="/">
+                            Home
+                        </a>
+                    </li>
                     <li>
                         <a href="index.html">
                             Quotation
@@ -215,11 +249,10 @@
                     <label class="control-label col-md-3" style="font-weight: 100;">Select
                         inspection type</label>
                     <div class="col-md-6">
-                        <label class="checkbox-inline"><input type="checkbox" name="inspectionType" value="on hire"/>On
-                            hire</label>
-                        <label class="checkbox-inline"><input type="checkbox" name="inspectionType" value="off hire"/>Off
-                            hire</label>
-                        <label class="checkbox-inline"><input type="checkbox" name="inspectionType" value="condition"/>Condition</label>
+                        <c:forEach items="${emailQuotationTypeDict}" var="dict">
+                            <label class="checkbox-inline"><input type="checkbox" name="inspectionType"
+                                                                  value="${dict.value}"/>${dict.des}</label>
+                        </c:forEach>
                     </div>
                     <span class="help-block"></span>
                 </div>
@@ -442,15 +475,16 @@
         source: function (request, response) {
             $.ajax({
                 type: "post",
-                url: "publicShip/searchList",
+                url: "publicShip/searchListByColumn",
                 dataType: "json",
                 data: {
-                    keyword: request.term
+                    keyword: request.term,
+                    columns: ["name", "imo"]
                 },
                 success: function (data) {
                     response($.map(data.list, function (item) {
                         return { //lable为下拉列表显示数据源。value为选中放入到文本框的值，这种方式可以自定义显示
-                            label: item.name + " / " + item.imo + " / " + item.callsign,
+                            label: item.name + " / " + item.imo + " / " + item.shipType,
                             imo: item.imo,
                             shipName: item.name,
                         }

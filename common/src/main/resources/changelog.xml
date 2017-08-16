@@ -208,30 +208,39 @@
             alter table sys_message CHANGE title title text DEFAULT NULL;
         </sql>
     </changeSet>
-    <changeSet author="LuZhen" id="17317309132-011">
-        <sql>
-            alter table t_inspection_report add submit_status1 int(11) NULL;
-            alter table t_inspection_report add submit_status2 int(11) NULL;
-            alter table t_inspection_report add submit_status3 int(11) NULL;
-            alter table t_inspection_report add submit_status4 int(11) NULL;
-            alter table t_inspection_report add submit_status5 int(11) NULL;
-            alter table t_inspection_report add submit_status6 int(11) NULL;
-            alter table t_inspection_report add submit_status7 int(11) NULL;
-        </sql>
-    </changeSet>
+    <!--<changeSet author="LuZhen" id="17317309132-011">-->
+        <!--<sql>-->
+            <!--alter table t_inspection_report add submit_status1 int(11) NULL;-->
+            <!--alter table t_inspection_report add submit_status2 int(11) NULL;-->
+            <!--alter table t_inspection_report add submit_status3 int(11) NULL;-->
+            <!--alter table t_inspection_report add submit_status4 int(11) NULL;-->
+            <!--alter table t_inspection_report add submit_status5 int(11) NULL;-->
+            <!--alter table t_inspection_report add submit_status6 int(11) NULL;-->
+            <!--alter table t_inspection_report add submit_status7 int(11) NULL;-->
+        <!--</sql>-->
+    <!--</changeSet>-->
     <changeSet author="WangShun" id="15950097942-018">
         <sql>
             alter table t_quotation ADD specified_id int(11) DEFAULT NULL COMMENT '指定验船公司的id';
         </sql>
     </changeSet>
-    <changeSet author="LuZhen" id="17317309132-012">
+    <!--<changeSet author="LuZhen" id="17317309132-012">-->
+        <!--<sql>-->
+            <!--alter table t_technical_appendix add flag int(11) DEFAULT NULL COMMENT '指定最后五条记录为textarea';-->
+        <!--</sql>-->
+    <!--</changeSet>-->
+    <!--<changeSet author="LuZhen" id="17317309132-013">-->
+        <!--<sql>-->
+            <!--alter table t_ship_detail add ship_img varchar(155) DEFAULT NULL COMMENT '船的图片';-->
+        <!--</sql>-->
+    <!--</changeSet>-->
+    <changeSet author="WangShun" id="15950097942-019">
         <sql>
-            alter table t_technical_appendix add flag int(11) DEFAULT NULL COMMENT '指定最后五条记录为textarea';
-        </sql>
-    </changeSet>
-    <changeSet author="LuZhen" id="17317309132-013">
-        <sql>
-            alter table t_ship_detail add ship_img varchar(155) DEFAULT NULL COMMENT '船的图片';
+            insert INTO t_dict(type,value,des,del_flag) VALUES('emailQuotationType',1,'On hire',0);
+            insert INTO t_dict(type,value,des,del_flag) VALUES('emailQuotationType',2,'Off hire',0);
+            insert INTO t_dict(type,value,des,del_flag) VALUES('emailQuotationType',3,'Condition',0);
+            insert INTO t_dict(type,value,des,del_flag) VALUES('emailQuotationType',4,'Pre-purchase',0);
+            insert INTO t_dict(type,value,des,del_flag) VALUES('emailQuotationType',5,'Bunker replenishment',0);
         </sql>
     </changeSet>
 </databaseChangeLog>

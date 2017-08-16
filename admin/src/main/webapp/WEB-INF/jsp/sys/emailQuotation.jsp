@@ -118,6 +118,10 @@
         .header .logo img {
             margin: 0;
         }
+
+        .form-group {
+            margin-bottom: 5px;
+        }
     </style>
 </head>
 
@@ -156,6 +160,11 @@
             <div class="container">
                 <ul class="nav navbar-nav" style="margin-top: -60px;float: right;color: white;">
                     <li>
+                        <a href="/">
+                            Home
+                        </a>
+                    </li>
+                    <li>
                         <a href="index.html">
                             Quotation
                         </a>
@@ -171,7 +180,7 @@
                         </a>
                     </li>
                     <li>
-                        <a href="static/html/about_us.html">
+                        <a href="/static/html/about_us.html">
                             About us
                         </a>
                     </li>
@@ -180,13 +189,14 @@
         </div>
 
         <div style="width: 80%;margin: -30px auto 10px;padding: 0; color: white;">
-            <h1 style="color: white;">Your quotation</h1>
-            <h3 style="color: white;">We are calculating for you,and price whill be sent to your email.Please note and
-                check your email.</h3>
+            <h1 style="color: white;font-size: 50px">Your quotation</h1>
+            <h3 style="color: white;font-size: 25px">We are calculating for you, and price will be sent to your email
+                within <span style="font-size: 50px;font-style: italic;color: greenyellow;font-weight: 700;">24 </span>
+                hours.Please note and check your email.</h3>
         </div>
 
         <div class="row">
-            <form class="form-horizontal" id="quotation-form" role="form" style="font-size: 30px;">
+            <form class="form-horizontal" id="quotation-form" role="form" style="font-size: 25px;">
                 <div class="form-group">
                     <label class="control-label col-md-5" style="font-weight: 100;">Ship's name:</label>
                     <label class="control-label col-md-7"
@@ -213,51 +223,28 @@
                     <label class="control-label col-md-7"
                            style="text-align: left;font-style: italic;">${quotation.inspectionType}</label>
                 </div>
+                <a class="btn" href="/"
+                   style="background-color: #264071;color: white;display: block;margin: 0 auto;width: 150px;"> &lt; Back
+                </a>
             </form>
         </div>
         <!--/row-->
     </div>
     <!--/container-->
     <!--=== End Service Block ===-->
-
+    <div class="row margin-bottom-15" style="background-color: white;text-align: center">
+        <h1 style="text-align: center;color: black">Please register to enjoy the best service</h1>
+        <a class="btn-u btn-u-blue" href="/"
+           style="color: white;margin-right:20px;width: 150px; "> Register
+        </a>
+        <a class="btn-u" href="/login_toLogin"
+           style="color: white;margin-left:20px;width: 150px;"> Login
+        </a>
+    </div>
     <!--=== Footer Version 1 ===-->
     <div class="footer-v1">
         <div class="copyright">
             <div class="container">
-                <div class="col-md-3 md-margin-bottom-40">
-                    <div class="headline">
-                        <h2>Quickly Links</h2></div>
-                    <ul class="list-unstyled link-list">
-                        <li>
-                            <a href="http://a.goshipyard.com">goshipyard</a><i class="fa fa-angle-right"></i></li>
-                        <li>
-                            <a href="http://a.goshipyard.com:8899/admin">goshiprepair</a><i
-                                class="fa fa-angle-right"></i></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 md-margin-bottom-40">
-                    <div class="headline">
-                        <h2>Quickly Links</h2></div>
-                    <ul class="list-unstyled link-list">
-                        <li>
-                            <a href="static/html/download_center.html">Download Center</a><i
-                                class="fa fa-angle-right"></i></li>
-                        <li>
-                            <a href="static/html/about_us.html">About Us</a><i class="fa fa-angle-right"></i></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 md-margin-bottom-40">
-                    <div class="headline">
-                        <h2>Login or Register</h2></div>
-                    <ul class="list-unstyled">
-                        <li style="float: left;margin-right: 10px;">
-                            <a class="btn-u btn-lg" href="static/html/download_center.html">Login</a>
-                        </li>
-                        <li style="float: left;margin-right: 10px;">
-                            <a class="btn-u btn-u-blue btn-lg" href="static/html/download_center.html">Register</a>
-                        </li>
-                    </ul>
-                </div>
                 <div class="row">
                     <div class="col-md-12" style="text-align: center;">
                         <p>Aoyang TC Email:

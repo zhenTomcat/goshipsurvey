@@ -15,6 +15,8 @@ public interface IPublicShipService extends ISuperService<PublicShip> {
 
     List<PublicShip> getSearchList(String keyword);
 
+    List<PublicShip> getSearchListByColumns(String keyword, String[] columns);
+
     PublicShip getById(int id);
 
 }

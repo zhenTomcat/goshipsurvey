@@ -5,6 +5,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.ctoangels.goshipsurvey.common.modules.go.entity.PublicShip;
 import com.ctoangels.goshipsurvey.common.modules.go.service.IPublicShipService;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Style;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IDictService;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IStyleService;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IPurchaseInspectionService;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.Button;
@@ -57,6 +58,9 @@ public class LoginController extends BaseController {
 
     @Autowired
     private IStyleService styleService;
+
+    @Autowired
+    private IDictService dictService;
 
     @Autowired
     private IPurchaseInspectionService purchaseInspectionService;
@@ -460,6 +464,7 @@ public class LoginController extends BaseController {
 
     @RequestMapping(value = "/welcome", method = RequestMethod.GET)
     public String welcome(ModelMap map) {
+        map.put("emailQuotationTypeDict", getEmailQuotationTypeDict());
         return "sys/welcome";
     }
 

@@ -13,6 +13,7 @@ import com.ctoangels.goshipsurvey.common.modules.sys.service.UserService;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.impl.MessageServiceImpl;
 import com.ctoangels.goshipsurvey.common.util.Const;
 import com.ctoangels.goshipsurvey.common.util.DateUtil;
+import com.ctoangels.goshipsurvey.common.util.Tools;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -65,8 +66,8 @@ public class OPQuotationController extends BaseController {
         JSONObject jsonObject = new JSONObject();
         List<Quotation> list = quotationService.getOPList(getCurrentUser().getId(), start, length);
         for (Quotation q : list) {
-            q.setInspectionType(transferValuesToDes(q.getInspectionType(), getInspectionTypeDict()));
-            q.setShipType(transferValuesToDes(q.getShipType(), getShipTypeDict()));
+            q.setInspectionType(Tools.transferValuesToDes(q.getInspectionType(), getInspectionTypeDict()));
+            q.setShipType(Tools.transferValuesToDes(q.getShipType(), getShipTypeDict()));
         }
         jsonObject.put(Const.DRAW, request.getParameter(Const.DRAW));
         int total = quotationService.getOPTotal(getCurrentUser().getId());

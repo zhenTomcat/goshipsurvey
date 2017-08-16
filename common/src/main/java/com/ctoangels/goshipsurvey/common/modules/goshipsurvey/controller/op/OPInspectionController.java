@@ -7,6 +7,7 @@ import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IDictServi
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IInspectionService;
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
 import com.ctoangels.goshipsurvey.common.util.Const;
+import com.ctoangels.goshipsurvey.common.util.Tools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
@@ -55,8 +56,8 @@ public class OPInspectionController extends BaseController {
         List<Inspection> list = inspectionService.getList(getCurrentUser().getId(), null, start, length);
         for (Inspection i : list) {
             Quotation q = i.getQuotation();
-            q.setInspectionType(transferValuesToDes(q.getInspectionType(), getInspectionTypeDict()));
-            q.setShipType(transferValuesToDes(q.getShipType(), getShipTypeDict()));
+            q.setInspectionType(Tools.transferValuesToDes(q.getInspectionType(), getInspectionTypeDict()));
+            q.setShipType(Tools.transferValuesToDes(q.getShipType(), getShipTypeDict()));
             String inspectionType = i.getInspectionType();
             String[] inspectionTypes = inspectionType.split(",");
             i.setInspectionTypes(inspectionTypes);
