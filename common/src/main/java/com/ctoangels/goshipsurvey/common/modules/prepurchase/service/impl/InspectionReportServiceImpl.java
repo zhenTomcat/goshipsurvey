@@ -41,6 +41,8 @@ import java.io.*;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.ProtocolException;
 import java.net.URL;
 import java.util.Date;
 import java.util.List;
@@ -227,7 +229,7 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
 
 
         File modelExcel=null;
-       String s=getClass().getClassLoader().getResource("REPORT.xls").getFile();
+        String s=getClass().getClassLoader().getResource("REPORT.xls").getFile();
         modelExcel = new File(getClass().getClassLoader().getResource("REPORT.xls").getFile());
         FileInputStream is = null; //文件流
         HSSFWorkbook wb = null;
@@ -251,6 +253,27 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
         shipSheet.getRow(22).getCell(0).setCellValue(dicts.get(Integer.parseInt(shipDetail.getShipType())-1).getDes());//船舶类型
 
         HSSFSheet shipSheet1 = wb.getSheetAt(2);
+       //获取图片信息
+       String imgUrl=shipDetail.getShipImg();
+       if(imgUrl!=null && !imgUrl.equals("")){
+           URL url= null;
+           try {
+               url = new URL(imgUrl);
+               HttpURLConnection conn= (HttpURLConnection) url.openConnection();//打开链接
+               conn.setRequestMethod("GET");//设置请求方式
+               conn.setConnectTimeout(5*1000);//设置超时响应时间
+               InputStream inputStream=conn.getInputStream();//通过输入流获取图片数据
+               byte[] data=readInputStream(inputStream);
+               HSSFPatriarch patriarch=shipSheet1.createDrawingPatriarch();
+               HSSFClientAnchor anchor=new HSSFClientAnchor(0,0,1010,250,(short)1,2,(short) 4,6);
+               anchor.setAnchorType(2);
+               patriarch.createPicture(anchor,wb.addPicture(data,HSSFWorkbook.PICTURE_TYPE_JPEG));
+           } catch (Exception e) {
+               e.printStackTrace();
+           }
+
+       }
+
        shipSheet1.getRow(2).getCell(0).setCellValue("Ship name:"+shipDetail.getShipName());
        shipSheet1.getRow(3).getCell(0).setCellValue("IMO:"+shipDetail.getImo());
        shipSheet1.getRow(4).getCell(0).setCellValue("Type:"+shipDetail.getType());
@@ -285,8 +308,8 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
        shipSheet1.getRow(16).getCell(1).setCellValue("Load:"+shipDetail.getApLoad());
        shipSheet1.getRow(16).getCell(3).setCellValue("A1 r/h:"+shipDetail.getApA1());
        shipSheet1.getRow(17).getCell(1).setCellValue("A2 r/h:"+shipDetail.getApA2());
-       shipSheet1.getRow(18).getCell(3).setCellValue("A3 r/h:"+shipDetail.getApA3());
-       shipSheet1.getRow(19).getCell(1).setCellValue("Other:"+shipDetail.getApOthers());
+       shipSheet1.getRow(17).getCell(3).setCellValue("A3 r/h:"+shipDetail.getApA3());
+       shipSheet1.getRow(18).getCell(1).setCellValue("Other:"+shipDetail.getApOthers());
 
         //Boiler
        shipSheet1.getRow(20).getCell(1).setCellValue("Maker:"+shipDetail.getBoMaker());
@@ -332,15 +355,21 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
        int m=0;
         for(int i=0;i<defects.size();i++){
             float defaultCount=0.00f;
-            float fontCountInline=2.3f;
+
+            float fontCountInline=50f;//一行所占的数量
             String description=defects.get(i).getDescription();
             for (int j=0; j < description.length(); j++) {
                 float ff = getRegex(description.substring(j, j + 1));
                 defaultCount = defaultCount + ff;
             }
             Row row=sheet1.createRow(i+2);
-            float hieght = (int) (defaultCount / fontCountInline);//计算
-            sheet1.getRow(i+2).setHeightInPoints(hieght);
+            float defaultRowHeight=row.getHeightInPoints();//默认行高
+            //float maxHeight=0;
+            float hieght = ((int) (defaultCount / fontCountInline)+1)*defaultRowHeight;//计算
+            if(defaultCount>=fontCountInline){
+                row.setHeightInPoints(hieght);
+            }
+
             //创建一行，并且创建三个单元格
 
             Cell cell0=row.createCell(0);
@@ -376,7 +405,7 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
 
             row.getCell(0).setCellValue(i+1);
             row.getCell(1).setCellValue(defects.get(i).getDescription());
-            row.getCell(4).setCellValue(defects.get(i).getEstimatCost());
+            row.getCell(3).setCellValue(defects.get(i).getEstimatCost());
 
             m=i;
 
@@ -403,6 +432,7 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
 
        HSSFFont font=wb.createFont();
        font.setFontHeight((short)320);
+       font.setColor(HSSFColor.WHITE.index);
        cellStyle1.setFont(font);
 
        //设置单元格自动换行
@@ -533,6 +563,7 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
                cellStyle4.setBorderLeft(HSSFCellStyle.BORDER_THIN);//左边框
                cellStyle4.setBorderTop(HSSFCellStyle.BORDER_THIN);//上边框
                cellStyle4.setBorderRight(HSSFCellStyle.BORDER_THIN);//右边框
+
                if(technicalAppendix.getTitle3()!=null && technicalAppendix.getTitle3()!=""){
                    sheet3.addMergedRegion(new CellRangeAddress(num, num, 0, 1));
                    sheet3.addMergedRegion(new CellRangeAddress(num, num, 2, 3));
@@ -563,11 +594,13 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
 
                //表中内容
                CellStyle cellStyle5=wb.createCellStyle();
-               cellStyle5.setAlignment(CellStyle.ALIGN_CENTER);
+               //cellStyle5.setAlignment(CellStyle.ALIGN_CENTER);
+               cellStyle5.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
                cellStyle5.setBorderBottom(HSSFCellStyle.BORDER_THIN); //下边框
                cellStyle5.setBorderLeft(HSSFCellStyle.BORDER_THIN);//左边框
                cellStyle5.setBorderTop(HSSFCellStyle.BORDER_THIN);//上边框
                cellStyle5.setBorderRight(HSSFCellStyle.BORDER_THIN);//右边框
+               cellStyle5.setWrapText(true);
 
                List<TechnicalAppendixInfo> infos=technicalAppendix.getTechnicalAppendixInfo();
                for(TechnicalAppendixInfo info:infos){
@@ -588,6 +621,21 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
                        row2.getCell(2).setCellValue(info.getTwo());
                        row2.getCell(4).setCellValue(info.getThree());
                    }else{
+                       //设置行高
+                       float defaultCount=0.00f;
+                       float fontCountInline=30f;//一行所占的数量
+                       String description=info.getTwo();
+                       for (int j=0; j < description.length(); j++) {
+                           float ff = getRegex(description.substring(j, j + 1));
+                           defaultCount = defaultCount + ff;
+                       }
+                       float defaultRowHeight=row2.getHeightInPoints();//默认行高
+                       //float maxHeight=0;
+                       float hieght = ((int) (defaultCount / fontCountInline)+1)*defaultRowHeight;//计算
+                       if(defaultCount>=fontCountInline){
+                           row2.setHeightInPoints(hieght);
+                       }
+
                        sheet3.addMergedRegion(new CellRangeAddress(num, num, 0, 2));
                        sheet3.addMergedRegion(new CellRangeAddress(num, num, 3, 4));
                        row2.getCell(0).setCellStyle(cellStyle5);
@@ -597,7 +645,7 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
                        row2.getCell(4).setCellStyle(cellStyle5);
 
                        row2.getCell(0).setCellValue(info.getOne());
-                       row2.getCell(4).setCellValue(info.getTwo());
+                       row2.getCell(3).setCellValue(info.getTwo());
                    }
                    num++;
                }
@@ -689,12 +737,21 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
        cellStyle9.setBorderTop(HSSFCellStyle.BORDER_THIN);//上边框
        cellStyle9.setBorderRight(HSSFCellStyle.BORDER_THIN);//右边框
 
+       //分数水平居中
+       CellStyle cellStyleGrade=wb.createCellStyle();
+       cellStyleGrade.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
+       cellStyleGrade.setAlignment(CellStyle.ALIGN_CENTER);
+       cellStyleGrade.setBorderBottom(HSSFCellStyle.BORDER_THIN); //下边框
+       cellStyleGrade.setBorderLeft(HSSFCellStyle.BORDER_THIN);//左边框
+       cellStyleGrade.setBorderTop(HSSFCellStyle.BORDER_THIN);//上边框
+       cellStyleGrade.setBorderRight(HSSFCellStyle.BORDER_THIN);//右边框
+
        int j=1;
        for(Grade g:grades){
            if(g.getGrade()!=null){
                Row row=sheet5.createRow(j);
                createCell(row);
-               sheet5.addMergedRegion(new CellRangeAddress(j, j, 2, 4));
+               sheet5.addMergedRegion(new CellRangeAddress(j, j, 2, 3));
 
                row.getCell(0).setCellStyle(cellStyle7);
                row.getCell(1).setCellStyle(cellStyle7);
@@ -714,7 +771,7 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
                if(grade.getGrade()!=null){
                    Row row1=sheet5.createRow(j);
                    createCell(row1);
-                   sheet5.addMergedRegion(new CellRangeAddress(j, j, 2, 4));
+                   sheet5.addMergedRegion(new CellRangeAddress(j, j, 2, 3));
 
                    row1.getCell(0).setCellStyle(cellStyle8);
                    row1.getCell(1).setCellStyle(cellStyle8);
@@ -738,10 +795,10 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
                    }
                    Row row2=sheet5.createRow(j);
                    createCell(row2);
-                   sheet5.addMergedRegion(new CellRangeAddress(j, j, 2, 4));
+                   sheet5.addMergedRegion(new CellRangeAddress(j, j, 2, 3));
 
                    row2.getCell(0).setCellStyle(cellStyle9);
-                   row2.getCell(1).setCellStyle(cellStyle9);
+                   row2.getCell(1).setCellStyle(cellStyleGrade);
                    row2.getCell(2).setCellStyle(cellStyle9);
                    row2.getCell(3).setCellStyle(cellStyle9);
                    row2.getCell(4).setCellStyle(cellStyle9);
@@ -790,24 +847,24 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
 
     public  float getRegex(String charStr) {
 
-        if(charStr=="")
+        if(charStr==" ")
         {
-            return 0.5f;
+            return 1;
         }
         // 判断是否为字母或字符
         if (Pattern.compile("^[A-Za-z0-9]+$").matcher(charStr).matches()) {
-            return 0.5f;
+            return 1;
         }
         // 判断是否为全角
 
         if (Pattern.compile("[\u4e00-\u9fa5]+$").matcher(charStr).matches()) {
-            return 1.00f;
+            return 2;
         }
         //全角符号 及中文
         if (Pattern.compile("[^x00-xff]").matcher(charStr).matches()) {
-            return 1.00f;
+            return 2;
         }
-        return 0.5f;
+        return 1;
 
     }
 
@@ -821,17 +878,23 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
         sheet.getRow(count).getCell(0).setCellStyle(cellStyle);
 
         float hieght=0.0f;
+        float fontCountInline=70f;
+        float defaultCount=0.00f;
+        float defaultRowHeight = row.getHeightInPoints();//每一行的高度指定
        if(description!=""){
-           float defaultRowHeight = 14.00f;//每一行的高度指定
-           float defaultCount=0.00f;
-           float fontCountInline=40.0f;
            for (int j=0; j < description.length(); j++) {
                float ff = getRegex(description.substring(j, j + 1));
                defaultCount = defaultCount + ff;
            }
-           hieght = (int) (defaultCount / fontCountInline+1)*defaultRowHeight;//计算
+           hieght = ((int) (defaultCount / fontCountInline)+1)*defaultRowHeight;//计算
+
        }
-       return hieght;
+        if(defaultCount>=fontCountInline){
+            return hieght;
+        }else {
+            return defaultRowHeight;
+        }
+
 
     }
 
@@ -920,8 +983,8 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
             // 封闭OpenOffice服务的进程
             pro.destroy();
             String url= uploadFile2OSS(outFilePath,endpoint,accessId,accessKey,bucket);
-            //inputFile.delete();
-            //outputFile.delete();
+            inputFile.delete();
+            outputFile.delete();
             return url;
         } catch (Exception e) {
             logger.error(e.toString());
@@ -951,7 +1014,7 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
             objectMetadata.setHeader("Pragma", "no-cache");
             objectMetadata.setContentDisposition("inline;filename=" + s+".pdf");
             //上传文件
-            PutObjectResult putResult = ossClient.putObject(bucket, s+".pdf", fin, objectMetadata);
+            PutObjectResult putResult = ossClient.putObject(bucket, "goshipsurveyPDF/"+s+".pdf", fin, objectMetadata);
 
         } catch (IOException e) {
             /*log.error(e.getMessage(), e);*/
@@ -964,7 +1027,7 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
                 e.printStackTrace();
             }
         }
-        String url="http://"+bucket+"."+endpoint+"/"+s+".pdf";
+        String url="http://"+bucket+"."+endpoint+"/goshipsurveyPDF/"+s+".pdf";
         return url;
     }
 
@@ -982,9 +1045,29 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
         }
         int pages=height / totalRowsHeight+1;
 
-        sheet1.getRow(flag).getCell(6).setCellValue(sheetBeforePage+1);
+        sheet1.getRow(flag).getCell(7).setCellValue(sheetBeforePage+1);
 
 
         return pages;
     }
+
+    //获取图片的字节数
+    private static byte[] readInputStream(InputStream inStream) throws Exception{
+        ByteArrayOutputStream outStream = new ByteArrayOutputStream();
+        //创建一个Buffer字符串
+        byte[] buffer = new byte[1024];
+        //每次读取的字符串长度，如果为-1，代表全部读取完毕
+        int len = 0;
+        //使用一个输入流从buffer里把数据读取出来
+        while( (len=inStream.read(buffer)) != -1 ){
+            //用输出流往buffer里写入数据，中间参数代表从哪个位置开始读，len代表读取的长度
+            outStream.write(buffer, 0, len);
+        }
+        //关闭输入流
+        inStream.close();
+        //把outStream里的数据写入内存
+        return outStream.toByteArray();
+    }
+
+
 }
