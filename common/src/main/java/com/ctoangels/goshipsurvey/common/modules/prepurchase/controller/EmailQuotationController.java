@@ -5,6 +5,7 @@ import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Port;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.EmailQuotation;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IEmailQuotationService;
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
+import com.ctoangels.goshipsurvey.common.util.Tools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -40,7 +41,9 @@ public class EmailQuotationController extends BaseController {
         Object objId = session.getAttribute("emailQuotationId");
         if (objId != null) {
             Integer id = (Integer) objId;
-            map.put("quotation", emailQuotationService.selectById(id));
+            EmailQuotation eq = emailQuotationService.selectById(id);
+            eq.setInspectionType(Tools.transferValuesToDes(eq.getInspectionType(), getEmailQuotationTypeDict()));
+            map.put("quotation", eq);
         }
         return "sys/emailQuotation";
     }

@@ -36,6 +36,23 @@ public class PublicShipServiceImpl extends SuperServiceImpl<PublicShipMapper, Pu
     }
 
     @Override
+    public List<PublicShip> getSearchListByColumns(String keyword, String[] columns) {
+        EntityWrapper<PublicShip> ew = new EntityWrapper<>();
+        if (!StringUtils.isEmpty(keyword) && columns != null && columns.length > 0) {
+            String searchParams = "concat(";
+            for (String column : columns) {
+                searchParams += column + ",";
+            }
+            searchParams = searchParams.substring(0, searchParams.length() - 1);
+            searchParams += ") like {0}";
+            ew.addFilter(searchParams, "%" + keyword + "%");
+        }
+        ew.setSqlSelect("id,name,imo,dwt,callsign,type_id");
+        Page p = new Page<>(1, 10);
+        return publicShipMapper.selectPage(p, ew);
+    }
+
+    @Override
     public PublicShip getById(int id) {
         return publicShipMapper.selectById(id);
     }

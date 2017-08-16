@@ -73,6 +73,7 @@ public class BaseController {
 
     private List<Dict> surveyTypeDict = null;
 
+    private List<Dict> emailQuotationTypeDict = null;
 
     @Autowired
     protected ServletContext application;
@@ -189,28 +190,11 @@ public class BaseController {
         return this.surveyTypeDict;
     }
 
-    /**
-     * 将数字值转换为字符描述
-     *
-     * @param values   数字值
-     * @param dictList 字典表
-     * @return
-     */
-    public String transferValuesToDes(String values, List<Dict> dictList) {
-        String result = "";
-        if (values != null && values.trim() != "") {
-            String[] types = values.split(",");
-            for (String type : types) {
-                for (Dict dict : dictList) {
-                    if (dict.getValue().equals(type)) {
-                        result += dict.getDes() + ",";
-                        break;
-                    }
-                }
-            }
-            result = result.substring(0, result.length() - 1);
+    public List<Dict> getEmailQuotationTypeDict() {
+        if (emailQuotationTypeDict == null) {
+            emailQuotationTypeDict = dictService.getListByType("emailQuotationType");
         }
-        return result;
+        return this.emailQuotationTypeDict;
     }
 
     public String transferShipType(String userShipType) {

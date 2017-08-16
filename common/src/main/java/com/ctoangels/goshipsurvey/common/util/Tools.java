@@ -15,6 +15,7 @@
 
 package com.ctoangels.goshipsurvey.common.util;
 
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Dict;
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.RightController;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
 import org.apache.shiro.SecurityUtils;
@@ -26,6 +27,7 @@ import java.security.Security;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -344,6 +346,30 @@ public class Tools {
 
         }
         return id;
+    }
+
+    /**
+     * 将数字值转换为字符描述
+     *
+     * @param values   数字值
+     * @param dictList 字典表
+     * @return
+     */
+    public static String transferValuesToDes(String values, List<Dict> dictList) {
+        String result = "";
+        if (values != null && values.trim() != "") {
+            String[] types = values.split(",");
+            for (String type : types) {
+                for (Dict dict : dictList) {
+                    if (dict.getValue().equals(type)) {
+                        result += dict.getDes() + ",";
+                        break;
+                    }
+                }
+            }
+            result = result.substring(0, result.length() - 1);
+        }
+        return result;
     }
 
 }

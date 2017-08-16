@@ -39,6 +39,18 @@ public class PublicShipController extends BaseController {
         return jsonObject;
     }
 
+    @RequestMapping(value = "/searchListByColumn")
+    @ResponseBody
+    public JSONObject searchListByColumn(@RequestParam(required = false) String keyword, @RequestParam(required = false, value = "columns[]") String[] columns) {
+        JSONObject jsonObject = new JSONObject();
+        List<PublicShip> shipList = publicShipService.getSearchListByColumns(keyword, columns);
+        for (PublicShip ship : shipList) {
+            ship.setShipType(dictService.getDesByTypeAndValue("shipType", String.valueOf(ship.getTypeId())));
+        }
+        jsonObject.put("list", shipList);
+        return jsonObject;
+    }
+
     @RequestMapping(value = "/searchOne")
     @ResponseBody
     public JSONObject one(@RequestParam(required = false) Integer id) {

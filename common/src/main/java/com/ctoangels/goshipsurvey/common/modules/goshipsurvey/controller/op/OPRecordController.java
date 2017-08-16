@@ -14,6 +14,7 @@ import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.ISurveyorI
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.IMessageService;
 import com.ctoangels.goshipsurvey.common.util.Const;
+import com.ctoangels.goshipsurvey.common.util.Tools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -59,8 +60,8 @@ public class OPRecordController extends BaseController {
         ew.orderBy("update_date", false);
         Page<Quotation> page = quotationService.selectPage(getPage(), ew);
         for (Quotation q : page.getRecords()) {
-            q.setInspectionType(transferValuesToDes(q.getInspectionType(), getInspectionTypeDict()));
-            q.setShipType(transferValuesToDes(q.getShipType(), getShipTypeDict()));
+            q.setInspectionType(Tools.transferValuesToDes(q.getInspectionType(), getInspectionTypeDict()));
+            q.setShipType(Tools.transferValuesToDes(q.getShipType(), getShipTypeDict()));
         }
         return jsonPage(page);
     }
@@ -80,8 +81,8 @@ public class OPRecordController extends BaseController {
         List<Inspection> list = inspectionService.getOPRecordList(getCurrentUser().getId(), start, length);
         for (Inspection i : list) {
             Quotation q = i.getQuotation();
-            q.setInspectionType(transferValuesToDes(q.getInspectionType(), getInspectionTypeDict()));
-            q.setShipType(transferValuesToDes(q.getShipType(), getShipTypeDict()));
+            q.setInspectionType(Tools.transferValuesToDes(q.getInspectionType(), getInspectionTypeDict()));
+            q.setShipType(Tools.transferValuesToDes(q.getShipType(), getShipTypeDict()));
             i.setQuotation(q);
         }
         jsonObject.put(Const.DRAW, request.getParameter(Const.DRAW));
