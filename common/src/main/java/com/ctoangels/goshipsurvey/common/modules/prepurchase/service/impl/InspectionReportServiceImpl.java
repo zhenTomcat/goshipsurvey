@@ -4,6 +4,8 @@ import com.aliyun.oss.OSSClient;
 import com.aliyun.oss.model.ObjectMetadata;
 import com.aliyun.oss.model.PutObjectResult;
 import com.artofsolving.jodconverter.DocumentConverter;
+import com.artofsolving.jodconverter.DocumentFamily;
+import com.artofsolving.jodconverter.DocumentFormat;
 import com.artofsolving.jodconverter.openoffice.connection.OpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.connection.SocketOpenOfficeConnection;
 import com.artofsolving.jodconverter.openoffice.converter.OpenOfficeDocumentConverter;
@@ -225,6 +227,7 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
 
 
         File modelExcel=null;
+       String s=getClass().getClassLoader().getResource("REPORT.xls").getFile();
         modelExcel = new File(getClass().getClassLoader().getResource("REPORT.xls").getFile());
         FileInputStream is = null; //文件流
         HSSFWorkbook wb = null;
@@ -243,8 +246,9 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
         //*船舶信息表*//*
         HSSFSheet shipSheet = wb.getSheetAt(0);
         //船舶概要信息
+       shipSheet.getRow(20).getCell(0).setCellValue(shipDetail.getShipName());//船的名称
         shipSheet.getRow(21).getCell(0).setCellValue("IMO:"+shipDetail.getImo());//船的IMO
-        shipSheet.getRow(21).getCell(5).setCellValue(dicts.get(Integer.parseInt(shipDetail.getShipType())-1).getDes());//船舶类型
+        shipSheet.getRow(22).getCell(0).setCellValue(dicts.get(Integer.parseInt(shipDetail.getShipType())-1).getDes());//船舶类型
 
         HSSFSheet shipSheet1 = wb.getSheetAt(2);
        shipSheet1.getRow(2).getCell(0).setCellValue("Ship name:"+shipDetail.getShipName());
@@ -267,29 +271,29 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
        shipSheet1.getRow(19).getCell(0).setCellValue("Inspection data:"+shipDetail.getInspectionDate());
 
         //Main engine
-       shipSheet1.getRow(9).getCell(2).setCellValue(shipDetail.getMeMaker());
-       shipSheet1.getRow(9).getCell(4).setCellValue(shipDetail.getMeType());
-       shipSheet1.getRow(10).getCell(2).setCellValue(shipDetail.getMeMcrKw());
-       shipSheet1.getRow(10).getCell(4).setCellValue(shipDetail.getMeMcrRpm());
-       shipSheet1.getRow(11).getCell(2).setCellValue(shipDetail.getMeRunningHours());
-       shipSheet1.getRow(12).getCell(2).setCellValue(shipDetail.getMeCriticalRpm());
-       shipSheet1.getRow(13).getCell(2).setCellValue(shipDetail.getMeOthers());
+       shipSheet1.getRow(9).getCell(1).setCellValue("Maker:"+shipDetail.getMeMaker());
+       shipSheet1.getRow(9).getCell(3).setCellValue("Type:"+shipDetail.getMeType());
+       shipSheet1.getRow(10).getCell(1).setCellValue("MCR KW:"+shipDetail.getMeMcrKw());
+       shipSheet1.getRow(10).getCell(3).setCellValue("MCR RPM:"+shipDetail.getMeMcrRpm());
+       shipSheet1.getRow(11).getCell(1).setCellValue("Running hours:"+shipDetail.getMeRunningHours());
+       shipSheet1.getRow(12).getCell(1).setCellValue("Critical RPM:"+shipDetail.getMeCriticalRpm());
+       shipSheet1.getRow(13).getCell(1).setCellValue("Other:"+shipDetail.getMeOthers());
 
         //Auxiliary Power
-       shipSheet1.getRow(15).getCell(2).setCellValue(shipDetail.getApMaker());
-       shipSheet1.getRow(15).getCell(4).setCellValue(shipDetail.getApType());
-       shipSheet1.getRow(16).getCell(2).setCellValue(shipDetail.getApLoad());
-       shipSheet1.getRow(16).getCell(4).setCellValue(shipDetail.getApA1());
-       shipSheet1.getRow(17).getCell(2).setCellValue(shipDetail.getApA2());
-       shipSheet1.getRow(18).getCell(2).setCellValue(shipDetail.getApA3());
-       shipSheet1.getRow(19).getCell(2).setCellValue(shipDetail.getApOthers());
+       shipSheet1.getRow(15).getCell(1).setCellValue("Maker:"+shipDetail.getApMaker());
+       shipSheet1.getRow(15).getCell(3).setCellValue("Type:"+shipDetail.getApType());
+       shipSheet1.getRow(16).getCell(1).setCellValue("Load:"+shipDetail.getApLoad());
+       shipSheet1.getRow(16).getCell(3).setCellValue("A1 r/h:"+shipDetail.getApA1());
+       shipSheet1.getRow(17).getCell(1).setCellValue("A2 r/h:"+shipDetail.getApA2());
+       shipSheet1.getRow(18).getCell(3).setCellValue("A3 r/h:"+shipDetail.getApA3());
+       shipSheet1.getRow(19).getCell(1).setCellValue("Other:"+shipDetail.getApOthers());
 
         //Boiler
-       shipSheet1.getRow(20).getCell(2).setCellValue(shipDetail.getBoMaker());
-       shipSheet1.getRow(20).getCell(4).setCellValue(shipDetail.getBoType());
-       shipSheet1.getRow(21).getCell(2).setCellValue(shipDetail.getBoEvaporation());
-       shipSheet1.getRow(21).getCell(2).setCellValue(shipDetail.getBoHeatingArea());
-       shipSheet1.getRow(22).getCell(2).setCellValue(shipDetail.getBoOthers());
+       shipSheet1.getRow(20).getCell(1).setCellValue("Maker:"+shipDetail.getBoMaker());
+       shipSheet1.getRow(20).getCell(3).setCellValue("Type:"+shipDetail.getBoType());
+       shipSheet1.getRow(21).getCell(1).setCellValue("Evaporation:"+shipDetail.getBoEvaporation());
+       shipSheet1.getRow(22).getCell(1).setCellValue("Heating area:"+shipDetail.getBoHeatingArea());
+       shipSheet1.getRow(23).getCell(1).setCellValue("Other:"+shipDetail.getBoOthers());
 
         //*GradeIng*//*
         HSSFSheet sheet = wb.getSheetAt(3);
@@ -344,7 +348,6 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
             Cell cell2=row.createCell(2);
             Cell cell3=row.createCell(3);
             Cell cell4=row.createCell(4);
-            Cell cell5=row.createCell(5);
 
 
             //设置单元格上下添加边框和颜色
@@ -367,10 +370,9 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
             cell2.setCellStyle(cellStyle);
             cell3.setCellStyle(cellStyle);
             cell4.setCellStyle(cellStyle);
-            cell5.setCellStyle(cellStyle);
 
-            sheet1.addMergedRegion(new CellRangeAddress(i+2, i+2, 1, 3));
-            sheet1.addMergedRegion(new CellRangeAddress(i+2, i+2, 4, 5));
+            sheet1.addMergedRegion(new CellRangeAddress(i+2, i+2, 1, 2));
+            sheet1.addMergedRegion(new CellRangeAddress(i+2, i+2, 3, 4));
 
             row.getCell(0).setCellValue(i+1);
             row.getCell(1).setCellValue(defects.get(i).getDescription());
@@ -514,7 +516,7 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
                Row row=sheet3.createRow(num);
 
                createCell(row);
-               sheet3.addMergedRegion(new CellRangeAddress(num, num, 0, 5));
+               sheet3.addMergedRegion(new CellRangeAddress(num, num, 0, 4));
                row.getCell(0).setCellStyle(cellStyle3);
                row.getCell(0).setCellValue(technicalAppendix.getCatagory());
 
@@ -533,31 +535,29 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
                cellStyle4.setBorderRight(HSSFCellStyle.BORDER_THIN);//右边框
                if(technicalAppendix.getTitle3()!=null && technicalAppendix.getTitle3()!=""){
                    sheet3.addMergedRegion(new CellRangeAddress(num, num, 0, 1));
-                   sheet3.addMergedRegion(new CellRangeAddress(num, num, 2, 4));
+                   sheet3.addMergedRegion(new CellRangeAddress(num, num, 2, 3));
                    row1.getCell(0).setCellValue(technicalAppendix.getTitle1());
                    row1.getCell(2).setCellValue(technicalAppendix.getTitle2());
-                   row1.getCell(5).setCellValue(technicalAppendix.getTitle3());
+                   row1.getCell(4).setCellValue(technicalAppendix.getTitle3());
 
                    row1.getCell(0).setCellStyle(cellStyle4);
                    row1.getCell(1).setCellStyle(cellStyle4);
                    row1.getCell(2).setCellStyle(cellStyle4);
                    row1.getCell(3).setCellStyle(cellStyle4);
                    row1.getCell(4).setCellStyle(cellStyle4);
-                   row1.getCell(5).setCellStyle(cellStyle4);
 
                }else {
-                   sheet3.addMergedRegion(new CellRangeAddress(num, num, 0, 3));
-                   sheet3.addMergedRegion(new CellRangeAddress(num, num, 4, 5));
+                   sheet3.addMergedRegion(new CellRangeAddress(num, num, 0, 2));
+                   sheet3.addMergedRegion(new CellRangeAddress(num, num, 3, 4));
 
                    row1.getCell(0).setCellValue(technicalAppendix.getTitle1());
-                   row1.getCell(4).setCellValue(technicalAppendix.getTitle2());
+                   row1.getCell(3).setCellValue(technicalAppendix.getTitle2());
 
                    row1.getCell(0).setCellStyle(cellStyle4);
                    row1.getCell(1).setCellStyle(cellStyle4);
                    row1.getCell(2).setCellStyle(cellStyle4);
                    row1.getCell(3).setCellStyle(cellStyle4);
                    row1.getCell(4).setCellStyle(cellStyle4);
-                   row1.getCell(5).setCellStyle(cellStyle4);
                }
                num++;
 
@@ -576,27 +576,25 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
 
                    if(technicalAppendix.getTitle3()!=null && technicalAppendix.getTitle3()!=""){
                        sheet3.addMergedRegion(new CellRangeAddress(num, num, 0, 1));
-                       sheet3.addMergedRegion(new CellRangeAddress(num, num, 2, 4));
+                       sheet3.addMergedRegion(new CellRangeAddress(num, num, 2, 3));
 
                        row2.getCell(0).setCellStyle(cellStyle5);
                        row2.getCell(1).setCellStyle(cellStyle5);
                        row2.getCell(2).setCellStyle(cellStyle5);
                        row2.getCell(3).setCellStyle(cellStyle5);
                        row2.getCell(4).setCellStyle(cellStyle5);
-                       row2.getCell(5).setCellStyle(cellStyle5);
 
                        row2.getCell(0).setCellValue(info.getOne());
                        row2.getCell(2).setCellValue(info.getTwo());
-                       row2.getCell(5).setCellValue(info.getThree());
+                       row2.getCell(4).setCellValue(info.getThree());
                    }else{
-                       sheet3.addMergedRegion(new CellRangeAddress(num, num, 0, 3));
-                       sheet3.addMergedRegion(new CellRangeAddress(num, num, 4, 5));
+                       sheet3.addMergedRegion(new CellRangeAddress(num, num, 0, 2));
+                       sheet3.addMergedRegion(new CellRangeAddress(num, num, 3, 4));
                        row2.getCell(0).setCellStyle(cellStyle5);
                        row2.getCell(1).setCellStyle(cellStyle5);
                        row2.getCell(2).setCellStyle(cellStyle5);
                        row2.getCell(3).setCellStyle(cellStyle5);
                        row2.getCell(4).setCellStyle(cellStyle5);
-                       row2.getCell(5).setCellStyle(cellStyle5);
 
                        row2.getCell(0).setCellValue(info.getOne());
                        row2.getCell(4).setCellValue(info.getTwo());
@@ -633,13 +631,12 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
                Row row=sheet4.createRow(i);
                createCell(row);
                sheet4.addMergedRegion(new CellRangeAddress(i, i, 0, 3));
-               sheet4.addMergedRegion(new CellRangeAddress(i, i, 4, 5));
+               //sheet4.addMergedRegion(new CellRangeAddress(i, i, 4, 5));
                row.getCell(0).setCellStyle(cellStyle6);
                row.getCell(1).setCellStyle(cellStyle6);
                row.getCell(2).setCellStyle(cellStyle6);
                row.getCell(3).setCellStyle(cellStyle6);
                row.getCell(4).setCellStyle(cellStyle6);
-               row.getCell(5).setCellStyle(cellStyle6);
                row.getCell(0).setCellValue(d.getTitle());
                row.getCell(4).setCellValue("Exit");
                i++;
@@ -704,7 +701,7 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
                row.getCell(2).setCellStyle(cellStyle7);
                row.getCell(3).setCellStyle(cellStyle7);
                row.getCell(4).setCellStyle(cellStyle7);
-               row.getCell(5).setCellStyle(cellStyle7);
+               //row.getCell(5).setCellStyle(cellStyle7);
 
                row.getCell(0).setCellValue(g.getItem());
                row.getCell(1).setCellValue(g.getGrade());
@@ -724,7 +721,7 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
                    row1.getCell(2).setCellStyle(cellStyle8);
                    row1.getCell(3).setCellStyle(cellStyle8);
                    row1.getCell(4).setCellStyle(cellStyle8);
-                   row1.getCell(5).setCellStyle(cellStyle8);
+                   //row1.getCell(5).setCellStyle(cellStyle8);
 
                    row1.getCell(0).setCellValue(grade.getItem());
                    row1.getCell(1).setCellValue(grade.getGrade());
@@ -748,14 +745,14 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
                    row2.getCell(2).setCellStyle(cellStyle9);
                    row2.getCell(3).setCellStyle(cellStyle9);
                    row2.getCell(4).setCellStyle(cellStyle9);
-                   row2.getCell(5).setCellStyle(cellStyle9);
+                   //row2.getCell(5).setCellStyle(cellStyle9);
                    row2.getCell(0).setCellValue(gr.getItem());
                    row2.getCell(1).setCellValue(gr.getGrade());
                    if(gr.getRemark()!=null && gr.getRemark()!=""){
                        row2.getCell(2).setCellValue(gr.getRemark());
                    }
                    if(gr.getFileName()!=null && gr.getFileName()!=""){
-                       row2.getCell(5).setCellValue("Exit");
+                       row2.getCell(4).setCellValue("Exit");
                    }
                    j++;
                }
@@ -768,19 +765,23 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
 
 
        // 第六步，将文件存到指定位置
+       String url=null;
         try {
-            FileOutputStream fout = new FileOutputStream("luzhen" + ".xls");
+            String basePath = ContextLoader.getCurrentWebApplicationContext().getServletContext().getRealPath("/");
+            String path=basePath.substring(0,basePath.lastIndexOf("admin"))+"admin";
+            File file=new File(basePath+"luzhen.xls");
+            FileOutputStream fout = new FileOutputStream(file);
             wb.write(fout);
             fout.close();
+
+            path.replace("\"","\"\"");
+            url=xlsToPdf(basePath,basePath,endpoint,accessId,accessKey,bucket);
+
         } catch (Exception e) {
             logger.info(e.toString());
             e.printStackTrace();
         }
-        String basePath = ContextLoader.getCurrentWebApplicationContext().getServletContext().getRealPath("/");
-        String path=basePath.substring(0,basePath.lastIndexOf("admin"))+"admin";
-        path.replace("\"","\"\"");
 
-       String url=xlsToPdf(path,path,endpoint,accessId,accessKey,bucket);
        purchaseInspection.setReportUrl(url);
        purchaseInspectionMapper.updateById(purchaseInspection);
 
@@ -816,9 +817,7 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
         Cell cell1=row.createCell(1);
         Cell cell2=row.createCell(2);
         Cell cell3=row.createCell(3);
-        Cell cell4=row.createCell(4);
-        Cell cell5=row.createCell(5);
-        sheet.addMergedRegion(new CellRangeAddress(count, count, 0, 5));
+        sheet.addMergedRegion(new CellRangeAddress(count, count, 0, 3));
         sheet.getRow(count).getCell(0).setCellStyle(cellStyle);
 
         float hieght=0.0f;
@@ -859,22 +858,21 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
         row.createCell(2);
         row.createCell(3);
         row.createCell(4);
-        row.createCell(5);
     }
 
 
     //excel转成pdf
     public  String xlsToPdf(String inFilePath,String outFilePath,String endpoint,String accessId,String accessKey,String bucket){
-        inFilePath+="\\luzhen.xls";
+        inFilePath+="luzhen.xls";
 
-        outFilePath+="\\REPORT.pdf";
+        outFilePath+="REPORT.pdf";
         //String OpenOffice_HOME = "D:/Program Files/OpenOffice.org 3";// 这里是OpenOffice的安装目录,C:\Program Files (x86)\OpenOffice 4
         String OpenOffice_HOME="";
         String osName = System.getProperty("os.name");
         if (Pattern.matches("Windows.*", osName)) {
             OpenOffice_HOME = "C:\\Program Files (x86)\\OpenOffice 4\\program\\";
         } else {
-            OpenOffice_HOME = "\\opt\\openoffice4\\program\\";
+            OpenOffice_HOME = "/opt/openoffice4/program/";
         }
 
         Process pro = null;
@@ -882,6 +880,20 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
             File inputFile = new File(inFilePath);
             // 如果目标路径不存在, 则新建该路径
             File outputFile = new File(outFilePath);
+            if(!inputFile.exists()){
+                try{
+                    inputFile.createNewFile();
+                }catch (Exception e){
+                }
+            }
+            if(!outputFile.exists()){
+                try{
+                    outputFile.createNewFile();
+                }catch (Exception e){
+                }
+            }
+
+
             // 启动OpenOffice的服务
             String[] command = {OpenOffice_HOME+"soffice","-headless -accept=\"socket,host=127.0.0.1,port=8100;urp;\" -nofirststartwizard"};
             pro = Runtime.getRuntime().exec(command);
@@ -892,7 +904,15 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
 
             // convert
             DocumentConverter converter = new OpenOfficeDocumentConverter(connection);
-            converter.convert(inputFile, outputFile);
+            DocumentFormat pdf = new DocumentFormat("Portable Document Format", "application/pdf", "pdf");
+            pdf.setExportFilter(DocumentFamily.DRAWING, "draw_pdf_Export");
+            pdf.setExportFilter(DocumentFamily.PRESENTATION, "impress_pdf_Export");
+            pdf.setExportFilter(DocumentFamily.SPREADSHEET, "calc_pdf_Export");
+            pdf.setExportFilter(DocumentFamily.TEXT, "writer_pdf_Export");
+
+            DocumentFormat xls = new DocumentFormat("Microsoft Excel", DocumentFamily.SPREADSHEET, "application/vnd.ms-excel", "xls");
+            xls.setExportFilter(DocumentFamily.SPREADSHEET, "MS Excel 97");
+            converter.convert(inputFile,xls, outputFile,pdf);
             //converter.convert(inputFile,xml,outputFile,pdf);
 
             // close the connection
@@ -900,6 +920,8 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
             // 封闭OpenOffice服务的进程
             pro.destroy();
             String url= uploadFile2OSS(outFilePath,endpoint,accessId,accessKey,bucket);
+            //inputFile.delete();
+            //outputFile.delete();
             return url;
         } catch (Exception e) {
             logger.error(e.toString());
