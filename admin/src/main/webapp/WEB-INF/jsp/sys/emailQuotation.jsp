@@ -170,12 +170,12 @@
                         </a>
                     </li>
                     <li>
-                        <a href="about_us.html">
+                        <a href="/static/html/reports.html">
                             Our reports
                         </a>
                     </li>
                     <li>
-                        <a href="disclaimer.html">
+                        <a href="/static/html/surveyors.html">
                             Our surveyors
                         </a>
                     </li>
@@ -250,7 +250,7 @@
                         <p>Aoyang TC Email:
                             <a href="mailto:service@goshipyard.com" style="color:#3598DC;" class="">service@goshipgroup.com</a>
                         <p>
-                        <p>Copyright &copy; 1998 - 2017 goshipyard.All Rights Reserved.</p>
+                        <p>Copyright &copy; 2016 - 2017 goshipyard.All Rights Reserved.</p>
                     </div>
                 </div>
             </div>

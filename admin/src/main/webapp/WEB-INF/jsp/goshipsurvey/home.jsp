@@ -841,6 +841,7 @@
             }
             var point = new BMap.Point(cityList[i].longitude, cityList[i].latitude);
             mark[cityList[i].id] = new BMap.Marker(point);
+
             map.addOverlay(mark[cityList[i].id]);
         }
     };
@@ -884,7 +885,7 @@
         map.addOverlay(markjing);
         map.removeOverlay(mark[e.id]);
         var point = new BMap.Point(e.longitude, e.latitude);
-        map.centerAndZoom(point, 6);
+        map.centerAndZoom(point, 5);
         var label = new BMap.Label(e.nameCN, {
             offset: new BMap.Size(10, -25)
         });
