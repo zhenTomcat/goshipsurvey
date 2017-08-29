@@ -164,11 +164,11 @@
                             Home
                         </a>
                     </li>
-                    <li>
-                        <a href="index.html">
-                            Quotation
-                        </a>
-                    </li>
+                    <%--<li>--%>
+                        <%--<a href="/">--%>
+                            <%--Quotation--%>
+                        <%--</a>--%>
+                    <%--</li>--%>
                     <li>
                         <a href="/static/html/reports.html">
                             Our reports

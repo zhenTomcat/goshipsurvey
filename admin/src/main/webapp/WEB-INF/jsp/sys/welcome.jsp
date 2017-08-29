@@ -198,11 +198,11 @@
                             Home
                         </a>
                     </li>
-                    <li>
-                        <a href="javascript:void(0)">
-                            Quotation
-                        </a>
-                    </li>
+                    <%--<li>--%>
+                        <%--<a href="javascript:void(0)">--%>
+                            <%--Quotation--%>
+                        <%--</a>--%>
+                    <%--</li>--%>
                     <li>
                         <a href="/static/html/reports.html">
                             Our reports
