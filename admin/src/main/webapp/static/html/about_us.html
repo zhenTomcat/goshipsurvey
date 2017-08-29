@@ -61,15 +61,7 @@
 
     <style>
         .header {
-            background: -webkit-linear-gradient(#006d9c, #005069);
-            /* Safari 5.1 - 6.0 */
-            background: -o-linear-gradient(#006d9c, #005069);
-            /* Opera 11.1 - 12.0 */
-            background: -moz-linear-gradient(#006d9c, #005069);
-            /* Firefox 3.6 - 15 */
-            background: linear-gradient(#006d9c, #005069);
-            /* 标准的语法 */
-            border-bottom: none;
+            background-color: #f3f2f1;
         }
 
         .header .topbar ul.loginbar > li > a {
@@ -84,27 +76,23 @@
             color: #eee;
         }
 
-        .content-boxes-v6:hover i {
-            background: #4B77BE;
+        .header .logo {
+            height: auto;
         }
 
-        .content-boxes-v6:hover i:after {
-            border-color: #4B77BE;
+        .header .logo img {
+            margin: 0;
         }
 
-        .tag-box-v2 {
-            border-left: solid 2px #3598DC;
+        ul.nav li a {
+            color: white;
+            text-decoration: underline;
         }
 
-        .header .navbar-nav > li > a:hover,
-        .header .navbar-nav > .active > a {
-            bottom: -2px;
-            position: relative;
-            border-bottom: solid 0px;
-        }
-
-        .header .navbar-nav > li:hover > a {
-            color: black;
+        ul.navbar-nav > li > a:hover,
+        ul.navbar-nav > .active > a {
+            color: #264071;
+            background-color: white;
         }
 
         .big-first-letter:first-letter {
@@ -133,16 +121,15 @@
 <div class="wrapper page-option-v1">
     <!--=== Header ===-->
     <div class="header">
-        <div class="container">
+        <div class="container" style="margin-bottom: 0;">
             <!-- Logo -->
-            <a class="logo" href="index.html">
-                <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/img/banner_transparent.png"
+            <a class="logo" href="/">
+                <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/icon/banner.png" style="height: 70px;"
                      alt="Logo">
             </a>
             <!-- End Logo -->
 
-            <h1 style="color:white;margin:35px 0;font-size:60px">GOSHIP GROUP</h1>
-
+            <h1 style="color:#0004fd;margin:0;font-size:60px;line-height: 1;">GOSHIPSURVEY</h1>
 
             <!-- Toggle get grouped for better mobile display -->
             <button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -152,53 +139,98 @@
             </button>
             <!-- End Toggle -->
 
-
         </div>
+
         <!--/end container-->
     </div>
     <!--=== End Header ===-->
 
-    <!--=== Slider ===-->
-    <div class="tp-banner-container" style="height:200px">
-        <div class="tp-banner">
-            <ul>
-                <li class="revolution-mch-1" data-transition="fade" data-slotamount="5" data-masterspeed="1000"
-                    data-title="Slide 1">
-                    <img src="http://shipinfo.img-cn-shanghai.aliyuncs.com/unify/assets/img/sliders/ship1.jpg@x200-5rc"
-                         alt="darkblurbg" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-                    <div class="tp-caption re-title-v1 sft start"
-                         data-x="center"
-                         data-hoffset="0"
-                         data-y="100"
-                         data-speed="1500"
-                         data-start="500"
-                         data-easing="Back.easeInOut"
-                         data-endeasing="Power1.easeIn"
-                         data-endspeed="300">
-                        About us
-                    </div>
-                </li>
-            </ul>
-            <div class="tp-bannertimer tp-bottom"></div>
-        </div>
-    </div>
-    <!--=== End Slider ===-->
     <!--=== Service Block ===-->
-    <div class="container content-sm box-shadow" id="service-choose">
-        <div class="blog margin-bottom-40">
-            <p style="font-size: 20px;text-align: justify;">Nowadays, the well established website platforms, such as Amazon and Alibaba, are capable of bringing products from almost every corner of the world to your doorstep. As a consequence redefining and reshaping our lifestyle. The shipping industry, with its long history of particular processes and practices, has generally remained immune to the trend towards online transactions. Nevertheless, we firmly believe that such a step would be beneficial for all of us and in fact the journey towards modernisation is already on its way. Embracing this, the aim of GOSHIP GROUP is to provide a platform that is able to furnish each interested party with a full range of ship survey & ship repair & ship supply resources and services in a more transparent and efficient manner.  </p>
-
-            <p style="font-size: 20px;text-align: justify;">GOSHIP GROUP was founded back in Jan 2016 and is now operating two websites dedicated for ship repair and ship survey services, which is supported by the extensive network of experienced and qualified maritime professionals, including ship inspectors and surveyors across the globe to accommodate our fast expanding client base. While we are in the progress of setting up service hub located in most of the key shipping ports, our established network is continuously monitored by our technical staff in accordance with standards and our own high quality and performance metrics to ensure the service rendered lives up to the expectation our our clients. Since her establishment, GOSHIP GROUP already provided survey services for lots of major Chinese shipping companies, such as FOSCO, Sinotrans and other major Opertators or Charterers in China and Singapore area.   </p>
-
-            <p style="font-size: 20px;text-align: justify;">GOSHIP GROUP is experienced with wide range types of ships, which includes dry bulk carriers, MPP, PCTC, container vessels, reefer vessels, product tankers, chemical tankers, LPG, LNG and offshore vessels.  </p>
-
-            <p style="font-size: 20px;text-align: justify;">As of now, GOSHIP GROUP consists of an extensive range of experts from other parts of the industry that includes ship repair yards, ship management, ship supervision, shipbroker, agency, financial leasing, insurance and maritime law. With so much of experience available, the clients of GOSHIP GROUP can be confident of receiving the complete package service, which can be provided to them 24/7. GOSHIP GROUP sincerely invite you to join this pioneering move into a new and more '21st century' industry.  </p>
-
-
-
+    <!--=== Service Block ===-->
+    <div class="container-fluid content-sm box-shadow" style="background-color: #264071;">
+        <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
+            <div class="container">
+                <ul class="nav navbar-nav" style="margin-top: -60px;float: right;color: white;">
+                    <li>
+                        <a href="/">
+                            Home
+                        </a>
+                    </li>
+                    <li>
+                        <a href="javascript:void(0)">
+                            Quotation
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/static/html/reports.html">
+                            Our reports
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/static/html/surveyors.html">
+                            Our surveyors
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/static/html/about_us.html">
+                            About us
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
+
+        <h1 style="margin-left: 10%;margin-top: -30px;color: white;">About us</h1>
+
+
+        <div class="container box-shadow">
+            <div class="blog ">
+                <p style="font-size: 20px;text-align: justify;">Nowadays, the well established website platforms, such
+                    as
+                    Amazon and Alibaba, are capable of bringing products from almost every corner of the world to your
+                    doorstep. As a consequence redefining and reshaping our lifestyle. The shipping industry, with its
+                    long
+                    history of particular processes and practices, has generally remained immune to the trend towards
+                    online
+                    transactions. Nevertheless, we firmly believe that such a step would be beneficial for all of us and
+                    in
+                    fact the journey towards modernisation is already on its way. Embracing this, the aim of GOSHIP
+                    GROUP is
+                    to provide a platform that is able to furnish each interested party with a full range of ship survey
+                    &
+                    ship repair & ship supply resources and services in a more transparent and efficient manner. </p>
+
+                <p style="font-size: 20px;text-align: justify;">GOSHIP GROUP was founded back in Jan 2016 and is now
+                    operating two websites dedicated for ship repair and ship survey services, which is supported by the
+                    extensive network of experienced and qualified maritime professionals, including ship inspectors and
+                    surveyors across the globe to accommodate our fast expanding client base. While we are in the
+                    progress
+                    of setting up service hub located in most of the key shipping ports, our established network is
+                    continuously monitored by our technical staff in accordance with standards and our own high quality
+                    and
+                    performance metrics to ensure the service rendered lives up to the expectation our our clients.
+                    Since
+                    her establishment, GOSHIP GROUP already provided survey services for lots of major Chinese shipping
+                    companies, such as FOSCO, Sinotrans and other major Opertators or Charterers in China and Singapore
+                    area. </p>
+
+                <p style="font-size: 20px;text-align: justify;">GOSHIP GROUP is experienced with wide range types of
+                    ships,
+                    which includes dry bulk carriers, MPP, PCTC, container vessels, reefer vessels, product tankers,
+                    chemical tankers, LPG, LNG and offshore vessels. </p>
+
+                <p style="font-size: 20px;text-align: justify;">As of now, GOSHIP GROUP consists of an extensive range
+                    of
+                    experts from other parts of the industry that includes ship repair yards, ship management, ship
+                    supervision, shipbroker, agency, financial leasing, insurance and maritime law. With so much of
+                    experience available, the clients of GOSHIP GROUP can be confident of receiving the complete package
+                    service, which can be provided to them 24/7. GOSHIP GROUP sincerely invite you to join this
+                    pioneering
+                    move into a new and more '21st century' industry. </p>
+            </div>
+        </div>
+        <!--/container-->
     </div>
-    <!--/container-->
     <!--=== End Service Block ===-->
 
     <!--=== Footer Version 1 ===-->
@@ -206,19 +238,45 @@
         <div class="copyright">
             <div class="container">
                 <div class="col-md-3 md-margin-bottom-40">
-                    <div class="headline"><h2>Quickly Links</h2></div>
+                    <div class="headline">
+                        <h2>Quickly Links</h2></div>
                     <ul class="list-unstyled link-list">
-                        <li><a href="http://a.goshipyard.com">goshipyard</a><i class="fa fa-angle-right"></i></li>
-                        <li><a href="http://a.goshipyard.com:8899/admin">goshiprepair</a><i
+                        <li>
+                            <a href="http://a.goshipyard.com">goshipyard</a><i class="fa fa-angle-right"></i></li>
+                        <li>
+                            <a href="http://a.goshipyard.com:8899/admin">goshiprepair</a><i
                                 class="fa fa-angle-right"></i></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 md-margin-bottom-40">
+                    <div class="headline">
+                        <h2>Quickly Links</h2></div>
+                    <ul class="list-unstyled link-list">
+                        <li>
+                            <a href="/static/html/download_center.html">Download Center</a><i
+                                class="fa fa-angle-right"></i></li>
+                        <li>
+                            <a href="/static/html/about_us.html">About Us</a><i class="fa fa-angle-right"></i></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 md-margin-bottom-40">
+                    <div class="headline">
+                        <h2>Login or Register</h2></div>
+                    <ul class="list-unstyled">
+                        <li style="float: left;margin-right: 10px;">
+                            <a class="btn-u btn-lg" href="/login_toLogin">Login</a>
+                        </li>
+                        <li style="float: left;margin-right: 10px;">
+                            <a class="btn-u btn-u-blue btn-lg" href="javascript:void(0)">Register</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="row">
                     <div class="col-md-12" style="text-align: center;">
                         <p>Aoyang TC Email:
-                            <a href="mailto:service@goshipyard.com" style="color:#3598DC;" class="">service@goshipyard.com</a>
+                            <a href="mailto:service@goshipyard.com" style="color:#3598DC;" class="">service@goshipgroup.com</a>
                         <p>
-                        <p>Copyright &copy; 1998 - 2017 goshipyard.All Rights Reserved.</p>
+                        <p>Copyright &copy; 2016 - 2017 goshipyard.All Rights Reserved.</p>
                     </div>
                 </div>
             </div>

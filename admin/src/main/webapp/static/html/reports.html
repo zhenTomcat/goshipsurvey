@@ -1,12 +1,3 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
-<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
-<%@ taglib prefix="go" uri="http://www.ctoangels.com/jsp/jstl/common" %>
-<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-<%
-    String path = request.getContextPath();
-    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
-%>
 <!DOCTYPE html>
 <!--[if IE 8]>
 <html lang="en" class="ie8"> <![endif]-->
@@ -17,7 +8,7 @@
 <!--<![endif]-->
 
 <head>
-    <title>主页</title>
+    <title>Reports</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -89,6 +80,14 @@
             color: #eee;
         }
 
+        .header .logo {
+            height: auto;
+        }
+
+        .header .logo img {
+            margin: 0;
+        }
+
         ul.nav li a {
             color: white;
             text-decoration: underline;
@@ -114,48 +113,6 @@
         #quotation-form label {
             color: black;
         }
-
-        .header .logo {
-            height: auto;
-        }
-
-        .header .logo img {
-            margin: 0;
-        }
-
-        .help-block {
-            margin-top: 0;
-            margin-bottom: 0;
-        }
-
-        /*html, body {*/
-        /*margin: 0;*/
-        /*min-height: 100%;*/
-        /*height: 100%;*/
-        /*}*/
-
-        /*.wrapper {*/
-        /*position: relative;*/
-        /*min-height: calc(100% - 250px);*/
-        /*padding-bottom: 250px;*/
-        /*background-color: #264071;*/
-        /*}*/
-
-        /*.container-fluid {*/
-        /*min-height: calc(100% - 70px);*/
-        /*}*/
-
-        /*.footer-v1 {*/
-        /*height: 225px;*/
-        /*width: 100%;*/
-        /*position: absolute;*/
-        /*bottom: 0;*/
-        /*}*/
-
-        /*.footer-v1 .copyright {*/
-        /*padding: 0;*/
-        /*height: 225px;*/
-        /*}*/
     </style>
 </head>
 
@@ -222,72 +179,169 @@
             </div>
         </div>
 
-        <h1 style="margin-left: 10%;margin-top: -30px;color: white;">Best service though internet</h1>
+        <h1 style="margin-left: 10%;margin-top: -30px;color: white;">Sample Reports</h1>
 
-        <div class="row">
-            <form class="form-horizontal" id="quotation-form" method="post" action="emailQuotation/addEmailQuotation"
-                  role="form">
-                <div class="form-group">
-                    <label class="control-label col-md-3"><h1>Quotation</h1></label>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-3" for="shipName" style="font-weight: 100;">Enter ship
-                        name</label>
-                    <div class="col-md-6">
-                        <input class="form-control" name="shipName" id="shipName"/>
+        <!--=== Content Part ===-->
+        <div class="container content">
+            <div class="row portfolio-item ">
+                <!--Condition Survey -->
+                <div class="col-md-6">
+                    <div class="carousel slide carousel-v1" id="condition-survey">
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img alt=""
+                                     src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/samplereportimg/ConditionSurvey/0.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
+                                <div class="carousel-caption">
+                                    <p>Condition Survey</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img alt=""
+                                     src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/samplereportimg/ConditionSurvey/1.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
+                                <div class="carousel-caption">
+                                    <p>Condition Survey</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img alt=""
+                                     src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/samplereportimg/ConditionSurvey/2.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
+                                <div class="carousel-caption">
+                                    <p>Condition Survey</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img alt=""
+                                     src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/samplereportimg/ConditionSurvey/3.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
+                                <div class="carousel-caption">
+                                    <p>Condition Survey</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-arrow">
+                            <a data-slide="prev" href="portfolio_old_item.html#condition-survey"
+                               class="left carousel-control">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a data-slide="next" href="portfolio_old_item.html#condition-survey"
+                               class="right carousel-control">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </div>
                     </div>
-                    <span class="help-block"></span>
+                    <h3 style="text-align: center" class="color-light">Condition Survey
+                        <a target="_blank"
+                           href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/SampleReports/ConditionSurvey.pdf">view
+                            more</a></h3>
                 </div>
-                <div class="form-group">
-                    <label class="control-label col-md-3" for="imo" style="font-weight: 100;">Enter IMO number</label>
-                    <div class="col-md-6">
-                        <input class="form-control" name="imo" id="imo"/>
-                    </div>
-                    <span class="help-block"></span>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-3" style="font-weight: 100;">Select
-                        inspection type</label>
-                    <div class="col-md-6">
-                        <c:forEach items="${emailQuotationTypeDict}" var="dict">
-                            <label class="checkbox-inline"><input type="checkbox" name="inspectionType"
-                                                                  value="${dict.value}"/>${dict.des}</label>
-                        </c:forEach>
-                    </div>
-                    <span class="help-block"></span>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-3" for="port" style="font-weight: 100;">Enter port</label>
-                    <div class="col-md-6">
-                        <input class="form-control" name="port" id="port"/>
-                    </div>
-                    <span class="help-block"></span>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-3" style="font-weight: 100;">Select date range</label>
-                    <div class="input-group input-large date-picker input-daterange col-md-6"
-                         data-date-format="mm/dd/yyyy" style="padding: 0 15px;float: left;">
-                        <input type="text" class="form-control" name="startDate" id="startDate" autocomplete="false">
-                        <span class="input-group-addon"> to </span>
-                        <input type="text" class="form-control" name="endDate" id="endDate" autocomplete="false">
-                    </div>
-                    <span class="help-block"></span>
-                </div>
+                <!-- End Condition Survey -->
 
-                <div class="form-group">
-                    <label class="control-label col-md-3" for="email" style="font-weight: 100;">Enter your email</label>
-                    <div class="col-md-6">
-                        <input class="form-control" name="email" id="email"/>
+                <!--On Hire -->
+                <div class="col-md-6">
+                    <div class="carousel slide carousel-v1" id="on-hire">
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img alt=""
+                                     src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/samplereportimg/OnHire/0.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
+                                <div class="carousel-caption">
+                                    <p>On Hire</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img alt=""
+                                     src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/samplereportimg/OnHire/1.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
+                                <div class="carousel-caption">
+                                    <p>On Hire</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img alt=""
+                                     src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/samplereportimg/OnHire/2.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
+                                <div class="carousel-caption">
+                                    <p>On Hire</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img alt=""
+                                     src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/samplereportimg/OnHire/3.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
+                                <div class="carousel-caption">
+                                    <p>On Hire</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-arrow">
+                            <a data-slide="prev" href="portfolio_old_item.html#on-hire"
+                               class="left carousel-control">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a data-slide="next" href="portfolio_old_item.html#on-hire"
+                               class="right carousel-control">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </div>
                     </div>
-                    <span class="help-block"></span>
+                    <h3 style="text-align: center" class="color-light">On Hire
+                        <a target="_blank"
+                           href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/SampleReports/OnHire.pdf">view
+                            more</a></h3>
                 </div>
-                <button class="btn" data-loading-text="Loading..." id="submitBtn"
-                        style="background-color: #264071;color: white;display: block;margin: 0 auto;width: 150px;">GET
-                    QUOTATION
-                </button>
-            </form>
+                <!-- End On Hire -->
 
-        </div>
+                <!--Off Hire -->
+                <div class="col-md-6">
+                    <div class="carousel slide carousel-v1" id="off-hire">
+                        <div class="carousel-inner">
+                            <div class="item active">
+                                <img alt=""
+                                     src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/samplereportimg/OffHire/0.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
+                                <div class="carousel-caption">
+                                    <p>Off Hire</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img alt=""
+                                     src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/samplereportimg/OffHire/1.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
+                                <div class="carousel-caption">
+                                    <p>Off Hire</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img alt=""
+                                     src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/samplereportimg/OffHire/2.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
+                                <div class="carousel-caption">
+                                    <p>Off Hire</p>
+                                </div>
+                            </div>
+                            <div class="item">
+                                <img alt=""
+                                     src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/samplereportimg/OffHire/3.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
+                                <div class="carousel-caption">
+                                    <p>Off Hire</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="carousel-arrow">
+                            <a data-slide="prev" href="portfolio_old_item.html#off-hire"
+                               class="left carousel-control">
+                                <i class="fa fa-angle-left"></i>
+                            </a>
+                            <a data-slide="next" href="portfolio_old_item.html#off-hire"
+                               class="right carousel-control">
+                                <i class="fa fa-angle-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                    <h3 style="text-align: center" class="color-light">Off Hire
+                        <a target="_blank"
+                           href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/SampleReports/OffHire.pdf">view
+                            more</a></h3>
+                </div>
+                <!-- End Off Hire -->
+
+            </div><!--/row-->
+            <div class="clearfix"></div>
+
+        </div><!--/container-->
+        <!--=== End Content Part ===-->
         <!--/row-->
     </div>
     <!--/container-->
@@ -313,10 +367,10 @@
                         <h2>Quickly Links</h2></div>
                     <ul class="list-unstyled link-list">
                         <li>
-                            <a href="static/html/download_center.html">Download Center</a><i
+                            <a href="/static/html/download_center.html">Download Center</a><i
                                 class="fa fa-angle-right"></i></li>
                         <li>
-                            <a href="static/html/about_us.html">About Us</a><i class="fa fa-angle-right"></i></li>
+                            <a href="/static/html/about_us.html">About Us</a><i class="fa fa-angle-right"></i></li>
                     </ul>
                 </div>
                 <div class="col-md-3 md-margin-bottom-40">
@@ -324,7 +378,7 @@
                         <h2>Login or Register</h2></div>
                     <ul class="list-unstyled">
                         <li style="float: left;margin-right: 10px;">
-                            <a class="btn-u btn-lg" href="login_toLogin">Login</a>
+                            <a class="btn-u btn-lg" href="/login_toLogin">Login</a>
                         </li>
                         <li style="float: left;margin-right: 10px;">
                             <a class="btn-u btn-u-blue btn-lg" href="javascript:void(0)">Register</a>
@@ -360,7 +414,6 @@
         src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 <script type="text/javascript"
         src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/metronic/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
-<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/jquery.form.min.js"></script>
 <!--<script type="text/javascript" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/back-to-top.js"></script>-->
 <!--<script type="text/javascript" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/smoothScroll.js"></script>
 <script type="text/javascript" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/jquery.parallax.js"></script>
@@ -374,179 +427,8 @@
 <script type="text/javascript" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/owl-carousel.js"></script>
 <script type="text/javascript" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/revolution-slider.js"></script>
 <script type="text/javascript" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/style-switcher.js"></script>-->
-<script type="text/javascript">
-    if (jQuery().datepicker) {
-        $('.date-picker').datepicker({
-            startDate: new Date(),
-            orientation: "left",
-            autoclose: true,
-            todayBtn: 'linked',
-            format: 'yyyy-mm-dd',
-        });
-    }
 
 
-    $('#quotation-form').validate({
-        errorElement: 'span',
-        //				onfocusout: function(element) {
-        //					$(element).valid();
-        //				},
-        focusInvalid: true,
-        rules: {
-            shipName: {
-                required: true,
-            },
-            imo: {
-                required: true,
-            },
-            inspectionType: {
-                required: true,
-            },
-            port: {
-                required: true,
-            },
-            startDate: {
-                required: true,
-            },
-            email: {
-                required: true,
-                email: true
-            },
-        },
-        messages: {
-            shipName: {
-                required: "Ship name is required",
-            },
-            imo: {
-                required: "IMO number is required",
-            },
-            inspectionType: {
-                required: "Inspection type is required",
-            },
-            port: {
-                required: "Port is required",
-            },
-            startDate: {
-                required: "Start date is required",
-            },
-            email: {
-                required: "Email is required",
-                email: "Incorrect email format",
-            },
-        },
-
-        highlight: function (element) {
-            $(element).closest('.form-group').addClass('has-error');
-        },
-
-        success: function (label) {
-            console.log(label);
-            label.closest('.form-group').removeClass('has-error');
-            //label.parents('.form-group').find('.help-block').html('<span style="color:green">ok</span>');
-            label.parents('.form-group').find('.help-block').html('');
-        },
-
-        errorPlacement: function (error, element) {
-            element.parents('.form-group').find('.help-block').html(error);
-        },
-        submitHandler: function (form) {
-            $("#submitBtn").button("loading");
-            $(form).ajaxSubmit({
-                success: function (data) {
-                    if (data.success) {
-                        window.location.href = "emailQuotation/detail";
-                    } else {
-                        console.log("failure");
-                        $("#submitBtn").button("reset");
-                    }
-                },
-                error: function (data) {
-                    console.log("error");
-                    $("#submitBtn").button("reset");
-                }
-            });
-        }
-    });
-
-    $("#shipName,#imo").autocomplete({
-        minChars: 0,
-        width: 310,
-        autoFill: false,
-        source: function (request, response) {
-            $.ajax({
-                type: "post",
-                url: "publicShip/searchListByColumn",
-                dataType: "json",
-                data: {
-                    keyword: request.term,
-                    columns: ["name", "imo"]
-                },
-                success: function (data) {
-                    response($.map(data.list, function (item) {
-                        return { //lable为下拉列表显示数据源。value为选中放入到文本框的值，这种方式可以自定义显示
-                            label: item.name + " / " + item.imo + " / " + item.shipType,
-                            imo: item.imo,
-                            shipName: item.name,
-                        }
-                    }));
-                }
-            });
-        },
-        select: function (event, ui) {
-            event.preventDefault();
-            $("#shipName").val(ui.item.shipName);
-            $("#imo").val(ui.item.imo);
-        }
-    });
-
-    $("#port").autocomplete({
-        minChars: 0,
-        width: 310,
-        autoFill: false,
-        source: function (request, response) {
-            $.ajax({
-                type: "post",
-                url: "port/searchList",
-                dataType: "json",
-                data: {
-                    keyword: request.term
-                },
-                success: function (data) {
-                    response($.map(data.list, function (item) {
-                        return { //lable为下拉列表显示数据源。value为选中放入到文本框的值，这种方式可以自定义显示
-                            label: item.portEn + " / " + item.countryCode,
-                        }
-                    }));
-                }
-            });
-        }
-    });
-
-    //			$("#userName").autocomplete({
-    //				source: function(request, response) {
-    //					$.ajax({
-    //						type: "post",
-    //						url: "",
-    //						dataType: "json",
-    //						data: {
-    //							userName: request.term
-    //						},
-    //						success: function(data) {
-    //							response($.map(data, function(item) {
-    //								return { //lable为下拉列表显示数据源。value为选中放入到文本框的值，这种方式可以自定义显示
-    //									lable: item.userName,
-    //									value: item.userName
-    //								}
-    //							}));
-    //						}
-    //					});
-    //				},
-    //				minLength: 1,
-    //				select: function(event, ui) { //移动键盘上下键，自动将下拉列表的数据放入到文本框，不过不写这个配置也是可以的，默认就行，具体这个还不知道是做什么
-    //					$("#userName").val(ui.item.userName);
-    //				}
-    //			});
-</script>
 <!--[if lt IE 9]>
 <script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/respond.js"></script>
 <script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/html5shiv.js"></script>
