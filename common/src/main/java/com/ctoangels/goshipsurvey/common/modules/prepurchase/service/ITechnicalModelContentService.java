@@ -12,5 +12,5 @@ import java.util.List;
  */
 public interface ITechnicalModelContentService extends ISuperService<TechnicalModelContent> {
 
-    List<TechnicalModelContent> selectByCatagoryAndTitle(String catagory,String title);
+    List<TechnicalModelContent> selectByCatagoryAndTitle(String catagory, String title);
 }
