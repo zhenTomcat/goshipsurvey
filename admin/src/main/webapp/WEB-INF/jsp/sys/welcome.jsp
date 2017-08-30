@@ -3,6 +3,7 @@
 <%@ taglib prefix="go" uri="http://www.ctoangels.com/jsp/jstl/common" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
 <%
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
@@ -199,9 +200,9 @@
                         </a>
                     </li>
                     <%--<li>--%>
-                        <%--<a href="javascript:void(0)">--%>
-                            <%--Quotation--%>
-                        <%--</a>--%>
+                    <%--<a href="javascript:void(0)">--%>
+                    <%--Quotation--%>
+                    <%--</a>--%>
                     <%--</li>--%>
                     <li>
                         <a href="/static/html/reports.html">
@@ -278,6 +279,16 @@
                     <label class="control-label col-md-3" for="email" style="font-weight: 100;">Enter your email</label>
                     <div class="col-md-6">
                         <input class="form-control" name="email" id="email"/>
+                    </div>
+                    <span class="help-block"></span>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-3" for="specialRequirement" style="font-weight: 100;">Special
+                        Requirement(If
+                        any)</label>
+                    <div class="col-md-6">
+                        <textarea class="form-control" name="specialRequirement" id="specialRequirement"
+                                  style="resize: vertical"></textarea>
                     </div>
                     <span class="help-block"></span>
                 </div>

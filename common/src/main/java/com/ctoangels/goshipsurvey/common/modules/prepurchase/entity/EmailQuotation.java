@@ -50,6 +50,10 @@ public class EmailQuotation implements Serializable {
     private String email;
 
     /**  */
+    @TableField(value = "special_requirement")
+    private String specialRequirement;
+
+    /**  */
     @TableField(value = "create_date")
     private Date createDate;
 
@@ -132,6 +136,14 @@ public class EmailQuotation implements Serializable {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    public String getSpecialRequirement() {
+        return specialRequirement;
+    }
+
+    public void setSpecialRequirement(String specialRequirement) {
+        this.specialRequirement = specialRequirement;
     }
 
     public Date getCreateDate() {

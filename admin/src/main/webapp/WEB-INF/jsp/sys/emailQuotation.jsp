@@ -165,9 +165,9 @@
                         </a>
                     </li>
                     <%--<li>--%>
-                        <%--<a href="/">--%>
-                            <%--Quotation--%>
-                        <%--</a>--%>
+                    <%--<a href="/">--%>
+                    <%--Quotation--%>
+                    <%--</a>--%>
                     <%--</li>--%>
                     <li>
                         <a href="/static/html/reports.html">
@@ -222,6 +222,11 @@
                     <label class="control-label col-md-5" style="font-weight: 100;">Inspection type:</label>
                     <label class="control-label col-md-7"
                            style="text-align: left;font-style: italic;">${quotation.inspectionType}</label>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-5" style="font-weight: 100;">Special Requirement:</label>
+                    <label class="control-label col-md-7"
+                           style="white-space: pre-wrap;word-wrap: break-word;text-align: left;font-style: italic;">${quotation.specialRequirement}</label>
                 </div>
                 <a class="btn" href="/"
                    style="background-color: #264071;color: white;display: block;margin: 0 auto;width: 150px;"> &lt; Back
@@ -283,52 +288,7 @@
 <script type="text/javascript" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/owl-carousel.js"></script>
 <script type="text/javascript" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/revolution-slider.js"></script>
 <script type="text/javascript" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/style-switcher.js"></script>-->
-<script type="text/javascript">
-    $('#quotation-form').validate({
-        errorElement: 'span',
-        onfocusout: function (element) {
-            $(element).valid();
-        },
-        focusInvalid: true,
-        rules: {
-            shipName: {
-                required: true,
-            },
-            password: {
-                required: true
-            },
-            address: {
-                required: false,
-                //minlength:8,
-                postcodeVal: true
-            }
-        },
-        messages: {
-            shipName: {
-                required: "Username is required.",
-            },
-        },
 
-        highlight: function (element) {
-            $(element).closest('.form-group').addClass('has-error');
-        },
-
-        success: function (label) {
-            console.log(label);
-            label.closest('.form-group').removeClass('has-error');
-            //label.parents('.form-group').find('.help-block').html('<span style="color:green">ok</span>');
-            label.parents('.form-group').find('.help-block').html('');
-        },
-
-        errorPlacement: function (error, element) {
-            element.parents('.form-group').find('.help-block').html(error);
-        },
-
-        submitHandler: function (form) {
-            $(form).ajaxSubmit();
-        }
-    });
-</script>
 <!--[if lt IE 9]>
 <script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/respond.js"></script>
 <script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/html5shiv.js"></script>

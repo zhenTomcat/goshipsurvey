@@ -134,6 +134,7 @@ public class MailUtil {
         sb.append("Port : " + emailQuotation.getPort() + "<br>");
         sb.append("Date range : " + DateUtil.formatDate(emailQuotation.getStartDate(), "yyyy-MM-dd") + "~" + DateUtil.formatDate(emailQuotation.getEndDate(), "yyyy-MM-dd") + "<br>");
         sb.append("Email : " + emailQuotation.getEmail() + "<br>");
+        sb.append("Special requirement :<br> <label style='white-space: pre-wrap;word-wrap: break-word; '> " + emailQuotation.getSpecialRequirement() + "</label>><br>");
         sendEmail(fromAddress, sb.toString(), "有船船要进行检验", null);
     }
 

@@ -173,8 +173,6 @@
             height: 400px;
             width: 200px;
         }
-
-
     </style>
 </head>
 
@@ -200,6 +198,7 @@
                 <span class="fa fa-bars"></span>
             </button>
             <!-- End Toggle -->
+
         </div>
         <!--/end container-->
     </div>
@@ -366,38 +365,43 @@
 <script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/jquery/jquery-migrate.min.js "></script>
 <script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/bootstrap/js/bootstrap.min.js "></script>
 <!-- JS Implementing Plugins -->
-<!--<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/back-to-top.js "></script>-->
-<!--<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/smoothScroll.js "></script>-->
-<!--<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/jquery.parallax.js "></script>-->
-<!--<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/fancybox/source/jquery.fancybox.pack.js "></script>-->
-<!--<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js "></script>-->
-<!--<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.tools.min.js "></script>-->
-<!--<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.revolution.min.js "></script>-->
+<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/back-to-top.js "></script>
+<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/smoothScroll.js "></script>
+<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/jquery.parallax.js "></script>
+<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/fancybox/source/jquery.fancybox.pack.js "></script>
+<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js "></script>
+<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.tools.min.js "></script>
+<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.revolution.min.js "></script>
 <!-- JS Customization -->
-<!--<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/custom.js "></script>-->
+<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/custom.js "></script>
 <!-- JS Page Level -->
-<!--<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/app.js "></script>-->
-<!--<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/fancy-box.js "></script>-->
-<!--<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/owl-carousel.js "></script>-->
-<!--<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/revolution-slider.js "></script>-->
-<!--<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/style-switcher.js "></script>-->
-<!--<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/datatable.min.js "></script>-->
-<!--<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/datatables/datatables.min.js "></script>-->
-<!--<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js"></script>-->
+<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/app.js "></script>
+<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/fancy-box.js "></script>
+<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/owl-carousel.js "></script>
+<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/revolution-slider.js "></script>
+<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/style-switcher.js "></script>
 
-<!--百度地图-->
-<script src="http://api.map.baidu.com/api?v=2.0&ak=sH45FS0Pd1v58SSDcltpILGWyLkSn959"></script>
-<!--谷歌地图-->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8ppjcHpAcpYycEReDM73t8ayqXoRfwtE&language=en"></script>
-<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+<script type="text/javascript ">
+    jQuery(document).ready(function () {
+        App.init();
+        App.initParallaxBg();
+        FancyBox.initFancybox();
+        OwlCarousel.initOwlCarousel();
+        RevolutionSlider.initRSfullWidth();
 
+    });
+
+</script>
 <!--[if lt IE 9]>
 <script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/respond.js "></script>
 <script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/html5shiv.js "></script>
 <script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/placeholder-IE-fixes.js "></script>
 <![endif]-->
 
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8ppjcHpAcpYycEReDM73t8ayqXoRfwtE&language=en"></script>
+<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
 <script type="text/javascript">
+
     var cityList = [
         //辽宁
         {
@@ -930,180 +934,81 @@
     ];
     var map;
     var mark = [];
-    var point = {};
-    var label = {};
-    var marker = {};
-    var markdong = {};
-    var markjing = {};
-
-    var initMap;
-    var loadMapDataList;
-    var loadShipList;
-    var mouseOverItem;
-
+    var markdong;
+    var markjing;
     var infoWindow;
 
-    getIP();
-    //获取ip
-    function getIP() {
-        $.ajax({
-            url: 'http://pv.sohu.com/cityjson?ie=utf-8',
-            dataType: "script",
-            success: function () {
-                var ipAddr = returnCitySN.cip;
-                judgeArea(ipAddr);
-            },
-            error: function () {
-                initBMap();
-            }
+    initMap();
+    loadShipList();
+    loadMapDataList();
+
+    function initMap() {
+        var center = {lat: 25.363, lng: 131.044};
+        map = new google.maps.Map(document.getElementById('l-map'), {
+            zoom: 2,
+            center: center
         });
-    }
-    //判断区域
-    function judgeArea(ipAddr) {
-        $.ajax({
-            url: 'http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js&ip=' + ipAddr,
-            dataType: "script",
-            success: function () {
-                var country = remote_ip_info.country;
-                if (country != "中国") {
-                    initGMap();
-                    console.log("国外");
-                } else {
-                    initBMap();
-                    console.log("国内");
-                }
-            },
-            error: function () {
-                initBMap();
-            }
+        var marker = new google.maps.Marker({
+            city: "北京",
+            map: map
         });
     }
 
-    //初始化百度地图
-    function initBMap() {
-        initMap = function () {
-            map = new BMap.Map("l-map", {minZoom: 1, maxZoom: 8});
-            map.centerAndZoom(new BMap.Point(116.4035, 39.915), 3);
-            map.enableScrollWheelZoom(true); //开启鼠标滚轮缩放
-            BMap.Marker.prototype.addEventListener("click", function () {
-                mouseOverItem($('ul[data-ship="' + this.mIndex + '"]'));
-            });
+    function loadShipList() {
+        var html = '';
+        for (var i = 0; i < cityList.length; i++) {
+            var tmp = $("#ul-tmp").clone();
+            tmp.find(".infodetails").attr("data-ship", i);
+            tmp.find(".index-p").text(i + 1);
+            tmp.find(".short-name-span").text(cityList[i].nameCN + " " + cityList[i].count);
+            tmp.find(".address-li").text(cityList[i].nameEN + " " + cityList[i].count);
+            html += tmp.html();
         }
-        loadMapDataList = function () {
-            markjing = '';
-            for (var i = 0; i < cityList.length; i++) {
-                if (cityList[i].longitude == null || cityList[i].latitude == null) {
-                    continue;//如果经纬度没有，那么跳过本次循环
-                }
-                var point = new BMap.Point(cityList[i].longitude, cityList[i].latitude);
-                mark[cityList[i].id] = new BMap.Marker(point);
-                mark[cityList[i].id].mIndex = i;
-                map.addOverlay(mark[cityList[i].id]);
-            }
-        }
-        loadShipList = function () {
-            var html = '';
-            for (var i = 0; i < cityList.length; i++) {
-                var tmp = $("#ul-tmp").clone();
-                tmp.find(".infodetails").attr("data-ship", i);
-                tmp.find(".index-p").text(i + 1);
-                tmp.find(".short-name-span").text(cityList[i].nameCN + " " + cityList[i].count);
-                tmp.find(".address-li").text(cityList[i].nameEN + " " + cityList[i].count);
-                html += tmp.html();
-            }
-            $("#outer-ul").html(html);
-        }
-        mouseOverItem = function (obj) {
-            var index = $(obj).attr("data-ship");
-            var e = cityList[index];
-            map.removeOverlay(markdong);
-            map.addOverlay(markjing);
-            map.removeOverlay(mark[e.id]);
-            var point = new BMap.Point(e.longitude, e.latitude);
-            map.centerAndZoom(point, 8);
-            var label = new BMap.Label(e.nameCN + ":" + e.count, {
-                offset: new BMap.Size(10, -25)
-            });
-            label.setStyle({
-                height: 0,
-                color: "red",
-                fontSize: "20px",
-                lineHeight: 0,
-                fontFamily: "宋体",
-                borderRadius: "3px",
-                borderColor: "white"
-            });
-            var marker = new BMap.Marker(point);
-            map.addOverlay(marker);
-            marker.setLabel(label);
-            marker.setAnimation(BMAP_ANIMATION_BOUNCE);
-            markdong = marker;
-            markjing = mark[e.id];
-        }
-        initMap();
-        loadMapDataList();
-        loadShipList();
+        $("#outer-ul").html(html);
     }
-    //初始化谷歌地图
-    function initGMap() {
-        initMap = function () {
-            var center = {lat: 25.363, lng: 131.044};
-            map = new google.maps.Map(document.getElementById('l-map'), {
-                zoom: 2,
-                center: center
-            });
+
+    function loadMapDataList() {
+        mark = cityList.map(function (e, i) {
             var marker = new google.maps.Marker({
-                city: "北京",
-                map: map
-            });
-        }
-        loadShipList = function () {
-            var html = '';
-            for (var i = 0; i < cityList.length; i++) {
-                var tmp = $("#ul-tmp").clone();
-                tmp.find(".infodetails").attr("data-ship", i);
-                tmp.find(".index-p").text(i + 1);
-                tmp.find(".short-name-span").text(cityList[i].nameCN + " " + cityList[i].count);
-                tmp.find(".address-li").text(cityList[i].nameEN + " " + cityList[i].count);
-                html += tmp.html();
-            }
-            $("#outer-ul").html(html);
-        }
-        loadMapDataList = function () {
-            mark = cityList.map(function (e, i) {
-                var marker = new google.maps.Marker({
-                    position: {lat: e.latitude, lng: e.longitude},
+                position: {lat: e.latitude, lng: e.longitude},
 //                label: e.id,
-                    mIndex: e.id,
-                    map: map,
-                    icon: 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/mappoint.png'
-                })
-                marker.addListener('click', function () {
-                    if (infoWindow != null) {
-                        infoWindow.close();
-                    }
-                    infoWindow = new google.maps.InfoWindow({
-                        content: cityList[this.mIndex - 1].nameEN + ' > count:' + cityList[this.mIndex - 1].count
-                    });
-                    infoWindow.open(map, marker);
-                });
-                return marker;
+                mIndex: e.id,
+                map: map,
+                icon: 'http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/mappoint.png'
             })
-        }
-        mouseOverItem = function (obj) {
-            var index = $(obj).attr("data-ship");
-            var e = cityList[index];
-            map.setCenter({lat: e.latitude, lng: e.longitude});
-            map.setZoom(8);
-        }
-        initMap();
-        loadShipList();
-        loadMapDataList();
+            marker.addListener('click', function () {
+                if (infoWindow != null) {
+                    infoWindow.close();
+                }
+                infoWindow = new google.maps.InfoWindow({
+                    content: cityList[this.mIndex - 1].nameEN + ' > count:' + cityList[this.mIndex - 1].count
+                });
+                infoWindow.open(map, marker);
+            });
+            return marker;
+        })
+//        var markerCluster = new MarkerClusterer(map, mark,
+//            {imagePath: 'https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/m'});
     }
 
+    function mouseOverItem(obj) {
+        var index = $(obj).attr("data-ship");
+        var e = cityList[index];
+        map.setCenter({lat: e.latitude, lng: e.longitude});
+        map.setZoom(8);
+    }
 
+    //判断ip
+    $.getScript('http://pv.sohu.com/cityjson?ie=utf-8', function () {
+        var ipAddr = returnCitySN.cip;
+        console.log(ipAddr);
+        $.getScript('http://int.dpool.sina.com.cn/iplookup/iplookup.php?format=js&ip=' + ipAddr, function () {
+                    var country = remote_ip_info.country;
+                    if (country == "中国") {
+                    }
+                }
+        )
+    })
 </script>
-
 </body>
-
 </html>
