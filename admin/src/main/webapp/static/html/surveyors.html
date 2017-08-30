@@ -388,8 +388,8 @@
 <!--百度地图-->
 <script src="http://api.map.baidu.com/api?v=2.0&ak=sH45FS0Pd1v58SSDcltpILGWyLkSn959"></script>
 <!--谷歌地图-->
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8ppjcHpAcpYycEReDM73t8ayqXoRfwtE&language=en"></script>
-<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>
+<!--<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB8ppjcHpAcpYycEReDM73t8ayqXoRfwtE&language=en"></script>-->
+<!--<script src="https://developers.google.com/maps/documentation/javascript/examples/markerclusterer/markerclusterer.js"></script>-->
 
 <!--[if lt IE 9]>
 <script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/respond.js "></script>
@@ -966,7 +966,7 @@
             success: function () {
                 var country = remote_ip_info.country;
                 if (country != "中国") {
-                    initGMap();
+                    getGMapJs();
                     console.log("国外");
                 } else {
                     initBMap();
@@ -975,6 +975,16 @@
             },
             error: function () {
                 initBMap();
+            }
+        });
+    }
+
+    function getGMapJs() {
+        $.ajax({
+            url: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyB8ppjcHpAcpYycEReDM73t8ayqXoRfwtE&language=en',
+            dataType: "script",
+            success: function () {
+                initGMap();
             }
         });
     }
