@@ -223,13 +223,15 @@
             </div>
         </div>
 
-        <h1 style="margin-left: 10%;margin-top: -30px;color: white;">Best service though internet</h1>
+        <h1 style="margin-left: 10%;margin-top: -30px;color: white;">Best Shipping Service Through Internet</h1>
 
         <div class="row">
             <form class="form-horizontal" id="quotation-form" method="post" action="emailQuotation/addEmailQuotation"
                   role="form">
                 <div class="form-group">
-                    <label class="control-label col-md-3"><h1>Send Quotation</h1></label>
+                    <label class="control-label col-md-9 col-md-offset-1" style="text-align: left"><h1>In Need Of A
+                        Survey?</h1>
+                    </label>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-3" for="shipName" style="font-weight: 100;">Enter ship

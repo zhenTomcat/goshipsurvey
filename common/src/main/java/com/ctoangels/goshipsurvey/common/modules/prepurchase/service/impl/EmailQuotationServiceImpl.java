@@ -6,6 +6,7 @@ import com.ctoangels.goshipsurvey.common.modules.go.mapper.PublicShipMapper;
 import com.ctoangels.goshipsurvey.common.modules.go.service.IPublicShipService;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Dict;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.DictMapper;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IDictService;
 import com.ctoangels.goshipsurvey.common.util.MailUtil;
 import com.ctoangels.goshipsurvey.common.util.Tools;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ public class EmailQuotationServiceImpl extends SuperServiceImpl<EmailQuotationMa
     @Autowired
     IPublicShipService publicShipService;
 
+    @Autowired
+    IDictService dictService;
+
     @Override
     public boolean sendEmailQuotation(EmailQuotation emailQuotation) {
         if (emailQuotationMapper.insert(emailQuotation) < 0) {
@@ -43,6 +47,7 @@ public class EmailQuotationServiceImpl extends SuperServiceImpl<EmailQuotationMa
         ew.orderBy("value");
         List<Dict> emailQuotationTypeDict = dictMapper.selectList(ew);
         emailQuotation.setInspectionType(Tools.transferValuesToDes(emailQuotation.getInspectionType(), emailQuotationTypeDict));
+        emailQuotation.setRole(Tools.transferValuesToDes(emailQuotation.getRole(), dictService.getListByType("emailQuotationRole")));
         EntityWrapper<PublicShip> ew2 = new EntityWrapper<>();
         ew2.where("imo={0}", emailQuotation.getImo());
         List<PublicShip> shipList = publicShipService.getListByIMO(emailQuotation.getImo());

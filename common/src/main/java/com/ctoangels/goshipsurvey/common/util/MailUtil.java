@@ -135,6 +135,7 @@ public class MailUtil {
         sb.append("Port : ").append(emailQuotation.getPort()).append("<br>");
         sb.append("Date range : ").append(DateUtil.formatDate(emailQuotation.getStartDate(), "yyyy-MM-dd")).append("~").append(DateUtil.formatDate(emailQuotation.getEndDate(), "yyyy-MM-dd")).append("<br>");
         sb.append("Email : ").append(emailQuotation.getEmail()).append("<br>");
+        sb.append("Role : ").append(emailQuotation.getRole()).append("<br>");
         sb.append("Special requirement :<br><label style='white-space: pre-wrap;word-wrap: break-word; '>" + emailQuotation.getSpecialRequirement() + "</label><br>");
         sb.append("<br><br>-------------------------------------<br><br>");
         PublicShip ship = emailQuotation.getPublicShip();
@@ -150,7 +151,7 @@ public class MailUtil {
             sb.append("LOA : ").append(ship.getLoa()).append(", Beam : ").append(ship.getBeam()).append(", Draft : ").append(ship.getDraft()).append("<br>");
             sb.append("Maker/Type : ").append(ship.getEngine()).append(", BHP/RPM : ").append(ship.getHp()).append(", Cyl.bore : ").append(ship.getMcyl()).append("<br>");
         }
-        sendEmail(fromAddress, sb.toString(), "有船船要进行检验", null);
+        sendEmail(fromAddress, sb.toString(), "有船船要进行检验(role : " + emailQuotation.getRole() + ")", null);
     }
 
     //发送注册时的验证邮件
