@@ -2,6 +2,7 @@ package com.ctoangels.goshipsurvey.common.modules.prepurchase.controller;
 
 import com.alibaba.fastjson.JSONObject;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Port;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IDictService;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.EmailQuotation;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IEmailQuotationService;
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
@@ -27,6 +28,9 @@ public class EmailQuotationController extends BaseController {
     @Autowired
     IEmailQuotationService emailQuotationService;
 
+    @Autowired
+    private IDictService dictService;
+
     @RequestMapping(value = "/addEmailQuotation", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject addEmailQuotation(EmailQuotation emailQuotation) {
@@ -43,6 +47,7 @@ public class EmailQuotationController extends BaseController {
             Integer id = (Integer) objId;
             EmailQuotation eq = emailQuotationService.selectById(id);
             eq.setInspectionType(Tools.transferValuesToDes(eq.getInspectionType(), getEmailQuotationTypeDict()));
+            eq.setRole(Tools.transferValuesToDes(eq.getRole(), dictService.getListByType("emailQuotationRole")));
             map.put("quotation", eq);
         }
         return "sys/emailQuotation";

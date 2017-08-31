@@ -8,6 +8,7 @@ import com.baomidou.mybatisplus.annotations.IdType;
 import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
+import com.ctoangels.goshipsurvey.common.modules.go.entity.PublicShip;
 
 /**
  *
@@ -49,6 +50,8 @@ public class EmailQuotation implements Serializable {
     /**  */
     private String email;
 
+    private String role;
+
     /**  */
     @TableField(value = "special_requirement")
     private String specialRequirement;
@@ -72,6 +75,9 @@ public class EmailQuotation implements Serializable {
     /**  */
     @TableField(value = "del_flag")
     private Integer delFlag;
+
+    @TableField(exist = false)
+    private PublicShip publicShip;
 
 
     public Integer getId() {
@@ -138,6 +144,14 @@ public class EmailQuotation implements Serializable {
         this.email = email;
     }
 
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
     public String getSpecialRequirement() {
         return specialRequirement;
     }
@@ -186,4 +200,11 @@ public class EmailQuotation implements Serializable {
         this.delFlag = delFlag;
     }
 
+    public PublicShip getPublicShip() {
+        return publicShip;
+    }
+
+    public void setPublicShip(PublicShip publicShip) {
+        this.publicShip = publicShip;
+    }
 }

@@ -19,4 +19,6 @@ public interface IPublicShipService extends ISuperService<PublicShip> {
 
     PublicShip getById(int id);
 
+    List<PublicShip> getListByIMO(String imo);
+
 }

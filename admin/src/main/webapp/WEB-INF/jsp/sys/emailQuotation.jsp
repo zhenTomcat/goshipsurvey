@@ -224,6 +224,16 @@
                            style="text-align: left;font-style: italic;">${quotation.inspectionType}</label>
                 </div>
                 <div class="form-group">
+                    <label class="control-label col-md-5" style="font-weight: 100;">Your email:</label>
+                    <label class="control-label col-md-7"
+                           style="text-align: left;font-style: italic;">${quotation.email}</label>
+                </div>
+                <div class="form-group">
+                    <label class="control-label col-md-5" style="font-weight: 100;">Your role:</label>
+                    <label class="control-label col-md-7"
+                           style="text-align: left;font-style: italic;">${quotation.role}</label>
+                </div>
+                <div class="form-group">
                     <label class="control-label col-md-5" style="font-weight: 100;">Special Requirement:</label>
                     <label class="control-label col-md-7"
                            style="white-space: pre-wrap;word-wrap: break-word;text-align: left;font-style: italic;">${quotation.specialRequirement}</label>

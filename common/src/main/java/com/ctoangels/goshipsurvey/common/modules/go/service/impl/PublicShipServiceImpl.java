@@ -56,4 +56,11 @@ public class PublicShipServiceImpl extends SuperServiceImpl<PublicShipMapper, Pu
     public PublicShip getById(int id) {
         return publicShipMapper.selectById(id);
     }
+
+    @Override
+    public List<PublicShip> getListByIMO(String imo) {
+        EntityWrapper<PublicShip> ew = new EntityWrapper<>();
+        ew.where("imo={0}", imo);
+        return publicShipMapper.selectList(ew);
+    }
 }

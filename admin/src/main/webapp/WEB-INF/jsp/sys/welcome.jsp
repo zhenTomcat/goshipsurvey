@@ -229,7 +229,7 @@
             <form class="form-horizontal" id="quotation-form" method="post" action="emailQuotation/addEmailQuotation"
                   role="form">
                 <div class="form-group">
-                    <label class="control-label col-md-3"><h1>Quotation</h1></label>
+                    <label class="control-label col-md-3"><h1>Send Quotation</h1></label>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-3" for="shipName" style="font-weight: 100;">Enter ship
@@ -274,7 +274,6 @@
                     </div>
                     <span class="help-block"></span>
                 </div>
-
                 <div class="form-group">
                     <label class="control-label col-md-3" for="email" style="font-weight: 100;">Enter your email</label>
                     <div class="col-md-6">
@@ -283,9 +282,19 @@
                     <span class="help-block"></span>
                 </div>
                 <div class="form-group">
+                    <label class="control-label col-md-3" style="font-weight: 100;">Select your role</label>
+                    <div class="col-md-6 ">
+                        <c:forEach items="${emailQuotationRoleDict}" var="role">
+                            <label class="radio-inline">
+                                <input type="radio" name="role" value="${role.value}"> ${role.des}
+                            </label>
+                        </c:forEach>
+                    </div>
+                    <span class="help-block"></span>
+                </div>
+                <div class="form-group">
                     <label class="control-label col-md-3" for="specialRequirement" style="font-weight: 100;">Special
-                        Requirement(If
-                        any)</label>
+                        Requirement(If any)</label>
                     <div class="col-md-6">
                         <textarea class="form-control" name="specialRequirement" id="specialRequirement"
                                   style="resize: vertical"></textarea>
@@ -423,6 +432,9 @@
                 required: true,
                 email: true
             },
+            role: {
+                required: true
+            }
         },
         messages: {
             shipName: {
@@ -443,6 +455,9 @@
             email: {
                 required: "Email is required",
                 email: "Incorrect email format",
+            },
+            role: {
+                required: "Role is required",
             },
         },
 

@@ -465,6 +465,7 @@ public class LoginController extends BaseController {
     @RequestMapping(value = "/welcome", method = RequestMethod.GET)
     public String welcome(ModelMap map) {
         map.put("emailQuotationTypeDict", getEmailQuotationTypeDict());
+        map.put("emailQuotationRoleDict", dictService.getListByType("emailQuotationRole"));
         return "sys/welcome";
     }
 

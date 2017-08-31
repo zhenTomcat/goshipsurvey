@@ -1,5 +1,6 @@
 package com.ctoangels.goshipsurvey.common.util;
 
+import com.ctoangels.goshipsurvey.common.modules.go.entity.PublicShip;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.EmailQuotation;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.MailAuthenticator;
 
@@ -128,13 +129,27 @@ public class MailUtil {
 
     public static void sendEmailQuotation(EmailQuotation emailQuotation) {
         StringBuilder sb = new StringBuilder();
-        sb.append("Ship name : " + emailQuotation.getShipName() + "<br>");
-        sb.append("Imo : " + emailQuotation.getImo() + "<br>");
-        sb.append("Inspection type : " + emailQuotation.getInspectionType() + "<br>");
-        sb.append("Port : " + emailQuotation.getPort() + "<br>");
-        sb.append("Date range : " + DateUtil.formatDate(emailQuotation.getStartDate(), "yyyy-MM-dd") + "~" + DateUtil.formatDate(emailQuotation.getEndDate(), "yyyy-MM-dd") + "<br>");
-        sb.append("Email : " + emailQuotation.getEmail() + "<br>");
-        sb.append("Special requirement :<br> <label style='white-space: pre-wrap;word-wrap: break-word; '> " + emailQuotation.getSpecialRequirement() + "</label>><br>");
+        sb.append("Ship name : ").append(emailQuotation.getShipName()).append("<br>");
+        sb.append("Imo : ").append(emailQuotation.getImo()).append("<br>");
+        sb.append("Inspection type : ").append(emailQuotation.getInspectionType()).append("<br>");
+        sb.append("Port : ").append(emailQuotation.getPort()).append("<br>");
+        sb.append("Date range : ").append(DateUtil.formatDate(emailQuotation.getStartDate(), "yyyy-MM-dd")).append("~").append(DateUtil.formatDate(emailQuotation.getEndDate(), "yyyy-MM-dd")).append("<br>");
+        sb.append("Email : ").append(emailQuotation.getEmail()).append("<br>");
+        sb.append("Special requirement :<br><label style='white-space: pre-wrap;word-wrap: break-word; '>" + emailQuotation.getSpecialRequirement() + "</label><br>");
+        sb.append("<br><br>-------------------------------------<br><br>");
+        PublicShip ship = emailQuotation.getPublicShip();
+        if (ship == null) {
+            sb.append("数据库中没有这条船的信息");
+        } else {
+            sb.append("Ship name : ").append(ship.getName()).append("<br>");
+            sb.append("Imo : ").append(ship.getImo()).append("<br>");
+            sb.append("Dwt : ").append(ship.getDwt()).append("<br>");
+            sb.append("BuilderYear : ").append(ship.getBuildyear()).append("<br>");
+            sb.append("Flag : ").append(ship.getFlag()).append("<br>");
+            sb.append("Class : ").append(ship.getClasss()).append(", SS(m/y) : ").append(ship.getNextSs()).append("<br>");
+            sb.append("LOA : ").append(ship.getLoa()).append(", Beam : ").append(ship.getBeam()).append(", Draft : ").append(ship.getDraft()).append("<br>");
+            sb.append("Maker/Type : ").append(ship.getEngine()).append(", BHP/RPM : ").append(ship.getHp()).append(", Cyl.bore : ").append(ship.getMcyl()).append("<br>");
+        }
         sendEmail(fromAddress, sb.toString(), "有船船要进行检验", null);
     }
 
