@@ -47,7 +47,6 @@ public class EmailQuotationController extends BaseController {
             Integer id = (Integer) objId;
             EmailQuotation eq = emailQuotationService.selectById(id);
             eq.setInspectionType(Tools.transferValuesToDes(eq.getInspectionType(), getEmailQuotationTypeDict()));
-            eq.setRole(Tools.transferValuesToDes(eq.getRole(), dictService.getListByType("emailQuotationRole")));
             map.put("quotation", eq);
         }
         return "sys/emailQuotation";

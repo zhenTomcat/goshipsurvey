@@ -20,7 +20,7 @@
 <!-- BEGIN HEAD -->
 <head>
     <meta charset="utf-8"/>
-    <title><fmt:message key="sys.site.title"/></title>
+    <title>GoShipSurvey</title>
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta content="width=device-width, initial-scale=1" name="viewport"/>
     <base href="<%=basePath%>">
@@ -68,28 +68,27 @@
 <div class="content">
     <form role="form" method="post" action="" name="loginForm"
           id="loginForm">
-        <h3 class="form-title"><fmt:message key="sys.user.plogin"/></h3>
-        <p><fmt:message key="login_no_account"/><a class="color-green" href="register"><fmt:message
-                key="sys.user.register"/></a>!</p>
+        <h3 class="form-title">Please login</h3>
+        <p>No account? Now <a class="color-green" href="javascript:void(0)">Register</a>!</p>
         <div class="form-group">
-            <label class="control-label visible-ie8 visible-ie9"><fmt:message key="login_username"/></label>
+            <label class="control-label visible-ie8 visible-ie9">Username</label>
             <div class="input-icon">
                 <i class="fa fa-user"></i>
                 <input class="form-control placeholder-no-fix" type="text" autocomplete="off"
-                       placeholder="<fmt:message key="login_username_input"/>" name="loginName" id="loginName"/></div>
+                       placeholder="Please input Username" name="loginName" id="loginName"/></div>
         </div>
         <div class="form-group">
-            <label class="control-label visible-ie8 visible-ie9"><fmt:message key="login_password"/></label>
+            <label class="control-label visible-ie8 visible-ie9">Password</label>
             <div class="input-icon">
                 <i class="fa fa-lock"></i>
                 <input class="form-control placeholder-no-fix" type="password" autocomplete="off"
-                       placeholder="<fmt:message key="login_pwd_input"/>" name="password" id="password"/></div>
+                       placeholder="Password" name="password" id="password"/></div>
         </div>
         <div class="form-group">
-            <input class="form-control" placeholder="<fmt:message key="login_verify_code"/>" type="text"
-                   id="code" name="code" style="width: 30%; float: left;">
-            <img id="codeImg" alt="<fmt:message key="login_click_change"/>"
-                 title="<fmt:message key="login_click_change"/>"
+            <input class="form-control" placeholder="VerifyCode" type="text"
+                   id="code" name="code" style="width: 40%; float: left;">
+            <img id="codeImg" alt="Click to change"
+                 title="Click to change"
                  style="width: 40%; height: 34px; margin-left: 12px;" src="">
         </div>
         <div class="form-group" id="system-select-div">
@@ -103,7 +102,8 @@
 
         <div class="form-actions">
             <button onclick="severCheck();" type="button" class="btn green">
-                <fmt:message key="sys.user.login"/></button>
+                Login
+            </button>
         </div>
     </form>
 
@@ -111,8 +111,7 @@
 </div>
 <!-- END LOGIN -->
 <!-- BEGIN COPYRIGHT -->
-<div class="copyright"><fmt:message key="login_since_year"/> &copy; <a href="http://a.goshipyard.com/"><fmt:message
-        key="sys.site.title"/></a> <fmt:message key="login_copyrights_reserved"/></div>
+<div class="copyright">Copyright &copy; 2016 - 2017 Goship Group.All Rights Reserved.</div>
 
 <input type="hidden" id="proType" value="${param.pro}">
 
@@ -176,7 +175,7 @@
                     } else if ("user error" == data.result) {
                         $("#loginName").tips({
                             side: 1,
-                            msg: "<fmt:message key="login_username_pwd_false"/>",
+                            msg: "Incorrect Username or Password",
                             bg: '#FF5080',
                             time: 15
                         });
@@ -184,7 +183,7 @@
                     } else if ("code error" == data.result) {
                         $("#code").tips({
                             side: 1,
-                            msg: "<fmt:message key="login_incorrect_verifycode"/>",
+                            msg: "Incorrect Verify Code",
                             bg: '#FF5080',
                             time: 15
                         });
@@ -193,7 +192,7 @@
                     } else {
                         $("#loginName").tips({
                             side: 1,
-                            msg: "<fmt:message key="login_lackofparameter"/>",
+                            msg: "Lack of Parameter",
                             bg: '#FF5080',
                             time: 15
                         });
@@ -207,18 +206,18 @@
     $(document).ready(function () {
         changeCode();
         $("#codeImg").bind("click", changeCode);
-        $.backstretch([
-                    "${ctx}/assets/layouts/layout/img/bg/1.jpg",
-                    "${ctx}/assets/layouts/layout/img/bg/2.jpg",
-                    "${ctx}/assets/layouts/layout/img/bg/3.jpg",
-                    "${ctx}/assets/layouts/layout/img/bg/4.jpg",
-                    "${ctx}/assets/layouts/layout/img/bg/5.jpg",
-                    "${ctx}/assets/layouts/layout/img/bg/6.jpg"
-                ], {
-                    fade: 1000,
-                    duration: 8000
-                }
-        );
+        <%--$.backstretch([--%>
+        <%--"${ctx}/assets/layouts/layout/img/bg/1.jpg",--%>
+        <%--"${ctx}/assets/layouts/layout/img/bg/2.jpg",--%>
+        <%--"${ctx}/assets/layouts/layout/img/bg/3.jpg",--%>
+        <%--"${ctx}/assets/layouts/layout/img/bg/4.jpg",--%>
+        <%--"${ctx}/assets/layouts/layout/img/bg/5.jpg",--%>
+        <%--"${ctx}/assets/layouts/layout/img/bg/6.jpg"--%>
+        <%--], {--%>
+        <%--fade: 1000,--%>
+        <%--duration: 8000--%>
+        <%--}--%>
+        <%--);--%>
 
     });
 
@@ -244,7 +243,7 @@
 
             $("#loginName").tips({
                 side: 2,
-                msg: '<fmt:message key="login_username_empty"/>',
+                msg: "Username can't be empty",
                 bg: '#AE81FF',
                 time: 3
             });
@@ -259,7 +258,7 @@
 
             $("#password").tips({
                 side: 2,
-                msg: '<fmt:message key="login_pwd_empty"/>',
+                msg: "Password can't be empty",
                 bg: '#AE81FF',
                 time: 3
             });
@@ -271,7 +270,7 @@
 
             $("#code").tips({
                 side: 1,
-                msg: '<fmt:message key="login_verifycode_empty"/>',
+                msg: "Verifycode can't be empty",
                 bg: '#AE81FF',
                 time: 3
             });
@@ -282,7 +281,7 @@
 
         $("#loginbox").tips({
             side: 1,
-            msg: '<fmt:message key="login_tuning"/>',
+            msg: "login...",
             bg: '#68B500',
             time: 10
         });

@@ -30,8 +30,8 @@
     <link rel="shortcut icon" href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/icon/icon.ico">
 
     <!-- Web Fonts -->
-    <link rel='stylesheet' type='text/css'
-          href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600&subset=cyrillic,latin'>
+    <%--<link rel='stylesheet' type='text/css'--%>
+    <%--href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600&subset=cyrillic,latin'>--%>
 
     <!-- CSS Global Compulsory -->
     <link rel="stylesheet"
@@ -90,6 +90,12 @@
             color: #eee;
         }
 
+        .navbar-nav {
+            margin-top: -60px;
+            float: right;
+            color: white;
+        }
+
         ul.nav li a {
             color: white;
             text-decoration: underline;
@@ -129,34 +135,10 @@
             margin-bottom: 0;
         }
 
-        /*html, body {*/
-        /*margin: 0;*/
-        /*min-height: 100%;*/
-        /*height: 100%;*/
-        /*}*/
-
-        /*.wrapper {*/
-        /*position: relative;*/
-        /*min-height: calc(100% - 250px);*/
-        /*padding-bottom: 250px;*/
-        /*background-color: #264071;*/
-        /*}*/
-
-        /*.container-fluid {*/
-        /*min-height: calc(100% - 70px);*/
-        /*}*/
-
-        /*.footer-v1 {*/
-        /*height: 225px;*/
-        /*width: 100%;*/
-        /*position: absolute;*/
-        /*bottom: 0;*/
-        /*}*/
-
-        /*.footer-v1 .copyright {*/
-        /*padding: 0;*/
-        /*height: 225px;*/
-        /*}*/
+        label.required::after {
+            content: " *";
+            color: red;
+        }
     </style>
 </head>
 
@@ -193,33 +175,8 @@
     <div class="container-fluid content-sm box-shadow" style="background-color: #264071;">
         <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
             <div class="container">
-                <ul class="nav navbar-nav" style="margin-top: -60px;float: right;color: white;">
-                    <li>
-                        <a href="/">
-                            Home
-                        </a>
-                    </li>
-                    <%--<li>--%>
-                    <%--<a href="javascript:void(0)">--%>
-                    <%--Quotation--%>
-                    <%--</a>--%>
-                    <%--</li>--%>
-                    <li>
-                        <a href="/static/html/reports.html">
-                            Our reports
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/static/html/surveyors.html">
-                            Our surveyors
-                        </a>
-                    </li>
-                    <li>
-                        <a href="/static/html/about_us.html">
-                            About us
-                        </a>
-                    </li>
-                </ul>
+                <jsp:include page="../include/navBar.jsp"/>
+                <div class="clearfix"></div>
             </div>
         </div>
 
@@ -228,28 +185,27 @@
         <div class="row">
             <form class="form-horizontal" id="quotation-form" method="post" action="emailQuotation/addEmailQuotation"
                   role="form">
+                <h1 style="margin-bottom: 20px;font-size: 35px; text-align: center;">In
+                    Need Of A
+                    Survey?</h1>
                 <div class="form-group">
-                    <label class="control-label col-md-9 col-md-offset-1" style="text-align: left"><h1>In Need Of A
-                        Survey?</h1>
-                    </label>
-                </div>
-                <div class="form-group">
-                    <label class="control-label col-md-3" for="shipName" style="font-weight: 100;">Enter ship
+                    <label class="control-label col-md-3 required" for="shipName" style="font-weight: 100;">Enter ship
                         name</label>
                     <div class="col-md-6">
-                        <input class="form-control" name="shipName" id="shipName"/>
+                        <input class="form-control " name="shipName" id="shipName"/>
                     </div>
                     <span class="help-block"></span>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3" for="imo" style="font-weight: 100;">Enter IMO number</label>
+                    <label class="control-label col-md-3" for="imo" style="font-weight: 100;">Enter IMO
+                        number</label>
                     <div class="col-md-6">
                         <input class="form-control" name="imo" id="imo"/>
                     </div>
                     <span class="help-block"></span>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3" style="font-weight: 100;">Select
+                    <label class="control-label col-md-3 required" style="font-weight: 100;">Select
                         inspection type</label>
                     <div class="col-md-6">
                         <c:forEach items="${emailQuotationTypeDict}" var="dict">
@@ -260,14 +216,15 @@
                     <span class="help-block"></span>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3" for="port" style="font-weight: 100;">Enter port</label>
+                    <label class="control-label col-md-3 required" for="port" style="font-weight: 100;">Enter
+                        port</label>
                     <div class="col-md-6">
                         <input class="form-control" name="port" id="port"/>
                     </div>
                     <span class="help-block"></span>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3" style="font-weight: 100;">Select date range</label>
+                    <label class="control-label col-md-3 required" style="font-weight: 100;">Select date range</label>
                     <div class="input-group input-large date-picker input-daterange col-md-6"
                          data-date-format="mm/dd/yyyy" style="padding: 0 15px;float: left;">
                         <input type="text" class="form-control" name="startDate" id="startDate" autocomplete="false">
@@ -277,26 +234,36 @@
                     <span class="help-block"></span>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3" for="email" style="font-weight: 100;">Enter your email</label>
+                    <label class="control-label col-md-3 required" for="email" style="font-weight: 100;">Enter your
+                        email</label>
                     <div class="col-md-6">
                         <input class="form-control" name="email" id="email"/>
                     </div>
                     <span class="help-block"></span>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3" style="font-weight: 100;">Select your role</label>
+                    <label class="control-label col-md-3 required" style="font-weight: 100;">Select your role</label>
                     <div class="col-md-6 ">
-                        <c:forEach items="${emailQuotationRoleDict}" var="role">
-                            <label class="radio-inline">
-                                <input type="radio" name="role" value="${role.value}"> ${role.des}
-                            </label>
-                        </c:forEach>
+                        <label class="radio-inline">
+                            <input type="radio" name="role" value="Charterers"> Charterers
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="role" value="Owners"> Owners
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="role" value="Buyers"> Buyers
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="role" value="Others" id="roleOther"> Others <input
+                                onkeyup="changeRoleOther(this)"
+                                placeholder=" Please specify" style="line-height: normal">
+                        </label>
                     </div>
                     <span class="help-block"></span>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-3" for="specialRequirement" style="font-weight: 100;">Special
-                        Requirement(If any)</label>
+                        Requirement&nbsp;(If any)</label>
                     <div class="col-md-6">
                         <textarea class="form-control" name="specialRequirement" id="specialRequirement"
                                   style="resize: vertical"></textarea>
@@ -316,55 +283,7 @@
     <!--=== End Service Block ===-->
 
     <!--=== Footer Version 1 ===-->
-    <div class="footer-v1">
-        <div class="copyright">
-            <div class="container">
-                <div class="col-md-3 md-margin-bottom-40">
-                    <div class="headline">
-                        <h2>Quickly Links</h2></div>
-                    <ul class="list-unstyled link-list">
-                        <li>
-                            <a href="http://a.goshipyard.com">goshipyard</a><i class="fa fa-angle-right"></i></li>
-                        <li>
-                            <a href="http://a.goshipyard.com:8899/admin">goshiprepair</a><i
-                                class="fa fa-angle-right"></i></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 md-margin-bottom-40">
-                    <div class="headline">
-                        <h2>Quickly Links</h2></div>
-                    <ul class="list-unstyled link-list">
-                        <li>
-                            <a href="static/html/download_center.html">Download Center</a><i
-                                class="fa fa-angle-right"></i></li>
-                        <li>
-                            <a href="static/html/about_us.html">About Us</a><i class="fa fa-angle-right"></i></li>
-                    </ul>
-                </div>
-                <div class="col-md-3 md-margin-bottom-40">
-                    <div class="headline">
-                        <h2>Login or Register</h2></div>
-                    <ul class="list-unstyled">
-                        <li style="float: left;margin-right: 10px;">
-                            <a class="btn-u btn-lg" href="login_toLogin">Login</a>
-                        </li>
-                        <li style="float: left;margin-right: 10px;">
-                            <a class="btn-u btn-u-blue btn-lg" href="javascript:void(0)">Register</a>
-                        </li>
-                    </ul>
-                </div>
-                <div class="row">
-                    <div class="col-md-12" style="text-align: center;">
-                        <p>Aoyang TC Email:
-                            <a href="mailto:service@goshipyard.com" style="color:#3598DC;" class="">service@goshipgroup.com</a>
-                        <p>
-                        <p>Copyright &copy; 2016 - 2017 goshipyard.All Rights Reserved.</p>
-                    </div>
-                </div>
-            </div>
-        </div>
-        <!--/copyright-->
-    </div>
+    <jsp:include page="../include/footer.jsp"/>
     <!--=== End Footer Version 1 ===-->
 </div>
 <!--/wrapper-->
@@ -418,9 +337,9 @@
             shipName: {
                 required: true,
             },
-            imo: {
-                required: true,
-            },
+//            imo: {
+//                required: true,
+//            },
             inspectionType: {
                 required: true,
             },
@@ -541,7 +460,7 @@
                 },
                 success: function (data) {
                     response($.map(data.list, function (item) {
-                        return { //lable为下拉列表显示数据源。value为选中放入到文本框的值，这种方式可以自定义显示
+                        return { //label为下拉列表显示数据源。value为选中放入到文本框的值，这种方式可以自定义显示
                             label: item.portEn + " / " + item.countryCode,
                         }
                     }));
@@ -550,30 +469,9 @@
         }
     });
 
-    //			$("#userName").autocomplete({
-    //				source: function(request, response) {
-    //					$.ajax({
-    //						type: "post",
-    //						url: "",
-    //						dataType: "json",
-    //						data: {
-    //							userName: request.term
-    //						},
-    //						success: function(data) {
-    //							response($.map(data, function(item) {
-    //								return { //lable为下拉列表显示数据源。value为选中放入到文本框的值，这种方式可以自定义显示
-    //									lable: item.userName,
-    //									value: item.userName
-    //								}
-    //							}));
-    //						}
-    //					});
-    //				},
-    //				minLength: 1,
-    //				select: function(event, ui) { //移动键盘上下键，自动将下拉列表的数据放入到文本框，不过不写这个配置也是可以的，默认就行，具体这个还不知道是做什么
-    //					$("#userName").val(ui.item.userName);
-    //				}
-    //			});
+    function changeRoleOther(obj) {
+        $('#roleOther').val($(obj).val());
+    }
 </script>
 <!--[if lt IE 9]>
 <script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/respond.js"></script>

@@ -469,4 +469,19 @@ public class LoginController extends BaseController {
         return "sys/welcome";
     }
 
+    @RequestMapping(value = "public/ourReports", method = RequestMethod.GET)
+    public String ourReports(ModelMap map) {
+        return "public/ourReports";
+    }
+
+    @RequestMapping(value = "public/ourSurveyors", method = RequestMethod.GET)
+    public String ourSurveyors(ModelMap map) {
+        return "public/ourSurveyors";
+    }
+
+    @RequestMapping(value = "public/aboutUs", method = RequestMethod.GET)
+    public String aboutUs(ModelMap map) {
+        return "public/aboutUs";
+    }
+
 }

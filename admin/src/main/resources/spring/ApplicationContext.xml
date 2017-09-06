@@ -64,6 +64,7 @@
                 /publicShip/** = anon
                 /port/** = anon
                 /welcome = anon
+                /public/** = anon
                 /onoff = anon
                 /prepurchase =anon
                 /onoffindex = user

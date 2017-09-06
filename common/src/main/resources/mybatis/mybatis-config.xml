@@ -11,33 +11,7 @@
     </settings>
 
     <typeAliases>
-        <typeAlias type="com.ctoangels.goshipsurvey.common.modules.sys.entity.Menu" alias="Menu"/>
-        <typeAlias type="com.ctoangels.goshipsurvey.common.modules.sys.entity.Button" alias="Button"/>
-        <typeAlias type="com.ctoangels.goshipsurvey.common.modules.sys.entity.User" alias="User"/>
-        <typeAlias type="com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Quotation"
-                   alias="Quotation"></typeAlias>
-        <typeAlias type="com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Inspection"
-                   alias="Inspection"></typeAlias>
-        <typeAlias type="com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.QuotationApplication"
-                   alias="QuotationApplication"></typeAlias>
-        <typeAlias type="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.PurchaseQuotation"
-                   alias="PurchaseQuotation"></typeAlias>
-        <typeAlias type="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.ShipDetail"
-                   alias="ShipDetail"></typeAlias>
-        <typeAlias type="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Surveyor"
-                   alias="Surveyor"></typeAlias>
-        <typeAlias type="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.InspectionReport"
-                   alias="InspectionReport"></typeAlias>
-        <typeAlias type="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Defect"
-                   alias="Defect"></typeAlias>
-        <typeAlias type="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Galleries"
-                   alias="Galleries"></typeAlias>
-        <typeAlias type="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Media"
-                   alias="Media"></typeAlias>
-        <typeAlias type="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.PurchaseInspection"
-                   alias="PurchaseInspection"></typeAlias>
-        <typeAlias type="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Comment"
-                   alias="Comment"></typeAlias>
+        <package name="com.ctoangels.goshipsurvey.common.**.entity"/>
     </typeAliases>
     <!-- 映射map -->
     <mappers>

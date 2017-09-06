@@ -1,3 +1,13 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8" %>
+<%@ taglib prefix="shiro" uri="http://shiro.apache.org/tags" %>
+<%@ taglib prefix="go" uri="http://www.ctoangels.com/jsp/jstl/common" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="form" uri="http://www.springframework.org/tags/form" %>
+<%
+    String path = request.getContextPath();
+    String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
+%>
 <!DOCTYPE html>
 <!--[if IE 8]>
 <html lang="en" class="ie8"> <![endif]-->
@@ -99,6 +109,15 @@
             text-decoration: underline;
         }
 
+        .nav-header {
+            height: 90px;
+            background-color: #264071;
+        }
+
+        .navbar-nav {
+            float: right;
+        }
+
         ul.navbar-nav > li > a:hover,
         ul.navbar-nav > .active > a {
             color: #264071;
@@ -169,9 +188,12 @@
 
         .left-part, .right-part {
             padding: 0;
-            height: calc(100% - 65px);
+            height: 100%;
         }
 
+        .content-sm {
+            padding-bottom: 0;
+        }
     </style>
 </head>
 
@@ -180,7 +202,7 @@
 <div class="wrapper page-option-v1">
     <!--=== Header ===-->
     <div class="header">
-        <div class="container" style="margin-bottom: 0;">
+        <div class="container" style="height: 70px;margin-bottom: 0;">
             <!-- Logo -->
             <a class="logo" href="/">
                 <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/icon/banner.png" style="height: 70px;"
@@ -204,43 +226,17 @@
     </div>
     <!--=== End Header ===-->
 
-    <div class="container-fluid "
-         style="height: calc(100% - 72px);padding: 0;background-color: #264071;">
-        <div class="nav-header">
-            <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
-                <div class="container">
-                    <ul class="nav navbar-nav" style="float: right;color: white;">
-                        <li>
-                            <a href="/">
-                                Home
-                            </a>
-                        </li>
-                        <!--<li>-->
-                        <!--<a href="javascript:void(0)">-->
-                        <!--Quotation-->
-                        <!--</a>-->
-                        <!--</li>-->
-                        <li>
-                            <a href="/static/html/reports.html">
-                                Our reports
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/static/html/surveyors.html">
-                                Our surveyors
-                            </a>
-                        </li>
-                        <li>
-                            <a href="/static/html/about_us.html">
-                                About us
-                            </a>
-                        </li>
-                    </ul>
-                </div>
+    <div class="nav-header">
+        <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
+            <div class="container">
+                <jsp:include page="../include/navBar.jsp"/>
             </div>
-            <h1 style="margin-left: 10%;margin-top: -30px;color: white;">Our surveyors</h1>
         </div>
+        <h1 style="margin-left: 10%;color:white">Our surveyors</h1>
+    </div>
 
+    <div class="container-fluid"
+         style="height: calc(100% - 162px);padding-left: 0;padding-right:0;background-color: #264071;">
         <div class="left-part col-md-3">
             <div class="input-group">
                 <input type="text" class="form-control" id="search-port-input" placeholder="Search port...">
@@ -307,7 +303,6 @@
             <!--</div>-->
             <!--&lt;!&ndash;/copyright&ndash;&gt;-->
             <!--</div>-->
-
         </div>
 
         <div class="right-part col-md-9">
@@ -624,7 +619,7 @@
             "latitude": 31.2304324029,
             "count": 8
         },
-//浙江
+        //浙江
         {
             "id": "30",
             "nameCN": "宁波",
@@ -674,7 +669,7 @@
             "latitude": 24.4795132358,
             "count": 5
         },
-//广东
+        //广东
         {
             "id": "36",
             "nameCN": "广州",
@@ -755,7 +750,7 @@
             "latitude": 22.5159645983,
             "count": 4
         },
-//广西
+        //广西
         {
             "id": "46",
             "nameCN": "钦州",
@@ -839,7 +834,7 @@
             "latitude": 25.1221050000,
             "count": 3
         },
-//国际
+        //国际
         {
             "id": "56",
             "nameCN": "新加坡",
@@ -912,8 +907,6 @@
             "latitude": 5.887766,
             "count": 1
         },
-
-
     ];
     var map;
     var mark = [];
@@ -967,7 +960,7 @@
             }
         });
     }
-
+    //加载谷歌地图js
     function getGMapJs() {
         $.ajax({
             url: 'https://maps.googleapis.com/maps/api/js?key=AIzaSyB8ppjcHpAcpYycEReDM73t8ayqXoRfwtE&language=en',
@@ -1168,6 +1161,7 @@
             var count = 0;
             response($.map(portList, function (item) {
                 var name = (item.nameEN + item.nameCN).toLowerCase();
+                //最多显示10个
                 if (count >= 10) {
                     return;
                 }

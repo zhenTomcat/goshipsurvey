@@ -1,6 +1,7 @@
 package com.ctoangels.goshipsurvey.common.modules.prepurchase.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.toolkit.StringUtils;
 import com.ctoangels.goshipsurvey.common.modules.go.entity.PublicShip;
 import com.ctoangels.goshipsurvey.common.modules.go.mapper.PublicShipMapper;
 import com.ctoangels.goshipsurvey.common.modules.go.service.IPublicShipService;
@@ -47,14 +48,15 @@ public class EmailQuotationServiceImpl extends SuperServiceImpl<EmailQuotationMa
         ew.orderBy("value");
         List<Dict> emailQuotationTypeDict = dictMapper.selectList(ew);
         emailQuotation.setInspectionType(Tools.transferValuesToDes(emailQuotation.getInspectionType(), emailQuotationTypeDict));
-        emailQuotation.setRole(Tools.transferValuesToDes(emailQuotation.getRole(), dictService.getListByType("emailQuotationRole")));
         EntityWrapper<PublicShip> ew2 = new EntityWrapper<>();
         ew2.where("imo={0}", emailQuotation.getImo());
-        List<PublicShip> shipList = publicShipService.getListByIMO(emailQuotation.getImo());
-        if (shipList == null || shipList.size() == 0) {
-            emailQuotation.setPublicShip(null);
-        } else {
-            emailQuotation.setPublicShip(shipList.get(0));
+        if (!StringUtils.isEmpty(emailQuotation.getImo())) {
+            List<PublicShip> shipList = publicShipService.getListByIMO(emailQuotation.getImo());
+            if (shipList == null || shipList.size() == 0) {
+                emailQuotation.setPublicShip(null);
+            } else {
+                emailQuotation.setPublicShip(shipList.get(0));
+            }
         }
         MailUtil.sendEmailQuotation(emailQuotation);
         return true;

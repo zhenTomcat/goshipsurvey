@@ -61,15 +61,7 @@
 
     <style>
         .header {
-            background: -webkit-linear-gradient(#006d9c, #005069);
-            /* Safari 5.1 - 6.0 */
-            background: -o-linear-gradient(#006d9c, #005069);
-            /* Opera 11.1 - 12.0 */
-            background: -moz-linear-gradient(#006d9c, #005069);
-            /* Firefox 3.6 - 15 */
-            background: linear-gradient(#006d9c, #005069);
-            /* 标准的语法 */
-            border-bottom: none;
+            background-color: #f3f2f1;
         }
 
         .header .topbar ul.loginbar > li > a {
@@ -84,27 +76,23 @@
             color: #eee;
         }
 
-        .content-boxes-v6:hover i {
-            background: #4B77BE;
+        .header .logo {
+            height: auto;
         }
 
-        .content-boxes-v6:hover i:after {
-            border-color: #4B77BE;
+        .header .logo img {
+            margin: 0;
         }
 
-        .tag-box-v2 {
-            border-left: solid 2px #3598DC;
+        ul.nav li a {
+            color: white;
+            text-decoration: underline;
         }
 
-        .header .navbar-nav > li > a:hover,
-        .header .navbar-nav > .active > a {
-            bottom: -2px;
-            position: relative;
-            border-bottom: solid 0px;
-        }
-
-        .header .navbar-nav > li:hover > a {
-            color: black;
+        ul.navbar-nav > li > a:hover,
+        ul.navbar-nav > .active > a {
+            color: #264071;
+            background-color: white;
         }
 
         .big-first-letter:first-letter {
@@ -133,16 +121,15 @@
 <div class="wrapper page-option-v1">
     <!--=== Header ===-->
     <div class="header">
-        <div class="container">
+        <div class="container" style="margin-bottom: 0;">
             <!-- Logo -->
-            <a class="logo" href="index.html">
-                <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/img/banner_transparent.png"
+            <a class="logo" href="/">
+                <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/icon/banner.png" style="height: 70px;"
                      alt="Logo">
             </a>
             <!-- End Logo -->
 
-            <h1 style="color:white;margin:35px 0;font-size:60px">GOSHIPSURVEY</h1>
-
+            <h1 style="color:#0004fd;margin:0;font-size:60px;line-height: 1;">GOSHIPSURVEY</h1>
 
             <!-- Toggle get grouped for better mobile display -->
             <button type="button" class="navbar-toggle" data-toggle="collapse"
@@ -152,44 +139,53 @@
             </button>
             <!-- End Toggle -->
 
-
         </div>
+
         <!--/end container-->
     </div>
     <!--=== End Header ===-->
 
-    <!--=== Slider ===-->
-    <div class="tp-banner-container" style="height:200px">
-        <div class="tp-banner">
-            <ul>
-                <li class="revolution-mch-1" data-transition="fade" data-slotamount="5" data-masterspeed="1000"
-                    data-title="Slide 1">
-                    <img src="http://shipinfo.img-cn-shanghai.aliyuncs.com/unify/assets/img/sliders/ship1.jpg@x200-5rc"
-                         alt="darkblurbg" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
-                    <div class="tp-caption re-title-v1 sft start"
-                         data-x="center"
-                         data-hoffset="0"
-                         data-y="100"
-                         data-speed="1500"
-                         data-start="500"
-                         data-easing="Back.easeInOut"
-                         data-endeasing="Power1.easeIn"
-                         data-endspeed="300">
-                        Download Center
-                    </div>
-                </li>
-            </ul>
-            <div class="tp-bannertimer tp-bottom"></div>
-        </div>
-    </div>
-    <!--=== End Slider ===-->
     <!--=== Service Block ===-->
-    <div class="container content-sm box-shadow" id="service-choose">
-        <div class="row content-boxes-v2 margin-bottom-40">
+    <div class="container-fluid content-sm box-shadow" style="background-color: #264071;">
+        <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
+            <div class="container">
+                <ul class="nav navbar-nav" style="margin-top: -60px;float: right;color: white;">
+                    <li>
+                        <a href="/">
+                            Home
+                        </a>
+                    </li>
+                    <!--<li>-->
+                    <!--<a href="javascript:void(0)">-->
+                    <!--Quotation-->
+                    <!--</a>-->
+                    <!--</li>-->
+                    <li>
+                        <a href="/static/html/reports.html">
+                            Our reports
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/static/html/surveyors.html">
+                            Our surveyors
+                        </a>
+                    </li>
+                    <li>
+                        <a href="/static/html/about_us.html">
+                            About us
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+
+        <h1 style="margin-left: 10%;margin-top: -30px;color: white;">Download Center</h1>
+
+        <div class="container box-shadow">
             <div class="col-sm-4 sm-margin-bottom-40">
                 <h2 class="heading-sm">
                     <i class="icon-custom icon-sm icon-bg-u fa fa-chrome"></i>
-                    <span>Chrome</span>
+                    <span style="color: white">Chrome</span>
                 </h2>
                 <p><a target="_blank"
                       href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/ChromeStandalone_59.0.3071.115_Setup.exe">Download</a>
@@ -198,13 +194,14 @@
             <div class="col-sm-4 sm-margin-bottom-40">
                 <h2 class="heading-sm">
                     <i class="icon-custom icon-sm icon-bg-u fa fa-file"></i>
-                    <span>PC version</span>
+                    <span style="color: white">PC version</span>
                 </h2>
                 <p><a target="_blank"
                       href="">Wait...</a>
                 </p>
             </div>
         </div>
+        <div class="clearfix"></div>
     </div>
     <!--/container-->
     <!--=== End Service Block ===-->
@@ -214,19 +211,45 @@
         <div class="copyright">
             <div class="container">
                 <div class="col-md-3 md-margin-bottom-40">
-                    <div class="headline"><h2>Quickly Links</h2></div>
+                    <div class="headline">
+                        <h2>Quickly Links</h2></div>
                     <ul class="list-unstyled link-list">
-                        <li><a href="http://a.goshipyard.com">goshipyard</a><i class="fa fa-angle-right"></i></li>
-                        <li><a href="http://a.goshipyard.com:8899/admin">goshiprepair</a><i
+                        <li>
+                            <a href="http://a.goshipyard.com">goshipyard</a><i class="fa fa-angle-right"></i></li>
+                        <li>
+                            <a href="http://a.goshipyard.com:8899/admin">goshiprepair</a><i
                                 class="fa fa-angle-right"></i></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 md-margin-bottom-40">
+                    <div class="headline">
+                        <h2>Quickly Links</h2></div>
+                    <ul class="list-unstyled link-list">
+                        <li>
+                            <a href="/static/html/download_center.html">Download Center</a><i
+                                class="fa fa-angle-right"></i></li>
+                        <li>
+                            <a href="/static/html/about_us.html">About Us</a><i class="fa fa-angle-right"></i></li>
+                    </ul>
+                </div>
+                <div class="col-md-3 md-margin-bottom-40">
+                    <div class="headline">
+                        <h2>Login or Register</h2></div>
+                    <ul class="list-unstyled">
+                        <li style="float: left;margin-right: 10px;">
+                            <a class="btn-u btn-lg" href="/login_toLogin">Login</a>
+                        </li>
+                        <li style="float: left;margin-right: 10px;">
+                            <a class="btn-u btn-u-blue btn-lg" href="javascript:void(0)">Register</a>
+                        </li>
                     </ul>
                 </div>
                 <div class="row">
                     <div class="col-md-12" style="text-align: center;">
-                        <p>Aoyang TC Email:
-                            <a href="mailto:service@goshipyard.com" style="color:#3598DC;" class="">service@goshipyard.com</a>
+                        <p>Email:
+                            <a href="mailto:service@goshipyard.com" style="color:#3598DC;" class="">service@goshipgroup.com</a>
                         <p>
-                        <p>Copyright &copy; 1998 - 2017 goshipyard.All Rights Reserved.</p>
+                        <p>Copyright &copy; 2016 - 2017 Goship Group.All Rights Reserved.</p>
                     </div>
                 </div>
             </div>
