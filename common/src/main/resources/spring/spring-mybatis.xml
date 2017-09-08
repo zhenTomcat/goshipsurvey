@@ -79,7 +79,7 @@
         <property name="logAbandoned" value="${logAbandoned}"/>
     </bean>
 
-    <bean id="dataSource" class="com.ctoangels.goshipsurvey.common.util.ThreadLocalRountingDataSource">
+    <bean id="dataSource" class="com.ctoangels.goshipsurvey.common.util.ThreadLocalRoutingDataSource">
         <property name="defaultTargetDataSource" ref="goShipSurvey"/>
         <property name="targetDataSources">
             <map key-type="com.ctoangels.goshipsurvey.common.util.DataSources">

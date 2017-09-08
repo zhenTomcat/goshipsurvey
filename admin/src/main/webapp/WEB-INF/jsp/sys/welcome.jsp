@@ -197,7 +197,7 @@
                     <span class="help-block"></span>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3" for="imo" style="font-weight: 100;">Enter IMO
+                    <label class="control-label col-md-3 required" for="imo" style="font-weight: 100;">Enter IMO
                         number</label>
                     <div class="col-md-6">
                         <input class="form-control" name="imo" id="imo"/>
@@ -219,7 +219,7 @@
                     <label class="control-label col-md-3 required" for="port" style="font-weight: 100;">Enter
                         port</label>
                     <div class="col-md-6">
-                        <input class="form-control" name="port" id="port"/>
+                        <input class="form-control" name="port" id="port" value="${param.port}"/>
                     </div>
                     <span class="help-block"></span>
                 </div>
@@ -326,7 +326,6 @@
         });
     }
 
-
     $('#quotation-form').validate({
         errorElement: 'span',
         //				onfocusout: function(element) {
@@ -337,9 +336,9 @@
             shipName: {
                 required: true,
             },
-//            imo: {
-//                required: true,
-//            },
+            imo: {
+                required: true,
+            },
             inspectionType: {
                 required: true,
             },

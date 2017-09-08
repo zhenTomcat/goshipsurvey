@@ -333,9 +333,9 @@
                         class="address-li">{{e.address}}
                     </li>
                 </div>
-                <div class="col-lg-3 col-xs-3" style="text-align:center" style="height:100%;">
-                    <!--<img ng-click="clickMapItem(e)" ng-mousemove="mouseOverItem(e)" src='img/88.jpg'-->
-                    <!--style=" height:50px; width:50px; text-align:center; margin-top:10px;"/>-->
+                <div class="col-lg-3 col-xs-3" style="text-align:center;height:50px;display: table">
+                    <a class="get-quotation-a" href="/" style="display: table-cell;vertical-align: middle">
+                        <i class="fa fa-arrow-right" style="" title="Get Quotation"></i></a>
                 </div>
             </div>
         </ul>
@@ -1031,6 +1031,7 @@
                         tmp.find(".index-p").text(i + 1);
                         tmp.find(".short-name-span").text(port.nameCN + " " + port.count);
                         tmp.find(".address-li").text(port.nameEN + " " + port.count);
+                        tmp.find("a").attr('href', '/?port=' + port.nameEN);
                         html += tmp.html();
                     }
                 }
@@ -1044,6 +1045,7 @@
                     tmp.find(".index-p").text(i + 1);
                     tmp.find(".short-name-span").text(port.nameCN + " " + port.count);
                     tmp.find(".address-li").text(port.nameEN + " " + port.count);
+                    tmp.find("a").attr('href', '/?port=' + port.nameEN);
                     html += tmp.html();
                 }
                 $("#outer-ul").html(html);
@@ -1083,7 +1085,7 @@
         }
         loadShipList = function (k) {
             if (k) {
-                var html = '';
+                var html = '';a
                 for (var i = 0; i < portList.length; i++) {
                     var port = portList[i];
                     var name = (port.nameEN + port.nameCN).toLowerCase();
@@ -1093,6 +1095,7 @@
                         tmp.find(".index-p").text(i + 1);
                         tmp.find(".short-name-span").text(port.nameCN + " " + port.count);
                         tmp.find(".address-li").text(port.nameEN + " " + port.count);
+                        tmp.find("a").attr('href', '/?port=' + port.nameEN);
                         html += tmp.html();
                     }
                 }
@@ -1106,6 +1109,7 @@
                     tmp.find(".index-p").text(i + 1);
                     tmp.find(".short-name-span").text(port.nameCN + " " + port.count);
                     tmp.find(".address-li").text(port.nameEN + " " + port.count);
+                    tmp.find("a").attr('href', '/?port=' + port.nameEN);
                     html += tmp.html();
                 }
                 $("#outer-ul").html(html);
