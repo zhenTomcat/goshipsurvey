@@ -34,6 +34,7 @@ public class EmailQuotationController extends BaseController {
     @RequestMapping(value = "/addEmailQuotation", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject addEmailQuotation(EmailQuotation emailQuotation) {
+        emailQuotation.setRemoteIp((String) request.getAttribute("ip"));
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("success", emailQuotationService.sendEmailQuotation(emailQuotation));
         session.setAttribute("emailQuotationId", emailQuotation.getId());

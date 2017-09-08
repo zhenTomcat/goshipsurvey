@@ -80,6 +80,9 @@ public class EmailQuotation implements Serializable {
     private PublicShip publicShip;
 
 
+    @TableField(exist = false)
+    private String remoteIp;
+
     public Integer getId() {
         return this.id;
     }
@@ -206,5 +209,13 @@ public class EmailQuotation implements Serializable {
 
     public void setPublicShip(PublicShip publicShip) {
         this.publicShip = publicShip;
+    }
+
+    public String getRemoteIp() {
+        return remoteIp;
+    }
+
+    public void setRemoteIp(String remoteIp) {
+        this.remoteIp = remoteIp;
     }
 }

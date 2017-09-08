@@ -137,6 +137,8 @@ public class MailUtil {
         sb.append("Email : ").append(emailQuotation.getEmail()).append("<br>");
         sb.append("Role : ").append(emailQuotation.getRole()).append("<br>");
         sb.append("Special requirement :<br><label style='white-space: pre-wrap;word-wrap: break-word; '>" + emailQuotation.getSpecialRequirement() + "</label><br>");
+        sb.append("Remote ip : ").append(emailQuotation.getRemoteIp()).append("<br>");
+
         sb.append("<br><br>-------------------------------------<br><br>");
         PublicShip ship = emailQuotation.getPublicShip();
         if (ship == null) {
