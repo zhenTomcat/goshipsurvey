@@ -31,9 +31,9 @@
                     <li style="float: left;margin-right: 10px;">
                         <a class="btn-u btn-lg" href="/login_toLogin">Login</a>
                     </li>
-                    <li style="float: left;margin-right: 10px;">
-                        <a class="btn-u btn-u-blue btn-lg" href="javascript:void(0)">Register</a>
-                    </li>
+                    <%--<li style="float: left;margin-right: 10px;">--%>
+                        <%--<a class="btn-u btn-u-blue btn-lg" href="javascript:void(0)">Register</a>--%>
+                    <%--</li>--%>
                 </ul>
             </div>
             <div class="row">

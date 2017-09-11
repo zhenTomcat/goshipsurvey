@@ -8,6 +8,7 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
+<c:set var="ctx" value="${pageContext.request.contextPath}"/>
 <!DOCTYPE html>
 <!--[if IE 8]>
 <html lang="en" class="ie8"> <![endif]-->
@@ -18,12 +19,13 @@
 <!--<![endif]-->
 
 <head>
-    <title>主页</title>
+    <title>GOSHIPSURVEY</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="">
+    <meta name="keywords" content="">
     <meta name="author" content="">
 
     <!-- Favicon -->
@@ -72,7 +74,6 @@
 
     <!-- CSS Customization -->
     <link rel="stylesheet" href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/css/custom.css">
-
     <style>
         .header {
             background-color: #f3f2f1;
@@ -113,7 +114,7 @@
 
         #quotation-form {
             background-color: white;
-            width: 80%;
+            width: 100%;
             margin: 0 auto;
             padding: 15px 10px;
         }
@@ -133,12 +134,48 @@
         .help-block {
             margin-top: 0;
             margin-bottom: 0;
+            padding-top: 10px;
         }
 
         label.required::after {
             content: " *";
             color: red;
         }
+
+        .checkbox-inline + .checkbox-inline, .radio-inline + .radio-inline {
+            margin-top: 0;
+            margin-left: 0;
+        }
+
+        .checkbox-inline, .radio-inline {
+            margin-right: 10px
+        }
+
+        .login, .welcome {
+            background-color: white;
+            margin-bottom: 10px;
+        }
+
+        .login .content, .welcome .content {
+            padding: 20px 0;
+        }
+
+        .reg-block-header h2 {
+            text-align: center;
+            margin-bottom: 15px;
+        }
+
+        .reg-block-header h2 {
+            font-size: 28px;
+        }
+
+        .reg-block .input-group-addon {
+            color: #bbb;
+            background: none;
+            min-width: 40px;
+        }
+
+
     </style>
 </head>
 
@@ -182,7 +219,7 @@
 
         <h1 style="margin-left: 10%;margin-top: -30px;color: white;">Best Shipping Service Through Internet</h1>
 
-        <div class="row">
+        <div class="col-md-8">
             <form class="form-horizontal" id="quotation-form" method="post" action="emailQuotation/addEmailQuotation"
                   role="form">
                 <h1 style="margin-bottom: 20px;font-size: 35px; text-align: center;">In
@@ -277,6 +314,62 @@
             </form>
 
         </div>
+        <div class="login col-md-4" style="display: <c:if test="${!empty sessionScope.sessionUser}">none</c:if>">
+            <div class="content">
+                <div class="reg-block">
+                    <div class="reg-block-header">
+                        <h2>Sign In</h2>
+                        <%--<p>Don't Have Account? Click <a class="color-green" href="page_registration1.html">Sign Up</a>--%>
+                        <%--to registration.</p>--%>
+                    </div>
+
+                    <div class="input-group margin-bottom-20">
+                        <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                        <input type="text" class="form-control" placeholder="Username" id="loginName">
+                    </div>
+                    <div class="input-group margin-bottom-20">
+                        <span class="input-group-addon"><i class="fa fa-lock"></i></span>
+                        <input type="text" class="form-control" placeholder="Password" id="password">
+                    </div>
+
+                    <div class="input-group margin-bottom-20">
+                        <input class="form-control" placeholder="VerifyCode" type="text"
+                               id="code" name="code" style="width: 40%; float: left;">
+                        <img id="codeImg" alt="Click to change"
+                             title="Click to change"
+                             style="width: 40%; height: 34px; margin-left: 12px;" src="">
+                    </div>
+
+                    <div class="row">
+                        <div class="col-md-10 col-md-offset-1">
+                            <button class="btn-u btn-block" type="button" onclick="severCheck()" id="loginBtn"
+                                    data-loading="Log in....">Log In
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div><!--/container-->
+        </div>
+        <div class="welcome col-md-4" <%--style="display: <c:if test="${empty sessionScope.sessionUser}">none</c:if>"--%>>
+            <div class="content">
+                <div class="headline"><h2>Welcome To GoShipSurvey</h2></div>
+                <div class="row">
+                    <div class="col-sm-6">
+                        <img class="img-responsive margin-bottom-20"
+                             src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/icon/icon.ico" alt="">
+                    </div>
+                    <div class="col-sm-6">
+                        <p>Our Advantages.</p>
+                        <ul class="list-unstyled margin-bottom-20">
+                            <li><i class="fa fa-check color-green"></i> Fast</li>
+                            <li><i class="fa fa-check color-green"></i> Convenient</li>
+                            <li><i class="fa fa-check color-green"></i> Efficient</li>
+                        </ul>
+                    </div>
+                </div>
+            </div><!--/container-->
+        </div>
+        <div class="clearfix"></div>
         <!--/row-->
     </div>
     <!--/container-->
@@ -302,6 +395,8 @@
 <script type="text/javascript"
         src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/metronic/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 <script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/jquery.form.min.js"></script>
+<script src="/static/js/jquery.tips.js"></script>
+<%--<script src="/static/js/jquery.cookie.js"></script>--%>
 <!--<script type="text/javascript" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/back-to-top.js"></script>-->
 <!--<script type="text/javascript" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/smoothScroll.js"></script>
 <script type="text/javascript" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/jquery.parallax.js"></script>
@@ -316,6 +411,10 @@
 <script type="text/javascript" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/revolution-slider.js"></script>
 <script type="text/javascript" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/style-switcher.js"></script>-->
 <script type="text/javascript">
+    $(document).ready(function () {
+        changeCode();
+    })
+
     if (jQuery().datepicker) {
         $('.date-picker').datepicker({
             startDate: new Date(),
@@ -414,6 +513,7 @@
         }
     });
 
+
     $("#shipName,#imo").autocomplete({
         minChars: 0,
         width: 310,
@@ -451,14 +551,15 @@
         autoFill: false,
         source: function (request, response) {
             $.ajax({
+                url: 'http://sjtu.goshipyard.com/port/list',
                 type: "post",
-                url: "port/searchList",
-                dataType: "json",
                 data: {
-                    keyword: request.term
+                    sqlWhere: "port_en like '%" + request.term + "%' and del_flag = 0",
                 },
+                contentType: "application/x-www-form-urlencoded; charset=utf-8",
+                async: false,
                 success: function (data) {
-                    response($.map(data.list, function (item) {
+                    response($.map(data.data, function (item) {
                         return { //label为下拉列表显示数据源。value为选中放入到文本框的值，这种方式可以自定义显示
                             label: item.portEn + " / " + item.countryCode,
                         }
@@ -470,6 +571,116 @@
 
     function changeRoleOther(obj) {
         $('#roleOther').val($(obj).val());
+    }
+
+    function genTimestamp() {
+        var time = new Date();
+        return time.getTime();
+    }
+
+    function changeCode() {
+        $("#codeImg").attr("src", "code?t=" + genTimestamp());
+    }
+
+    function severCheck() {
+        $("#loginBtn").button("loading");
+        if (check()) {
+            var loginName = $("#loginName").val();
+            var password = $("#password").val();
+            var code = "ksbadmtn1f2izwqy" + loginName + ",00," + password
+                    + "ipvb5cxat0zn9eg7" + ",00," + $("#code").val();
+            $.ajax({
+                type: "POST",
+                url: 'login_login',
+                data: {
+                    keyData: code,
+                    tm: new Date().getTime()
+                },
+                dataType: 'json',
+                cache: false,
+                success: function (data) {
+                    if ("success" == data.result) {
+//                        $.cookie('isLogin', 1);
+//                        saveCookie();
+                        // var proType = $("#proType").val();
+//                        var proType = $('#system-select-div label.active').attr('data-sys');
+                        window.location.href = "onoffindex";
+//                        if (proType == 1) {
+//                            window.location.href = "onoffindex";
+//                        }
+//                        else if (proType == 2) {
+//                            window.location.href = "prepurchaseindex";
+//                        } else {
+//                            window.location.href = "";
+//                        }
+                    } else if ("user error" == data.result) {
+                        $("#loginName").tips({
+                            side: 3,
+                            msg: "Incorrect Username or Password",
+                            bg: '#FF5080',
+                            time: 15
+                        });
+                        $("#loginName").focus();
+                    } else if ("code error" == data.result) {
+                        $("#code").tips({
+                            side: 3,
+                            msg: "Incorrect Verify Code",
+                            bg: '#FF5080',
+                            time: 15
+                        });
+                        changeCode();
+                        $("#code").focus();
+                    } else {
+                        $("#loginName").tips({
+                            side: 3,
+                            msg: "Lack of Parameter",
+                            bg: '#FF5080',
+                            time: 15
+                        });
+                        $("#loginName").focus();
+                    }
+                }
+            });
+        }
+        $("#loginBtn").button("reset");
+    }
+
+    function check() {
+        if ($("#loginName").val() == "") {
+
+            $("#loginName").tips({
+                side: 3,
+                msg: "Username can't be empty",
+                bg: '#AE81FF',
+                time: 3
+            });
+            $("#loginName").focus();
+            return false;
+        } else {
+            $("#loginName").val(jQuery.trim($('#loginName').val()));
+        }
+        if ($("#password").val() == "") {
+
+            $("#password").tips({
+                side: 3,
+                msg: "Password can't be empty",
+                bg: '#AE81FF',
+                time: 3
+            });
+            $("#password").focus();
+            return false;
+        }
+        if ($("#code").val() == "") {
+            $("#code").tips({
+                side: 3,
+                msg: "Verifycode can't be empty",
+                bg: '#AE81FF',
+                time: 3
+            });
+            $("#code").focus();
+            return false;
+        }
+        return true;
     }
 </script>
 <!--[if lt IE 9]>
