@@ -43,6 +43,7 @@
     <!-- CSS Header and Footer -->
     <link rel="stylesheet"
           href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/css/headers/header-default.css">
+    <%--<link rel="stylesheet" href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/css/headers/header-v4.css">--%>
     <link rel="stylesheet" href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/css/footers/footer-v1.css">
 
     <!-- CSS Jquery UI -->
@@ -75,41 +76,8 @@
     <!-- CSS Customization -->
     <link rel="stylesheet" href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/css/custom.css">
     <style>
-        .header {
+        .header, .breadcrumbs {
             background-color: #f3f2f1;
-        }
-
-        .header .topbar ul.loginbar > li > a {
-            color: #eee;
-        }
-
-        .header .topbar ul.loginbar > li > a:hover {
-            color: black;
-        }
-
-        .header .navbar-nav > li > a {
-            color: #eee;
-        }
-
-        .navbar-nav {
-            margin-top: -60px;
-            float: right;
-            color: white;
-        }
-
-        ul.nav li a {
-            color: white;
-            text-decoration: underline;
-        }
-
-        ul.navbar-nav > li > a:hover,
-        ul.navbar-nav > .active > a {
-            color: #264071;
-            background-color: white;
-        }
-
-        .big-first-letter:first-letter {
-            font-size: 50px;
         }
 
         #quotation-form {
@@ -121,14 +89,6 @@
 
         #quotation-form label {
             color: black;
-        }
-
-        .header .logo {
-            height: auto;
-        }
-
-        .header .logo img {
-            margin: 0;
         }
 
         .help-block {
@@ -175,7 +135,6 @@
             min-width: 40px;
         }
 
-
     </style>
 </head>
 
@@ -183,41 +142,21 @@
 
 <div class="wrapper page-option-v1">
     <!--=== Header ===-->
-    <div class="header">
-        <div class="container" style="margin-bottom: 0;">
-            <!-- Logo -->
-            <a class="logo" href="/">
-                <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/icon/banner.png" style="height: 70px;"
-                     alt="Logo">
-            </a>
-            <!-- End Logo -->
-
-            <h1 style="color:#0004fd;margin:0;font-size:60px;line-height: 1;">GOSHIPSURVEY</h1>
-
-            <!-- Toggle get grouped for better mobile display -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                    data-target=".navbar-responsive-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="fa fa-bars"></span>
-            </button>
-            <!-- End Toggle -->
-
-        </div>
-
-        <!--/end container-->
-    </div>
+    <jsp:include page="../include/header.jsp"/>
     <!--=== End Header ===-->
+
+    <div class="breadcrumbs">
+        <div class="container">
+            <h1 class="pull-left">Best Shipping Service Through Internet</h1>
+            <ul class="pull-right breadcrumb">
+                <li><a href="/" class="active">Home</a></li>
+            </ul>
+        </div>
+    </div>
+    <!--/breadcrumbs-->
 
     <!--=== Service Block ===-->
     <div class="container-fluid content-sm box-shadow" style="background-color: #264071;">
-        <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
-            <div class="container">
-                <jsp:include page="../include/navBar.jsp"/>
-                <div class="clearfix"></div>
-            </div>
-        </div>
-
-        <h1 style="margin-left: 10%;margin-top: -30px;color: white;">Best Shipping Service Through Internet</h1>
 
         <div class="col-md-8">
             <form class="form-horizontal" id="quotation-form" method="post" action="emailQuotation/addEmailQuotation"

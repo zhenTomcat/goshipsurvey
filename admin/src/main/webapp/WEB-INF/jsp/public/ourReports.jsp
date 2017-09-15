@@ -74,61 +74,7 @@
     <link rel="stylesheet" href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/css/custom.css">
 
     <style>
-        .header {
-            background-color: #f3f2f1;
-        }
 
-        .header .topbar ul.loginbar > li > a {
-            color: #eee;
-        }
-
-        .header .topbar ul.loginbar > li > a:hover {
-            color: black;
-        }
-
-        .header .navbar-nav > li > a {
-            color: #eee;
-        }
-
-        .header .logo {
-            height: auto;
-        }
-
-        .header .logo img {
-            margin: 0;
-        }
-
-        ul.nav li a {
-            color: white;
-            text-decoration: underline;
-        }
-
-        .navbar-nav {
-            margin-top: -60px;
-            float: right;
-            color: white;
-        }
-
-        ul.navbar-nav > li > a:hover,
-        ul.navbar-nav > .active > a {
-            color: #264071;
-            background-color: white;
-        }
-
-        .big-first-letter:first-letter {
-            font-size: 50px;
-        }
-
-        #quotation-form {
-            background-color: white;
-            width: 80%;
-            margin: 0 auto;
-            padding: 15px 10px;
-        }
-
-        #quotation-form label {
-            color: black;
-        }
     </style>
 </head>
 
@@ -136,40 +82,21 @@
 
 <div class="wrapper page-option-v1">
     <!--=== Header ===-->
-    <div class="header">
-        <div class="container" style="margin-bottom: 0;">
-            <!-- Logo -->
-            <a class="logo" href="/">
-                <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/icon/banner.png" style="height: 70px;"
-                     alt="Logo">
-            </a>
-            <!-- End Logo -->
-
-            <h1 style="color:#0004fd;margin:0;font-size:60px;line-height: 1;">GOSHIPSURVEY</h1>
-
-            <!-- Toggle get grouped for better mobile display -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                    data-target=".navbar-responsive-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="fa fa-bars"></span>
-            </button>
-            <!-- End Toggle -->
-
-        </div>
-        <!--/end container-->
-    </div>
+    <jsp:include page="../include/header.jsp"/>
     <!--=== End Header ===-->
 
+    <div class="breadcrumbs">
+        <div class="container">
+            <h1 class="pull-left">Our Reports</h1>
+            <ul class="pull-right breadcrumb">
+                <li><a href="/">Home</a></li>
+                <li class="active"><a href="/public/ourReports">Our Reports</a></li>
+            </ul>
+        </div>
+    </div>
+    <!--/breadcrumbs-->
     <!--=== Service Block ===-->
     <div class="container-fluid content-sm box-shadow" style="background-color: #264071;">
-        <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
-            <div class="container">
-                <jsp:include page="../include/navBar.jsp"/>
-            </div>
-        </div>
-
-        <h1 style="margin-left: 10%;margin-top: -30px;color: white;">Sample Reports</h1>
-
         <!--=== Content Part ===-->
         <div class="container content">
             <div class="row portfolio-item ">

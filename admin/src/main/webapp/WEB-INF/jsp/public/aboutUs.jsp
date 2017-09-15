@@ -70,58 +70,42 @@
     <link rel="stylesheet" href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/css/custom.css">
 
     <style>
-        .header {
+        .header, .breadcrumbs {
             background-color: #f3f2f1;
         }
 
-        .header .topbar ul.loginbar > li > a {
-            color: #eee;
-        }
+        /*.header .navbar-nav > li > a {*/
+        /*color: #eee;*/
+        /*}*/
 
-        .header .topbar ul.loginbar > li > a:hover {
-            color: black;
-        }
+        /*ul.nav li a {*/
+        /*color: white;*/
+        /*text-decoration: underline;*/
+        /*}*/
 
-        .header .navbar-nav > li > a {
-            color: #eee;
-        }
+        /*.navbar-nav {*/
+        /*margin-top: -60px;*/
+        /*float: right;*/
+        /*color: white;*/
+        /*}*/
 
-        .header .logo {
-            height: auto;
-        }
+        /*ul.navbar-nav > li > a:hover,*/
+        /*ul.navbar-nav > .active > a {*/
+        /*color: #264071;*/
+        /*background-color: white;*/
+        /*}*/
 
-        .header .logo img {
-            margin: 0;
-        }
+        /*.big-first-letter:first-letter {*/
+        /*font-size: 50px;*/
+        /*}*/
 
-        ul.nav li a {
-            color: white;
-            text-decoration: underline;
-        }
+        /*.content-boxes-v6 i:after {*/
+        /*border: 1px solid #3598DC;*/
+        /*}*/
 
-        .navbar-nav {
-            margin-top: -60px;
-            float: right;
-            color: white;
-        }
-
-        ul.navbar-nav > li > a:hover,
-        ul.navbar-nav > .active > a {
-            color: #264071;
-            background-color: white;
-        }
-
-        .big-first-letter:first-letter {
-            font-size: 50px;
-        }
-
-        .content-boxes-v6 i:after {
-            border: 1px solid #3598DC;
-        }
-
-        .content-boxes-v6 i {
-            background-color: #3598DC;
-        }
+        /*.content-boxes-v6 i {*/
+        /*background-color: #3598DC;*/
+        /*}*/
 
         /*#service-choose{
             width: 100%;
@@ -136,43 +120,21 @@
 
 <div class="wrapper page-option-v1">
     <!--=== Header ===-->
-    <div class="header">
-        <div class="container" style="margin-bottom: 0;">
-            <!-- Logo -->
-            <a class="logo" href="/">
-                <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/icon/banner.png" style="height: 70px;"
-                     alt="Logo">
-            </a>
-            <!-- End Logo -->
-
-            <h1 style="color:#0004fd;margin:0;font-size:60px;line-height: 1;">GOSHIPSURVEY</h1>
-
-            <!-- Toggle get grouped for better mobile display -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                    data-target=".navbar-responsive-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="fa fa-bars"></span>
-            </button>
-            <!-- End Toggle -->
-
-        </div>
-
-        <!--/end container-->
-    </div>
+    <jsp:include page="../include/header.jsp"/>
     <!--=== End Header ===-->
 
-    <!--=== Service Block ===-->
+    <div class="breadcrumbs">
+        <div class="container">
+            <h1 class="pull-left">About us</h1>
+            <ul class="pull-right breadcrumb">
+                <li><a href="/">Home</a></li>
+                <li class="active"><a href="/public/aboutUs">About Us</a></li>
+            </ul>
+        </div>
+    </div><!--/breadcrumbs-->
+
     <!--=== Service Block ===-->
     <div class="container-fluid content-sm box-shadow" style="background-color: #264071;">
-        <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
-            <div class="container">
-                <jsp:include page="../include/navBar.jsp"/>
-            </div>
-        </div>
-
-        <h1 style="margin-left: 10%;margin-top: -30px;color: white;">About us</h1>
-
-
         <div class="container box-shadow">
             <div class="blog ">
                 <p style="font-size: 20px;text-align: justify;">Nowadays, the well established website platforms, such

@@ -80,50 +80,6 @@
             height: 100%;
         }
 
-        .header {
-            background-color: #f3f2f1;
-        }
-
-        .header .topbar ul.loginbar > li > a {
-            color: #eee;
-        }
-
-        .header .topbar ul.loginbar > li > a:hover {
-            color: black;
-        }
-
-        .header .navbar-nav > li > a {
-            color: #eee;
-        }
-
-        .header .logo {
-            height: auto;
-        }
-
-        .header .logo img {
-            margin: 0;
-        }
-
-        ul.nav li a {
-            color: white;
-            text-decoration: underline;
-        }
-
-        .nav-header {
-            height: 90px;
-            background-color: #264071;
-        }
-
-        .navbar-nav {
-            float: right;
-        }
-
-        ul.navbar-nav > li > a:hover,
-        ul.navbar-nav > .active > a {
-            color: #264071;
-            background-color: white;
-        }
-
         body {
             color: black
         }
@@ -191,9 +147,6 @@
             height: 100%;
         }
 
-        .content-sm {
-            padding-bottom: 0;
-        }
     </style>
 </head>
 
@@ -201,42 +154,22 @@
 
 <div class="wrapper page-option-v1">
     <!--=== Header ===-->
-    <div class="header">
-        <div class="container" style="height: 70px;margin-bottom: 0;">
-            <!-- Logo -->
-            <a class="logo" href="/">
-                <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/icon/banner.png" style="height: 70px;"
-                     alt="Logo">
-            </a>
-            <!-- End Logo -->
-
-            <h1 style="color:#0004fd;margin:0;font-size:60px;line-height: 1;">GOSHIPSURVEY</h1>
-
-            <!-- Toggle get grouped for better mobile display -->
-            <button type="button" class="navbar-toggle" data-toggle="collapse"
-                    data-target=".navbar-responsive-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="fa fa-bars"></span>
-            </button>
-            <!-- End Toggle -->
-
-        </div>
-
-        <!--/end container-->
-    </div>
+    <jsp:include page="../include/header.jsp"/>
     <!--=== End Header ===-->
 
-    <div class="nav-header">
-        <div class="collapse navbar-collapse mega-menu navbar-responsive-collapse">
-            <div class="container">
-                <jsp:include page="../include/navBar.jsp"/>
-            </div>
+    <div class="breadcrumbs">
+        <div class="container">
+            <h1 class="pull-left">Our Surveyors</h1>
+            <ul class="pull-right breadcrumb">
+                <li><a href="/">Home</a></li>
+                <li class="active"><a href="/public/ourSurveyors">Our Surveyors</a></li>
+            </ul>
         </div>
-        <h1 style="margin-left: 10%;color:white;margin-top: -20px">Our surveyors</h1>
     </div>
+    <!--/breadcrumbs-->
 
     <div class="container-fluid"
-         style="height: calc(100% - 162px);padding-left: 0;padding-right:0;background-color: #264071;">
+         style="height: calc(100% - 154px);padding-left: 0;padding-right:0;background-color: #264071;">
         <div class="left-part col-md-3">
             <div class="input-group">
                 <input type="text" class="form-control" id="search-port-input" placeholder="Search port...">

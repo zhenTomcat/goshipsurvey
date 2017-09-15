@@ -91,7 +91,7 @@
                  title="Click to change"
                  style="width: 40%; height: 34px; margin-left: 12px;" src="">
         </div>
-        <div class="form-group" id="system-select-div">
+        <div class="form-group" id="system-select-div" style="display: none">
             <div class="btn-group btn-group-circle" data-toggle="buttons">
                 <label class="btn blue active" data-sys="onoffindex">
                     <input type="radio" class="toggle"> On/Off hire </label>
