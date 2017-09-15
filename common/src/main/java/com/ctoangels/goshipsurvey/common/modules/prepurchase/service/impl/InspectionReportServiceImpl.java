@@ -266,7 +266,7 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
                byte[] data=readInputStream(inputStream);
                HSSFPatriarch patriarch=shipSheet1.createDrawingPatriarch();
                HSSFClientAnchor anchor=new HSSFClientAnchor(0,0,1010,250,(short)1,2,(short) 4,6);
-               anchor.setAnchorType(2);
+               //anchor.setAnchorType(2);
                patriarch.createPicture(anchor,wb.addPicture(data,HSSFWorkbook.PICTURE_TYPE_JPEG));
            } catch (Exception e) {
                e.printStackTrace();
@@ -381,18 +381,18 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
 
             //设置单元格上下添加边框和颜色
             CellStyle cellStyle=wb.createCellStyle();
-            cellStyle.setBorderBottom(CellStyle.BORDER_THIN);
+            cellStyle.setBorderBottom(BorderStyle.THIN);
             cellStyle.setBottomBorderColor(IndexedColors.BLACK.getIndex());
 
-            cellStyle.setBorderTop(CellStyle.BORDER_THIN);
+            cellStyle.setBorderTop(BorderStyle.THIN);
             cellStyle.setTopBorderColor(IndexedColors.BLACK.getIndex());
 
             //设置单元格换行
             cellStyle.setWrapText(true);
 
             //设置单元格的垂直居中和水平居中
-            cellStyle.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
-            cellStyle.setAlignment(CellStyle.ALIGN_CENTER);
+            cellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+            cellStyle.setAlignment(HorizontalAlignment.CENTER);
 
             cell0.setCellStyle(cellStyle);
             cell1.setCellStyle(cellStyle);
@@ -427,7 +427,7 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
        /*cellStyle1.setFillBackgroundColor(IndexedColors.AQUA.getIndex());*/
 
 
-       cellStyle1.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+       cellStyle1.setFillPattern(FillPatternType.SOLID_FOREGROUND);
        cellStyle1.setFillForegroundColor(HSSFColor.AQUA.index);
 
        HSSFFont font=wb.createFont();
@@ -529,7 +529,7 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
        HSSFSheet sheet3 = wb.getSheetAt(6);
        //设置单元格背景颜色和字体大小
        CellStyle cellStyle3=wb.createCellStyle();
-       cellStyle3.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+       cellStyle3.setFillPattern(FillPatternType.SOLID_FOREGROUND);
        cellStyle3.setFillForegroundColor(HSSFColor.AQUA.index);
 
 
@@ -556,13 +556,21 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
                createCell(row1);
 
                CellStyle cellStyle4=wb.createCellStyle();
-               cellStyle4.setAlignment(CellStyle.ALIGN_CENTER);
+               /*cellStyle4.setAlignment(CellStyle.ALIGN_CENTER);
                cellStyle4.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
                cellStyle4.setFillForegroundColor(HSSFColor.GREY_25_PERCENT.index);
                cellStyle4.setBorderBottom(HSSFCellStyle.BORDER_THIN); //下边框
                cellStyle4.setBorderLeft(HSSFCellStyle.BORDER_THIN);//左边框
                cellStyle4.setBorderTop(HSSFCellStyle.BORDER_THIN);//上边框
-               cellStyle4.setBorderRight(HSSFCellStyle.BORDER_THIN);//右边框
+               cellStyle4.setBorderRight(HSSFCellStyle.BORDER_THIN);//右边框*/
+
+               cellStyle4.setAlignment(HorizontalAlignment.CENTER);
+               cellStyle4.setFillPattern(FillPatternType.SOLID_FOREGROUND);
+               cellStyle4.setFillForegroundColor(HSSFColor.GREY_25_PERCENT.index);
+               cellStyle4.setBorderBottom(BorderStyle.THIN); //下边框
+               cellStyle4.setBorderLeft(BorderStyle.THIN);//左边框
+               cellStyle4.setBorderTop(BorderStyle.THIN);//上边框
+               cellStyle4.setBorderRight(BorderStyle.THIN);//右边框
 
                if(technicalAppendix.getTitle3()!=null && technicalAppendix.getTitle3()!=""){
                    sheet3.addMergedRegion(new CellRangeAddress(num, num, 0, 1));
@@ -595,11 +603,11 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
                //表中内容
                CellStyle cellStyle5=wb.createCellStyle();
                //cellStyle5.setAlignment(CellStyle.ALIGN_CENTER);
-               cellStyle5.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
-               cellStyle5.setBorderBottom(HSSFCellStyle.BORDER_THIN); //下边框
-               cellStyle5.setBorderLeft(HSSFCellStyle.BORDER_THIN);//左边框
-               cellStyle5.setBorderTop(HSSFCellStyle.BORDER_THIN);//上边框
-               cellStyle5.setBorderRight(HSSFCellStyle.BORDER_THIN);//右边框
+               cellStyle5.setVerticalAlignment(VerticalAlignment.CENTER);
+               cellStyle5.setBorderBottom(BorderStyle.THIN); //下边框
+               cellStyle5.setBorderLeft(BorderStyle.THIN);//左边框
+               cellStyle5.setBorderTop(BorderStyle.THIN);//上边框
+               cellStyle5.setBorderRight(BorderStyle.THIN);//右边框
                cellStyle5.setWrapText(true);
 
                List<TechnicalAppendixInfo> infos=technicalAppendix.getTechnicalAppendixInfo();
@@ -666,11 +674,11 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
        List<Document>  documents=report.getDocuments();
        HSSFSheet sheet4 = wb.getSheetAt(7);
        CellStyle cellStyle6=wb.createCellStyle();
-       cellStyle6.setAlignment(HSSFCellStyle.ALIGN_CENTER);
-       cellStyle6.setBorderBottom(HSSFCellStyle.BORDER_THIN); //下边框
-       cellStyle6.setBorderLeft(HSSFCellStyle.BORDER_THIN);//左边框
-       cellStyle6.setBorderTop(HSSFCellStyle.BORDER_THIN);//上边框
-       cellStyle6.setBorderRight(HSSFCellStyle.BORDER_THIN);//右边框
+       cellStyle6.setAlignment(HorizontalAlignment.CENTER);
+       cellStyle6.setBorderBottom(BorderStyle.THIN); //下边框
+       cellStyle6.setBorderLeft(BorderStyle.THIN);//左边框
+       cellStyle6.setBorderTop(BorderStyle.THIN);//上边框
+       cellStyle6.setBorderRight(BorderStyle.THIN);//右边框
 
        int i=3;
        sheet4.createRow(i-2);
@@ -707,12 +715,12 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
 
        //一级标题的样式
        CellStyle cellStyle7=wb.createCellStyle();
-       cellStyle7.setBorderBottom(HSSFCellStyle.BORDER_THIN); //下边框
-       cellStyle7.setBorderLeft(HSSFCellStyle.BORDER_THIN);//左边框
-       cellStyle7.setBorderTop(HSSFCellStyle.BORDER_THIN);//上边框
-       cellStyle7.setBorderRight(HSSFCellStyle.BORDER_THIN);//右边框
-       cellStyle7.setAlignment(CellStyle.ALIGN_CENTER);
-       cellStyle7.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+       cellStyle7.setBorderBottom(BorderStyle.THIN); //下边框
+       cellStyle7.setBorderLeft(BorderStyle.THIN);//左边框
+       cellStyle7.setBorderTop(BorderStyle.THIN);//上边框
+       cellStyle7.setBorderRight(BorderStyle.THIN);//右边框
+       cellStyle7.setAlignment(HorizontalAlignment.CENTER);
+       cellStyle7.setFillPattern(FillPatternType.SOLID_FOREGROUND);
        cellStyle7.setFillForegroundColor(HSSFColor.GREY_50_PERCENT.index);
        HSSFFont font2=wb.createFont();
        font2.setFontHeight((short)320);
@@ -720,11 +728,11 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
 
        //二级标题的样式
        CellStyle cellStyle8=wb.createCellStyle();
-       cellStyle8.setBorderBottom(HSSFCellStyle.BORDER_THIN); //下边框
-       cellStyle8.setBorderLeft(HSSFCellStyle.BORDER_THIN);//左边框
-       cellStyle8.setBorderTop(HSSFCellStyle.BORDER_THIN);//上边框
-       cellStyle8.setBorderRight(HSSFCellStyle.BORDER_THIN);//右边框
-       cellStyle8.setFillPattern(HSSFCellStyle.SOLID_FOREGROUND);
+       cellStyle8.setBorderBottom(BorderStyle.THIN); //下边框
+       cellStyle8.setBorderLeft(BorderStyle.THIN);//左边框
+       cellStyle8.setBorderTop(BorderStyle.THIN);//上边框
+       cellStyle8.setBorderRight(BorderStyle.THIN);//右边框
+       cellStyle8.setFillPattern(FillPatternType.SOLID_FOREGROUND);
        cellStyle8.setFillForegroundColor(HSSFColor.GREY_25_PERCENT.index);
        HSSFFont font3=wb.createFont();
        font3.setFontHeight((short)240);
@@ -732,19 +740,19 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
 
        //三级标题
        CellStyle cellStyle9=wb.createCellStyle();
-       cellStyle9.setBorderBottom(HSSFCellStyle.BORDER_THIN); //下边框
-       cellStyle9.setBorderLeft(HSSFCellStyle.BORDER_THIN);//左边框
-       cellStyle9.setBorderTop(HSSFCellStyle.BORDER_THIN);//上边框
-       cellStyle9.setBorderRight(HSSFCellStyle.BORDER_THIN);//右边框
+       cellStyle9.setBorderBottom(BorderStyle.THIN); //下边框
+       cellStyle9.setBorderLeft(BorderStyle.THIN);//左边框
+       cellStyle9.setBorderTop(BorderStyle.THIN);//上边框
+       cellStyle9.setBorderRight(BorderStyle.THIN);//右边框
 
        //分数水平居中
        CellStyle cellStyleGrade=wb.createCellStyle();
-       cellStyleGrade.setVerticalAlignment(CellStyle.VERTICAL_CENTER);
-       cellStyleGrade.setAlignment(CellStyle.ALIGN_CENTER);
-       cellStyleGrade.setBorderBottom(HSSFCellStyle.BORDER_THIN); //下边框
-       cellStyleGrade.setBorderLeft(HSSFCellStyle.BORDER_THIN);//左边框
-       cellStyleGrade.setBorderTop(HSSFCellStyle.BORDER_THIN);//上边框
-       cellStyleGrade.setBorderRight(HSSFCellStyle.BORDER_THIN);//右边框
+       cellStyleGrade.setVerticalAlignment(VerticalAlignment.CENTER);
+       cellStyleGrade.setAlignment(HorizontalAlignment.CENTER);
+       cellStyleGrade.setBorderBottom(BorderStyle.THIN); //下边框
+       cellStyleGrade.setBorderLeft(BorderStyle.THIN);//左边框
+       cellStyleGrade.setBorderTop(BorderStyle.THIN);//上边框
+       cellStyleGrade.setBorderRight(BorderStyle.THIN);//右边框
 
        int j=1;
        for(Grade g:grades){
