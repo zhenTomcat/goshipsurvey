@@ -41,7 +41,7 @@
 <div class="header">
     <div class="container">
         <!-- Logo -->
-        <a class="logo" href="index.html" style="font-size: 30px;color:#0804dc;text-decoration: none">
+        <a class="logo" href="/" style="font-size: 30px;color:#0804dc;text-decoration: none">
             <img src="http://shipinfo.img-cn-shanghai.aliyuncs.com/icon/banner.png@39h" alt="Logo">
             | GOSHIPSURVEY
         </a>
