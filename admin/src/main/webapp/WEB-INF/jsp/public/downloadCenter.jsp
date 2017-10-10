@@ -18,7 +18,7 @@
 <!--<![endif]-->
 
 <head>
-    <title>About us</title>
+    <title>Download Center</title>
 
     <!-- Meta -->
     <meta charset="utf-8">
@@ -31,7 +31,7 @@
 
     <!-- Web Fonts -->
     <%--<link rel='stylesheet' type='text/css'--%>
-          <%--href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600&subset=cyrillic,latin'>--%>
+    <%--href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600&subset=cyrillic,latin'>--%>
 
     <!-- CSS Global Compulsory -->
     <link rel="stylesheet"
@@ -73,6 +73,10 @@
         .header, .breadcrumbs {
             background-color: #f3f2f1;
         }
+
+        .download-file {
+            margin-top: 20px;
+        }
     </style>
 </head>
 
@@ -85,61 +89,36 @@
 
     <div class="breadcrumbs">
         <div class="container">
-            <h1 class="pull-left">About us</h1>
+            <h1 class="pull-left">Download Center</h1>
             <ul class="pull-right breadcrumb">
                 <li><a href="/">Home</a></li>
-                <li class="active"><a href="/public/aboutUs">About Us</a></li>
+                <li class="active"><a href="/public/downloadCenter">Download Center</a></li>
             </ul>
         </div>
     </div><!--/breadcrumbs-->
 
     <!--=== Service Block ===-->
     <div class="container-fluid content-sm box-shadow" style="background-color: #264071;">
-        <div class="container box-shadow">
-            <div class="blog ">
-                <p style="font-size: 20px;text-align: justify;">Nowadays, the well established website platforms, such
-                    as
-                    Amazon and Alibaba, are capable of bringing products from almost every corner of the world to your
-                    doorstep. As a consequence redefining and reshaping our lifestyle. The shipping industry, with its
-                    long
-                    history of particular processes and practices, has generally remained immune to the trend towards
-                    online
-                    transactions. Nevertheless, we firmly believe that such a step would be beneficial for all of us and
-                    in
-                    fact the journey towards modernisation is already on its way. Embracing this, the aim of GOSHIP
-                    GROUP is
-                    to provide a platform that is able to furnish each interested party with a full range of ship survey
-                    &
-                    ship repair & ship supply resources and services in a more transparent and efficient manner. </p>
-
-                <p style="font-size: 20px;text-align: justify;">GOSHIP GROUP was founded back in Jan 2016 and is now
-                    operating two websites dedicated for ship repair and ship survey services, which is supported by the
-                    extensive network of experienced and qualified maritime professionals, including ship inspectors and
-                    surveyors across the globe to accommodate our fast expanding client base. While we are in the
-                    progress
-                    of setting up service hub located in most of the key shipping ports, our established network is
-                    continuously monitored by our technical staff in accordance with standards and our own high quality
-                    and
-                    performance metrics to ensure the service rendered lives up to the expectation our our clients.
-                    Since
-                    her establishment, GOSHIP GROUP already provided survey services for lots of major Chinese shipping
-                    companies, such as FOSCO, Sinotrans and other major Opertators or Charterers in China and Singapore
-                    area. </p>
-
-                <p style="font-size: 20px;text-align: justify;">GOSHIP GROUP is experienced with wide range types of
-                    ships,
-                    which includes dry bulk carriers, MPP, PCTC, container vessels, reefer vessels, product tankers,
-                    chemical tankers, LPG, LNG and offshore vessels. </p>
-
-                <p style="font-size: 20px;text-align: justify;">As of now, GOSHIP GROUP consists of an extensive range
-                    of
-                    experts from other parts of the industry that includes ship repair yards, ship management, ship
-                    supervision, shipbroker, agency, financial leasing, insurance and maritime law. With so much of
-                    experience available, the clients of GOSHIP GROUP can be confident of receiving the complete package
-                    service, which can be provided to them 24/7. GOSHIP GROUP sincerely invite you to join this
-                    pioneering
-                    move into a new and more '21st century' industry. </p>
+        <div class="container box-shadow" style="min-height: 200px">
+            <div class="col-sm-4 download-file">
+                <h2 class="heading-sm">
+                    <i class="icon-custom icon-sm icon-bg-u fa fa-chrome"></i>
+                    <span style="color: #72c02c">Chrome</span>
+                </h2>
+                <p><a target="_blank"
+                      href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/ChromeStandalone_59.0.3071.115_Setup.exe">Download</a>
+                </p>
             </div>
+            <div class="col-sm-4 download-file">
+                <h2 class="heading-sm">
+                    <i class="icon-custom icon-sm icon-bg-u fa fa-file"></i>
+                    <span style="color: #72c02c">PC version</span>
+                </h2>
+                <p><a target="_blank"
+                      href="javascript:void(0)">Wait...</a>
+                </p>
+            </div>
+            <div class="clearfix"></div>
         </div>
         <!--/container-->
     </div>

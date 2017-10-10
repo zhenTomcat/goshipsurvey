@@ -5,38 +5,6 @@
     .header{
         background-color: #f3f2f1;
     }
-    /*.header .topbar ul.loginbar > li > a {*/
-    /*color: #eee;*/
-    /*}*/
-
-    /*.header .topbar ul.loginbar > li > a:hover {*/
-    /*color: black;*/
-    /*}*/
-
-    /*.header .navbar-nav > li > a {*/
-    /*color: #eee;*/
-    /*}*/
-
-    /*.navbar-nav {*/
-    /*margin-top: -60px;*/
-    /*float: right;*/
-    /*color: white;*/
-    /*}*/
-
-    /*ul.nav li a {*/
-    /*color: white;*/
-    /*text-decoration: underline;*/
-    /*}*/
-
-    /*ul.navbar-nav > li > a:hover,*/
-    /*ul.navbar-nav > .active > a {*/
-    /*color: #264071;*/
-    /*background-color: white;*/
-    /*}*/
-
-    /*.big-first-letter:first-letter {*/
-    /*font-size: 50px;*/
-    /*}*/
 </style>
 <div class="header">
     <div class="container">

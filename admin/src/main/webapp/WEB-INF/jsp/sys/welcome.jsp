@@ -80,13 +80,6 @@
             background-color: #f3f2f1;
         }
 
-        #quotation-form {
-            background-color: white;
-            width: 100%;
-            margin: 0 auto;
-            padding: 15px 10px;
-        }
-
         #quotation-form label {
             color: black;
         }
@@ -111,13 +104,20 @@
             margin-right: 10px
         }
 
-        .login, .welcome {
-            background-color: white;
-            margin-bottom: 10px;
+        #quotation-form {
+            width: 100%;
+            margin: 0 auto;
+            padding: 15px 10px;
+        }
+
+        .quotation, .login, .welcome {
+            background: white;
+            background-clip: content-box;
+            padding: 5px;
         }
 
         .login .content, .welcome .content {
-            padding: 20px 0;
+            padding: 15px 10px;
         }
 
         .reg-block-header h2 {
@@ -156,9 +156,9 @@
     <!--/breadcrumbs-->
 
     <!--=== Service Block ===-->
-    <div class="container-fluid content-sm box-shadow" style="background-color: #264071;">
+    <div class="container-fluid content-sm box-shadow" style="background-color: #264071;padding: 20px 15px">
 
-        <div class="col-md-8">
+        <div class="quotation col-md-8">
             <form class="form-horizontal" id="quotation-form" method="post" action="emailQuotation/addEmailQuotation"
                   role="form">
                 <h1 style="margin-bottom: 20px;font-size: 35px; text-align: center;">In
