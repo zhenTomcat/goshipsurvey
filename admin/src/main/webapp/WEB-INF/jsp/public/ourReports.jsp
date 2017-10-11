@@ -30,8 +30,8 @@
     <link rel="shortcut icon" href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/icon/icon.ico">
 
     <!-- Web Fonts -->
-    <link rel='stylesheet' type='text/css'
-          href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600&subset=cyrillic,latin'>
+    <%--<link rel='stylesheet' type='text/css'--%>
+          <%--href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600&subset=cyrillic,latin'>--%>
 
     <!-- CSS Global Compulsory -->
     <link rel="stylesheet"

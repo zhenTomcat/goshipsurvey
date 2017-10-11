@@ -3,22 +3,22 @@
     <div class="copyright">
         <div class="container">
             <%--<div class="col-md-3 md-margin-bottom-40">--%>
-                <%--<div class="headline">--%>
-                    <%--<h2>Quickly Links</h2></div>--%>
-                <%--<ul class="list-unstyled link-list">--%>
-                    <%--<li>--%>
-                        <%--<a href="http://a.goshipyard.com">goshipyard</a><i class="fa fa-angle-right"></i></li>--%>
-                    <%--<li>--%>
-                        <%--<a href="http://a.goshipyard.com:8899/admin">goshiprepair</a><i--%>
-                            <%--class="fa fa-angle-right"></i></li>--%>
-                <%--</ul>--%>
+            <%--<div class="headline">--%>
+            <%--<h2>Quickly Links</h2></div>--%>
+            <%--<ul class="list-unstyled link-list">--%>
+            <%--<li>--%>
+            <%--<a href="http://a.goshipyard.com">goshipyard</a><i class="fa fa-angle-right"></i></li>--%>
+            <%--<li>--%>
+            <%--<a href="http://a.goshipyard.com:8899/admin">goshiprepair</a><i--%>
+            <%--class="fa fa-angle-right"></i></li>--%>
+            <%--</ul>--%>
             <%--</div>--%>
             <div class="col-md-3 md-margin-bottom-40">
                 <div class="headline">
                     <h2>Quickly Links</h2></div>
                 <ul class="list-unstyled link-list">
                     <li>
-                        <a href="static/html/download_center.html">Download Center</a><i
+                        <a href="/public/downloadCenter">Download Center</a><i
                             class="fa fa-angle-right"></i></li>
                     <li>
                         <a href="/public/aboutUs">About Us</a><i class="fa fa-angle-right"></i></li>
@@ -32,7 +32,7 @@
                         <a class="btn-u btn-lg" href="/login_toLogin">Login</a>
                     </li>
                     <%--<li style="float: left;margin-right: 10px;">--%>
-                        <%--<a class="btn-u btn-u-blue btn-lg" href="javascript:void(0)">Register</a>--%>
+                    <%--<a class="btn-u btn-u-blue btn-lg" href="javascript:void(0)">Register</a>--%>
                     <%--</li>--%>
                 </ul>
             </div>
