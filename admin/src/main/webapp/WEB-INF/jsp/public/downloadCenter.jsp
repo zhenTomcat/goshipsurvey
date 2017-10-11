@@ -77,6 +77,10 @@
         .download-file {
             margin-top: 20px;
         }
+
+        #download-file-tmp {
+            display: none;
+        }
     </style>
 </head>
 
@@ -99,26 +103,8 @@
 
     <!--=== Service Block ===-->
     <div class="container-fluid content-sm box-shadow" style="background-color: #264071;">
-        <div class="container box-shadow" style="min-height: 200px">
-            <div class="col-sm-4 download-file">
-                <h2 class="heading-sm">
-                    <i class="icon-custom icon-sm icon-bg-u fa fa-chrome"></i>
-                    <span style="color: #72c02c">Chrome</span>
-                </h2>
-                <p><a target="_blank"
-                      href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/ChromeStandalone_59.0.3071.115_Setup.exe">Download</a>
-                </p>
-            </div>
-            <div class="col-sm-4 download-file">
-                <h2 class="heading-sm">
-                    <i class="icon-custom icon-sm icon-bg-u fa fa-file"></i>
-                    <span style="color: #72c02c">PC version</span>
-                </h2>
-                <p><a target="_blank"
-                      href="javascript:void(0)">Wait...</a>
-                </p>
-            </div>
-            <div class="clearfix"></div>
+        <div class="container box-shadow" style="min-height: 200px" id="download-file-group">
+            <p style="padding:50px;font-size: 40px ">Wait...</p>
         </div>
         <!--/container-->
     </div>
@@ -129,7 +115,15 @@
     <!--=== End Footer Version 1 ===-->
 </div>
 <!--/wrapper-->
-
+<div class="col-sm-4 download-file" id="download-file-tmp">
+    <h2 class="heading-sm">
+        <i class="icon-custom icon-sm icon-bg-u fa fa-file"></i>
+        <span style="color: #72c02c">N/A</span>
+    </h2>
+    <p><a target="_blank"
+          href="javascript:void(0)">Download</a>
+    </p>
+</div>
 <!-- JS Global Compulsory -->
 <script type="text/javascript"
         src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/jquery/jquery.min.js"></script>
@@ -165,13 +159,59 @@
 <script type="text/javascript"
         src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/style-switcher.js"></script>
 <script type="text/javascript">
-    jQuery(document).ready(function () {
-        App.init();
-        App.initParallaxBg();
-        FancyBox.initFancybox();
-        OwlCarousel.initOwlCarousel();
-        RevolutionSlider.initRSfullWidth();
+    //    jQuery(document).ready(function () {
+    //        App.init();
+    //        App.initParallaxBg();
+    //        FancyBox.initFancybox();
+    //        OwlCarousel.initOwlCarousel();
+    //        RevolutionSlider.initRSfullWidth();
+    //    });
+    $(function () {
+        initDownloadList();
     });
+
+
+    function initDownloadList() {
+        var downloadList = getDownloadList();
+//        var downloadList = getTestList();
+//        downloadList = [];
+        var length = downloadList.length;
+        var html = '';
+        if (downloadList && length > 0) {
+
+            var tmp = $('#download-file-tmp');
+            for (var i = 0; i < length; i++) {
+                var div = tmp.clone().removeAttr('id');
+                var file = downloadList[i];
+                div.find('span').text(file.fileName);
+                div.find('a').attr('href', file.ossUrl);
+                html += div.prop("outerHTML");
+            }
+            html += '<div class="clearfix"></div>';
+
+        } else {
+            html += ' <p style="padding:50px;font-size: 40px ">Nothing...</p>';
+        }
+        $('#download-file-group').html(html);
+    }
+
+    function getDownloadList() {
+        var list = {};
+        $.ajax({
+            url: 'http://sjtu.goshipyard.com/file/downloadList',
+            type: 'get',
+            async: false,
+            contentType: 'application/x-www-form-urlencoded; charset=utf-8',
+            success: function (data) {
+                list = data.list;
+            },
+        });
+        return list;
+    }
+
+    function getTestList() {
+        return [{fileName: 'i am a', ossUrl: 'i am url a'}, {fileName: 'i am b', ossUrl: 'i am url b'}];
+    }
 </script>
 <!--[if lt IE 9]>
 <script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/respond.js"></script>
