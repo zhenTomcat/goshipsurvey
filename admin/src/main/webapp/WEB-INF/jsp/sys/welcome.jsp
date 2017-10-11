@@ -543,12 +543,12 @@
 //                        saveCookie();
                         // var proType = $("#proType").val();
 //                        var proType = $('#system-select-div label.active').attr('data-sys');
-                        window.location.href = "onoffindex";
+                        window.location.href = "prepurchaseindex";
 //                        if (proType == 1) {
 //                            window.location.href = "onoffindex";
 //                        }
 //                        else if (proType == 2) {
-//                            window.location.href = "prepurchaseindex";
+//                            window.location.href = "";
 //                        } else {
 //                            window.location.href = "";
 //                        }

@@ -516,7 +516,6 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
            }
            if(conditionInspection.getInterGasSystem()!=null && conditionInspection.getInterGasSystem()!=""){
                count=addCellInfo(conditionInspection,sheet2,count,cellStyle1,cellStyle2,conditionInspection.getInterGasSystem(),"Inter gas system");
-               sheet2.createRow(count);
            }
        }
 
@@ -1048,8 +1047,9 @@ public class InspectionReportServiceImpl extends SuperServiceImpl<InspectionRepo
         int totalRowsHeight=51*14;
 
         int height=0;
-        for(int j=0;j<=rows;j++){
-            height+=sheet.getRow(j).getHeightInPoints();
+        for(int j=0;j<rows;j++){
+            Row row=sheet.getRow(j);
+            height+=row.getHeightInPoints();
         }
         int pages=height / totalRowsHeight+1;
 

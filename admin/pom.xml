@@ -58,11 +58,11 @@
             <artifactId>mail</artifactId>
             <version>1.4.4</version>
         </dependency>
-        <dependency>
+        <!--<dependency>
             <groupId>org.apache.poi</groupId>
             <artifactId>poi</artifactId>
             <version>3.11</version>
-        </dependency>
+        </dependency>-->
         <dependency>
             <groupId>com.belerweb</groupId>
             <artifactId>pinyin4j</artifactId>
