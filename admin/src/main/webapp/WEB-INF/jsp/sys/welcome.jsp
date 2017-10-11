@@ -203,9 +203,9 @@
                     <label class="control-label col-md-3 required" style="font-weight: 100;">Select date range</label>
                     <div class="input-group input-large date-picker input-daterange col-md-6"
                          data-date-format="mm/dd/yyyy" style="padding: 0 15px;float: left;">
-                        <input type="text" class="form-control" name="startDate" id="startDate" autocomplete="false">
+                        <input type="text" class="form-control" name="startDate" id="startDate" autocomplete="false" readonly>
                         <span class="input-group-addon"> to </span>
-                        <input type="text" class="form-control" name="endDate" id="endDate" autocomplete="false">
+                        <input type="text" class="form-control" name="endDate" id="endDate" autocomplete="false" readonly>
                     </div>
                     <span class="help-block"></span>
                 </div>
