@@ -136,6 +136,17 @@
             min-width: 40px;
         }
 
+
+        @media screen and (max-width: 768px) {
+            .breadcrumbs {
+                display: none;
+            }
+
+            .header .logo{
+                font-size: 10px !important;
+            }
+        }
+
     </style>
 </head>
 

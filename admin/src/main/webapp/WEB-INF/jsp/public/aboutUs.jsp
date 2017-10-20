@@ -28,7 +28,7 @@
     <meta name="author" content="">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="favicon.ico.png">
+    <link rel="shortcut icon" href="${global}/icon/icon.ico">
 
     <!-- Web Fonts -->
     <%--<link rel='stylesheet' type='text/css'--%>

@@ -73,6 +73,18 @@
     </servlet-mapping>
     <!-- 连接池 启用Web监控统计功能  end-->
 
+
+    <!-- CORS过滤器 start -->
+    <filter>
+        <filter-name>CorsFilter</filter-name>
+        <filter-class>com.ctoangels.goshipsurvey.admin.base.filter.cors.CorsFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>CorsFilter</filter-name>
+        <url-pattern>/emailQuotation/addEmailQuotation</url-pattern>
+    </filter-mapping>
+    <!-- CORS过滤器 end -->
+
     <!-- 日志记录 start -->
     <context-param>
         <!-- 日志配置文件路径 -->

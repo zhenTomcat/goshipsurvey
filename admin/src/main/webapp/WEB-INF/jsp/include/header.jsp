@@ -10,7 +10,7 @@
     <div class="container">
         <!-- Logo -->
         <a class="logo" href="/" style="font-size: 30px;color:#0804dc;text-decoration: none">
-            <img src="https://shipinfo.img-cn-shanghai.aliyuncs.com/icon/banner.png@39h" alt="Logo">
+            <img src="https://shipinfo.oss-cn-shanghai.aliyuncs.com/icon/banner.png?x-oss-process=image/resize,h_39" alt="Logo">
             | GOSHIPSURVEY
         </a>
         <!-- End Logo -->
