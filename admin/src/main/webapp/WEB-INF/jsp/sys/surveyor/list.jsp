@@ -176,7 +176,7 @@
                 }
             },
             "language": {
-                "url": "http://windyeel.oss-cn-shanghai.aliyuncs.com/global/plugins/datatables/cn.txt"
+                "url": "https://windyeel.oss-cn-shanghai.aliyuncs.com/global/plugins/datatables/cn.txt"
             },
             "createdRow": function (row, data, index) {
                 $('td:eq(0)', row).html("<input type='checkbox' name='chx_default' value='" + data.id + "'/>");

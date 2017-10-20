@@ -7,6 +7,7 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
+<c:set var="global" value="https://shipinfo.oss-cn-shanghai.aliyuncs.com"/>
 <!DOCTYPE html>
 <!--[if IE 8]>
 <html lang="en" class="ie8"> <![endif]-->
@@ -29,48 +30,48 @@
     <link rel="shortcut icon" href="favicon.ico.png">
 
     <!-- Web Fonts -->
-    <link rel='stylesheet' type='text/css'
-          href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600&subset=cyrillic,latin'>
+    <%--<link rel='stylesheet' type='text/css'--%>
+          <%--href='http://fonts.googleapis.com/css?family=Open+Sans:400,300,600&subset=cyrillic,latin'>--%>
 
     <!-- CSS Global Compulsory -->
     <link rel="stylesheet"
-          href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/css/style.css">
+          href="${global}/unify/assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${global}/unify/assets/css/style.css">
 
     <!-- CSS Header and Footer -->
     <link rel="stylesheet"
-          href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/css/headers/header-default.css">
-    <link rel="stylesheet" href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/css/footers/footer-v1.css">
+          href="${global}/unify/assets/css/headers/header-default.css">
+    <link rel="stylesheet" href="${global}/unify/assets/css/footers/footer-v1.css">
 
     <!-- CSS Implementing Plugins -->
-    <link rel="stylesheet" href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/animate.css">
+    <link rel="stylesheet" href="${global}/unify/assets/plugins/animate.css">
     <link rel="stylesheet"
-          href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/line-icons/line-icons.css">
+          href="${global}/unify/assets/plugins/line-icons/line-icons.css">
     <link rel="stylesheet"
-          href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/font-awesome/css/font-awesome.min.css">
+          href="${global}/unify/assets/plugins/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet"
-          href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/fancybox/source/jquery.fancybox.css">
+          href="${global}/unify/assets/plugins/fancybox/source/jquery.fancybox.css">
     <link rel="stylesheet"
-          href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
+          href="${global}/unify/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
     <link rel="stylesheet"
-          href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/revolution-slider/rs-plugin/css/settings.css"
+          href="${global}/unify/assets/plugins/revolution-slider/rs-plugin/css/settings.css"
           type="text/css" media="screen">
     <!--[if lt IE 9]>
     <link rel="stylesheet"
-          href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/revolution-slider/rs-plugin/css/settings-ie8.css"
+          href="${global}/unify/assets/plugins/revolution-slider/rs-plugin/css/settings-ie8.css"
           type="text/css" media="screen"><![endif]-->
 
     <!-- CSS Theme -->
-    <link rel="stylesheet" href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/css/theme-colors/default.css"
+    <link rel="stylesheet" href="${global}/unify/assets/css/theme-colors/default.css"
           id="style_color">
-    <link rel="stylesheet" href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/css/theme-skins/dark.css">
+    <link rel="stylesheet" href="${global}/unify/assets/css/theme-skins/dark.css">
 
     <!-- CSS Customization -->
-    <link rel="stylesheet" href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/css/custom.css">
+    <link rel="stylesheet" href="${global}/unify/assets/css/custom.css">
 
-    <link href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/datatables/datatables.min.css"
+    <link href="${global}/unify/assets/plugins/datatables/datatables.min.css"
           rel="stylesheet" type="text/css"/>
-    <link href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css"
+    <link href="${global}/unify/assets/plugins/datatables/plugins/bootstrap/datatables.bootstrap.css"
           rel="stylesheet" type="text/css"/>
     <style>
         .header {
@@ -134,7 +135,7 @@
 
         /*#service-choose{
         width: 100%;
-        background-image: url(http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/img/sliders/ship2.jpg);
+        background-image: url(${global}/unify/assets/img/sliders/ship2.jpg);
         background-repeat: no-repeat;
         background-size: cover;
     }*/
@@ -279,7 +280,7 @@
             <ul>
                 <li class="revolution-mch-1" data-transition="fade" data-slotamount="5" data-masterspeed="1000"
                     data-title="Slide 1">
-                    <img src="http://shipinfo.img-cn-shanghai.aliyuncs.com/unify/assets/img/sliders/ship1.jpg@x200-5rc"
+                    <img src="https://shipinfo.img-cn-shanghai.aliyuncs.com/unify/assets/img/sliders/ship1.jpg@x200-5rc"
                          alt="darkblurbg" data-bgfit="cover" data-bgposition="left top" data-bgrepeat="no-repeat">
                     <div class="tp-caption re-title-v1 sft start" data-x="center" data-hoffset="0" data-y="70"
                          data-speed="1500" data-start="500" data-easing="Back.easeInOut" data-endeasing="Power1.easeIn"
@@ -319,7 +320,7 @@
             <%--placeholder="Enter a keyword to search:">--%>
             <%--</div>--%>
             <%--<div class="col-lg-2 col-xs-2" style="padding-left:0px;">--%>
-            <%--<img style="width:40px; height:40px;" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/system/find_one.png"--%>
+            <%--<img style="width:40px; height:40px;" src="${global}/system/find_one.png"--%>
             <%--ng-click="listRefreshByName(findShipName)"/>--%>
             <%--<div id="result1" name="result1"></div>--%>
             <%--</div>--%>
@@ -652,9 +653,9 @@
                         <h2>Quickly Links</h2></div>
                     <ul class="list-unstyled link-list ">
                         <li>
-                            <a href="http://a.goshipyard.com ">goshipyard</a><i class="fa fa-angle-right "></i></li>
+                            <a href="https://www.goshipsurvey.com">goshipsurvey</a><i class="fa fa-angle-right "></i></li>
                         <li>
-                            <a href="http://a.goshipyard.com:8899/admin ">goshiprepair</a><i
+                            <a href="https://a.goshipyard.com:8899/admin ">goshiprepair</a><i
                                 class="fa fa-angle-right "></i></li>
                     </ul>
                 </div>
@@ -682,7 +683,7 @@
             <div class="row" style="padding-left:0px;margin-left: 0px;">
                 <div class="col-lg-9 col-xs-9"
                      style="overflow:hidden;margin-top:10px;margin-left: 0px;padding-left: 0px">
-                    <li style="display:inline-block; position:absolute; top:-10px; width:30px; margin-top:10px;background:url(http://shipinfo.oss-cn-shanghai.aliyuncs.com/system/dibiao1.png) no-repeat;background-position: 10px 0 ">
+                    <li style="display:inline-block; position:absolute; top:-10px; width:30px; margin-top:10px;background:url(${global}/system/dibiao1.png) no-repeat;background-position: 10px 0 ">
                         <p style="color:#fff; text-align:center" class="index-p">{{$index+1}}</p>
                     </li>
                     <li style="display:inline-block; margin-left:26px;"><span
@@ -702,43 +703,43 @@
 
 <!-- JS Global Compulsory -->
 <script type="text/javascript "
-        src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/jquery/jquery.min.js "></script>
+        src="${global}/unify/assets/plugins/jquery/jquery.min.js "></script>
 <script type="text/javascript "
-        src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/jquery/jquery-migrate.min.js "></script>
+        src="${global}/unify/assets/plugins/jquery/jquery-migrate.min.js "></script>
 <script type="text/javascript "
-        src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/bootstrap/js/bootstrap.min.js "></script>
+        src="${global}/unify/assets/plugins/bootstrap/js/bootstrap.min.js "></script>
 <!-- JS Implementing Plugins -->
 <script type="text/javascript "
-        src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/back-to-top.js "></script>
+        src="${global}/unify/assets/plugins/back-to-top.js "></script>
 <script type="text/javascript "
-        src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/smoothScroll.js "></script>
+        src="${global}/unify/assets/plugins/smoothScroll.js "></script>
 <script type="text/javascript "
-        src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/jquery.parallax.js "></script>
+        src="${global}/unify/assets/plugins/jquery.parallax.js "></script>
 <script type="text/javascript "
-        src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/fancybox/source/jquery.fancybox.pack.js "></script>
+        src="${global}/unify/assets/plugins/fancybox/source/jquery.fancybox.pack.js "></script>
 <script type="text/javascript "
-        src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js "></script>
+        src="${global}/unify/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js "></script>
 <script type="text/javascript "
-        src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.tools.min.js "></script>
+        src="${global}/unify/assets/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.tools.min.js "></script>
 <script type="text/javascript "
-        src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.revolution.min.js "></script>
+        src="${global}/unify/assets/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.revolution.min.js "></script>
 <!-- JS Customization -->
-<script type="text/javascript " src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/custom.js "></script>
+<script type="text/javascript " src="${global}/unify/assets/js/custom.js "></script>
 <!-- JS Page Level -->
-<script type="text/javascript " src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/app.js "></script>
+<script type="text/javascript " src="${global}/unify/assets/js/app.js "></script>
 <script type="text/javascript "
-        src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/fancy-box.js "></script>
+        src="${global}/unify/assets/js/plugins/fancy-box.js "></script>
 <script type="text/javascript "
-        src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/owl-carousel.js "></script>
+        src="${global}/unify/assets/js/plugins/owl-carousel.js "></script>
 <script type="text/javascript "
-        src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/revolution-slider.js "></script>
+        src="${global}/unify/assets/js/plugins/revolution-slider.js "></script>
 <script type="text/javascript "
-        src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/style-switcher.js "></script>
-<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/datatable.min.js "
+        src="${global}/unify/assets/js/plugins/style-switcher.js "></script>
+<script src="${global}/unify/assets/js/datatable.min.js "
         type="text/javascript "></script>
-<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/datatables/datatables.min.js "
+<script src="${global}/unify/assets/plugins/datatables/datatables.min.js "
         type="text/javascript "></script>
-<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js "
+<script src="${global}/unify/assets/plugins/datatables/plugins/bootstrap/datatables.bootstrap.js "
         type="text/javascript "></script>
 
 <script type="text/javascript ">
@@ -797,14 +798,14 @@
 
 </script>
 <!--[if lt IE 9]>
-<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/respond.js "></script>
-<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/html5shiv.js "></script>
-<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/placeholder-IE-fixes.js "></script>
+<script src="${global}/unify/assets/plugins/respond.js "></script>
+<script src="${global}/unify/assets/plugins/html5shiv.js "></script>
+<script src="${global}/unify/assets/plugins/placeholder-IE-fixes.js "></script>
 <![endif]-->
 
 
 <script type="text/javascript"
-        src="http://api.map.baidu.com/api?v=2.0&ak=sH45FS0Pd1v58SSDcltpILGWyLkSn959"></script>
+        src="https://api.map.baidu.com/api?v=2.0&ak=sH45FS0Pd1v58SSDcltpILGWyLkSn959"></script>
 <script type="text/javascript">
     var map = new BMap.Map("l-map");
     map.centerAndZoom("上海", 5);

@@ -8,6 +8,7 @@
     String path = request.getContextPath();
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
+<c:set var="global" value="https://shipinfo.oss-cn-shanghai.aliyuncs.com"/>
 <!DOCTYPE html>
 <!--[if IE 8]>
 <html lang="en" class="ie8"> <![endif]-->
@@ -27,7 +28,7 @@
     <meta name="author" content="">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/icon/icon.ico">
+    <link rel="shortcut icon" href="${global}/icon/icon.ico">
 
     <!-- Web Fonts -->
     <%--<link rel='stylesheet' type='text/css'--%>
@@ -35,43 +36,43 @@
 
     <!-- CSS Global Compulsory -->
     <link rel="stylesheet"
-          href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/bootstrap/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/css/style.css">
+          href="${global}/unify/assets/plugins/bootstrap/css/bootstrap.min.css">
+    <link rel="stylesheet" href="${global}/unify/assets/css/style.css">
 
     <!-- CSS Header and Footer -->
     <link rel="stylesheet"
-          href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/css/headers/header-default.css">
-    <link rel="stylesheet" href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/css/footers/footer-v1.css">
+          href="${global}/unify/assets/css/headers/header-default.css">
+    <link rel="stylesheet" href="${global}/unify/assets/css/footers/footer-v1.css">
 
     <!-- CSS Jquery UI -->
     <link rel="stylesheet"
-          href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/metronic/global/plugins/jquery-ui/jquery-ui.min.css">
+          href="${global}/metronic/global/plugins/jquery-ui/jquery-ui.min.css">
 
     <!-- CSS Implementing Plugins -->
-    <link rel="stylesheet" href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/animate.css">
+    <link rel="stylesheet" href="${global}/unify/assets/plugins/animate.css">
     <link rel="stylesheet"
-          href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/line-icons/line-icons.css">
+          href="${global}/unify/assets/plugins/line-icons/line-icons.css">
     <link rel="stylesheet"
-          href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/font-awesome/css/font-awesome.min.css">
+          href="${global}/unify/assets/plugins/font-awesome/css/font-awesome.min.css">
     <link rel="stylesheet"
-          href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/fancybox/source/jquery.fancybox.css">
+          href="${global}/unify/assets/plugins/fancybox/source/jquery.fancybox.css">
     <link rel="stylesheet"
-          href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
+          href="${global}/unify/assets/plugins/owl-carousel/owl-carousel/owl.carousel.css">
     <link rel="stylesheet"
-          href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/revolution-slider/rs-plugin/css/settings.css"
+          href="${global}/unify/assets/plugins/revolution-slider/rs-plugin/css/settings.css"
           type="text/css" media="screen">
     <!--[if lt IE 9]>
     <link rel="stylesheet"
-          href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/revolution-slider/rs-plugin/css/settings-ie8.css"
+          href="${global}/unify/assets/plugins/revolution-slider/rs-plugin/css/settings-ie8.css"
           type="text/css" media="screen"><![endif]-->
 
     <!-- CSS Theme -->
-    <link rel="stylesheet" href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/css/theme-colors/default.css"
+    <link rel="stylesheet" href="${global}/unify/assets/css/theme-colors/default.css"
           id="style_color">
-    <link rel="stylesheet" href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/css/theme-skins/dark.css">
+    <link rel="stylesheet" href="${global}/unify/assets/css/theme-skins/dark.css">
 
     <!-- CSS Customization -->
-    <link rel="stylesheet" href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/css/custom.css">
+    <link rel="stylesheet" href="${global}/unify/assets/css/custom.css">
 
     <style>
 
@@ -106,28 +107,28 @@
                         <div class="carousel-inner">
                             <div class="item active">
                                 <img alt=""
-                                     src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/samplereportimg/ConditionSurvey/0.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
+                                     src="${global}/downloadCenter/samplereportimg/ConditionSurvey/0.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
                                 <div class="carousel-caption">
                                     <p>Condition Survey</p>
                                 </div>
                             </div>
                             <div class="item">
                                 <img alt=""
-                                     src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/samplereportimg/ConditionSurvey/1.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
+                                     src="${global}/downloadCenter/samplereportimg/ConditionSurvey/1.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
                                 <div class="carousel-caption">
                                     <p>Condition Survey</p>
                                 </div>
                             </div>
                             <div class="item">
                                 <img alt=""
-                                     src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/samplereportimg/ConditionSurvey/2.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
+                                     src="${global}/downloadCenter/samplereportimg/ConditionSurvey/2.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
                                 <div class="carousel-caption">
                                     <p>Condition Survey</p>
                                 </div>
                             </div>
                             <div class="item">
                                 <img alt=""
-                                     src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/samplereportimg/ConditionSurvey/3.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
+                                     src="${global}/downloadCenter/samplereportimg/ConditionSurvey/3.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
                                 <div class="carousel-caption">
                                     <p>Condition Survey</p>
                                 </div>
@@ -145,7 +146,7 @@
                         </div>
                     </div>
                     <h3 style="text-align: center" class="color-light">Condition Survey
-                        <a href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/SampleReports/ConditionSurvey.pdf"
+                        <a href="${global}/downloadCenter/SampleReports/ConditionSurvey.pdf"
                            target="_blank">Download sample</a></h3>
                 </div>
                 <!-- End Condition Survey -->
@@ -156,28 +157,28 @@
                         <div class="carousel-inner">
                             <div class="item active">
                                 <img alt=""
-                                     src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/samplereportimg/OnHire/0.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
+                                     src="${global}/downloadCenter/samplereportimg/OnHire/0.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
                                 <div class="carousel-caption">
                                     <p>On Hire</p>
                                 </div>
                             </div>
                             <div class="item">
                                 <img alt=""
-                                     src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/samplereportimg/OnHire/1.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
+                                     src="${global}/downloadCenter/samplereportimg/OnHire/1.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
                                 <div class="carousel-caption">
                                     <p>On Hire</p>
                                 </div>
                             </div>
                             <div class="item">
                                 <img alt=""
-                                     src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/samplereportimg/OnHire/2.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
+                                     src="${global}/downloadCenter/samplereportimg/OnHire/2.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
                                 <div class="carousel-caption">
                                     <p>On Hire</p>
                                 </div>
                             </div>
                             <div class="item">
                                 <img alt=""
-                                     src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/samplereportimg/OnHire/3.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
+                                     src="${global}/downloadCenter/samplereportimg/OnHire/3.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
                                 <div class="carousel-caption">
                                     <p>On Hire</p>
                                 </div>
@@ -195,7 +196,7 @@
                         </div>
                     </div>
                     <h3 style="text-align: center" class="color-light">On Hire
-                        <a href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/SampleReports/OnHire.pdf"
+                        <a href="${global}/downloadCenter/SampleReports/OnHire.pdf"
                            target="_blank">Download sample</a></h3>
                 </div>
                 <!-- End On Hire -->
@@ -206,28 +207,28 @@
                         <div class="carousel-inner">
                             <div class="item active">
                                 <img alt=""
-                                     src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/samplereportimg/OffHire/0.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
+                                     src="${global}/downloadCenter/samplereportimg/OffHire/0.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
                                 <div class="carousel-caption">
                                     <p>Off Hire</p>
                                 </div>
                             </div>
                             <div class="item">
                                 <img alt=""
-                                     src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/samplereportimg/OffHire/1.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
+                                     src="${global}/downloadCenter/samplereportimg/OffHire/1.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
                                 <div class="carousel-caption">
                                     <p>Off Hire</p>
                                 </div>
                             </div>
                             <div class="item">
                                 <img alt=""
-                                     src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/samplereportimg/OffHire/2.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
+                                     src="${global}/downloadCenter/samplereportimg/OffHire/2.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
                                 <div class="carousel-caption">
                                     <p>Off Hire</p>
                                 </div>
                             </div>
                             <div class="item">
                                 <img alt=""
-                                     src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/samplereportimg/OffHire/3.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
+                                     src="${global}/downloadCenter/samplereportimg/OffHire/3.jpg?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071">
                                 <div class="carousel-caption">
                                     <p>Off Hire</p>
                                 </div>
@@ -245,14 +246,14 @@
                         </div>
                     </div>
                     <h3 style="text-align: center" class="color-light">Off Hire
-                        <a href="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/SampleReports/OffHire.pdf"
+                        <a href="${global}/downloadCenter/SampleReports/OffHire.pdf"
                            target="_blank">Download sample</a></h3>
                 </div>
                 <!-- End Off Hire -->
                 <!--wait for more samples-->
                 <div class="col-md-6">
                     <img class="wow zoomInLeft img-responsive"
-                         src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/downloadCenter/samplereportimg/moresamples.png?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071"
+                         src="${global}/downloadCenter/samplereportimg/moresamples.png?x-oss-process=image/resize,m_pad,h_400,w_600,color_264071"
                          alt="" style="visibility: visible; animation-name: zoomInLeft;">
                     <span class="wow zoomInLeft"
                           style="display:block;width:100%;position: absolute;margin-left: -15px;top:65px;text-align: center;font-size: 30px;color:white;visibility: visible; animation-name: zoomInLeft;">
@@ -276,31 +277,31 @@
 <!--/wrapper-->
 
 <!-- JS Global Compulsory -->
-<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/jquery/jquery.min.js"></script>
-<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/metronic/global/plugins/jquery-ui/jquery-ui.min.js"></script>
-<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/jquery.validate.min.js"></script>
-<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/jquery/jquery-migrate.min.js"></script>
-<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="${global}/unify/assets/plugins/jquery/jquery.min.js"></script>
+<script src="${global}/metronic/global/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="${global}/unify/assets/js/plugins/jquery.validate.min.js"></script>
+<script src="${global}/unify/assets/plugins/jquery/jquery-migrate.min.js"></script>
+<script src="${global}/unify/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
 
-<!--<script  src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/metronic/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>-->
-<!--<script  src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/back-to-top.js"></script>-->
-<!--<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/smoothScroll.js"></script>-->
-<!--<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/jquery.parallax.js"></script>-->
-<!--<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/fancybox/source/jquery.fancybox.pack.js"></script>-->
-<!--<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>-->
-<!--<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.tools.min.js"></script>-->
-<!--<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>-->
-<!--<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/custom.js"></script>-->
-<!--<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/app.js"></script>-->
-<!--<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/fancy-box.js"></script>-->
-<!--<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/owl-carousel.js"></script>-->
-<!--<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/revolution-slider.js"></script>-->
-<!--<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/js/plugins/style-switcher.js"></script>-->
-<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/wow-animations/js/wow.min.js"></script>
+<!--<script  src="${global}/metronic/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>-->
+<!--<script  src="${global}/unify/assets/plugins/back-to-top.js"></script>-->
+<!--<script src="${global}/unify/assets/plugins/smoothScroll.js"></script>-->
+<!--<script src="${global}/unify/assets/plugins/jquery.parallax.js"></script>-->
+<!--<script src="${global}/unify/assets/plugins/fancybox/source/jquery.fancybox.pack.js"></script>-->
+<!--<script src="${global}/unify/assets/plugins/owl-carousel/owl-carousel/owl.carousel.js"></script>-->
+<!--<script src="${global}/unify/assets/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.tools.min.js"></script>-->
+<!--<script src="${global}/unify/assets/plugins/revolution-slider/rs-plugin/js/jquery.themepunch.revolution.min.js"></script>-->
+<!--<script src="${global}/unify/assets/js/custom.js"></script>-->
+<!--<script src="${global}/unify/assets/js/app.js"></script>-->
+<!--<script src="${global}/unify/assets/js/plugins/fancy-box.js"></script>-->
+<!--<script src="${global}/unify/assets/js/plugins/owl-carousel.js"></script>-->
+<!--<script src="${global}/unify/assets/js/plugins/revolution-slider.js"></script>-->
+<!--<script src="${global}/unify/assets/js/plugins/style-switcher.js"></script>-->
+<script src="${global}/unify/assets/plugins/wow-animations/js/wow.min.js"></script>
 <!--[if lt IE 9]>
-<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/respond.js"></script>
-<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/html5shiv.js"></script>
-<script src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/unify/assets/plugins/placeholder-IE-fixes.js"></script>
+<script src="${global}/unify/assets/plugins/respond.js"></script>
+<script src="${global}/unify/assets/plugins/html5shiv.js"></script>
+<script src="${global}/unify/assets/plugins/placeholder-IE-fixes.js"></script>
 <![endif]-->
 <script type="text/javascript">
     jQuery(document).ready(function () {

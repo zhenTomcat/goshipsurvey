@@ -9,7 +9,7 @@
             + path + "/";
 %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-<c:set var="global" value="http://windyeel.oss-cn-shanghai.aliyuncs.com/global"/>
+<c:set var="global" value="https://windyeel.oss-cn-shanghai.aliyuncs.com/global"/>
 <!DOCTYPE html>
 
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
@@ -54,7 +54,7 @@
 </div>
 <!-- END LOGIN -->
 <!-- BEGIN COPYRIGHT -->
-<div class="copyright"><fmt:message key="login_since_year"/> &copy; <a href="http://a.goshipyard.com/"><fmt:message
+<div class="copyright"><fmt:message key="login_since_year"/> &copy; <a href="https://www.goshipsurvey.com/"><fmt:message
         key="sys.site.title"/></a> <fmt:message key="login_copyrights_reserved"/></div>
 
 <script src="${global}/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>

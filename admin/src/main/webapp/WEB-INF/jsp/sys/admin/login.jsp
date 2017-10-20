@@ -9,7 +9,7 @@
             + path + "/";
 %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-<c:set var="global" value="http://windyeel.oss-cn-shanghai.aliyuncs.com/global"/>
+<c:set var="global" value="https://windyeel.oss-cn-shanghai.aliyuncs.com/global"/>
 <!DOCTYPE html>
 
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->

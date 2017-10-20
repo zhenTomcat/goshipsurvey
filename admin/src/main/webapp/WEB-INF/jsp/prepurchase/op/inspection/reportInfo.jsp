@@ -111,7 +111,7 @@
                                                                 <img src="${report.shipDetail.shipImg}" style="width: 100%;height: 250px"/>
                                                             </c:if>
                                                             <c:if test="${! ss}">
-                                                                <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/zQnJWazGDX.jpg" style="width: 100%;height: 250px"/>
+                                                                <img src="https://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/zQnJWazGDX.jpg" style="width: 100%;height: 250px"/>
                                                             </c:if>
                                                         </div>
                                                 </div>
@@ -403,7 +403,7 @@
                                                         <input data-imgId="${m.id}" style=" margin-left: 3px; margin-top: 5px;" type="checkbox"/>
                                                     </span>
                                                     <a data-model="dialog" class="downloadAlbum" data-galleriesId="${g.id}" href="prepurchase/op/viewImg?galleriesId=${g.id}"  >
-                                                        <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/GWTcR228ek.jpg"
+                                                        <img src="https://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/GWTcR228ek.jpg"
                                                              style="width: 200px;height: 200px;"/>
                                                     </a>
                                                 </div>
