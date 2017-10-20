@@ -168,7 +168,7 @@
 
                                                         <c:if test="${! rss}">
                                                             <button id="upload_ship_img" style="width: 100%">
-                                                                <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/zQnJWazGDX.jpg" style="width: 100%;height: 250px"/>
+                                                                <img src="https://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/zQnJWazGDX.jpg" style="width: 100%;height: 250px"/>
                                                             </button>
                                                         </c:if>
                                                     </div>
@@ -431,7 +431,7 @@
                                                                 <th> Description </th>
                                                                 <th style="width: 15%"> Estimated cost   </br>(USD) </th>
                                                                 <th style="width: 10%"> <button data-num="3" type="button" onclick="defectAddRow(this)">
-                                                                    <img class="add_img" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/add.png" />
+                                                                    <img class="add_img" src="https://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/add.png" />
                                                                 </button>
                                                                 </th>
                                                             </tr>
@@ -479,7 +479,7 @@
                                                                 <li class="li-right fa fa-trash-o"></li>
                                                             </span>
                                                             <a data-model="dialog" href="prepurchase/surveyor/img?galleriesId=${g.id}&reportId=${report.id}"  >
-                                                                <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/GWTcR228ek.jpg"
+                                                                <img src="https://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/GWTcR228ek.jpg"
                                                                      style="width: 200px;height: 200px;"/>
                                                             </a>
                                                         </div>
@@ -643,7 +643,7 @@
                                                                                     data-num="2"
                                                                                 </c:if>
                                                                                 type="button" onclick="addRow(this,'${t.catagory}','${t.title1}','${t.flag}')">
-                                                                            <img class="add_img" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/add.png" />
+                                                                            <img class="add_img" src="https://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/add.png" />
                                                                         </button>
                                                                         </th>
                                                                     </tr>
@@ -713,7 +713,7 @@
                                                                             <th style="width: 40%"> ${te.title2} </th>
                                                                             <th style="width: 20%"> ${te.title3} </th>
                                                                             <th style="width: 10%"> <button data-num="3" type="button" onclick="addRow(this,'Vessel tank capacity','${te.title1}')">
-                                                                                <img class="add_img" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/add.png" />
+                                                                                <img class="add_img" src="https://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/add.png" />
                                                                             </button>
                                                                             </th>
                                                                         </tr>
@@ -757,7 +757,7 @@
                                                     <th> Title </th>
                                                     <th> Attachment </th>
                                                     <th style="width: 5%"> <button  type="button" onclick="addRow1(this)">
-                                                        <img class="add_img" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/add.png" />
+                                                        <img class="add_img" src="https://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/add.png" />
                                                     </button>
                                                     </th>
                                                 </tr>
@@ -794,7 +794,7 @@
                                 <div class="tab-pane tab-left " id="tab8">
                                     <div class="tab-pane-div"  >
                                         <div>
-                                            <img width="800px" height="500px" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/system/success.jpg"/>
+                                            <img width="800px" height="500px" src="https://shipinfo.oss-cn-shanghai.aliyuncs.com/system/success.jpg"/>
                                         </div>
                                     </div>
 
@@ -978,7 +978,7 @@
     //删除船的图片
     function removeShipImg(obj){
         var html='<button id="upload_ship_img" style="width: 100%">'+
-                ' <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/zQnJWazGDX.jpg" style="width: 100%;height: 250px"/> </button>';
+                ' <img src="https://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/zQnJWazGDX.jpg" style="width: 100%;height: 250px"/> </button>';
         $(obj).parent().parent().html(html);
         initUploaders_ship_img("upload_ship_img", "shipinfo", "${staticPath}/");
 
@@ -1248,7 +1248,7 @@
                             '<div><span  onclick="javascript:editPhoto(this,'+galleriesId+',\''+albumName+'\');" class="span-left"><li class="li-left fa fa-edit"></li></span>'+
                             '<span onclick="javascript:removePhoto(this,'+galleriesId+',\''+albumName+'\');" class="span-right"><li class="li-right fa fa-trash-o"></li> </span>'+
                             '<a data-model="dialog" href="prepurchase/surveyor/img?galleriesId='+galleriesId+'&reportId='+reportId+'"  >'+
-                            '<img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/GWTcR228ek.jpg" style="width: 200px;height: 200px;"/> </a> </div>'+
+                            '<img src="https://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/GWTcR228ek.jpg" style="width: 200px;height: 200px;"/> </a> </div>'+
                             '<div style="width: 200px"><p style="float: left;margin-right: 10px;">'+albumName+'</p><p style="float: left;margin-right: 10px">(0)</p>'+
                             '<p style="float: left;margin: 0px">Create at '+createDate+'</p></div></div></div>';
                     $(".photo_name").closest("form").find(".divPhoto:last").after(html);

@@ -152,7 +152,7 @@
                                                                     </c:if>
                                                                     <c:if test="${! rss}">
                                                                         <button id="upload_ship_img" style="width: 100%">
-                                                                            <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/zQnJWazGDX.jpg" style="width: 100%;height: 250px"/>
+                                                                            <img src="https://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/zQnJWazGDX.jpg" style="width: 100%;height: 250px"/>
                                                                         </button>
                                                                     </c:if>
                                                                 </div>
@@ -408,7 +408,7 @@
                                                                             <th> Description </th>
                                                                             <th style="width: 15%"> Estimated cost   </br>(USD) </th>
                                                                             <th style="width: 5%"> <button data-num="3" type="button" onclick="defectAddRow(this)">
-                                                                                <img class="add_img" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/add.png" />
+                                                                                <img class="add_img" src="https://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/add.png" />
                                                                             </button>
                                                                             </th>
                                                                         </tr>
@@ -454,7 +454,7 @@
                                                                             <li class="li-right fa fa-trash-o"></li>
                                                                         </span>
                                                                         <a data-model="dialog" href="prepurchase/surveyor/img?galleriesId=${g.id}&reportId=${report.id}"  >
-                                                                            <img src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/GWTcR228ek.jpg"
+                                                                            <img src="https://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/GWTcR228ek.jpg"
                                                                                  style="width: 200px;height: 200px;"/>
                                                                         </a>
                                                                     </div>
@@ -614,7 +614,7 @@
                                                                                         <th> ${t.title3} </th>
                                                                                     </c:if>
                                                                                     <th style="width: 5%"> <button data-num="3" type="button" onclick="addRow(this)">
-                                                                                        <img class="add_img" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/add.png" />
+                                                                                        <img class="add_img" src="https://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/add.png" />
                                                                                     </button>
                                                                                     </th>
                                                                                 </tr>
@@ -670,7 +670,7 @@
                                                                                         <th style="width: 40%"> ${te.title2} </th>
                                                                                         <th style="width: 20%"> ${te.title3} </th>
                                                                                         <th style="width: 10%"> <button data-num="3" type="button" onclick="addRow(this)">
-                                                                                            <img class="add_img" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/add.png" />
+                                                                                            <img class="add_img" src="https://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/add.png" />
                                                                                         </button>
                                                                                         </th>
                                                                                     </tr>
@@ -708,7 +708,7 @@
                                                                 <th> Title </th>
                                                                 <th> Attachment </th>
                                                                 <th style="width: 5%"> <button  type="button" onclick="addRow1(this)">
-                                                                    <img class="add_img" src="http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/add.png" />
+                                                                    <img class="add_img" src="https://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipsurvey/add.png" />
                                                                 </button>
                                                                 </th>
                                                             </tr>

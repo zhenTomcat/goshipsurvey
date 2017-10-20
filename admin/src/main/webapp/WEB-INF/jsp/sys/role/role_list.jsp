@@ -69,7 +69,7 @@
                 }
             },
             "language": {
-                "url": "http://idle-data.oss-cn-shanghai.aliyuncs.com/global/plugins/datatables/cn.txt"
+                "url": "https://idle-data.oss-cn-shanghai.aliyuncs.com/global/plugins/datatables/cn.txt"
             },
             "createdRow": function (row, data, index) {
                 $('td:eq(0)', row).html("<input type='checkbox' name='chx_default' value='" + data.id + "'/>");

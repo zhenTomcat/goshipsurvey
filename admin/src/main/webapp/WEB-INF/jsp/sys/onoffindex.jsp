@@ -8,7 +8,7 @@
     String wsPath = request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <c:set var="ctx" value="${pageContext.request.contextPath}"/>
-<c:set var="global" value="http://windyeel.oss-cn-shanghai.aliyuncs.com/global"/>
+<c:set var="global" value="https://windyeel.oss-cn-shanghai.aliyuncs.com/global"/>
 <!DOCTYPE html>
 <!--[if IE 8]> <html lang="en" class="ie8 no-js"> <![endif]-->
 <!--[if IE 9]> <html lang="en" class="ie9 no-js"> <![endif]-->
@@ -105,7 +105,7 @@
 </div>
 <div class="page-footer">
     <div class="page-footer-inner"> 2016 &copy;
-        <a href="http://a.goshipyard.com/" style="color:#337ab7"
+        <a href="https://www.goshipsurvey.com" style="color:#337ab7"
            title="<fmt:message key="sys.site.title"/>" target="_blank"><fmt:message
                 key="sys.site.title"/></a><fmt:message key="login_copyrights_reserved"/>
     </div>
@@ -188,7 +188,7 @@
 <input id="index-user-type" type="hidden" value="${sessionScope.sessionUser.type}">
 <input id="isLogin" type="hidden" value="${param.isLogin}">
 </body>
-<script src="http://cdn.sockjs.org/sockjs-0.3.min.js"></script>
+<script src="https://cdn.sockjs.org/sockjs-0.3.min.js"></script>
 <script>
 
     $(document).ready(function () {
@@ -199,13 +199,13 @@
     function nofind(type) {
         var img = event.srcElement;
         if (type == '1') {
-            img.src = "http://windyeel.oss-cn-shanghai.aliyuncs.com/global/img/default.png";
+            img.src = "https://windyeel.oss-cn-shanghai.aliyuncs.com/global/img/default.png";
         } else if (type == '2') {
-            img.src = "http://windyeel.oss-cn-shanghai.aliyuncs.com/global/img/default-man.jpg";
+            img.src = "https://windyeel.oss-cn-shanghai.aliyuncs.com/global/img/default-man.jpg";
         } else if (type == '3') {
-            img.src = "http://windyeel.oss-cn-shanghai.aliyuncs.com/global/img/default-site-index.png";
+            img.src = "https://windyeel.oss-cn-shanghai.aliyuncs.com/global/img/default-site-index.png";
         } else if (type == '4') {
-            img.src = "http://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/zQnJWazGDX.jpg";
+            img.src = "https://shipinfo.oss-cn-shanghai.aliyuncs.com/goshipyard/zQnJWazGDX.jpg";
         }
     }
 
@@ -267,7 +267,7 @@
             websocket = new MozWebSocket("ws://" + path + "wsMy");
             console.log("WebSocket:开始2")
         } else {
-            websocket = new SockJS("http://" + path + "wsMy/sockjs");
+            websocket = new SockJS("https://" + path + "wsMy/sockjs");
             console.log("WebSocket:开始3")
         }
         websocket.onopen = function (event) {

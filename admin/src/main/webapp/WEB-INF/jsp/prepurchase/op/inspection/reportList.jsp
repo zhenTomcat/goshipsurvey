@@ -68,7 +68,7 @@
                 }
             },
 //            "language": {
-//                "url": "http://windyeel.oss-cn-shanghai.aliyuncs.com/global/plugins/datatables/cn.txt"
+//                "url": "https://windyeel.oss-cn-shanghai.aliyuncs.com/global/plugins/datatables/cn.txt"
 //            },
             "lengthMenu": [[5, 40, 60], [5, 40, 60]],
             "columns": [

@@ -7,9 +7,9 @@
             <%--<h2>Quickly Links</h2></div>--%>
             <%--<ul class="list-unstyled link-list">--%>
             <%--<li>--%>
-            <%--<a href="http://a.goshipyard.com">goshipyard</a><i class="fa fa-angle-right"></i></li>--%>
+            <%--<a href="https://a.goshipyard.com">goshipyard</a><i class="fa fa-angle-right"></i></li>--%>
             <%--<li>--%>
-            <%--<a href="http://a.goshipyard.com:8899/admin">goshiprepair</a><i--%>
+            <%--<a href="https://a.goshipyard.com:8899/admin">goshiprepair</a><i--%>
             <%--class="fa fa-angle-right"></i></li>--%>
             <%--</ul>--%>
             <%--</div>--%>
