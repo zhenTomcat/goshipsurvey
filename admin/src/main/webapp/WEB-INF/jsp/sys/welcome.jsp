@@ -317,7 +317,7 @@
                     </div>
                     <div class="input-group margin-bottom-20">
                         <span class="input-group-addon"><i class="fa fa-lock"></i></span>
-                        <input type="text" class="form-control" placeholder="Password" id="password">
+                        <input type="password" class="form-control" placeholder="Password" id="password">
                     </div>
 
                     <div class="input-group margin-bottom-20">
@@ -646,7 +646,7 @@
 //                        saveCookie();
                         // var proType = $("#proType").val();
 //                        var proType = $('#system-select-div label.active').attr('data-sys');
-                        window.location.href = "onoffindexindex";
+                        window.location.href = "onoffindex";
 //                        if (proType == 1) {
 //                            window.location.href = "onoffindex";
 //                        }
