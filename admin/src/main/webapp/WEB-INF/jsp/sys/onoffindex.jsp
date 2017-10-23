@@ -187,12 +187,12 @@
 <input id="index-user-type" type="hidden" value="${sessionScope.sessionUser.type}">
 <input id="isLogin" type="hidden" value="${param.isLogin}">
 </body>
-<script src="https://cdn.sockjs.org/sockjs-0.3.min.js"></script>
+<%--<script src="https://cdn.sockjs.org/sockjs-0.3.min.js"></script>--%>
 <script>
 
     $(document).ready(function () {
         initPage();
-        webSocketMessage();
+//        webSocketMessage();
     });
 
     function nofind(type) {
