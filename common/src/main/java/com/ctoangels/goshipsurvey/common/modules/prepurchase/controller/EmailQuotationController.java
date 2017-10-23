@@ -37,19 +37,12 @@ public class EmailQuotationController extends BaseController {
         emailQuotation.setRemoteIp((String) request.getAttribute("ip"));
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("success", emailQuotationService.sendEmailQuotation(emailQuotation));
-        session.setAttribute("emailQuotationId", emailQuotation.getId());
+        session.setAttribute("emailQuotation", emailQuotation);
         return jsonObject;
     }
 
     @RequestMapping(value = "/detail")
     public String emailQuotationShow(ModelMap map) {
-        Object objId = session.getAttribute("emailQuotationId");
-        if (objId != null) {
-            Integer id = (Integer) objId;
-            EmailQuotation eq = emailQuotationService.selectById(id);
-            eq.setInspectionType(Tools.transferValuesToDes(eq.getInspectionType(), getEmailQuotationTypeDict()));
-            map.put("quotation", eq);
-        }
         return "sys/emailQuotation";
     }
 }

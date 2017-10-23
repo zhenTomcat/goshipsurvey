@@ -136,13 +136,12 @@
             min-width: 40px;
         }
 
-
         @media screen and (max-width: 768px) {
             .breadcrumbs {
                 display: none;
             }
 
-            .header .logo{
+            .header .logo {
                 font-size: 10px !important;
             }
         }
@@ -198,8 +197,45 @@
                     <div class="col-md-6">
                         <c:forEach items="${emailQuotationTypeDict}" var="dict">
                             <label class="checkbox-inline"><input type="checkbox" name="inspectionType"
+                                                                  id="inspectionType${dict.value}"
+                                                                  onclick="changeDeliveryDisplay(this)"
                                                                   value="${dict.value}"/>${dict.des}</label>
                         </c:forEach>
+                    </div>
+                    <span class="help-block"></span>
+                </div>
+                <div class="form-group" id="delivery-div" style="display: none;">
+                    <label class="control-label col-md-3 required" style="font-weight: 100;">Place of delivery</label>
+                    <div class="col-md-6 ">
+                        <label class="radio-inline">
+                            <input type="radio" name="delivery" value="1"> DLOSP
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="delivery" value="2"> APS
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="delivery" value="3"> Other
+                            <input class="other-input" name="deliveryOther" placeholder=" Please specify"
+                                   style="line-height: normal" disabled>
+                        </label>
+                    </div>
+                    <span class="help-block"></span>
+                </div>
+                <div class="form-group" id="re-delivery-div" style="display: none;">
+                    <label class="control-label col-md-3 required" style="font-weight: 100;">Place of
+                        re-delivery</label>
+                    <div class="col-md-6 ">
+                        <label class="radio-inline">
+                            <input type="radio" name="reDelivery" value="1"> DLOSP
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="reDelivery" value="2"> APS
+                        </label>
+                        <label class="radio-inline">
+                            <input type="radio" name="reDelivery" value="3"> Other
+                            <input class="other-input" name="reDeliveryOther" placeholder=" Please specify"
+                                   style="line-height: normal" disabled>
+                        </label>
                     </div>
                     <span class="help-block"></span>
                 </div>
@@ -212,12 +248,11 @@
                     <span class="help-block"></span>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3 required" style="font-weight: 100;">Select date range</label>
-                    <div class="input-group input-large date-picker input-daterange col-md-6"
-                         data-date-format="mm/dd/yyyy" style="padding: 0 15px;float: left;">
-                        <input type="text" class="form-control" name="startDate" id="startDate" autocomplete="false" readonly>
-                        <span class="input-group-addon"> to </span>
-                        <input type="text" class="form-control" name="endDate" id="endDate" autocomplete="false" readonly>
+                    <label class="control-label col-md-3 required" style="font-weight: 100;">Estimated Date</label>
+                    <div class="col-md-6">
+                        <input type="text" class="form-control date-picker" style="background-color: white"
+                               id="estimatedDate"
+                               name="estimatedDate" autocomplete="false" readonly>
                     </div>
                     <span class="help-block"></span>
                 </div>
@@ -229,23 +264,25 @@
                     </div>
                     <span class="help-block"></span>
                 </div>
-                <div class="form-group">
+                <div class="form-group" id="role-div">
                     <label class="control-label col-md-3 required" style="font-weight: 100;">Select your role</label>
                     <div class="col-md-6 ">
                         <label class="radio-inline">
-                            <input type="radio" name="role" value="Charterers"> Charterers
+                            <input type="radio" name="role" value="1"> Charterers
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="role" value="Owners"> Owners
+                            <input type="radio" name="role" value="2"> Owners
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="role" value="Buyers"> Buyers
+                            <input type="radio" name="role" value="3"> Buyers
                         </label>
                         <label class="radio-inline">
-                            <input type="radio" name="role" value="Others" id="roleOther"> Others <input
-                                onkeyup="changeRoleOther(this)"
-                                placeholder=" Please specify" style="line-height: normal">
+                            <input class="other-input-control" type="radio" name="role" value="4" id="roleOtherRadio">
+                            Others <input class="other-input" placeholder=" Please specify" name="roleOther"
+                                          id="roleOther" disabled
+                                          style="line-height: normal;">
                         </label>
+
                     </div>
                     <span class="help-block"></span>
                 </div>
@@ -368,13 +405,13 @@
 
     if (jQuery().datepicker) {
         $('.date-picker').datepicker({
-            startDate: new Date(),
             orientation: "left",
             autoclose: true,
             todayBtn: 'linked',
             format: 'yyyy-mm-dd',
         });
     }
+
 
     $('#quotation-form').validate({
         errorElement: 'span',
@@ -392,10 +429,19 @@
             inspectionType: {
                 required: true,
             },
+            deliveryOther: {
+                required: true
+            },
+            delivery: {
+                required: "#inspectionType1:checked",
+            },
+            reDelivery: {
+                required: "#inspectionType2:checked",
+            },
             port: {
                 required: true,
             },
-            startDate: {
+            estimatedDate: {
                 required: true,
             },
             email: {
@@ -404,9 +450,12 @@
             },
             role: {
                 required: true
-            }
+            },
         },
         messages: {
+            deliveryOther: {
+                required: "i am des"
+            },
             shipName: {
                 required: "Ship name is required",
             },
@@ -416,11 +465,17 @@
             inspectionType: {
                 required: "Inspection type is required",
             },
+            delivery: {
+                required: "Delivery is required",
+            },
+            reDelivery: {
+                required: "Re-delivery is required ",
+            },
             port: {
                 required: "Port is required",
             },
-            startDate: {
-                required: "Start date is required",
+            estimatedDate: {
+                required: "Estimated date is required",
             },
             email: {
                 required: "Email is required",
@@ -436,14 +491,13 @@
         },
 
         success: function (label) {
-            console.log(label);
             label.closest('.form-group').removeClass('has-error');
             //label.parents('.form-group').find('.help-block').html('<span style="color:green">ok</span>');
-            label.parents('.form-group').find('.help-block').html('');
+//            label.parents('.form-group').find('.help-block').html('');
         },
 
         errorPlacement: function (error, element) {
-            element.parents('.form-group').find('.help-block').html(error);
+            element.closest('.form-group').find('.help-block').html(error);
         },
         submitHandler: function (form) {
             $("#submitBtn").button("loading");
@@ -520,9 +574,46 @@
         }
     });
 
-    function changeRoleOther(obj) {
-        $('#roleOther').val($(obj).val());
+
+    var $deliveryDiv = $('#delivery-div');
+    var $reDeliveryDiv = $('#re-delivery-div');
+    function changeDeliveryDisplay(obj) {
+        var value = obj.value;
+        var checked = obj.checked;
+        console.log(checked);
+        if (value == 1) {
+            $deliveryDiv.toggle();
+            if (!checked) {
+                $deliveryDiv.find('input[type="radio"]').attr('checked', false).end().find('.other-input').val("").attr('disabled', true);
+            }
+        } else if (value == 2) {
+            $reDeliveryDiv.toggle();
+            if (!checked) {
+                $reDeliveryDiv.find('input[type="radio"]').attr('checked', false).end().find('.other-input').val("").attr('disabled', true);
+            }
+        }
     }
+
+    var $roleDiv = $('#role-div');
+    $roleDiv.delegate('input[type="radio"]', 'click', function () {
+        var value = this.value;
+        if (value == 4) {
+            $roleDiv.find('.other-input').attr("disabled", false);
+        } else {
+            $roleDiv.find('.other-input').attr("disabled", true).val("");
+        }
+    });
+
+    $('#delivery-div,#re-delivery-div').delegate('input[type="radio"]', 'click', function () {
+        var value = this.value;
+        if (value == 3) {
+            console.log(111);
+            $(this).closest('.form-group').find('.other-input').attr("disabled", false);
+        } else {
+            console.log(222);
+            $(this).closest('.form-group').find('.other-input').attr("disabled", true).val("");
+        }
+    });
 
     function genTimestamp() {
         var time = new Date();

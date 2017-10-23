@@ -43,11 +43,48 @@ public class EmailQuotationServiceImpl extends SuperServiceImpl<EmailQuotationMa
         if (emailQuotationMapper.insert(emailQuotation) < 0) {
             return false;
         }
-        EntityWrapper<Dict> ew = new EntityWrapper<>();
-        ew.addFilter("type={0}", "emailQuotationType");
-        ew.orderBy("value");
-        List<Dict> emailQuotationTypeDict = dictMapper.selectList(ew);
+        //处理inspectionType
+        EntityWrapper<Dict> insEw = new EntityWrapper<>();
+        insEw.addFilter("type={0}", "emailQuotationType");
+        insEw.orderBy("value");
+        List<Dict> emailQuotationTypeDict = dictMapper.selectList(insEw);
         emailQuotation.setInspectionType(Tools.transferValuesToDes(emailQuotation.getInspectionType(), emailQuotationTypeDict));
+        //处理role
+        if ("4".equals(emailQuotation.getRole())) {
+            emailQuotation.setRole(emailQuotation.getRoleOther());
+        } else {
+            EntityWrapper<Dict> roleEW = new EntityWrapper<>();
+            roleEW.addFilter("type={0}", "emailQuotationRole");
+            roleEW.orderBy("value");
+            List<Dict> emailQuotationRoleDict = dictMapper.selectList(roleEW);
+            emailQuotation.setRole(Tools.transferValuesToDes(emailQuotation.getRole(), emailQuotationRoleDict));
+        }
+
+
+        //处理delivery
+        if ("3".equals(emailQuotation.getDelivery())) {
+            emailQuotation.setDelivery(emailQuotation.getDeliveryOther());
+        } else {
+            EntityWrapper<Dict> deliveryEW = new EntityWrapper<>();
+            deliveryEW.addFilter("type={0}", "emailQuotationDelivery");
+            deliveryEW.orderBy("value");
+            List<Dict> emailQuotationDeliveryDict = dictMapper.selectList(deliveryEW);
+            emailQuotation.setDelivery(Tools.transferValuesToDes(emailQuotation.getDelivery(), emailQuotationDeliveryDict));
+        }
+
+
+        //处理re-delivery
+        if ("3".equals(emailQuotation.getReDelivery())) {
+            emailQuotation.setReDelivery(emailQuotation.getReDeliveryOther());
+        } else {
+            EntityWrapper<Dict> reDeliveryEW = new EntityWrapper<>();
+            reDeliveryEW.addFilter("type={0}", "emailQuotationReDelivery");
+            reDeliveryEW.orderBy("value");
+            List<Dict> emailQuotationReDeliveryDict = dictMapper.selectList(reDeliveryEW);
+            emailQuotation.setReDelivery(Tools.transferValuesToDes(emailQuotation.getReDelivery(), emailQuotationReDeliveryDict));
+        }
+
+
         EntityWrapper<PublicShip> ew2 = new EntityWrapper<>();
         ew2.where("imo={0}", emailQuotation.getImo());
         if (!StringUtils.isEmpty(emailQuotation.getImo())) {
@@ -58,6 +95,7 @@ public class EmailQuotationServiceImpl extends SuperServiceImpl<EmailQuotationMa
                 emailQuotation.setPublicShip(shipList.get(0));
             }
         }
+
         MailUtil.sendEmailQuotation(emailQuotation);
         return true;
     }

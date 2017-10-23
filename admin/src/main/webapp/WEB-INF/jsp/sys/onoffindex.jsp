@@ -175,7 +175,6 @@
 <script src="${ctx}/static/js/jquery-gv-validate.js" type="text/javascript"></script>
 <script src="${ctx}/static/js/admin.js" type="text/javascript"></script>
 <script src="${ctx}/static/js/go.common.js"></script>
-<script src="${ctx}/static/js/api.js"></script>
 <script src="${ctx}/static/js/jquery.tips.js"></script>
 
 <%--handsontable的js--%>
@@ -261,10 +260,10 @@
         console.log("wsPath:" + path);
         var websocket;
         if ('WebSocket' in window) {
-            websocket = new WebSocket("ws://" + path + "wsMy");
+            websocket = new WebSocket("wss://" + path + "wsMy");
             console.log("WebSocket:开始1")
         } else if ('MozWebSocket' in window) {
-            websocket = new MozWebSocket("ws://" + path + "wsMy");
+            websocket = new MozWebSocket("wss://" + path + "wsMy");
             console.log("WebSocket:开始2")
         } else {
             websocket = new SockJS("https://" + path + "wsMy/sockjs");

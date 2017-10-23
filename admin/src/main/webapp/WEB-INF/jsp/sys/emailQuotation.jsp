@@ -8,6 +8,7 @@
     String basePath = request.getScheme() + "://" + request.getServerName() + ":" + request.getServerPort() + path + "/";
 %>
 <c:set var="global" value="https://shipinfo.oss-cn-shanghai.aliyuncs.com"/>
+<c:set value="${sessionScope.emailQuotation}" var="quotation"/>
 <!DOCTYPE html>
 <!--[if IE 8]>
 <html lang="en" class="ie8"> <![endif]-->
@@ -127,7 +128,6 @@
 </head>
 
 <body>
-
 <div class="wrapper page-option-v1">
     <!--=== Header ===-->
     <div class="header">
@@ -214,16 +214,30 @@
                            style="text-align: left;font-style: italic;">${quotation.port}</label>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-5" style="font-weight: 100;">Date:</label>
+                    <label class="control-label col-md-5" style="font-weight: 100;">Estimated Date:</label>
                     <label class="control-label col-md-7" style="text-align: left;font-style: italic;">
-                        <fmt:formatDate value="${quotation.startDate}" pattern="yyyy-MM-dd"/> ~
-                        <fmt:formatDate value="${quotation.endDate}" pattern="yyyy-MM-dd"/></label>
+                        <fmt:formatDate value="${quotation.estimatedDate}" pattern="yyyy-MM-dd"/>
+                    </label>
                 </div>
                 <div class="form-group">
                     <label class="control-label col-md-5" style="font-weight: 100;">Inspection type:</label>
                     <label class="control-label col-md-7"
                            style="text-align: left;font-style: italic;">${quotation.inspectionType}</label>
                 </div>
+                <c:if test="${!empty quotation.delivery}">
+                    <div class="form-group">
+                        <label class="control-label col-md-5" style="font-weight: 100;">Place of delivery:</label>
+                        <label class="control-label col-md-7"
+                               style="text-align: left;font-style: italic;">${quotation.delivery}</label>
+                    </div>
+                </c:if>
+                <c:if test="${!empty quotation.reDelivery}">
+                    <div class="form-group">
+                        <label class="control-label col-md-5" style="font-weight: 100;">Place of re-delivery:</label>
+                        <label class="control-label col-md-7"
+                               style="text-align: left;font-style: italic;">${quotation.reDelivery}</label>
+                    </div>
+                </c:if>
                 <div class="form-group">
                     <label class="control-label col-md-5" style="font-weight: 100;">Your email:</label>
                     <label class="control-label col-md-7"

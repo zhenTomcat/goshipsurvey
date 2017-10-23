@@ -132,8 +132,15 @@ public class MailUtil {
         sb.append("Ship name : ").append(emailQuotation.getShipName()).append("<br>");
         sb.append("Imo : ").append(emailQuotation.getImo()).append("<br>");
         sb.append("Inspection type : ").append(emailQuotation.getInspectionType()).append("<br>");
+        if (StringUtils.isNotEmpty(emailQuotation.getDelivery())){
+            sb.append("Place of delivery: ").append(emailQuotation.getDelivery()).append("<br>");
+        }
+        if (StringUtils.isNotEmpty(emailQuotation.getReDelivery())){
+            sb.append("Place of re-delivery: ").append(emailQuotation.getReDelivery()).append("<br>");
+        }
         sb.append("Port : ").append(emailQuotation.getPort()).append("<br>");
-        sb.append("Date range : ").append(DateUtil.formatDate(emailQuotation.getStartDate(), "yyyy-MM-dd")).append("~").append(DateUtil.formatDate(emailQuotation.getEndDate(), "yyyy-MM-dd")).append("<br>");
+//        sb.append("Date range : ").append(DateUtil.formatDate(emailQuotation.getStartDate(), "yyyy-MM-dd")).append("~").append(DateUtil.formatDate(emailQuotation.getEndDate(), "yyyy-MM-dd")).append("<br>");
+        sb.append("Estimated Date : ").append(DateUtil.formatDate(emailQuotation.getEstimatedDate(), "yyyy-MM-dd")).append("<br>");
         sb.append("Email : ").append(emailQuotation.getEmail()).append("<br>");
         sb.append("Role : ").append(emailQuotation.getRole()).append("<br>");
         sb.append("Special requirement :<br><label style='white-space: pre-wrap;word-wrap: break-word; '>" + emailQuotation.getSpecialRequirement() + "</label><br>");

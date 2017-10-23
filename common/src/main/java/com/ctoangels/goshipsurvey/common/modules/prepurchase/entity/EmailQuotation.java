@@ -36,8 +36,24 @@ public class EmailQuotation implements Serializable {
     @TableField(value = "inspection_type")
     private String inspectionType;
 
+    private String delivery;
+
+    /**  */
+    @TableField(value = "delivery_other")
+    private String deliveryOther;
+
+    private String reDelivery;
+
+    /**  */
+    @TableField(value = "re_delivery_other")
+    private String reDeliveryOther;
+
     /**  */
     private String port;
+
+    /**  */
+    @TableField(value = "estimated_date")
+    private Date estimatedDate;
 
     /**  */
     @TableField(value = "start_date")
@@ -51,6 +67,9 @@ public class EmailQuotation implements Serializable {
     private String email;
 
     private String role;
+
+    @TableField(value = "role_other")
+    private String roleOther;
 
     /**  */
     @TableField(value = "special_requirement")
@@ -217,5 +236,53 @@ public class EmailQuotation implements Serializable {
 
     public void setRemoteIp(String remoteIp) {
         this.remoteIp = remoteIp;
+    }
+
+    public String getDelivery() {
+        return delivery;
+    }
+
+    public void setDelivery(String delivery) {
+        this.delivery = delivery;
+    }
+
+    public String getDeliveryOther() {
+        return deliveryOther;
+    }
+
+    public void setDeliveryOther(String deliveryOther) {
+        this.deliveryOther = deliveryOther;
+    }
+
+    public String getReDelivery() {
+        return reDelivery;
+    }
+
+    public void setReDelivery(String reDelivery) {
+        this.reDelivery = reDelivery;
+    }
+
+    public String getReDeliveryOther() {
+        return reDeliveryOther;
+    }
+
+    public void setReDeliveryOther(String reDeliveryOther) {
+        this.reDeliveryOther = reDeliveryOther;
+    }
+
+    public Date getEstimatedDate() {
+        return estimatedDate;
+    }
+
+    public void setEstimatedDate(Date estimatedDate) {
+        this.estimatedDate = estimatedDate;
+    }
+
+    public String getRoleOther() {
+        return roleOther;
+    }
+
+    public void setRoleOther(String roleOther) {
+        this.roleOther = roleOther;
     }
 }
