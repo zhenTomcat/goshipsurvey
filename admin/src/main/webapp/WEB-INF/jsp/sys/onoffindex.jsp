@@ -191,7 +191,7 @@
 <script>
 
     $(document).ready(function () {
-//        initPage();
+        initPage();
 //        webSocketMessage();
     });
 
