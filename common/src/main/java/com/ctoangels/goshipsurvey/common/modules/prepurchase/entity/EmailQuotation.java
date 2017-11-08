@@ -9,6 +9,10 @@ import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.ctoangels.goshipsurvey.common.modules.go.entity.PublicShip;
+import org.hibernate.validator.constraints.NotBlank;
+
+import javax.validation.constraints.Email;
+import javax.validation.constraints.NotNull;
 
 /**
  *
@@ -26,13 +30,16 @@ public class EmailQuotation implements Serializable {
     private Integer id;
 
     /**  */
+    @NotBlank
     @TableField(value = "ship_name")
     private String shipName;
 
     /**  */
+    @NotBlank
     private String imo;
 
     /**  */
+    @NotBlank
     @TableField(value = "inspection_type")
     private String inspectionType;
 
@@ -49,9 +56,11 @@ public class EmailQuotation implements Serializable {
     private String reDeliveryOther;
 
     /**  */
+    @NotBlank
     private String port;
 
     /**  */
+    @NotNull
     @TableField(value = "estimated_date")
     private Date estimatedDate;
 
@@ -64,8 +73,11 @@ public class EmailQuotation implements Serializable {
     private Date endDate;
 
     /**  */
+    @NotBlank
+    @Email
     private String email;
 
+    @NotBlank
     private String role;
 
     @TableField(value = "role_other")

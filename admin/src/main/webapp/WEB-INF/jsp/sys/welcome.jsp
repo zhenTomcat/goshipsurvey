@@ -76,6 +76,8 @@
 
     <!-- CSS Customization -->
     <link rel="stylesheet" href="${global}/unify/assets/css/custom.css">
+    <link href="${global}/metronic/global/plugins/bootstrap-sweetalert/sweetalert.css" rel="stylesheet"
+          type="text/css"/>
     <style>
         .header, .breadcrumbs {
             background-color: #f3f2f1;
@@ -370,20 +372,15 @@
 <!--/wrapper-->
 
 <!-- JS Global Compulsory -->
-<script type="text/javascript"
-        src="${global}/unify/assets/plugins/jquery/jquery.min.js"></script>
-<script type="text/javascript"
-        src="${global}/metronic/global/plugins/jquery-ui/jquery-ui.min.js"></script>
-<script type="text/javascript"
-        src="${global}/unify/assets/js/plugins/jquery.validate.min.js"></script>
-<script type="text/javascript"
-        src="${global}/unify/assets/plugins/jquery/jquery-migrate.min.js"></script>
-<script type="text/javascript"
-        src="${global}/unify/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
-<script type="text/javascript"
-        src="${global}/metronic/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
+<script src="${global}/unify/assets/plugins/jquery/jquery.min.js"></script>
+<script src="${global}/metronic/global/plugins/jquery-ui/jquery-ui.min.js"></script>
+<script src="${global}/unify/assets/js/plugins/jquery.validate.min.js"></script>
+<script src="${global}/unify/assets/plugins/jquery/jquery-migrate.min.js"></script>
+<script src="${global}/unify/assets/plugins/bootstrap/js/bootstrap.min.js"></script>
+<script src="${global}/metronic/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
 <script src="${global}/unify/assets/js/plugins/jquery.form.min.js"></script>
 <script src="/static/js/jquery.tips.js"></script>
+<script src="${global}/metronic/global/plugins/bootstrap-sweetalert/sweetalert.min.js"></script>
 <%--<script src="/static/js/jquery.cookie.js"></script>--%>
 <!--<script type="text/javascript" src="${global}/unify/assets/plugins/back-to-top.js"></script>-->
 <!--<script type="text/javascript" src="${global}/unify/assets/plugins/smoothScroll.js"></script>
@@ -420,37 +417,37 @@
         //				},
         focusInvalid: true,
         rules: {
-            shipName: {
-                required: true,
-            },
-            imo: {
-                required: true,
-            },
-            inspectionType: {
-                required: true,
-            },
-            deliveryOther: {
-                required: true
-            },
-            delivery: {
-                required: "#inspectionType1:checked",
-            },
-            reDelivery: {
-                required: "#inspectionType2:checked",
-            },
-            port: {
-                required: true,
-            },
-            estimatedDate: {
-                required: true,
-            },
-            email: {
-                required: true,
-                email: true
-            },
-            role: {
-                required: true
-            },
+            <%--shipName: {--%>
+            <%--required: true,--%>
+            <%--},--%>
+            <%--imo: {--%>
+            <%--required: true,--%>
+            <%--},--%>
+            <%--inspectionType: {--%>
+            <%--required: true,--%>
+            <%--},--%>
+            <%--deliveryOther: {--%>
+            <%--required: true--%>
+            <%--},--%>
+            <%--delivery: {--%>
+            <%--required: "#inspectionType1:checked",--%>
+            <%--},--%>
+            <%--reDelivery: {--%>
+            <%--required: "#inspectionType2:checked",--%>
+            <%--},--%>
+            <%--port: {--%>
+            <%--required: true,--%>
+            <%--},--%>
+            <%--estimatedDate: {--%>
+            <%--required: true,--%>
+            <%--},--%>
+            <%--email: {--%>
+            <%--required: true,--%>
+            <%--email: true--%>
+            <%--},--%>
+            <%--role: {--%>
+            <%--required: true--%>
+            <%--},--%>
         },
         messages: {
             deliveryOther: {
@@ -506,12 +503,14 @@
                     if (data.success) {
                         window.location.href = "emailQuotation/detail";
                     } else {
-                        console.log("failure");
+                        swal({type: "warning", title: "Warning!", text: 'Please enter the correct information!'});
                         $("#submitBtn").button("reset");
                     }
                 },
                 error: function (data) {
-                    console.log("error");
+                    swal({type: "warning", title: "Error!", text: 'System error.'});
+                },
+                complete: function () {
                     $("#submitBtn").button("reset");
                 }
             });
@@ -681,7 +680,7 @@
                         });
                         $("#loginName").focus();
                     }
-                }
+                },
             });
         }
         $("#loginBtn").button("reset");
