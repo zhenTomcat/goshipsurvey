@@ -417,37 +417,37 @@
         //				},
         focusInvalid: true,
         rules: {
-            <%--shipName: {--%>
-            <%--required: true,--%>
-            <%--},--%>
-            <%--imo: {--%>
-            <%--required: true,--%>
-            <%--},--%>
-            <%--inspectionType: {--%>
-            <%--required: true,--%>
-            <%--},--%>
-            <%--deliveryOther: {--%>
-            <%--required: true--%>
-            <%--},--%>
-            <%--delivery: {--%>
-            <%--required: "#inspectionType1:checked",--%>
-            <%--},--%>
-            <%--reDelivery: {--%>
-            <%--required: "#inspectionType2:checked",--%>
-            <%--},--%>
-            <%--port: {--%>
-            <%--required: true,--%>
-            <%--},--%>
-            <%--estimatedDate: {--%>
-            <%--required: true,--%>
-            <%--},--%>
-            <%--email: {--%>
-            <%--required: true,--%>
-            <%--email: true--%>
-            <%--},--%>
-            <%--role: {--%>
-            <%--required: true--%>
-            <%--},--%>
+            shipName: {
+                required: true,
+            },
+            imo: {
+                required: true,
+            },
+            inspectionType: {
+                required: true,
+            },
+            deliveryOther: {
+                required: true
+            },
+            delivery: {
+                required: "#inspectionType1:checked",
+            },
+            reDelivery: {
+                required: "#inspectionType2:checked",
+            },
+            port: {
+                required: true,
+            },
+            estimatedDate: {
+                required: true,
+            },
+            email: {
+                required: true,
+                email: true
+            },
+            role: {
+                required: true
+            },
         },
         messages: {
             deliveryOther: {
