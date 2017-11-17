@@ -449,7 +449,7 @@ public class LoginController extends BaseController {
         Subject subject = SecurityUtils.getSubject();
         subject.logout();
         map.put("sysname", sysName);
-        return "sys/admin/login";
+        return "sys/welcome";
     }
 
     @RequestMapping(value = "/onoff", method = RequestMethod.GET)
