@@ -16,4 +16,8 @@ import com.baomidou.framework.service.impl.SuperServiceImpl;
 public class IpRecordServiceImpl extends SuperServiceImpl<IpRecordMapper, IpRecord> implements IIpRecordService {
 
 
+    @Override
+    public void setIpAndUri(String ip, String uri) {
+
+    }
 }
