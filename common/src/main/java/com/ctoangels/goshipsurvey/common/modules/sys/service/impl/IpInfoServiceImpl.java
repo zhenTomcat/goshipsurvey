@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.IpData;
 import com.ctoangels.goshipsurvey.common.modules.sys.mapper.IpDataMapper;
 import com.ctoangels.goshipsurvey.common.util.Const;
+import org.apache.commons.beanutils.BeanUtils;
 import org.apache.commons.collections.FastArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -16,6 +17,7 @@ import com.baomidou.framework.service.impl.SuperServiceImpl;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.lang.reflect.InvocationTargetException;
 import java.net.URL;
 import java.net.URLConnection;
 import java.util.ArrayList;
@@ -39,20 +41,38 @@ public class IpInfoServiceImpl extends SuperServiceImpl<IpInfoMapper, IpInfo> im
 
     @Override
     public void setIpAndUri(String ip, String uri) {
-        IpInfo ipInfo= getAddressByIP(ip);
+        IpData data=ipDataMapper.selectByIp(ip);
+        IpData ipData=null;
+        IpInfo ipInfo=null;
+        if (data!=null){
+            ipData=new IpData();
+            try {
+                ipInfo=new IpInfo();
+                ipInfo.setCode(0);
+
+                ipData=new IpData();
+                BeanUtils.copyProperties(ipData,data);
+                ipData.setId(null);
+            } catch (IllegalAccessException e) {
+                e.printStackTrace();
+            } catch (InvocationTargetException e) {
+                e.printStackTrace();
+            }
+        }else {
+            ipInfo= getAddressByIP(ip);
+            ipData=ipInfo.getData();
+        }
         if(ipInfo!=null && ipInfo.getCode()==0){
 
             ipInfo.setDelFlag(Const.DEL_FLAG_NORMAL);
             ipInfo.setCreateDate(new Date());
             ipInfoMapper.insert(ipInfo);
 
-            IpData ipData=ipInfo.getData();
             ipData.setUri(uri);
             ipData.setIpRecordId(ipInfo.getId());
             ipData.setDelFlag(Const.DEL_FLAG_NORMAL);
             ipData.setCreateDate(new Date());
             ipDataMapper.insert(ipData);
-
         }
     }
 
