@@ -44,10 +44,9 @@ public class LogInterceptor implements HandlerInterceptor {
         logger.info("ip : " + ip);
 
         String uri=httpServletRequest.getRequestURI();
-        /*if(!ip.equals("The ip is invalid.")){
-
-        }*/
-        iIpInfoService.setIpAndUri(ip,uri);
+        if(!ip.equals("The ip is invalid.")){
+            iIpInfoService.setIpAndUri(ip,uri);
+        }
         return true;
     }
 

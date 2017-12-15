@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.IpData;
 import com.ctoangels.goshipsurvey.common.modules.sys.mapper.IpDataMapper;
 import com.ctoangels.goshipsurvey.common.util.Const;
+import org.apache.commons.collections.FastArrayList;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,7 +18,10 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.net.URL;
 import java.net.URLConnection;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.Hashtable;
+import java.util.List;
 
 /**
  *
@@ -52,11 +56,11 @@ public class IpInfoServiceImpl extends SuperServiceImpl<IpInfoMapper, IpInfo> im
         }
     }
 
-    public IpInfo getAddressByIP(String ip) {
+    public IpInfo getAddressByIP(String strIP) {
         try
         {
 
-            String strIP = "139.224.62.32";
+            //String strIP = "139.224.62.32";
             URL url = new URL( "http://ip.taobao.com/service/getIpInfo.php?ip="+strIP);
             URLConnection conn = url.openConnection();
             BufferedReader reader = new BufferedReader(new InputStreamReader(conn.getInputStream(), "utf8"));
