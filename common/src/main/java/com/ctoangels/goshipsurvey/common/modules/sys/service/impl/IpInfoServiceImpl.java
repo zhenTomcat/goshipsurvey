@@ -39,26 +39,14 @@ public class IpInfoServiceImpl extends SuperServiceImpl<IpInfoMapper, IpInfo> im
 
     @Override
     public void setIpAndUri(String ip, String uri) {
-        IpData data=ipDataMapper.selectByIp(ip);
-        IpInfo ipInfo=null;
-        IpData ipData=null;
-        if(data!=null){
-            ipInfo=new IpInfo();
-            ipInfo.setCode(0);
-            ipData=data;
-            ipData.setId(null);
-
-        }else {
-            ipInfo = getAddressByIP(ip);
-            ipData=ipInfo.getData();
-        }
-
+        IpInfo ipInfo= getAddressByIP(ip);
         if(ipInfo!=null && ipInfo.getCode()==0){
 
             ipInfo.setDelFlag(Const.DEL_FLAG_NORMAL);
             ipInfo.setCreateDate(new Date());
             ipInfoMapper.insert(ipInfo);
 
+            IpData ipData=ipInfo.getData();
             ipData.setUri(uri);
             ipData.setIpRecordId(ipInfo.getId());
             ipData.setDelFlag(Const.DEL_FLAG_NORMAL);
