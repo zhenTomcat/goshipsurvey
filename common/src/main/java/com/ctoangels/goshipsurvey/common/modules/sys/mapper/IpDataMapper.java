@@ -10,5 +10,7 @@ import com.baomidou.mybatisplus.mapper.AutoMapper;
  */
 public interface IpDataMapper extends AutoMapper<IpData> {
 
-    Boolean selectByIp(String ip);
+
+    IpData selectByIp(String ip);
+
 }

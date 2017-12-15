@@ -6,7 +6,7 @@
 	<sql id="Base_Column_List">
 		id, country, country_id, area, area_id, region, region_id, city, city_id, county, county_id, isp, isp_id, ip, uri, `location`, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag, ip_record_id AS ipRecordId
 	</sql>
-	<select id="selectByIp" resultType="java.lang.Boolean">
+	<select id="selectByIp" resultType="com.ctoangels.goshipsurvey.common.modules.sys.entity.IpData">
 		select * from sys_ip_data i where i.ip=#{0} and i.del_flag=0
 	</select>
 
