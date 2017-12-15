@@ -3,6 +3,8 @@ package com.ctoangels.goshipsurvey.common.modules.sys.mapper;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.IpData;
 import com.baomidou.mybatisplus.mapper.AutoMapper;
 
+import java.util.List;
+
 /**
  *
  * IpData 表数据库控制层接口
@@ -11,6 +13,7 @@ import com.baomidou.mybatisplus.mapper.AutoMapper;
 public interface IpDataMapper extends AutoMapper<IpData> {
 
 
-    IpData selectByIp(String ip);
+    List<IpData> selectByIp(String ip);
+
 
 }

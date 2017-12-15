@@ -41,17 +41,17 @@ public class IpInfoServiceImpl extends SuperServiceImpl<IpInfoMapper, IpInfo> im
 
     @Override
     public void setIpAndUri(String ip, String uri) {
-        IpData data=ipDataMapper.selectByIp(ip);
+        List<IpData> datas=ipDataMapper.selectByIp(ip);
         IpData ipData=null;
         IpInfo ipInfo=null;
-        if (data!=null){
+        if (datas!=null && datas.size()>0){
             ipData=new IpData();
             try {
                 ipInfo=new IpInfo();
                 ipInfo.setCode(0);
 
                 ipData=new IpData();
-                BeanUtils.copyProperties(ipData,data);
+                BeanUtils.copyProperties(ipData,datas.get(0));
                 ipData.setId(null);
             } catch (IllegalAccessException e) {
                 e.printStackTrace();
