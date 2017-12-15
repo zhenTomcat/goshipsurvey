@@ -14,8 +14,8 @@ import com.baomidou.mybatisplus.annotations.TableName;
  * 
  *
  */
-@TableName("sys_ip_record")
-public class IpRecord implements Serializable {
+@TableName("sys_ip_info")
+public class IpInfo implements Serializable {
 
 	@TableField(exist = false)
 	private static final long serialVersionUID = 1L;
@@ -25,13 +25,7 @@ public class IpRecord implements Serializable {
 	private Integer id;
 
 	/**  */
-	private String ip;
-
-	/**  */
-	private String uri;
-
-	/**  */
-	private String location;
+	private Integer code;
 
 	/**  */
 	@TableField(value = "create_date")
@@ -53,6 +47,9 @@ public class IpRecord implements Serializable {
 	@TableField(value = "del_flag")
 	private Integer delFlag;
 
+	@TableField(exist = false)
+	private IpData data;
+
 
 	public Integer getId() {
 		return this.id;
@@ -62,28 +59,12 @@ public class IpRecord implements Serializable {
 		this.id = id;
 	}
 
-	public String getIp() {
-		return this.ip;
+	public Integer getCode() {
+		return this.code;
 	}
 
-	public void setIp(String ip) {
-		this.ip = ip;
-	}
-
-	public String getUri() {
-		return this.uri;
-	}
-
-	public void setUri(String uri) {
-		this.uri = uri;
-	}
-
-	public String getLocation() {
-		return this.location;
-	}
-
-	public void setLocation(String location) {
-		this.location = location;
+	public void setCode(Integer code) {
+		this.code = code;
 	}
 
 	public Date getCreateDate() {
@@ -126,4 +107,11 @@ public class IpRecord implements Serializable {
 		this.delFlag = delFlag;
 	}
 
+	public IpData getData() {
+		return data;
+	}
+
+	public void setData(IpData data) {
+		this.data = data;
+	}
 }

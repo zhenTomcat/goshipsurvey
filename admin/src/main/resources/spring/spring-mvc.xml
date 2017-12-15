@@ -64,7 +64,7 @@
     <mvc:interceptors>
         <bean id="localeChangeInterceptor" class="org.springframework.web.servlet.i18n.LocaleChangeInterceptor"/>
         <mvc:interceptor>
-            <mvc:mapping path="/emailQuotation/addEmailQuotation"/>
+            <mvc:mapping path="/**"/>
             <bean class="com.ctoangels.goshipsurvey.admin.base.interceptor.log.LogInterceptor"/>
         </mvc:interceptor>
     </mvc:interceptors>

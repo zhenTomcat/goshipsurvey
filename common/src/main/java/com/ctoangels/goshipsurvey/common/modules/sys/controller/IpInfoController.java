@@ -4,11 +4,11 @@ import org.springframework.stereotype.Controller;
 
 /**
  *
- * IpRecord 控制层
+ * IpInfo 控制层
  *
  */
 @Controller
-public class IpRecordController {
+public class IpInfoController {
 
 
 }

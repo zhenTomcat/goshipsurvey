@@ -4,7 +4,7 @@
 
 	<!-- 通用查询结果列-->
 	<sql id="Base_Column_List">
-		id, ip, uri, `location`, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
+		id, country, country_id AS countryId, area, area_id AS areaId, region region_id AS regionId, city, city_id AS cityId, isp, isp_id AS ispId ip, uri, `location`, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
 	</sql>
 
 </mapper>

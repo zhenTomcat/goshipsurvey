@@ -1,8 +1,7 @@
 package com.ctoangels.goshipsurvey.admin.base.interceptor.log;
 
 import com.ctoangels.goshipsurvey.admin.base.interceptor.dataSourceSelect.DataSourceInterceptor;
-import com.ctoangels.goshipsurvey.common.modules.sys.entity.IpRecord;
-import com.ctoangels.goshipsurvey.common.modules.sys.service.IIpRecordService;
+import com.ctoangels.goshipsurvey.common.modules.sys.service.IIpInfoService;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.UserService;
 import com.ctoangels.goshipsurvey.common.util.DataSourceTypeManager;
 import com.ctoangels.goshipsurvey.common.util.DataSources;
@@ -28,7 +27,8 @@ public class LogInterceptor implements HandlerInterceptor {
     private UserService userService;
 
     @Autowired
-    private IIpRecordService recordService;
+    private IIpInfoService iIpInfoService;
+
 
     private static Logger logger = LoggerFactory.getLogger(LogInterceptor.class);
 
@@ -44,7 +44,10 @@ public class LogInterceptor implements HandlerInterceptor {
         logger.info("ip : " + ip);
 
         String uri=httpServletRequest.getRequestURI();
-        recordService.setIpAndUri(ip,uri);
+        /*if(!ip.equals("The ip is invalid.")){
+
+        }*/
+        iIpInfoService.setIpAndUri(ip,uri);
         return true;
     }
 
