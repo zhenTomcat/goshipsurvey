@@ -313,7 +313,6 @@
         if (!remote_ip_info.country || remote_ip_info.country == "中国") {
             initBMap();
         } else {
-            加载谷歌地图js
             getGMapJs();
             initGMap();
         }
