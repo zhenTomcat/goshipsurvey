@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ctoangels.goshipsurvey.common.modules.sys.mapper.IpDataMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id, country, area, region, city, county, isp, ip, uri, `location`, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag, ip_record_id AS ipRecordId
+	</sql>
+	<select id="selectByIp" resultType="com.ctoangels.goshipsurvey.common.modules.sys.entity.IpData">
+		select * from sys_ip_data i where i.ip=#{0} and i.del_flag=0
+	</select>
+
+</mapper>
