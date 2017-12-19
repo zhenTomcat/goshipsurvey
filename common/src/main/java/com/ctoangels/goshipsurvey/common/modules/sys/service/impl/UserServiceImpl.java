@@ -16,6 +16,7 @@ import com.ctoangels.goshipsurvey.common.modules.sys.entity.UserRole;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.UserService;
 import com.ctoangels.goshipsurvey.common.util.Const;
 import com.ctoangels.goshipsurvey.common.util.StringUtils;
+import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.SimpleHash;
@@ -24,10 +25,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * @author Sun.Han
@@ -162,5 +160,35 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
         ew.setSqlSelect("id,name,email");
         Page p = new Page<>(1, 10);
         return userMapper.selectPage(p, ew);
+    }
+
+    @Override
+    public User getUserByUnionId(String unionId) {
+        User u = new User();
+        u.setUnionId(unionId);
+        u.setDelFlag(Const.DEL_FLAG_NORMAL);
+        return userMapper.selectOne(u);
+    }
+
+    @Override
+    public User registerWeiXinUser(WxMpUser wxMpUser) {
+        User user = new User();
+        String name = StringUtils.filterEmoji(wxMpUser.getNickname());
+        user.setLoginName(name);
+        user.setPassword("WeiXinUser");
+        user.setName(name);
+        user.setOpenId(wxMpUser.getOpenId());
+        user.setLastLogin(new Date());
+        user.setHeadImgUrl(wxMpUser.getHeadImgUrl());
+        user.setUnionId(wxMpUser.getUnionId());
+        user.setCreateDate(new Date());
+        user.setUpdateDate(new Date());
+        user.setDelFlag(Const.DEL_FLAG_NORMAL);
+        userMapper.insert(user);
+        UserRole ur = new UserRole();
+        ur.setUserId(user.getId());
+        ur.setRoleId(Const.USER_TYPE_OP);
+        userRoleMapper.insert(ur);
+        return user;
     }
 }

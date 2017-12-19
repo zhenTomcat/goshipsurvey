@@ -248,10 +248,10 @@
         var path = "<%=wsPath%>";
         var websocket;
         if ('WebSocket' in window) {
-            websocket = new WebSocket("ws://" + path + "wsMy");
+            websocket = new WebSocket("wss://" + path + "wsMy");
             console.log("WebSocket:开始1")
         } else if ('MozWebSocket' in window) {
-            websocket = new MozWebSocket("ws://" + path + "wsMy");
+            websocket = new MozWebSocket("wss://" + path + "wsMy");
             console.log("WebSocket:开始2")
         } else {
             websocket = new SockJS("https://" + path + "wsMy/sockjs");

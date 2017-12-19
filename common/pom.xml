@@ -207,6 +207,12 @@
             <version>RELEASE</version>
         </dependency>
 
+        <!--微信相关sdk-->
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-mp</artifactId>
+            <version>2.9.0</version>
+        </dependency>
 
         <!--<dependency>
             <groupId>com.artofsolving</groupId>

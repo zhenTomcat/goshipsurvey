@@ -165,4 +165,18 @@ public class StringUtils {
         Matcher m = p.matcher(str);
         return m.replaceAll("").trim();
     }
+
+    /**
+     * 过滤emoji
+     *
+     * @param source
+     * @return
+     */
+    public static String filterEmoji(String source) {
+        if (org.apache.commons.lang.StringUtils.isNotBlank(source)) {
+            return source.replaceAll("[\\ud800\\udc00-\\udbff\\udfff\\ud800-\\udfff]", "*");
+        } else {
+            return source;
+        }
+    }
 }

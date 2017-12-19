@@ -1,0 +1,9 @@
+body {
+    color: #000;
+}
+
+.impowerBox .qrcode {
+    width: 100px;
+    margin-top: 15px;
+    border: 1px solid #E2E2E2;
+}

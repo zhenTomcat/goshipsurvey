@@ -192,7 +192,7 @@
 
     $(document).ready(function () {
         initPage();
-//        webSocketMessage();
+        webSocketMessage();
     });
 
     function nofind(type) {
