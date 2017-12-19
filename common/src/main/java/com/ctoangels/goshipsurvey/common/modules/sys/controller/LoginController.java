@@ -511,6 +511,6 @@ public class LoginController extends BaseController {
         } catch (AuthenticationException e) {
             throw e;
         }
-        return "redirect:onoffindex";
+        return "redirect:/onoffindex";
     }
 }
