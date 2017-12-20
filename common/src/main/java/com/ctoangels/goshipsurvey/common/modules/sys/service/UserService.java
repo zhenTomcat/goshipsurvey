@@ -30,4 +30,6 @@ public interface UserService extends ISuperService<User> {
     User getUserByUnionId(String unionId);
 
     User registerWeiXinUser(WxMpUser wxMpUser);
+
+    boolean existUnionId(String unionId);
 }

@@ -287,17 +287,21 @@ public class UserController extends BaseController {
                 response.sendRedirect(wxMpService.oauth2buildAuthorizationUrl(resultUrl, WxConsts.OAuth2Scope.SNSAPI_USERINFO, null));
             }
         }
-        User user = getCurrentUser();
-        user.setUnionId(wxMpUser.getUnionId());
-        user.setOpenId(wxMpUser.getOpenId());
-        user.setNickname(StringUtils.filterEmoji(wxMpUser.getNickname()));
-        if (StringUtils.isEmpty(user.getHeadImgUrl())) {
-            user.setHeadImgUrl(wxMpUser.getHeadImgUrl());
+        String unionId = wxMpUser.getUnionId();
+        if (!userService.existUnionId(unionId)) {
+            User user = getCurrentUser();
+            user.setUnionId(wxMpUser.getUnionId());
+            user.setOpenId(wxMpUser.getOpenId());
+            user.setNickname(StringUtils.filterEmoji(wxMpUser.getNickname()));
+            if (StringUtils.isEmpty(user.getHeadImgUrl())) {
+                user.setHeadImgUrl(wxMpUser.getHeadImgUrl());
+            }
+            userService.updateSelectiveById(user);
+            Subject subject = SecurityUtils.getSubject();
+            Session session = subject.getSession();
+            session.setAttribute(Const.SESSION_USER, user);
+            return "redirect:/onoffindex#user/companyEdit";
         }
-        userService.updateSelectiveById(user);
-        Subject subject = SecurityUtils.getSubject();
-        Session session = subject.getSession();
-        session.setAttribute(Const.SESSION_USER, user);
-        return "redirect:/onoffindex#user/companyEdit";
+        return "redirect:/onoffindex#user/companyEdit?errCode=U002";
     }
 }

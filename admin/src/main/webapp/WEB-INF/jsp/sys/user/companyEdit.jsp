@@ -135,7 +135,14 @@
         <!-- END PROFILE CONTENT -->
     </div>
 </div>
+<input id="errCode" type="hidden" value="${param.errCode}">
 <script>
+    $(function () {
+        if ($("#errCode").val) {
+            swal({type: "error", type: "该微信号已被绑定,请选择其它账号进行绑定."});
+        }
+    })
+
     if (jQuery().datepicker) {
         $('.date-picker').datepicker({
             rtl: App.isRTL(),

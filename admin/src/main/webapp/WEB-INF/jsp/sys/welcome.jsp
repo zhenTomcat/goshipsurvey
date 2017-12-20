@@ -174,7 +174,7 @@
 </head>
 
 <body>
-
+<input id="errCode" type="hidden" value="${param.errCode}">
 <div class="wrapper page-option-v1">
     <!--=== Header ===-->
     <jsp:include page="../include/header.jsp"/>
@@ -426,6 +426,9 @@
 <script type="text/javascript">
     $(document).ready(function () {
         changeCode();
+        if ($("#errCode").val == "U001") {
+            swal({type: "error", type: "该微信号尚未与任何进行绑定,绑定后方可使用微信扫一扫登录"});
+        }
     })
 
     var obj = new WxLogin({

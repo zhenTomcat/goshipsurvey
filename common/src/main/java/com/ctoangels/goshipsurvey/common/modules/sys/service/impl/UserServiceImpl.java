@@ -191,4 +191,12 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
         userRoleMapper.insert(ur);
         return user;
     }
+
+    @Override
+    public boolean existUnionId(String unionId) {
+        User u = new User();
+        u.setUnionId(unionId);
+        u.setDelFlag(Const.DEL_FLAG_NORMAL);
+        return userMapper.selectOne(u) != null;
+    }
 }

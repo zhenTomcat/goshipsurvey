@@ -499,18 +499,18 @@ public class LoginController extends BaseController {
         u.setUnionId(unionId);
         u.setDelFlag(Const.DEL_FLAG_NORMAL);
         User user = userService.selectOne(u);
-        if (user == null) {
-            user = userService.registerWeiXinUser(wxMpUser);
+        if (user != null) {
+            Subject subject = SecurityUtils.getSubject();
+            Session session = subject.getSession();
+            session.setAttribute(Const.SESSION_USER, user);
+            UsernamePasswordToken token = new UsernamePasswordToken(user.getLoginName(), user.getPassword());
+            try {
+                subject.login(token);
+            } catch (AuthenticationException e) {
+                throw e;
+            }
+            return "redirect:/onoffindex";
         }
-        Subject subject = SecurityUtils.getSubject();
-        Session session = subject.getSession();
-        session.setAttribute(Const.SESSION_USER, user);
-        UsernamePasswordToken token = new UsernamePasswordToken(user.getLoginName(), user.getPassword());
-        try {
-            subject.login(token);
-        } catch (AuthenticationException e) {
-            throw e;
-        }
-        return "redirect:/onoffindex";
+        return "redirect:/?errCode=U001";
     }
 }
