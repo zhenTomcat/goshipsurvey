@@ -138,7 +138,7 @@
 <input id="errCode" type="hidden" value="${param.errCode}">
 <script>
     $(function () {
-        if ($("#errCode").val) {
+        if ($("#errCode").val() == "U002") {
             swal({type: "error", title: "Error!", text: "该微信号已被绑定,请选择其它账号进行绑定."});
         }
     })

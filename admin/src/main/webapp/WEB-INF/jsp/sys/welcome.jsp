@@ -426,7 +426,7 @@
 <script type="text/javascript">
     $(document).ready(function () {
         changeCode();
-        if ($("#errCode").val == "U001") {
+        if ($("#errCode").val() == "U001") {
             swal({type: "error", title: "Error!", text: "该微信号尚未与任何进行绑定,绑定后方可使用微信扫一扫登录"});
         }
     })
