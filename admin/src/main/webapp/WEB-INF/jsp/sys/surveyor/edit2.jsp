@@ -231,7 +231,7 @@
                     }
                 },
                 error: function () {
-                    swal({type: "error", type: "Error!"})
+                    swal({type: "error", title: "Error!"})
                 },
                 complete: function () {
                     btn.attr("disabled", false);

@@ -139,7 +139,7 @@
 <script>
     $(function () {
         if ($("#errCode").val) {
-            swal({type: "error", type: "该微信号已被绑定,请选择其它账号进行绑定."});
+            swal({type: "error", title: "Error!", text: "该微信号已被绑定,请选择其它账号进行绑定."});
         }
     })
 
