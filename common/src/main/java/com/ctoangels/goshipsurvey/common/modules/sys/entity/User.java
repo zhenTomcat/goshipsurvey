@@ -175,6 +175,11 @@ public class User implements Serializable {
     @TableField(value = "open_id")
     private String openId;
 
+    /**
+     * 微信名称,在绑定微信时插入,不更新
+     */
+    private String nickname;
+
     @TableField(exist = false)
     private List<Role> roles;
 
@@ -437,6 +442,14 @@ public class User implements Serializable {
 
     public void setOpenId(String openId) {
         this.openId = openId;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public List<Role> getRoles() {

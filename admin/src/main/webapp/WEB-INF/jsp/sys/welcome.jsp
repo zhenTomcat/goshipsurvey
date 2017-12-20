@@ -436,7 +436,7 @@
 //        redirect_uri: "http%3A%2F%2Ftfhczg.natappfree.cc/wx_login",
         state: "",
         style: "white",
-        href: "https://shipinfo.oss-cn-shanghai.aliyuncs.com/static/css/wx-login.css"
+//        href: "https://shipinfo.oss-cn-shanghai.aliyuncs.com/static/css/wx-login.css"
     });
 
     if (jQuery().datepicker) {
