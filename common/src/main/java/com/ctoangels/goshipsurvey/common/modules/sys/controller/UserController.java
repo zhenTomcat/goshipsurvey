@@ -206,12 +206,15 @@ public class UserController extends BaseController {
         map.put("shipType", getShipTypeDict());
         User company = userService.selectById(getCurrentUser().getId());
         map.put("company", company);
-        String userShipType = company.getShipType();
-        String[] userShipTypes = null;
-        if (StringUtils.isNotEmpty(userShipType)) {
-            userShipTypes = userShipType.split(",");
+        int type = company.getType();
+        if (type != Const.USER_TYPE_OP) {
+            String userShipType = company.getShipType();
+            String[] userShipTypes = null;
+            if (StringUtils.isNotEmpty(userShipType)) {
+                userShipTypes = userShipType.split(",");
+            }
+            map.put("userShipTypes", userShipTypes);
         }
-        map.put("userShipTypes", userShipTypes);
         map.put("staticPath", staticPath);
         return "sys/user/companyEdit";
     }
@@ -295,6 +298,6 @@ public class UserController extends BaseController {
         Subject subject = SecurityUtils.getSubject();
         Session session = subject.getSession();
         session.setAttribute(Const.SESSION_USER, user);
-        return "goshipsurvey/op/account/info";
+        return "redirect:/onoffindex#user/companyEdit";
     }
 }

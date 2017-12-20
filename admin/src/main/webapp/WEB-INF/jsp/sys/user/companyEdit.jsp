@@ -28,6 +28,21 @@
                     </div>
                 </div>
             </div>
+            <div class="portlet light profile-sidebar-portlet ">
+                <div id="wx-container"></div>
+                <div class="profile-usertitle">
+                    <div class="profile-usertitle-name">
+                        <c:if test="${empty company.unionId}">You have not bind wechat</c:if>
+                        <c:if test="${!empty company.unionId}">You have bind wechat "${company.nickname}"</c:if>
+                    </div>
+                    <div class="profile-usertitle-name">
+                        <button type="button" id="bindWeiXin"><i class="fa fa-weixin" style="color:limegreen;"></i>
+                            <c:if test="${empty company.unionId}">Bind WeChat</c:if>
+                            <c:if test="${!empty company.unionId}">Change Binding Account</c:if>
+                        </button>
+                    </div>
+                </div>
+            </div>
         </div>
         <div class="profile-content">
             <div class="row">
@@ -67,33 +82,35 @@
                                     <input type="text" class="form-control" name="address"
                                            value="${company.address}"/>
                                 </div>
-                                <div class="form-group col-md-6">
-                                    <label class="control-labe">Inspection date(LMT)</label>
-                                    <div class="input-group input-large date-picker input-daterange">
-                                        <input type="text" class="form-control required" name="startDate"
-                                               value=" <fmt:formatDate value="${company.startDate}" pattern="yyyy-MM-dd"></fmt:formatDate>  ">
-                                        <span class="input-group-addon"> to </span>
-                                        <input type="text" class="form-control required" name="endDate"
-                                               value=" <fmt:formatDate value="${company.endDate}" pattern="yyyy-MM-dd"></fmt:formatDate>  ">
+                                <c:if test="${company.type!=2}">
+                                    <div class="form-group col-md-6">
+                                        <label class="control-labe">Inspection date(LMT)</label>
+                                        <div class="input-group input-large date-picker input-daterange">
+                                            <input type="text" class="form-control required" name="startDate"
+                                                   value=" <fmt:formatDate value="${company.startDate}" pattern="yyyy-MM-dd"></fmt:formatDate>  ">
+                                            <span class="input-group-addon"> to </span>
+                                            <input type="text" class="form-control required" name="endDate"
+                                                   value=" <fmt:formatDate value="${company.endDate}" pattern="yyyy-MM-dd"></fmt:formatDate>  ">
+                                        </div>
                                     </div>
-                                </div>
-                                <div class="form-group col-md-12">
-                                    <label>Ship type</label>
-                                    <div class="mt-checkbox-inline">
-                                        <c:forEach items="${shipType}" var="type">
-                                            <label class="mt-checkbox col-sm-3">
+                                    <div class="form-group col-md-12">
+                                        <label>Ship type</label>
+                                        <div class="mt-checkbox-inline">
+                                            <c:forEach items="${shipType}" var="type">
+                                                <label class="mt-checkbox col-sm-3">
 
-                                                <input type="checkbox" value="${type.value}" name="shipType"
-                                                <c:forEach items="${userShipTypes}" var="userType">
-                                                       <c:if test="${userType==type.value}">checked</c:if>
-                                                </c:forEach>
-                                                >
-                                                    ${type.des}
-                                                <span></span>
-                                            </label>
-                                        </c:forEach>
+                                                    <input type="checkbox" value="${type.value}" name="shipType"
+                                                    <c:forEach items="${userShipTypes}" var="userType">
+                                                           <c:if test="${userType==type.value}">checked</c:if>
+                                                    </c:forEach>
+                                                    >
+                                                        ${type.des}
+                                                    <span></span>
+                                                </label>
+                                            </c:forEach>
+                                        </div>
                                     </div>
-                                </div>
+                                </c:if>
                                 <div class="form-group col-md-12">
                                     <label class="control-label">Description</label>
                                     <textarea class="form-control" rows="5"
@@ -192,5 +209,16 @@
     }
 
     initUploaders_head_img("change-head-img-btn", "shipinfo", "${staticPath}/");
+
+    $("#bindWeiXin").on('click', function () {
+        var obj = new WxLogin({
+            id: "wx-container",
+            appid: "wxa4cceb05af90e315",
+            scope: "snsapi_login",
+            redirect_uri: "https%3A%2F%2Fwww.goshipsurvey.com/user/bindWeiXin",
+            state: "",
+            style: "white",
+        });
+    })
 </script>
 

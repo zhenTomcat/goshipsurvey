@@ -184,6 +184,10 @@
 <script src="${ctx}/static/js/handsontable/numbro.js"></script>
 <script src="${ctx}/static/js/handsontable/languages.js"></script>
 <script src="${ctx}/static/js/handsontable/handsontable.js"></script>
+
+<%--微信登录用--%>
+<script src="https://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
+
 <input id="index-user-type" type="hidden" value="${sessionScope.sessionUser.type}">
 <input id="isLogin" type="hidden" value="${param.isLogin}">
 </body>
