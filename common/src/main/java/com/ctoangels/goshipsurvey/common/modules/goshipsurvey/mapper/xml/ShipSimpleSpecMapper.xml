@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.ShipSimpleSpecMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id, ship_name AS shipName, ship_info_name AS shipInfoName, ship_info_oss AS shipInfoOss, ship_type AS shipType, imo, inspect_type AS inspectType, inspect_port AS inspectPort, inspect_date AS inspectDate, inspect_report_name AS inspectReportName, inspect_report_oss AS inspectReportOss, site_picture_name AS sitePictureName, site_picture_oss AS sitePictureOss, surveyor_a_name AS surveyorAName, surveyor_a_resume_name AS surveyorAResumeName, surveyor_a_resume_oss AS surveyorAResumeOss, surveyor_b_name AS surveyorBName, surveyor_b_resume_name AS surveyorBResumeName, surveyor_b_resume_oss AS surveyorBResumeOss, create_by AS createBy, create_date AS createDate, update_by AS updateBy, update_date AS updateDate, del_flag AS delFlag
+	</sql>
+
+</mapper>
