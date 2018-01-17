@@ -163,6 +163,23 @@ public class User implements Serializable {
     @TableField(value = "del_flag")
     private Integer delFlag;
 
+    /**
+     * 同一公司下多个微信公众号之间,union_id 唯一,open_id不唯一
+     */
+    @TableField(value = "union_id")
+    private String unionId;
+
+    /**
+     * 同一公司下多个微信公众号之间,union_id 唯一,open_id不唯一
+     */
+    @TableField(value = "open_id")
+    private String openId;
+
+    /**
+     * 微信名称,在绑定微信时插入,不更新
+     */
+    private String nickname;
+
     @TableField(exist = false)
     private List<Role> roles;
 
@@ -409,6 +426,30 @@ public class User implements Serializable {
 
     public void setDelFlag(Integer delFlag) {
         this.delFlag = delFlag;
+    }
+
+    public String getUnionId() {
+        return unionId;
+    }
+
+    public void setUnionId(String unionId) {
+        this.unionId = unionId;
+    }
+
+    public String getOpenId() {
+        return openId;
+    }
+
+    public void setOpenId(String openId) {
+        this.openId = openId;
+    }
+
+    public String getNickname() {
+        return nickname;
+    }
+
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
     }
 
     public List<Role> getRoles() {

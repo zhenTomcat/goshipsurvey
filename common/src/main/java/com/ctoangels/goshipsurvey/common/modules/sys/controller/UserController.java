@@ -8,9 +8,17 @@ import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.RoleService;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.UserService;
 import com.ctoangels.goshipsurvey.common.util.Const;
-import org.apache.commons.lang.StringUtils;
+import com.ctoangels.goshipsurvey.common.util.StringUtils;
+import me.chanjar.weixin.common.api.WxConsts;
+import me.chanjar.weixin.common.exception.WxErrorException;
+import me.chanjar.weixin.mp.api.WxMpService;
+import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
+import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authc.AuthenticationException;
+import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.crypto.hash.SimpleHash;
+import org.apache.shiro.session.Session;
 import org.apache.shiro.subject.Subject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -23,6 +31,9 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.Arrays;
 import java.util.List;
 
@@ -44,6 +55,9 @@ public class UserController extends BaseController {
 
     @Autowired
     private RoleService roleService;
+
+    @Autowired
+    private WxMpService wxMpService;
 
     @Value("${static_path}")
     private String staticPath;
@@ -134,7 +148,7 @@ public class UserController extends BaseController {
     @ResponseBody
     public JSONObject edit(User user) {
         JSONObject result = new JSONObject();
-        if (StringUtils.isNotBlank(user.getPassword())) {
+        if (StringUtils.isNotEmpty(user.getPassword())) {
             User u = userService.selectById(user.getId());
             String loginName = u.getLoginName();
             String password = new SimpleHash("SHA-1", loginName, user.getPassword()).toString();
@@ -192,12 +206,15 @@ public class UserController extends BaseController {
         map.put("shipType", getShipTypeDict());
         User company = userService.selectById(getCurrentUser().getId());
         map.put("company", company);
-        String userShipType = company.getShipType();
-        String[] userShipTypes = null;
-        if (StringUtils.isNotEmpty(userShipType)) {
-            userShipTypes = userShipType.split(",");
+        int type = company.getType();
+        if (type != Const.USER_TYPE_OP) {
+            String userShipType = company.getShipType();
+            String[] userShipTypes = null;
+            if (StringUtils.isNotEmpty(userShipType)) {
+                userShipTypes = userShipType.split(",");
+            }
+            map.put("userShipTypes", userShipTypes);
         }
-        map.put("userShipTypes", userShipTypes);
         map.put("staticPath", staticPath);
         return "sys/user/companyEdit";
     }
@@ -250,5 +267,41 @@ public class UserController extends BaseController {
         return jsonObject;
     }
 
-
+    @RequestMapping(value = "/bindWeiXin")
+    public String bindWeiXin(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String code = request.getParameter("code");
+        String resultUrl = request.getRequestURL().toString();
+        String param = request.getQueryString();
+        if (param != null) {
+            resultUrl += "?" + param;
+        }
+        WxMpUser wxMpUser = new WxMpUser();
+        if (com.ctoangels.goshipsurvey.common.util.StringUtils.isEmpty(code)) {
+            response.sendRedirect(wxMpService.oauth2buildAuthorizationUrl(resultUrl, WxConsts.OAuth2Scope.SNSAPI_USERINFO, null));
+        } else {
+            WxMpOAuth2AccessToken accessToken = null;
+            try {
+                accessToken = wxMpService.oauth2getAccessToken(code);
+                wxMpUser = wxMpService.oauth2getUserInfo(accessToken, null);
+            } catch (WxErrorException e) {
+                response.sendRedirect(wxMpService.oauth2buildAuthorizationUrl(resultUrl, WxConsts.OAuth2Scope.SNSAPI_USERINFO, null));
+            }
+        }
+        String unionId = wxMpUser.getUnionId();
+        if (!userService.existUnionId(unionId)) {
+            User user = getCurrentUser();
+            user.setUnionId(wxMpUser.getUnionId());
+            user.setOpenId(wxMpUser.getOpenId());
+            user.setNickname(StringUtils.filterEmoji(wxMpUser.getNickname()));
+            if (StringUtils.isEmpty(user.getHeadImgUrl())) {
+                user.setHeadImgUrl(wxMpUser.getHeadImgUrl());
+            }
+            userService.updateSelectiveById(user);
+            Subject subject = SecurityUtils.getSubject();
+            Session session = subject.getSession();
+            session.setAttribute(Const.SESSION_USER, user);
+            return "redirect:/onoffindex#user/companyEdit";
+        }
+        return "redirect:/onoffindex#user/companyEdit?errCode=U002";
+    }
 }

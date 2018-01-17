@@ -11,12 +11,17 @@ import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IPurchaseIn
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.Button;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.Menu;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
+import com.ctoangels.goshipsurvey.common.modules.sys.entity.UserRole;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.LoginService;
-import com.ctoangels.goshipsurvey.common.util.Const;
-import com.ctoangels.goshipsurvey.common.util.Tools;
+import com.ctoangels.goshipsurvey.common.util.*;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.UserService;
-import com.ctoangels.goshipsurvey.common.util.MD5;
-import com.ctoangels.goshipsurvey.common.util.MailUtil;
+import me.chanjar.weixin.common.api.WxConsts;
+import me.chanjar.weixin.common.exception.WxErrorException;
+import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
+import me.chanjar.weixin.mp.api.WxMpService;
+import me.chanjar.weixin.mp.api.impl.WxMpServiceImpl;
+import me.chanjar.weixin.mp.bean.result.WxMpOAuth2AccessToken;
+import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.UsernamePasswordToken;
@@ -35,6 +40,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
 import java.util.*;
 
 /**
@@ -64,6 +72,9 @@ public class LoginController extends BaseController {
 
     @Autowired
     private IPurchaseInspectionService purchaseInspectionService;
+
+    @Autowired
+    private WxMpService wxMpService;
 
     @Value("${site_path}")
     private String sitePath;
@@ -462,4 +473,44 @@ public class LoginController extends BaseController {
         return "prepurchase/home";
     }
 
+
+    @RequestMapping(value = "/wx_login", method = RequestMethod.GET)
+    public String wxLogin(HttpServletRequest request, HttpServletResponse response) throws IOException {
+        String code = request.getParameter("code");
+        String resultUrl = request.getRequestURL().toString();
+        String param = request.getQueryString();
+        if (param != null) {
+            resultUrl += "?" + param;
+        }
+        WxMpUser wxMpUser = new WxMpUser();
+        if (StringUtils.isEmpty(code)) {
+            response.sendRedirect(wxMpService.oauth2buildAuthorizationUrl(resultUrl, WxConsts.OAuth2Scope.SNSAPI_USERINFO, null));
+        } else {
+            WxMpOAuth2AccessToken accessToken = null;
+            try {
+                accessToken = wxMpService.oauth2getAccessToken(code);
+                wxMpUser = wxMpService.oauth2getUserInfo(accessToken, null);
+            } catch (WxErrorException e) {
+                response.sendRedirect(wxMpService.oauth2buildAuthorizationUrl(resultUrl, WxConsts.OAuth2Scope.SNSAPI_USERINFO, null));
+            }
+        }
+        String unionId = wxMpUser.getUnionId();
+        User u = new User();
+        u.setUnionId(unionId);
+        u.setDelFlag(Const.DEL_FLAG_NORMAL);
+        User user = userService.selectOne(u);
+        if (user != null) {
+            Subject subject = SecurityUtils.getSubject();
+            Session session = subject.getSession();
+            session.setAttribute(Const.SESSION_USER, user);
+            UsernamePasswordToken token = new UsernamePasswordToken(user.getLoginName(), user.getPassword());
+            try {
+                subject.login(token);
+            } catch (AuthenticationException e) {
+                throw e;
+            }
+            return "redirect:/onoffindex";
+        }
+        return "redirect:/?errCode=U001";
+    }
 }

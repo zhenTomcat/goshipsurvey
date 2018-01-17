@@ -4,6 +4,7 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.framework.service.ISuperService;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.Role;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
+import me.chanjar.weixin.mp.bean.result.WxMpUser;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
@@ -25,4 +26,10 @@ public interface UserService extends ISuperService<User> {
     List<Integer> getAllId(Integer role);
 
     List<User> getSurveyorList(String keyword);
+
+    User getUserByUnionId(String unionId);
+
+    User registerWeiXinUser(WxMpUser wxMpUser);
+
+    boolean existUnionId(String unionId);
 }

@@ -148,11 +148,33 @@
             }
         }
 
+        #account-login, #wx-login {
+            position: relative;
+        }
+
+        .login-switch {
+            position: absolute;
+            right: 8px;
+            top: 8px;
+            font-size: 20px;
+            color: limegreen;
+        }
+
+        .hidden {
+            display: none;
+        }
+
+        iframe {
+            display: block;
+            height: 230px;
+            margin: 0 auto;
+        }
+
     </style>
 </head>
 
 <body>
-
+<input id="errCode" type="hidden" value="${param.errCode}">
 <div class="wrapper page-option-v1">
     <!--=== Header ===-->
     <jsp:include page="../include/header.jsp"/>
@@ -305,7 +327,8 @@
 
         </div>
         <div class="login col-md-4" style="display: <c:if test="${!empty sessionScope.sessionUser}">none</c:if>">
-            <div class="content">
+            <div id="account-login" class="login-window content">
+                <div class="login-switch"><i class="fa fa-weixin"></i></div>
                 <div class="reg-block">
                     <div class="reg-block-header">
                         <h2>Sign In</h2>
@@ -339,6 +362,10 @@
                     </div>
                 </div>
             </div><!--/container-->
+            <div id="wx-login" class="login-window hidden">
+                <div class="login-switch"><i class="fa fa-user"></i></div>
+                <div id="wx-container"></div>
+            </div>
         </div>
         <div class="welcome col-md-4" <%--style="display: <c:if test="${empty sessionScope.sessionUser}">none</c:if>"--%>>
             <div class="content">
@@ -395,10 +422,25 @@
 <script type="text/javascript" src="${global}/unify/assets/js/plugins/owl-carousel.js"></script>
 <script type="text/javascript" src="${global}/unify/assets/js/plugins/revolution-slider.js"></script>
 <script type="text/javascript" src="${global}/unify/assets/js/plugins/style-switcher.js"></script>-->
+<script src="https://res.wx.qq.com/connect/zh_CN/htmledition/js/wxLogin.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
         changeCode();
+        if ($("#errCode").val() == "U001") {
+            swal({type: "error", title: "Error!", text: "该微信号尚未与任何进行绑定,绑定后方可使用微信扫一扫登录"});
+        }
     })
+
+    var obj = new WxLogin({
+        id: "wx-container",
+        appid: "wxa4cceb05af90e315",
+        scope: "snsapi_login",
+        redirect_uri: "https%3A%2F%2Fwww.goshipsurvey.com/wx_login",
+//        redirect_uri: "http%3A%2F%2Ftfhczg.natappfree.cc/wx_login",
+        state: "",
+        style: "white",
+        href: "https://shipinfo.oss-cn-shanghai.aliyuncs.com/static/css/wx-login.css"
+    });
 
     if (jQuery().datepicker) {
         $('.date-picker').datepicker({
@@ -723,6 +765,11 @@
         }
         return true;
     }
+
+
+    $(".login-switch").on('click', function () {
+        $(".login-window.hidden").removeClass("hidden").siblings(".login-window").addClass("hidden");
+    })
 </script>
 <!--[if lt IE 9]>
 <script src="${global}/unify/assets/plugins/respond.js"></script>
