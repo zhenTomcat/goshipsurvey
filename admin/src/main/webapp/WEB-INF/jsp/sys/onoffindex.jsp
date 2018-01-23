@@ -219,11 +219,16 @@
         } else {
             var url1 = "op/record";
             var url2 = "surveyor/record";
+            var url3="spec";
             var a = $("a[href='" + url1 + "']");
+            var b = $("a[href='" + url2 + "']");
+            console.log(a.length +" ::"+b.length);
             if (a.length > 0) {
                 url = url1
-            } else {
+            } else if(b.length > 0){
                 url = url2;
+            }else {
+                url=url3;
             }
         }
         $("a[href='" + url + "']").click();

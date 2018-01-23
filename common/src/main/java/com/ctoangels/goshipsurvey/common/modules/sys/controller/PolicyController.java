@@ -42,7 +42,7 @@ public class PolicyController {
     public Map<String, Object> get() {
         Map<String, Object> map = new HashMap<String, Object>();
         String dir = "goshipsurvey/";
-        String host = "http://" + bucket + "." + endpoint;
+        String host = "https://" + bucket + "." + endpoint;
         OSSClient client = new OSSClient(endpoint, accessId, accessKey);
         try {
             long expireTime = 3000;

@@ -90,6 +90,7 @@
                 /surveyor/account/personalInfo=user
                 /surveyor/account/companyInfo=user
                 /** = gvrts
+                /spec/**=user
             </value>
         </property>
     </bean>
