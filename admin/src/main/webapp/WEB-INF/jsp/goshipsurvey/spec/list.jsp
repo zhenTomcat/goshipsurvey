@@ -202,7 +202,9 @@
                         "render": function (data, type, row) {
                             var a="";
                             var b="";
+
                             if(row.surveyorAResumeOss!=null && row.surveyorAResumeOss!=""){
+//                                "<embed width='800' height='600' src='test_pdf.pdf'> </embed>"
                                 a="<a href='"+row.surveyorAResumeOss+"' target='_blank'>"+row.surveyorAName+"</a>";
                             }
                             if(row.surveyorBResumeOss!=null && row.surveyorBResumeOss!=""){
