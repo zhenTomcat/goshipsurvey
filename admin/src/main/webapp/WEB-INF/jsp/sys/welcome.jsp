@@ -311,8 +311,8 @@
                     <span class="help-block"></span>
                 </div>
                 <div class="form-group">
-                    <label class="control-label col-md-3" for="specialRequirement" style="font-weight: 100;">Special
-                        Requirement&nbsp;(If any)</label>
+                    <label class="control-label col-md-3" for="specialRequirement" style="font-weight: 100;">
+                        Agent details & Special requirement (if any)</label>
                     <div class="col-md-6">
                         <textarea class="form-control" name="specialRequirement" id="specialRequirement"
                                   style="resize: vertical"></textarea>
