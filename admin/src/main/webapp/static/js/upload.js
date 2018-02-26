@@ -95,7 +95,7 @@ function set_upload_param(up, filename, ret, domain) {
         'success_action_status': '200', //让服务端返回200,不然，默认会返回204
         'callback': callbackbody,
         'signature': signature,
-        'Content-Disposition':"attachment;filename="+nativeName+";filename*=UTF-8''"+nativeName
+       /* 'Content-Disposition':"attachment;filename="+nativeName+";filename*=UTF-8''"+nativeName*/
     };
 
     up.setOption({'url': host, 'multipart_params': new_multipart_params});
