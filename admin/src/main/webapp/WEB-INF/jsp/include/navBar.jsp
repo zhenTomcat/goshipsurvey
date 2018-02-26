@@ -28,7 +28,7 @@
         </a>
     </li>
     <li>
-        <a href="/ship-calculation">
+        <a href="/ship-calculation.html">
             Calculation
         </a>
     </li>
