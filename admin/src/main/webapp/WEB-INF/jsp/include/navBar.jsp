@@ -28,11 +28,6 @@
         </a>
     </li>
     <li>
-        <a href="/ship-calculation.html">
-            Calculation
-        </a>
-    </li>
-    <li>
         <c:if test="${empty sessionScope.sessionUser}">
             <a href="/login_toLogin">
                 Login

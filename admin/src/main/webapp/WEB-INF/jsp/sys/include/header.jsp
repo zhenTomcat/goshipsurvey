@@ -53,6 +53,10 @@
                                     <i class="fa fa-cog"></i>Change password </a>
                             </li>
                             <li>
+                                <a href="/ship-calculation.html">
+                                    <i class="fa fa-ship"></i>Calculation </a>
+                            </li>
+                            <li>
                                 <a href="logout">
                                     <i class="icon-key"></i> Exit </a>
                             </li>
