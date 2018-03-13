@@ -1632,13 +1632,17 @@
 
     function editGrade(obj) {
         var grade=$(obj).val();
-        if(grade!="e" && grade!="E" && grade<=10 && grade>=1){
+        console.log(grade);
+        if(grade!="e" && grade!="E" && grade<=10 && grade>=1 || grade.trim()==""){
+            if(grade == ""){
+                grade=0;
+            }
             $.ajax({
                 url:"prepurchase/surveyor/reportEditGrade",
                 type:"GET",
                 dataType:"json",
                 data:{
-                    grade:$(obj).val(),
+                    grade:grade,
                     id:$(obj).attr("data-id")
 
                 },
