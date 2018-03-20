@@ -191,7 +191,7 @@ public class SurveyorController extends BaseController {
         map.put("shipType", getShipTypeDict());
         map.put("surveyType", getSurveyTypeDict());
 
-        if (dialog == 1) {
+        if (dialog!=null && dialog == 1) {
             return "sys/surveyor/edit2";
         }
         return "sys/surveyor/edit";

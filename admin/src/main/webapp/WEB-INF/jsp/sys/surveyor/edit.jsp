@@ -35,154 +35,235 @@
                     <div class="portlet light ">
                         <div class="portlet-body">
                             <div class="tab-content">
-                                <div class="tab-pane active">
-                                    <form id="add-surveyor-form" action="surveyor/editComplete" method="post">
-                                        <input name="id" value="${surveyor.id}" type="hidden">
-                                        <input name="pastEvaluation" value="${surveyor.pastEvaluation}" type="hidden">
-                                        <input name="portraitUrl" id="portraitUrl" type="hidden">
-                                        <input name="companyId" value="${surveyor.companyId}" type="hidden">
-                                        <input name="createBy" value="${surveyor.createBy}" type="hidden">
-                                        <input name="createDate"
-                                               value=" <fmt:formatDate value="${surveyor.createDate}" pattern="yyyy-MM-dd"></fmt:formatDate>  "
-                                               type="hidden">
-                                        <input name="delFlag" value="${surveyor.delFlag}" type="hidden">
-                                        <div class="form-group col-md-6">
-                                            <label class="control-label">First name</label>
-                                            <input type="text" class="form-control" name="firstName"
-                                                   value="${surveyor.firstName}"/>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label class="control-label">Last name</label>
-                                            <input type="text" class="form-control" name="lastName"
-                                                   value="${surveyor.lastName}"/>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label class="control-label">Nationality</label>
-                                            <input type="text" class="form-control" name="nationality"
-                                                   value="${surveyor.nationality}"/>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label class="control-label">Personal Email</label>
-                                            <input type="text" class="form-control" value="${surveyor.email}"
-                                                   name="email"/>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label class="control-label">Mobile number</label>
-                                            <input type="text" class="form-control" name="tel"
-                                                   value="${surveyor.tel}"/>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label class="control-labe">Available survey time from</label>
-                                            <div class="input-group input-large date-picker input-daterange">
-                                                <input type="text" class="form-control required" name="surveyTimeStart"
-                                                       value=" <fmt:formatDate value="${surveyor.surveyTimeStart}" pattern="yyyy-MM-dd"></fmt:formatDate>">
-                                                <span class="input-group-addon"> to </span>
-                                                <input type="text" class="form-control required" name="surveyTimeEnd"
-                                                       value="<fmt:formatDate value="${surveyor.surveyTimeEnd}" pattern="yyyy-MM-dd"></fmt:formatDate>">
+                                <form id="add-surveyor-form" action="surveyor/editComplete" method="post">
+                                    <div class="tab-pane active col-md-10">
+                                        <!-- BEGIN Portlet PORTLET-->
+                                        <div class="portlet box green">
+                                            <div class="portlet-title">
+                                                <div class="caption">
+                                                    <i class="fa fa-gift"></i>个人基本信息 </div>
+                                                <div class="tools">
+                                                    <a href="javascript:;" class="collapse"> </a>
+                                                </div>
+                                            </div>
+                                            <div class="portlet-body">
+                                                <div class="scroller" >
+                                                        <input name="id" value="${surveyor.id}" type="hidden">
+                                                        <input name="pastEvaluation" value="${surveyor.pastEvaluation}" type="hidden">
+                                                        <input name="portraitUrl" id="portraitUrl" type="hidden">
+                                                        <input name="companyId" value="${surveyor.companyId}" type="hidden">
+                                                        <input name="createBy" value="${surveyor.createBy}" type="hidden">
+                                                        <input name="createDate"
+                                                               value=" <fmt:formatDate value="${surveyor.createDate}" pattern="yyyy-MM-dd"></fmt:formatDate>  "
+                                                               type="hidden">
+                                                        <input name="delFlag" value="${surveyor.delFlag}" type="hidden">
+                                                        <div class="form-group col-md-6">
+                                                            <label class="control-label">姓名</label>
+                                                            <input type="text" class="form-control" name="firstName" value="${surveyor.firstName}"/>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label class="control-label">姓别</label>
+                                                            <input type="text" class="form-control" name="sex" value="${surveyor.sex}"/>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label class="control-label">名族</label>
+                                                            <input type="text" class="form-control" name="nation" value="${surveyor.nation}"/>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label class="control-label">户籍</label>
+                                                            <input type="text" class="form-control" name="censusRegister" value="${surveyor.censusRegister}"/>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label class="control-label">出生年月</label>
+                                                            <input type="text" class="form-control date-picker" name="birthTime" value="${surveyor.birthTime}"/>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label class="control-label">婚姻状况</label>
+                                                            <input type="text" class="form-control" name="maritalStatus" value="${surveyor.maritalStatus}"/>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label class="control-label">毕业院校</label>
+                                                            <input type="text" class="form-control" name="graduateSchool" value="${surveyor.graduateSchool}"/>
+                                                        </div>
+                                                        <div class="form-group col-md-6">
+                                                            <label class="control-label">学历</label>
+                                                            <input type="text" class="form-control" name="education" value="${surveyor.education}"/>
+                                                        </div>
+                                                        <div class="form-group col-md-3">
+                                                            <label class="control-label">专业</label>
+                                                            <input type="text" class="form-control" name="professional" value="${surveyor.professional}"/>
+                                                        </div>
+                                                        <div class="form-group col-md-3">
+                                                            <label class="control-label">常住地</label>
+                                                            <input type="text" class="form-control" name="permanentResidence" value="${surveyor.permanentResidence}"/>
+                                                        </div>
+                                                        <div class="form-group col-md-3">
+                                                            <label class="control-label">现从事工作</label>
+                                                            <input type="text" class="form-control" name="work" value="${surveyor.work}"/>
+                                                        </div>
+                                                        <div class="form-group col-md-3">
+                                                            <label class="control-label">职务</label>
+                                                            <input type="text" class="form-control" name="position" value="${surveyor.position}"/>
+                                                        </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-12">
-                                            <label>Available Ship type</label>
-                                            <div class="mt-checkbox-inline">
-                                                <c:forEach items="${shipType}" var="type">
-                                                    <label class="mt-checkbox col-sm-3">
-                                                        <input type="checkbox" value="${type.value}" name="shipType"
-                                                        <c:forEach items="${userShipTypes}" var="userType">
-                                                               <c:if test="${userType==type.value}">checked</c:if>
-                                                        </c:forEach>
-                                                        >
-                                                            ${type.des}
-                                                        <span></span>
-                                                    </label>
-                                                </c:forEach>
+
+                                        <div class="portlet box blue-hoki">
+                                            <div class="portlet-title">
+                                                <div class="caption">
+                                                    <i class="fa fa-gift"></i>相关工作经验及特长 </div>
+                                                <div class="tools">
+                                                    <a href="javascript:;" class="collapse"> </a>
+                                                </div>
+                                            </div>
+                                            <div class="portlet-body">
+                                                <div class="scroller" >
+                                                    <div class="form-group col-md-6">
+                                                        <label class="control-label">外语语种</label>
+                                                        <input type="text" class="form-control" name="foreignLanguages" value="${surveyor.foreignLanguages}"/>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label class="control-label">外语水平</label>
+                                                        <input type="text" class="form-control" name="foreignLanguageLevel" value="${surveyor.foreignLanguageLevel}"/>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label class="control-label">相关工作经验</label>
+                                                        <input type="text" class="form-control" name="relatedWorkExperience" value="${surveyor.relatedWorkExperience}"/>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label class="control-label">计算机能力</label>
+                                                        <input type="text" class="form-control" name="computerPower" value="${surveyor.computerPower}"/>
+                                                    </div>
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-12">
-                                            <label>Type of survey</label>
-                                            <div class="mt-checkbox-inline">
-                                                <c:forEach items="${surveyType}" var="type">
-                                                    <label class="mt-checkbox col-sm-5">
-                                                        <input type="checkbox" value="${type.value}" name="surveyType"
-                                                        <c:forEach items="${userSurveyTypes}" var="userSurveyType">
-                                                               <c:if test="${userSurveyTypes==type.value}">checked</c:if>
-                                                        </c:forEach>
-                                                        >
-                                                            ${type.des}
-                                                        <span></span>
-                                                    </label>
-                                                </c:forEach>
+
+                                        <div class="portlet box blue-hoki">
+                                            <div class="portlet-title">
+                                                <div class="caption">
+                                                    <i class="fa fa-gift"></i>教育/培训经历及所获证书 </div>
+                                                <div class="tools">
+                                                    <a href="javascript:;" class="collapse"> </a>
+                                                </div>
+                                            </div>
+                                            <div class="portlet-body">
+                                                <div class="scroller" >
+                                                    <div class="form-group col-md-12">
+                                                        <textarea  class="form-control" name="certificateEducation" rows="5" >${surveyor.certificateEducation}</textarea>
+                                                    </div>
+
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-12">
-                                            <label class=" control-label">Available survey port</label>
-                                            <div>
-                                                <select id="select2-button-addons-single-input-group-sm"
-                                                        name="surveyPort"
-                                                        class="form-control js-data-example-ajax" multiple>
-                                                    <c:forEach items="${portList}" var="port">
-                                                        <option value="${port.id}"
-                                                                selected="selected">${port.portEn},${port.countryCode}</option>
-                                                    </c:forEach>
-                                                </select>
+
+                                        <div class="portlet box blue-hoki">
+                                            <div class="portlet-title">
+                                                <div class="caption">
+                                                    <i class="fa fa-gift"></i>主要工作经验 </div>
+
+                                                <div class="tools">
+                                                    <button id="add-row-btn" type="button" class="btn btn-sm green"
+                                                            style="padding: 2px 5px" onclick="TableDeal.addRow()">+ Add new
+                                                    </button>
+                                                </div>
+                                            </div>
+                                            <div class="portlet-body">
+                                                <div class="scroller" >
+                                                    <div class="form-group col-md-12">
+
+                                                        <table class="table  table-checkable table-bordered"
+                                                               id="experience_table">
+                                                            <thead>
+                                                            <tr>
+                                                                <th width="25%">Time</th>
+                                                                <th width="55%">Work content</th>
+                                                                <th width="15%">Ship type</th>
+                                                                <th width="5%">Delete</th>
+                                                            </tr>
+                                                            <tbody>
+                                                            <tr>
+                                                                <c:forEach items="${experienceList}" var="e">
+                                                            <tr>
+                                                                <td><input type="text" class="date-picker form-control"
+                                                                           value="<fmt:formatDate value="${e.startDate}" pattern="yyyy-MM-dd"/>"
+                                                                           style="width:45%;display: inline-block">
+                                                                    to
+                                                                    <input value="<fmt:formatDate value="${e.endDate}" pattern="yyyy-MM-dd"/>"
+                                                                           type="text" class="form-control date-picker"
+                                                                           style="width:45%;display: inline-block"></td>
+                                                                <td><input value="${e.workContent}" type="text"
+                                                                           class=" form-control"></td>
+                                                                <td><input value="${e.shipType}" type="text"
+                                                                           class=" form-control"></td>
+                                                                <td>
+                                                                    <button onclick="TableDeal.deleteRow(this)" type="button"
+                                                                            class="btn red">Delete
+                                                                    </button>
+                                                                </td>
+                                                                <input type="hidden" value="${e.id}">
+                                                                <input type="hidden" value="${e.delFlag}"
+                                                                       class="del-flag-class">
+                                                            </tr>
+                                                            </c:forEach>
+                                                            </tbody>
+
+                                                            </thead>
+                                                        </table>
+                                                    </div>
+
+                                                </div>
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-12">
-                                            <label class="control-label">Surveyor's profile</label>
-                                            <textarea class="form-control" rows="5"
-                                                      name="surveyorProfile">${surveyor.surveyorProfile}</textarea>
+
+                                        <div class="portlet box blue-hoki">
+                                            <div class="portlet-title">
+                                                <div class="caption">
+                                                    <i class="fa fa-gift"></i>船舶检验经历 </div>
+                                                <div class="tools">
+                                                    <a href="javascript:;" class="collapse"> </a>
+                                                </div>
+                                            </div>
+                                            <div class="portlet-body">
+                                                <div class="scroller" >
+                                                    <div class="form-group col-md-12">
+                                                        <textarea  class="form-control" name="shipInspectionExperience" rows="5">${surveyor.shipInspectionExperience}</textarea>
+                                                    </div>
+
+                                                </div>
+                                            </div>
                                         </div>
-                                        <div class="form-group col-md-12">
-                                            <label class="control-label">Surveyor's experience</label>&nbsp;
-                                            <button id="add-row-btn" type="button" class="btn btn-sm green"
-                                                    style="padding: 2px 5px" onclick="TableDeal.addRow()">+ Add new
-                                            </button>
-                                            <table class="table  table-checkable table-bordered"
-                                                   id="experience_table">
-                                                <thead>
-                                                <tr>
-                                                    <th width="25%">Time</th>
-                                                    <th width="15%">Ship type</th>
-                                                    <th width="15%">Company</th>
-                                                    <th width="40%">Work content</th>
-                                                    <th width="5%">Delete</th>
-                                                </tr>
-                                                <tbody>
-                                                <c:forEach items="${experienceList}" var="e">
-                                                    <tr>
-                                                        <td><input type="text" class="date-picker form-control"
-                                                                   value="<fmt:formatDate value="${e.startDate}" pattern="yyyy-MM-dd"/>"
-                                                                   style="width:45%;display: inline-block">
-                                                            to
-                                                            <input value="<fmt:formatDate value="${e.endDate}" pattern="yyyy-MM-dd"/>"
-                                                                   type="text" class="form-control date-picker"
-                                                                   style="width:45%;display: inline-block"></td>
-                                                        <td><input value="${e.shipType}" type="text"
-                                                                   class=" form-control"></td>
-                                                        <td><input value="${e.company}" type="text"
-                                                                   class=" form-control"></td>
-                                                        <td><input value="${e.workContent}" type="text"
-                                                                   class=" form-control"></td>
-                                                        <td>
-                                                            <button onclick="TableDeal.deleteRow(this)" type="button"
-                                                                    class="btn red">Delete
-                                                            </button>
-                                                        </td>
-                                                        <input type="hidden" value="${e.id}">
-                                                        <input type="hidden" value="${e.delFlag}"
-                                                               class="del-flag-class">
-                                                    </tr>
-                                                </c:forEach>
-                                                </tbody>
-                                                </thead>
-                                            </table>
+
+                                        <div class="portlet box blue-hoki">
+                                            <div class="portlet-title">
+                                                <div class="caption">
+                                                    <i class="fa fa-gift"></i>个人联系方式 </div>
+                                                <div class="tools">
+                                                    <a href="javascript:;" class="collapse"> </a>
+                                                </div>
+                                            </div>
+                                            <div class="portlet-body">
+                                                <div class="scroller" >
+                                                    <div class="form-group col-md-6">
+                                                        <label class="control-label">联系电话</label>
+                                                        <input type="text" class="form-control" name="tel" value="${surveyor.tel}"/>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label class="control-label">E-Mail</label>
+                                                        <input type="text" class="form-control" name="email" value="${surveyor.email}"/>
+                                                    </div>
+                                                </div>
+                                            </div>
                                         </div>
+
                                         <div class="margiv-top-10 col-md-12">
                                             <button type="button" onclick="editSurveyor(this)" class="btn green"> Save
                                                 Changes
                                             </button>
                                         </div>
-                                    </form>
-                                </div>
+                                        <!-- END Portlet PORTLET-->
+                                    </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -236,82 +317,17 @@
     }
 
 
-    var PortMultiSelect = function () {
-        var handleDemo = function () {
-            $.fn.select2.defaults.set("theme", "bootstrap");
-            var placeholder = "Select a State";
-            $(".select2, .select2-multiple").select2({
-                placeholder: placeholder,
-                width: null
-            });
-            $(".select2-allow-clear").select2({
-                allowClear: true,
-                placeholder: placeholder,
-                width: null
-            });
-            function formatRepo(repo) {
-                if (repo.loading) return repo.text;
-                var markup = repo.portEn + "," + repo.countryCode
-
-                return markup;
-            }
-
-            function formatRepoSelection(repo) {
-                return repo.text || repo.portEn + "," + repo.countryCode;
-            }
-
-            $(".js-data-example-ajax").select2({
-                width: "off",
-                ajax: {
-                    url: "port/searchList",
-                    dataType: 'json',
-                    data: function (params) {
-                        return {
-                            keyword: params.term,
-                        };
-                    },
-                    processResults: function (data, page) {
-                        return {
-                            results: data.list
-                        };
-                    },
-                    cache: true
-                },
-                escapeMarkup: function (markup) {
-                    return markup;
-                },
-                minimumInputLength: 1,
-                templateResult: formatRepo,
-                templateSelection: formatRepoSelection
-            });
-            $(".select2, .select2-multiple, .select2-allow-clear, .js-data-example-ajax").on("select2:open", function () {
-                if ($(this).parents("[class*='has-']").length) {
-                    var classNames = $(this).parents("[class*='has-']")[0].className.split(/\s+/);
-                    for (var i = 0; i < classNames.length; ++i) {
-                        if (classNames[i].match("has-")) {
-                            $("body > .select2-container").addClass(classNames[i]);
-                        }
-                    }
-                }
-            });
-        }
-        return {
-            init: function () {
-                handleDemo();
-            }
-        };
-    }();
-
-    if (App.isAngularJsApp() === false) {
-        jQuery(document).ready(function () {
-            PortMultiSelect.init();
-        });
-    }
 
 
     var experienceTable = $("#experience_table");
     var TableDeal = function () {
-        var row = '<tr><td><input type="text" class="date-picker form-control"  style="width:45%;display: inline-block">to<input type="text" class="form-control date-picker" style="width:45%;display: inline-block"></td> <td><input type="text" class=" form-control"></td> <td><input type="text" class=" form-control"></td> <td><input type="text" class="form-control"></td> <td> <button onclick="TableDeal.deleteRow(this)" type="button" class="btn red">Delete</button> </td><input type="hidden" > <input type="hidden" value="0" class="del-flag-class"></tr>'
+        var row = '<tr><td><input type="text" class="date-picker form-control"  style="width:45%;display: inline-block">to' +
+                '<input type="text" class="form-control date-picker" style="width:45%;display: inline-block"></td>' +
+                ' <td><input type="text" class=" form-control"></td>  ' +
+                '<td><input type="text" class="form-control"></td> ' +
+                '<td> <button onclick="TableDeal.deleteRow(this)" type="button" class="btn red">Delete</button> ' +
+                '</td><input type="hidden" >' +
+                ' <input type="hidden" value="0" class="del-flag-class"></tr>'
         return {
             addRow: function () {
                 experienceTable.append(row);
@@ -329,11 +345,10 @@
                     var inputs = $(e).find("input");
                     surveyorExperience.startDate = $(inputs[0]).val();
                     surveyorExperience.endDate = $(inputs[1]).val();
-                    surveyorExperience.shipType = $(inputs[2]).val();
-                    surveyorExperience.company = $(inputs[3]).val();
-                    surveyorExperience.workContent = $(inputs[4]).val();
-                    surveyorExperience.id = $(inputs[5]).val();
-                    surveyorExperience.delFlag = $(inputs[6]).val();
+                    surveyorExperience.workContent = $(inputs[2]).val();
+                    surveyorExperience.shipType = $(inputs[3]).val();
+                    surveyorExperience.id = $(inputs[4]).val();
+                    surveyorExperience.delFlag = $(inputs[5]).val();
                     experienceList.push(surveyorExperience);
                 })
                 return experienceList;

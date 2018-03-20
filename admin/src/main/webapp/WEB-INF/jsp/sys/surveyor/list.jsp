@@ -126,9 +126,9 @@
                     <input type='checkbox' id="defaultCheck"/>
                 </th>
                 <th width="15%">Surveyor name</th>
-                <th width="40%">Available port</th>
-                <th width="20%">Type of survey</th>
-                <th width="30%">Available time</th>
+                <th width="40%">Position</th>
+                <th width="20%">TEL</th>
+                <th width="30%">E-Mail</th>
             </tr>
             <tbody></tbody>
             </thead>
@@ -193,30 +193,25 @@
                 {
                     "targets": 1,
                     "render": function (data, type, row) {
-                        return '<a data-target="navTab" href="surveyor/edit?id=' + row.id + '">' + row.firstName + " " + row.lastName + '</a>';
+                        return '<a data-target="navTab" href="surveyor/edit?id=' + row.id + '">' + row.firstName + '</a>';
                     }
                 },
                 {
                     "targets": 2,
                     "render": function (data, type, row) {
-                        var text = row.surveyPort || "nothing";
-                        return '<a href="surveyor/editPort?id=' + row.id + '" data-model="dialog">' + text + '</a>';
+                        return row.position;
                     }
                 },
                 {
                     "targets": 3,
                     "render": function (data, type, row) {
-                        var text = row.surveyType || "nothing";
-                        return '<a href="surveyor/editSurveyType?id=' + row.id + '" data-model="dialog">' + text + '</a>';
+                        return row.tel;
                     }
                 },
                 {
                     "targets": 4,
                     "render": function (data, type, row) {
-                        var surveyTimeStart = new Date(row.surveyTimeStart.replace(/-/g, "/")).Format("yyyy-MM-dd");
-                        var surveyTimeEnd = new Date(row.surveyTimeEnd.replace(/-/g, "/")).Format("yyyy-MM-dd");
-//                    return '<a href="surveyor/editTime?id=' + row.id + '" data-model="dialog">' + surveyTimeStart + ' to ' + surveyTimeEnd + '</a>';
-                        return '<a href="#time_modal" data-toggle="modal" onclick="changeEditTimeId(' + row.id + ')">' + surveyTimeStart + ' to ' + surveyTimeEnd + '</a>';
+                        return row.email;
                     }
                 }],
             "drawCallback": function (settings) {
