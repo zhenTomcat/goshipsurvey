@@ -11,6 +11,28 @@ App({
       success: res => {
         // 发送 res.code 到后台换取 openId, sessionKey, unionId
         console.log(res);
+        if (res.code) {
+          wx.request({
+            url: 'http://localhost/wechat/user/login',
+            data: {
+              code: res.code
+            },
+            success: function (res) {
+              console.log(res);
+              if (res.statusCode == 200) {
+                wx.setStorageSync('init', '成功获取userToken！');
+              } else {
+                wx.setStorageSync('init', '获取userToken失败！');
+              }
+            },
+            fail: function (e) {
+              util.alert('数据请求失败！');
+            }
+          })
+        } else {
+          console.log('获取用户登录态失败！' + res.errMsg)
+          // wx.setStorageSync('init', '获取用户登录态失败！');
+        }
       }
     })
     // 获取用户信息
@@ -37,7 +59,7 @@ App({
   globalData: {
     userInfo: null
   },
-  getInfo: function() {
+  getInfo: function () {
     console.log(12);
   }
 })

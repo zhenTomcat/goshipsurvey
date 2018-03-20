@@ -20,6 +20,7 @@
         <spring.version>4.3.4.RELEASE</spring.version>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <org.springframework.version>4.1.6.RELEASE</org.springframework.version>
+        <weixin-java-miniapp.version>2.9.6.BETA</weixin-java-miniapp.version>
     </properties>
 
     <dependencies>
@@ -213,6 +214,14 @@
             <artifactId>weixin-java-mp</artifactId>
             <version>2.9.0</version>
         </dependency>
+
+        <dependency>
+            <groupId>com.github.binarywang</groupId>
+            <artifactId>weixin-java-miniapp</artifactId>
+            <version>${weixin-java-miniapp.version}</version>
+        </dependency>
+
+
 
         <!--<dependency>
             <groupId>com.artofsolving</groupId>

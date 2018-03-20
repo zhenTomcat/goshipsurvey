@@ -1,5 +1,9 @@
 package com.ctoangels.goshipsurvey.common.modules.sys.config;
 
+import cn.binarywang.wx.miniapp.api.WxMaService;
+import cn.binarywang.wx.miniapp.api.impl.WxMaServiceImpl;
+import cn.binarywang.wx.miniapp.config.WxMaConfig;
+import cn.binarywang.wx.miniapp.config.WxMaInMemoryConfig;
 import me.chanjar.weixin.mp.api.WxMpConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpInMemoryConfigStorage;
 import me.chanjar.weixin.mp.api.WxMpService;
@@ -63,6 +67,30 @@ public class MainConfig {
     public WxMpTemplateMsgService wxMpTemplateMsgService() {
         WxMpTemplateMsgService wxMpTemplateMsgService = new WxMpTemplateMsgServiceImpl(wxMpService());
         return wxMpTemplateMsgService;
+    }
+
+
+
+    @Value("${weixin.surveyor.appid}")
+    private String weixinSurveyorAppid;
+
+    @Value("${weixin.surveyor.appsecret}")
+    private String weixinSurveyorAppsecret;
+
+
+    @Bean
+    public WxMaConfig config() {
+        WxMaInMemoryConfig config = new WxMaInMemoryConfig();
+        config.setAppid(weixinSurveyorAppid);
+        config.setSecret(weixinSurveyorAppsecret);
+        return config;
+    }
+
+    @Bean
+    public WxMaService wxMaService(WxMaConfig config) {
+        WxMaService service = new WxMaServiceImpl();
+        service.setWxMaConfig(config);
+        return service;
     }
 
 }
