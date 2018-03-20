@@ -9,10 +9,6 @@
 <h1 style="text-align: center;background-color: #3598dc;color: white;margin-top: 0">Surveyor management</h1>
 <div class="row">
     <div class="col-md-12">
-        <form class="form-horizontal" action="op/quotation/add" method="post" id="quotation-add-form">
-        </form>
-    </div>
-    <div class="col-md-12">
         <div style="float:left;margin-bottom: 10px;margin-left: 20px;" class="col-md-3">
             <a type="button" id="back-btn" class="btn btn-circle blue" data-target="navTab" href="surveyor">Back to
                 Surveyor list</a>
@@ -39,114 +35,214 @@
                     <div class="portlet light ">
                         <div class="portlet-body">
                             <div class="tab-content">
-                                <div class="tab-pane active">
-                                    <form id="add-surveyor-form" action="surveyor/addComplete" method="post">
-                                        <input type="hidden" name="portraitUrl" id="portraitUrl">
-                                        <div class="form-group col-md-6">
-                                            <label class="control-label">First name</label>
-                                            <input type="text" class="form-control" name="firstName"/>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label class="control-label">Last name</label>
-                                            <input type="text" class="form-control" name="lastName"/>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label class="control-label">Nationality</label>
-                                            <input type="text" class="form-control" name="nationality"/>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label class="control-label">Personal Email</label>
-                                            <input type="text" class="form-control" name="email"/>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label class="control-label">Mobile number</label>
-                                            <input type="text" class="form-control" name="tel"/>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <label class="control-labe">Available survey time from</label>
-                                            <div class="input-group input-large date-picker input-daterange">
-                                                <input type="text" class="form-control required" name="surveyTimeStart">
-                                                <span class="input-group-addon"> to </span>
-                                                <input type="text" class="form-control required" name="surveyTimeEnd">
+                                <form id="add-surveyor-form" action="surveyor/addComplete" method="post">
+                                    <div class="tab-pane active col-md-10">
+                                    <!-- BEGIN Portlet PORTLET-->
+                                    <div class="portlet box green">
+                                        <div class="portlet-title">
+                                            <div class="caption">
+                                                <i class="fa fa-gift"></i>个人基本信息 </div>
+                                            <div class="tools">
+                                                <a href="javascript:;" class="collapse"> </a>
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-12">
-                                            <label>Available Ship type</label>
-                                            <div class="mt-checkbox-inline">
-                                                <c:forEach items="${shipType}" var="type">
-                                                    <label class="mt-checkbox col-sm-3">
-                                                        <input type="checkbox" value="${type.value}" name="shipType">
-                                                            ${type.des}
-                                                        <span></span>
-                                                    </label>
-                                                </c:forEach>
+                                        <div class="portlet-body">
+                                            <div class="scroller" >
+                                                <form id="add-surveyor" action="surveyor/addComplete" method="post">
+                                                    <input type="hidden" name="portraitUrl" id="portraitUrl">
+                                                    <div class="form-group col-md-6">
+                                                        <label class="control-label">姓名</label>
+                                                        <input type="text" class="form-control" name="firstName" id="name"/>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label class="control-label">姓别</label>
+                                                        <input type="text" class="form-control" name="sex"/>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label class="control-label">名族</label>
+                                                        <input type="text" class="form-control" name="nation"/>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label class="control-label">户籍</label>
+                                                        <input type="text" class="form-control" name="censusRegister"/>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label class="control-label">出生年月</label>
+                                                        <input type="text" class="form-control date-picker" name="birthTime"/>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label class="control-label">婚姻状况</label>
+                                                        <input type="text" class="form-control" name="maritalStatus"/>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label class="control-label">毕业院校</label>
+                                                        <input type="text" class="form-control" name="graduateSchool"/>
+                                                    </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label class="control-label">学历</label>
+                                                        <input type="text" class="form-control" name="education"/>
+                                                    </div>
+                                                    <div class="form-group col-md-3">
+                                                        <label class="control-label">专业</label>
+                                                        <input type="text" class="form-control" name="professional"/>
+                                                    </div>
+                                                    <div class="form-group col-md-3">
+                                                        <label class="control-label">常住地</label>
+                                                        <input type="text" class="form-control" name="permanentResidence"/>
+                                                    </div>
+                                                    <div class="form-group col-md-3">
+                                                        <label class="control-label">现从事工作</label>
+                                                        <input type="text" class="form-control" name="work"/>
+                                                    </div>
+                                                    <div class="form-group col-md-3">
+                                                        <label class="control-label">职务</label>
+                                                        <input type="text" class="form-control" name="position"/>
+                                                    </div>
+                                                </form>
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-12">
-                                            <label>Type of survey</label>
-                                            <div class="mt-checkbox-inline">
-                                                <c:forEach items="${surveyType}" var="type">
-                                                    <label class="mt-checkbox col-sm-5">
-                                                        <input type="checkbox" value="${type.value}" name="surveyType">
-                                                            ${type.des}
-                                                        <span></span>
-                                                    </label>
-                                                </c:forEach>
+                                    </div>
+
+                                    <div class="portlet box blue-hoki">
+                                    <div class="portlet-title">
+                                        <div class="caption">
+                                            <i class="fa fa-gift"></i>相关工作经验及特长 </div>
+                                        <div class="tools">
+                                            <a href="javascript:;" class="collapse"> </a>
+                                        </div>
+                                    </div>
+                                    <div class="portlet-body">
+                                        <div class="scroller" >
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label">外语语种</label>
+                                                <input type="text" class="form-control" name="foreignLanguages"/>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label">外语水平</label>
+                                                <input type="text" class="form-control" name="foreignLanguageLevel"/>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label">相关工作经验</label>
+                                                <input type="text" class="form-control" name="relatedWorkExperience"/>
+                                            </div>
+                                            <div class="form-group col-md-6">
+                                                <label class="control-label">计算机能力</label>
+                                                <input type="text" class="form-control" name="computerPower"/>
                                             </div>
                                         </div>
-                                        <div class="form-group col-md-12">
-                                            <label class=" control-label">Available survey port</label>
-                                            <div>
-                                                <select id="select2-button-addons-single-input-group-sm"
-                                                        name="surveyPort"
-                                                        class="form-control js-data-example-ajax" multiple>
-                                                </select>
-                                            </div>
-                                        </div>
-                                        <div class="form-group col-md-12">
-                                            <label class="control-label">Surveyor's profile</label>
-                                            <textarea class="form-control" rows="5"
-                                                      name="surveyorProfile"></textarea>
-                                        </div>
-                                        <div class="form-group col-md-12">
-                                            <label class="control-label">Surveyor's experience</label>&nbsp;
-                                            <button id="add-row-btn" type="button" class="btn btn-sm green"
-                                                    style="padding: 2px 5px" onclick="TableDeal.addRow()">+ Add new
-                                            </button>
-                                            <table class="table  table-checkable table-bordered"
-                                                   id="experience_table">
-                                                <thead>
-                                                <tr>
-                                                    <th width="25%">Time</th>
-                                                    <th width="15%">Ship type</th>
-                                                    <th width="15%">Company</th>
-                                                    <th width="40%">Work content</th>
-                                                    <th width="5%">Delete</th>
-                                                </tr>
-                                                <tbody>
-                                                <tr>
-                                                    <td><input type="text" class="date-picker form-control"
-                                                               style="width:45%;display: inline-block">to<input
-                                                            type="text"
-                                                            class="form-control date-picker"
-                                                            style="width:45%;display: inline-block"></td>
-                                                    <td><input type="text" class=" form-control"></td>
-                                                    <td><input type="text" class=" form-control"></td>
-                                                    <td><input type="text" class=" form-control"></td>
-                                                    <td>
-                                                        <button onclick="" type="button" class="btn red">Delete</button>
-                                                    </td>
-                                                </tr>
-                                                </tbody>
-                                                </thead>
-                                            </table>
-                                        </div>
-                                        <div class="margiv-top-10 col-md-12">
-                                            <button type="button" onclick="addSurveyor(this)" class="btn green"> Save
-                                            </button>
-                                        </div>
-                                    </form>
+                                    </div>
                                 </div>
+
+                                    <div class="portlet box blue-hoki">
+                                        <div class="portlet-title">
+                                            <div class="caption">
+                                                <i class="fa fa-gift"></i>教育/培训经历及所获证书 </div>
+                                            <div class="tools">
+                                                <a href="javascript:;" class="collapse"> </a>
+                                            </div>
+                                        </div>
+                                        <div class="portlet-body">
+                                            <div class="scroller" >
+                                                <div class="form-group col-md-12">
+                                                    <textarea  class="form-control" name="certificateEducation" rows="5"></textarea>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="portlet box blue-hoki">
+                                        <div class="portlet-title">
+                                            <div class="caption">
+                                                <i class="fa fa-gift"></i>主要工作经验 </div>
+
+                                            <div class="tools">
+                                                <button id="add-row-btn" type="button" class="btn btn-sm green"
+                                                        style="padding: 2px 5px" onclick="TableDeal.addRow()">+ Add new
+                                                </button>
+                                            </div>
+                                        </div>
+                                        <div class="portlet-body">
+                                            <div class="scroller" >
+                                                <div class="form-group col-md-12">
+
+                                                    <table class="table  table-checkable table-bordered"
+                                                           id="experience_table">
+                                                        <thead>
+                                                        <tr>
+                                                            <th width="25%">Time</th>
+                                                            <th width="55%">Work content</th>
+                                                            <th width="15%">Ship type</th>
+                                                            <th width="5%">Delete</th>
+                                                        </tr>
+                                                        <tbody>
+                                                        <tr>
+                                                            <td><input type="text" class="date-picker form-control"
+                                                                       style="width:45%;display: inline-block">to<input
+                                                                    type="text"
+                                                                    class="form-control date-picker"
+                                                                    style="width:45%;display: inline-block"></td>
+                                                            <td><input type="text" class=" form-control"></td>
+                                                            <td><input type="text" class=" form-control"></td>
+                                                            <td>
+                                                                <button onclick="" type="button" class="btn red">Delete</button>
+                                                            </td>
+                                                        </tr>
+                                                        </tbody>
+                                                        </thead>
+                                                    </table>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="portlet box blue-hoki">
+                                        <div class="portlet-title">
+                                            <div class="caption">
+                                                <i class="fa fa-gift"></i>船舶检验经历 </div>
+                                            <div class="tools">
+                                                <a href="javascript:;" class="collapse"> </a>
+                                            </div>
+                                        </div>
+                                        <div class="portlet-body">
+                                            <div class="scroller" >
+                                                <div class="form-group col-md-12">
+                                                    <textarea  class="form-control" name="shipInspectionExperience" rows="5"></textarea>
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="portlet box blue-hoki">
+                                        <div class="portlet-title">
+                                            <div class="caption">
+                                                <i class="fa fa-gift"></i>个人联系方式 </div>
+                                            <div class="tools">
+                                                <a href="javascript:;" class="collapse"> </a>
+                                            </div>
+                                        </div>
+                                        <div class="portlet-body">
+                                            <div class="scroller" >
+                                                <div class="form-group col-md-6">
+                                                    <label class="control-label">联系电话</label>
+                                                    <input type="text" class="form-control" name="tel"/>
+                                                </div>
+                                                <div class="form-group col-md-6">
+                                                    <label class="control-label">E-Mail</label>
+                                                    <input type="text" class="form-control" name="email"/>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="margiv-top-10 col-md-12">
+                                        <button type="button" onclick="addSurveyor(this)" class="btn green"> Save</button>
+                                    </div>
+                                        <!-- END Portlet PORTLET-->
+                                </div>
+                                </form>
                             </div>
                         </div>
                     </div>
@@ -196,100 +292,30 @@
     }
 
     function check() {
+        if ($("#name").val() == "") {
+            $("#name").tips({
+                side: 2,
+                msg: '姓名不能为空',/*船名不能为空*/
+                bg: '#AE81FF',
+                time: 3
+            });
+            $("#name").focus();
+            return false;
+        } else {
+            $("#name").val(jQuery.trim($('#name').val()));
+        }
         return true;
     }
 
 
-    var PortMultiSelect = function () {
-        var handleDemo = function () {
-            $.fn.select2.defaults.set("theme", "bootstrap");
-            var placeholder = "Select a State";
-            $(".select2, .select2-multiple").select2({
-                placeholder: placeholder,
-                width: null
-            });
-            $(".select2-allow-clear").select2({
-                allowClear: true,
-                placeholder: placeholder,
-                width: null
-            });
-            function formatRepo(repo) {
-                if (repo.loading) return repo.text;
-                var markup = repo.portEn + "," + repo.countryCode
-
-                return markup;
-            }
-
-            function formatRepoSelection(repo) {
-                return repo.portEn + "," + repo.countryCode || repo.text;
-            }
-
-            $(".js-data-example-ajax").select2({
-                width: "off",
-                ajax: {
-                    url: "port/searchList",
-                    dataType: 'json',
-                    delay: 10,
-                    data: function (params) {
-                        return {
-                            keyword: params.term,
-                            page: params.page
-                        };
-                    },
-                    processResults: function (data, page) {
-                        return {
-                            results: data.list
-                        };
-                    },
-                    cache: true
-                },
-                escapeMarkup: function (markup) {
-                    return markup;
-                },
-                minimumInputLength: 1,
-                templateResult: formatRepo,
-                templateSelection: formatRepoSelection
-            });
-            $("button[data-select2-open]").click(function () {
-                $("#" + $(this).data("select2-open")).select2("open");
-            });
-            $(":checkbox").on("click", function () {
-                $(this).parent().nextAll("select").prop("disabled", !this.checked);
-            });
-            $(".select2, .select2-multiple, .select2-allow-clear, .js-data-example-ajax").on("select2:open", function () {
-                if ($(this).parents("[class*='has-']").length) {
-                    var classNames = $(this).parents("[class*='has-']")[0].className.split(/\s+/);
-
-                    for (var i = 0; i < classNames.length; ++i) {
-                        if (classNames[i].match("has-")) {
-                            $("body > .select2-container").addClass(classNames[i]);
-                        }
-                    }
-                }
-            });
-            $(".js-btn-set-scaling-classes").on("click", function () {
-                $("#select2-multiple-input-sm, #select2-single-input-sm").next(".select2-container--bootstrap").addClass("input-sm");
-                $("#select2-multiple-input-lg, #select2-single-input-lg").next(".select2-container--bootstrap").addClass("input-lg");
-                $(this).removeClass("btn-primary btn-outline").prop("disabled", true);
-            });
-        }
-        return {
-            init: function () {
-                handleDemo();
-            }
-        };
-    }();
-
-    if (App.isAngularJsApp() === false) {
-        jQuery(document).ready(function () {
-            PortMultiSelect.init();
-        });
-    }
-
 
     var experienceTable = $("#experience_table");
     var TableDeal = function () {
-        var row = '<tr><td><input type="text" class="date-picker form-control"  style="width:45%;display: inline-block">to<input type="text" class="form-control date-picker" style="width:45%;display: inline-block"></td> <td><input type="text" class=" form-control"></td> <td><input type="text" class=" form-control"></td> <td><input type="text" class="form-control"></td> <td> <button onclick="TableDeal.deleteRow(this)" type="button" class="btn red">Delete</button> </td> </tr>'
+
+        var row = '<tr><td><input type="text" class="date-picker form-control"  style="width:45%;display: inline-block">to' +
+                '<input type="text" class="form-control date-picker" style="width:45%;display: inline-block"></td>' +
+                '<td><input type="text" class=" form-control"></td> <td><input type="text" class="form-control"></td> ' +
+                '<td> <button onclick="TableDeal.deleteRow(this)" type="button" class="btn red">Delete</button> </td> </tr>'
         return {
             addRow: function () {
                 experienceTable.append(row);
@@ -305,15 +331,16 @@
                     var inputs = $(e).find("input");
                     surveyorExperience.startDate = $(inputs[0]).val();
                     surveyorExperience.endDate = $(inputs[1]).val();
-                    surveyorExperience.shipType = $(inputs[2]).val();
-                    surveyorExperience.company = $(inputs[3]).val();
-                    surveyorExperience.workContent = $(inputs[4]).val();
+                    surveyorExperience.workContent = $(inputs[2]).val();
+                    surveyorExperience.shipType = $(inputs[3]).val();
+
                     surveyorExperience.delFlag = 0;
                     experienceList.push(surveyorExperience);
                 })
                 return experienceList;
             }
         }
+
     }();
 
 
