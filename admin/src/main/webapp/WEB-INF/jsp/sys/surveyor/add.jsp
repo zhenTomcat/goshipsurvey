@@ -52,7 +52,7 @@
                                                     <input type="hidden" name="portraitUrl" id="portraitUrl">
                                                     <div class="form-group col-md-6">
                                                         <label class="control-label">姓名</label>
-                                                        <input type="text" class="form-control" name="firstName"/>
+                                                        <input type="text" class="form-control" name="firstName" id="name"/>
                                                     </div>
                                                     <div class="form-group col-md-6">
                                                         <label class="control-label">姓别</label>
@@ -292,6 +292,18 @@
     }
 
     function check() {
+        if ($("#name").val() == "") {
+            $("#name").tips({
+                side: 2,
+                msg: '姓名不能为空',/*船名不能为空*/
+                bg: '#AE81FF',
+                time: 3
+            });
+            $("#name").focus();
+            return false;
+        } else {
+            $("#name").val(jQuery.trim($('#name').val()));
+        }
         return true;
     }
 
