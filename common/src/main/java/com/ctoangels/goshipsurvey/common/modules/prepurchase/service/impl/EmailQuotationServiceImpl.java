@@ -3,7 +3,6 @@ package com.ctoangels.goshipsurvey.common.modules.prepurchase.service.impl;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.toolkit.StringUtils;
 import com.ctoangels.goshipsurvey.common.modules.go.entity.PublicShip;
-import com.ctoangels.goshipsurvey.common.modules.go.mapper.PublicShipMapper;
 import com.ctoangels.goshipsurvey.common.modules.go.service.IPublicShipService;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Dict;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.DictMapper;
@@ -96,7 +95,8 @@ public class EmailQuotationServiceImpl extends SuperServiceImpl<EmailQuotationMa
             }
         }
 
-        MailUtil.sendEmailQuotation(emailQuotation);
+        MailUtil.sendEmailQuotationInner(emailQuotation);
+        MailUtil.sendEmailQuotationOuter(emailQuotation);
         return true;
     }
 }

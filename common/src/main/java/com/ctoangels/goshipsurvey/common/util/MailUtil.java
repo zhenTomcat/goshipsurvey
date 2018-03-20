@@ -126,20 +126,19 @@ public class MailUtil {
         }
     }
 
-
-    public static void sendEmailQuotation(EmailQuotation emailQuotation) {
+    // 船东需要验船时 发送给内部的邮件
+    public static void sendEmailQuotationInner(EmailQuotation emailQuotation) {
         StringBuilder sb = new StringBuilder();
         sb.append("Ship name : ").append(emailQuotation.getShipName()).append("<br>");
         sb.append("Imo : ").append(emailQuotation.getImo()).append("<br>");
         sb.append("Inspection type : ").append(emailQuotation.getInspectionType()).append("<br>");
-        if (StringUtils.isNotEmpty(emailQuotation.getDelivery())){
+        if (StringUtils.isNotEmpty(emailQuotation.getDelivery())) {
             sb.append("Place of delivery: ").append(emailQuotation.getDelivery()).append("<br>");
         }
-        if (StringUtils.isNotEmpty(emailQuotation.getReDelivery())){
+        if (StringUtils.isNotEmpty(emailQuotation.getReDelivery())) {
             sb.append("Place of re-delivery: ").append(emailQuotation.getReDelivery()).append("<br>");
         }
         sb.append("Port : ").append(emailQuotation.getPort()).append("<br>");
-//        sb.append("Date range : ").append(DateUtil.formatDate(emailQuotation.getStartDate(), "yyyy-MM-dd")).append("~").append(DateUtil.formatDate(emailQuotation.getEndDate(), "yyyy-MM-dd")).append("<br>");
         sb.append("Estimated Date : ").append(DateUtil.formatDate(emailQuotation.getEstimatedDate(), "yyyy-MM-dd")).append("<br>");
         sb.append("Email : ").append(emailQuotation.getEmail()).append("<br>");
         sb.append("Role : ").append(emailQuotation.getRole()).append("<br>");
@@ -162,6 +161,54 @@ public class MailUtil {
         }
         sendEmail(fromAddress, sb.toString(), "有船船要进行检验(role : " + emailQuotation.getRole() + ")", null);
     }
+    // 船东需要验船时 发送给船东的邮件
+    public static void sendEmailQuotationOuter(EmailQuotation emailQuotation) {
+        StringBuilder sb = new StringBuilder();
+        sb.append("From <a href='www.goshipsurvey.com'>www.goshipsurvey.com</a>").append("<br><br>");
+        sb.append("Ship name: ").append(emailQuotation.getShipName()).append("<br>");
+        sb.append("Imo: ").append(emailQuotation.getImo()).append("<br>");
+        sb.append("Inspection type: ").append(emailQuotation.getInspectionType()).append("<br>");
+        if (StringUtils.isNotEmpty(emailQuotation.getDelivery())) {
+            sb.append("Place of delivery: ").append(emailQuotation.getDelivery()).append("<br>");
+        }
+        if (StringUtils.isNotEmpty(emailQuotation.getReDelivery())) {
+            sb.append("Place of re-delivery: ").append(emailQuotation.getReDelivery()).append("<br>");
+        }
+        sb.append("Port: ").append(emailQuotation.getPort()).append("<br>");
+        sb.append("Estimated Date: ").append(DateUtil.formatDate(emailQuotation.getEstimatedDate(), "yyyy-MM-dd")).append("<br>");
+        sb.append("Email: ").append(emailQuotation.getEmail()).append("<br>");
+        sb.append("Role: ").append(emailQuotation.getRole()).append("<br>");
+        sb.append("Special requirement: <label style='white-space: pre-wrap;word-wrap: break-word; '>" + emailQuotation.getSpecialRequirement() + "</label><br>");
+
+        sb.append("<br><br>");
+
+        sb.append("Dear Sirs,").append("<br>");
+        sb.append("Thanks for your enquiry.").append("<br>");
+        sb.append("We herewith offer USD 1500 as the lumpsum fee for the pre-purchase inspection in ").append(emailQuotation.getPort()).append(" port.").append("<br>");
+        sb.append("Please confirm in order by providing the agent details and get the owners' approval/loi for our inspector to go on board the vessel for inspection. ").append("<br>");
+        sb.append("The details of the inspector will be provided to you within 24 hours.").append("<br>");
+        sb.append("After inspection, we will provide the access user id & passward together with the link for you to download  the survey report & photos once the full payment is receieved.").append("<br>");
+        sb.append("Our account details is to be advised with the signed loi.").append("<br>");
+
+        sb.append("<br><br>--------------------<br><br>");
+
+        sb.append("Thanks in advance!").append("<br>");
+
+        sb.append("Best Rgds!").append("<br>");
+        sb.append("PIC: Capt Shen").append("<br>");
+        sb.append("Goship Group Company Limited").append("<br>");
+        sb.append("Tel: +86 21 6841 6768").append("<br>");
+        sb.append("Mobile: +86 139 1584 8533  (24HOURS)").append("<br>");
+        sb.append("Email: <a href='mailto:survey@goshipgroup.com'>survey@goshipgroup.com</a>").append("<br>");
+        sb.append("Website: <a href='www.goshipsurvey.com'>www.goshipsurvey.com</a>").append("<br>");
+
+        String subject = "MV " + emailQuotation.getShipName() + " Quotation " + emailQuotation.getInspectionType()
+                + " in " + emailQuotation.getPort() + " port "
+                + DateUtil.formatDate(emailQuotation.getEstimatedDate(), "yyyy/MM/dd") + ")";
+
+        sendEmail(emailQuotation.getEmail(), sb.toString(), subject, null);
+    }
+
 
     //发送注册时的验证邮件
     public static void sendActivateEmail(String toAddress, String validateCode) {
@@ -170,7 +217,6 @@ public class MailUtil {
         sb.append("<head>");
         sb.append("<meta http-equiv='Content-Type' content='text/html; charset=utf-8'>");
         sb.append("<title>Daily Report</title>");
-
 
         sb.append("<style>");
         sb.append(" a:hover img {  -webkit-transform: scale(1.5, 1.5);  -moz-transform: scale(1.5, 1.5);  -transform: scale(1.5, 1.5);  }");
@@ -199,57 +245,4 @@ public class MailUtil {
 
         MailUtil.sendEmail(toAddress, sb.toString(), "欢迎注册", null);
     }
-
-    //发送更改邮箱时的验证邮件
-    public static void sendChangeEmailCode(String toAddress, HttpSession session) {
-        StringBuffer sb = new StringBuffer();
-        String base = "0123456789";
-        Random random = new Random();
-        StringBuilder code = new StringBuilder();
-        for (int i = 0; i < 6; ++i) {
-            int number = random.nextInt(base.length());
-            code.append(base.charAt(number));
-        }
-        session.setAttribute("sessionChangeEmail", toAddress);
-        session.setAttribute("sessionChangeEmailCode", code.toString());
-        sb.append("请尽快使用下面的验证码进行验证");
-        sb.append(code.toString());
-        MailUtil.sendEmail(toAddress, sb.toString(), "更换邮箱", null);
-    }
-
-    //发送询价邮件
-    public static void sendEnquiryEmail(String toAddress, String text, List<File> files) {
-        Multipart multipart = new MimeMultipart();
-        //实例化一个bodypart用于封装内容
-        BodyPart bodyPart = new MimeBodyPart();
-        try {
-            bodyPart.setContent(text, "text/html;charset=utf8");
-            multipart.addBodyPart(bodyPart);
-            //每一个部分实例化一个bodypart，故每个附件也需要实例化一个bodypart
-            for (File file : files) {
-                bodyPart = new MimeBodyPart();
-                //实例化DataSource(来自jaf)，参数为文件的地址
-                DataSource dataSource = new FileDataSource(file.getAbsolutePath());
-                //使用datasource实例化datahandler
-                DataHandler dataHandler = new DataHandler(dataSource);
-                bodyPart.setDataHandler(dataHandler);
-                //设置附件标题，使用MimeUtility进行名字转码，否则接收到的是乱码
-                try {
-                    bodyPart.setFileName(javax.mail.internet.MimeUtility.encodeText(file.getName()));
-                } catch (UnsupportedEncodingException e) {
-                    e.printStackTrace();
-                }
-                //添加bodypart到multipart
-                multipart.addBodyPart(bodyPart);
-            }
-
-        } catch (MessagingException e) {
-            e.printStackTrace();
-        }
-        MailUtil.sendEmail(toAddress, text, "附件", multipart);
-        for (File file : files) {
-            file.delete();
-        }
-    }
-
 }
