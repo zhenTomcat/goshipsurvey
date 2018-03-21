@@ -1,5 +1,7 @@
 package com.ctoangels.goshipsurvey.common.modules.wechat.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Surveyor;
 import com.ctoangels.goshipsurvey.common.modules.wechat.service.CoreService;
 import com.ctoangels.goshipsurvey.common.modules.wechat.util.ReturnModel;
 import com.google.gson.Gson;
@@ -17,10 +19,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
 /**
@@ -37,6 +41,8 @@ public class CoreController {
     @Autowired
     protected CoreService coreService;
     protected Logger logger = LoggerFactory.getLogger(getClass());
+    @Autowired
+    protected HttpSession session;
 
     @RequestMapping(value = "index")
     public String index() {
@@ -156,17 +162,45 @@ public class CoreController {
     }
 
     @RequestMapping(value = "goToBind")
-    public String goToBind(HttpServletResponse response, @RequestParam(value = "code") String code, @RequestParam(value = "lang") String lang, ModelMap map) {
+    public String goToBind(HttpServletResponse response, @RequestParam(value = "code") String code, @RequestParam(value = "lang", required = false) String lang, ModelMap map) {
         WxMpOAuth2AccessToken accessToken;
         WxMpUser wxMpUser;
+        String errMsg = "";
         try {
             accessToken = this.wxMpService.oauth2getAccessToken(code);
             wxMpUser = this.wxMpService.getUserService()
                     .userInfo(accessToken.getOpenId(), lang);
-            map.put("wxMpUser", wxMpUser);
+            Boolean exist = true;  // TODO: 从wxMpUser获取openId unionId判断是否已经绑定  wxMpUser 放入session中
+            if (exist) {
+                // 如果存在
+                errMsg = ""; //用户存在的错误信息
+            } else {
+
+            }
+            session.setAttribute("wxMpUser", wxMpUser);
         } catch (WxErrorException e) {
+            e.printStackTrace();
+            errMsg = "";// 抓取错误
         }
+        map.put("errMsg", errMsg);
         return "we_chat/bind";
+    }
+
+    @RequestMapping(method = RequestMethod.POST, value = "bindWeiXinPublic")
+    public JSONObject bindWeiXinPublic(Surveyor surveyor) {
+        JSONObject jsonObject = new JSONObject();
+        // TODO 通过surveyor的email 和 tel  查找数据库有没有这个验船师 flag
+
+        Object object = (WxMpUser) session.getAttribute("wxMpUser");
+        WxMpUser wxMpUser = null;
+        if (object != null) {
+            wxMpUser = (WxMpUser) session.getAttribute("wxMpUser");
+        }
+
+        session.removeAttribute("wxMpUser");
+        jsonObject.put("success", null);
+        jsonObject.put("errMsg", "");// TODO 存放错误信息
+        return jsonObject;
     }
 
 
