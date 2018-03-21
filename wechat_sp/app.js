@@ -13,7 +13,7 @@ App({
         console.log(res);
         if (res.code) {
           wx.request({
-            url: 'http://localhost/wechat/user/login',
+            url: 'http://localhost:8080/wechat/user/login',
             data: {
               code: res.code
             },
@@ -26,7 +26,7 @@ App({
               }
             },
             fail: function (e) {
-              util.alert('数据请求失败！');
+              
             }
           })
         } else {
