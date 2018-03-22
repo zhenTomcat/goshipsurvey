@@ -2,6 +2,7 @@ package com.ctoangels.goshipsurvey.common.modules.sys.service;
 
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.framework.service.ISuperService;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Surveyor;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.Role;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
@@ -32,4 +33,6 @@ public interface UserService extends ISuperService<User> {
     User registerWeiXinUser(WxMpUser wxMpUser);
 
     boolean existUnionId(String unionId);
+
+    Boolean insertByInfo(JSONObject jsonObject,Surveyor surveyor,WxMpUser wxMpUser);
 }

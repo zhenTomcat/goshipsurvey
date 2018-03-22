@@ -4,20 +4,22 @@ import com.alibaba.fastjson.JSONObject;
 import com.baomidou.framework.service.impl.SuperServiceImpl;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
-import com.ctoangels.goshipsurvey.common.modules.go.entity.PublicShip;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Surveyor;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.SurveyorMapper;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.Role;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
+import com.ctoangels.goshipsurvey.common.modules.sys.entity.UserSurveyor;
 import com.ctoangels.goshipsurvey.common.modules.sys.mapper.UserMapper;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Company;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.CompanyMapper;
 import com.ctoangels.goshipsurvey.common.modules.sys.mapper.RoleMapper;
 import com.ctoangels.goshipsurvey.common.modules.sys.mapper.UserRoleMapper;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.UserRole;
+import com.ctoangels.goshipsurvey.common.modules.sys.mapper.UserSurveyorMapper;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.UserService;
 import com.ctoangels.goshipsurvey.common.util.Const;
 import com.ctoangels.goshipsurvey.common.util.StringUtils;
 import me.chanjar.weixin.mp.bean.result.WxMpUser;
-import org.apache.ibatis.annotations.Param;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.crypto.hash.SimpleHash;
 import org.apache.shiro.subject.Subject;
@@ -45,6 +47,12 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
     private UserRoleMapper userRoleMapper;
     @Autowired
     private CompanyMapper companyMapper;
+
+    @Autowired
+    private SurveyorMapper surveyorMapper;
+
+    @Autowired
+    private UserSurveyorMapper userServeyorMapper;
 
     public List<Role> getRoles(Integer userId) {
         Map<String, Object> map = new HashMap<>();
@@ -198,5 +206,57 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
         u.setUnionId(unionId);
         u.setDelFlag(Const.DEL_FLAG_NORMAL);
         return userMapper.selectOne(u) != null;
+    }
+
+    @Transactional
+    @Override
+    public Boolean insertByInfo(JSONObject jsonObject,Surveyor surveyor,WxMpUser wxMpUser) {
+        if (surveyor.getEmail()!=null &&
+                !surveyor.getEmail().trim().equals("")&&
+                surveyor.getTel()!=null&&
+                !surveyor.getTel().trim().equals("")){
+            Surveyor sy=surveyorMapper.selectByTelAndEmail(surveyor.getEmail(),surveyor.getTel());
+            if (sy ==null){
+                setJsonObject("数据库暂时没有该验船师，请联系相关部门",1,jsonObject);
+                return false;
+            }
+            UserSurveyor us=  userServeyorMapper.selectBySurveyorId(sy.getId());
+            if (us!=null){
+                setJsonObject("该用户已经被绑定了，请重新输入信息",2,jsonObject);
+                return false;
+            }
+            User user=new User();
+            String passwd = new SimpleHash("SHA-1", surveyor.getEmail(), surveyor.getTel()).toString(); // 密码加密
+            user.setName(surveyor.getEmail());
+            user.setLoginName(surveyor.getEmail());
+            user.setEmail(surveyor.getEmail());
+            user.setPhone(surveyor.getTel());
+            user.setPassword(passwd);
+            int a = userMapper.insert(user);
+
+            String gzhOpenId=wxMpUser.getOpenId();
+            String unionId= wxMpUser.getUnionId();
+            Integer userId = user.getId();
+            Integer surveyorId = sy.getId();
+
+            UserSurveyor userServeyor=new UserSurveyor();
+            userServeyor.setGzhOpenId(gzhOpenId);
+            userServeyor.setUnionId(unionId);
+            userServeyor.setUserId(userId);
+            userServeyor.setSurveyorId(surveyorId);
+            int c =userServeyorMapper.insert(userServeyor);
+            if (a>0 && c>0){
+                setJsonObject("数据绑定成功",3,jsonObject);
+                return true;
+            }
+        }
+        setJsonObject("数据绑定失败",4,jsonObject);
+        return false;
+
+    }
+
+    private void setJsonObject(String mes,Integer delFlag,JSONObject jsonObject){
+        jsonObject.put("mes",mes);
+        jsonObject.put("delFlag",delFlag);
     }
 }

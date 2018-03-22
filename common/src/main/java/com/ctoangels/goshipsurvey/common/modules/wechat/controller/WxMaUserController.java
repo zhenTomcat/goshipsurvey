@@ -10,8 +10,10 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,7 +23,7 @@ import javax.servlet.http.HttpServletRequest;
  *
  * @author <a href="https://github.com/binarywang">Binary Wang</a>
  */
-@RestController
+@Controller
 @RequestMapping("/wechat/user")
 public class WxMaUserController {
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
@@ -33,6 +35,7 @@ public class WxMaUserController {
      * 登陆接口
      */
     @GetMapping("/login")
+    @ResponseBody
     public JSONObject login(String code) {
         JSONObject jsonObject = new JSONObject();
         try {

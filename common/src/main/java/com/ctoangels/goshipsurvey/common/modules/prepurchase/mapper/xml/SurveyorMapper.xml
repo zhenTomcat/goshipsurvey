@@ -10,8 +10,12 @@
 	<select id="getById" resultType="Surveyor">
 		SELECT s.*  FROM  t_surveyor s WHERE s.id=#{survey_id}
 	</select>
+    <select id="selectByTelAndEmail"
+            resultType="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Surveyor">
+		select * from t_surveyor where email=#{0} and tel = #{1}
+	</select>
 
-	<update id="updatePastEvaluation">
+    <update id="updatePastEvaluation">
 		UPDATE t_surveyor sur
 		SET sur.past_evaluation= ceil((select IFNULL(AVG(co.op_grade),0)  as avg_grade  from t_comment co WHERE co.surveyor_id=#{0}))
 		Where sur.id=#{0}

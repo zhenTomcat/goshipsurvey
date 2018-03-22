@@ -40,6 +40,8 @@ public class SurveyorServiceImpl extends SuperServiceImpl<SurveyorMapper, Survey
     public boolean insertSurveyorWithExperience(Surveyor surveyor, List<SurveyorExperience> experienceList) {
         User user = (User) SecurityUtils.getSubject().getPrincipal();
         surveyor.setCreateInfo(user.getName());
+        surveyor.setEmail(surveyor.getEmail().trim());
+        surveyor.setTel(surveyor.getTel().trim());
         if (surveyorMapper.insert(surveyor) < 0) {
             return false;
         }
