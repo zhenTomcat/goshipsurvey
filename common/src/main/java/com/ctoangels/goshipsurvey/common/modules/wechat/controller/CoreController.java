@@ -21,6 +21,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -179,14 +180,14 @@ public class CoreController {
             }
             session.setAttribute("wxMpUser", wxMpUser);
         } catch (WxErrorException e) {
-            e.printStackTrace();
-            errMsg = "";// 抓取错误
+            errMsg = "err";// 抓取错误
         }
         map.put("errMsg", errMsg);
         return "we_chat/bind";
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "bindWeiXinPublic")
+    @ResponseBody
     public JSONObject bindWeiXinPublic(Surveyor surveyor) {
         JSONObject jsonObject = new JSONObject();
         // TODO 通过surveyor的email 和 tel  查找数据库有没有这个验船师 flag
@@ -197,9 +198,7 @@ public class CoreController {
             wxMpUser = (WxMpUser) session.getAttribute("wxMpUser");
         }
 
-        session.removeAttribute("wxMpUser");
-        jsonObject.put("success", null);
-        jsonObject.put("errMsg", "");// TODO 存放错误信息
+        jsonObject.put("errMsg", "");// TODO 存放错误信息 如果错误信息为空 则绑定成功
         return jsonObject;
     }
 
