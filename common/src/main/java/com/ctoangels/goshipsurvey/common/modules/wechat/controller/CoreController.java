@@ -192,7 +192,6 @@ public class CoreController {
             }
             session.setAttribute("wxMpUser", wxMpUser);
         } catch (WxErrorException e) {
-            e.printStackTrace();
             errMsg = "绑定信息失败，请重新操作";// 抓取错误
         }
         map.put("errMsg", errMsg);
@@ -249,10 +248,10 @@ public class CoreController {
             //解决跨域问题
             response.setHeader("Access-Control-Allow-Origin", "*");
             response.getWriter().print(string);
-            return null;
         } catch (IOException e) {
             return null;
         }
+        return null;
     }
 
 }
