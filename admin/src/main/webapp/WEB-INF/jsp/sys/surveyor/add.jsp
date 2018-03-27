@@ -227,11 +227,11 @@
                                             <div class="scroller" >
                                                 <div class="form-group col-md-6">
                                                     <label class="control-label">联系电话</label>
-                                                    <input type="text" class="form-control" name="tel"/>
+                                                    <input type="text" class="form-control" id="tel" name="tel"/>
                                                 </div>
                                                 <div class="form-group col-md-6">
                                                     <label class="control-label">E-Mail</label>
-                                                    <input type="text" class="form-control" name="email"/>
+                                                    <input type="text" class="form-control" id="email" name="email"/>
                                                 </div>
                                             </div>
                                         </div>
@@ -295,7 +295,7 @@
         if ($("#name").val() == "") {
             $("#name").tips({
                 side: 2,
-                msg: '姓名不能为空',/*船名不能为空*/
+                msg: '姓名不能为空',
                 bg: '#AE81FF',
                 time: 3
             });
@@ -303,6 +303,30 @@
             return false;
         } else {
             $("#name").val(jQuery.trim($('#name').val()));
+        }
+        if ($("#tel").val() == "") {
+            $("#tel").tips({
+                side: 2,
+                msg: '号码不能为空',
+                bg: '#AE81FF',
+                time: 3
+            });
+            $("#tel").focus();
+            return false;
+        } else {
+            $("#tel").val(jQuery.trim($('#tel').val()));
+        }
+        if ($("#email").val() == "") {
+            $("#email").tips({
+                side: 2,
+                msg: '邮箱不能为空',
+                bg: '#AE81FF',
+                time: 3
+            });
+            $("#email").focus();
+            return false;
+        } else {
+            $("#email").val(jQuery.trim($('#email').val()));
         }
         return true;
     }

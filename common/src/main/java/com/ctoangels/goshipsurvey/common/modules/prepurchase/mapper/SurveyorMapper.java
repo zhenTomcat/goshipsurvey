@@ -10,4 +10,6 @@ public interface SurveyorMapper extends AutoMapper<Surveyor> {
 
     int updatePastEvaluation(Integer surveyorId);
 
+    Surveyor  selectByTelAndEmail(String email,String tel);
+
 }

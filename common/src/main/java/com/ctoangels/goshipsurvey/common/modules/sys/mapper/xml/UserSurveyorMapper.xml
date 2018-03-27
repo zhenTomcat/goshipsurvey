@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.ctoangels.goshipsurvey.common.modules.sys.mapper.UserSurveyorMapper">
+
+	<!-- 通用查询结果列-->
+	<sql id="Base_Column_List">
+		id, gch_open_id AS gzhOpenId, xcx_open_id AS xcxOpenId, union_id AS unionId, user_id AS userId, serveyor_id AS serveyorId
+	</sql>
+    <select id="selectByGzhOpenId"
+            resultType="com.ctoangels.goshipsurvey.common.modules.sys.entity.UserSurveyor">
+		select * from sys_user_serveyor where gzh_open_id=#{0}
+	</select>
+	<select id="selectBySurveyorId"
+			resultType="com.ctoangels.goshipsurvey.common.modules.sys.entity.UserSurveyor">
+		select * from sys_user_surveyor where surveyor_id=#{0}
+	</select>
+
+</mapper>
