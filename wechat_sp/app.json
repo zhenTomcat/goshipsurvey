@@ -10,7 +10,6 @@
     "navigationBarBackgroundColor": "#fff",
     "navigationBarTitleText": "GoShipSurvey",
     "navigationBarTextStyle": "black",
-    "enablePullDownRefresh": true,
     "enableReachBottom": true
   },
   "tabBar": {

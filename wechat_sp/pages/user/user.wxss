@@ -1,19 +1,24 @@
-page,
-.page,
-.page__bd{
-    height: 100%;
-}
-.page__bd{
-    padding-bottom: 0;
-}
-.weui-tab__content{
-    text-align: center;
+page, .page, .page__bd {
+  height: auto;
 }
 
-.weui-navbar{
+.page__bd {
+  padding-bottom: 0;
+}
+
+.weui-tab__content {
+  text-align: center;
+}
+
+.weui-navbar {
   background-color: white;
+  position: fixed;
 }
 
-.weui-form-preview{
-    margin-bottom: 25px;
+.weui-form-preview {
+  margin-bottom: 25px;
 }
+
+/* .weui-bar__item_on {
+   border-top: 2px solid lightgreen; 
+} */
