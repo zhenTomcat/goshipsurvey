@@ -135,6 +135,27 @@
                                                         <label class="control-label">计算机能力</label>
                                                         <input type="text" class="form-control" name="computerPower" value="${surveyor.computerPower}"/>
                                                     </div>
+                                                    <div class="form-group col-md-6">
+                                                        <label>是否有长期登轮证及有效期</label>
+                                                        <div class="mt-radio-inline">
+                                                            <label class="mt-radio">
+                                                                <input type="radio" name="isBoardCard" id="optionsRadios4"
+                                                                       <c:if test="${isBoardCard ==0}">
+                                                                            checked
+                                                                        </c:if>
+                                                                       value="0"> 是
+                                                                <span></span>
+                                                            </label>
+                                                            <label class="mt-radio">
+                                                                <input type="radio" name="isBoardCard" id="optionsRadios5"
+                                                                <c:if test="${isBoardCard ==1}">
+                                                                       checked
+                                                                </c:if>
+                                                                       value="1"> 否
+                                                                <span></span>
+                                                            </label>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>

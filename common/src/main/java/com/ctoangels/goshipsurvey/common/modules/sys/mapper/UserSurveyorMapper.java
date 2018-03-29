@@ -14,4 +14,6 @@ public interface UserSurveyorMapper extends AutoMapper<UserSurveyor> {
 
     UserSurveyor selectBySurveyorId(Integer surveyorId);
 
+    UserSurveyor selectByUserId(Integer userId);
+
 }

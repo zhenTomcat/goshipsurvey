@@ -4,6 +4,8 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.SurveyorExperience;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.SurveyorExperienceMapper;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
+import com.ctoangels.goshipsurvey.common.modules.sys.entity.UserSurveyor;
+import com.ctoangels.goshipsurvey.common.modules.sys.mapper.UserSurveyorMapper;
 import com.ctoangels.goshipsurvey.common.util.Const;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +30,9 @@ public class SurveyorServiceImpl extends SuperServiceImpl<SurveyorMapper, Survey
 
     @Autowired
     SurveyorExperienceMapper surveyorExperienceMapper;
+
+    @Autowired
+    private UserSurveyorMapper userSurveyorMapper;
 
     @Override
     public List<Surveyor> getSurveyorsByCompanyId(int companyId) {
@@ -92,5 +97,12 @@ public class SurveyorServiceImpl extends SuperServiceImpl<SurveyorMapper, Survey
     @Override
     public boolean updatePastEvaluation(Integer surveyorId) {
         return surveyorMapper.updatePastEvaluation(surveyorId) >= 0;
+    }
+
+    @Override
+    public Surveyor selectByOpenId(String gzhOpenId) {
+       UserSurveyor userSurveyor= userSurveyorMapper.selectByGzhOpenId(gzhOpenId);
+       Surveyor surveyor= surveyorMapper.selectById(userSurveyor.getUserId());
+        return surveyor;
     }
 }

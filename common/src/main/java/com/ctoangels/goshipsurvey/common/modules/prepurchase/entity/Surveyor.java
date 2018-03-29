@@ -162,6 +162,9 @@ public class Surveyor implements Serializable {
     @TableField(value = "survey_type")
     private String surveyType;
 
+    /** 判断是否有登轮证0表示有，1表示没有 */
+    @TableField(value = "is_board_card")
+    private String isBoardCard;
 
 
     @TableField(exist = false)
@@ -492,6 +495,14 @@ public class Surveyor implements Serializable {
 
     public String getShipInspectionExperience() {
         return shipInspectionExperience;
+    }
+
+    public String getIsBoardCard() {
+        return isBoardCard;
+    }
+
+    public void setIsBoardCard(String isBoardCard) {
+        this.isBoardCard = isBoardCard;
     }
 
     public void setShipInspectionExperience(String shipInspectionExperience) {

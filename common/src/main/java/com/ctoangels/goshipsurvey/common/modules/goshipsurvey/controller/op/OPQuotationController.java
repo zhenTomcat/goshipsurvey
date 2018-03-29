@@ -8,9 +8,12 @@ import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IDictServi
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IQuotationService;
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
+import com.ctoangels.goshipsurvey.common.modules.sys.entity.UserSurveyor;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.IMessageService;
+import com.ctoangels.goshipsurvey.common.modules.sys.service.IUserSurveyorService;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.UserService;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.impl.MessageServiceImpl;
+import com.ctoangels.goshipsurvey.common.modules.wechat.controller.Template;
 import com.ctoangels.goshipsurvey.common.util.Const;
 import com.ctoangels.goshipsurvey.common.util.DateUtil;
 import com.ctoangels.goshipsurvey.common.util.Tools;
@@ -44,6 +47,18 @@ public class OPQuotationController extends BaseController {
 
     @Autowired
     UserService userService;
+
+    @Autowired
+    private Template template;
+
+    @Autowired
+    private IUserSurveyorService userSurveyorService;
+
+    private  static String url= "/pages/selectType/selectType?openid=";
+    private  static String first= "询价消息通知";
+    private  static String keyword1= "";
+    private  static String keyword2= "岙洋船务";
+    private  static String remark= "打开小程序查看更详细类容";
 
     @RequestMapping
     public String list(ModelMap map) {
@@ -132,6 +147,12 @@ public class OPQuotationController extends BaseController {
         quotation.setQuotationStatus(Const.QUOTATION_ING);
         quotation.setUpdateInfo(getCurrentUser().getName());
         if (quotationService.updateById(quotation)) {
+            keyword1+="您好，当前有新的船舶检验通知,请及时查看";
+            List<UserSurveyor> userSurveyors=userSurveyorService.selectList(new EntityWrapper<UserSurveyor>());
+            for (UserSurveyor userSurveyor:userSurveyors){
+                template.infomationNotice(userSurveyor.getGzhOpenId(), Const.INQUIRY_NOTICE,url,first,keyword1,keyword2,remark);
+            }
+
             jsonObject.put("success", true);
             String title = "本区域有可进行租还船检验船舶,请及时查看";
             Integer specifiedId = quotation.getSpecifiedId();

@@ -1,12 +1,15 @@
 package com.ctoangels.goshipsurvey.common.modules.wechat.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Surveyor;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.ISurveyorService;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.UserSurveyor;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.IUserSurveyorService;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.UserService;
 import com.ctoangels.goshipsurvey.common.modules.wechat.service.CoreService;
 import com.ctoangels.goshipsurvey.common.modules.wechat.util.ReturnModel;
+import com.ctoangels.goshipsurvey.common.util.Const;
 import com.google.gson.Gson;
 import me.chanjar.weixin.common.exception.WxErrorException;
 import me.chanjar.weixin.mp.api.WxMpConfigStorage;
@@ -52,6 +55,18 @@ public class CoreController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private Template template;
+
+    @Autowired
+    private ISurveyorService surveyorService;
+
+    private static String url= "/pages/selectType/selectType?openid=";
+    private static String first= "欢迎使用岙洋船务微信小程序！";
+    private static String keyword1= "点击打开微信小程序";
+    private static String keyword2= "新用户第一次使用需进行绑定";
+    private static String remark= "点击此条消息即可跳转到岙洋船务小程序";
 
     @RequestMapping(value = "index")
     public String index() {
@@ -175,18 +190,21 @@ public class CoreController {
         WxMpOAuth2AccessToken accessToken;
         WxMpUser wxMpUser;
         String errMsg = "";
+        String surveyorEmail="";
         try {
             accessToken = this.wxMpService.oauth2getAccessToken(code);
             wxMpUser = this.wxMpService.getUserService()
                     .userInfo(accessToken.getOpenId(), lang);
             UserSurveyor userServeyor=userServeyorService.selectByGzhOpenId(wxMpUser.getOpenId());
             Boolean exist = false;
-            if(userServeyor.getGzhOpenId().equals(wxMpUser.getOpenId())){
+            if(userServeyor!=null && userServeyor.getGzhOpenId().equals(wxMpUser.getOpenId())){
+                surveyorEmail =surveyorService.selectByOpenId(wxMpUser.getOpenId()).getEmail();
                 exist = true;  // TODO: 从wxMpUser获取openId unionId判断是否已经绑定  wxMpUser 放入session中
             }
             if (exist) {
                 // 如果存在
                 errMsg = "你的信息已经被绑定"; //用户存在的错误信息
+                template.infomationNotice(wxMpUser.getOpenId(), Const.IDENTITY_BINDING_SUCCESSFULLY_NOTICE,url,first,surveyorEmail,keyword2,remark);
             } else {
                 errMsg="";
             }
@@ -206,6 +224,11 @@ public class CoreController {
         WxMpUser wxMpUser = (WxMpUser) session.getAttribute("wxMpUser");
         if (wxMpUser != null) {
             userService.insertByInfo(jsonObject,surveyor,wxMpUser);
+
+        }
+        String delFlag= (String) jsonObject.get("delFlag");
+        if(delFlag.equals("3")){
+            template.infomationNotice(wxMpUser.getOpenId(), Const.IDENTITY_BINDING_SUCCESSFULLY_NOTICE,url,first,surveyor.getEmail(),keyword2,remark);
         }
         session.removeAttribute("wxMpUser");
         return jsonObject;

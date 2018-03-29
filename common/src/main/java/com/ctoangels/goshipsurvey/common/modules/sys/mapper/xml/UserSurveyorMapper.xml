@@ -14,5 +14,8 @@
 			resultType="com.ctoangels.goshipsurvey.common.modules.sys.entity.UserSurveyor">
 		select * from sys_user_surveyor where surveyor_id=#{0}
 	</select>
+	<select id="selectByUserId" resultType="com.ctoangels.goshipsurvey.common.modules.sys.entity.UserSurveyor">
+		select * from sys_user_surveyor where user_id=#{0}
+	</select>
 
 </mapper>

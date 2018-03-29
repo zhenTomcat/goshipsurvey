@@ -4,7 +4,7 @@
 
 	<!-- 通用查询结果列-->
 	<sql id="Base_Column_List">
-		id, first_name AS firstName, sex, nation, census_register AS censusRegister, birth_time AS birthTime, marital_status AS maritalStatus, graduate_school AS graduateSchool, education, professional, permanent_residence AS permanentResidence, `work`, `position`, foreign_languages AS foreignLanguages, foreign_language_level AS foreignLanguageLevel, related_work_experience AS relatedWorkExperience, computer_power AS computerPower, certificate_education AS certificateEducation, ship_inspection_experience AS shipInspectionExperience, tel, email, last_name AS lastName, nationality, survey_time_start AS surveyTimeStart, survey_time_end AS surveyTimeEnd, survey_port AS surveyPort, surveyor_profile AS surveyorProfile, company_id AS companyId, portrait_url AS portraitUrl, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag, ship_type AS shipType, past_evaluation AS pastEvaluation, survey_type AS surveyType
+		id, first_name AS firstName, sex, nation, census_register AS censusRegister, birth_time AS birthTime, marital_status AS maritalStatus, graduate_school AS graduateSchool, education, professional, permanent_residence AS permanentResidence, `work`, `position`, foreign_languages AS foreignLanguages, foreign_language_level AS foreignLanguageLevel, related_work_experience AS relatedWorkExperience, computer_power AS computerPower, certificate_education AS certificateEducation, ship_inspection_experience AS shipInspectionExperience, tel, email, last_name AS lastName, nationality, survey_time_start AS surveyTimeStart, survey_time_end AS surveyTimeEnd, survey_port AS surveyPort, surveyor_profile AS surveyorProfile, company_id AS companyId, portrait_url AS portraitUrl, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag, ship_type AS shipType, past_evaluation AS pastEvaluation, survey_type AS surveyType, is_board_card AS isBoardCard
 	</sql>
 
 	<select id="getById" resultType="Surveyor">
@@ -15,7 +15,7 @@
 		select * from t_surveyor where email=#{0} and tel = #{1}
 	</select>
 
-    <update id="updatePastEvaluation">
+	<update id="updatePastEvaluation">
 		UPDATE t_surveyor sur
 		SET sur.past_evaluation= ceil((select IFNULL(AVG(co.op_grade),0)  as avg_grade  from t_comment co WHERE co.surveyor_id=#{0}))
 		Where sur.id=#{0}

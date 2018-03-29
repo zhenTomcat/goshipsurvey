@@ -19,4 +19,6 @@ public interface ISurveyorService extends ISuperService<Surveyor> {
 
     boolean updatePastEvaluation(Integer surveyorId);
 
+    Surveyor selectByOpenId(String openId);
+
 }
