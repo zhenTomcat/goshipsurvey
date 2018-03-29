@@ -1,1 +1,24 @@
-/* pages/user/user.wxss */
+page, .page, .page__bd {
+  height: auto;
+}
+
+.page__bd {
+  padding-bottom: 0;
+}
+
+.weui-tab__content {
+  text-align: center;
+}
+
+.weui-navbar {
+  background-color: white;
+  position: fixed;
+}
+
+.weui-form-preview {
+  margin-bottom: 25px;
+}
+
+/* .weui-bar__item_on {
+   border-top: 2px solid lightgreen; 
+} */

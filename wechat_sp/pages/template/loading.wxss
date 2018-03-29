@@ -1,0 +1,9 @@
+.loading-panel{
+  height: 100%;
+  width: 100%;
+  display:-webkit-box;
+  display:-webkit-flex;
+  display:flex;
+  -webkit-align-items:center;
+	align-items:center;
+}

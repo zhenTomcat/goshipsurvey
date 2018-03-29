@@ -27,6 +27,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -217,6 +218,7 @@ public class CoreController {
     }
 
     @RequestMapping(method = RequestMethod.POST, value = "bindWeiXinPublic")
+    @ResponseBody
     public JSONObject bindWeiXinPublic(Surveyor surveyor) {
         JSONObject jsonObject = new JSONObject();;
         // TODO 通过surveyor的email 和 tel  查找数据库有没有这个验船师 flag

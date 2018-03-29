@@ -1,15 +1,17 @@
 {
   "pages": [
-    "pages/home/home",
     "pages/user/user",
+    "pages/home/home",
     "pages/info/info",
     "pages/index/index"
   ],
-  "window":{
-    "backgroundTextStyle":"light",
+  "window": {
+    "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "WeChat",
-    "navigationBarTextStyle":"black"  },
+    "navigationBarTitleText": "GoShipSurvey",
+    "navigationBarTextStyle": "black",
+    "enableReachBottom": true
+  },
   "tabBar": {
     "color": "#a9b7b7",
     "selectedColor": "#1296db",
