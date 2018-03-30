@@ -131,6 +131,8 @@
                                             </div>
                                             <div class="form-group col-md-6">
                                                 <label>是否有长期登轮证及有效期</label>
+                                            </div>
+                                            <div>
                                                 <div class="mt-radio-inline">
                                                     <label class="mt-radio">
                                                         <input type="radio" name="isBoardCard" id="optionsRadios4" value="0"> 是

@@ -16,7 +16,8 @@ public class Template {
 
     @Autowired
     protected WxMpTemplateMsgService wxMpTemplateMsgService;
-    @Value("${weixin.appId}")
+
+    @Value("${weixin.appid}")
     private String appid;
 
 
