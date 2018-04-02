@@ -12,4 +12,5 @@ public interface SurveyorMapper extends AutoMapper<Surveyor> {
 
     Surveyor  selectByTelAndEmail(String email,String tel);
 
+
 }

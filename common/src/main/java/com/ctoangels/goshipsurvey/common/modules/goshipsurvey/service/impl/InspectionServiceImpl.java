@@ -11,8 +11,11 @@ import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Comment;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.PurchaseInspection;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.CommentMapper;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
+import com.ctoangels.goshipsurvey.common.modules.sys.entity.UserSurveyor;
 import com.ctoangels.goshipsurvey.common.modules.sys.mapper.UserMapper;
+import com.ctoangels.goshipsurvey.common.modules.sys.mapper.UserSurveyorMapper;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.IMessageService;
+import com.ctoangels.goshipsurvey.common.modules.wechat.controller.Template;
 import com.ctoangels.goshipsurvey.common.util.Const;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,6 +34,12 @@ import java.util.List;
  */
 @Service
 public class InspectionServiceImpl extends SuperServiceImpl<InspectionMapper, Inspection> implements IInspectionService {
+
+    private static String url= "/pages/selectType/selectType?openid=";
+    private static String first= "您好，申请结果如下";
+    private static String keyword1= "";
+    private static String keyword2= "";
+    private static String remark= "";
 
     @Autowired
     InspectionMapper inspectionMapper;
@@ -53,6 +62,12 @@ public class InspectionServiceImpl extends SuperServiceImpl<InspectionMapper, In
     @Autowired
     IMessageService messageService;
 
+    @Autowired
+    private UserSurveyorMapper userSurveyorMapper;
+
+    @Autowired
+    private Template template;
+
     @Override
     public boolean initInspection(int quotationId, int applicationId) {
         //更新所以询价申请状态
@@ -65,12 +80,25 @@ public class InspectionServiceImpl extends SuperServiceImpl<InspectionMapper, In
         double totalPrice = 0;
         List<Integer> failureIds = new ArrayList<>();
         for (QuotationApplication qa : applicationList) {
+            UserSurveyor userSurveyor=  userSurveyorMapper.selectByUserId(qa.getUserId());
             if (qa.getId() == applicationId) {
                 qa.setApplicationStatus(Const.QUO_APPLY_SUCCESS);
                 surveyorId = qa.getSurveyId();
                 totalPrice = qa.getTotalPrice();
                 companyId = qa.getUserId();
+
+
+                if (userSurveyor!=null){
+                    keyword2="你的申请成功通过，并且被邀请验船";
+                    remark="详细信息打开微信小程序";
+                    template.infomationNotice(userSurveyor.getGzhOpenId(),Const.NOTICE_AUDIT_RESULT,url,first,keyword1,keyword2,remark);
+                }
             } else {
+                if (userSurveyor!=null){
+                    keyword2="很遗憾，您的申请未被通过。";
+                    remark="详细信息打开微信小程序";
+                    template.infomationNotice(userSurveyor.getGzhOpenId(),Const.NOTICE_AUDIT_RESULT,url,first,keyword1,keyword2,remark);
+                }
                 qa.setApplicationStatus(Const.QUO_APPLY_FAILURE);
                 failureIds.add(qa.getUserId());
             }

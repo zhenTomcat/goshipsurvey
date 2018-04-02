@@ -90,7 +90,10 @@ public class OPInspectionController extends BaseController {
     public JSONObject add(@RequestParam(required = false) int quotationId,
                           @RequestParam(required = false) int applicationId) {
         JSONObject jsonObject = new JSONObject();
-        jsonObject.put("success", inspectionService.initInspection(quotationId, applicationId));
+        Boolean flag=inspectionService.initInspection(quotationId, applicationId);
+
+
+        jsonObject.put("success", flag);
         return jsonObject;
     }
 

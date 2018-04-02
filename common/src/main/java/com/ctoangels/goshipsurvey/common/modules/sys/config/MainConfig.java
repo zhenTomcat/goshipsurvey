@@ -13,6 +13,7 @@ import me.chanjar.weixin.mp.api.impl.WxMpTemplateMsgServiceImpl;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.PropertySource;
 
 /**
  * Created by FirenzesEagle on 2016/5/30 0030.
@@ -35,6 +36,13 @@ public class MainConfig {
 
     @Value("${weixin.aeskey}")
     private String aesKey;
+
+    @Value("${weixin.surveyor.appid}")
+    private String weixinSurveyorAppid;
+
+    @Value("${weixin.surveyor.appsecret}")
+    private String weixinSurveyorAppsecret;
+
 
 //    @Value("#{overrideProperties.partener_id}")
 //    private String partenerId;
@@ -70,12 +78,6 @@ public class MainConfig {
     }
 
 
-
-    @Value("${weixin.surveyor.appid}")
-    private String weixinSurveyorAppid;
-
-    @Value("${weixin.surveyor.appsecret}")
-    private String weixinSurveyorAppsecret;
 
 
     @Bean
