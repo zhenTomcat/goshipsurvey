@@ -1,0 +1,146 @@
+<view class="page">
+  <view class="page__bd">
+    <view class="weui-tab">
+      <view class="weui-navbar">
+        <block wx:for="{{tabs}}" wx:key="*this">
+          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
+            <view class="weui-navbar__title">{{item}}</view>
+          </view>
+        </block>
+        <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view>
+      </view>
+      <view class="weui-tab__panel">
+        <swiper class="tab-content" current="{{activeIndex}}" duration="300" bindchange="switchTab" style="height:100%">
+          <swiper-item>
+            <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="getMore" data-index="0">
+              <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
+                <view class="weui-form-preview" wx:for="{{canGetPage.data}}" wx:for-index="index" wx:for-item="item">
+                  <view class="weui-form-preview__hd">
+                    <view class="weui-form-preview__item">
+                      <view class="weui-form-preview__label">有船要验{{index}}</view>
+                      <!-- <view class="weui-form-preview__value_in-hd">¥2400.00</view> -->
+                    </view>
+                  </view>
+                  <view class="weui-form-preview__bd">
+                    <view class="weui-form-preview__item">
+                      <view class="weui-form-preview__label">船名</view>
+                      <view class="weui-form-preview__value">我是好船{{index}}</view>
+                    </view>
+                    <view class="weui-form-preview__item">
+                      <view class="weui-form-preview__label">港口</view>
+                      <view class="weui-form-preview__value">我是名字{{index}}</view>
+                    </view>
+                    <view class="weui-form-preview__item">
+                      <view class="weui-form-preview__label">日期</view>
+                      <view class="weui-form-preview__value">2018-11-12</view>
+                    </view>
+                  </view>
+                  <view class="weui-form-preview__ft">
+                    <!-- <navigator class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active">辅助操作</navigator> -->
+                    <navigator data-quotation="{{item}}" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap="apply">抢单</navigator>
+                  </view>
+                </view>
+              </view>
+            </scroll-view>
+          </swiper-item>
+          <swiper-item>
+            <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="getMore" data-index="1">
+              <view class="weui-tab__content">
+                <view class="weui-form-preview" wx:for="{{waitPage.data}}" wx:for-index="index" wx:for-item="item">
+                  <view class="weui-form-preview__hd">
+                    <view class="weui-form-preview__item">
+                      <view class="weui-form-preview__label">抢单中</view>
+                      <!-- <view class="weui-form-preview__value_in-hd">¥2400.00</view> -->
+                    </view>
+                  </view>
+                  <view class="weui-form-preview__bd">
+                    <view class="weui-form-preview__item">
+                      <view class="weui-form-preview__label">船名</view>
+                      <view class="weui-form-preview__value">我是好船{{index}}</view>
+                    </view>
+                    <view class="weui-form-preview__item">
+                      <view class="weui-form-preview__label">港口</view>
+                      <view class="weui-form-preview__value">我是名字{{index}}</view>
+                    </view>
+                    <view class="weui-form-preview__item">
+                      <view class="weui-form-preview__label">日期</view>
+                      <view class="weui-form-preview__value">2018-11-12</view>
+                    </view>
+                  </view>
+                  <view class="weui-form-preview__ft">
+                    <navigator class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active">辅助操作</navigator>
+                    <navigator class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">撤销</navigator>
+                  </view>
+                </view>
+              </view>
+            </scroll-view>
+          </swiper-item>
+          <swiper-item>
+            <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="getMore" data-index="2">
+              <view class="weui-tab__content">
+                <view class="weui-form-preview" wx:for="{{ingPage.data}}" wx:for-index="index" wx:for-item="item">
+                  <view class="weui-form-preview__hd">
+                    <view class="weui-form-preview__item">
+                      <view class="weui-form-preview__label">XX{{index}}船正在检查</view>
+                      <!-- <view class="weui-form-preview__value_in-hd">¥2400.00</view> -->
+                    </view>
+                  </view>
+                  <view class="weui-form-preview__bd">
+                    <view class="weui-form-preview__item">
+                      <view class="weui-form-preview__label">船名</view>
+                      <view class="weui-form-preview__value">我是好船XX</view>
+                    </view>
+                    <view class="weui-form-preview__item">
+                      <view class="weui-form-preview__label">港口</view>
+                      <view class="weui-form-preview__value">XXXXXXXX</view>
+                    </view>
+                    <view class="weui-form-preview__item">
+                      <view class="weui-form-preview__label">日期</view>
+                      <view class="weui-form-preview__value">2018-11-12</view>
+                    </view>
+                  </view>
+                  <view class="weui-form-preview__ft">
+                    <navigator class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active">查看已上传</navigator>
+                    <navigator class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active">上传报告</navigator>
+                    <navigator class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">完成</navigator>
+                  </view>
+                </view>
+              </view>
+            </scroll-view>
+          </swiper-item>
+          <swiper-item>
+            <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="getMore" data-index="3">
+              <view class="weui-tab__content">
+                <view class=" weui-form-preview " wx:for="{{completePage.data}} " wx:for-index="index " wx:for-item="item ">
+                  <view class="weui-form-preview__hd ">
+                    <view class="weui-form-preview__item ">
+                      <view class="weui-form-preview__label ">XX船检</view>
+                      <!-- <view class="weui-form-preview__value_in-hd ">¥2400.00</view> -->
+                    </view>
+                  </view>
+                  <view class="weui-form-preview__bd ">
+                    <view class="weui-form-preview__item ">
+                      <view class="weui-form-preview__label ">船名</view>
+                      <view class="weui-form-preview__value ">我是好船</view>
+                    </view>
+                    <view class="weui-form-preview__item ">
+                      <view class="weui-form-preview__label ">港口</view>
+                      <view class="weui-form-preview__value ">名字名字名字</view>
+                    </view>
+                    <view class="weui-form-preview__item ">
+                      <view class="weui-form-preview__label ">日期</view>
+                      <view class="weui-form-preview__value ">2018-11-12</view>
+                    </view>
+                  </view>
+                  <view class="weui-form-preview__ft ">
+                    <navigator class="weui-form-preview__btn weui-form-preview__btn_default " hover-class="weui-form-preview__btn_active ">{{index/2==0?"查看报告 ":"抢单失败 "}}</navigator>
+                  </view>
+                </view>
+              </view>
+            </scroll-view>
+          </swiper-item>
+        </swiper>
+      </view>
+    </view>
+  </view>
+</view>

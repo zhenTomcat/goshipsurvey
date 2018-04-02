@@ -1,0 +1,24 @@
+page, .page, .page__bd {
+  height: 100%;
+}
+
+.page__bd {
+  padding-bottom: 0;
+}
+
+.weui-tab__content {
+  text-align: center;
+}
+
+.weui-navbar {
+  background-color: white;
+  /* position: fixed; */
+}
+
+.weui-form-preview {
+  margin-bottom: 25px;
+}
+
+.scoll-h {
+  height: 100%;
+}

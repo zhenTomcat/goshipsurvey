@@ -1,130 +1,59 @@
-<import src="/pages/template/loading.wxml" />
-
-<view class="page">
+<import src="/pages/template/no-user.wxml" />
+<template is="{{showError?'no-user':''}}" bindtap="toggle"></template>
+<view class="page" hidden="{{showError}}">
   <view class="page__bd">
-    <view class="weui-tab">
-      <view class="weui-navbar">
-        <block wx:for="{{tabs}}" wx:key="*this">
-          <view id="{{index}}" class="weui-navbar__item {{activeIndex == index ? 'weui-bar__item_on' : ''}}" bindtap="tabClick">
-            <view class="weui-navbar__title">{{item}}</view>
+    <view class="weui-panel weui-panel_access">
+      <view class="weui-panel__bd">
+        <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+          <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+            <image class="weui-media-box__thumb" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522250448307&di=ebe625988caa530ac94fac778bddb33e&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fforum%2Fw%3D580%2Fsign%3D3277c1f391dda144da096cba82b6d009%2F0af1b31c8701a18bb97677af982f07082938fe52.jpg"
+            />
           </view>
-        </block>
-         <view class="weui-navbar__slider" style="left: {{sliderLeft}}px; transform: translateX({{sliderOffset}}px); -webkit-transform: translateX({{sliderOffset}}px);"></view> 
+          <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+            <view class="weui-media-box__title">David</view>
+            <view class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</view>
+          </view>
+        </navigator>
       </view>
-      <view class="weui-tab__panel" bindtouchstart="touchStart" bindtouchend="touchEnd">
-        <view class="weui-tab__content" hidden="{{activeIndex != 0}}">
-          <view class="weui-form-preview" wx:for="{{canGetPage.data}}" wx:for-index="index" wx:for-item="item">
-            <view class="weui-form-preview__hd">
-              <view class="weui-form-preview__item">
-                <view class="weui-form-preview__label">有船要验{{index}}</view>
-                <!-- <view class="weui-form-preview__value_in-hd">¥2400.00</view> -->
-              </view>
-            </view>
-            <view class="weui-form-preview__bd">
-              <view class="weui-form-preview__item">
-                <view class="weui-form-preview__label">船名</view>
-                <view class="weui-form-preview__value">我是好船{{index}}</view>
-              </view>
-              <view class="weui-form-preview__item">
-                <view class="weui-form-preview__label">港口</view>
-                <view class="weui-form-preview__value">我是名字{{index}}</view>
-              </view>
-              <view class="weui-form-preview__item">
-                <view class="weui-form-preview__label">日期</view>
-                <view class="weui-form-preview__value">2018-11-12</view>
-              </view>
-            </view>
-            <view class="weui-form-preview__ft">
-              <!-- <navigator class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active">辅助操作</navigator> -->
-              <navigator data-quotation="{{item}}" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap="apply">抢单</navigator>
-            </view>
+    </view>
+    <view class="weui-cells__title"></view>
+    <view class="weui-cells weui-cells_after-title">
+      <navigator url="/pages/inspection/inspection?activeIndex=0">
+        <view class="weui-cell weui-cell_access">
+          <view class="weui-cell__bd">
+            <view style="display: inline-block; vertical-align: middle">可抢单</view>
+            <!-- <view class="weui-badge" style="margin-left: 5px;">8</view> -->
           </view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
         </view>
-        <view class="weui-tab__content" hidden="{{activeIndex != 1}}">
-          <view class="weui-form-preview" wx:for="{{waitPage.data}}" wx:for-index="index" wx:for-item="item">
-            <view class="weui-form-preview__hd">
-              <view class="weui-form-preview__item">
-                <view class="weui-form-preview__label">的等待船东选择</view>
-                <!-- <view class="weui-form-preview__value_in-hd">¥2400.00</view> -->
-              </view>
-            </view>
-            <view class="weui-form-preview__bd">
-              <view class="weui-form-preview__item">
-                <view class="weui-form-preview__label">船名</view>
-                <view class="weui-form-preview__value">我是好船{{index}}</view>
-              </view>
-              <view class="weui-form-preview__item">
-                <view class="weui-form-preview__label">港口</view>
-                <view class="weui-form-preview__value">我是名字{{index}}</view>
-              </view>
-              <view class="weui-form-preview__item">
-                <view class="weui-form-preview__label">日期</view>
-                <view class="weui-form-preview__value">2018-11-12</view>
-              </view>
-            </view>
-            <view class="weui-form-preview__ft">
-              <navigator class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active">辅助操作</navigator>
-              <navigator class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">撤销</navigator>
-            </view>
+      </navigator>
+      <navigator url="/pages/inspection/inspection?activeIndex=1">
+        <view class="weui-cell weui-cell_access">
+          <view class="weui-cell__bd">
+            <view style="display: inline-block; vertical-align: middle">抢单中</view>
+            <!-- <view class="weui-badge" style="margin-left: 5px;">8</view> -->
           </view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
         </view>
-        <view class="weui-tab__content" hidden="{{activeIndex != 2}}">
-          <view class="weui-form-preview" wx:for="{{ingPage.data}}" wx:for-index="index" wx:for-item="item">
-            <view class="weui-form-preview__hd">
-              <view class="weui-form-preview__item">
-                <view class="weui-form-preview__label">XX{{index}}船正在检查</view>
-                <!-- <view class="weui-form-preview__value_in-hd">¥2400.00</view> -->
-              </view>
-            </view>
-            <view class="weui-form-preview__bd">
-              <view class="weui-form-preview__item">
-                <view class="weui-form-preview__label">船名</view>
-                <view class="weui-form-preview__value">我是好船XX</view>
-              </view>
-              <view class="weui-form-preview__item">
-                <view class="weui-form-preview__label">港口</view>
-                <view class="weui-form-preview__value">XXXXXXXX</view>
-              </view>
-              <view class="weui-form-preview__item">
-                <view class="weui-form-preview__label">日期</view>
-                <view class="weui-form-preview__value">2018-11-12</view>
-              </view>
-            </view>
-            <view class="weui-form-preview__ft">
-              <navigator class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active">查看已上传</navigator>
-              <navigator class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active">上传报告</navigator>
-              <navigator class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active">完成</navigator>
-            </view>
+      </navigator>
+      <navigator url="/pages/inspection/inspection?activeIndex=2">
+        <view class="weui-cell weui-cell_access">
+          <view class="weui-cell__bd">
+            <view style="display: inline-block; vertical-align: middle">检验中</view>
+            <!-- <view class="weui-badge" style="margin-left: 5px;">3</view> -->
           </view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
         </view>
-        <view class="weui-tab__content" hidden="{{activeIndex != 3}}">
-          <view class="weui-form-preview" wx:for="{{completePage.data}}" wx:for-index="index" wx:for-item="item">
-            <view class="weui-form-preview__hd">
-              <view class="weui-form-preview__item">
-                <view class="weui-form-preview__label">XX船检</view>
-                <!-- <view class="weui-form-preview__value_in-hd">¥2400.00</view> -->
-              </view>
-            </view>
-            <view class="weui-form-preview__bd">
-              <view class="weui-form-preview__item">
-                <view class="weui-form-preview__label">船名</view>
-                <view class="weui-form-preview__value">我是好船</view>
-              </view>
-              <view class="weui-form-preview__item">
-                <view class="weui-form-preview__label">港口</view>
-                <view class="weui-form-preview__value">名字名字名字</view>
-              </view>
-              <view class="weui-form-preview__item">
-                <view class="weui-form-preview__label">日期</view>
-                <view class="weui-form-preview__value">2018-11-12</view>
-              </view>
-            </view>
-            <view class="weui-form-preview__ft">
-              <navigator class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active">{{index/2==0?"查看报告":"抢单失败"}}</navigator>
-            </view>
+      </navigator>
+      <navigator url="/pages/inspection/inspection?activeIndex=3">
+        <view class="weui-cell weui-cell_access">
+          <view class="weui-cell__bd">
+            <view style="display: inline-block; vertical-align: middle">已完成</view>
+            <!-- <view class="weui-badge" style="margin-left: 5px;">1</view> -->
           </view>
+          <view class="weui-cell__ft weui-cell__ft_in-access"></view>
         </view>
-      </view>
+      </navigator>
     </view>
   </view>
 </view>

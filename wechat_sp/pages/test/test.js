@@ -1,14 +1,8 @@
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
 
-var time = 0;
-var touchDot = 0;//触摸时的原点
-var interval = "";
-var flag_hd = true;
-
 Page({
   data: {
-    showError: false,
-    tabs: ["可抢单", "请等待", "检验中", "已完成"],
+    tabs: ["可抢单", "抢单中", "检验中", "已完成"],
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
@@ -19,17 +13,29 @@ Page({
     pageNames: ["canGetPage", "waitPage", "ingPage", "completePage"],
     tabWidth: 0
   },
-  onLoad: function () {
+  onLoad: function (options) {
+    const activeIndex = options.activeIndex;
+    if (activeIndex) {
+      this.setData({
+        activeIndex: activeIndex
+      });
+    }
+
     var that = this;
     wx.getSystemInfo({
       success: function (res) {
         let w = res.windowWidth / that.data.tabs.length;
-        console.log(res);
-        console.log(w);
         that.setData({
           sliderLeft: (res.windowWidth / that.data.tabs.length - 96) / 2,
           sliderOffset: res.windowWidth / that.data.tabs.length * that.data.activeIndex,
           tabWidth: res.windowWidth / that.data.tabs.length
+        });
+        var clientHeight = res.windowHeight,
+          clientWidth = res.windowWidth,
+          rpxR = 750 / clientWidth;
+        var calc = clientHeight * rpxR;
+        that.setData({
+          winHeight: calc
         });
       }
     });
@@ -37,14 +43,13 @@ Page({
   },
 
   tabClick: function (e) {
-    console.log(e);
     this.setData({
       sliderOffset: e.currentTarget.offsetLeft,
       activeIndex: e.currentTarget.id
     });
   },
 
-  onReachBottom: function (e) {
+  getMore: function () {
     this.requestPage(this.data.activeIndex);
   },
 
@@ -72,6 +77,8 @@ Page({
     }
   },
 
+
+
   apply: function (e) {
     const that = this;
     console.log(e.currentTarget.dataset.quotation);
@@ -93,93 +100,18 @@ Page({
         showCancel: false
       })
     }
-
   },
 
 
-
-  // 触摸开始事件
-  touchStart: function (e) {
-    touchDot = e.touches[0].pageX; // 获取触摸时的原点
-    // 使用js计时器记录时间    
-    interval = setInterval(function () {
-      time++;
-    }, 100);
-  },
-  // 触摸结束事件
-  touchEnd: function (e) {
-    var touchMove = e.changedTouches[0].pageX;
-    // 向左滑动   
-    if (touchMove - touchDot <= -40 && time < 10) {
-      if (this.data.activeIndex != this.data.tabs.length - 1) {
-        const newTabIndex = this.data.activeIndex + 1;
-        this.setData({
-          sliderOffset: this.data.tabWidth * newTabIndex,
-          activeIndex: newTabIndex
-        });
-      }
+  // 滚动切换标签样式
+  switchTab: function (e) {
+    const cur = e.detail.current;
+    if (this.data.activeIndex == cur) { return false; }
+    else {
+      this.setData({
+        sliderOffset: this.data.tabWidth * cur,
+        activeIndex: cur
+      });
     }
-    // 向右滑动   
-    if (touchMove - touchDot >= 40 && time < 10) {
-      if (this.data.activeIndex != 0) {
-        const newTabIndex = this.data.activeIndex - 1;
-        this.setData({
-          sliderOffset: this.data.tabWidth * newTabIndex,
-          activeIndex: newTabIndex
-        });
-      }
-    }
-    clearInterval(interval); // 清除setInterval
-    time = 0;
-  },
-
-  showContent: function () {
-
-  },
-
-  toggle: function () {
-    this.setData({
-      showError: !this.data.showError
-    });
   }
-
-  // requestCanPage: function () {
-  //   const that = this;
-  //   let page = this.data.canGetPage
-  //   if (page.flag) {
-  //     // 从服务器获取数据
-  //     wx.showLoading({
-  //       title: 'loading'
-  //     });
-  //     const newPage = { data: [9, 9, 9] };
-  //     const newData = newPage.data;
-  //     const flag = newData.length == page.pageSize;
-  //     const pageNo = page.pageNo + newData.length != 0 ? 1 : 0;
-  //     that.setData({
-  //       canGetPage: { pageNo: pageNo, pageSize: page.pageSize, flag: flag, data: page.data.concat(newData) }
-  //     })
-  //     wx.hideLoading();
-  //   } else {
-  //     wx.showToast({
-  //       title: '到底啦!',
-  //     });
-  //   }
-  // },
-
-  // requestWaitPage: function () {
-  //   if (this.data.waitPage.flag) {
-
-  //   }
-  // },
-  // requestIngPage: function () {
-  //   if (this.data.ingPage.flag) {
-
-  //   }
-  // },
-  // requestCompletePage: function () {
-  //   if (this.data.completePage.flag) {
-
-  //   }
-  // },
-
 });

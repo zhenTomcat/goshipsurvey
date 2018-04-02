@@ -1,2 +1,69 @@
-<!--pages/info/info.wxml-->
-<text>我是信息</text>
+<view class="page">
+    <view class="page__hd">
+        <view class="page__title">综合信息</view>
+        <view class="page__desc">综合信息</view>
+    </view>
+    <view class="page__bd">
+        <view class="weui-panel weui-panel_access">
+            <view class="weui-panel__hd">验船师</view>
+            <view class="weui-panel__bd">
+                <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                        <image class="weui-media-box__thumb" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522246215708&di=1006ecfff5069de2cf479a9b7341d008&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fforum%2Fw%253D580%2Fsign%3Df1071a40dd54564ee565e43183df9cde%2F7c24372ac65c1038eb10e891b2119313b17e89ef.jpg" />
+                    </view>
+                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                        <view class="weui-media-box__title">我是验船师1</view>
+                        <view class="weui-media-box__desc">验船经历,验船经历,验船经历,验船经历,验船经历,验船经历,验船经历.</view>
+                    </view>
+                </navigator>
+                <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
+                    <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
+                        <image class="weui-media-box__thumb" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522246131617&di=7a111d7dde3211f24305eaed575ca823&imgtype=0&src=http%3A%2F%2Ff.hiphotos.baidu.com%2Fzhidao%2Fwh%253D450%252C600%2Fsign%3Dfaa4b8cb222dd42a5f5c09af360b7783%2Fb21bb051f81986181bf402264ded2e738ad4e6e5.jpg" />
+                    </view>
+                    <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
+                        <view class="weui-media-box__title">我是验船师2</view>
+                        <view class="weui-media-box__desc">验船经历,验船经历,验船经历,验船经历,验船经历,验船经历,验船经历.</view>
+                    </view>
+                </navigator>
+            </view>
+            <view class="weui-panel__ft">
+                <view class="weui-cell weui-cell_access weui-cell_link">
+                    <view class="weui-cell__bd">查看更多</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                </view>
+            </view>
+        </view>
+
+        <view class="weui-panel">
+            <view class="weui-panel__hd">最近船检信息</view>
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__title weui-media-box__title_in-text">XX船检验</view>
+                    <view class="weui-media-box__desc">XX船检描述XX船检描述XX船检描述XX船检描述XX船检描述XX船检描述XX船检描述XX船检描述</view>
+                    <view class="weui-media-box__info">
+                        <view class="weui-media-box__info__meta">XX港口</view>
+                        <view class="weui-media-box__info__meta">2018-11-11</view>
+                        <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">其它信息</view>
+                    </view>
+                </view>
+            </view>
+            <view class="weui-panel__bd">
+                <view class="weui-media-box weui-media-box_text">
+                    <view class="weui-media-box__title weui-media-box__title_in-text">ZZ船检验</view>
+                    <view class="weui-media-box__desc">ZZ船检验描述ZZ船检验描述ZZ船检验描述ZZ船检验描述ZZ船检验描述ZZ船检验描述ZZ船检验描述</view>
+                    <view class="weui-media-box__info">
+                        <view class="weui-media-box__info__meta">YY港口</view>
+                        <view class="weui-media-box__info__meta">2018-11-11</view>
+                        <view class="weui-media-box__info__meta weui-media-box__info__meta_extra">其它信息</view>
+                    </view>
+                </view>
+            </view>
+             <view class="weui-panel__ft">
+                <view class="weui-cell weui-cell_access weui-cell_link">
+                    <view class="weui-cell__bd">查看更多</view>
+                    <view class="weui-cell__ft weui-cell__ft_in-access"></view>
+                </view>
+            </view>
+        </view>
+    </view>
+</view>

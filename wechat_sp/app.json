@@ -1,9 +1,12 @@
 {
   "pages": [
-    "pages/user/user",
     "pages/home/home",
+    "pages/user/user",
+    "pages/test/test",
+    "pages/inspection/inspection",
+    "pages/index/index",
     "pages/info/info",
-    "pages/index/index"
+    "pages/error/error"
   ],
   "window": {
     "backgroundTextStyle": "light",
