@@ -1,4 +1,3 @@
-//app.js
 App({
   onLaunch: function () {
     // 展示本地存储能力
@@ -13,7 +12,7 @@ App({
         console.log(res);
         if (res.code) {
           wx.request({
-            url: 'http://localhost:8080/wechat/user/login',
+            url: this.webUrl + '/wechat/user/login',
             data: {
               code: res.code
             },
@@ -26,7 +25,7 @@ App({
               }
             },
             fail: function (e) {
-              
+
             }
           })
         } else {
@@ -61,5 +60,10 @@ App({
   },
   getInfo: function () {
     console.log(12);
-  }
+  },
+
+  // webUrl: 'https://www.goshipsurvey.com',
+  webUrl: 'http://localhost:80'
+
+
 })
