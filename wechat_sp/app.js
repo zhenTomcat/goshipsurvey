@@ -61,5 +61,6 @@ App({
   },
   getInfo: function () {
     console.log(12);
-  }
+  },
+  codeUrl: 'http://localhost:8080',
 })

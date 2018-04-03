@@ -44,5 +44,13 @@
                      select="com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.QuotationApplicationMapper.getBySurveyorId"/>
     </resultMap>
 
+    <select id="getQuotationList"
+            resultType="com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Quotation">
+        select * from t_quotation q where q.id not in (select qa.quotation_id from t_quotation_application qa where qa.user_id=#{surveyorId}) and q.quotation_status
+        =1 and (q.specified_id is null or q.specified_id=#{surveyorId} ) and q.end_date>=(select DATE_FORMAT(now(),'%Y-%m-%d'))
+        ORDER BY q.update_date desc
+                limit #{start},#{length};
+    </select>
+
 
 </mapper>

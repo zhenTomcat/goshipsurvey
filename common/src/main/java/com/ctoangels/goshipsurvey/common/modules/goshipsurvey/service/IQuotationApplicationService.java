@@ -1,5 +1,7 @@
 package com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service;
 
+import com.baomidou.mybatisplus.plugins.Page;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Quotation;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.QuotationApplication;
 import com.baomidou.framework.service.ISuperService;
 
@@ -14,5 +16,6 @@ public interface IQuotationApplicationService extends ISuperService<QuotationApp
     List<QuotationApplication> getAppliedQuotations(int userId);
 
     List<QuotationApplication> getApplications(Integer quotationId, Integer proType);
+
 
 }

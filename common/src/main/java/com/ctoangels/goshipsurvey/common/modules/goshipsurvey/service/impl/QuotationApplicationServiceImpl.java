@@ -1,8 +1,10 @@
 package com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.QuotationMapper;
 import com.ctoangels.goshipsurvey.common.util.Const;
+import org.apache.ibatis.session.RowBounds;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -41,6 +43,7 @@ public class QuotationApplicationServiceImpl extends SuperServiceImpl<QuotationA
     public List<QuotationApplication> getApplications(Integer quotationId, Integer proType) {
         return quotationApplicationMapper.getApplications(quotationId, proType);
     }
+
 
 
 }

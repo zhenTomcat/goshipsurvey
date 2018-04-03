@@ -21,4 +21,9 @@ public interface QuotationMapper extends AutoMapper<Quotation> {
                                     @Param(value = "start") Integer start,
                                     @Param(value = "length") Integer length);
 
+    List<Quotation> getQuotationList(@Param(value = "surveyorId") Integer surveyorId,
+                                    @Param(value = "start") Integer start,
+                                    @Param(value = "length") Integer length);
+
+
 }

@@ -261,4 +261,5 @@ public class InspectionServiceImpl extends SuperServiceImpl<InspectionMapper, In
         inspection.setInspectionStatus(Const.INSPECTION_SURVEYOR_COMPLETE);
         return (inspectionMapper.updateSelectiveById(inspection) >= 0);
     }
+
 }

@@ -1,5 +1,5 @@
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
-
+var app =getApp();
 Page({
   data: {
     tabs: ["可抢单", "抢单中", "检验中", "已完成"],
@@ -40,6 +40,7 @@ Page({
       }
     });
     // this.requestCanPage();
+    this.initQuotationInfo();
   },
 
   tabClick: function (e) {
@@ -54,6 +55,7 @@ Page({
   },
 
   requestPage: function (index, first) {
+    console.log("这是第"+index+"页面");
     const that = this
     const pageName = this.data.pageNames[index];
     let oldPage = this.data[pageName];
@@ -62,6 +64,7 @@ Page({
       wx.showLoading({
         title: 'loading'
       });
+
       const newPage = { data: [9, 9, 9] };
       const newData = newPage.data;
       const flag = newData.length == oldPage.pageSize;
@@ -111,5 +114,20 @@ Page({
         activeIndex: cur
       });
     }
+  },
+
+  initQuotationInfo: function(){
+    wx.request({
+      url: app.codeUrl +"/wx/surveyor/quotation/list",
+      data:{
+        userId:23
+      },
+      success: function (res) {
+        console.log(res)
+      },
+      fail: function (e) {
+        util.alert('数据请求失败！');
+      }
+    })
   }
 });

@@ -29,6 +29,8 @@ public interface IQuotationService extends ISuperService<Quotation> {
 
     List<Quotation> getSurveyorList(Integer surveyorId, Integer start, Integer length);
 
+    List<Quotation> getQuotationList(Integer surveyorId, Integer start, Integer length);
+
     int getSurveyorTotal(Integer surveyorId);
 
 

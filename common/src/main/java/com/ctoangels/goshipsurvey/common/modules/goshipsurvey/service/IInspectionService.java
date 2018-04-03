@@ -36,4 +36,5 @@ public interface IInspectionService extends ISuperService<Inspection> {
 
     boolean surveyorConfirmComplete(int id);
 
+
 }

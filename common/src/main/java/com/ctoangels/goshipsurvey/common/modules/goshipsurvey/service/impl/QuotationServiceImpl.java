@@ -111,6 +111,11 @@ public class QuotationServiceImpl extends SuperServiceImpl<QuotationMapper, Quot
     }
 
     @Override
+    public List<Quotation> getQuotationList(Integer surveyorId, Integer start, Integer length) {
+        return quotationMapper.getQuotationList(surveyorId, start, length);
+    }
+
+    @Override
     public int getSurveyorTotal(Integer surveyorId) {
         EntityWrapper<Quotation> ew = new EntityWrapper();
         ew.addFilter("end_date>={0} and quotation_status != 0 and del_flag=0", DateUtil.formatDate(new Date(), "yyyy-MM-dd"));
