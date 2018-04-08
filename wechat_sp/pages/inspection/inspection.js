@@ -1,16 +1,15 @@
+const app = getApp();
 var sliderWidth = 96; // 需要设置slider的宽度，用于计算中间位置
-var app =getApp();
 Page({
   data: {
     tabs: ["可抢单", "抢单中", "检验中", "已完成"],
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
-    canGetPage: { pageNo: 0, pageSize: 10, flag: true, data: [{ "name": "hah", "age": 11 }, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] },
-    waitPage: { pageNo: 0, pageSize: 10, flag: true, data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] },
-    ingPage: { pageNo: 0, pageSize: 10, flag: true, data: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10] },
-    completePage: { pageNo: 0, pageSize: 10, flag: true, data: [0, 1, 2, 3] },
-    pageNames: ["canGetPage", "waitPage", "ingPage", "completePage"],
+    canGetPage: { url: app.webUrl + '/', pageName: 'canGetPage', pageNo: 0, pageSize: 10, flag: true, data: [0] },
+    waitPage: { url: app.webUrl + '/', pageName: 'waitPage', pageNo: 0, pageSize: 10, flag: true, data: [0] },
+    ingPage: { url: app.webUrl + '/', pageName: 'ingPage', pageNo: 0, pageSize: 10, flag: true, data: [0] },
+    completePage: { url: app.webUrl + '/', pageName: 'completePage', pageNo: 0, pageSize: 10, flag: true, data: [0] },
     tabWidth: 0
   },
   onLoad: function (options) {
@@ -20,7 +19,6 @@ Page({
         activeIndex: activeIndex
       });
     }
-    console.log('in');
     var that = this;
     wx.getSystemInfo({
       success: function (res) {
@@ -39,6 +37,7 @@ Page({
         });
       }
     });
+
     // this.requestCanPage();
     this.initQuotationInfo();
   },
@@ -55,29 +54,52 @@ Page({
   },
 
   requestPage: function (index, first) {
-    console.log("这是第"+index+"页面");
     const that = this
-    const pageName = this.data.pageNames[index];
+
     let oldPage = this.data[pageName];
+    const pageName = oldPage.pageName;
+    const url = oldPage.url;
     if (oldPage.flag || first) {
       // 从服务器获取数据
       wx.showLoading({
         title: 'loading'
       });
-
       const newPage = { data: [9, 9, 9] };
       const newData = newPage.data;
       const flag = newData.length == oldPage.pageSize;
       const pageNo = first ? 0 : oldPage.pageNo + newData.length != 0 ? 1 : 0;
-      that.setData({
-        [pageName]: { pageNo: pageNo, pageSize: oldPage.pageSize, flag: flag, data: oldPage.data.concat(newData) }
+  
+      wx.request({
+        url: url,
+        data: { userId: '' },
+        method: '',
+        success: function (res) {
+          const newPage = res.data;
+          const newData = newPage.data;
+          const flag = newData.length == oldPage.pageSize;
+          const pageNo = first ? 0 : oldPage.pageNo + newData.length != 0 ? 1 : 0;
+          that.setData({
+            [pageName]: { pageNo: pageNo, pageSize: oldPage.pageSize, flag: flag, data: oldPage.data.concat(newData) }
+          })
+          wx.hideLoading();
+        }
       })
-      wx.hideLoading();
     } else {
       wx.showToast({
         title: '到底啦!',
       });
     }
+  },
+  requestAll: function () {
+    wx.request({
+      url: app.wenUrl + '/',
+      data: { userId: 1 },
+      header: {},
+      method: 'GET',
+      success: function (res) { },
+      fail: function (res) { },
+      complete: function (res) { },
+    })
   },
 
   apply: function (e) {
@@ -103,6 +125,57 @@ Page({
     }
   },
 
+  cancelApply: function (e) {
+
+    const that = this;
+    console.log(e.currentTarget.dataset.quotation);
+    // 与服务器交互
+    const flag = true;
+    if (flag) {
+      wx.showModal({
+        title: '已撤销',
+        content: '成功撤销',
+        showCancel: false,
+        success: function () {
+          that.requestPage(0, true);
+          that.requestPage(1, true);
+        }
+      })
+    } else {
+      wx.showModal({
+        title: '撤销失败',
+        content: '请稍后再试',
+        showCancel: false
+      })
+    }
+  },
+
+  uploadReport: function (e) {
+    const that = this;
+    console.log(e.currentTarget.dataset.quotation);
+    wx.chooseImage({
+      count: 1, // 默认9  
+      sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有  
+      sourceType: ['album', 'camera'], // 可以指定来源是相册还是相机，默认二者都有  
+      success: function (res) {
+        console.log(res.tempFilePaths);
+        return;
+        wx.uploadFile({
+          url: 'https://example.weixin.qq.com/upload', //仅为示例，非真实的接口地址
+          filePath: tempFilePaths[0],
+          name: 'file',
+          formData: {
+            'user': 'test'
+          },
+          success: function (res) {
+            var data = res.data
+            //do something
+          }
+        })
+      }
+    });
+  },
+
 
   // 滚动切换标签样式
   switchTab: function (e) {
@@ -117,13 +190,18 @@ Page({
   },
 
   initQuotationInfo: function(){
+    var that = this;
     wx.request({
-      url: app.codeUrl +"/wx/surveyor/quotation/list",
+      url: app.webUrl +"/wx/surveyor/quotation/list",
       data:{
         userId:23
       },
       success: function (res) {
-        console.log(res)
+        console.log(res.data.complete);
+        that.setData({
+          'canGetPage.data': res.data.complete
+        });
+        console.log(that.data.canGetPage.data[0].companyId);
       },
       fail: function (e) {
         util.alert('数据请求失败！');
