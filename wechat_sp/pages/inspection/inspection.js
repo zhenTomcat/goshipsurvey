@@ -6,10 +6,11 @@ Page({
     activeIndex: 0,
     sliderOffset: 0,
     sliderLeft: 0,
-    canGetPage: { url: app.webUrl + '/', pageName: 'canGetPage', pageNo: 0, pageSize: 10, flag: true, data: [0] },
-    waitPage: { url: app.webUrl + '/', pageName: 'waitPage', pageNo: 0, pageSize: 10, flag: true, data: [0] },
-    ingPage: { url: app.webUrl + '/', pageName: 'ingPage', pageNo: 0, pageSize: 10, flag: true, data: [0] },
-    completePage: { url: app.webUrl + '/', pageName: 'completePage', pageNo: 0, pageSize: 10, flag: true, data: [0] },
+    canGetPage: { url: app.webUrl + '/wx/surveyor/quotation/canGet', pageNo: 0, pageSize: 10, flag: true, data: [0] },
+    waitPage: { url: app.webUrl + '/wx/surveyor/quotation/wait',  pageNo: 0, pageSize: 10, flag: true, data: [0] },
+    ingPage: { url: app.webUrl + '/wx/surveyor/quotation/ing',  pageNo: 0, pageSize: 10, flag: true, data: [0] },
+    completePage: { url: app.webUrl + '/wx/surveyor/quotation/complete',  pageNo: 0, pageSize: 10, flag: true, data: [0] },
+  pageNames: ["canGetPage", "waitPage", "ingPage", "completePage"],
     tabWidth: 0
   },
   onLoad: function (options) {
@@ -55,25 +56,20 @@ Page({
 
   requestPage: function (index, first) {
     const that = this
-
+    const pageName = this.data.pageNames[index];
     let oldPage = this.data[pageName];
-    const pageName = oldPage.pageName;
     const url = oldPage.url;
     if (oldPage.flag || first) {
       // 从服务器获取数据
       wx.showLoading({
         title: 'loading'
       });
-      const newPage = { data: [9, 9, 9] };
-      const newData = newPage.data;
-      const flag = newData.length == oldPage.pageSize;
-      const pageNo = first ? 0 : oldPage.pageNo + newData.length != 0 ? 1 : 0;
-  
       wx.request({
         url: url,
-        data: { userId: '' },
-        method: '',
+        data: { userId: 23 },
+        method: 'GET',
         success: function (res) {
+          console.log(res)
           const newPage = res.data;
           const newData = newPage.data;
           const flag = newData.length == oldPage.pageSize;
@@ -197,11 +193,14 @@ Page({
         userId:23
       },
       success: function (res) {
-        console.log(res.data.complete);
+        console.log(res);
         that.setData({
-          'canGetPage.data': res.data.complete
+          'canGetPage.data': res.data.canGet,
+          'waitPage.data': res.data.wait,
+          'ingPage.data': res.data.ing,
+          'completePage.data': res.data.complete
         });
-        console.log(that.data.canGetPage.data[0].companyId);
+    
       },
       fail: function (e) {
         util.alert('数据请求失败！');
