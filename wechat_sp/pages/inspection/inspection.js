@@ -88,7 +88,7 @@ Page({
   },
   requestAll: function () {
     wx.request({
-      url: app.wenUrl + '/',
+      url: app.webUrl + '/',
       data: { userId: 1 },
       header: {},
       method: 'GET',
@@ -203,7 +203,7 @@ Page({
     
       },
       fail: function (e) {
-        util.alert('数据请求失败！');
+        
       }
     })
   }

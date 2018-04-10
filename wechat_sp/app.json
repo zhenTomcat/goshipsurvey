@@ -21,12 +21,6 @@
     "borderStyle": "white",
     "list": [
       {
-        "selectedIconPath": "images/tabBar/report_selected.png",
-        "iconPath": "images/tabBar/report.png",
-        "pagePath": "pages/info/info",
-        "text": "信息"
-      },
-      {
         "selectedIconPath": "images/tabBar/home_selected.png",
         "iconPath": "images/tabBar/home.png",
         "pagePath": "pages/home/home",
