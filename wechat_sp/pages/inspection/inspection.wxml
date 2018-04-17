@@ -17,22 +17,26 @@
                 <view class="weui-form-preview" wx:for="{{canGetPage.data}}" wx:for-index="index" wx:for-item="item">
                   <view class="weui-form-preview__hd">
                     <view class="weui-form-preview__item">
-                      <view class="weui-form-preview__label">有船要验{{index}}</view>
+                      <view class="weui-form-preview__label">有船要验</view>
                       <!-- <view class="weui-form-preview__value_in-hd">¥2400.00</view> -->
                     </view>
                   </view>
                   <view class="weui-form-preview__bd">
                     <view class="weui-form-preview__item">
                       <view class="weui-form-preview__label">船名</view>
-                      <view class="weui-form-preview__value">我是好船{{index}}</view>
+                      <view class="weui-form-preview__value">{{item.shipName}}</view>
                     </view>
                     <view class="weui-form-preview__item">
                       <view class="weui-form-preview__label">港口</view>
-                      <view class="weui-form-preview__value">我是名字{{index}}</view>
+                      <view class="weui-form-preview__value">{{item.portName}}</view>
                     </view>
                     <view class="weui-form-preview__item">
                       <view class="weui-form-preview__label">日期</view>
-                      <view class="weui-form-preview__value">2018-11-12</view>
+                      <view class="weui-form-preview__value">{{item.estimateDate}}</view>
+                    </view>
+                    <view class="weui-form-preview__item">
+                      <view class="weui-form-preview__label">船检类型</view>
+                      <view class="weui-form-preview__value">还没有转化成字符串{{item.inspectionTypes}}</view>
                     </view>
                   </view>
                   <view class="weui-form-preview__ft">
@@ -40,6 +44,9 @@
                     <button data-quotation="{{item}}" class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" bindtap="apply">抢单</button>
                   </view>
                 </view>
+              </view>
+              <view class="weui-footer" hidden="{{!(canGetPage.data.length==0)}}">
+                <view class="weui-footer__text">没有可抢单的船舶</view>
               </view>
             </scroll-view>
           </swiper-item>
@@ -56,15 +63,19 @@
                   <view class="weui-form-preview__bd">
                     <view class="weui-form-preview__item">
                       <view class="weui-form-preview__label">船名</view>
-                      <view class="weui-form-preview__value">我是好船{{index}}</view>
+                      <view class="weui-form-preview__value">{{item.quotation.shipName}}</view>
                     </view>
                     <view class="weui-form-preview__item">
                       <view class="weui-form-preview__label">港口</view>
-                      <view class="weui-form-preview__value">我是名字{{index}}</view>
+                      <view class="weui-form-preview__value">{{item.quotation.portName}}</view>
                     </view>
                     <view class="weui-form-preview__item">
                       <view class="weui-form-preview__label">日期</view>
-                      <view class="weui-form-preview__value">2018-11-12</view>
+                      <view class="weui-form-preview__value">{{item.quotation.estimateDate}}</view>
+                    </view>
+                    <view class="weui-form-preview__item">
+                      <view class="weui-form-preview__label">船检类型</view>
+                      <view class="weui-form-preview__value">还没有转化成字符串{{item.quotation.inspectionTypes}}</view>
                     </view>
                   </view>
                   <view class="weui-form-preview__ft">
@@ -72,6 +83,9 @@
                     <button class="weui-form-preview__btn weui-form-preview__btn_primary" data-quotation="{{item}}" hover-class="weui-form-preview__btn_active" bindtap="cancelApply">撤销</button>
                   </view>
                 </view>
+              </view>
+              <view class="weui-footer" hidden="{{!(waitPage.data.length==0)}}">
+                <view class="weui-footer__text">没有抢单中的申请</view>
               </view>
             </scroll-view>
           </swiper-item>
@@ -81,22 +95,26 @@
                 <view class="weui-form-preview" wx:for="{{ingPage.data}}" wx:for-index="index" wx:for-item="item">
                   <view class="weui-form-preview__hd">
                     <view class="weui-form-preview__item">
-                      <view class="weui-form-preview__label">XX{{index}}船正在检查</view>
+                      <view class="weui-form-preview__label">{{item.quotation.shipName}}正在检验</view>
                       <!-- <view class="weui-form-preview__value_in-hd">¥2400.00</view> -->
                     </view>
                   </view>
                   <view class="weui-form-preview__bd">
                     <view class="weui-form-preview__item">
                       <view class="weui-form-preview__label">船名</view>
-                      <view class="weui-form-preview__value">我是好船XX</view>
+                      <view class="weui-form-preview__value">{{item.quotation.shipName}}</view>
                     </view>
                     <view class="weui-form-preview__item">
                       <view class="weui-form-preview__label">港口</view>
-                      <view class="weui-form-preview__value">XXXXXXXX</view>
+                      <view class="weui-form-preview__value">{{item.quotation.portName}}</view>
                     </view>
                     <view class="weui-form-preview__item">
                       <view class="weui-form-preview__label">日期</view>
-                      <view class="weui-form-preview__value">2018-11-12</view>
+                      <view class="weui-form-preview__value">{{item.quotation.estimateDate}}</view>
+                    </view>
+                    <view class="weui-form-preview__item">
+                      <view class="weui-form-preview__label">船检类型</view>
+                      <view class="weui-form-preview__value">还没有转化成字符串{{item.quotation.inspectionTypes}}</view>
                     </view>
                   </view>
                   <view class="weui-form-preview__ft">
@@ -106,12 +124,15 @@
                   </view>
                 </view>
               </view>
+              <view class="weui-footer" hidden="{{!(ingPage.data.length==0)}}">
+                <view class="weui-footer__text">没有正在检验的船舶</view>
+              </view>
             </scroll-view>
           </swiper-item>
           <swiper-item>
             <scroll-view scroll-y="true" class="scoll-h" bindscrolltolower="getMore" data-index="3">
               <view class="weui-tab__content">
-                <view class=" weui-form-preview " wx:for="{{completePage.data}} " wx:for-index="index " wx:for-item="item ">
+                <view class=" weui-form-preview " wx:for="{{completePage.data}}" wx:for-index="index" wx:for-item="item">
                   <view class="weui-form-preview__hd ">
                     <view class="weui-form-preview__item ">
                       <view class="weui-form-preview__label ">XX船检</view>
@@ -119,23 +140,30 @@
                     </view>
                   </view>
                   <view class="weui-form-preview__bd ">
-                    <view class="weui-form-preview__item ">
-                      <view class="weui-form-preview__label ">船名</view>
-                      <view class="weui-form-preview__value ">我是好船</view>
+                    <view class="weui-form-preview__item">
+                      <view class="weui-form-preview__label">船名</view>
+                      <view class="weui-form-preview__value">{{item.quotation.shipName}}</view>
                     </view>
-                    <view class="weui-form-preview__item ">
-                      <view class="weui-form-preview__label ">港口</view>
-                      <view class="weui-form-preview__value ">名字名字名字</view>
+                    <view class="weui-form-preview__item">
+                      <view class="weui-form-preview__label">港口</view>
+                      <view class="weui-form-preview__value">{{item.quotation.portName}}</view>
                     </view>
-                    <view class="weui-form-preview__item ">
-                      <view class="weui-form-preview__label ">日期</view>
-                      <view class="weui-form-preview__value ">2018-11-12</view>
+                    <view class="weui-form-preview__item">
+                      <view class="weui-form-preview__label">日期</view>
+                      <view class="weui-form-preview__value">{{item.quotation.estimateDate}}</view>
+                    </view>
+                    <view class="weui-form-preview__item">
+                      <view class="weui-form-preview__label">船检类型</view>
+                      <view class="weui-form-preview__value">还没有转化成字符串{{item.quotation.inspectionTypes}}</view>
                     </view>
                   </view>
                   <view class="weui-form-preview__ft ">
-                    <button class="weui-form-preview__btn weui-form-preview__btn_default " hover-class="weui-form-preview__btn_active ">{{index/2==0?"查看报告 ":"抢单失败 "}}</button>
+                    <button class="weui-form-preview__btn weui-form-preview__btn_default " hover-class="weui-form-preview__btn_active ">查看报告</button>
                   </view>
                 </view>
+              </view>
+              <view class="weui-footer" hidden="{{!(completePage.data.length==0)}}">
+                <view class="weui-footer__text">没有检验完成的船舶</view>
               </view>
             </scroll-view>
           </swiper-item>

@@ -7,10 +7,10 @@ Page({
     sliderOffset: 0,
     sliderLeft: 0,
     canGetPage: { url: app.webUrl + '/wx/surveyor/quotation/canGet', pageNo: 0, pageSize: 10, flag: true, data: [0] },
-    waitPage: { url: app.webUrl + '/wx/surveyor/quotation/wait',  pageNo: 0, pageSize: 10, flag: true, data: [0] },
-    ingPage: { url: app.webUrl + '/wx/surveyor/quotation/ing',  pageNo: 0, pageSize: 10, flag: true, data: [0] },
-    completePage: { url: app.webUrl + '/wx/surveyor/quotation/complete',  pageNo: 0, pageSize: 10, flag: true, data: [0] },
-  pageNames: ["canGetPage", "waitPage", "ingPage", "completePage"],
+    waitPage: { url: app.webUrl + '/wx/surveyor/quotation/wait', pageNo: 0, pageSize: 10, flag: true, data: [0] },
+    ingPage: { url: app.webUrl + '/wx/surveyor/quotation/ing', pageNo: 0, pageSize: 10, flag: true, data: [0] },
+    completePage: { url: app.webUrl + '/wx/surveyor/quotation/complete', pageNo: 0, pageSize: 10, flag: true, data: [0] },
+    pageNames: ["canGetPage", "waitPage", "ingPage", "completePage"],
     tabWidth: 0
   },
   onLoad: function (options) {
@@ -86,17 +86,7 @@ Page({
       });
     }
   },
-  requestAll: function () {
-    wx.request({
-      url: app.webUrl + '/',
-      data: { userId: 1 },
-      header: {},
-      method: 'GET',
-      success: function (res) { },
-      fail: function (res) { },
-      complete: function (res) { },
-    })
-  },
+
 
   apply: function (e) {
     const that = this;
@@ -172,7 +162,6 @@ Page({
     });
   },
 
-
   // 滚动切换标签样式
   switchTab: function (e) {
     const cur = e.detail.current;
@@ -185,25 +174,24 @@ Page({
     }
   },
 
-  initQuotationInfo: function(){
+  initQuotationInfo: function () {
     var that = this;
     wx.request({
-      url: app.webUrl +"/wx/surveyor/quotation/list",
-      data:{
-        userId:23
+      url: app.webUrl + "/wx/surveyor/quotation/list",
+      data: {
+        surveyorUId: 23
       },
       success: function (res) {
         console.log(res);
         that.setData({
-          'canGetPage.data': res.data.canGet,
-          'waitPage.data': res.data.wait,
-          'ingPage.data': res.data.ing,
-          'completePage.data': res.data.complete
+          ['canGetPage.data']: res.data.canGet,
+          ['waitPage.data']: res.data.wait,
+          ['ingPage.data']: res.data.ing,
+          ['completePage.data']: res.data.complete
         });
-    
       },
       fail: function (e) {
-        
+
       }
     })
   }
