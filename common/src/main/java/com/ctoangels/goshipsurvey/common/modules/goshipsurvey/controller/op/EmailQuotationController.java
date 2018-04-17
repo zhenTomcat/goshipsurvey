@@ -1,11 +1,14 @@
-package com.ctoangels.goshipsurvey.common.modules.prepurchase.controller;
+package com.ctoangels.goshipsurvey.common.modules.goshipsurvey.controller.op;
 
 import com.alibaba.fastjson.JSONObject;
-import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Port;
+import com.baomidou.mybatisplus.mapper.EntityWrapper;
+import com.baomidou.mybatisplus.plugins.Page;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Quotation;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IDictService;
-import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.EmailQuotation;
-import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IEmailQuotationService;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.EmailQuotation;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IEmailQuotationService;
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
+import com.ctoangels.goshipsurvey.common.util.Const;
 import com.ctoangels.goshipsurvey.common.util.StringUtils;
 import com.ctoangels.goshipsurvey.common.util.Tools;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,14 +21,14 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.validation.Valid;
-import java.io.Serializable;
+import java.util.Date;
 import java.util.List;
 
 /**
  * EmailQuotation 控制层
  */
 @Controller
-@RequestMapping(value = "emailQuotation")
+@RequestMapping(value = "op/emailQuotation")
 public class EmailQuotationController extends BaseController {
 
     @Autowired
@@ -34,6 +37,26 @@ public class EmailQuotationController extends BaseController {
     @Autowired
     private IDictService dictService;
 
+
+    @RequestMapping
+    public String list(ModelMap map) {
+        map.put("shipType", getShipTypeDict());
+        map.put("inspectionType", getInspectionTypeDict());
+        return "goshipsurvey/op/emailQuotation/list";
+    }
+
+    @RequestMapping(value = "/list", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject getList(@RequestParam (required = false)String keyword) {
+        EntityWrapper<EmailQuotation> ew=getEntityWrapper();
+        if (keyword!=null && !keyword.trim().equals("")){
+            ew.like("ship_name",keyword);
+        }
+        ew.orderBy("create_date",false);
+        Page<EmailQuotation> page=emailQuotationService.selectPage(getPage(),ew);
+        return jsonPage(page);
+    }
+
     @RequestMapping(value = "/addEmailQuotation", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject addEmailQuotation(@Valid EmailQuotation emailQuotation, BindingResult result) {
@@ -41,6 +64,8 @@ public class EmailQuotationController extends BaseController {
         if (result.hasErrors() || !validateEmailQuotation(emailQuotation)) {
             jsonObject.put("success", false);
         } else {
+            emailQuotation.setCreateDate(new Date());
+            emailQuotation.setDelFlag(Const.DEL_FLAG_NORMAL);
             emailQuotation.setRemoteIp((String) request.getAttribute("ip"));
             jsonObject.put("success", emailQuotationService.sendEmailQuotation(emailQuotation));
             session.setAttribute("emailQuotation", emailQuotation);
@@ -48,6 +73,16 @@ public class EmailQuotationController extends BaseController {
         return jsonObject;
     }
 
+    /**
+     *  将EmailQuotation的信息转存到Quotation中
+     **/
+    @RequestMapping(value = "/import", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject importQuotation(@RequestParam Integer id) {
+        JSONObject jsonObject = new JSONObject();
+        emailQuotationService.EmailQuotationIdImportQuotation(id,getCurrentUser());
+        return jsonObject;
+    }
     @RequestMapping(value = "/detail")
     public String emailQuotationShow(ModelMap map) {
         return "sys/emailQuotation";

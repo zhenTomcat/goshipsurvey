@@ -2,6 +2,7 @@ package com.ctoangels.goshipsurvey.common.modules.go.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
+import com.ctoangels.goshipsurvey.common.util.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -60,7 +61,9 @@ public class PublicShipServiceImpl extends SuperServiceImpl<PublicShipMapper, Pu
     @Override
     public List<PublicShip> getListByIMO(String imo) {
         EntityWrapper<PublicShip> ew = new EntityWrapper<>();
+        ew.addFilter("del_flag={0}", Const.DEL_FLAG_NORMAL);
         ew.where("imo={0}", imo);
         return publicShipMapper.selectList(ew);
     }
+
 }

@@ -103,11 +103,11 @@ public class OPQuotationController extends BaseController {
     @ResponseBody
     public JSONObject addComplete(Quotation quotation) {
         JSONObject jsonObject = new JSONObject();
-        User op = getCurrentUser();
-        quotation.setOpId(op.getId());
-        quotation.setOpName(op.getName());
+        User user = getCurrentUser();
+        quotation.setOpUId(user.getId());
+        quotation.setOpUName(user.getName());
         quotation.setQuotationStatus(Const.QUOTATION_INIT);
-        quotation.setCreateInfo(op.getName());
+        quotation.setCreateInfo(user.getName());
         if (quotationService.insert(quotation)) {
             jsonObject.put("success", true);
         } else {
@@ -122,7 +122,7 @@ public class OPQuotationController extends BaseController {
         String inspectionType = q.getInspectionType();
         String[] inspectionTypes = inspectionType.split(",");
         q.setInspectionTypes(inspectionTypes);
-        User specifiedUser = userService.selectById(q.getSpecifiedId());
+        User specifiedUser = userService.selectById(q.getSurveyorUId());
         map.put("quotation", q);
         map.put("inspectionType", getInspectionTypeDict());
         map.put("shipType", getShipTypeDict());
@@ -155,11 +155,11 @@ public class OPQuotationController extends BaseController {
 
             jsonObject.put("success", true);
             String title = "本区域有可进行租还船检验船舶,请及时查看";
-            Integer specifiedId = quotation.getSpecifiedId();
-            if (specifiedId == null) {
+            Integer surveyorUId = quotation.getSurveyorUId();
+            if (surveyorUId == null) {
                 messageService.publicAll(title, title, Const.USER_TYPE_SURVEYOR_COMPANY);
             } else {
-                messageService.publicOne(specifiedId, title, title);
+                messageService.publicOne(surveyorUId, title, title);
             }
         } else {
             jsonObject.put("success", false);

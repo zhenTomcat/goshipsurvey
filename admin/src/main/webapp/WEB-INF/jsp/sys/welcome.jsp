@@ -194,7 +194,7 @@
     <div class="container-fluid content-sm box-shadow" style="background-color: #264071;padding: 20px 15px">
 
         <div class="quotation col-md-8">
-            <form class="form-horizontal" id="quotation-form" method="post" action="emailQuotation/addEmailQuotation"
+            <form class="form-horizontal" id="quotation-form" method="post" action="op/emailQuotation/addEmailQuotation"
                   role="form">
                 <h1 style="margin-bottom: 20px;font-size: 35px; text-align: center;">In
                     Need Of A

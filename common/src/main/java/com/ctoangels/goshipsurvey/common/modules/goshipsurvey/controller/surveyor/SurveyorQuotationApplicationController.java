@@ -66,11 +66,11 @@ public class SurveyorQuotationApplicationController extends BaseController {
         qa.setCreateInfo(getCurrentUser().getName());
         qa.setApplicationStatus(Const.QUO_APPLY_ING);
         if (quotationApplicationService.insert(qa)) {
-            UserSurveyor userSurveyor=userSurveyorService.selectOne(new EntityWrapper<UserSurveyor>().addFilter("user_id={0}",getCurrentUser().getId()));
+           /* UserSurveyor userSurveyor=userSurveyorService.selectOne(new EntityWrapper<UserSurveyor>().addFilter("user_id={0}",getCurrentUser().getId()));
             if (userSurveyor!=null){
                 String gzhOpenId= userSurveyor.getGzhOpenId();
                 template.infomationNotice(gzhOpenId, Const.CHECK_REMIND,url,first,keyword1,keyword2,remark);
-            }
+            }*/
 
             jsonObject.put("success", true);
             messageService.addApplicationMessage(qa.getId());

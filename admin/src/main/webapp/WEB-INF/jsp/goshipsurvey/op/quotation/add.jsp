@@ -328,7 +328,7 @@
                         </span></div>
                     <div class="col-sm-6 btn-group">
                         <select id="surveyorsSelect"
-                                name="specifiedId"
+                                name="surveyorUId"
                                 class="js-data-example-ajax">
                         </select>
 

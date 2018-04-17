@@ -1,6 +1,6 @@
-package com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper;
+package com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper;
 
-import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.EmailQuotation;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.EmailQuotation;
 import com.baomidou.mybatisplus.mapper.AutoMapper;
 
 /**

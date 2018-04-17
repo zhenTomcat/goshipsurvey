@@ -16,7 +16,7 @@ public interface IPurchaseQuotationService extends ISuperService<PurchaseQuotati
 
     boolean saveQuotationWithDetail(PurchaseQuotation quotation, ShipDetail detail);
 
-    List<PurchaseQuotation> getOPList(Integer opId, Integer start, Integer length);
+    List<PurchaseQuotation> getOPList(Integer opUId, Integer start, Integer length);
 
     List<PurchaseQuotation> getSurveyorList(Integer surveyorId, Integer start, Integer length);
 

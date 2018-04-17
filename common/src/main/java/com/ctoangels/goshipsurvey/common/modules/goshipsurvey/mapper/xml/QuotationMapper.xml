@@ -4,7 +4,13 @@
 
     <!-- 通用查询结果列-->
     <sql id="Base_Column_List">
-		id, op_id AS opId, op_name AS opName, ship_id AS shipId, ship_name AS shipName, imo, ship_type AS shipType, inspection_type AS inspectionType, port_id AS portId, port_name AS portName, start_date AS startDate, end_date AS endDate, current_quantity AS currentQuantity, current_quantity_url AS currentQuantityUrl, bonus_plan AS bonusPlan, total_price AS totalPrice, quotation_status AS quotationStatus, delivery_by AS deliveryBy, accepted_by AS acceptedBy , re_delivery_by AS reDeliveryBy, re_accepted_by AS reAcceptedBy, charter, owner, ship_particulars AS shipParticulars,ship_particulars_url AS shipParticularsUrl, port_agency AS portAgency,blank_loi_url AS blankLoiUrl, specified_id AS specifiedId, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag
+		id, op_u_id AS opUId, op_user_name AS opUserName, ship_id AS shipId, ship_name AS shipName, imo, ship_type AS shipType, inspection_type AS inspectionType,
+		port_id AS portId, port_name AS portName, start_date AS startDate, end_date AS endDate, current_quantity AS currentQuantity, current_quantity_url AS currentQuantityUrl,
+		bonus_plan AS bonusPlan, total_price AS totalPrice, quotation_status AS quotationStatus, delivery_by AS deliveryBy,
+		accepted_by AS acceptedBy , re_delivery_by AS reDeliveryBy, re_accepted_by AS reAcceptedBy, charter, owner,
+		ship_particulars AS shipParticulars,ship_particulars_url AS shipParticularsUrl, port_agency AS portAgency,
+		blank_loi_url AS blankLoiUrl, surveyor_u_id AS surveyorUId, create_date AS createDate, create_by AS createBy,
+		update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag, surveyorUId AS surveyor_u_id
 	</sql>
 
     <select id="getById" resultType="Quotation">
@@ -17,7 +23,7 @@
         <where>
             AND quo.del_flag=0
             AND quo.end_date &gt;= (select date_format(now(),'%Y-%m-%d'))
-            AND quo.op_id=#{opId}
+            AND quo.op_u_id=#{opUId}
         </where>
         order by quo.update_date desc
         limit #{start},#{length}
@@ -31,23 +37,23 @@
 
 
     <select id="getSurveyorList" resultMap="surveyorQuotationMap">
-        SELECT quo.*,#{surveyorId} AS surveyor_id,1 AS `type`  FROM t_quotation quo
-        WHERE quo.end_date &gt;=(select date_format(now(),'%Y-%m-%d')) and quo.quotation_status !=0 and quo.del_flag=0 and (quo.specified_id is null or quo.specified_id =#{surveyorId})
+        SELECT quo.*,#{surveyorUId} AS u_id,1 AS `type`  FROM t_quotation quo
+        WHERE quo.end_date &gt;=(select date_format(now(),'%Y-%m-%d')) and quo.quotation_status !=0 and quo.del_flag=0 and (quo.surveyor_u_id is null or quo.surveyor_u_id =#{surveyorUId})
         ORDER BY quo.update_date desc
         limit #{start},#{length}
     </select>
 
     <resultMap id="surveyorQuotationMap" type="Quotation">
         <result property="id" column="id"/>
-        <association property="application" column="{surveyor_id=surveyor_id,quotation_id=id,type=type}"
+        <association property="application" column="{u_id=u_id,quotation_id=id,type=type}"
                      javaType="QuotationApplication"
-                     select="com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.QuotationApplicationMapper.getBySurveyorId"/>
+                     select="com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.QuotationApplicationMapper.getBySurveyorUId"/>
     </resultMap>
 
     <select id="getQuotationList"
             resultType="com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Quotation">
-        select * from t_quotation q where q.id not in (select qa.quotation_id from t_quotation_application qa where qa.user_id=#{surveyorId}) and q.quotation_status
-        =1 and (q.specified_id is null or q.specified_id=#{surveyorId} ) and q.end_date>=(select DATE_FORMAT(now(),'%Y-%m-%d'))
+        select * from t_quotation q where q.id not in (select qa.quotation_id from t_quotation_application qa where qa.user_id=#{surveyorUId}) and q.quotation_status
+        =1 and (q.specified_id is null or q.surveyor_u_id=#{surveyorUId} ) and q.end_date>=(select DATE_FORMAT(now(),'%Y-%m-%d')) and find_in_set(#{surveyorUId},q.surveyor_u_ids)
         ORDER BY q.update_date desc
                 limit #{start},#{length};
     </select>

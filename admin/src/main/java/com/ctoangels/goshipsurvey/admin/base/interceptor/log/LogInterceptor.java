@@ -38,10 +38,8 @@ public class LogInterceptor implements HandlerInterceptor {
 
     @Override
     public boolean preHandle(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o) throws Exception {
-        logger.info("logInterceptor 前");
         String ip = getUsrIPAddr(httpServletRequest);
         httpServletRequest.setAttribute("ip", ip);
-        logger.info("ip : " + ip);
 
         String uri=httpServletRequest.getRequestURI();
         if(!ip.equals("The ip is invalid.")){
@@ -57,7 +55,6 @@ public class LogInterceptor implements HandlerInterceptor {
 
     @Override
     public void afterCompletion(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Object o, Exception e) throws Exception {
-        logger.info("logInterceptor 后");
     }
 
     public String getUsrIPAddr(HttpServletRequest request) {
@@ -111,7 +108,6 @@ public class LogInterceptor implements HandlerInterceptor {
                 retVal = pattern.matcher(ipAddress).matches();
             }
         } catch (Exception e) {
-            logger.error(e.getMessage(), e);
         }
         return retVal;
     }

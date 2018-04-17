@@ -27,12 +27,12 @@ public class Quotation implements Serializable {
     private Integer id;
 
     /**  */
-    @TableField(value = "op_id")
-    private Integer opId;
+    @TableField(value = "op_u_id")
+    private Integer opUId;
 
     /**  */
-    @TableField(value = "op_name")
-    private String opName;
+    @TableField(value = "op_u_name")
+    private String opUName;
 
     /**  */
     @TableField(value = "ship_id")
@@ -169,10 +169,17 @@ public class Quotation implements Serializable {
 
 
     /**
-     * 指定的验船公司id
+     * 验船师的userId,指定该验船师能够申请
      */
-    @TableField(value = "specified_id")
-    private Integer specifiedId;
+    @TableField(value = "surveyor_u_id")
+    private Integer surveyorUId;
+
+    /**
+     * 指定的一些验船师才能看到询价信息，surveyor的用户的userId
+     */
+    @TableField(value = "surveyor_u_ids")
+    private String surveyorUIds;
+
 
     @TableField(exist = false)
     private Inspection inspection;
@@ -194,21 +201,6 @@ public class Quotation implements Serializable {
         this.id = id;
     }
 
-    public Integer getOpId() {
-        return this.opId;
-    }
-
-    public void setOpId(Integer opId) {
-        this.opId = opId;
-    }
-
-    public String getOpName() {
-        return this.opName;
-    }
-
-    public void setOpName(String opName) {
-        this.opName = opName;
-    }
 
     public Integer getShipId() {
         return this.shipId;
@@ -487,11 +479,35 @@ public class Quotation implements Serializable {
         this.inspectionTypes = inspectionTypes;
     }
 
-    public Integer getSpecifiedId() {
-        return specifiedId;
+    public Integer getOpUId() {
+        return opUId;
     }
 
-    public void setSpecifiedId(Integer specifiedId) {
-        this.specifiedId = specifiedId;
+    public void setOpUId(Integer opUId) {
+        this.opUId = opUId;
+    }
+
+    public String getOpUName() {
+        return opUName;
+    }
+
+    public void setOpUName(String opUName) {
+        this.opUName = opUName;
+    }
+
+    public Integer getSurveyorUId() {
+        return surveyorUId;
+    }
+
+    public void setSurveyorUId(Integer surveyorUId) {
+        this.surveyorUId = surveyorUId;
+    }
+
+    public String getSurveyorUIds() {
+        return surveyorUIds;
+    }
+
+    public void setSurveyorUIds(String surveyorUIds) {
+        this.surveyorUIds = surveyorUIds;
     }
 }

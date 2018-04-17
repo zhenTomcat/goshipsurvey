@@ -165,7 +165,7 @@ public class MessageServiceImpl extends SuperServiceImpl<MessageMapper, Message>
         if (Const.PROJECT_TYPE_HIRE == qa.getType()) {
             Quotation q = quotationMapper.selectById(qa.getQuotationId());
             String title = q.getShipName() + "船租还船检验,已有验船师申请检验";
-            publicOne(q.getOpId(), title, title);
+            publicOne(q.getOpUId(), title, title);
         } else {
             PurchaseQuotation q = purchaseQuotationMapper.selectById(qa.getQuotationId());
             String title = shipDetailMapper.selectById(q.getShipId()).getShipName() + "船买卖船检验,已有验船师申请勘验";

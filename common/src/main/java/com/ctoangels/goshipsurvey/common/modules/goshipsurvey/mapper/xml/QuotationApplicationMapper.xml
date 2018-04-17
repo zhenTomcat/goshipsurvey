@@ -7,8 +7,8 @@
 		id, quotation_id AS quotationId, user_id AS userId, application_status AS applicationStatus, total_price AS totalPrice, create_date AS createDate, create_by AS createBy, update_date AS updateDate, update_by AS updateBy, del_flag AS delFlag, company_id AS companyId, survey_id AS surveyId, `type`
 	</sql>
 
-    <select id="getBySurveyorId" resultMap="QuotationApplicationMap" parameterType="java.util.Map">
-        SELECT qa.* FROM t_quotation_application qa WHERE qa.user_id =#{surveyor_id} and qa.quotation_id=#{quotation_id} and qa.type=#{type} and del_flag=0
+    <select id="getBySurveyorUId" resultMap="QuotationApplicationMap" parameterType="java.util.Map">
+        SELECT qa.* FROM t_quotation_application qa WHERE qa.user_id =#{u_id} and qa.quotation_id=#{quotation_id} and qa.type=#{type} and del_flag=0
     </select>
 
     <resultMap id="QuotationApplicationMap" type="QuotationApplication">

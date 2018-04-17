@@ -1,4 +1,4 @@
-package com.ctoangels.goshipsurvey.common.modules.prepurchase.entity;
+package com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity;
 
 import java.io.Serializable;
 import java.util.Date;

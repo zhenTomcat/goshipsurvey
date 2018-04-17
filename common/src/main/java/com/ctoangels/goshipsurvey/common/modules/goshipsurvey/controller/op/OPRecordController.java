@@ -56,7 +56,7 @@ public class OPRecordController extends BaseController {
     @ResponseBody
     public JSONObject quotationList(@RequestParam(required = false) String keyword) {
         EntityWrapper<Quotation> ew = getEntityWrapper();
-        ew.addFilter("op_id={0} and quotation_status>={1}", getCurrentUser().getId(), Const.QUOTATION_END);
+        ew.addFilter("op_u_id={0} and quotation_status>={1}", getCurrentUser().getId(), Const.QUOTATION_END);
         ew.orderBy("update_date", false);
         Page<Quotation> page = quotationService.selectPage(getPage(), ew);
         for (Quotation q : page.getRecords()) {

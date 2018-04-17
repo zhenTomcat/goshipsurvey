@@ -45,14 +45,14 @@ public class QuotationServiceImpl extends SuperServiceImpl<QuotationMapper, Quot
     UserMapper userMapper;
 
     @Override
-    public List<Quotation> getOPList(Integer opId, Integer start, Integer length) {
-        return quotationMapper.getOPList(opId, start, length);
+    public List<Quotation> getOPList(Integer opUId, Integer start, Integer length) {
+        return quotationMapper.getOPList(opUId, start, length);
     }
 
     @Override
-    public int getOPTotal(Integer opId) {
+    public int getOPTotal(Integer opUId) {
         EntityWrapper<Quotation> ew = new EntityWrapper<>();
-        ew.addFilter("op_id={0} and end_date>={1} and del_flag=0", opId, DateUtil.formatDate(new Date(), "yyyy-MM-dd"));
+        ew.addFilter("op_u_id={0} and end_date>={1} and del_flag=0", opUId, DateUtil.formatDate(new Date(), "yyyy-MM-dd"));
         return quotationMapper.selectCountByEw(ew);
     }
 
@@ -106,20 +106,20 @@ public class QuotationServiceImpl extends SuperServiceImpl<QuotationMapper, Quot
     }
 
     @Override
-    public List<Quotation> getSurveyorList(Integer surveyorId, Integer start, Integer length) {
-        return quotationMapper.getSurveyorList(surveyorId, start, length);
+    public List<Quotation> getSurveyorList(Integer surveyorUId, Integer start, Integer length) {
+        return quotationMapper.getSurveyorList(surveyorUId, start, length);
     }
 
     @Override
-    public List<Quotation> getQuotationList(Integer surveyorId, Integer start, Integer length) {
-        return quotationMapper.getQuotationList(surveyorId, start, length);
+    public List<Quotation> getQuotationList(Integer surveyorUId, Integer start, Integer length) {
+        return quotationMapper.getQuotationList(surveyorUId, start, length);
     }
 
     @Override
-    public int getSurveyorTotal(Integer surveyorId) {
+    public int getSurveyorTotal(Integer surveyorUId) {
         EntityWrapper<Quotation> ew = new EntityWrapper();
         ew.addFilter("end_date>={0} and quotation_status != 0 and del_flag=0", DateUtil.formatDate(new Date(), "yyyy-MM-dd"));
-        ew.addFilter("(specified_id is null or specified_id = {0})", surveyorId);
+        ew.addFilter("(surveyor_u_id is null or surveyor_u_id = {0})", surveyorUId);
         return quotationMapper.selectCountByEw(ew);
     }
 

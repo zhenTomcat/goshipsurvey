@@ -1,20 +1,23 @@
-package com.ctoangels.goshipsurvey.common.modules.prepurchase.service.impl;
+package com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.impl;
 
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.toolkit.StringUtils;
 import com.ctoangels.goshipsurvey.common.modules.go.entity.PublicShip;
 import com.ctoangels.goshipsurvey.common.modules.go.service.IPublicShipService;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Dict;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Quotation;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.DictMapper;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.QuotationMapper;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IDictService;
+import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
 import com.ctoangels.goshipsurvey.common.util.MailUtil;
 import com.ctoangels.goshipsurvey.common.util.Tools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.ctoangels.goshipsurvey.common.modules.prepurchase.mapper.EmailQuotationMapper;
-import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.EmailQuotation;
-import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IEmailQuotationService;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.EmailQuotationMapper;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.EmailQuotation;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IEmailQuotationService;
 import com.baomidou.framework.service.impl.SuperServiceImpl;
 
 import java.util.List;
@@ -36,6 +39,9 @@ public class EmailQuotationServiceImpl extends SuperServiceImpl<EmailQuotationMa
 
     @Autowired
     IDictService dictService;
+
+    @Autowired
+    private QuotationMapper quotationMapper;
 
     @Override
     public boolean sendEmailQuotation(EmailQuotation emailQuotation) {
@@ -98,5 +104,34 @@ public class EmailQuotationServiceImpl extends SuperServiceImpl<EmailQuotationMa
         MailUtil.sendEmailQuotationInner(emailQuotation);
         MailUtil.sendEmailQuotationOuter(emailQuotation);
         return true;
+    }
+
+    @Override
+    public boolean EmailQuotationIdImportQuotation(Integer id, User user) {
+
+
+        EmailQuotation emailQuotation=emailQuotationMapper.selectById(id);
+        Quotation quotation=new Quotation();
+        quotation.setOpUName(user.getLoginName());
+        quotation.setShipName(emailQuotation.getShipName());
+        quotation.setImo(emailQuotation.getImo());
+        quotation.setOpUId(user.getId());
+
+        List<PublicShip> publicShips=publicShipService.getListByIMO(emailQuotation.getImo());
+        if (publicShips!=null && publicShips.size()>0){
+           quotation.setShipId(publicShips.get(0).getId());
+           quotation.setShipType(publicShips.get(0).getTypeId()+"");
+        }
+
+        List<Dict>  inspectionTypeDict = dictService.getListByType("inspectionType");
+        quotation.setInspectionType(Tools.transferValuesToDes(quotation.getInspectionType(), inspectionTypeDict));
+        quotation.setShipType(Tools.transferValuesToDes(quotation.getShipType(), inspectionTypeDict));
+
+        quotation.setPortName(emailQuotation.getPort());
+        int a =quotationMapper.insert(quotation);
+        if (a>0){
+            return true;
+        }
+        return false;
     }
 }

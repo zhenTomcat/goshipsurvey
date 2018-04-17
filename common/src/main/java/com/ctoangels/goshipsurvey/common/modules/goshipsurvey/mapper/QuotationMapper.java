@@ -13,15 +13,15 @@ import java.util.List;
  */
 public interface QuotationMapper extends AutoMapper<Quotation> {
 
-    List<Quotation> getOPList(@Param(value = "opId") Integer opId,
+    List<Quotation> getOPList(@Param(value = "opUId") Integer opUId,
                               @Param(value = "start") Integer start,
                               @Param(value = "length") Integer length);
 
-    List<Quotation> getSurveyorList(@Param(value = "surveyorId") Integer surveyorId,
+    List<Quotation> getSurveyorList(@Param(value = "surveyorUId") Integer surveyorUId,
                                     @Param(value = "start") Integer start,
                                     @Param(value = "length") Integer length);
 
-    List<Quotation> getQuotationList(@Param(value = "surveyorId") Integer surveyorId,
+    List<Quotation> getQuotationList(@Param(value = "surveyorUId") Integer surveyorUId,
                                     @Param(value = "start") Integer start,
                                     @Param(value = "length") Integer length);
 

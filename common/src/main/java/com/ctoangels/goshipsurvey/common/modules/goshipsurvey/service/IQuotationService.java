@@ -14,9 +14,9 @@ import java.util.List;
  */
 public interface IQuotationService extends ISuperService<Quotation> {
 
-    List<Quotation> getOPList(Integer opId, Integer start, Integer length);
+    List<Quotation> getOPList(Integer opUId, Integer start, Integer length);
 
-    int getOPTotal(Integer opId);
+    int getOPTotal(Integer opUId);
 
     //根据quo查询inspection  包含surveyorInfo
     Inspection getInspectionInfo(int id);
@@ -27,11 +27,11 @@ public interface IQuotationService extends ISuperService<Quotation> {
     //获取满足surveyor条件的quotation集合
     List<Quotation> getSatisfiedQuotations(int userId);
 
-    List<Quotation> getSurveyorList(Integer surveyorId, Integer start, Integer length);
+    List<Quotation> getSurveyorList(Integer surveyorUId, Integer start, Integer length);
 
-    List<Quotation> getQuotationList(Integer surveyorId, Integer start, Integer length);
+    List<Quotation> getQuotationList(Integer surveyorUId, Integer start, Integer length);
 
-    int getSurveyorTotal(Integer surveyorId);
+    int getSurveyorTotal(Integer surveyorUId);
 
 
 }

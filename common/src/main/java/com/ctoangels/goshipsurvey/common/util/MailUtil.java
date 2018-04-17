@@ -1,19 +1,13 @@
 package com.ctoangels.goshipsurvey.common.util;
 
 import com.ctoangels.goshipsurvey.common.modules.go.entity.PublicShip;
-import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.EmailQuotation;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.EmailQuotation;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.MailAuthenticator;
 
-import javax.activation.DataHandler;
-import javax.activation.DataSource;
-import javax.activation.FileDataSource;
 import javax.mail.*;
 import javax.mail.internet.*;
-import javax.servlet.http.HttpSession;
-import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.UnsupportedEncodingException;
 import java.security.Security;
 import java.util.*;
 

@@ -118,7 +118,7 @@ public class InspectionServiceImpl extends SuperServiceImpl<InspectionMapper, In
 
         //生成船检
         Inspection inspection = new Inspection();
-        inspection.setOpId(quotation.getOpId());
+        inspection.setOpId(quotation.getOpUId());
         inspection.setCompanyId(companyId);
         inspection.setSurveyorId(surveyorId);
         inspection.setInspectionType(quotation.getInspectionType());
@@ -134,7 +134,7 @@ public class InspectionServiceImpl extends SuperServiceImpl<InspectionMapper, In
         Comment comment = new Comment();
         comment.setCompanyId(companyId);
         comment.setSurveyorId(surveyorId);
-        comment.setOpId(quotation.getOpId());
+        comment.setOpId(quotation.getOpUId());
         comment.setCreateInfo(user.getName());
         comment.setProType(Const.PROJECT_TYPE_HIRE);
         comment.setInspectionId(inspection.getId());
