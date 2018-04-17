@@ -516,4 +516,12 @@ public class Quotation implements Serializable {
     public void setSurveyorUIds(String surveyorUIds) {
         this.surveyorUIds = surveyorUIds;
     }
+
+    public Date getEstimateDate() {
+        return estimateDate;
+    }
+
+    public void setEstimateDate(Date estimateDate) {
+        this.estimateDate = estimateDate;
+    }
 }

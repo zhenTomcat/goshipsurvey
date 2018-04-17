@@ -139,7 +139,7 @@
                         </div>
                     </div>
                     <div class="row">
-                        <div class="form-group col-md-6">
+                        <%--<div class="form-group col-md-6">
                             <label class="control-label col-sm-4 required-label">Inspection date(LMT)</label>
                             <div class="col-sm-8" style="padding-left: 7.5px">
                                 <div class="input-group input-large date-picker input-daterange">
@@ -148,7 +148,14 @@
                                     <input type="text" class="form-control required" name="endDate">
                                 </div>
                             </div>
-                        </div>
+                        </div>--%>
+                            <div class="form-group col-md-4 ">
+                                <label class="col-sm-6 control-label required-label">Estimate date</label>
+                                <div class="col-sm-6">
+                                    <input type="text" class="form-control required date-picker" name="estimateDate">
+                                </div>
+                            </div>
+
                     </div>
                     <div class="form-group col-md-6">
                         <label class="control-label col-sm-4">Current quantity of bunkers from ship <i

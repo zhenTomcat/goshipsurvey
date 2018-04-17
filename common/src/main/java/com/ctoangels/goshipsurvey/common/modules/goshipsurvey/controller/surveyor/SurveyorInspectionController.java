@@ -56,12 +56,14 @@ public class SurveyorInspectionController extends BaseController {
         List<Inspection> list = inspectionService.getList(null, getCurrentUser().getId(), start, length);
         for (Inspection i : list) {
             Quotation q = i.getQuotation();
-            q.setInspectionType(Tools.transferValuesToDes(q.getInspectionType(), getInspectionTypeDict()));
-            q.setShipType(Tools.transferValuesToDes(q.getShipType(), getShipTypeDict()));
-            String inspectionType = i.getInspectionType();
-            String[] inspectionTypes = inspectionType.split(",");
-            i.setInspectionTypes(inspectionTypes);
-            i.setQuotation(q);
+            if(q!=null){
+                q.setInspectionType(Tools.transferValuesToDes(q.getInspectionType(), getInspectionTypeDict()));
+                q.setShipType(Tools.transferValuesToDes(q.getShipType(), getShipTypeDict()));
+                String inspectionType = i.getInspectionType();
+                String[] inspectionTypes = inspectionType.split(",");
+                i.setInspectionTypes(inspectionTypes);
+                i.setQuotation(q);
+            }
         }
         jsonObject.put(Const.DRAW, request.getParameter(Const.DRAW));
         int total = inspectionService.getTotal(null, getCurrentUser().getId());

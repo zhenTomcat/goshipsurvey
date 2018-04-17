@@ -86,7 +86,8 @@
                                                     <th style="width: 10%">Ship type</th>
                                                     <th style="width: 15%">Inspection type</th>
                                                     <th style="width: 15%">Inspection port</th>
-                                                    <th style="width: 15%">Inspection date(LMT)</th>
+                                                    <%--<th style="width: 15%">Inspection date(LMT)</th>--%>
+                                                    <th style="width: 15%">Estimate Date</th>
                                                     <th style="width: 10%">Total price</th>
                                                     <th style="width: 10%">Status</th>
                                                 </tr>
@@ -265,9 +266,10 @@
             "columnDefs": [{
                 "targets": 5,
                 "render": function (data, type, row) {
-                    var startDate = new Date(row.startDate.replace(/-/g, "/")).Format("yyyy-MM-dd");
-                    var endDate = new Date(row.endDate.replace(/-/g, "/")).Format("yyyy-MM-dd");
-                    return startDate + " to " + endDate;
+                    /*var startDate = new Date(row.startDate.replace(/-/g, "/")).Format("yyyy-MM-dd");
+                    var endDate = new Date(row.endDate.replace(/-/g, "/")).Format("yyyy-MM-dd");*/
+                    var estimateDate = new Date(row.estimateDate.replace(/-/g, "/")).Format("yyyy-MM-dd");
+                    return estimateDate;
                 }
             }],
         });

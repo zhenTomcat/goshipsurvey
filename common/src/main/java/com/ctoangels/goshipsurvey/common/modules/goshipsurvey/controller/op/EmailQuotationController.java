@@ -80,7 +80,12 @@ public class EmailQuotationController extends BaseController {
     @ResponseBody
     public JSONObject importQuotation(@RequestParam Integer id) {
         JSONObject jsonObject = new JSONObject();
-        emailQuotationService.EmailQuotationIdImportQuotation(id,getCurrentUser());
+        Boolean b= emailQuotationService.EmailQuotationIdImportQuotation(id,getCurrentUser());
+        if (b) {
+            jsonObject.put("status", 1);
+        } else {
+            jsonObject.put("status", 0);
+        }
         return jsonObject;
     }
     @RequestMapping(value = "/detail")
