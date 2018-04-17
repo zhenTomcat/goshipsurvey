@@ -11,6 +11,7 @@ import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.QuotationMa
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IDictService;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IInspectionTypePriceService;
+import com.ctoangels.goshipsurvey.common.util.Const;
 import com.ctoangels.goshipsurvey.common.util.MailUtil;
 import com.ctoangels.goshipsurvey.common.util.Tools;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +22,7 @@ import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.EmailQuotat
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IEmailQuotationService;
 import com.baomidou.framework.service.impl.SuperServiceImpl;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -126,12 +128,12 @@ public class EmailQuotationServiceImpl extends SuperServiceImpl<EmailQuotationMa
            quotation.setShipId(publicShips.get(0).getId());
            quotation.setShipType(publicShips.get(0).getTypeId()+"");
         }
-
-        List<Dict>  inspectionTypeDict = dictService.getListByType("inspectionType");
-        quotation.setInspectionType(Tools.transferValuesToDes(quotation.getInspectionType(), inspectionTypeDict));
-        quotation.setShipType(Tools.transferValuesToDes(quotation.getShipType(), inspectionTypeDict));
-
         quotation.setPortName(emailQuotation.getPort());
+        quotation.setInspectionType(emailQuotation.getInspectionType());
+        quotation.setCreateDate(new Date());
+        quotation.setQuotationStatus(Const.QUOTATION_INIT);
+        quotation.setDelFlag(Const.DEL_FLAG_NORMAL);
+        quotation.setEstimateDate(emailQuotation.getEstimatedDate());
         int a =quotationMapper.insert(quotation);
         if (a>0){
             return true;

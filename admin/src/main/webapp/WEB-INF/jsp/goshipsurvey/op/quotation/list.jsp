@@ -57,7 +57,7 @@
                                                     <th width="10%">Ship type</th>
                                                     <th width="15%">Inspection type</th>
                                                     <th width="15%">Inspection port</th>
-                                                    <th width="15%">Inspection date(LMT)</th>
+                                                    <th width="15%">Estimate Date</th>
                                                     <th width="10%">Status</th>
                                                     <th width="10%">Trash</th>
                                                 </tr>
@@ -132,7 +132,7 @@
                     "data": "portName",
                 },
                 {
-                    "data": "startDate",
+                    "data": "estimateDate",
                 },
                 {
                     "data": "quotationStatus",
@@ -158,9 +158,8 @@
                 {
                     "targets": 5,
                     "render": function (data, type, row) {
-                        var startDate = new Date(row.startDate.replace(/-/g, "/")).Format("yyyy-MM-dd");
-                        var endDate = new Date(row.endDate.replace(/-/g, "/")).Format("yyyy-MM-dd");
-                        return startDate + " to " + endDate;
+                        var estimateDate = new Date(row.estimateDate.replace(/-/g, "/")).Format("yyyy-MM-dd");
+                        return estimateDate
                     }
                 },
                 {

@@ -137,21 +137,15 @@
                     "render": function (data, type, row) {
                         var status = row.quotationStatus;
                         if (status != 2) {
-                            return '<a href="op/emailQuotation/import?id=' + row.id + '" class="btn blue btn-sm" type="button" data-msg="确定导入到Quotation？" data-model="ajaxToDo" data-callback="drawTable()">Import</a>';
+                            return '<button class="btn blue btn-sm"  onclick="importQuotation('+row.id+')" ">Import</button>';
                         }
                         return "";
                     }
                 }
             ],
             /*"drawCallback": function () {
-                var rows = $('#onoff_op_quotation_table').find("tbody tr");
-                rows.each(function (i, e) {
-                    var row = quotationTable.row($(this));
-                    var data = row.data();
-                    if (data != null) {
-                        $(this).after(moreInfo(data));
-                    }
-                })
+                window.location.href="onoffindex#op/quotation";
+                console.log("我点了import确定后回来了")
             },*/
         })
     }
@@ -166,6 +160,39 @@
         } else {//表格重绘，保持在当前页
             quotationTable.draw(false);
         }
+    }
+    function importQuotation(id) {
+        swal({
+            title: "确认导入Quotation吗？",
+            text: "您将EmailQuotation信息导入到Quotation中",
+            type: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#DD6B55",
+            confirmButtonText: "确认",
+            cancelButtonText: "取消",
+            closeOnConfirm: false,
+            closeOnCancel: true
+        },function (isConfirm) {
+            if (isConfirm) {
+                $.ajax({
+                    type:"get",
+                    url:"op/emailQuotation/import",
+                    data:{
+                        id:id
+                    },
+                    success:function (data) {
+                        if (data.status==1){
+                            swal("导入成功","已成功导入","success");
+                            window.location.href="/onoffindex#op/quotation";
+                        }else {
+                            swal("导入失败","导入操作失败","error");
+                        }
+                    }
+                })
+            }
+
+        });
+
     }
 </script>
 
