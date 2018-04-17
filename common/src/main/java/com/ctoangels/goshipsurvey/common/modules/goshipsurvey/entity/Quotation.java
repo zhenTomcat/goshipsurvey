@@ -180,6 +180,12 @@ public class Quotation implements Serializable {
     @TableField(value = "surveyor_u_ids")
     private String surveyorUIds;
 
+    /**
+     * 预估日期
+     */
+    @TableField(value = "estimate_date")
+    private Date estimateDate;
+
 
     @TableField(exist = false)
     private Inspection inspection;
