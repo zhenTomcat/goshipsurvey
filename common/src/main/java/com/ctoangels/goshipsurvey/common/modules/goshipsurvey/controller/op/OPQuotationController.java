@@ -54,11 +54,11 @@ public class OPQuotationController extends BaseController {
     @Autowired
     private IUserSurveyorService userSurveyorService;
 
-    private  static String url= "/pages/selectType/selectType?openid=";
-    private  static String first= "询价消息通知";
-    private  static String keyword1= "";
-    private  static String keyword2= "岙洋船务";
-    private  static String remark= "打开小程序查看更详细类容";
+    private static String url = "/pages/selectType/selectType?openid=";
+    private static String first = "询价消息通知";
+    private static String keyword1 = "";
+    private static String keyword2 = "岙洋船务";
+    private static String remark = "打开小程序查看更详细类容";
 
     @RequestMapping
     public String list(ModelMap map) {
@@ -147,10 +147,10 @@ public class OPQuotationController extends BaseController {
         quotation.setQuotationStatus(Const.QUOTATION_ING);
         quotation.setUpdateInfo(getCurrentUser().getName());
         if (quotationService.updateById(quotation)) {
-            keyword1+="您好，当前有新的船舶检验通知,请及时查看";
-            List<UserSurveyor> userSurveyors=userSurveyorService.selectList(new EntityWrapper<UserSurveyor>());
-            for (UserSurveyor userSurveyor:userSurveyors){
-                template.infomationNotice(userSurveyor.getGzhOpenId(), Const.INQUIRY_NOTICE,url,first,keyword1,keyword2,remark);
+            keyword1 += "您好，当前有新的船舶检验通知,请及时查看";
+            List<UserSurveyor> userSurveyors = userSurveyorService.selectList(new EntityWrapper<>());
+            for (UserSurveyor userSurveyor : userSurveyors) {
+                template.infomationNotice(userSurveyor.getGzhOpenId(), Const.INQUIRY_NOTICE, url, first, keyword1, keyword2, remark);
             }
 
             jsonObject.put("success", true);

@@ -2,6 +2,7 @@ package com.ctoangels.goshipsurvey.common.util;
 
 import com.ctoangels.goshipsurvey.common.modules.go.entity.PublicShip;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.EmailQuotation;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.InspectionTypePrice;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.MailAuthenticator;
 
 import javax.mail.*;
@@ -155,8 +156,9 @@ public class MailUtil {
         }
         sendEmail(fromAddress, sb.toString(), "有船船要进行检验(role : " + emailQuotation.getRole() + ")", null);
     }
+
     // 船东需要验船时 发送给船东的邮件
-    public static void sendEmailQuotationOuter(EmailQuotation emailQuotation) {
+    public static void sendEmailQuotationOuter(EmailQuotation emailQuotation, List<InspectionTypePrice> prices) {
         StringBuilder sb = new StringBuilder();
         sb.append("From <a href='www.goshipsurvey.com'>www.goshipsurvey.com</a>").append("<br><br>");
         sb.append("Ship name: ").append(emailQuotation.getShipName()).append("<br>");
@@ -176,13 +178,29 @@ public class MailUtil {
 
         sb.append("<br><br>");
 
+
+        // TODO: 价格表
+
         sb.append("Dear Sirs,").append("<br>");
         sb.append("Thanks for your enquiry.").append("<br>");
-        sb.append("We herewith offer USD 1500 as the lumpsum fee for the pre-purchase inspection in ").append(emailQuotation.getPort()).append(" port.").append("<br>");
-        sb.append("Please confirm in order by providing the agent details and get the owners' approval/loi for our inspector to go on board the vessel for inspection. ").append("<br>");
-        sb.append("The details of the inspector will be provided to you within 24 hours.").append("<br>");
-        sb.append("After inspection, we will provide the access user id & passward together with the link for you to download  the survey report & photos once the full payment is receieved.").append("<br>");
-        sb.append("Our account details is to be advised with the signed loi.").append("<br>");
+        sb.append("<table>");
+        sb.append("<tr>");
+        sb.append("</tr>");
+
+        for (InspectionTypePrice price : prices) {
+            sb.append("<tr><td>");
+            sb.append(price.getTypesText());
+            sb.append("</td><td>");
+            sb.append(price.getPrice() + price.getUnit());
+            sb.append("</td></tr>");
+        }
+
+        sb.append("</table>");
+//        sb.append("We herewith offer USD 1500 as the lumpsum fee for the pre-purchase inspection in ").append(emailQuotation.getPort()).append(" port.").append("<br>");
+//        sb.append("Please confirm in order by providing the agent details and get the owners' approval/loi for our inspector to go on board the vessel for inspection. ").append("<br>");
+//        sb.append("The details of the inspector will be provided to you within 24 hours.").append("<br>");
+//        sb.append("After inspection, we will provide the access user id & passward together with the link for you to download  the survey report & photos once the full payment is receieved.").append("<br>");
+//        sb.append("Our account details is to be advised with the signed loi.").append("<br>");
 
         sb.append("<br><br>--------------------<br><br>");
 
