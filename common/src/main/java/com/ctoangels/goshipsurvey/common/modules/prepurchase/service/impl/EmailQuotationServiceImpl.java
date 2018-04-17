@@ -5,8 +5,10 @@ import com.baomidou.mybatisplus.toolkit.StringUtils;
 import com.ctoangels.goshipsurvey.common.modules.go.entity.PublicShip;
 import com.ctoangels.goshipsurvey.common.modules.go.service.IPublicShipService;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Dict;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.InspectionTypePrice;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.DictMapper;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IDictService;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IInspectionTypePriceService;
 import com.ctoangels.goshipsurvey.common.util.MailUtil;
 import com.ctoangels.goshipsurvey.common.util.Tools;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +35,9 @@ public class EmailQuotationServiceImpl extends SuperServiceImpl<EmailQuotationMa
 
     @Autowired
     IPublicShipService publicShipService;
+
+    @Autowired
+    IInspectionTypePriceService inspectionTypePriceService;
 
     @Autowired
     IDictService dictService;
@@ -96,7 +101,7 @@ public class EmailQuotationServiceImpl extends SuperServiceImpl<EmailQuotationMa
         }
 
         MailUtil.sendEmailQuotationInner(emailQuotation);
-        MailUtil.sendEmailQuotationOuter(emailQuotation);
+        MailUtil.sendEmailQuotationOuter(emailQuotation, inspectionTypePriceService.getALl());
         return true;
     }
 }
