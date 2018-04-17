@@ -73,9 +73,6 @@ public class MailUtil {
             message.setSubject(subject); //设置标题
             message.setRecipient(Message.RecipientType.TO, new InternetAddress(toAddress)); //设置接收方
             Transport.send(message); //使用Transport静态方法发送邮件
-        } catch (AddressException e) {
-            //此处处理AddressException异常  [The exception thrown when a wrongly formatted address is encountered.]
-            e.printStackTrace();
         } catch (MessagingException e) {
             //此处处理MessagingException异常 [The base class for all exceptions thrown by the Messaging classes ]
             e.printStackTrace();
@@ -114,8 +111,6 @@ public class MailUtil {
             }
             message.addRecipients(Message.RecipientType.TO, addresses);
             Transport.send(message); //使用Transport静态方法发送邮件
-        } catch (AddressException e) {
-            //此处处理AddressException异常  [The exception thrown when a wrongly formatted address is encountered.]
         } catch (MessagingException e) {
             //此处处理MessagingException异常 [The base class for all exceptions thrown by the Messaging classes ]
         }
@@ -137,7 +132,7 @@ public class MailUtil {
         sb.append("Estimated Date : ").append(DateUtil.formatDate(emailQuotation.getEstimatedDate(), "yyyy-MM-dd")).append("<br>");
         sb.append("Email : ").append(emailQuotation.getEmail()).append("<br>");
         sb.append("Role : ").append(emailQuotation.getRole()).append("<br>");
-        sb.append("Special requirement :<br><label style='white-space: pre-wrap;word-wrap: break-word; '>" + emailQuotation.getSpecialRequirement() + "</label><br>");
+        sb.append("Special requirement :<br><label style='white-space: pre-wrap;word-wrap: break-word; '>").append(emailQuotation.getSpecialRequirement()).append("</label><br>");
         sb.append("Remote ip : ").append(emailQuotation.getRemoteIp()).append("<br>");
 
         sb.append("<br><br>-------------------------------------<br><br>");
@@ -160,6 +155,7 @@ public class MailUtil {
     // 船东需要验船时 发送给船东的邮件
     public static void sendEmailQuotationOuter(EmailQuotation emailQuotation, List<InspectionTypePrice> prices) {
         StringBuilder sb = new StringBuilder();
+        sb.append("<style>table,th,td{border:1px solid lightgray;text-align:center;vertical-align:middle;}</style>");
         sb.append("From <a href='www.goshipsurvey.com'>www.goshipsurvey.com</a>").append("<br><br>");
         sb.append("Ship name: ").append(emailQuotation.getShipName()).append("<br>");
         sb.append("Imo: ").append(emailQuotation.getImo()).append("<br>");
@@ -174,15 +170,16 @@ public class MailUtil {
         sb.append("Estimated Date: ").append(DateUtil.formatDate(emailQuotation.getEstimatedDate(), "yyyy-MM-dd")).append("<br>");
         sb.append("Email: ").append(emailQuotation.getEmail()).append("<br>");
         sb.append("Role: ").append(emailQuotation.getRole()).append("<br>");
-        sb.append("Special requirement: <label style='white-space: pre-wrap;word-wrap: break-word; '>" + emailQuotation.getSpecialRequirement() + "</label><br>");
+        sb.append("Special requirement: <label style='white-space: pre-wrap;word-wrap: break-word; '>").append(emailQuotation.getSpecialRequirement()).append("</label><br>");
 
         sb.append("<br><br>");
 
 
-        // TODO: 价格表
+        // 价格表
 
         sb.append("Dear Sirs,").append("<br>");
         sb.append("Thanks for your enquiry.").append("<br>");
+        sb.append("Pls find below our quotation for 2018").append("<br>");
         sb.append("<table>");
         sb.append("<tr>");
         sb.append("</tr>");
@@ -191,7 +188,7 @@ public class MailUtil {
             sb.append("<tr><td>");
             sb.append(price.getTypesText());
             sb.append("</td><td>");
-            sb.append(price.getPrice() + price.getUnit());
+            sb.append(price.getUnit()).append(price.getPrice());
             sb.append("</td></tr>");
         }
 
@@ -236,20 +233,20 @@ public class MailUtil {
 
         sb.append("</head>");
         sb.append("<body>");
-        sb.append("点击下面链接激活账号，" + effectiveTime + "分钟生效，否则重新注册账号，链接只能使用一次，请尽快激活!");
+        sb.append("点击下面链接激活账号，").append(effectiveTime).append("分钟生效，否则重新注册账号，链接只能使用一次，请尽快激活!");
         sb.append("<br>");
         String href = sitePath + "/register/activate?action=activate&email=" + toAddress + "&validateCode=" + validateCode;
 //        sb.append(sitePath + "/register/activate?action=activate&email=");
 //        sb.append(toAddress);
 //        sb.append("&validateCode=");
 //        sb.append(validateCode);
-        sb.append("<a href='" + href + "'>" + "点击进行激活" + "</a>");
+        sb.append("<a href='").append(href).append("'>").append("点击进行激活").append("</a>");
 
         sb.append("<br>=================================<br>");
         String imgPath = "https://zhstatic.zhihu.com/eDM/roundtable/chunjiyundong.jpg";
 
-        sb.append("<a href='" + imgPath + "'>");
-        sb.append("<img id='img1' src='" + imgPath + "' />");
+        sb.append("<a href='").append(imgPath).append("'>");
+        sb.append("<img id='img1' src='").append(imgPath).append("' />");
         sb.append("</a>");
 
         sb.append("</body>");

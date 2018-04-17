@@ -543,7 +543,7 @@
             $(form).ajaxSubmit({
                 success: function (data) {
                     if (data.success) {
-                        window.location.href = "emailQuotation/detail";
+                        window.location.href = "op/emailQuotation/detail";
                     } else {
                         swal({type: "warning", title: "Warning!", text: 'Please enter the correct information!'});
                         $("#submitBtn").button("reset");

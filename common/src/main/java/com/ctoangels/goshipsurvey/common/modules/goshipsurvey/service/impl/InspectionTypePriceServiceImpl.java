@@ -28,10 +28,10 @@ public class InspectionTypePriceServiceImpl extends SuperServiceImpl<InspectionT
         EntityWrapper<InspectionTypePrice> ew = new EntityWrapper<>();
         ew.where("del_flag = 0");
         List<InspectionTypePrice> pricesList = selectList(ew);
-        List<Dict> typesDict = dictService.getListByType("emailQuotation");
+        List<Dict> typesDict = dictService.getListByType("emailQuotationType");
         for (InspectionTypePrice inspectionTypePrice : pricesList) {
             inspectionTypePrice.setTypesText(Tools.transferValuesToDes(inspectionTypePrice.getTypes(), typesDict));
         }
-        return selectList(ew);
+        return pricesList;
     }
 }
