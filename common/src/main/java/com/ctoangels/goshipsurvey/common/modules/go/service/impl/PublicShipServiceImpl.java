@@ -61,7 +61,6 @@ public class PublicShipServiceImpl extends SuperServiceImpl<PublicShipMapper, Pu
     @Override
     public List<PublicShip> getListByIMO(String imo) {
         EntityWrapper<PublicShip> ew = new EntityWrapper<>();
-        ew.addFilter("del_flag={0}", Const.DEL_FLAG_NORMAL);
         ew.where("imo={0}", imo);
         return publicShipMapper.selectList(ew);
     }
