@@ -7,12 +7,15 @@ import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.QuotationAp
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IQuotationApplicationService;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IQuotationService;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.PurchaseQuotation;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Surveyor;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IPurchaseQuotationService;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.IShipDetailService;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.ISurveyorService;
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.UserSurveyor;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.IMessageService;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.IUserSurveyorService;
+import com.ctoangels.goshipsurvey.common.modules.sys.service.UserService;
 import com.ctoangels.goshipsurvey.common.modules.wechat.controller.Template;
 import com.ctoangels.goshipsurvey.common.util.Const;
 import com.ctoangels.goshipsurvey.common.util.Tools;
@@ -40,9 +43,6 @@ public class SurveyorQuotationApplicationController extends BaseController {
     IQuotationApplicationService quotationApplicationService;
 
     @Autowired
-    IQuotationService quotationService;
-
-    @Autowired
     IPurchaseQuotationService purchaseQuotationService;
 
     @Autowired
@@ -57,6 +57,12 @@ public class SurveyorQuotationApplicationController extends BaseController {
     @Autowired
     private IUserSurveyorService userSurveyorService;
 
+    @Autowired
+    private ISurveyorService surveyorService;
+
+    @Autowired
+    private IQuotationService quotationService;
+
 
     @RequestMapping(value = "/add", method = RequestMethod.POST)
     @ResponseBody
@@ -65,6 +71,16 @@ public class SurveyorQuotationApplicationController extends BaseController {
         qa.setUserId(getCurrentUser().getId());
         qa.setCreateInfo(getCurrentUser().getName());
         qa.setApplicationStatus(Const.QUO_APPLY_ING);
+        UserSurveyor userSurveyor= userSurveyorService.selectByUserId(getCurrentUser().getId());
+        Surveyor surveyor=surveyorService.selectById(userSurveyor.getSurveyorId());
+        qa.setSurveyId(surveyor.getId());
+
+        Quotation quotation=quotationService.selectById(qa.getQuotationId());
+        if (quotation.getTotalPrice()!=null){
+            qa.setTotalPrice(quotation.getTotalPrice());
+        }
+
+
         if (quotationApplicationService.insert(qa)) {
            /* UserSurveyor userSurveyor=userSurveyorService.selectOne(new EntityWrapper<UserSurveyor>().addFilter("user_id={0}",getCurrentUser().getId()));
             if (userSurveyor!=null){

@@ -141,7 +141,6 @@ public class EmailQuotationServiceImpl extends SuperServiceImpl<EmailQuotationMa
         if (inspectionTypePrice!=null){
             quotation.setTotalPrice(inspectionTypePrice.getPrice());
         }
-
         int a =quotationMapper.insert(quotation);
         if (a>0){
             MailUtil.sendEmailQuotationOuter(emailQuotation, inspectionTypePriceService.getALl());

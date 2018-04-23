@@ -86,7 +86,8 @@
                                                     <th style="width: 10%">imo</th>
                                                     <th style="width: 10%">Ship type</th>
                                                     <th style="width: 12%">Inspection port</th>
-                                                    <th style="width: 18%">Inspection date(LMT)</th>
+                                                    <%--<th style="width: 18%">Inspection date(LMT)</th>--%>
+                                                    <th style="width: 18%">Estimate Date</th>
                                                     <th style="width: 10%">Surveyor/Company</th>
                                                     <th style="width: 10%">Total price</th>
                                                     <th style="width: 15%">Status</th>
@@ -103,7 +104,8 @@
                                                     <th style="width: 10%">imo</th>
                                                     <th style="width: 10%">Ship type</th>
                                                     <th style="width: 12%">Inspection port</th>
-                                                    <th style="width: 18%">Inspection date(LMT)</th>
+                                                    <%--<th style="width: 18%">Inspection date(LMT)</th>--%>
+                                                    <th style="width: 18%">Estimate Date</th>
                                                     <th style="width: 10%">Total price</th>
                                                     <th style="width: 10%">Grading</th>
                                                     <th style="width: 15%">Link of inspection report</th>
@@ -260,9 +262,11 @@
             "columnDefs": [{
                 "targets": 4,
                 "render": function (data, type, row) {
-                    var startDate = new Date(row.startDate).Format("yyyy-MM-dd");
+                    /*var startDate = new Date(row.startDate).Format("yyyy-MM-dd");
                     var endDate = new Date(row.endDate).Format("yyyy-MM-dd");
-                    return startDate + " to " + endDate;
+                    return startDate + " to " + endDate;*/
+                    var estimateDate = new Date(row.estimateDate).Format("yyyy-MM-dd");
+                    return estimateDate;
                 }
             }],
         });
@@ -325,9 +329,11 @@
             "columnDefs": [{
                 "targets": 4,
                 "render": function (data, type, row) {
-                    var startDate = new Date(row.purchaseQuotation.startDate).Format("yyyy-MM-dd");
+                    /*var startDate = new Date(row.purchaseQuotation.startDate).Format("yyyy-MM-dd");
                     var endDate = new Date(row.purchaseQuotation.endDate).Format("yyyy-MM-dd");
-                    return startDate + " to " + endDate;
+                    return startDate + " to " + endDate;*/
+                    var estimateDate = new Date(row.purchaseQuotation.estimateDate).Format("yyyy-MM-dd");
+                    return estimateDate;
                 }
             }],
         });

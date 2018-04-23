@@ -183,7 +183,7 @@
             }
             ],
             "initComplete": function () {
-                getSurveyor();
+                /*getSurveyor();*/
             }
         });
 
@@ -202,7 +202,7 @@
     }
 
 
-    function getSurveyor() {
+/*    function getSurveyor() {
         $.ajax({
             type: "GET",
             url: "surveyor/getSurveyors",
@@ -217,7 +217,7 @@
                 surveyorSelectHtml += '</select>';
             }
         })
-    }
+    }*/
 
     function moreInfo(data) {
         var html = '';
@@ -249,15 +249,15 @@
         html += '<div class="col-md-3">';
         html += '<label class="col-md-12 text-left">Our price & surveyor:</label>';
         if (application == null) {
-            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5">Price:</label> <div class="input-group input-icon col-md-7"><i class="fa fa-dollar"></i> <input type="text" class="form-control price-input"> </div></div>';
-            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">Surveyor:</label> <div class="input-group col-md-7"> ';
+           /* html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5">Price:</label> <div class="input-group input-icon col-md-7"><i class="fa fa-dollar"></i> <input type="text" class="form-control price-input"> </div></div>';*/
+           /* html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">Surveyor:</label> <div class="input-group col-md-7"> ';*/
             html += surveyorSelectHtml;
             html += ' </div></div>';
             html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">SurveyorCV:</label>  <a class="col-md-3" href="javascript:void(0)" onclick="goToViewSurveyor(this)"  style="padding-top: 8px; vertical-align: middle">VIEW</a></div>';
         } else {
             var surveyor = application.surveyor;
             html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5">Price:$</label> <div class="input-group col-md-7"> ' + application.totalPrice + '</div></div>';
-            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">Surveyor:</label> <div class="input-group col-md-7">' + surveyor.firstName + " " + surveyor.lastName + '</div></div>';
+            html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">Surveyor:</label> <div class="input-group col-md-7">' + surveyor.firstName+ '</div></div>';
             html += '<div class="col-md-12 form-group form-md-line-input "><label class="control-label col-md-5 " style="padding-top: 5px">SurveyorCV:</label>  <a class="col-md-7" data-model="dialog"  href="surveyor/info?id=' + surveyor.id + '" style="padding-top: 8px; vertical-align: middle">VIEW</a></div>';
         }
         html += "</div>";
@@ -265,7 +265,7 @@
     }
 
     //提交申请
-    function addApplication(obj, quotationId) {
+    /*function addApplication(obj, quotationId) {
         var price = "";
         var tr = $(obj).closest('tr');
         var detail = tr.next(".detail-row");
@@ -317,9 +317,27 @@
                 alert("addApplication error");
             },
         })
+    }*/
+
+    function addApplication(obj, quotationId) {
+        $.ajax({
+            url: "surveyor/quotationApplication/add",
+            type: "post",
+            data: {quotationId: quotationId,  type: 1},
+            success: function (data) {
+                if (data.success) {
+                    quotationTable.draw();
+                } else {
+                    alert("addApplication error");
+                }
+            },
+            error: function () {
+                alert("addApplication error");
+            },
+        })
     }
 
-    function goToViewSurveyor(obj) {
+  /*  function goToViewSurveyor(obj) {
         var select = $(obj).parent().parent().find(".surveyor-select");
         var id = select.val();
         if (id == 0) {
@@ -332,7 +350,7 @@
         } else {
             $("#goToSurveyorInfo").attr("href", "surveyor/info?id=" + id).click();
         }
-    }
+    }*/
 </script>
 
 

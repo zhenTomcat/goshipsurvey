@@ -88,11 +88,11 @@ public class EmailQuotationController extends BaseController {
         }
         return jsonObject;
     }
+
     @RequestMapping(value = "/detail")
     public String emailQuotationShow(ModelMap map) {
         return "sys/emailQuotation";
     }
-
 
     private boolean validateEmailQuotation(EmailQuotation emailQuotation) {
         if (emailQuotation == null) return false;

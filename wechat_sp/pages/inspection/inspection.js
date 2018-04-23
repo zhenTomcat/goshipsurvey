@@ -51,14 +51,16 @@ Page({
   },
 
   getMore: function () {
-    this.requestPage(this.data.activeIndex);
+    this.requestPage(this.data.activeIndex,true);
   },
 
   requestPage: function (index, first) {
+    console.log(index+"----"+first);
     const that = this
-    const pageName = this.data.pageNames[index];
-    let oldPage = this.data[pageName];
+    const pageName = that.data.pageNames[index];
+    let oldPage = that.data[pageName];
     const url = oldPage.url;
+    console.log(url);
     if (oldPage.flag || first) {
       // 从服务器获取数据
       wx.showLoading({
@@ -66,11 +68,12 @@ Page({
       });
       wx.request({
         url: url,
-        data: { userId: 23 },
+        data: { surveyorUId: 23 },
         method: 'GET',
         success: function (res) {
           console.log(res)
           const newPage = res.data;
+          console.log(res.data)
           const newData = newPage.data;
           const flag = newData.length == oldPage.pageSize;
           const pageNo = first ? 0 : oldPage.pageNo + newData.length != 0 ? 1 : 0;

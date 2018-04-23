@@ -25,4 +25,9 @@ public class UserSurveyorServiceImpl extends SuperServiceImpl<UserSurveyorMapper
 
         return userSurveyor;
     }
+
+    @Override
+    public UserSurveyor selectByUserId(Integer userId) {
+        return userSurveyorMapper.selectByUserId(userId);
+    }
 }

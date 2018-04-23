@@ -11,4 +11,6 @@ import com.baomidou.framework.service.ISuperService;
 public interface IUserSurveyorService extends ISuperService<UserSurveyor> {
 
   UserSurveyor selectByGzhOpenId(String gzhOpenId);
+
+  UserSurveyor selectByUserId(Integer userId);
 }

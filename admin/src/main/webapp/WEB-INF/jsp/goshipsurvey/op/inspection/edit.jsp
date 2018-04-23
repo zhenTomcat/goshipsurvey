@@ -89,7 +89,8 @@
                                                                         <th>Ship type</th>
                                                                         <th>Inspection type</th>
                                                                         <th>Inspection port</th>
-                                                                        <th>Inspection date(LMT)</th>
+                                                                        <th>Estimate Date</th>
+                                                                        <%--<th>Inspection date(LMT)</th>--%>
                                                                         <th>Total price</th>
                                                                     </tr>
                                                                     </thead>
@@ -101,11 +102,15 @@
                                                                         <td>${quotation.inspectionType}</td>
                                                                         <td>${quotation.portName}</td>
                                                                         <td><fmt:formatDate
+                                                                                value="${quotation.estimateDate}"
+                                                                                pattern="yyyy-MM-dd"/>
+                                                                            </td>
+                                                                        <%--<td><fmt:formatDate
                                                                                 value="${quotation.startDate}"
                                                                                 pattern="yyyy-MM-dd"/>
                                                                             to <fmt:formatDate
                                                                                     value="${quotation.endDate}"
-                                                                                    pattern="yyyy-MM-dd"/></td>
+                                                                                    pattern="yyyy-MM-dd"/></td>--%>
                                                                         <td>$:${quotation.totalPrice}</td>
                                                                     </tr>
                                                                     </tbody>
