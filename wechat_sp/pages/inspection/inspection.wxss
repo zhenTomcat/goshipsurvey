@@ -22,3 +22,7 @@ page, .page, .page__bd {
 .scoll-h {
   height: 100%;
 }
+
+.weui-footer{
+  padding: 100px 0;
+}

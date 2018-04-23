@@ -56,41 +56,41 @@ public class WxSurveyorQuotationController extends BaseController {
             int shipType = Integer.parseInt(q.getShipType());
             q.setShipType(getShipTypeDict().get(shipType - 1).getDes());
         }*/
-        jsonObject.put("canGet",canGet);
+        jsonObject.put("canGet", canGet);
 
 
 
         /*正在申请验船*/
-        EntityWrapper<QuotationApplication> ew =getEntityWrapper();
-        ew.addFilter("user_id={0}  and application_status={1}", surveyorUId,Const.QUO_APPLY_ING);
+        EntityWrapper<QuotationApplication> ew = getEntityWrapper();
+        ew.addFilter("user_id = {0}  and application_status = {1}", surveyorUId, Const.QUO_APPLY_ING);
         ew.orderBy("update_date", false);
-        List<QuotationApplication> wait = quotationApplicationService.selectPage(getPage(),ew).getRecords();
+        List<QuotationApplication> wait = quotationApplicationService.selectPage(getPage(), ew).getRecords();
         for (QuotationApplication application : wait) {
             application.setQuotation(quotationService.selectById(application.getQuotationId()));
         }
-        jsonObject.put("wait",wait);
+        jsonObject.put("wait", wait);
 
 
 
         /*正在验船*/
 
-        EntityWrapper<Inspection> ew1 =getEntityWrapper();
-        ew1.addFilter("inspection_status!={0} and company_id={1}",Const.INSPECTION_END,surveyorUId);
-        List<Inspection> ing=inspectionService.selectPage(getPage(),ew1).getRecords();
-        for (Inspection inspection:ing){
+        EntityWrapper<Inspection> ew1 = getEntityWrapper();
+        ew1.addFilter("inspection_status != {0} and company_id = {1}", Const.INSPECTION_END, surveyorUId);
+        List<Inspection> ing = inspectionService.selectPage(getPage(), ew1).getRecords();
+        for (Inspection inspection : ing) {
             inspection.setQuotation(quotationService.selectById(inspection.getQuotationId()));
         }
-        jsonObject.put("ing",ing);
+        jsonObject.put("ing", ing);
 
         /*已经完成验船完成*/
-        EntityWrapper<Inspection> ew2 =getEntityWrapper();
-        ew2.addFilter("inspection_status={0} and company_id={1}",Const.INSPECTION_END,surveyorUId);
-        List<Inspection> complete=inspectionService.selectPage(getPage(),ew2).getRecords();
-        for (Inspection inspection:complete){
+        EntityWrapper<Inspection> ew2 = getEntityWrapper();
+        ew2.addFilter("inspection_status = {0} and company_id = {1}", Const.INSPECTION_END, surveyorUId);
+        List<Inspection> complete = inspectionService.selectPage(getPage(), ew2).getRecords();
+        for (Inspection inspection : complete) {
             inspection.setQuotation(quotationService.selectById(inspection.getQuotationId()));
         }
 
-        jsonObject.put("complete",complete);
+        jsonObject.put("complete", complete);
         return jsonObject;
     }
 
@@ -111,63 +111,66 @@ public class WxSurveyorQuotationController extends BaseController {
             int shipType = Integer.parseInt(q.getShipType());
             q.setShipType(getShipTypeDict().get(shipType - 1).getDes());
         }*/
-        jsonObject.put("start",start);
-        jsonObject.put("length",length);
-        jsonObject.put("canGet",canGet);
+        jsonObject.put("start", start);
+        jsonObject.put("length", length);
+        jsonObject.put("data", canGet);
 
         return jsonObject;
     }
+
     @RequestMapping(value = "/wait")
     @ResponseBody
     public JSONObject wait(@RequestParam(required = true) Integer surveyorUId) {
         JSONObject jsonObject = new JSONObject();
         /*正在申请验船*/
-        EntityWrapper<QuotationApplication> ew =getEntityWrapper();
-        ew.addFilter("user_id={0}  and application_status={1}", surveyorUId,Const.QUO_APPLY_ING);
+        EntityWrapper<QuotationApplication> ew = getEntityWrapper();
+        ew.addFilter("user_id={0}  and application_status={1}", surveyorUId, Const.QUO_APPLY_ING);
         ew.orderBy("update_date", false);
-        Page<QuotationApplication> page= quotationApplicationService.selectPage(getPage(),ew);
+        Page<QuotationApplication> page = quotationApplicationService.selectPage(getPage(), ew);
         for (QuotationApplication application : page.getRecords()) {
             application.setQuotation(quotationService.selectById(application.getQuotationId()));
         }
-        jsonObject.put("wait",page.getRecords());
-        jsonObject.put("start",page.getCurrent());
-        jsonObject.put("length",page.getSize());
+        jsonObject.put("data", page.getRecords());
+        jsonObject.put("start", page.getCurrent());
+        jsonObject.put("length", page.getSize());
 
         return jsonObject;
     }
+
     @RequestMapping(value = "/ing")
     @ResponseBody
     public JSONObject ing(@RequestParam(required = true) Integer surveyorUId) {
         JSONObject jsonObject = new JSONObject();
         /*正在验船*/
 
-        EntityWrapper<Inspection> ew1 =getEntityWrapper();
-        ew1.addFilter("inspection_status!={0} and company_id={1}",Const.INSPECTION_END,surveyorUId);
-        Page<Inspection> page=inspectionService.selectPage(getPage(),ew1);
-        for (Inspection inspection:page.getRecords()){
+        EntityWrapper<Inspection> ew1 = getEntityWrapper();
+        ew1.addFilter("inspection_status!={0} and company_id={1}", Const.INSPECTION_END, surveyorUId);
+        Page<Inspection> page = inspectionService.selectPage(getPage(), ew1);
+        for (Inspection inspection : page.getRecords()) {
             inspection.setQuotation(quotationService.selectById(inspection.getQuotationId()));
         }
-        jsonObject.put("ing",page.getRecords());
-        jsonObject.put("start",page.getCurrent());
-        jsonObject.put("length",page.getSize());
+        jsonObject.put("data", page.getRecords());
+        jsonObject.put("start", page.getCurrent());
+        jsonObject.put("length", page.getSize());
 
         return jsonObject;
     }
+
     @RequestMapping(value = "/complete")
     @ResponseBody
     public JSONObject complete(@RequestParam(required = true) Integer surveyorUId) {
         JSONObject jsonObject = new JSONObject();
         /*已经完成验船完成*/
-        EntityWrapper<Inspection> ew2 =getEntityWrapper();
-        ew2.addFilter("inspection_status={0} and company_id={1}",Const.INSPECTION_END,surveyorUId);
-        Page<Inspection> page=inspectionService.selectPage(getPage(),ew2);
-        for (Inspection inspection:page.getRecords()){
+        EntityWrapper<Inspection> ew2 = getEntityWrapper();
+        ew2.addFilter("inspection_status={0} and company_id={1}", Const.INSPECTION_END, surveyorUId);
+        Page<Inspection> page = inspectionService.selectPage(getPage(), ew2);
+        for (Inspection inspection : page.getRecords()) {
             inspection.setQuotation(quotationService.selectById(inspection.getQuotationId()));
         }
 
-        jsonObject.put("complete",page.getRecords());
-        jsonObject.put("start",page.getCurrent());
-        jsonObject.put("length",page.getSize());
+        jsonObject.put("data", page.getRecords());
+        jsonObject.put("start", page.getCurrent());
+        jsonObject.put("length", page.getSize());
 
         return jsonObject;
     }
