@@ -10,5 +10,6 @@ import com.baomidou.mybatisplus.mapper.AutoMapper;
  */
 public interface InspectionTypePriceMapper extends AutoMapper<InspectionTypePrice> {
 
+    InspectionTypePrice selectByTypes(String inspectionType);
 
 }

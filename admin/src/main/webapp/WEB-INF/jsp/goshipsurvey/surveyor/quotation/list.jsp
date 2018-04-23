@@ -37,7 +37,8 @@
                                                 <th width="9%">IMO</th>
                                                 <th width="9%">Ship Type</th>
                                                 <th width="9%">Inspection port</th>
-                                                <th width="9%">Inspection date(LMT)</th>
+                                                <%--<th width="9%">Inspection date(LMT)</th>--%>
+                                                <th width="9%">Estimate Date</th>
                                                 <th width="9%">Consignor</th>
                                                 <th width="7%">Price</th>
                                                 <th width="9%">Surveyor</th>
@@ -131,9 +132,10 @@
             "columnDefs": [{
                 "targets": 5,
                 "render": function (data, type, row) {
-                    var startDate = new Date(row.startDate.replace(/-/g, "/")).Format("yyyy-MM-dd");
-                    var endDate = new Date(row.endDate.replace(/-/g, "/")).Format("yyyy-MM-dd");
-                    return startDate + " to " + endDate;
+                    /*var startDate = new Date(row.startDate.replace(/-/g, "/")).Format("yyyy-MM-dd");
+                    var endDate = new Date(row.endDate.replace(/-/g, "/")).Format("yyyy-MM-dd");*/
+                    var estimateDate = new Date(row.estimateDate.replace(/-/g, "/")).Format("yyyy-MM-dd");
+                    return estimateDate;
                 }
             }, {
                 "targets": 9,

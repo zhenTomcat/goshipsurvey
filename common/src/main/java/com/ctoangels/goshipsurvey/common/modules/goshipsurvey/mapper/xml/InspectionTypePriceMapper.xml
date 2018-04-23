@@ -6,5 +6,9 @@
 	<sql id="Base_Column_List">
 		id, types, price, unit, create_date AS createDate, update_date AS updateDate, del_flag AS delFlag
 	</sql>
+    <select id="selectByTypes"
+            resultType="com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.InspectionTypePrice">
+		select i.* from t_inspection_type_price i where i.types=#{inspectionType}
+	</select>
 
 </mapper>

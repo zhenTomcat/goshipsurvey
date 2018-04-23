@@ -5,8 +5,10 @@ import com.baomidou.mybatisplus.toolkit.StringUtils;
 import com.ctoangels.goshipsurvey.common.modules.go.entity.PublicShip;
 import com.ctoangels.goshipsurvey.common.modules.go.service.IPublicShipService;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Dict;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.InspectionTypePrice;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Quotation;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.DictMapper;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.InspectionTypePriceMapper;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.mapper.QuotationMapper;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IDictService;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
@@ -48,6 +50,9 @@ public class EmailQuotationServiceImpl extends SuperServiceImpl<EmailQuotationMa
 
     @Autowired
     private QuotationMapper quotationMapper;
+
+    @Autowired
+    private InspectionTypePriceMapper inspectionTypePriceMapper;
 
     @Override
     public boolean sendEmailQuotation(EmailQuotation emailQuotation) {
@@ -108,14 +113,11 @@ public class EmailQuotationServiceImpl extends SuperServiceImpl<EmailQuotationMa
         }
 
         MailUtil.sendEmailQuotationInner(emailQuotation);
-        MailUtil.sendEmailQuotationOuter(emailQuotation, inspectionTypePriceService.getALl());
         return true;
     }
 
     @Override
     public boolean EmailQuotationIdImportQuotation(Integer id, User user) {
-
-
         EmailQuotation emailQuotation=emailQuotationMapper.selectById(id);
         Quotation quotation=new Quotation();
         quotation.setOpUName(user.getLoginName());
@@ -134,8 +136,15 @@ public class EmailQuotationServiceImpl extends SuperServiceImpl<EmailQuotationMa
         quotation.setQuotationStatus(Const.QUOTATION_INIT);
         quotation.setDelFlag(Const.DEL_FLAG_NORMAL);
         quotation.setEstimateDate(emailQuotation.getEstimatedDate());
+
+        InspectionTypePrice inspectionTypePrice= inspectionTypePriceMapper.selectByTypes(quotation.getInspectionType());
+        if (inspectionTypePrice!=null){
+            quotation.setTotalPrice(inspectionTypePrice.getPrice());
+        }
+
         int a =quotationMapper.insert(quotation);
         if (a>0){
+            MailUtil.sendEmailQuotationOuter(emailQuotation, inspectionTypePriceService.getALl());
             return true;
         }
         return false;

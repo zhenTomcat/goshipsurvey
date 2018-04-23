@@ -21,6 +21,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -130,6 +131,7 @@ public class OPQuotationController extends BaseController {
         return "goshipsurvey/op/quotation/edit";
     }
 
+
     @RequestMapping(value = "/editComplete", method = RequestMethod.POST)
     @ResponseBody
     public JSONObject editComplete(Quotation quotation) {
@@ -139,20 +141,31 @@ public class OPQuotationController extends BaseController {
         return jsonObject;
     }
 
+    /**
+     * op询价前，选择指定的surveyor能看到
+     *
+     * */
+    @RequestMapping(value = "/selectSurveyor", method = RequestMethod.GET)
+    public String selectSurveyor(ModelMap map, @RequestParam(required = false) Integer id) {
+        map.put("id",id);
+        return "goshipsurvey/op/quotation/selectSurveyor";
+    }
+
+    @Transactional
     @RequestMapping(value = "/startQuotation", method = RequestMethod.POST)
     @ResponseBody
-    public JSONObject startQuotation(@RequestParam(required = false) int id) {
+    public JSONObject startQuotation(@RequestParam(required = false) int id,String surveyorUIds) {
         JSONObject jsonObject = new JSONObject();
         Quotation quotation = quotationService.selectById(id);
         quotation.setQuotationStatus(Const.QUOTATION_ING);
         quotation.setUpdateInfo(getCurrentUser().getName());
+        quotation.setSurveyorUIds(surveyorUIds);
         if (quotationService.updateById(quotation)) {
             keyword1 += "您好，当前有新的船舶检验通知,请及时查看";
-            List<UserSurveyor> userSurveyors = userSurveyorService.selectList(new EntityWrapper<>());
+            /*List<UserSurveyor> userSurveyors = userSurveyorService.selectList(new EntityWrapper<>());
             for (UserSurveyor userSurveyor : userSurveyors) {
                 template.infomationNotice(userSurveyor.getGzhOpenId(), Const.INQUIRY_NOTICE, url, first, keyword1, keyword2, remark);
-            }
-
+            }*/
             jsonObject.put("success", true);
             String title = "本区域有可进行租还船检验船舶,请及时查看";
             Integer surveyorUId = quotation.getSurveyorUId();
@@ -181,5 +194,4 @@ public class OPQuotationController extends BaseController {
         }
         return jsonObject;
     }
-
 }

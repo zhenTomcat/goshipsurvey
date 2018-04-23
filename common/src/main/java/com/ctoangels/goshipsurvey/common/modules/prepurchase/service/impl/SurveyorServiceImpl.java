@@ -105,4 +105,9 @@ public class SurveyorServiceImpl extends SuperServiceImpl<SurveyorMapper, Survey
        Surveyor surveyor= surveyorMapper.selectById(userSurveyor.getUserId());
         return surveyor;
     }
+
+    @Override
+    public List<Surveyor> selectBindInfo() {
+        return surveyorMapper.selectBindInfo();
+    }
 }

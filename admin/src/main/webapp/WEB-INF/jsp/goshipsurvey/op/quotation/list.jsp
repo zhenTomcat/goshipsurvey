@@ -89,6 +89,10 @@
         }
         return false;
     }
+    function showModelSelectSurveyor(id) {
+        $("#modal_form").load("op/quotation/selectSurveyor?id="+id);
+        $("#modal_form_switch").click();
+    }
 
     var quotationTable = $("#onoff_op_quotation_table");
     $(document).ready(function () {
@@ -167,7 +171,7 @@
                     "render": function (data, type, row) {
                         var status = row.quotationStatus;
                         if (status == 0) {
-                            return '<a class="btn btn-sm blue" onclick="startQuotation(' + row.id + ')">询价</a>';
+                            return '<a class="btn btn-sm blue" onclick="showModelSelectSurveyor(' + row.id + ')">询价</a>';
                         } else if (status == 1) {
                             return '<a class="btn btn-sm green">询价中...</a>';
                         } else if (status == 2) {

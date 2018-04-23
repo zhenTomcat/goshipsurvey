@@ -15,7 +15,18 @@
 		select * from t_surveyor where email=#{0} and tel = #{1}
 	</select>
 
-	<update id="updatePastEvaluation">
+    <select id="selectBindInfo"
+            resultType="com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Surveyor" resultMap="UserInfo">
+		select s.* from t_surveyor s join sys_user_surveyor us on s.id=us.surveyor_id JOIN sys_user u on u.id = us.user_id
+	</select>
+
+	<resultMap id="UserInfo" type="Surveyor">
+		<result property="id" column="id"/>
+		<association property="user" column="{surveyor_id=id}"
+					 select="com.ctoangels.goshipsurvey.common.modules.sys.mapper.UserMapper.getUserByUserId"/>
+	</resultMap>
+
+    <update id="updatePastEvaluation">
 		UPDATE t_surveyor sur
 		SET sur.past_evaluation= ceil((select IFNULL(AVG(co.op_grade),0)  as avg_grade  from t_comment co WHERE co.surveyor_id=#{0}))
 		Where sur.id=#{0}

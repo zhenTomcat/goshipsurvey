@@ -7,6 +7,7 @@ import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.baomidou.mybatisplus.plugins.Page;
 import com.baomidou.mybatisplus.toolkit.CollectionUtil;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Port;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.SurveyorInfo;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IPortService;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Surveyor;
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.SurveyorExperience;
@@ -312,6 +313,15 @@ public class SurveyorController extends BaseController {
     public JSONObject getSurveyors(ModelMap map) {
         JSONObject jsonObject = new JSONObject();
         jsonObject.put("list", surveyorService.getSurveyorsByCompanyId(getCurrentUser().getId()));
+        return jsonObject;
+    }
+
+    @RequestMapping(value = "/bindInfo", method = RequestMethod.GET)
+    @ResponseBody
+    public JSONObject bindInfo(SurveyorInfo surveyorInfo) {
+        JSONObject jsonObject = new JSONObject();
+        List<Surveyor> bindSurveyors=surveyorService.selectBindInfo();
+        jsonObject.put("bindSurveyors",bindSurveyors);
         return jsonObject;
     }
 

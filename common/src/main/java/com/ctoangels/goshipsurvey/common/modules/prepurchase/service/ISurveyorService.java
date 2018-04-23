@@ -21,4 +21,6 @@ public interface ISurveyorService extends ISuperService<Surveyor> {
 
     Surveyor selectByOpenId(String openId);
 
+    List<Surveyor> selectBindInfo();
+
 }

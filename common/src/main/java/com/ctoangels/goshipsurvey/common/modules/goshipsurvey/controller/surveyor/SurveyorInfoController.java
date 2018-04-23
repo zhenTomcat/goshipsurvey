@@ -3,6 +3,7 @@ package com.ctoangels.goshipsurvey.common.modules.goshipsurvey.controller.survey
 import com.alibaba.fastjson.JSONObject;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.SurveyorInfo;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.ISurveyorInfoService;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Surveyor;
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.UserService;
@@ -13,6 +14,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+
+import java.util.List;
 
 /**
  * SurveyorInfo 控制层
@@ -58,6 +61,4 @@ public class SurveyorInfoController extends BaseController {
         jsonObject.put("success", surveyorInfoService.updateSelectiveById(surveyorInfo));
         return jsonObject;
     }
-
-
 }

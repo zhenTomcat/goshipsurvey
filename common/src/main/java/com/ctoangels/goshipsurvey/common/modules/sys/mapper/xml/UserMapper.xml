@@ -21,5 +21,10 @@
         </where>
     </select>
 
+    <select id="getUserByUserId" resultType="User">
+
+        SELECT u.* FROM sys_user u JOIN sys_user_surveyor us on u.id=us.user_id WHERE us.surveyor_id=#{surveyor_id}
+    </select>
+
 
 </mapper>

@@ -10,6 +10,7 @@ import com.baomidou.mybatisplus.annotations.TableField;
 import com.baomidou.mybatisplus.annotations.TableId;
 import com.baomidou.mybatisplus.annotations.TableName;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Port;
+import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
 import com.ctoangels.goshipsurvey.common.util.Const;
 
 /**
@@ -173,6 +174,9 @@ public class Surveyor implements Serializable {
     @TableField(exist = false)
     private List<SurveyorExperience> experienceList;
 
+    /** 如果surveyor绑定了，则数据库会对应一个用户信息 */
+    @TableField(exist = false)
+    private User user;
 
 
 
@@ -507,5 +511,13 @@ public class Surveyor implements Serializable {
 
     public void setShipInspectionExperience(String shipInspectionExperience) {
         this.shipInspectionExperience = shipInspectionExperience;
+    }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }
