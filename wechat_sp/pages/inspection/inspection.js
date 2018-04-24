@@ -12,7 +12,9 @@ Page({
     completePage: { url: app.webUrl + '/wx/surveyor/quotation/complete', pageNo: 0, pageSize: 10, flag: true, data: [0] },
     pageNames: ["canGetPage", "waitPage", "ingPage", "completePage"],
     tabWidth: 0,
-    flag:false
+    flag: false,
+    //存放当前正在进行的请求,若存在键值,说明请求正在进行
+    requestIngMap: {}
   },
   onLoad: function (options) {
     const activeIndex = options.activeIndex;
@@ -56,12 +58,12 @@ Page({
   },
 
   requestPage: function (index, first) {
-    console.log(index+"----"+first);
+    // console.log(index + "----" + first);
     const that = this
     const pageName = that.data.pageNames[index];
-    let oldPage = that.data[pageName];
+    const oldPage = that.data[pageName];
     const url = oldPage.url;
-
+    const start = first ? 0 : oldPage.pageNo * oldPage.pageSize;
     if (oldPage.flag || first) {
       // 从服务器获取数据
       wx.showLoading({
@@ -69,18 +71,31 @@ Page({
       });
       wx.request({
         url: url,
-        data: { surveyorUId: 23 },
+        data: { surveyorUId: 23, start: start, length: 10 },
         method: 'GET',
         success: function (res) {
           const newPage = res.data;
-          console.log(res.data)
+          // console.log(res.data)
           const newData = newPage.data;
           const flag = newData.length == oldPage.pageSize;
-          const pageNo = first ? 0 : oldPage.pageNo + newData.length != 0 ? 1 : 0;
+          const pageNo = first ? 0 : oldPage.pageNo + (newData.length != 0 ? 1 : 0);
+          let data;
+          if (first) {
+            data = newData;
+          } else {
+            data = oldPage.data.concat(newData);
+          }
+          oldPage.pageNo = pageNo;
+          oldPage.flag = flag;
           that.setData({
-            [pageName]: { pageNo: pageNo, pageSize: oldPage.pageSize, flag: flag, data: oldPage.data.concat(newData) }
+            [pageName]: oldPage
           })
           wx.hideLoading();
+          const requestIngMap = that.data.requestIngMap;
+          delete requestIngMap['apply'];
+          that.setData({
+            requestIngMap: requestIngMap
+          })
         }
       })
     } else {
@@ -93,34 +108,54 @@ Page({
 
   apply: function (e) {
     const that = this;
-    console.log(e.currentTarget.dataset.quotation);
+    const requestIngMap = this.data.requestIngMap;
+    console.log(requestIngMap);
+    if (requestIngMap['apply']) {
+      return;
+    }
+    requestIngMap['apply'] = true;
+    this.setData({
+      requestIngMap: requestIngMap
+    })
+    console.log(this.data.requestIngMap);
     let quotationId = e.currentTarget.dataset.quotation.id;
-    console.log(quotationId);
+    // console.log(quotationId);
     // 与服务器交互
     // that.applyQuotation();
-     const flag = true;
-    if (flag) {
-      wx.showModal({
-        title: '已抢单',
-        content: '我们会在第一时间提醒您抢单信息',
-        showCancel: false,
-        success: function () {
-          that.requestPage(0, true);
-        }
-      })
-    } else {
-      wx.showModal({
-        title: '抢单失败',
-        content: '请稍后再试',
-        showCancel: false
-      })
-    }
+    wx.request({
+      url: app.webUrl + "/wx/surveyor/quotation/apply",
+      data: {
+        surveyorUId: 23,
+        quotationId: quotationId
+      },
+      success: function (res) {
+        // console.log(res);
+        wx.showModal({
+          title: '已抢单',
+          content: '我们会在第一时间提醒您抢单信息',
+          showCancel: false,
+          success: function () {
+            that.requestPage(0, true);
+            that.requestPage(1, true);
+          }
+        })
+      },
+      fail: function (e) {
+        wx.showModal({
+          title: '抢单失败',
+          content: '请稍后再试',
+          showCancel: false
+        })
+      },
+      complete: function () {
+      }
+    })
   },
 
   cancelApply: function (e) {
 
     const that = this;
-    console.log(e.currentTarget.dataset.quotation);
+    // console.log(e.currentTarget.dataset.quotation);
     // 与服务器交互
     const flag = true;
     if (flag) {
@@ -144,7 +179,7 @@ Page({
 
   uploadReport: function (e) {
     const that = this;
-    console.log(e.currentTarget.dataset.quotation);
+    // console.log(e.currentTarget.dataset.quotation);
     wx.chooseImage({
       count: 1, // 默认9  
       sizeType: ['original', 'compressed'], // 可以指定是原图还是压缩图，默认二者都有  
@@ -189,16 +224,16 @@ Page({
       },
       success: function (res) {
         console.log(res);
-        if (res.data.canGet.length>=10){
-          that.setData({ ['canGetPage.flag']:false});
+        if (res.data.canGet.length < 10) {
+          that.setData({ ['canGetPage.flag']: false });
         }
-        if (res.data.wait.length >= 10) {
+        if (res.data.wait.length < 10) {
           that.setData({ ['waitPage.flag']: false });
         }
-        if (res.data.ing.length >= 10) {
+        if (res.data.ing.length < 10) {
           that.setData({ ['ingPage.flag']: false });
         }
-        if (res.data.complete.length >= 10) {
+        if (res.data.complete.length < 10) {
           that.setData({ ['completePage.flag']: false });
         }
         that.setData({
@@ -214,7 +249,7 @@ Page({
     })
   },
 
-  applyQuotation:function(){
+  applyQuotation: function () {
     var that = this;
     wx.request({
       url: app.webUrl + "/wx/surveyor/quotation/apply",
@@ -224,7 +259,7 @@ Page({
       success: function (res) {
         console.log(res);
         that.setData({
-          flag:true
+          flag: true
         });
       },
       fail: function (e) {
