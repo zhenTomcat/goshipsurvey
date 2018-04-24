@@ -255,6 +255,11 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
 
     }
 
+    @Override
+    public User getUserBySurveyorId(Integer surveyor_id) {
+        return userMapper.getUserBySurveyorId(surveyor_id);
+    }
+
     private void setJsonObject(String mes,Integer delFlag,JSONObject jsonObject){
         jsonObject.put("mes",mes);
         jsonObject.put("delFlag",delFlag);

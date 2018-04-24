@@ -15,6 +15,7 @@ import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.ISurveyorEx
 import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.ISurveyorService;
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
+import com.ctoangels.goshipsurvey.common.modules.sys.service.IUserSurveyorService;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.UserService;
 import com.ctoangels.goshipsurvey.common.util.Const;
 import com.ctoangels.goshipsurvey.common.util.DateUtil;
@@ -55,6 +56,8 @@ public class SurveyorController extends BaseController {
     @Value("${static_path}")
     private String staticPath;
 
+    @Autowired
+    private IUserSurveyorService userSurveyorService;
 
     @RequestMapping
     public String surveyor(ModelMap map) {
@@ -63,17 +66,14 @@ public class SurveyorController extends BaseController {
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     @ResponseBody
-    public JSONObject getList(@RequestParam(required = false) String name,
-                              @RequestParam(required = false) String port,
-                              @RequestParam(required = false) Date startDate,
-                              @RequestParam(required = false) Date endDate) {
+    public JSONObject getList(@RequestParam(required = false) String name) {
         EntityWrapper<Surveyor> ew = getEntityWrapper();
         ew.addFilter("company_id={0} and del_flag={1}", getCurrentUser().getId(), Const.DEL_FLAG_NORMAL);
         if (StringUtils.isNotEmpty(name)) {
             ew.like("first_name", name);
             ew.or("last_name like {0}", "%" + name + "%");
         }
-        if (StringUtils.isNotEmpty(port)) {
+       /* if (StringUtils.isNotEmpty(port)) {
             ew.addFilter("( survey_port ={0} or survey_port REGEXP \"(^" + port + ",)|(," + port + "$)|(," + port + ",)\")", port);
         }
         if (startDate != null) {
@@ -81,11 +81,14 @@ public class SurveyorController extends BaseController {
         }
         if (endDate != null) {
             ew.addFilter("survey_time_end >={0}", DateUtil.formatDate(endDate, "yyyy-MM-dd"));
-        }
+        }*/
 
         List<Port> allPort = portService.selectList(new EntityWrapper<>());
         Page<Surveyor> page = surveyorService.selectPage(getPage(), ew);
-        for (Surveyor s : page.getRecords()) {
+        for (Surveyor surveyor:page.getRecords()){
+            surveyor.setUser(userService.getUserBySurveyorId(surveyor.getId()));
+        }
+        /*for (Surveyor s : page.getRecords()) {
             String portValue = "";
             String portString = s.getSurveyPort();
             String[] userPorts;
@@ -111,7 +114,7 @@ public class SurveyorController extends BaseController {
             s.setSurveyType(surveyValue);
 
             s.setSurveyPort(portValue);
-        }
+        }*/
 
         return jsonPage(page);
     }
