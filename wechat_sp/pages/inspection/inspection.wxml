@@ -118,8 +118,8 @@
                     </view>
                   </view>
                   <view class="weui-form-preview__ft">
-                    <button class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active" data-quotation="{{item}}">查看已上传</button>
-                    <button class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active" data-quotation="{{item}}" bindtap="uploadReport">上传报告</button>
+                    <!-- <button class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active" data-quotation="{{item}}">查看已上传</button>
+                    <button class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active" data-quotation="{{item}}" bindtap="uploadReport">上传报告</button> -->
                     <button class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" data-quotation="{{item}}">完成</button>
                   </view>
                 </view>
@@ -158,7 +158,7 @@
                     </view>
                   </view>
                   <view class="weui-form-preview__ft ">
-                    <button class="weui-form-preview__btn weui-form-preview__btn_default " hover-class="weui-form-preview__btn_active ">查看报告</button>
+                    <button class="weui-form-preview__btn weui-form-preview__btn_default " hover-class="weui-form-preview__btn_active ">已完成</button>
                   </view>
                 </view>
               </view>
