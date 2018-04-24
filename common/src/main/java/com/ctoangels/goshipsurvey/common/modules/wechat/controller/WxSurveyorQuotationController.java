@@ -10,7 +10,13 @@ import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IDictServi
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IInspectionService;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IQuotationApplicationService;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IQuotationService;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.entity.Surveyor;
+import com.ctoangels.goshipsurvey.common.modules.prepurchase.service.ISurveyorService;
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
+import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
+import com.ctoangels.goshipsurvey.common.modules.sys.entity.UserSurveyor;
+import com.ctoangels.goshipsurvey.common.modules.sys.service.IUserSurveyorService;
+import com.ctoangels.goshipsurvey.common.modules.sys.service.UserService;
 import com.ctoangels.goshipsurvey.common.util.Const;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -38,6 +44,15 @@ public class WxSurveyorQuotationController extends BaseController {
 
     @Autowired
     private IInspectionService inspectionService;
+
+    @Autowired
+    private IUserSurveyorService userSurveyorService;
+
+    @Autowired
+    private ISurveyorService surveyorService;
+
+    @Autowired
+    private UserService userService;
 
     @RequestMapping(value = "/list")
     @ResponseBody
@@ -172,6 +187,27 @@ public class WxSurveyorQuotationController extends BaseController {
         jsonObject.put("start", page.getCurrent());
         jsonObject.put("length", page.getSize());
 
+        return jsonObject;
+    }
+
+    @RequestMapping(value = "/apply")
+    @ResponseBody
+    public JSONObject apply(@RequestParam(required = true) Integer surveyorUId,@RequestParam(required = true) Integer quotationId) {
+        JSONObject jsonObject = new JSONObject();
+        User user=userService.selectById(surveyorUId);
+        QuotationApplication qa=new QuotationApplication();
+
+        qa.setUserId(user.getId());
+        qa.setCreateInfo(user.getName());
+        qa.setApplicationStatus(Const.QUO_APPLY_ING);
+        UserSurveyor userSurveyor= userSurveyorService.selectByUserId(getCurrentUser().getId());
+        Surveyor surveyor=surveyorService.selectById(userSurveyor.getSurveyorId());
+        qa.setSurveyId(surveyor.getId());
+
+        Quotation quotation=quotationService.selectById(qa.getQuotationId());
+        if (quotation.getTotalPrice()!=null){
+            qa.setTotalPrice(quotation.getTotalPrice());
+        }
         return jsonObject;
     }
 }

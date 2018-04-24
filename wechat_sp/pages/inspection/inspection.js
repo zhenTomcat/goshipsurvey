@@ -11,7 +11,8 @@ Page({
     ingPage: { url: app.webUrl + '/wx/surveyor/quotation/ing', pageNo: 0, pageSize: 10, flag: true, data: [0] },
     completePage: { url: app.webUrl + '/wx/surveyor/quotation/complete', pageNo: 0, pageSize: 10, flag: true, data: [0] },
     pageNames: ["canGetPage", "waitPage", "ingPage", "completePage"],
-    tabWidth: 0
+    tabWidth: 0,
+    flag:false
   },
   onLoad: function (options) {
     const activeIndex = options.activeIndex;
@@ -51,7 +52,7 @@ Page({
   },
 
   getMore: function () {
-    this.requestPage(this.data.activeIndex,true);
+    this.requestPage(this.data.activeIndex);
   },
 
   requestPage: function (index, first) {
@@ -60,7 +61,7 @@ Page({
     const pageName = that.data.pageNames[index];
     let oldPage = that.data[pageName];
     const url = oldPage.url;
-    console.log(url);
+
     if (oldPage.flag || first) {
       // 从服务器获取数据
       wx.showLoading({
@@ -71,7 +72,6 @@ Page({
         data: { surveyorUId: 23 },
         method: 'GET',
         success: function (res) {
-          console.log(res)
           const newPage = res.data;
           console.log(res.data)
           const newData = newPage.data;
@@ -94,8 +94,11 @@ Page({
   apply: function (e) {
     const that = this;
     console.log(e.currentTarget.dataset.quotation);
+    let quotationId = e.currentTarget.dataset.quotation.id;
+    console.log(quotationId);
     // 与服务器交互
-    const flag = true;
+    // that.applyQuotation();
+     const flag = true;
     if (flag) {
       wx.showModal({
         title: '已抢单',
@@ -186,11 +189,42 @@ Page({
       },
       success: function (res) {
         console.log(res);
+        if (res.data.canGet.length>=10){
+          that.setData({ ['canGetPage.flag']:false});
+        }
+        if (res.data.wait.length >= 10) {
+          that.setData({ ['waitPage.flag']: false });
+        }
+        if (res.data.ing.length >= 10) {
+          that.setData({ ['ingPage.flag']: false });
+        }
+        if (res.data.complete.length >= 10) {
+          that.setData({ ['completePage.flag']: false });
+        }
         that.setData({
           ['canGetPage.data']: res.data.canGet,
           ['waitPage.data']: res.data.wait,
           ['ingPage.data']: res.data.ing,
           ['completePage.data']: res.data.complete
+        });
+      },
+      fail: function (e) {
+
+      }
+    })
+  },
+
+  applyQuotation:function(){
+    var that = this;
+    wx.request({
+      url: app.webUrl + "/wx/surveyor/quotation/apply",
+      data: {
+        surveyorUId: 23
+      },
+      success: function (res) {
+        console.log(res);
+        that.setData({
+          flag:true
         });
       },
       fail: function (e) {
