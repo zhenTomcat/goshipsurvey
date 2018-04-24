@@ -71,86 +71,65 @@
 
 
 </style>
-<h1 style="text-align: center;background-color: #3598dc;color: white;margin-top: 0">Surveyor management</h1>
 <div class="row">
     <div class="col-md-12">
-        <form class="form-horizontal">
-            <div class="form-group col-md-3">
-                <label class="col-md-6 control-label head-set">Surveyor name</label>
-                <div class="col-md-6">
-                    <input id="name" type="text"
-                           class="form-control required head-set">
-                </div>
-            </div>
-            <div class="form-group col-md-5">
-                <label class="control-label col-sm-3 head-set">Available time </label>
-                <div class="col-sm-9" style="padding-left: 7.5px">
-                    <div class="input-group input-large date-picker input-daterange">
-                        <input id="startDate" type="text" class="form-control required head-set">
-                        <span class="input-group-addon"> to </span>
-                        <input id="endDate" type="text" class="form-control required head-set">
+        <div class="portlet light bordered">
+            <div class="portlet-body">
+                <div class="table-toolbar">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="portlet light">
+                                <div class="portlet-title">
+                                    <div class="caption col-md-4">
+                                        <i class="icon-social-dribbble font-blue-soft"></i>
+                                        <span class="caption-subject font-blue-soft bold uppercase">Surveyor</span>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <input id="name"  type="text"
+                                               class="form-control" name="name"
+                                               placeholder="请输入验船师名称" style="width: 180px"/>
+                                    </div>
+                                    <div class="col-md-4">
+                                        <div class="btn-group">
+                                            <a type="button" class="btn green" data-target="navTab" href="surveyor/add">+ Add new
+                                                surveyor</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="portlet-body">
+                                    <div class="tab-content">
+                                        <div class="tab-pane fade active in" id="tab_1_1">
+                                            <table class="table  table-checkable table-bordered"
+                                                   id="surveyor_table">
+                                                <thead>
+                                                <tr>
+                                                    <th width="5%">
+                                                        <input type='checkbox' id="defaultCheck"/>
+                                                    </th>
+                                                    <th width="15%">验船师名称</th>
+                                                    <th width="20%">职位</th>
+                                                    <th width="20%">电话</th>
+                                                    <th width="30%">邮箱</th>
+                                                    <th width="35%">微信是否绑定</th>
+                                                </tr>
+                                                <tbody></tbody>
+                                                </thead>
+                                            </table>
+                                        </div>
+                                    </div>
+                                    <div class="clearfix margin-bottom-20"></div>
+                                </div>
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
-            <div class="form-group col-md-3">
-                <label class="col-sm-6 control-label">Available port</label>
-                <div class="col-sm-6">
-                    <select id="port"
-                            name="surveyPort"
-                            class="form-control js-data-example-ajax">
-                    </select>
-                </div>
-            </div>
-            <div class="form-group col-md-2" style="text-align: center">
-                <button type="button" class="btn" onclick="refreshTable(true)">Search</button>
-                <button id="reset-btn" type="reset" class="btn">Clean</button>
-            </div>
-        </form>
-    </div>
-    <hr style="width: 95%;margin: auto;margin-bottom:10px">
-    <div class="col-md-12">
-        <div style="margin-bottom: 10px;margin-left: 20px;">
-            <a type="button" class="btn btn-circle green" data-target="navTab" href="surveyor/add">+ Add new
-                surveyor</a>
-            <button data-url="surveyor/batchDelete" data-msg="确定批量删除吗？" data-model="ajaxToDo"
-                    class="btn  btn-circle  green"
-                    data-checkbox-name="chx_default" data-callback="refreshTable">Delete
-                <i class="fa fa-times"></i>
-            </button>
         </div>
-        <table class="table  table-checkable table-bordered"
-               id="surveyor_table">
-            <thead>
-            <tr>
-                <th width="5%">
-                    <input type='checkbox' id="defaultCheck"/>
-                </th>
-                <th width="15%">Surveyor name</th>
-                <th width="40%">Position</th>
-                <th width="20%">TEL</th>
-                <th width="30%">E-Mail</th>
-            </tr>
-            <tbody></tbody>
-            </thead>
-        </table>
     </div>
 </div>
 
-
 <script>
     $('.date-picker').datepicker({autoclose: true, todayHighlight: true, format: 'yyyy-mm-dd'});
-
-    if (jQuery().datepicker) {
-        $('.date-picker').datepicker({
-            rtl: App.isRTL(),
-            orientation: "left",
-            autoclose: true,
-            startDate: new Date(),
-            format: 'yyyy-mm-dd'
-        });
-        $('body').removeClass("modal-open"); // fix bug when inline picker is used in modal
-    }
-
 
     var surveyorTable;
     $(document).ready(function () {
@@ -170,9 +149,9 @@
                 "type": "get",
                 "data": function (data) {
                     data.name = $("#name").val();
-                    data.startDate = $("#startDate").val();
+                   /* data.startDate = $("#startDate").val();
                     data.endDate = $("#endDate").val();
-                    data.port = $("#port").val();
+                    data.port = $("#port").val();*/
                 }
             },
             "language": {
@@ -213,6 +192,14 @@
                     "render": function (data, type, row) {
                         return row.email;
                     }
+                },{
+                    "targets": 5,
+                    "render": function (data, type, row) {
+                        if(row.user==null){
+                            return '未绑定';
+                        }
+                        return '已绑定';
+                    }
                 }],
             "drawCallback": function (settings) {
                 drawICheck('defaultCheck', 'chx_default');
@@ -228,6 +215,9 @@
         }
     }
 
+    $("#name").change(function () {
+        refreshTable(false)
+    });
 
     var PortMultiSelect = function () {
         var handleDemo = function () {
@@ -314,16 +304,6 @@
             PortMultiSelect.init();
         });
     }
-
-
-    function changeEditTimeId(id) {
-        $("#edit-time-id").val(id);
-    }
-
-
-    $("#reset-btn").on("click", function () {
-        $("#port").html("");
-    })
 
 </script>
 <jsp:include page="editTime.jsp"/>

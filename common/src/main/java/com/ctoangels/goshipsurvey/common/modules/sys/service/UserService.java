@@ -35,4 +35,6 @@ public interface UserService extends ISuperService<User> {
     boolean existUnionId(String unionId);
 
     Boolean insertByInfo(JSONObject jsonObject,Surveyor surveyor,WxMpUser wxMpUser);
+
+    User getUserBySurveyorId(Integer surveyor_id);
 }

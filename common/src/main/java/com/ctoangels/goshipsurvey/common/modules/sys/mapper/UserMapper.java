@@ -13,4 +13,6 @@ public interface UserMapper extends AutoMapper<User> {
 
     List<Integer> getAllId(@Param(value = "role") Integer role);
 
+    User getUserBySurveyorId(Integer surveyor_id);
+
 }

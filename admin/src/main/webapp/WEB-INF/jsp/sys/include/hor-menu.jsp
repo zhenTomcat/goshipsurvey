@@ -67,12 +67,12 @@
                                     <i class="fa fa-comment"></i>Message<span
                                         class="badge badge-danger unreadCount"> 0 </span> </a>
                             </li>
-                            <shiro:hasPermission name="surveyor/list">
+                            <%--<shiro:hasPermission name="surveyor/list">
                                 <li>
                                     <a href="surveyor" class="ajaxify" data-target='navTab'>
                                         <i class="fa fa-users"></i>Surveyor management </a>
                                 </li>
-                            </shiro:hasPermission>
+                            </shiro:hasPermission>--%>
                             <li>
                                 <a href="user/companyEdit" class="ajaxify" data-target='navTab'>
                                     <i class="fa fa-user"></i>My profile </a>

@@ -23,7 +23,7 @@
 	<resultMap id="UserInfo" type="Surveyor">
 		<result property="id" column="id"/>
 		<association property="user" column="{surveyor_id=id}"
-					 select="com.ctoangels.goshipsurvey.common.modules.sys.mapper.UserMapper.getUserByUserId"/>
+					 select="com.ctoangels.goshipsurvey.common.modules.sys.mapper.UserMapper.getUserBySurveyorId"/>
 	</resultMap>
 
     <update id="updatePastEvaluation">

@@ -204,7 +204,8 @@ public class WxSurveyorQuotationController extends BaseController {
         Surveyor surveyor=surveyorService.selectById(userSurveyor.getSurveyorId());
         qa.setSurveyId(surveyor.getId());
 
-        Quotation quotation=quotationService.selectById(qa.getQuotationId());
+
+        Quotation quotation=quotationService.selectById(quotationId);
         if (quotation.getTotalPrice()!=null){
             qa.setTotalPrice(quotation.getTotalPrice());
         }
