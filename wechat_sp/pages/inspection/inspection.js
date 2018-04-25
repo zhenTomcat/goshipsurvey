@@ -91,10 +91,8 @@ Page({
             [pageName]: oldPage
           })
           wx.hideLoading();
-          const requestIngMap = that.data.requestIngMap;
-          delete requestIngMap['apply'];
           that.setData({
-            requestIngMap: requestIngMap
+            requestIngMap: {}
           })
         }
       })
@@ -107,17 +105,15 @@ Page({
 
 
   apply: function (e) {
-    const that = this;
     const requestIngMap = this.data.requestIngMap;
-    console.log(requestIngMap);
     if (requestIngMap['apply']) {
       return;
     }
     requestIngMap['apply'] = true;
     this.setData({
       requestIngMap: requestIngMap
-    })
-    console.log(this.data.requestIngMap);
+    });
+    const that = this;
     let quotationId = e.currentTarget.dataset.quotation.id;
     // console.log(quotationId);
     // 与服务器交互
@@ -153,9 +149,16 @@ Page({
   },
 
   cancelApply: function (e) {
-
+    const requestIngMap = this.data.requestIngMap;
+    if (requestIngMap['cancelApply']) {
+      return;
+    }
+    requestIngMap['cancelApply'] = true;
+    this.setData({
+      requestIngMap: requestIngMap
+    });
     const that = this;
-    // console.log(e.currentTarget.dataset.quotation);
+    let applicationId = e.currentTarget.dataset.application.id;
     // 与服务器交互
     const flag = true;
     if (flag) {
@@ -201,6 +204,38 @@ Page({
         })
       }
     });
+  },
+
+  completeInspection: function (e) {
+    const requestIngMap = this.data.requestIngMap;
+    if (requestIngMap['completeInspection']) {
+      return;
+    }
+    requestIngMap['completeInspection'] = true;
+    this.setData({
+      requestIngMap: requestIngMap
+    });
+    const that = this;
+    let inspectionId = e.currentTarget.dataset.inspection.id;
+    // 与服务器交互
+    const flag = true;
+    if (flag) {
+      wx.showModal({
+        title: '已撤销',
+        content: '成功撤销',
+        showCancel: false,
+        success: function () {
+          that.requestPage(2, true);
+          that.requestPage(3, true);
+        }
+      })
+    } else {
+      wx.showModal({
+        title: '撤销失败',
+        content: '请稍后再试',
+        showCancel: false
+      })
+    }
   },
 
   // 滚动切换标签样式

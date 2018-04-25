@@ -80,7 +80,7 @@
                   </view>
                   <view class="weui-form-preview__ft">
                     <!-- <navigator class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active">辅助操作</navigator> -->
-                    <button class="weui-form-preview__btn weui-form-preview__btn_primary" data-quotation="{{item}}" hover-class="weui-form-preview__btn_active" bindtap="cancelApply">撤销</button>
+                    <button class="weui-form-preview__btn weui-form-preview__btn_primary" data-application="{{item}}" hover-class="weui-form-preview__btn_active" bindtap="cancelApply">撤销</button>
                   </view>
                 </view>
               </view>
@@ -118,9 +118,9 @@
                     </view>
                   </view>
                   <view class="weui-form-preview__ft">
-                    <!-- <button class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active" data-quotation="{{item}}">查看已上传</button>
-                    <button class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active" data-quotation="{{item}}" bindtap="uploadReport">上传报告</button> -->
-                    <button class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" data-quotation="{{item}}">完成</button>
+                    <!-- <button class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active" data-inspection="{{item}}">查看已上传</button>
+                    <button class="weui-form-preview__btn weui-form-preview__btn_default" hover-class="weui-form-preview__btn_active" data-inspection="{{item}}" bindtap="uploadReport">上传报告</button> -->
+                    <button class="weui-form-preview__btn weui-form-preview__btn_primary" hover-class="weui-form-preview__btn_active" data-inspection="{{item}}" bindtap="completeInspection">完成</button>
                   </view>
                 </view>
               </view>
