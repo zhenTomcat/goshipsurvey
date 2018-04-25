@@ -8,7 +8,7 @@
 	</sql>
     <select id="selectByGzhOpenId"
             resultType="com.ctoangels.goshipsurvey.common.modules.sys.entity.UserSurveyor">
-		select * from sys_user_serveyor where gzh_open_id=#{0}
+		select * from sys_user_surveyor where gzh_open_id=#{0}
 	</select>
 	<select id="selectBySurveyorId"
 			resultType="com.ctoangels.goshipsurvey.common.modules.sys.entity.UserSurveyor">

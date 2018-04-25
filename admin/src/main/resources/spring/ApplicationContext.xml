@@ -16,8 +16,8 @@
     <task:scheduler id="scheduler" pool-size="5"/>
     <task:annotation-driven executor="asyncExecutor" scheduler="scheduler"/>
     <!--定时任务-->
-    <bean id="autoSelectSurveyorScheduler"
-          class="com.ctoangels.goshipsurvey.admin.base.scheduler.AutoSelectSurveyorScheduler"/>
+    <!--<bean id="autoSelectSurveyorScheduler"
+          class="com.ctoangels.goshipsurvey.admin.base.scheduler.AutoSelectSurveyorScheduler"/>-->
 
     <!--注入微信服务-->
     <!--<bean class="me.chanjar.weixin.mp.api.impl.WxMpServiceImpl"></bean>-->
@@ -61,6 +61,7 @@
         <property name="filterChainDefinitions">
             <value>
                 /static/** = anon
+                /MP_verify_IeV2Gc6aFk0EcMwz.txt=anon
                 /assets/** = anon
                 /emailQuotation/** = anon
                 /publicShip/** = anon

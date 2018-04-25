@@ -187,7 +187,10 @@ public class CoreController {
     }
 
     @RequestMapping(value = "goToBind")
-    public String goToBind(HttpServletResponse response, @RequestParam(value = "code") String code, @RequestParam(value = "lang", required = false) String lang, ModelMap map) {
+    public String goToBind(HttpServletResponse response,
+                           @RequestParam(value = "code") String code,
+                           @RequestParam(value = "lang", required = false) String lang,
+                           ModelMap map) {
         WxMpOAuth2AccessToken accessToken;
         WxMpUser wxMpUser;
         String errMsg = "";

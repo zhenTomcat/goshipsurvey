@@ -102,7 +102,7 @@ public class SurveyorServiceImpl extends SuperServiceImpl<SurveyorMapper, Survey
     @Override
     public Surveyor selectByOpenId(String gzhOpenId) {
        UserSurveyor userSurveyor= userSurveyorMapper.selectByGzhOpenId(gzhOpenId);
-       Surveyor surveyor= surveyorMapper.selectById(userSurveyor.getUserId());
+       Surveyor surveyor= surveyorMapper.selectById(userSurveyor.getSurveyorId());
         return surveyor;
     }
 

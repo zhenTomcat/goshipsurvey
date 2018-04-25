@@ -35,12 +35,12 @@ public class Template {
 
         templateMessage.setToUser(openid);
         templateMessage.setTemplateId(templateId);
-        templateMessage.setUrl(url);
+/*        templateMessage.setUrl(null);
 
 
-        WxMpTemplateMessage.MiniProgram miniProgram =new WxMpTemplateMessage.MiniProgram(openid,url);
+        WxMpTemplateMessage.MiniProgram miniProgram =new WxMpTemplateMessage.MiniProgram(appid,null);
 
-        templateMessage.setMiniProgram(miniProgram);
+        templateMessage.setMiniProgram(miniProgram);*/
         templateMessage.getData().add(new WxMpTemplateData("first", first, "#000000"));
         templateMessage.getData().add(new WxMpTemplateData("keyword1", keyword1));
         templateMessage.getData().add(new WxMpTemplateData("keyword2", keyword2));
