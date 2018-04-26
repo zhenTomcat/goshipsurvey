@@ -192,22 +192,62 @@ public class WxSurveyorQuotationController extends BaseController {
 
     @RequestMapping(value = "/apply")
     @ResponseBody
-    public JSONObject apply(@RequestParam(required = true) Integer surveyorUId,@RequestParam(required = true) Integer quotationId) {
+    public JSONObject apply(@RequestParam(required = true) Integer surveyorUId, @RequestParam(required = true) Integer quotationId) {
         JSONObject jsonObject = new JSONObject();
-        User user=userService.selectById(surveyorUId);
-        QuotationApplication qa=new QuotationApplication();
+        User user = userService.selectById(surveyorUId);
+        QuotationApplication qa = new QuotationApplication();
 
         qa.setUserId(user.getId());
         qa.setCreateInfo(user.getName());
         qa.setApplicationStatus(Const.QUO_APPLY_ING);
-        UserSurveyor userSurveyor= userSurveyorService.selectByUserId(getCurrentUser().getId());
-        Surveyor surveyor=surveyorService.selectById(userSurveyor.getSurveyorId());
+        UserSurveyor userSurveyor = userSurveyorService.selectByUserId(getCurrentUser().getId());
+        Surveyor surveyor = surveyorService.selectById(userSurveyor.getSurveyorId());
         qa.setSurveyId(surveyor.getId());
 
 
-        Quotation quotation=quotationService.selectById(quotationId);
-        if (quotation.getTotalPrice()!=null){
+        Quotation quotation = quotationService.selectById(quotationId);
+        if (quotation.getTotalPrice() != null) {
             qa.setTotalPrice(quotation.getTotalPrice());
+        }
+        return jsonObject;
+    }
+
+    @RequestMapping(value = "/cancelApply")
+    @ResponseBody
+    public JSONObject cancelApply(@RequestParam(required = true) Integer surveyorUId, @RequestParam(required = true) Integer applicationId) {
+        JSONObject jsonObject = new JSONObject();
+        User user = userService.selectById(surveyorUId);
+        if (user == null) {
+            jsonObject.put("errMsg", "请登录或绑定后进行操作");
+            return jsonObject;
+        }
+        QuotationApplication qa = new QuotationApplication();
+        qa.setId(applicationId);
+        qa.setDelFlag(Const.DEL_FLAG_DELETE);
+        qa.setUpdateInfo(getCurrentUser().getName());
+        if (quotationApplicationService.updateSelectiveById(qa)) {
+            jsonObject.put("errMsg", "");
+        } else {
+            jsonObject.put("errMsg", "撤销失败");
+        }
+        return jsonObject;
+    }
+
+    @RequestMapping(value = "/completeInspection")
+    @ResponseBody
+    public JSONObject completeInspection(@RequestParam(required = true) Integer surveyorUId, @RequestParam(required = true) Integer inspectionId) {
+        JSONObject jsonObject = new JSONObject();
+        User user = userService.selectById(surveyorUId);
+        if (user == null) {
+            jsonObject.put("errMsg", "请登录或绑定后进行操作");
+            return jsonObject;
+        }
+        Inspection inspection = inspectionService.selectById(inspectionId);
+        inspection.setInspectionStatus(Const.INSPECTION_END);
+        if (inspectionService.updateById(inspection)) {
+            jsonObject.put("errMsg", "");
+        } else {
+            jsonObject.put("errMsg", "提交完成失败!");
         }
         return jsonObject;
     }

@@ -12,15 +12,20 @@ Page({
     completePage: { url: app.webUrl + '/wx/surveyor/quotation/complete', pageNo: 0, pageSize: 10, flag: true, data: [0] },
     pageNames: ["canGetPage", "waitPage", "ingPage", "completePage"],
     tabWidth: 0,
+    userId: null,
     flag: false,
     //存放当前正在进行的请求,若存在键值,说明请求正在进行
     requestIngMap: {}
   },
   onLoad: function (options) {
+    const userId = app.globalData.userInfo.id;
+    console.log(app.globalData.userInfo);
+    console.log(userId);
     const activeIndex = options.activeIndex;
     if (activeIndex) {
       this.setData({
-        activeIndex: activeIndex
+        activeIndex: activeIndex,
+        userId: userId
       });
     }
     var that = this;
@@ -71,7 +76,7 @@ Page({
       });
       wx.request({
         url: url,
-        data: { surveyorUId: 23, start: start, length: 10 },
+        data: { surveyorUId: this.data.userId, start: start, length: 10 },
         method: 'GET',
         success: function (res) {
           const newPage = res.data;
@@ -121,7 +126,7 @@ Page({
     wx.request({
       url: app.webUrl + "/wx/surveyor/quotation/apply",
       data: {
-        surveyorUId: 23,
+        surveyorUId: this.data.userId,
         quotationId: quotationId
       },
       success: function (res) {
@@ -160,24 +165,72 @@ Page({
     const that = this;
     let applicationId = e.currentTarget.dataset.application.id;
     // 与服务器交互
-    const flag = true;
-    if (flag) {
-      wx.showModal({
-        title: '已撤销',
-        content: '成功撤销',
-        showCancel: false,
-        success: function () {
-          that.requestPage(0, true);
-          that.requestPage(1, true);
-        }
-      })
-    } else {
-      wx.showModal({
-        title: '撤销失败',
-        content: '请稍后再试',
-        showCancel: false
-      })
+    wx.request({
+      url: app.webUrl + "/wx/surveyor/quotation/cancelApply",
+      data: {
+        surveyorUId: this.data.userId,
+        applicationId: applicationId
+      },
+      success: function (res) {
+        console.log(res);
+        wx.showModal({
+          title: '已撤销',
+          content: '成功撤销',
+          showCancel: false,
+          success: function () {
+            that.requestPage(0, true);
+            that.requestPage(1, true);
+          }
+        })
+      },
+      fail: function (e) {
+        wx.showModal({
+          title: '撤销失败',
+          content: '请稍后再试',
+          showCancel: false
+        })
+      }
+    })
+  },
+
+  completeInspection: function (e) {
+    const requestIngMap = this.data.requestIngMap;
+    if (requestIngMap['completeInspection']) {
+      return;
     }
+    requestIngMap['completeInspection'] = true;
+    this.setData({
+      requestIngMap: requestIngMap
+    });
+    const that = this;
+    let inspectionId = e.currentTarget.dataset.inspection.id;
+    // 与服务器交互
+    wx.request({
+      url: app.webUrl + "/wx/surveyor/quotation/completeInspection",
+      data: {
+        surveyorUId: this.data.userId,
+        inspectionId: inspectionId
+      },
+      success: function (res) {
+        console.log(res);
+        wx.showModal({
+          title: '验船完成!',
+          // content: '成功撤销',
+          showCancel: false,
+          success: function () {
+            that.requestPage(2, true);
+            that.requestPage(3, true);
+          }
+        });
+      },
+      fail: function (e) {
+        wx.showModal({
+          title: '撤销失败',
+          content: '请稍后再试',
+          showCancel: false
+        })
+      }
+    })
   },
 
   uploadReport: function (e) {
@@ -206,38 +259,6 @@ Page({
     });
   },
 
-  completeInspection: function (e) {
-    const requestIngMap = this.data.requestIngMap;
-    if (requestIngMap['completeInspection']) {
-      return;
-    }
-    requestIngMap['completeInspection'] = true;
-    this.setData({
-      requestIngMap: requestIngMap
-    });
-    const that = this;
-    let inspectionId = e.currentTarget.dataset.inspection.id;
-    // 与服务器交互
-    const flag = true;
-    if (flag) {
-      wx.showModal({
-        title: '已撤销',
-        content: '成功撤销',
-        showCancel: false,
-        success: function () {
-          that.requestPage(2, true);
-          that.requestPage(3, true);
-        }
-      })
-    } else {
-      wx.showModal({
-        title: '撤销失败',
-        content: '请稍后再试',
-        showCancel: false
-      })
-    }
-  },
-
   // 滚动切换标签样式
   switchTab: function (e) {
     const cur = e.detail.current;
@@ -255,46 +276,39 @@ Page({
     wx.request({
       url: app.webUrl + "/wx/surveyor/quotation/list",
       data: {
-        surveyorUId: 23
+        surveyorUId: this.data.userId
       },
       success: function (res) {
         console.log(res);
         if (res.data.canGet.length < 10) {
           that.setData({ ['canGetPage.flag']: false });
+          if (res.data.canGet.length!=0){
+            that.setData({ ['canGetPage.pageNo']: 1 });
+          }
         }
         if (res.data.wait.length < 10) {
           that.setData({ ['waitPage.flag']: false });
+          if (res.data.wait.length != 0) {
+            that.setData({ ['waitPage.pageNo']: 1 });
+          }
         }
         if (res.data.ing.length < 10) {
           that.setData({ ['ingPage.flag']: false });
+          if (res.data.ing.length != 0) {
+            that.setData({ ['ingPage.pageNo']: 1 });
+          }
         }
         if (res.data.complete.length < 10) {
           that.setData({ ['completePage.flag']: false });
+          if (res.data.complete.length != 0) {
+            that.setData({ ['completePage.pageNo']: 1 });
+          }
         }
         that.setData({
           ['canGetPage.data']: res.data.canGet,
           ['waitPage.data']: res.data.wait,
           ['ingPage.data']: res.data.ing,
           ['completePage.data']: res.data.complete
-        });
-      },
-      fail: function (e) {
-
-      }
-    })
-  },
-
-  applyQuotation: function () {
-    var that = this;
-    wx.request({
-      url: app.webUrl + "/wx/surveyor/quotation/apply",
-      data: {
-        surveyorUId: 23
-      },
-      success: function (res) {
-        console.log(res);
-        that.setData({
-          flag: true
         });
       },
       fail: function (e) {

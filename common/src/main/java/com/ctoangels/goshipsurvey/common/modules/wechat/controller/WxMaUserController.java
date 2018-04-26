@@ -5,6 +5,7 @@ import cn.binarywang.wx.miniapp.api.WxMaUserService;
 import cn.binarywang.wx.miniapp.bean.WxMaJscode2SessionResult;
 import cn.binarywang.wx.miniapp.bean.WxMaUserInfo;
 import com.alibaba.fastjson.JSONObject;
+import com.ctoangels.goshipsurvey.common.modules.sys.service.UserService;
 import me.chanjar.weixin.common.exception.WxErrorException;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -30,6 +31,8 @@ public class WxMaUserController {
 
     @Autowired
     private WxMaService wxService;
+    @Autowired
+    private UserService userService;
 
     /**
      * 登陆接口
@@ -40,8 +43,9 @@ public class WxMaUserController {
         JSONObject jsonObject = new JSONObject();
         try {
             WxMaJscode2SessionResult session = wxService.getUserService().getSessionInfo(code);
-            jsonObject.put("openId", session.getOpenid());
-            jsonObject.put("unionId", session.getUnionid());
+//            jsonObject.put("openId", session.getOpenid());
+//            jsonObject.put("unionId", session.getUnionid());
+            jsonObject.put("userInfo", userService.getUserByUnionId(session.getUnionid()));
         } catch (WxErrorException e) {
             System.out.println(e.toString());
         }
