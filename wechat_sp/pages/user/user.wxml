@@ -6,12 +6,12 @@
       <view class="weui-panel__bd">
         <navigator url="" class="weui-media-box weui-media-box_appmsg" hover-class="weui-cell_active">
           <view class="weui-media-box__hd weui-media-box__hd_in-appmsg">
-            <image class="weui-media-box__thumb" src="https://timgsa.baidu.com/timg?image&quality=80&size=b9999_10000&sec=1522250448307&di=ebe625988caa530ac94fac778bddb33e&imgtype=0&src=http%3A%2F%2Fimgsrc.baidu.com%2Fforum%2Fw%3D580%2Fsign%3D3277c1f391dda144da096cba82b6d009%2F0af1b31c8701a18bb97677af982f07082938fe52.jpg"
+            <image class="weui-media-box__thumb" src="{{headImgUrl}}
             />
           </view>
           <view class="weui-media-box__bd weui-media-box__bd_in-appmsg">
-            <view class="weui-media-box__title">David</view>
-            <view class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</view>
+            <view class="weui-media-box__title">{{userInfo.name}}</view>
+            <!-- <view class="weui-media-box__desc">由各种物质组成的巨型球状天体，叫做星球。星球有一定的形状，有自己的运行轨道。</view> -->
           </view>
         </navigator>
       </view>

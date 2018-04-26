@@ -211,23 +211,23 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
 
     @Transactional
     @Override
-    public Boolean insertByInfo(JSONObject jsonObject,Surveyor surveyor,WxMpUser wxMpUser) {
-        if (surveyor.getEmail()!=null &&
-                !surveyor.getEmail().trim().equals("")&&
-                surveyor.getTel()!=null&&
-                !surveyor.getTel().trim().equals("")){
-            Surveyor sy=surveyorMapper.selectByTelAndEmail(surveyor.getEmail(),surveyor.getTel());
-            if (sy ==null){
-                setJsonObject("数据库暂时没有该验船师，请联系相关部门",1,jsonObject);
+    public Boolean insertByInfo(JSONObject jsonObject, Surveyor surveyor, WxMpUser wxMpUser) {
+        if (surveyor.getEmail() != null &&
+                !surveyor.getEmail().trim().equals("") &&
+                surveyor.getTel() != null &&
+                !surveyor.getTel().trim().equals("")) {
+            Surveyor sy = surveyorMapper.selectByTelAndEmail(surveyor.getEmail(), surveyor.getTel());
+            if (sy == null) {
+                setJsonObject("数据库暂时没有该验船师，请联系相关部门", 1, jsonObject);
                 return false;
             }
-            UserSurveyor us=  userServeyorMapper.selectBySurveyorId(sy.getId());
-            if (us!=null){
-                setJsonObject("该用户已经被绑定了，请重新输入信息",2,jsonObject);
+            UserSurveyor us = userServeyorMapper.selectBySurveyorId(sy.getId());
+            if (us != null) {
+                setJsonObject("该用户已经被绑定了，请重新输入信息", 2, jsonObject);
                 return false;
             }
             //插入用户
-            User user=new User();
+            User user = new User();
             String passwd = new SimpleHash("SHA-1", surveyor.getEmail(), surveyor.getTel()).toString(); // 密码加密
             user.setName(surveyor.getEmail());
             user.setLoginName(surveyor.getEmail());
@@ -235,31 +235,32 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
             user.setPhone(surveyor.getTel());
             user.setPassword(passwd);
             user.setType(4);
+            user.setDelFlag(Const.DEL_FLAG_NORMAL);
             int a = userMapper.insert(user);
 
             //插入角色
-            UserRole userRole=new UserRole();
+            UserRole userRole = new UserRole();
             userRole.setUserId(user.getId());
             userRole.setRoleId(4);
             userRoleMapper.insert(userRole);
 
-            String gzhOpenId=wxMpUser.getOpenId();
-            String unionId= wxMpUser.getUnionId();
+            String gzhOpenId = wxMpUser.getOpenId();
+            String unionId = wxMpUser.getUnionId();
             Integer userId = user.getId();
             Integer surveyorId = sy.getId();
 
-            UserSurveyor userServeyor=new UserSurveyor();
+            UserSurveyor userServeyor = new UserSurveyor();
             userServeyor.setGzhOpenId(gzhOpenId);
             userServeyor.setUnionId(unionId);
             userServeyor.setUserId(userId);
             userServeyor.setSurveyorId(surveyorId);
-            int c =userServeyorMapper.insert(userServeyor);
-            if (a>0 && c>0){
-                setJsonObject("数据绑定成功",3,jsonObject);
+            int c = userServeyorMapper.insert(userServeyor);
+            if (a > 0 && c > 0) {
+                setJsonObject("数据绑定成功", 3, jsonObject);
                 return true;
             }
         }
-        setJsonObject("数据绑定失败",4,jsonObject);
+        setJsonObject("数据绑定失败", 4, jsonObject);
         return false;
 
     }
@@ -269,8 +270,17 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
         return userMapper.getUserBySurveyorId(surveyor_id);
     }
 
-    private void setJsonObject(String mes,Integer delFlag,JSONObject jsonObject){
-        jsonObject.put("mes",mes);
-        jsonObject.put("delFlag",delFlag);
+    private void setJsonObject(String mes, Integer delFlag, JSONObject jsonObject) {
+        jsonObject.put("mes", mes);
+        jsonObject.put("delFlag", delFlag);
+    }
+
+    @Override
+    public User getUserByUnionIdForXCX(String unionId) {
+        UserSurveyor userSurveyor = userServeyorMapper.selectByUnionId(unionId);
+        if (userSurveyor != null) {
+            return userMapper.selectById(userSurveyor.getUserId());
+        }
+        return null;
     }
 }

@@ -148,6 +148,7 @@ public class LoginController extends BaseController {
                     User user = new User();
                     user.setLoginName(loginName);
                     user.setPassword(passwd);
+                    user.setDelFlag(Const.DEL_FLAG_NORMAL);
                     user = userService.selectOne(user);
                     // 用于验证用户名和密码，改方法名需要改良
                     if (user != null) {

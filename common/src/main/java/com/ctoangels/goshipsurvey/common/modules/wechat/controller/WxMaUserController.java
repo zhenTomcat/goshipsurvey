@@ -45,7 +45,7 @@ public class WxMaUserController {
             WxMaJscode2SessionResult session = wxService.getUserService().getSessionInfo(code);
 //            jsonObject.put("openId", session.getOpenid());
 //            jsonObject.put("unionId", session.getUnionid());
-            jsonObject.put("userInfo", userService.getUserByUnionId(session.getUnionid()));
+            jsonObject.put("userInfo", userService.getUserByUnionIdForXCX(session.getUnionid()));
         } catch (WxErrorException e) {
             System.out.println(e.toString());
         }

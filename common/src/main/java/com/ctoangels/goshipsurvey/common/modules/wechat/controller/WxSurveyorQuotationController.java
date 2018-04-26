@@ -24,6 +24,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -195,20 +196,26 @@ public class WxSurveyorQuotationController extends BaseController {
     public JSONObject apply(@RequestParam(required = true) Integer surveyorUId, @RequestParam(required = true) Integer quotationId) {
         JSONObject jsonObject = new JSONObject();
         User user = userService.selectById(surveyorUId);
-        QuotationApplication qa = new QuotationApplication();
 
+        QuotationApplication qa = new QuotationApplication();
         qa.setUserId(user.getId());
+        qa.setCreateDate(new Date());
+        qa.setUpdateDate(new Date());
         qa.setCreateInfo(user.getName());
+        qa.setDelFlag(Const.DEL_FLAG_NORMAL);
         qa.setApplicationStatus(Const.QUO_APPLY_ING);
-        UserSurveyor userSurveyor = userSurveyorService.selectByUserId(getCurrentUser().getId());
+        UserSurveyor userSurveyor = userSurveyorService.selectByUserId(surveyorUId);
         Surveyor surveyor = surveyorService.selectById(userSurveyor.getSurveyorId());
         qa.setSurveyId(surveyor.getId());
-
+        qa.setQuotationId(quotationId);
 
         Quotation quotation = quotationService.selectById(quotationId);
         if (quotation.getTotalPrice() != null) {
             qa.setTotalPrice(quotation.getTotalPrice());
         }
+
+        quotationApplicationService.insert(qa);
+
         return jsonObject;
     }
 

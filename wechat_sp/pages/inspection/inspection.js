@@ -92,6 +92,7 @@ Page({
           }
           oldPage.pageNo = pageNo;
           oldPage.flag = flag;
+          oldPage.data = data;
           that.setData({
             [pageName]: oldPage
           })
@@ -282,7 +283,7 @@ Page({
         console.log(res);
         if (res.data.canGet.length < 10) {
           that.setData({ ['canGetPage.flag']: false });
-          if (res.data.canGet.length!=0){
+          if (res.data.canGet.length != 0) {
             that.setData({ ['canGetPage.pageNo']: 1 });
           }
         }

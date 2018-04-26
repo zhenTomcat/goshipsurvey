@@ -16,4 +16,6 @@ public interface UserSurveyorMapper extends AutoMapper<UserSurveyor> {
 
     UserSurveyor selectByUserId(Integer userId);
 
+    UserSurveyor selectByUnionId(String unionId);
+
 }

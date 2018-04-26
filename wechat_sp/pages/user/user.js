@@ -11,12 +11,20 @@ Page({
   data: {
     showError: false,
     tabs: ["可抢单", "请等待", "检验中", "已完成"],
-    tabWidth: 0
+    tabWidth: 0,
+    headImgUrl: null,
+    userInfo:{}
   },
   onLoad: function () {
     const showError = app.globalData.userInfo == null;
     this.setData({
-      showError: showError
+      showError: showError,
+      userInfo: app.globalData.userInfo
     });
+    if (app.globalData.wxUserInfo != null) {
+      this.setData({
+        headImgUrl: app.globalData.wxUserInfo.avatarUrl
+      });
+    }
   }
 });

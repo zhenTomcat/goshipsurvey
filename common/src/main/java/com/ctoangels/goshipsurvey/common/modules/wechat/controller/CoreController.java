@@ -63,11 +63,11 @@ public class CoreController {
     @Autowired
     private ISurveyorService surveyorService;
 
-    private static String url= "/pages/selectType/selectType?openid=";
-    private static String first= "欢迎使用岙洋船务微信小程序！";
-    private static String keyword1= "点击打开微信小程序";
-    private static String keyword2= "新用户第一次使用需进行绑定";
-    private static String remark= "点击此条消息即可跳转到岙洋船务小程序";
+    private static String url = "/pages/selectType/selectType?openid=";
+    private static String first = "欢迎使用岙洋船务微信小程序！";
+    private static String keyword1 = "点击打开微信小程序";
+    private static String keyword2 = "新用户第一次使用需进行绑定";
+    private static String remark = "点击此条消息即可跳转到岙洋船务小程序";
 
     @RequestMapping(value = "index")
     public String index() {
@@ -194,23 +194,23 @@ public class CoreController {
         WxMpOAuth2AccessToken accessToken;
         WxMpUser wxMpUser;
         String errMsg = "";
-        String surveyorEmail="";
+        String surveyorEmail = "";
         try {
             accessToken = this.wxMpService.oauth2getAccessToken(code);
             wxMpUser = this.wxMpService.getUserService()
                     .userInfo(accessToken.getOpenId(), lang);
-            UserSurveyor userServeyor=userServeyorService.selectByGzhOpenId(wxMpUser.getOpenId());
+            UserSurveyor userSurveyor = userServeyorService.selectByGzhOpenId(wxMpUser.getOpenId());
             Boolean exist = false;
-            if(userServeyor!=null && userServeyor.getGzhOpenId().equals(wxMpUser.getOpenId())){
-                surveyorEmail =surveyorService.selectByOpenId(wxMpUser.getOpenId()).getEmail();
+            if (userSurveyor != null && userSurveyor.getGzhOpenId().equals(wxMpUser.getOpenId())) {
+                surveyorEmail = surveyorService.selectByOpenId(wxMpUser.getOpenId()).getEmail();
                 exist = true;  // TODO: 从wxMpUser获取openId unionId判断是否已经绑定  wxMpUser 放入session中
             }
             if (exist) {
                 // 如果存在
                 errMsg = "你的信息已经被绑定"; //用户存在的错误信息
-                template.infomationNotice(wxMpUser.getOpenId(), Const.IDENTITY_BINDING_SUCCESSFULLY_NOTICE,url,first,surveyorEmail,keyword2,remark);
+                template.infomationNotice(wxMpUser.getOpenId(), Const.IDENTITY_BINDING_SUCCESSFULLY_NOTICE, url, first, surveyorEmail, keyword2, remark);
             } else {
-                errMsg="";
+                errMsg = "";
             }
             session.setAttribute("wxMpUser", wxMpUser);
         } catch (WxErrorException e) {
@@ -223,18 +223,19 @@ public class CoreController {
     @RequestMapping(method = RequestMethod.POST, value = "bindWeiXinPublic")
     @ResponseBody
     public JSONObject bindWeiXinPublic(Surveyor surveyor) {
-        JSONObject jsonObject = new JSONObject();;
+        JSONObject jsonObject = new JSONObject();
+        ;
         // TODO 通过surveyor的email 和 tel  查找数据库有没有这个验船师 flag
 
         WxMpUser wxMpUser = (WxMpUser) session.getAttribute("wxMpUser");
         if (wxMpUser != null) {
-            userService.insertByInfo(jsonObject,surveyor,wxMpUser);
+            userService.insertByInfo(jsonObject, surveyor, wxMpUser);
 
         }
 
-        Integer delFlag= (Integer) jsonObject.get("delFlag");
-        if(delFlag==3){
-            template.infomationNotice(wxMpUser.getOpenId(), Const.IDENTITY_BINDING_SUCCESSFULLY_NOTICE,url,first,surveyor.getEmail(),keyword2,remark);
+        Integer delFlag = (Integer) jsonObject.get("delFlag");
+        if (delFlag == 3) {
+            template.infomationNotice(wxMpUser.getOpenId(), Const.IDENTITY_BINDING_SUCCESSFULLY_NOTICE, url, first, surveyor.getEmail(), keyword2, remark);
         }
         session.removeAttribute("wxMpUser");
         return jsonObject;
