@@ -161,7 +161,7 @@ public class OPQuotationController extends BaseController {
         quotation.setUpdateInfo(getCurrentUser().getName());
         quotation.setSurveyorUIds(surveyorUIds);
         if (quotationService.updateById(quotation)) {
-            keyword1 += "您好，当前有新的船舶检验通知,请及时查看";
+            keyword1 = "您好，当前有新的船舶检验通知,请及时查看";
             List<String> gzhOpenIds = userSurveyorService.selectGzhOpenIdsBySurveyorUIds(surveyorUIds);
             for (String g : gzhOpenIds) {
                 template.infomationNotice(g, Const.INQUIRY_NOTICE, url, first, keyword1, keyword2, remark);
