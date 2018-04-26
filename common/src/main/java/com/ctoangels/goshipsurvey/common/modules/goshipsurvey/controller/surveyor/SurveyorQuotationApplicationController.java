@@ -79,17 +79,11 @@ public class SurveyorQuotationApplicationController extends BaseController {
         if (quotation.getTotalPrice()!=null){
             qa.setTotalPrice(quotation.getTotalPrice());
         }
-
-
         if (quotationApplicationService.insert(qa)) {
-           /* UserSurveyor userSurveyor=userSurveyorService.selectOne(new EntityWrapper<UserSurveyor>().addFilter("user_id={0}",getCurrentUser().getId()));
-            if (userSurveyor!=null){
-                String gzhOpenId= userSurveyor.getGzhOpenId();
-                template.infomationNotice(gzhOpenId, Const.CHECK_REMIND,url,first,keyword1,keyword2,remark);
-            }*/
-
+            String gzhOpenId= userSurveyor.getGzhOpenId();
+            template.infomationNotice(gzhOpenId, Const.CHECK_REMIND,url,first,keyword1,keyword2,remark);
             jsonObject.put("success", true);
-            messageService.addApplicationMessage(qa.getId());
+//            messageService.addApplicationMessage(qa.getId());
         } else {
             jsonObject.put("success", false);
         }
@@ -106,6 +100,11 @@ public class SurveyorQuotationApplicationController extends BaseController {
         qa.setUpdateInfo(getCurrentUser().getName());
         if (quotationApplicationService.updateSelectiveById(qa)) {
             jsonObject.put("status", 1);
+            UserSurveyor userSurveyor= userSurveyorService.selectByUserId(getCurrentUser().getId());
+            String gzhOpenId= userSurveyor.getGzhOpenId();
+            String keyword1="您已经取消了该船舶的检验申请";
+            String keyword2="岙洋船务";
+            template.infomationNotice(gzhOpenId, Const.CHECK_REMIND,url,first,keyword1,keyword2,remark);
         } else {
             jsonObject.put("status", 0);
         }

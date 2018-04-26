@@ -161,19 +161,19 @@ public class OPQuotationController extends BaseController {
         quotation.setUpdateInfo(getCurrentUser().getName());
         quotation.setSurveyorUIds(surveyorUIds);
         if (quotationService.updateById(quotation)) {
-            keyword1 += "您好，当前有新的船舶检验通知,请及时查看";
-            /*List<UserSurveyor> userSurveyors = userSurveyorService.selectList(new EntityWrapper<>());
-            for (UserSurveyor userSurveyor : userSurveyors) {
-                template.infomationNotice(userSurveyor.getGzhOpenId(), Const.INQUIRY_NOTICE, url, first, keyword1, keyword2, remark);
-            }*/
+            keyword1 = "您好，当前有新的船舶检验通知,请及时查看";
+            List<String> gzhOpenIds = userSurveyorService.selectGzhOpenIdsBySurveyorUIds(surveyorUIds);
+            for (String g : gzhOpenIds) {
+                template.infomationNotice(g, Const.INQUIRY_NOTICE, url, first, keyword1, keyword2, remark);
+            }
             jsonObject.put("success", true);
-            String title = "本区域有可进行租还船检验船舶,请及时查看";
+            /*String title = "本区域有可进行租还船检验船舶,请及时查看";
             Integer surveyorUId = quotation.getSurveyorUId();
             if (surveyorUId == null) {
                 messageService.publicAll(title, title, Const.USER_TYPE_SURVEYOR_COMPANY);
             } else {
                 messageService.publicOne(surveyorUId, title, title);
-            }
+            }*/
         } else {
             jsonObject.put("success", false);
         }

@@ -231,8 +231,9 @@ public class CoreController {
             userService.insertByInfo(jsonObject,surveyor,wxMpUser);
 
         }
-        String delFlag= (String) jsonObject.get("delFlag");
-        if(delFlag.equals("3")){
+
+        Integer delFlag= (Integer) jsonObject.get("delFlag");
+        if(delFlag==3){
             template.infomationNotice(wxMpUser.getOpenId(), Const.IDENTITY_BINDING_SUCCESSFULLY_NOTICE,url,first,surveyor.getEmail(),keyword2,remark);
         }
         session.removeAttribute("wxMpUser");

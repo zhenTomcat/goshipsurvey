@@ -21,11 +21,11 @@ public class AutoSelectSurveyorScheduler {
 
     private Logger logger = Logger.getLogger(AutoSelectSurveyorScheduler.class);
 
-    @Scheduled(cron = "0 55 23 * * ?")
+   /* @Scheduled(cron = "0 55 23 * * ?")
     public void autoSelectSurveyor() {
         logger.info("自动选择验船师... " + new Date());
         iPurchaseInspectionService.autoSelectSurveyors();
 
-    }
+    }*/
 
 }

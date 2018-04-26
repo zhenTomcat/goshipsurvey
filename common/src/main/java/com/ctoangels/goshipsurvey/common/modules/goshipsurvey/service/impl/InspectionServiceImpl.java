@@ -74,13 +74,16 @@ public class InspectionServiceImpl extends SuperServiceImpl<InspectionMapper, In
         QuotationApplication quotationApplication = new QuotationApplication();
         quotationApplication.setQuotationId(quotationId);
         quotationApplication.setType(Const.PROJECT_TYPE_HIRE);
+        quotationApplication.setDelFlag(Const.DEL_FLAG_NORMAL);
         List<QuotationApplication> applicationList = quotationApplicationMapper.selectList(new EntityWrapper<>(quotationApplication));
+        Quotation quotation=quotationMapper.selectById(quotationId);
         int surveyorId = 0;
         int companyId = 0;
         double totalPrice = 0;
         List<Integer> failureIds = new ArrayList<>();
         for (QuotationApplication qa : applicationList) {
             UserSurveyor userSurveyor=  userSurveyorMapper.selectByUserId(qa.getUserId());
+            keyword1=quotation.getShipName()+":"+quotation.getImo();
             if (qa.getId() == applicationId) {
                 qa.setApplicationStatus(Const.QUO_APPLY_SUCCESS);
                 surveyorId = qa.getSurveyId();
@@ -108,7 +111,7 @@ public class InspectionServiceImpl extends SuperServiceImpl<InspectionMapper, In
         }
 
         //更新询价状态
-        Quotation quotation = quotationMapper.selectById(quotationId);
+//        Quotation quotation = quotationMapper.selectById(quotationId);
         quotation.setTotalPrice(totalPrice);
         quotation.setQuotationStatus(Const.QUOTATION_END);
         if (quotationMapper.updateById(quotation) < 0) {
@@ -143,11 +146,11 @@ public class InspectionServiceImpl extends SuperServiceImpl<InspectionMapper, In
         }
 
         //发送信息
-        String shipName = quotation.getShipName();
+/*        String shipName = quotation.getShipName();
         String content1 = shipName + "船租还船检验,船东已接受您的检验申请,请尽快上传护照及loi文件,并查看代理信息安排人员验船";
         messageService.publicOne(companyId, content1, content1);
         String content2 = shipName + "船租还船检验,验船申请失败";
-        messageService.publicSome(failureIds, content2, content2);
+        messageService.publicSome(failureIds, content2, content2);*/
         return true;
     }
 

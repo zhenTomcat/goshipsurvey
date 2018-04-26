@@ -54,6 +54,7 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
     @Autowired
     private UserSurveyorMapper userServeyorMapper;
 
+
     public List<Role> getRoles(Integer userId) {
         Map<String, Object> map = new HashMap<>();
         map.put("del_flag", 0);
@@ -225,6 +226,7 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
                 setJsonObject("该用户已经被绑定了，请重新输入信息",2,jsonObject);
                 return false;
             }
+            //插入用户
             User user=new User();
             String passwd = new SimpleHash("SHA-1", surveyor.getEmail(), surveyor.getTel()).toString(); // 密码加密
             user.setName(surveyor.getEmail());
@@ -232,7 +234,14 @@ public class UserServiceImpl extends SuperServiceImpl<UserMapper, User> implemen
             user.setEmail(surveyor.getEmail());
             user.setPhone(surveyor.getTel());
             user.setPassword(passwd);
+            user.setType(4);
             int a = userMapper.insert(user);
+
+            //插入角色
+            UserRole userRole=new UserRole();
+            userRole.setUserId(user.getId());
+            userRole.setRoleId(4);
+            userRoleMapper.insert(userRole);
 
             String gzhOpenId=wxMpUser.getOpenId();
             String unionId= wxMpUser.getUnionId();
