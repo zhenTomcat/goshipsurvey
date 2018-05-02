@@ -18,6 +18,7 @@ import com.ctoangels.goshipsurvey.common.modules.sys.entity.UserSurveyor;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.IUserSurveyorService;
 import com.ctoangels.goshipsurvey.common.modules.sys.service.UserService;
 import com.ctoangels.goshipsurvey.common.util.Const;
+import com.ctoangels.goshipsurvey.common.util.Tools;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -72,10 +73,10 @@ public class WxSurveyorQuotationController extends BaseController {
             length = Integer.parseInt(request.getParameter(Const.LENGTH));
         }
         List<Quotation> canGet = quotationService.getQuotationList(surveyorUId, start, length);
-        /*for (Quotation q : list) {
-            int shipType = Integer.parseInt(q.getShipType());
-            q.setShipType(getShipTypeDict().get(shipType - 1).getDes());
-        }*/
+
+        for (Quotation q : canGet) {
+            setInspectionStringType(q);
+        }
         jsonObject.put("canGet", canGet);
 
 
@@ -86,8 +87,11 @@ public class WxSurveyorQuotationController extends BaseController {
         ew.orderBy("update_date", false);
         List<QuotationApplication> wait = quotationApplicationService.selectPage(getPage(), ew).getRecords();
         for (QuotationApplication application : wait) {
+            Quotation quotation = application.getQuotation();
+            setInspectionStringType(quotation);
             application.setQuotation(quotationService.selectById(application.getQuotationId()));
         }
+
         jsonObject.put("wait", wait);
 
 
@@ -98,7 +102,10 @@ public class WxSurveyorQuotationController extends BaseController {
         ew1.addFilter("inspection_status != {0} and company_id = {1}", Const.INSPECTION_END, surveyorUId);
         List<Inspection> ing = inspectionService.selectPage(getPage(), ew1).getRecords();
         for (Inspection inspection : ing) {
+            Quotation quotation = inspection.getQuotation();
+            setInspectionStringType(quotation);
             inspection.setQuotation(quotationService.selectById(inspection.getQuotationId()));
+
         }
         jsonObject.put("ing", ing);
 
@@ -107,6 +114,8 @@ public class WxSurveyorQuotationController extends BaseController {
         ew2.addFilter("inspection_status = {0} and company_id = {1}", Const.INSPECTION_END, surveyorUId);
         List<Inspection> complete = inspectionService.selectPage(getPage(), ew2).getRecords();
         for (Inspection inspection : complete) {
+            Quotation quotation = inspection.getQuotation();
+            setInspectionStringType(quotation);
             inspection.setQuotation(quotationService.selectById(inspection.getQuotationId()));
         }
 
@@ -127,10 +136,9 @@ public class WxSurveyorQuotationController extends BaseController {
             length = Integer.parseInt(request.getParameter(Const.LENGTH));
         }
         List<Quotation> canGet = quotationService.getQuotationList(surveyorUId, start, length);
-        /*for (Quotation q : list) {
-            int shipType = Integer.parseInt(q.getShipType());
-            q.setShipType(getShipTypeDict().get(shipType - 1).getDes());
-        }*/
+        for (Quotation q : canGet) {
+            setInspectionStringType(q);
+        }
         jsonObject.put("start", start);
         jsonObject.put("length", length);
         jsonObject.put("data", canGet);
@@ -148,6 +156,8 @@ public class WxSurveyorQuotationController extends BaseController {
         ew.orderBy("update_date", false);
         Page<QuotationApplication> page = quotationApplicationService.selectPage(getPage(), ew);
         for (QuotationApplication application : page.getRecords()) {
+            Quotation quotation = application.getQuotation();
+            setInspectionStringType(quotation);
             application.setQuotation(quotationService.selectById(application.getQuotationId()));
         }
         jsonObject.put("data", page.getRecords());
@@ -167,6 +177,8 @@ public class WxSurveyorQuotationController extends BaseController {
         ew1.addFilter("inspection_status!={0} and company_id={1}", Const.INSPECTION_END, surveyorUId);
         Page<Inspection> page = inspectionService.selectPage(getPage(), ew1);
         for (Inspection inspection : page.getRecords()) {
+            Quotation quotation = inspection.getQuotation();
+            setInspectionStringType(quotation);
             inspection.setQuotation(quotationService.selectById(inspection.getQuotationId()));
         }
         jsonObject.put("data", page.getRecords());
@@ -185,6 +197,8 @@ public class WxSurveyorQuotationController extends BaseController {
         ew2.addFilter("inspection_status={0} and company_id={1}", Const.INSPECTION_END, surveyorUId);
         Page<Inspection> page = inspectionService.selectPage(getPage(), ew2);
         for (Inspection inspection : page.getRecords()) {
+            Quotation quotation = inspection.getQuotation();
+            setInspectionStringType(quotation);
             inspection.setQuotation(quotationService.selectById(inspection.getQuotationId()));
         }
 
@@ -206,6 +220,7 @@ public class WxSurveyorQuotationController extends BaseController {
         qa.setCreateDate(new Date());
         qa.setUpdateDate(new Date());
         qa.setCreateInfo(user.getLoginName());
+        qa.setType(Const.PROJECT_TYPE_HIRE);
         qa.setDelFlag(Const.DEL_FLAG_NORMAL);
         qa.setApplicationStatus(Const.QUO_APPLY_ING);
         UserSurveyor userSurveyor = userSurveyorService.selectByUserId(surveyorUId);
@@ -278,5 +293,10 @@ public class WxSurveyorQuotationController extends BaseController {
             jsonObject.put("errMsg", "提交完成失败!");
         }
         return jsonObject;
+    }
+
+    public void  setInspectionStringType(Quotation q){
+            q.setInspectionType(Tools.transferValuesToDes(q.getInspectionType(), getInspectionTypeDict()));
+            q.setShipType(Tools.transferValuesToDes(q.getShipType(), getShipTypeDict()));
     }
 }
