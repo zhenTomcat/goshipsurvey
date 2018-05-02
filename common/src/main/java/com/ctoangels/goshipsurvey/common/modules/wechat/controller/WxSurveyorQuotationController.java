@@ -87,9 +87,9 @@ public class WxSurveyorQuotationController extends BaseController {
         ew.orderBy("update_date", false);
         List<QuotationApplication> wait = quotationApplicationService.selectPage(getPage(), ew).getRecords();
         for (QuotationApplication application : wait) {
-            Quotation quotation = application.getQuotation();
+            Quotation quotation = quotationService.selectById(application.getQuotationId());
+            application.setQuotation(quotation);
             setInspectionStringType(quotation);
-            application.setQuotation(quotationService.selectById(application.getQuotationId()));
         }
 
         jsonObject.put("wait", wait);
@@ -102,9 +102,9 @@ public class WxSurveyorQuotationController extends BaseController {
         ew1.addFilter("inspection_status != {0} and company_id = {1}", Const.INSPECTION_END, surveyorUId);
         List<Inspection> ing = inspectionService.selectPage(getPage(), ew1).getRecords();
         for (Inspection inspection : ing) {
-            Quotation quotation = inspection.getQuotation();
+            Quotation quotation =quotationService.selectById(inspection.getQuotationId());
+            inspection.setQuotation(quotation);
             setInspectionStringType(quotation);
-            inspection.setQuotation(quotationService.selectById(inspection.getQuotationId()));
 
         }
         jsonObject.put("ing", ing);
@@ -114,9 +114,9 @@ public class WxSurveyorQuotationController extends BaseController {
         ew2.addFilter("inspection_status = {0} and company_id = {1}", Const.INSPECTION_END, surveyorUId);
         List<Inspection> complete = inspectionService.selectPage(getPage(), ew2).getRecords();
         for (Inspection inspection : complete) {
-            Quotation quotation = inspection.getQuotation();
+            Quotation quotation =quotationService.selectById(inspection.getQuotationId());
+            inspection.setQuotation(quotation);
             setInspectionStringType(quotation);
-            inspection.setQuotation(quotationService.selectById(inspection.getQuotationId()));
         }
 
         jsonObject.put("complete", complete);
@@ -156,9 +156,9 @@ public class WxSurveyorQuotationController extends BaseController {
         ew.orderBy("update_date", false);
         Page<QuotationApplication> page = quotationApplicationService.selectPage(getPage(), ew);
         for (QuotationApplication application : page.getRecords()) {
-            Quotation quotation = application.getQuotation();
+            Quotation quotation = quotationService.selectById(application.getQuotationId());
+            application.setQuotation(quotation);
             setInspectionStringType(quotation);
-            application.setQuotation(quotationService.selectById(application.getQuotationId()));
         }
         jsonObject.put("data", page.getRecords());
         jsonObject.put("start", page.getCurrent());
@@ -177,9 +177,9 @@ public class WxSurveyorQuotationController extends BaseController {
         ew1.addFilter("inspection_status!={0} and company_id={1}", Const.INSPECTION_END, surveyorUId);
         Page<Inspection> page = inspectionService.selectPage(getPage(), ew1);
         for (Inspection inspection : page.getRecords()) {
-            Quotation quotation = inspection.getQuotation();
+            Quotation quotation =quotationService.selectById(inspection.getQuotationId());
+            inspection.setQuotation(quotation);
             setInspectionStringType(quotation);
-            inspection.setQuotation(quotationService.selectById(inspection.getQuotationId()));
         }
         jsonObject.put("data", page.getRecords());
         jsonObject.put("start", page.getCurrent());
