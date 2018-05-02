@@ -18,10 +18,7 @@ Page({
     requestIngMap: {}
   },
   onLoad: function (options) {
-    const userId = app.globalData.userInfo.id;
-    console.log(app.globalData.userInfo);
-    console.log(userId);
-    const activeIndex = options.activeIndex;
+    const userId = app.globalData.userInfo.id;    const activeIndex = options.activeIndex;
     if (activeIndex) {
       this.setData({
         activeIndex: activeIndex,

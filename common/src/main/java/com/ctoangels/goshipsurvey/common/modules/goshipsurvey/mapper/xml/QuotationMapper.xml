@@ -52,7 +52,7 @@
 
     <select id="getQuotationList"
             resultType="com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Quotation">
-        select * from t_quotation q where q.id not in (select qa.quotation_id from t_quotation_application qa where qa.user_id=#{surveyorUId} and qa.quotation_id is not null) and q.quotation_status
+        select * from t_quotation q where q.id not in (select qa.quotation_id from t_quotation_application qa where qa.del_flag=0 and qa.user_id=#{surveyorUId} and qa.quotation_id is not null) and q.quotation_status
         =1 and (q.surveyor_u_id is null or q.surveyor_u_id=#{surveyorUId} ) /*and q.end_date>=(select DATE_FORMAT(now(),'%Y-%m-%d'))*/ and find_in_set(#{surveyorUId},q.surveyor_u_ids)
         ORDER BY q.update_date desc
                 limit #{start},#{length};

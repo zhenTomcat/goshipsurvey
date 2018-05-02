@@ -55,6 +55,10 @@ public class WxSurveyorQuotationController extends BaseController {
     @Autowired
     private UserService userService;
 
+    @Autowired
+    private Template template;
+
+
     @RequestMapping(value = "/list")
     @ResponseBody
     public JSONObject getQuotation(@RequestParam(required = true) Integer surveyorUId) {
@@ -201,7 +205,7 @@ public class WxSurveyorQuotationController extends BaseController {
         qa.setUserId(user.getId());
         qa.setCreateDate(new Date());
         qa.setUpdateDate(new Date());
-        qa.setCreateInfo(user.getName());
+        qa.setCreateInfo(user.getLoginName());
         qa.setDelFlag(Const.DEL_FLAG_NORMAL);
         qa.setApplicationStatus(Const.QUO_APPLY_ING);
         UserSurveyor userSurveyor = userSurveyorService.selectByUserId(surveyorUId);
@@ -214,7 +218,14 @@ public class WxSurveyorQuotationController extends BaseController {
             qa.setTotalPrice(quotation.getTotalPrice());
         }
 
-        quotationApplicationService.insert(qa);
+        if (quotationApplicationService.insert(qa)) {
+            String gzhOpenId= userSurveyor.getGzhOpenId();
+            template.infomationNotice(gzhOpenId, Const.CHECK_REMIND,"/pages/selectType/selectType?openid=","您好：",
+                    "您申请的船舶检验，正在处理","待审批","点击此条消息查看更详细的信息");
+            jsonObject.put("success", true);
+        } else {
+            jsonObject.put("success", false);
+        }
 
         return jsonObject;
     }
@@ -231,8 +242,13 @@ public class WxSurveyorQuotationController extends BaseController {
         QuotationApplication qa = new QuotationApplication();
         qa.setId(applicationId);
         qa.setDelFlag(Const.DEL_FLAG_DELETE);
-        qa.setUpdateInfo(getCurrentUser().getName());
+        qa.setUpdateInfo(user.getLoginName());
         if (quotationApplicationService.updateSelectiveById(qa)) {
+            UserSurveyor userSurveyor= userSurveyorService.selectByUserId(surveyorUId);
+            String gzhOpenId= userSurveyor.getGzhOpenId();
+            String keyword1="您已经取消了该船舶的检验申请";
+            String keyword2="岙洋船务";
+            template.infomationNotice(gzhOpenId, Const.CHECK_REMIND,"/pages/selectType/selectType?openid=","您好：",keyword1,keyword2,"点击此条消息查看更详细的信息");
             jsonObject.put("errMsg", "");
         } else {
             jsonObject.put("errMsg", "撤销失败");
@@ -252,6 +268,11 @@ public class WxSurveyorQuotationController extends BaseController {
         Inspection inspection = inspectionService.selectById(inspectionId);
         inspection.setInspectionStatus(Const.INSPECTION_END);
         if (inspectionService.updateById(inspection)) {
+            UserSurveyor userSurveyor= userSurveyorService.selectByUserId(surveyorUId);
+            String gzhOpenId= userSurveyor.getGzhOpenId();
+            String keyword1="您已经完成了该船舶的检验";
+            String keyword2="岙洋船务";
+            template.infomationNotice(gzhOpenId, Const.CHECK_REMIND,"/pages/selectType/selectType?openid=","您好：",keyword1,keyword2,"点击此条消息查看更详细的信息");
             jsonObject.put("errMsg", "");
         } else {
             jsonObject.put("errMsg", "提交完成失败!");
