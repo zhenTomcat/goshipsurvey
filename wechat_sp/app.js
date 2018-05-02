@@ -76,6 +76,6 @@ App({
   getInfo: function () {
     console.log(12);
   },
-  // webUrl: 'https://www.goshipsurvey.com',
-  webUrl: 'http://localhost:8080'
+  webUrl: 'https://www.goshipsurvey.com',
+  // webUrl: 'http://localhost:8080'
 })
