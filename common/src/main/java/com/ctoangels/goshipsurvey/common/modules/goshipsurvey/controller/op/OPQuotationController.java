@@ -3,8 +3,10 @@ package com.ctoangels.goshipsurvey.common.modules.goshipsurvey.controller.op;
 import com.alibaba.fastjson.JSONObject;
 import com.baomidou.mybatisplus.mapper.EntityWrapper;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Dict;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.InspectionTypePrice;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.entity.Quotation;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IDictService;
+import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IInspectionTypePriceService;
 import com.ctoangels.goshipsurvey.common.modules.goshipsurvey.service.IQuotationService;
 import com.ctoangels.goshipsurvey.common.modules.sys.controller.BaseController;
 import com.ctoangels.goshipsurvey.common.modules.sys.entity.User;
@@ -51,6 +53,9 @@ public class OPQuotationController extends BaseController {
 
     @Autowired
     private Template template;
+
+   @Autowired
+   private IInspectionTypePriceService iInspectionTypePriceService;
 
     @Autowired
     private IUserSurveyorService userSurveyorService;
@@ -109,6 +114,12 @@ public class OPQuotationController extends BaseController {
         quotation.setOpUName(user.getName());
         quotation.setQuotationStatus(Const.QUOTATION_INIT);
         quotation.setCreateInfo(user.getName());
+        InspectionTypePrice inspectionTypePrice=iInspectionTypePriceService.selectOne(new EntityWrapper<InspectionTypePrice>().addFilter("types={0}",quotation.getInspectionType()));
+        if(inspectionTypePrice!=null){
+            quotation.setTotalPrice(inspectionTypePrice.getPrice());
+        }else {
+            quotation.setTotalPrice(400d);
+        }
         if (quotationService.insert(quotation)) {
             jsonObject.put("success", true);
         } else {
