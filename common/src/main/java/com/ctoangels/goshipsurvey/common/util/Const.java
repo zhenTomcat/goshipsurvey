@@ -133,7 +133,7 @@ public class Const {
 
     public static final String IDENTITY_BINDING_SUCCESSFULLY_NOTICE = "P-jVM4N1IvcCQ50ClYq_k2tykOZzPE38jo3MP89rNkE";//用户绑定成功通知
     public static final String INQUIRY_NOTICE = "DmjGb8BSd8-fvNzvR6a-1sgqJraFk6XeQTWIDr0YhTo";//询价通知
-    public static final String CHECK_REMIND = "DmjGb8BSd8-fvNzvR6a-1sgqJraFk6XeQTWIDr0YhTo";//待审核提醒
+    public static final String CHECK_REMIND = "ZcCEatRM-EGJLFFNMiO-1srF7Swkv6WlvS4aDQOKi1Q";//待审核提醒
     public static final String NOTICE_AUDIT_RESULT = "NjaXjmYuOAoJe1kz0PaLnBXJq0I6eb1-ZKuqKa4SsME";//审核结果通知
 
 }

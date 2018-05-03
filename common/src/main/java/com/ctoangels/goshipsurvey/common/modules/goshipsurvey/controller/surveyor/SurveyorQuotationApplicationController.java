@@ -33,10 +33,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 @RequestMapping(value = "surveyor/quotationApplication")
 public class SurveyorQuotationApplicationController extends BaseController {
 
-    private static String url= "/pages/selectType/selectType?openid=";
+    private static String url= "pages/home/home";
     private static String first= "您好：";
     private static String keyword1= "您申请的船舶检验，正在处理";
-    private static String keyword2= "待审批";
+    private static String keyword2= "待审核";
     private static String remark= "点击此条消息查看更详细的信息";
 
     @Autowired

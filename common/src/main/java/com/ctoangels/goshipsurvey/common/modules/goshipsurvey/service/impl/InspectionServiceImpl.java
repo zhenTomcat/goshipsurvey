@@ -35,7 +35,7 @@ import java.util.List;
 @Service
 public class InspectionServiceImpl extends SuperServiceImpl<InspectionMapper, Inspection> implements IInspectionService {
 
-    private static String url= "/pages/selectType/selectType?openid=";
+    private static String url= "pages/home/home";
     private static String first= "您好，申请结果如下";
     private static String keyword1= "";
     private static String keyword2= "";

@@ -235,8 +235,8 @@ public class WxSurveyorQuotationController extends BaseController {
 
         if (quotationApplicationService.insert(qa)) {
             String gzhOpenId= userSurveyor.getGzhOpenId();
-            template.infomationNotice(gzhOpenId, Const.CHECK_REMIND,"/pages/selectType/selectType?openid=","您好：",
-                    "您申请的船舶检验，正在处理","待审批","点击此条消息查看更详细的信息");
+            template.infomationNotice(gzhOpenId, Const.CHECK_REMIND,"pages/home/home","您好：",
+                    "您申请的船舶检验，正在处理","待审核","点击此条消息查看更详细的信息");
             jsonObject.put("success", true);
         } else {
             jsonObject.put("success", false);
@@ -263,7 +263,7 @@ public class WxSurveyorQuotationController extends BaseController {
             String gzhOpenId= userSurveyor.getGzhOpenId();
             String keyword1="您已经取消了该船舶的检验申请";
             String keyword2="岙洋船务";
-            template.infomationNotice(gzhOpenId, Const.CHECK_REMIND,"/pages/selectType/selectType?openid=","您好：",keyword1,keyword2,"点击此条消息查看更详细的信息");
+            template.infomationNotice(gzhOpenId, Const.CHECK_REMIND,"pages/home/home","您好：",keyword1,keyword2,"点击此条消息查看更详细的信息");
             jsonObject.put("errMsg", "");
         } else {
             jsonObject.put("errMsg", "撤销失败");
@@ -287,7 +287,7 @@ public class WxSurveyorQuotationController extends BaseController {
             String gzhOpenId= userSurveyor.getGzhOpenId();
             String keyword1="您已经完成了该船舶的检验";
             String keyword2="岙洋船务";
-            template.infomationNotice(gzhOpenId, Const.CHECK_REMIND,"/pages/selectType/selectType?openid=","您好：",keyword1,keyword2,"点击此条消息查看更详细的信息");
+            template.infomationNotice(gzhOpenId, Const.CHECK_REMIND,"pages/home/home","您好：",keyword1,keyword2,"点击此条消息查看更详细的信息");
             jsonObject.put("errMsg", "");
         } else {
             jsonObject.put("errMsg", "提交完成失败!");

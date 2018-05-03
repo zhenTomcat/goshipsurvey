@@ -63,7 +63,7 @@ public class CoreController {
     @Autowired
     private ISurveyorService surveyorService;
 
-    private static String url = "/pages/selectType/selectType?openid=";
+    private static String url = "/pages/home/home";
     private static String first = "欢迎使用岙洋船务微信小程序！";
     private static String keyword1 = "点击打开微信小程序";
     private static String keyword2 = "新用户第一次使用需进行绑定";

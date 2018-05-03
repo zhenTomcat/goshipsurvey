@@ -55,7 +55,7 @@ public class OPQuotationController extends BaseController {
     @Autowired
     private IUserSurveyorService userSurveyorService;
 
-    private static String url = "/pages/selectType/selectType?openid=";
+    private static String url = "pages/home/home";
     private static String first = "询价消息通知";
     private static String keyword1 = "";
     private static String keyword2 = "岙洋船务";
