@@ -76,6 +76,6 @@ App({
   getInfo: function () {
     console.log(12);
   },
-  // webUrl: 'https://www.goshipsurvey.com',
-  webUrl: 'http://zhen.natapp1.cc'
+  webUrl: 'https://www.goshipsurvey.com',
+  // webUrl: 'http://zhen.natapp1.cc'
 })

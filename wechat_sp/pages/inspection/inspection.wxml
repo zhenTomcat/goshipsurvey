@@ -114,7 +114,7 @@
                     </view>
                     <view class="weui-form-preview__item">
                       <view class="weui-form-preview__label">船检类型</view>
-                      <view class="weui-form-preview__value">还没有转化成字符串{{item.quotation.inspectionType}}</view>
+                      <view class="weui-form-preview__value">{{item.quotation.inspectionType}}</view>
                     </view>
                   </view>
                   <view class="weui-form-preview__ft">
@@ -154,7 +154,7 @@
                     </view>
                     <view class="weui-form-preview__item">
                       <view class="weui-form-preview__label">船检类型</view>
-                      <view class="weui-form-preview__value">还没有转化成字符串{{item.quotation.inspectionType}}</view>
+                      <view class="weui-form-preview__value">{{item.quotation.inspectionType}}</view>
                     </view>
                   </view>
                   <view class="weui-form-preview__ft ">

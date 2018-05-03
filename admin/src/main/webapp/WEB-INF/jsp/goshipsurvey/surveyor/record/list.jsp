@@ -225,7 +225,7 @@
                 "render": function (data, type, row) {
                     /*var startDate = new Date(row.startDate.replace(/-/g, "/")).Format("yyyy-MM-dd");
                      var endDate = new Date(row.endDate.replace(/-/g, "/")).Format("yyyy-MM-dd");*/
-                    var estimateDate = new Date(row.estimateDate.replace(/-/g, "/")).Format("yyyy-MM-dd");
+                    var estimateDate = new Date(row.quotation.estimateDate.replace(/-/g, "/")).Format("yyyy-MM-dd");
                     return estimateDate;
                 }
             }],
