@@ -28,6 +28,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
+import java.util.Objects;
 import java.util.Random;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -357,7 +358,7 @@ public class Tools {
      */
     public static String transferValuesToDes(String values, List<Dict> dictList) {
         String result = "";
-        if (values != null && values.trim() != "") {
+        if (values != null && !Objects.equals(values.trim(), "")) {
             String[] types = values.split(",");
             for (String type : types) {
                 for (Dict dict : dictList) {
