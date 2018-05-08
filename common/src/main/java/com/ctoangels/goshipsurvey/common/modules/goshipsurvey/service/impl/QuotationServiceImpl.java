@@ -52,7 +52,7 @@ public class QuotationServiceImpl extends SuperServiceImpl<QuotationMapper, Quot
     @Override
     public int getOPTotal(Integer opUId) {
         EntityWrapper<Quotation> ew = new EntityWrapper<>();
-        ew.addFilter("op_u_id={0} and end_date>={1} and del_flag=0", opUId, DateUtil.formatDate(new Date(), "yyyy-MM-dd"));
+        ew.addFilter("op_u_id={0} and del_flag=0", opUId);
         return quotationMapper.selectCountByEw(ew);
     }
 
