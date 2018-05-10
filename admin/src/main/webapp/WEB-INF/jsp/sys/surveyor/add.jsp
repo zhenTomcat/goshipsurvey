@@ -55,11 +55,11 @@
                                                         <input type="text" class="form-control" name="firstName" id="name"/>
                                                     </div>
                                                     <div class="form-group col-md-6">
-                                                        <label class="control-label">姓别</label>
+                                                        <label class="control-label">性别</label>
                                                         <input type="text" class="form-control" name="sex"/>
                                                     </div>
                                                     <div class="form-group col-md-6">
-                                                        <label class="control-label">名族</label>
+                                                        <label class="control-label">民族</label>
                                                         <input type="text" class="form-control" name="nation"/>
                                                     </div>
                                                     <div class="form-group col-md-6">
